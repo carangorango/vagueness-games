@@ -11,31 +11,44 @@ import matplotlib.pyplot as plt
 def plotStrategies(block=False):
     plt.clf()
 
-    plt.subplot(2,2,1)
+    plt.subplot(4,2,1)
     plt.plot(PerceptualSpace, Priors)
     plt.ylim(ymin=0)
     plt.title('Priors')
 
-    plt.subplot(2,4,3)
+    plt.subplot(4,4,3)
     plt.imshow(Utility, origin='lower', interpolation='none')
     plt.title('Utility')
-    plt.subplot(2,4,4)
+    plt.subplot(4,4,4)
     plt.imshow(Confusion, origin='lower', interpolation='none')
     plt.title('Confusion')
 
-    plt.subplot(2,2,3)
+    plt.subplot(4,2,3)
     for m in xrange(NMessages):
         plt.plot(PerceptualSpace, Speaker[:,m], label='$m_'+str(m)+'$')
     plt.ylim(-0.1,1.1)
     plt.legend(loc='lower left')
     plt.title('Speaker strategy')
 
-    plt.subplot(2,2,4)
+    plt.subplot(4,2,4)
     for m in xrange(NMessages):
         plt.plot(PerceptualSpace, Hearer[m,:], label='$m_'+str(m)+'$')
     plt.ylim(ymin=0)
     plt.legend(loc='lower left')
     plt.title('Hearer strategy')
+
+    plt.subplot(4,1,3)
+    plt.plot(ExpectedUtilityHistory)
+    plt.ylim(ymin=0)
+    plt.title('Expected utility')
+
+    plt.subplot(4,2,7)
+    plt.plot(BasicUncertaintySpeakerHistory, label='basic')
+    plt.plot(LucaTerminiUncertaintySpeakerHistory, label='LT')
+    plt.plot(FrankeUncertaintySpeakerHistory, label='MF')
+    plt.ylim(ymin=-0.1, ymax=1.1)
+    plt.legend(loc='upper right')
+    plt.title('Uncertainty metrics speaker')
 
     plt.show(block=block)
     plt.pause(0.01)
@@ -51,6 +64,12 @@ def makePDF(Vector):
 def makePDFPerRow(Matrix):
     return np.array([ makePDF(Row) for Row in Matrix ])
     
+def ShannonEntropy(x):
+    if x == 0 or x == 1:
+        return 0
+    else:
+        return -x * np.log10(x) - (1 - x) * np.log10(1 - x)
+
 ## Settings
 
 NStates = 50
@@ -93,6 +112,13 @@ Confusion = Similarity
 Speaker = makePDFPerRow(random.random((NStates,NMessages)))
 Hearer = makePDFPerRow(random.random((NMessages,NStates)))
 
+ExpectedUtilityHistory = []
+
+# Uncertainty metrics
+BasicUncertaintySpeakerHistory = []
+LucaTerminiUncertaintySpeakerHistory = []
+FrankeUncertaintySpeakerHistory = []
+
 converged = False
 while not converged:
     
@@ -100,6 +126,31 @@ while not converged:
 
     SpeakerBefore, HearerBefore = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
 
+    ExpectedUtility = np.sum(Speaker[t1,m]*Hearer[m,t2]*Utility[t1,t2]
+                             for t1 in xrange(NStates)
+                             for m in xrange(NMessages)
+                             for t2 in xrange(NStates))
+    ExpectedUtilityHistory.append(np.sum(ExpectedUtility))
+
+    BasicUncertaintySpeaker = np.mean([1 - abs(Speaker[t,m]-0.5)/0.5
+                                      for t in xrange(NStates)
+                                      for m in xrange(NMessages)])
+    BasicUncertaintySpeakerHistory.append(BasicUncertaintySpeaker)
+    
+    LucaTerminiUncertaintySpeaker = np.mean([np.sum(ShannonEntropy(Speaker[t,m])
+                                                   for m in xrange(NMessages))
+                                            for t in xrange(NStates)])
+    LucaTerminiUncertaintySpeakerHistory.append(LucaTerminiUncertaintySpeaker)
+    
+    FrankeUncertaintySpeaker = np.mean([np.min([-np.log10(Speaker[t,m]) if Speaker[t,m] != 0 else 0
+                                               for m in xrange(NMessages)])
+                                        for t in xrange(NStates)])
+    FrankeUncertaintySpeakerHistory.append(FrankeUncertaintySpeaker)
+    
+    print BasicUncertaintySpeaker, LucaTerminiUncertaintySpeaker, FrankeUncertaintySpeaker
+    
+    ## Dynamics
+    
     ## Speaker strategy
     
     UtilitySpeaker = np.array([ [ np.dot(Hearer[m], Utility[t]) for m in xrange(NMessages) ] for t in xrange(NStates) ])
