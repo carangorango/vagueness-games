@@ -50,6 +50,14 @@ def plotStrategies(block=False):
     plt.legend(loc='upper right')
     plt.title('Uncertainty metrics speaker')
 
+    plt.subplot(4,2,8)
+    plt.plot(BasicUncertaintyHearerHistory, label='basic')
+    plt.plot(LucaTerminiUncertaintyHearerHistory, label='LT')
+    plt.plot(FrankeUncertaintyHearerHistory, label='MF-2')
+    plt.ylim(ymin=-0.1)#, ymax=1.1)
+    plt.legend(loc='upper right')
+    plt.title('Uncertainty metrics hearer')
+
     plt.show(block=block)
     plt.pause(0.01)
 
@@ -70,6 +78,21 @@ def ShannonEntropy(x):
     else:
         return -x * np.log10(x) - (1 - x) * np.log10(1 - x)
 
+def BasicUncertainty(Strategy):
+    return np.mean([1 - abs(Strategy[c,a] - 0.5) / 0.5
+                    for c in xrange(Strategy.shape[0])
+                    for a in xrange(Strategy.shape[1])])
+
+def LucaTerminiUncertainty(Strategy):
+    return np.mean([np.sum(ShannonEntropy(Strategy[c,a])
+                           for a in xrange(Strategy.shape[1]))
+                    for c in xrange(Strategy.shape[0])])
+    
+def FrankeUncertainty(Strategy):
+    return np.mean([np.min([-np.log10(Strategy[c,a]) if Strategy[c,a] != 0 else 0
+                            for a in xrange(Strategy.shape[1])])
+                    for c in xrange(Strategy.shape[0])])
+    
 ## Settings
 
 NStates = 50
@@ -119,6 +142,10 @@ BasicUncertaintySpeakerHistory = []
 LucaTerminiUncertaintySpeakerHistory = []
 FrankeUncertaintySpeakerHistory = []
 
+BasicUncertaintyHearerHistory = []
+LucaTerminiUncertaintyHearerHistory = []
+FrankeUncertaintyHearerHistory = []
+
 converged = False
 while not converged:
     
@@ -132,22 +159,15 @@ while not converged:
                              for t2 in xrange(NStates))
     ExpectedUtilityHistory.append(np.sum(ExpectedUtility))
 
-    BasicUncertaintySpeaker = np.mean([1 - abs(Speaker[t,m]-0.5)/0.5
-                                      for t in xrange(NStates)
-                                      for m in xrange(NMessages)])
-    BasicUncertaintySpeakerHistory.append(BasicUncertaintySpeaker)
+    # Uncertainty metrics
     
-    LucaTerminiUncertaintySpeaker = np.mean([np.sum(ShannonEntropy(Speaker[t,m])
-                                                   for m in xrange(NMessages))
-                                            for t in xrange(NStates)])
-    LucaTerminiUncertaintySpeakerHistory.append(LucaTerminiUncertaintySpeaker)
+    BasicUncertaintySpeakerHistory.append(BasicUncertainty(Speaker))
+    LucaTerminiUncertaintySpeakerHistory.append(LucaTerminiUncertainty(Speaker))
+    FrankeUncertaintySpeakerHistory.append(FrankeUncertainty(Speaker))
     
-    FrankeUncertaintySpeaker = np.mean([np.min([-np.log10(Speaker[t,m]) if Speaker[t,m] != 0 else 0
-                                               for m in xrange(NMessages)])
-                                        for t in xrange(NStates)])
-    FrankeUncertaintySpeakerHistory.append(FrankeUncertaintySpeaker)
-    
-    print BasicUncertaintySpeaker, LucaTerminiUncertaintySpeaker, FrankeUncertaintySpeaker
+    BasicUncertaintyHearerHistory.append(BasicUncertainty(Hearer))
+    LucaTerminiUncertaintyHearerHistory.append(LucaTerminiUncertainty(Hearer))
+    FrankeUncertaintyHearerHistory.append(FrankeUncertainty(Hearer))
     
     ## Dynamics
     
