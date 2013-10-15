@@ -8,7 +8,7 @@ from scipy import stats as stats
 
 import matplotlib.pyplot as plt
 
-def plotStrategies(NStates, NMessages, PerceptualSpace, Priors, Utility, Confusion, Speaker, Hearer, block=False):
+def plotStrategies(block=False):
     plt.clf()
 
     plt.subplot(2,2,1)
@@ -96,7 +96,7 @@ Hearer = makePDFPerRow(random.random((NMessages,NStates)))
 converged = False
 while not converged:
     
-    if not BatchMode: plotStrategies(NStates, NMessages, PerceptualSpace, Priors, Utility, Confusion, Speaker, Hearer)
+    if not BatchMode: plotStrategies()
 
     SpeakerBefore, HearerBefore = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
 
@@ -136,4 +136,4 @@ while not converged:
         converged = True
         if not BatchMode: print 'Language converged!'
 
-if not BatchMode: plotStrategies(NStates, NMessages, PerceptualSpace, Priors, Utility, Confusion, Speaker, Hearer, block=True)
+if not BatchMode: plotStrategies(block=True)
