@@ -84,7 +84,7 @@ def BasicUncertainty(Strategy):
                     for a in xrange(Strategy.shape[1])])
 
 def LucaTerminiUncertainty(Strategy):
-    return np.mean([np.sum(ShannonEntropy(Strategy[c,a])
+    return np.mean([(1.0/Strategy.shape[1]) * np.sum(ShannonEntropy(Strategy[c,a])
                            for a in xrange(Strategy.shape[1]))
                     for c in xrange(Strategy.shape[0])])
     
