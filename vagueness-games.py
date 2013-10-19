@@ -45,7 +45,8 @@ def plotStrategies(block=False):
     plt.subplot(4,2,7)
     plt.plot(BasicUncertaintySpeakerHistory, label='basic')
     plt.plot(LucaTerminiUncertaintySpeakerHistory, label='LT')
-    plt.plot(FrankeUncertaintySpeakerHistory, label='MF')
+    plt.plot(FrankeUncertaintySpeakerHistory, label='MF-2')
+    plt.plot(CorreiaUncertaintySpeakerHistory, label='JPC')
     plt.ylim(ymin=-0.1, ymax=1.1)
     plt.legend(loc='upper right')
     plt.title('Uncertainty metrics speaker')
@@ -54,6 +55,7 @@ def plotStrategies(block=False):
     plt.plot(BasicUncertaintyHearerHistory, label='basic')
     plt.plot(LucaTerminiUncertaintyHearerHistory, label='LT')
     plt.plot(FrankeUncertaintyHearerHistory, label='MF-2')
+    plt.plot(CorreiaUncertaintyHearerHistory, label='JPC')
     plt.ylim(ymin=-0.1)#, ymax=1.1)
     plt.legend(loc='upper right')
     plt.title('Uncertainty metrics hearer')
@@ -91,6 +93,11 @@ def LucaTerminiUncertainty(Strategy):
 def FrankeUncertainty(Strategy):
     return np.mean([np.min([-np.log10(Strategy[c,a]) if Strategy[c,a] != 0 else 0
                             for a in xrange(Strategy.shape[1])])
+                    for c in xrange(Strategy.shape[0])])
+
+def CorreiaUncertainty(Strategy):
+    return np.mean([1 - (1.0/np.log(Strategy.shape[1])) * np.sum(np.log(Strategy.shape[1] * Strategy[c,a]) * Strategy[c,a] if Strategy[c,a] != 0 else 0
+                             for a in xrange(Strategy.shape[1]))
                     for c in xrange(Strategy.shape[0])])
     
 ## Settings
@@ -141,10 +148,12 @@ ExpectedUtilityHistory = []
 BasicUncertaintySpeakerHistory = []
 LucaTerminiUncertaintySpeakerHistory = []
 FrankeUncertaintySpeakerHistory = []
+CorreiaUncertaintySpeakerHistory = []
 
 BasicUncertaintyHearerHistory = []
 LucaTerminiUncertaintyHearerHistory = []
 FrankeUncertaintyHearerHistory = []
+CorreiaUncertaintyHearerHistory = []
 
 converged = False
 while not converged:
@@ -164,10 +173,16 @@ while not converged:
     BasicUncertaintySpeakerHistory.append(BasicUncertainty(Speaker))
     LucaTerminiUncertaintySpeakerHistory.append(LucaTerminiUncertainty(Speaker))
     FrankeUncertaintySpeakerHistory.append(FrankeUncertainty(Speaker))
+    CorreiaUncertaintySpeakerHistory.append(CorreiaUncertainty(Speaker))
+
+    print "Speaker:", BasicUncertainty(Speaker), LucaTerminiUncertainty(Speaker), FrankeUncertainty(Speaker), CorreiaUncertainty(Speaker)
     
     BasicUncertaintyHearerHistory.append(BasicUncertainty(Hearer))
     LucaTerminiUncertaintyHearerHistory.append(LucaTerminiUncertainty(Hearer))
     FrankeUncertaintyHearerHistory.append(FrankeUncertainty(Hearer))
+    CorreiaUncertaintyHearerHistory.append(CorreiaUncertainty(Hearer))
+
+    print "Hearer:", BasicUncertainty(Hearer), LucaTerminiUncertainty(Hearer), FrankeUncertainty(Hearer), CorreiaUncertainty(Hearer)
     
     ## Dynamics
     
