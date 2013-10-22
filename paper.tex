@@ -1,0 +1,85 @@
+%% LyX 2.0.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\usepackage[color=green!40]{todonotes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{a4wide}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{The evolution of vague categories}
+
+
+\author{José Pedro Correia\and Michael Franke}
+
+\maketitle
+
+\section{Quantitative measures of uncertainty}
+
+Both sender and receiver strategies are of the form $s:C\rightarrow\Delta\left(A\right)$,
+\emph{i.e.}\ a function $s$ from a set of choice points $C$ to
+a probability distribution over a set of actions $A$. We will henceforth
+restrict ourselves to finite $C$ and $A$. For a given choice point
+$c\in C$, a strategy $\hat{s}$\todo{Find better notation?} is maximally
+uncertain if it assigns the same probability to every action $a\in A$,
+\emph{i.e.}\ if $\hat{s}\left(c\right)$ is a discrete uniform distribution:
+\[
+\forall a\in A:\hat{s}\left(c,a\right)=\frac{1}{\left|A\right|}
+\]
+We say it is maximally uncertain since it has no preference whatsoever
+for any action in $A$.
+
+We can measure how certain a strategy $s$ is at a choice point $c$
+in terms of the distance from such a distribution $\hat{s}\left(c\right)$,
+for example in terms of the Kullback-Leibler divergence:
+\begin{gather*}
+D_{\textnormal{KL}}\left(s\left(c\right)\parallel\hat{s}\left(c\right)\right)=\sum_{a\in A}s\left(c,a\right)\cdot\ln\left(\frac{s\left(c,a\right)}{\hat{s}\left(c,a\right)}\right)=\\
+=\sum_{a\in A}s\left(c,a\right)\cdot\ln\left(\frac{s\left(c,a\right)}{\frac{1}{\left|A\right|}}\right)=\sum_{a\in A}s\left(c,a\right)\cdot\ln\left(\left|A\right|\cdot s\left(c,a\right)\right)
+\end{gather*}
+This distance should be maximal\todo{Is it the case?} for any strategy
+$\check{s}$\todo{Find better notation?} which puts all probability
+mass on some action $a^{\prime}\in A$, \emph{i.e.}\ a degenerate
+distribution localized at $a^{\prime}$:
+\[
+\check{s}\left(c,a\right)=\begin{cases}
+1 & a=a^{\prime}\\
+0 & \textnormal{otherwise}
+\end{cases}
+\]
+For such a strategy we have:
+\begin{gather*}
+D_{\textnormal{KL}}\left(\check{s}\left(c\right)\parallel\hat{s}\left(c\right)\right)=\sum_{a\in A}\check{s}\left(c,a\right)\cdot\ln\left(\left|A\right|\cdot\check{s}\left(c,a\right)\right)\\
+=\sum_{a\in A\backslash\left\{ a^{\prime}\right\} }\check{s}\left(c,a\right)\cdot\ln\left(\left|A\right|\cdot\check{s}\left(c,a\right)\right)+\check{s}\left(c,a^{\prime}\right)\cdot\ln\left(\left|A\right|\cdot\check{s}\left(c,a^{\prime}\right)\right)=\\
+=\sum_{a\in A\backslash\left\{ a^{\prime}\right\} }0\cdot\ln\left(\left|A\right|\cdot0\right)+1\cdot\ln\left(\left|A\right|\cdot1\right)=\ln\left|A\right|
+\end{gather*}
+This value allows us to normalize the distance so that our measure
+of uncertainty ranges between $0$ and $1$. Finally, the measure
+of uncertainty of a strategy $s$ at a choice point $c$ thus becomes:
+\[
+u\left(s,c\right)=1-\frac{1}{\ln\left|A\right|}\sum_{a\in A}s\left(c,a\right)\cdot\ln\left(\left|A\right|\cdot s\left(c,a\right)\right)
+\]
+
+
+We can then measure the overall uncertainty of a strategy $s$ as
+the mean uncertainty per choice point:
+\[
+u\left(s\right)=\frac{1}{\left|C\right|}\sum_{c\in C}u\left(s,c\right)
+\]
+
+\end{document}
