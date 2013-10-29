@@ -335,27 +335,33 @@ with $\Spure(\state_1=\messg_2$ and $\Spure(\state_2) =
   \end{align*}
   The rhs expands to:
   \begin{align*}
-    G(R^C(\Rmixed))(\state_x \probbar \messg_y) & = \sum_{i}
+    G(R^C(\Rmixed))(\state_x \probbar \messg_y) & = \sum_{\Rpure_i}
     \Rmixed_i \cdot \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) =
         \state_x}} 
-    \prod_{\messg} C_{\Rstrat_i(\messg)\Rstrat_j(\messg)} \\
-    & = \sum_{i}
-    \Rmixed_i \cdot ( (C_{\Rpure_i(\messg_1)1} \cdot
-      C_{\Rpure_i(\messg_2)1} \cdot \ldots +
-      C_{\Rpure_i(\messg_d)1})  \\
-      & + \quad (C_{\Rpure_i(\messg_1)1} \cdot
-      C_{\Rpure_i(\messg_2)1} \cdot \ldots \cdot
-      C_{\Rpure_i(\messg_d)2}) + \ldots  \\
-      & + \quad (C_{\Rpure_i(\messg_1)1} \cdot
-      C_{\Rpure_i(\messg_2)e} \cdot \ldots \cdot
-      C_{\Rpure_i(\messg_d)e}) + \ldots ))
+    \prod_{\messg} C_{\Rpure_i(\messg)\Rpure_j(\messg)}
   \end{align*}
-  If we assuming without loss of generality that $x=y=1$, then if $d =
-  \card{\Messgs}$, we see that:
+  Without loss of generality, assume that $x=y=1$, and fix
+  $\card{M}=d$ and let $e$ be the number of pure receiver
+  strategies. Then the last term can be rewritten as:
   \begin{align*}
-    \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) = \state_x}}
-    \prod_{\messg} C_{\Rstrat_i(\messg)\Rstrat_j(\messg)} = \sum_{i}
-    \Rmixed_i \cdot
+    & = \sum_{i}
+    \Rmixed_i \cdot ( C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_1(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_1(\messg_d)} + \ldots  \\
+      & \textcolor{white}{ = \sum_{i}
+    \Rmixed_i  (}  +  C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_2(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_2(\messg_d)} + \ldots  \\
+      & \textcolor{white}{ = \sum_{i}
+    \Rmixed_i  (}  + C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_e(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_e(\messg_d)}) )
+  \end{align*}
+  Every for every messages $C_{\Rpure_i(\messg_l)}$ is a stochastic
+  vector. For $l>1$, all elements of these vectors appear equally
+  often. But that means that these cancel out. What remains is:
+  \begin{align*}
+    & = \sum_{\Rpure_i} \Rmixed_i \cdot C_{\Rpure_i(\messg_y)x} \,.
   \end{align*}
 \end{proof}
 
