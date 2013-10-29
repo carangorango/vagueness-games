@@ -55,8 +55,8 @@ sender population and $\Phi(\Rmixed,\Smixed) = \sum_{k} \Rmixed_k
 (non-payoff adjusted) continuous replicator dynamics in pure
 strategies is defined as:
 \begin{align*}
-  \dot{\Smixed_i} & = \sum_{j} \Smixed_j \cdot \left ( F_j^{\Rmixed} -
-  \Phi(\Smixed,\Rmixed) \right ) &   \dot{\Rmixed_i} &  = \sum_{j} \Rmixed_j \cdot \left ( F_j^{\Smixed} -
+  \dot{\Smixed_i} & = \Smixed_i \cdot \left ( F_i^{\Rmixed} -
+  \Phi(\Smixed,\Rmixed) \right ) &   \dot{\Rmixed_i} &  = \Rmixed_i \cdot \left ( F_i^{\Smixed} -
   \Phi(\Rmixed,\Smixed) \right ) \,.
 \end{align*}
 The discrete time version is given by: 
@@ -68,11 +68,10 @@ The discrete time version is given by:
 
 
 \paragraph{Replicator-mutator equation.} Let $Q$ be a row-stochastic
-\emph{mutation matrix} where $Q_{ji}$ gives the probability that pure
-sender strategy $\Spure_j$ mutates into $\Spure_i$. Similarly, let $R$
-be a row-stochastic \emph{mutation matrix} where $Q_{ji}$ gives the
-probability that pure receiver strategy $\Rpure_j$ mutates into
-$\Rpure_i$.
+mutation matrix where $Q_{ji}$ gives the probability that pure sender
+strategy $\Spure_j$ mutates into $\Spure_i$. Similarly, let $R$ be a
+row-stochastic mutation matrix where $R_{ji}$ gives the probability
+that pure receiver strategy $\Rpure_j$ mutates into $\Rpure_i$.
 
 The two-population (non-payoff adjusted) continuous replicator-mutator
 dynamics, is then given by::
@@ -105,8 +104,8 @@ dynamics, is then given by::
     & = \sum_{j} \Smixed_j \left ( \frac{ Q_{ji} \cdot
         F_j^{\Rmixed} - \Smixed_i \cdot \Phi(\Smixed,\Rmixed)}{ \Phi(\Smixed,\Rmixed)}  \right )
   \end{align*}
-  As $\Phi(\Smixed,\Rmixed)$ is constant the rate of change we can
-  drop it to derive the non-payoff adjusted continuous version above,
+  As $\Phi(\Smixed,\Rmixed)$ is a constant rate of change, we can drop
+  it to derive the non-payoff adjusted continuous version above,
   since:
   \begin{align*}
     & \sum_{j} \Smixed_j \left ( Q_{ji} \cdot
@@ -120,7 +119,7 @@ dynamics, is then given by::
   \end{align*}
 \end{proof}
 
-The discrete time replicator-mutator dynamics have a nice sequential
+The discrete time replicator-mutator dynamics has a nice sequential
 update property: first we compute the fitness-driven change according
 to the standard replicator dynamics; then we compute the perturbation
 from mutation.
@@ -130,7 +129,7 @@ from mutation.
 We look at signaling games with $\States = \Acts$ and fix a confusion
 matrix $C$, which is a row-stochastic matrix whose elements $C_{ij}$
 give the probability that $\state_i$ is perceived as
-$\state_j$. Define player's average utility at each choice point given
+$\state_j$. Define players average utility at each choice point given
 the opponent's strategy as:
 \begin{align*}
   \Phi(\state,\Rstrat) & = \sum_{\messg} \Sstrat(\messg \probbar \state) \cdot
@@ -139,7 +138,7 @@ the opponent's strategy as:
 \cdot \EU(\state,\messg,\Sstrat)\,.
 \end{align*}
 The discrete noise-perturbed replicator dynamics on behavioral
-strategies proposed by \citep{Correia2013:The-Bivalent-Tr} is:
+strategies proposed by \citet{Correia2013:The-Bivalent-Tr} is:
 \begin{align*}
   \Sstrat'(\messg \probbar \state_i) & = \sum_{j} C_{ji} \cdot
   \frac{\Sstrat(\messg \probbar \state_j) \cdot
@@ -160,16 +159,16 @@ above is the behavioral-strategy analogue to the replicator-mutator
 dynamics when the only source of mutation is perceptual confusion of
 states. Since, in general, the replicator dynamics in two-populations
 is not equivalent in its formulations for behavioral and mixed
-strategies,\todo{reference} we abstract from the dynamics and look
-only at the effect of mutation and noise-perturbation. This is
-justified given the above mentioned sequential nature of both
-dynamics.
+strategies \citep{Cressman2003:Evolutionary-Dy}, we abstract from the
+dynamics and look only at the effect of mutation and
+noise-perturbation. This is justified given the above mentioned
+sequential nature of both dynamics.
 
 Let the mutation $Q(\Smixed)$ ($R(\Rmixed)$) of a mixed sender
 (receiver) strategy be another mixed sender (receiver) strategy
 defined by:
 \begin{align*}
-  Q(\Smixed)i & =  \sum_j  \Smixed_j \cdot
+  Q(\Smixed)_i & =  \sum_j  \Smixed_j \cdot
   Q_{ji} &   R(\Rmixed)_i & =  \sum_{j}  \Rmixed_j \cdot
   R_{ji} \,.
 \end{align*}
@@ -179,23 +178,24 @@ another behavioral strategy given by:
 \begin{align*}
   C(\Sstrat)(\messg \probbar \state_i) & = \sum_{j} C_{ji} \cdot
   \Sstrat(\messg \probbar \state_j) & C(\Rstrat)(\state_i \probbar
-  \messg) & = \sum_{j} C_{ji} \cdot \Sstrat(\state_j \probbar \messg)
+  \messg) & = \sum_{j} C_{ji} \cdot \Rstrat(\state_j \probbar \messg)
   \,.
 \end{align*}
 
 We hypothesize that a confusion matrix $C$ should give rise to a
-unique mutation matrix $Q^C$ so that whenever $F(\Smixed) = \Sstrat$
-we also have $F(Q^C(\Smixed)) = C(\Sstrat)$. Similarly, for the
+unique mutation matrix $Q^C$ so that whenever $G(\Smixed) = \Sstrat$
+we also have $G(Q^C(\Smixed)) = C(\Sstrat)$. Similarly, for the
 receiver.
 
 \paragraph{Confusion-based mutations.} There are natural conversions
 of $C$ into $Q^C$ and $R^C$. The case for the receiver is easier, so
 we start with that.
 
-The probability that $\Rpure$ mutates into $\Rpure'$ is the product
-of the probabilities for each $\messg$ that $\Rpure(\messg)$ is
-perceived as $\Rpure'(\messg)$. Abusing notation, by refer to the
-index of $\Rpure(\messg)$ with $\Rpure(\messg)$ itself, we define:
+The probability that $\Rpure$ mutates into $\Rpure'$ is the product of
+the probabilities for each $\messg$ that $\Rpure(\messg)$ is perceived
+as $\Rpure'(\messg)$. Abusing notation, by refer to the index of
+$\Rpure(\messg)$ and $\Rpure'(\messg)$ with $\Rpure(\messg)$ and
+$\Rpure'(\messg)$ directly, we define:
 \begin{align*}
   R^C_{ji} = \prod_{\messg} C_{\Rpure(\messg)\Rpure'(\messg)}\,.
 \end{align*}
@@ -218,7 +218,7 @@ messages. Let the confusion matrix be:
   \begin{pmatrix}
     .8 & .2 \\
     .2 & .8 
-  \end{pmatrix}
+  \end{pmatrix}\,.
 \end{align*}
 The resulting mutation matrices are:
 \begin{align*}
@@ -232,14 +232,15 @@ S^C & = \bordermatrix{ ~ & 11 & 12 & 21 & 22 \cr
                       11 & .64 & .16 & .16 & .04 \cr
                       12 & .16 & .64 & .04 & .16 \cr
                       21 & .16 & .04 & .64 & .16 \cr
-                      22 & .04 & .12 & .12 & .64 \cr}
+                      22 & .04 & .12 & .12 & .64 \cr}\,.
 \end{align*}
-Here, a pair like $21$ refers to a pure strategy that plays message 2
-and is states 1 and 2 respectively. Similarly for the receiver.
+Here, a pair like $21$, for example, refers to a pure sender strategy
+with $\Spure(\state_1=\messg_2$ and $\Spure(\state_2) =
+\messg_1$. Similarly for the receiver.
 
 \medskip
 
-\todo[inline]{necessary to prove that mutation matrices are row-stochastic}
+\todo[inline]{necessary to prove that mutation matrices are row-stochastic?}
 
 \todo[inline]{maybe worthwhile to think about general properties of
   the mutation matrices that ensue from perceptual confusion?}
@@ -321,41 +322,42 @@ and is states 1 and 2 respectively. Similarly for the receiver.
   If $G(\Rmixed) = \Rstrat$, then $G(R^C(\Rmixed)) = C(\Rstrat)$.
 \end{theorem}
 
-\todo[inline]{proof}
-
-% \begin{proof}
-%   The proof is almost entirely parallel to that of
-%   Theorem~\ref{thm:sender-eq}. Fix $\Rmixed$ and $\Rstrat =
-%   G(\Rmixed)$. The rhs of the consequent expands to:
-%   \begin{align*}
-%     C(\Rstrat)(\state_x \probbar \messg_y) & = \sum_{i}
-%     \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) = \state_x}} \Rmixed_j \cdot C_{ix}\,.
-%   \end{align*}
-%   The rhs expands to:
-%   \begin{align*}
-%     G(R^C(\Rmixed))(\state_x \probbar \messg_y) & = \sum_{i}
-%     \Rmixed_i \cdot \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) =
-%         \state_x}} 
-%     \prod_{\messg} C_{\Rstrat_i(\messg)\Rstrat_j(\messg)} \\
-%     & = \sum_{i}
-%     \Rmixed_i \cdot ( (C_{\Rpure_i(\messg_1)1} \cdot
-%       C_{\Rpure_i(\messg_2)1} \cdot \ldots +
-%       C_{\Rpure_i(\messg_d)1})  \\
-%       & + \quad (C_{\Rpure_i(\messg_1)1} \cdot
-%       C_{\Rpure_i(\messg_2)1} \cdot \ldots \cdot
-%       C_{\Rpure_i(\messg_d)2}) + \ldots  \\
-%       & + \quad (C_{\Rpure_i(\messg_1)1} \cdot
-%       C_{\Rpure_i(\messg_2)e} \cdot \ldots \cdot
-%       C_{\Rpure_i(\messg_d)e}) + \ldots ))
-%   \end{align*}
-%   If we assuming without loss of generality that $x=y=1$, then if $d =
-%   \card{\Messgs}$, we see that:
-%   \begin{align*}
-%     \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) = \state_x}}
-%     \prod_{\messg} C_{\Rstrat_i(\messg)\Rstrat_j(\messg)} = \sum_{i}
-%     \Rmixed_i \cdot
-%   \end{align*}
-% \end{proof}
+\begin{proof}
+  Fix $\Rmixed$ and $\Rstrat = G(\Rmixed)$. The rhs of the consequent
+  expands to:
+  \begin{align*}
+    C(\Rstrat)(\state_x \probbar \messg_y) & = \sum_{\state_j}
+    \sum_{i \in \set{k \setbar \Rpure_k(\messg_y) = \state_x}}
+    \Rmixed_i \cdot C_{jx} \\
+    & = \sum_{\Rpure_i} \sum_{j \in \set{k \setbar \Rpure_i(\messg_y) = \state_j}}
+    \Rmixed_i \cdot C_{jx} \\
+    & = \sum_{\Rpure_i} \Rmixed_i \cdot C_{\Rpure_i(\messg_y)x} \,.
+  \end{align*}
+  The rhs expands to:
+  \begin{align*}
+    G(R^C(\Rmixed))(\state_x \probbar \messg_y) & = \sum_{i}
+    \Rmixed_i \cdot \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) =
+        \state_x}} 
+    \prod_{\messg} C_{\Rstrat_i(\messg)\Rstrat_j(\messg)} \\
+    & = \sum_{i}
+    \Rmixed_i \cdot ( (C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)1} \cdot \ldots +
+      C_{\Rpure_i(\messg_d)1})  \\
+      & + \quad (C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)1} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)2}) + \ldots  \\
+      & + \quad (C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)e} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)e}) + \ldots ))
+  \end{align*}
+  If we assuming without loss of generality that $x=y=1$, then if $d =
+  \card{\Messgs}$, we see that:
+  \begin{align*}
+    \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) = \state_x}}
+    \prod_{\messg} C_{\Rstrat_i(\messg)\Rstrat_j(\messg)} = \sum_{i}
+    \Rmixed_i \cdot
+  \end{align*}
+\end{proof}
 
 \printbibliography[heading=bibintoc]
 
