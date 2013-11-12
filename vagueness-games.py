@@ -111,6 +111,8 @@ Dynamics = 'replicator dynamics'
 LimitedPerception = True
 Acuity = 10
 
+Strictness = 5
+
 ## Batch mode
 
 BatchMode = False
@@ -135,7 +137,7 @@ elif PriorDistributionType == 'normal':
 Distance = np.array([ [ abs(x - y) for y in PerceptualSpace ] for x in PerceptualSpace ])
 Similarity = np.exp( - (Distance ** 2 / (1.0/Acuity) ** 2))
 
-Utility = Similarity
+Utility = makePDF(np.exp( - (Distance ** 2 / (1.0/Strictness) ** 2)))
 
 Confusion = Similarity
 
