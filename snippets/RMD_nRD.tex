@@ -1,0 +1,370 @@
+\documentclass[fleqn,reqno,10pt]{article}
+
+\usepackage{../helpers/myarticlestyledefault}
+
+\renewcommand{\Smixed}{\ensuremath{\mathrm{\mathbf{s}}}}
+\renewcommand{\Rmixed}{\ensuremath{\mathrm{\mathbf{r}}}}
+
+\title{Replicator-mutator and noise-perturbed replicator dynamics}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\section{Preliminaries}
+
+\paragraph{Notation.} Fix a signaling game with states $\States$,
+messages $\Messgs$ and acts $\Acts$. % Let $\Util_{\sen,\rec} \mycolon
+% \States \times \Messgs \times \Acts \rightarrow \mathds{R}$ be the
+% player's utility function.
+
+Pure sender (receiver) strategies are functions $\Spure \in
+\Messgs^\States$ ($\Rpure \in \Acts^\Messgs$). Mixed sender (receiver)
+strategies are functions $\Smixed \in \Delta(\Messgs^\States)$
+($\Rmixed \in (\Acts^\Messgs)$). The latter give the relative
+population frequencies of the former. We write $\Smixed_i$ for the
+frequency $\Smixed(\Spure_i)$ of pure strategy $\Spure_i$ (also for
+the receiver).
+
+
+
+Let the sender's (receiver's) behavioral strategies be functions in
+$\Sstrat \in \Delta(\Messgs)^\States$ ($\Rstrat \in
+\Delta(\Acts)^\Messgs$). Every mixed strategy $\Smixed$ converts to a
+unique behavioral strategy defined by:
+\begin{align*}
+  \Sstrat(\messg \probbar \state) = \sum_{\Spure(\state) = \messg} \Smixed(\Spure)\,.
+\end{align*} 
+Let $G$ be this mapping from mixed to behavioral strategies. Notice
+that $G$ is \emph{not} an injection, as many mixed strategies map onto
+the same behavioral strategy.
+
+For behavioral strategies, let $\EU(\messg, \state, \Rstrat)$ and
+$\EU(\act, \messg, \Sstrat)$ be the players' expected utilities of
+each action in each choice point as usual. For mixed strategies we
+define the players' fitness in the usual manner. Let $F_i^{\Rmixed}$
+be $\Spure_i$'s fitness given $\Rmixed$ and $F_i^{\Smixed}$ be
+$\Rpure_i$'s fitness given $\Smixed$. Then $\Phi(\Smixed,\Rmixed) =
+\sum_{k} \Smixed_k \cdot F_k^{\Rmixed}$ is the average fitness in the
+sender population and $\Phi(\Rmixed,\Smixed) = \sum_{k} \Rmixed_k
+\cdot F_k^{\Smixed}$ the average fitness in the receiver population.
+
+\paragraph{Replicator dynamics in pure strategies.} The two-population
+(non-payoff adjusted) continuous replicator dynamics in pure
+strategies is defined as:
+\begin{align*}
+  \dot{\Smixed_i} & = \Smixed_i \cdot \left ( F_i^{\Rmixed} -
+  \Phi(\Smixed,\Rmixed) \right ) &   \dot{\Rmixed_i} &  = \Rmixed_i \cdot \left ( F_i^{\Smixed} -
+  \Phi(\Rmixed,\Smixed) \right ) \,.
+\end{align*}
+The discrete time version is given by: 
+\begin{align*}
+  \Smixed_i' & = \frac{\Smixed_i \cdot
+  F_i^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} &     \Rmixed_i' & = \frac{\Rmixed_i \cdot
+  F_i^{\Smixed}}{ \Phi(\Rmixed,\Smixed)} \,.
+\end{align*}
+
+
+\paragraph{Replicator-mutator equation.} Let $Q$ be a row-stochastic
+mutation matrix where $Q_{ji}$ gives the probability that pure sender
+strategy $\Spure_j$ mutates into $\Spure_i$. Similarly, let $R$ be a
+row-stochastic mutation matrix where $R_{ji}$ gives the probability
+that pure receiver strategy $\Rpure_j$ mutates into $\Rpure_i$.
+
+The two-population (non-payoff adjusted) continuous replicator-mutator
+dynamics, is then given by::
+\begin{align*}
+  \dot{\Smixed_i} & = \sum_{j}  Q_{ji} \cdot \Smixed_j
+    \cdot F_j^{\Rmixed} - \Smixed_i \cdot \Phi(\Smixed,\Rmixed) &
+    \dot{\Rmixed_i} & = \sum_{j}  R_{ji} \cdot \Rmixed_j
+    \cdot F_j^{\Smixed} - \Rmixed_i \cdot \Phi(\Rmixed,\Smixed) \,.
+\end{align*}
+\begin{claim} A discrete time version of the above replicator mutator
+  dynamics is:
+  \begin{align*}
+    \Smixed_i' & = \sum_{j} Q_{ji} \frac{\Smixed_j \cdot
+      F_j^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} & \Rmixed_i' & = \sum_{j}
+    R_{ji} \frac{\Rmixed_j \cdot F_j^{\Smixed}}{
+      \Phi(\Rmixed,\Smixed)}\,.
+  \end{align*}
+\end{claim}
+
+\begin{proof}
+  It suffices to check either sender or receiver part. Focusing on the
+  former, we need to show that the continuous version is derivable
+  from the discrete version if the discrete update steps get
+  infinitely small so that:
+  \begin{align*}
+    \dot{\Smixed_i} & = \Smixed_i' - \Smixed_i = \sum_{j} Q_{ji}
+    \frac{\Smixed_j \cdot F_j^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} -
+    \Smixed_i = \sum_{j} \Smixed_j \left ( \frac{ Q_{ji} \cdot
+        F_j^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} - \Smixed_i \right ) \\
+    & = \sum_{j} \Smixed_j \left ( \frac{ Q_{ji} \cdot
+        F_j^{\Rmixed} - \Smixed_i \cdot \Phi(\Smixed,\Rmixed)}{ \Phi(\Smixed,\Rmixed)}  \right )
+  \end{align*}
+  As $\Phi(\Smixed,\Rmixed)$ is a constant rate of change, we can drop
+  it to derive the non-payoff adjusted continuous version above,
+  since:
+  \begin{align*}
+    & \sum_{j} \Smixed_j \left ( Q_{ji} \cdot
+        F_j^{\Rmixed} - \Smixed_i \cdot \Phi(\Smixed,\Rmixed)  \right
+      ) =     \sum_{j} \Smixed_j  Q_{ji} \cdot
+        F_j^{\Rmixed} - \sum_{j} \Smixed_j \cdot \Smixed_i \cdot
+        \Phi(\Smixed,\Rmixed) \\
+       = &    \sum_{j} \Smixed_j  Q_{ji} \cdot
+        F_j^{\Rmixed} - \Smixed_i \cdot
+        \Phi(\Smixed,\Rmixed) 
+  \end{align*}
+\end{proof}
+
+The discrete time replicator-mutator dynamics has a nice sequential
+update property: first we compute the fitness-driven change according
+to the standard replicator dynamics; then we compute the perturbation
+from mutation.
+
+\section{Noise-perturbed replicator dynamics}
+
+We look at signaling games with $\States = \Acts$ and fix a confusion
+matrix $C$, which is a row-stochastic matrix whose elements $C_{ij}$
+give the probability that $\state_i$ is perceived as
+$\state_j$. Define players average utility at each choice point given
+the opponent's strategy as:
+\begin{align*}
+  \Phi(\state,\Rstrat) & = \sum_{\messg} \Sstrat(\messg \probbar \state) \cdot
+\EU(\messg,\state,\Rstrat) &
+\Phi(\messg,\Sstrat) & = \sum_{\state} \Rstrat(\state \probbar \messg)
+\cdot \EU(\state,\messg,\Sstrat)\,.
+\end{align*}
+The discrete noise-perturbed replicator dynamics on behavioral
+strategies proposed by \citet{Correia2013:The-Bivalent-Tr} is:
+\begin{align*}
+  \Sstrat'(\messg \probbar \state_i) & = \sum_{j} C_{ji} \cdot
+  \frac{\Sstrat(\messg \probbar \state_j) \cdot
+    \EU(\messg,\state_j,\Rstrat)} {\Phi(\state_j,\Rstrat)} \\
+    \Rstrat'(\state_i \probbar \messg) & = \sum_{j} C_{ji} \cdot
+  \frac{\Rstrat(\state_j \probbar \messg) \cdot
+    \EU(\state_j,\messg,\Sstrat)} {\Phi(\messg,\Sstrat)}  \,.
+\end{align*}
+Notice that this update is also sequential: first we calculate an
+update according to the standard replicator dynamics (in behavioral
+strategies), then we compute the perturbation from perceptual noise.
+
+
+\section{Exploring the relation}
+
+We will show that the noise-perturbed replicator dynamics defined
+above is the behavioral-strategy analogue to the replicator-mutator
+dynamics when the only source of mutation is perceptual confusion of
+states. Since, in general, the replicator dynamics in two-populations
+is not equivalent in its formulations for behavioral and mixed
+strategies \citep{Cressman2003:Evolutionary-Dy}, we abstract from the
+dynamics and look only at the effect of mutation and
+noise-perturbation. This is justified given the above mentioned
+sequential nature of both dynamics.
+
+Let the mutation $Q(\Smixed)$ ($R(\Rmixed)$) of a mixed sender
+(receiver) strategy be another mixed sender (receiver) strategy
+defined by:
+\begin{align*}
+  Q(\Smixed)_i & =  \sum_j  \Smixed_j \cdot
+  Q_{ji} &   R(\Rmixed)_i & =  \sum_{j}  \Rmixed_j \cdot
+  R_{ji} \,.
+\end{align*}
+We would like to compare this to the noise perturbation $C(\Sstrat)$
+($C(\Rstrat)$) of behavioral strategy $\Sstrat$ ($\Rstrat)$, which is
+another behavioral strategy given by:
+\begin{align*}
+  C(\Sstrat)(\messg \probbar \state_i) & = \sum_{j} C_{ji} \cdot
+  \Sstrat(\messg \probbar \state_j) & C(\Rstrat)(\state_i \probbar
+  \messg) & = \sum_{j} C_{ji} \cdot \Rstrat(\state_j \probbar \messg)
+  \,.
+\end{align*}
+
+We hypothesize that a confusion matrix $C$ should give rise to a
+unique mutation matrix $Q^C$ so that whenever $G(\Smixed) = \Sstrat$
+we also have $G(Q^C(\Smixed)) = C(\Sstrat)$. Similarly, for the
+receiver.
+
+\paragraph{Confusion-based mutations.} There are natural conversions
+of $C$ into $Q^C$ and $R^C$. The case for the receiver is easier, so
+we start with that.
+
+The probability that $\Rpure$ mutates into $\Rpure'$ is the product of
+the probabilities for each $\messg$ that $\Rpure(\messg)$ is perceived
+as $\Rpure'(\messg)$. Abusing notation, by refer to the index of
+$\Rpure(\messg)$ and $\Rpure'(\messg)$ with $\Rpure(\messg)$ and
+$\Rpure'(\messg)$ directly, we define:
+\begin{align*}
+  R^C_{ji} = \prod_{\messg} C_{\Rpure(\messg)\Rpure'(\messg)}\,.
+\end{align*}
+
+Now look at the sender. If $\Spure_j(\state_k)=\messg$ and
+$\Spure_i(\state_k)=\messg'$, then the probability of confusion at
+state $\state_k$ is given by the chance that $\state_k$ is perceived
+as a state $\state_l$ which $\Spure_j$ would map onto $\messg'$. The
+overal probability that $\Spure_j$ mutates into $\Sstrat_i$ is the
+product of these chances for all states. So, define:
+\begin{align*}
+  Q^C_{ji} = \prod_{\state_k} \sum_{\state_l \in
+    \Spure_j^{-1}(\Spure_i(\state_k))} C_{kl}\,.
+\end{align*}
+
+For example, consider a signaling game with two states and two
+messages. Let the confusion matrix be:
+\begin{align*}
+  C=
+  \begin{pmatrix}
+    .8 & .2 \\
+    .2 & .8 
+  \end{pmatrix}\,.
+\end{align*}
+The resulting mutation matrices are:
+\begin{align*}
+S^C & = \bordermatrix{ ~ & 11 & 12 & 21 & 22 \cr
+                      11 & 1 & 0 & 0 & 0 \cr
+                      12 & .16 & .64 & .04 & .16 \cr
+                      21 & .16 & .04 & .64 & .16 \cr
+                      22 & 0 & 0 & 0 & 1 \cr}
+&                    
+  R^C & = \bordermatrix{ ~ & 11 & 12 & 21 & 22 \cr
+                      11 & .64 & .16 & .16 & .04 \cr
+                      12 & .16 & .64 & .04 & .16 \cr
+                      21 & .16 & .04 & .64 & .16 \cr
+                      22 & .04 & .12 & .12 & .64 \cr}\,.
+\end{align*}
+Here, a pair like $21$, for example, refers to a pure sender strategy
+with $\Spure(\state_1=\messg_2$ and $\Spure(\state_2) =
+\messg_1$. Similarly for the receiver.
+
+\medskip
+
+\todo[inline]{necessary to prove that mutation matrices are row-stochastic?}
+
+\todo[inline]{maybe worthwhile to think about general properties of
+  the mutation matrices that ensue from perceptual confusion?}
+
+\medskip
+
+\begin{theorem}
+  \label{thm:sender-eq}
+  If $G(\Smixed) = \Sstrat$, then $G(Q^C(\Smixed)) = C(\Sstrat)$.
+\end{theorem}
+
+
+
+
+\begin{proof}
+  Fix $\Smixed$ and $\Sstrat = G(\Smixed)$. Look first at the rhs of
+  the consequent:
+  \begin{align*}
+    C(\Sstrat)(\messg_y \probbar \state_x) & =  \sum_{\state_l} C_{xl}
+    \cdot \Sstrat(\messg_y \probbar \state_l) \\
+    & =  \sum_{\state_l} C_{xl}
+    \cdot  \sum_{\Spure(\state_l) = \messg_y} \Smixed(\Spure) \\
+    & = \sum_{\state_l}
+    \sum_{\Spure(\state_l) = \messg_y} \Smixed(\Spure) \cdot C_{xl}\,.
+  \end{align*}
+  Next consider the lhs of the consequent:
+  \begin{align*}
+    G(Q^C(\Smixed))(\messg_y \probbar \state_x) & =
+    \sum_{\Spure_i(\state_x)=\messg_y} Q^C(\Smixed)(\Spure_i) \\
+    & = \sum_{\Spure_i(\state_x)=\messg_y} \sum_{\Spure_j}
+    \Smixed(\Spure_j) \cdot Q^C_{ji} \\
+    & = \sum_{\Spure_i(\state_x)=\messg_y} \sum_{\Spure_j}
+    \Smixed(\Spure_j) \cdot \prod_{\state_l} \sum_{\state_m \in
+      \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm} \\
+    & = \sum_{\Spure_j} \Smixed(\Spure_j) \cdot
+    \sum_{\Spure_i(\state_x)=\messg_y} \prod_{\state_l}
+    \sum_{\state_m \in \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm}
+  \end{align*}
+  To simplify this further we look at a fixed $\Spure_j$ and consider
+  the term: 
+  \begin{align}
+    \label{eq:term}
+    \sum_{\Spure_i(\state_x)=\messg_y} \prod_{\state_l} \sum_{\state_m
+      \in \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm}\,.
+  \end{align}
+  Let $Y$ be the row-stochastic matrix with $Y_{kl} = \sum_{\state_m
+    \in \Spure_j^{-1}(\messg_l)} C_{km}$. Every pure sender strategy
+  maps each state $\state_k$ onto exactly one $Y_{kl}$. If we quantify
+  over all pure strategies, we essentially look at each such
+  mapping. Term (\ref{eq:term}) above quantifies over all pure
+  strategies that map $\state_k$ onto $\messg_y$. The above term then
+  sums over all products whose factors are tuples in $\times_{k>2}
+  \set{y \setbar \exists l \mycolon y = Y_{kl}}$. So term
+  (\ref{eq:term}) expands to (where $e = \card{\States}$ and $d=\card{\Messgs}$):
+  \begin{align*}
+    & (Y_{11} \cdot Y_{21} \cdot Y_{31} \cdot \ldots \cdot Y_{e1}) +
+    (Y_{11} \cdot Y_{21} \cdot Y_{31} \cdot \ldots \cdot Y_{e2}) + 
+    \dots \\
+    & + (Y_{11} \cdot Y_{2d} \cdot
+    Y_{3d} \cdot \ldots \cdot
+    Y_{ed})\\
+    = &    
+  \end{align*}
+  But since $Y$ is a row-stochastic matrix, this simplifies to
+  $Y_{xy}$. Continuing the derivation with this:
+  \begin{align*}
+    G(Q^C(\Smixed))(\messg_y \probbar \state_x) 
+    & = \sum_{\Spure_j} \Smixed(\Spure_j) \cdot
+    \sum_{\state_l \in \Spure_j^{-1}(\messg_y)} C_{xl} \\
+    & = \sum_{\Spure_j} \sum_{\state_l \in \Spure_j^{-1}(\messg_y)} \Smixed(\Spure_j) \cdot
+     C_{xl} \\
+     & = \sum_{\state_l}
+    \sum_{\Spure(\state_l) = \messg_y} \Smixed(\Spure) \cdot C_{xl}\,.
+  \end{align*}
+
+\end{proof}
+
+\begin{theorem}
+  If $G(\Rmixed) = \Rstrat$, then $G(R^C(\Rmixed)) = C(\Rstrat)$.
+\end{theorem}
+
+\begin{proof}
+  Fix $\Rmixed$ and $\Rstrat = G(\Rmixed)$. The rhs of the consequent
+  expands to:
+  \begin{align*}
+    C(\Rstrat)(\state_x \probbar \messg_y) & = \sum_{\state_j}
+    \sum_{i \in \set{k \setbar \Rpure_k(\messg_y) = \state_x}}
+    \Rmixed_i \cdot C_{jx} \\
+    & = \sum_{\Rpure_i} \sum_{j \in \set{k \setbar \Rpure_i(\messg_y) = \state_j}}
+    \Rmixed_i \cdot C_{jx} \\
+    & = \sum_{\Rpure_i} \Rmixed_i \cdot C_{\Rpure_i(\messg_y)x} \,.
+  \end{align*}
+  The rhs expands to:
+  \begin{align*}
+    G(R^C(\Rmixed))(\state_x \probbar \messg_y) & = \sum_{\Rpure_i}
+    \Rmixed_i \cdot \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) =
+        \state_x}} 
+    \prod_{\messg} C_{\Rpure_i(\messg)\Rpure_j(\messg)}
+  \end{align*}
+  Without loss of generality, assume that $x=y=1$, and fix
+  $\card{M}=d$ and let $e$ be the number of pure receiver
+  strategies. Then the last term can be rewritten as:
+  \begin{align*}
+    & = \sum_{i}
+    \Rmixed_i \cdot ( C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_1(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_1(\messg_d)} + \ldots  \\
+      & \textcolor{white}{ = \sum_{i}
+    \Rmixed_i  (}  +  C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_2(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_2(\messg_d)} + \ldots  \\
+      & \textcolor{white}{ = \sum_{i}
+    \Rmixed_i  (}  + C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_e(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_e(\messg_d)}) )
+  \end{align*}
+  Every for every messages $C_{\Rpure_i(\messg_l)}$ is a stochastic
+  vector. For $l>1$, all elements of these vectors appear equally
+  often. But that means that these cancel out. What remains is:
+  \begin{align*}
+    & = \sum_{\Rpure_i} \Rmixed_i \cdot C_{\Rpure_i(\messg_y)x} \,.
+  \end{align*}
+\end{proof}
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
