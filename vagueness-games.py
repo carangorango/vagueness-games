@@ -102,16 +102,15 @@ def CorreiaUncertainty(Strategy):
     
 ## Settings
 
-NStates = 50
+NStates = 10
 PriorDistributionType = 'uniform'
 
 NMessages = 2
 
 Dynamics = 'replicator dynamics'
-LimitedPerception = True
-Acuity = 10
+Impairment = 0.1
 
-Strictness = 5
+Tolerance = 0.2
 
 ## Batch mode
 
@@ -123,7 +122,7 @@ if BatchMode:
         sys.exit(1)
     else:
         NStates = int(sys.argv[1])
-        Acuity = float(sys.argv[2])
+        Impairment = float(sys.argv[2])
 
 ## Initialization
 
@@ -135,11 +134,10 @@ elif PriorDistributionType == 'normal':
     Priors = stats.norm.pdf(PerceptualSpace, loc=0.5, scale=0.1)
 
 Distance = np.array([ [ abs(x - y) for y in PerceptualSpace ] for x in PerceptualSpace ])
-Similarity = np.exp( - (Distance ** 2 / (1.0/Acuity) ** 2))
 
-Utility = makePDF(np.exp( - (Distance ** 2 / (1.0/Strictness) ** 2)))
+Utility = np.exp( - (Distance ** 2 / Tolerance ** 2))
 
-Confusion = Similarity
+Confusion = np.exp( - (Distance ** 2 / Impairment ** 2)) if Impairment != 0 else np.identity(NStates)
 
 Speaker = random.dirichlet([1]*NMessages,NStates)
 Hearer = random.dirichlet([1]*NStates,NMessages)
@@ -199,8 +197,7 @@ while not converged:
             elif Dynamics == 'best response':
                 Speaker[t,m] = 1 if UtilitySpeaker[t,m] == max(UtilitySpeaker[t]) else 0
 
-    if LimitedPerception:
-        Speaker = np.dot(Confusion, Speaker)
+    Speaker = np.dot(Confusion, Speaker)
 
     Speaker = makePDFPerRow(Speaker)
     
@@ -215,8 +212,7 @@ while not converged:
             elif Dynamics == 'best response':
                 Hearer[m,t] = 1 if UtilityHearer[m,t] == max(UtilityHearer[m]) else 0
 
-    if LimitedPerception:
-        Hearer = np.dot(Hearer, np.transpose(Confusion))
+    Hearer = np.dot(Hearer, np.transpose(Confusion))
 
     Hearer = makePDFPerRow(Hearer)
 
