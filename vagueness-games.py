@@ -1,5 +1,6 @@
 import sys
 import copy
+import csv
 
 import numpy as np
 from numpy import random as random
@@ -99,7 +100,13 @@ def CorreiaUncertainty(Strategy):
     return np.mean([1 - (1.0/np.log(Strategy.shape[1])) * np.sum(np.log(Strategy.shape[1] * Strategy[c,a]) * Strategy[c,a] if Strategy[c,a] != 0 else 0
                              for a in xrange(Strategy.shape[1]))
                     for c in xrange(Strategy.shape[0])])
-    
+
+def ExpectedUtility(Speaker, Hearer, Utility):
+    return np.sum(Speaker[t1,m] * Hearer[m,t2] * Utility[t1,t2]
+                  for t1 in xrange(Speaker.shape[0])
+                  for m in xrange(Speaker.shape[1])
+                  for t2 in xrange(Hearer.shape[1]))
+
 ## Settings
 
 NStates = 10
@@ -155,18 +162,16 @@ LucaTerminiUncertaintyHearerHistory = []
 FrankeUncertaintyHearerHistory = []
 CorreiaUncertaintyHearerHistory = []
 
+i=0
 converged = False
 while not converged:
+    i+=1
     
     if not BatchMode: plotStrategies()
 
     SpeakerBefore, HearerBefore = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
 
-    ExpectedUtility = np.sum(Speaker[t1,m]*Hearer[m,t2]*Utility[t1,t2]
-                             for t1 in xrange(NStates)
-                             for m in xrange(NMessages)
-                             for t2 in xrange(NStates))
-    ExpectedUtilityHistory.append(np.sum(ExpectedUtility))
+    ExpectedUtilityHistory.append(ExpectedUtility(Speaker, Hearer, Utility))
 
     # Uncertainty metrics
     
@@ -175,15 +180,11 @@ while not converged:
     FrankeUncertaintySpeakerHistory.append(FrankeUncertainty(Speaker))
     CorreiaUncertaintySpeakerHistory.append(CorreiaUncertainty(Speaker))
 
-    print "Speaker:", BasicUncertainty(Speaker), LucaTerminiUncertainty(Speaker), FrankeUncertainty(Speaker), CorreiaUncertainty(Speaker)
-    
     BasicUncertaintyHearerHistory.append(BasicUncertainty(Hearer))
     LucaTerminiUncertaintyHearerHistory.append(LucaTerminiUncertainty(Hearer))
     FrankeUncertaintyHearerHistory.append(FrankeUncertainty(Hearer))
     CorreiaUncertaintyHearerHistory.append(CorreiaUncertainty(Hearer))
 
-    print "Hearer:", BasicUncertainty(Hearer), LucaTerminiUncertainty(Hearer), FrankeUncertainty(Hearer), CorreiaUncertainty(Hearer)
-    
     ## Dynamics
     
     ## Speaker strategy
@@ -221,3 +222,8 @@ while not converged:
         if not BatchMode: print 'Language converged!'
 
 if not BatchMode: plotStrategies(block=True)
+
+csv.writer(sys.stdout).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
+    BasicUncertainty(Speaker), LucaTerminiUncertainty(Speaker), FrankeUncertainty(Speaker), CorreiaUncertainty(Speaker), \
+    BasicUncertainty(Hearer), LucaTerminiUncertainty(Hearer), FrankeUncertainty(Hearer), CorreiaUncertainty(Hearer), \
+    ExpectedUtility(Speaker, Hearer, Utility), i])
