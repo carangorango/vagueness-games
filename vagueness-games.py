@@ -141,8 +141,8 @@ Utility = makePDF(np.exp( - (Distance ** 2 / (1.0/Strictness) ** 2)))
 
 Confusion = Similarity
 
-Speaker = makePDFPerRow(random.random((NStates,NMessages)))
-Hearer = makePDFPerRow(random.random((NMessages,NStates)))
+Speaker = random.dirichlet([1]*NMessages,NStates)
+Hearer = random.dirichlet([1]*NStates,NMessages)
 
 ExpectedUtilityHistory = []
 
