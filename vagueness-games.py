@@ -8,6 +8,7 @@ from numpy import random as random
 from scipy import stats as stats
 
 import matplotlib.pyplot as plt
+import itertools
 
 def plotStrategies(block=False):
     plt.clf()
@@ -48,6 +49,7 @@ def plotStrategies(block=False):
     plt.plot(LucaTerminiUncertaintySpeakerHistory, label='LT')
     plt.plot(FrankeUncertaintySpeakerHistory, label='MF-2')
     plt.plot(CorreiaUncertaintySpeakerHistory, label='JPC')
+    plt.plot(EntropyMixedSpeakerHistory, label='E')
     plt.ylim(ymin=-0.1, ymax=1.1)
     plt.legend(loc='upper right')
     plt.title('Uncertainty metrics speaker')
@@ -57,6 +59,7 @@ def plotStrategies(block=False):
     plt.plot(LucaTerminiUncertaintyHearerHistory, label='LT')
     plt.plot(FrankeUncertaintyHearerHistory, label='MF-2')
     plt.plot(CorreiaUncertaintyHearerHistory, label='JPC')
+    plt.plot(EntropyMixedHearerHistory, label='E')
     plt.ylim(ymin=-0.1)#, ymax=1.1)
     plt.legend(loc='upper right')
     plt.title('Uncertainty metrics hearer')
@@ -107,6 +110,13 @@ def ExpectedUtility(Speaker, Hearer, Utility):
                   for m in xrange(Speaker.shape[1])
                   for t2 in xrange(Hearer.shape[1]))
 
+def ToMixedStrategy(Strategy):
+    return [ np.prod([Strategy[c, s[c]] for c in xrange(Strategy.shape[0])])
+            for s in itertools.product(xrange(Strategy.shape[1]), repeat=Strategy.shape[0]) ]
+
+def NormalizedEntropy(MixedStrategy):
+    return - sum(x * np.log2(x) if x != 0 else 0 for x in MixedStrategy) / np.log2(len(MixedStrategy))
+
 ## Settings
 
 NStates = 10
@@ -156,11 +166,13 @@ BasicUncertaintySpeakerHistory = []
 LucaTerminiUncertaintySpeakerHistory = []
 FrankeUncertaintySpeakerHistory = []
 CorreiaUncertaintySpeakerHistory = []
+EntropyMixedSpeakerHistory = []
 
 BasicUncertaintyHearerHistory = []
 LucaTerminiUncertaintyHearerHistory = []
 FrankeUncertaintyHearerHistory = []
 CorreiaUncertaintyHearerHistory = []
+EntropyMixedHearerHistory = []
 
 i=0
 converged = False
@@ -184,6 +196,12 @@ while not converged:
     LucaTerminiUncertaintyHearerHistory.append(LucaTerminiUncertainty(Hearer))
     FrankeUncertaintyHearerHistory.append(FrankeUncertainty(Hearer))
     CorreiaUncertaintyHearerHistory.append(CorreiaUncertainty(Hearer))
+
+    MixedSpeaker = ToMixedStrategy(Speaker)
+    EntropyMixedSpeakerHistory.append(NormalizedEntropy(MixedSpeaker))
+
+    MixedHearer = ToMixedStrategy(Hearer)
+    EntropyMixedHearerHistory.append(NormalizedEntropy(MixedHearer))
 
     ## Dynamics
     
@@ -224,6 +242,6 @@ while not converged:
 if not BatchMode: plotStrategies(block=True)
 
 csv.writer(sys.stdout).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
-    BasicUncertainty(Speaker), LucaTerminiUncertainty(Speaker), FrankeUncertainty(Speaker), CorreiaUncertainty(Speaker), \
-    BasicUncertainty(Hearer), LucaTerminiUncertainty(Hearer), FrankeUncertainty(Hearer), CorreiaUncertainty(Hearer), \
+    BasicUncertainty(Speaker), LucaTerminiUncertainty(Speaker), FrankeUncertainty(Speaker), CorreiaUncertainty(Speaker), NormalizedEntropy(ToMixedStrategy(Speaker)), \
+    BasicUncertainty(Hearer), LucaTerminiUncertainty(Hearer), FrankeUncertainty(Hearer), CorreiaUncertainty(Hearer), NormalizedEntropy(ToMixedStrategy(Hearer)), \
     ExpectedUtility(Speaker, Hearer, Utility), i])
