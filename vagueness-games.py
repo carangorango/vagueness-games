@@ -1,6 +1,7 @@
 import sys
 import copy
 import csv
+import math
 
 import numpy as np
 from numpy import random as random
@@ -27,21 +28,25 @@ def plotStrategies(block=False):
 
     plt.subplot(4,2,3)
     for m in xrange(NMessages):
-        plt.plot(PerceptualSpace, Speaker[:,m], label='$m_'+str(m)+'$')
+        plt.plot(PerceptualSpace, Speaker[:,m], label='$m_{'+str(m)+'}$')
+    for m in xrange(NMessages):
+        plt.plot(PerceptualSpace, SpeakerOptimal[:,m], linestyle='--', color='0.5')
     plt.ylim(-0.1,1.1)
     plt.legend(loc='lower left')
     plt.title('Speaker strategy')
 
     plt.subplot(4,2,4)
     for m in xrange(NMessages):
-        plt.plot(PerceptualSpace, Hearer[m,:], label='$m_'+str(m)+'$')
+        plt.plot(PerceptualSpace, Hearer[m,:], label='$m_{'+str(m)+'}$')
+    for m in xrange(NMessages):
+        plt.plot(PerceptualSpace, HearerOptimal[m,:], linestyle='--', color='0.5')
     plt.ylim(ymin=0)
     plt.legend(loc='lower left')
     plt.title('Hearer strategy')
 
     plt.subplot(4,1,3)
     plt.plot(ExpectedUtilityHistory)
-    plt.ylim(ymin=0)
+    plt.ylim(ymin=-0.1, ymax=1.1)
     plt.title('Expected utility')
 
     plt.subplot(4,2,7)
@@ -50,6 +55,7 @@ def plotStrategies(block=False):
     plt.plot(FrankeUncertaintySpeakerHistory, label='MF-2')
     plt.plot(CorreiaUncertaintySpeakerHistory, label='JPC')
     plt.plot(EntropySpeakerHistory, label='E')
+    plt.plot(ConvexitySpeakerHistory, label='conv')
     plt.ylim(ymin=-0.1, ymax=1.1)
     plt.legend(loc='upper right')
     plt.title('Uncertainty metrics speaker')
@@ -60,6 +66,7 @@ def plotStrategies(block=False):
     plt.plot(FrankeUncertaintyHearerHistory, label='MF-2')
     plt.plot(CorreiaUncertaintyHearerHistory, label='JPC')
     plt.plot(EntropyHearerHistory, label='E')
+    plt.plot(ConvexityHearerHistory, label='conv')
     plt.ylim(ymin=-0.1)#, ymax=1.1)
     plt.legend(loc='upper right')
     plt.title('Uncertainty metrics hearer')
@@ -112,7 +119,27 @@ def ExpectedUtility(Speaker, Hearer, Utility):
 
 def NormalizedEntropy(Strategy):
     return - sum(np.log(Strategy[c,a]) * Strategy[c,a] if Strategy[c,a] != 0 else 0
-                 for c in xrange(Strategy.shape[0]) for a in xrange(Strategy.shape[1])) / np.log(pow(Strategy.shape[1],Strategy.shape[0]))
+                 for c in xrange(Strategy.shape[0]) for a in xrange(Strategy.shape[1])) / (Strategy.shape[0] * np.log(Strategy.shape[1]))
+
+def convex_sequences(options, length, current=None, acc=[]):
+    if length == 0:
+        return [acc]
+    else:
+        result = []
+        for x in options:
+            new_acc = list(acc)
+            new_acc.append(x)
+            new_options = list(options)
+            if x != current and current in new_options:
+                new_options.remove(current)
+            for seq in convex_sequences(new_options,length-1,x,new_acc):
+                result.append(seq)
+        return result
+
+def Convexity(Strategy):
+    ConvexPureStrategies = convex_sequences(range(Strategy.shape[1]), Strategy.shape[0])
+    return sum(np.prod([ Strategy[c, s[c]] for c in xrange(Strategy.shape[0])])
+               for s in ConvexPureStrategies)
 
 ## Settings
 
@@ -171,6 +198,36 @@ FrankeUncertaintyHearerHistory = []
 CorreiaUncertaintyHearerHistory = []
 EntropyHearerHistory = []
 
+ConvexitySpeakerHistory = []
+ConvexityHearerHistory = []
+
+SpeakerOptimal, HearerOptimal = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
+converged = False
+while not converged:
+
+    SpeakerOptimalBefore, HearerOptimalBefore = copy.deepcopy(SpeakerOptimal), copy.deepcopy(HearerOptimal)
+
+    UtilitySpeakerOptimal = np.array([ [ np.dot(HearerOptimal[m], Utility[t]) for m in xrange(NMessages) ] for t in xrange(NStates) ])
+
+    for t in xrange(NStates):
+        for m in xrange(NMessages):
+                SpeakerOptimal[t,m] = 1 if UtilitySpeakerOptimal[t,m] == max(UtilitySpeakerOptimal[t]) else 0
+
+    SpeakerOptimal = makePDFPerRow(SpeakerOptimal)
+
+    UtilityHearerOptimal = np.array([ [ np.dot(Priors * SpeakerOptimal[:,m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
+
+    for m in xrange(NMessages):
+        for t in xrange(NStates):
+                HearerOptimal[m,t] = 1 if UtilityHearerOptimal[m,t] == max(UtilityHearerOptimal[m]) else 0
+
+    HearerOptimal = makePDFPerRow(HearerOptimal)
+
+    if np.sum(abs(SpeakerOptimal - SpeakerOptimalBefore)) == 0 and np.sum(abs(HearerOptimal - HearerOptimalBefore)) == 0:
+        converged = True
+
+OptimalExpectedUtility = ExpectedUtility(SpeakerOptimal, HearerOptimal, Utility)
+
 i=0
 converged = False
 while not converged:
@@ -180,7 +237,7 @@ while not converged:
 
     SpeakerBefore, HearerBefore = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
 
-    ExpectedUtilityHistory.append(ExpectedUtility(Speaker, Hearer, Utility))
+    ExpectedUtilityHistory.append(ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility)
 
     # Uncertainty metrics
     
@@ -188,15 +245,17 @@ while not converged:
     LucaTerminiUncertaintySpeakerHistory.append(LucaTerminiUncertainty(Speaker))
     FrankeUncertaintySpeakerHistory.append(FrankeUncertainty(Speaker))
     CorreiaUncertaintySpeakerHistory.append(CorreiaUncertainty(Speaker))
+    EntropySpeakerHistory.append(NormalizedEntropy(Speaker))
 
     BasicUncertaintyHearerHistory.append(BasicUncertainty(Hearer))
     LucaTerminiUncertaintyHearerHistory.append(LucaTerminiUncertainty(Hearer))
     FrankeUncertaintyHearerHistory.append(FrankeUncertainty(Hearer))
     CorreiaUncertaintyHearerHistory.append(CorreiaUncertainty(Hearer))
-
-    EntropySpeakerHistory.append(NormalizedEntropy(Speaker))
-
     EntropyHearerHistory.append(NormalizedEntropy(Hearer))
+
+    # Convexity metric
+    ConvexitySpeakerHistory.append(Convexity(Speaker))
+    ConvexityHearerHistory.append(Convexity(Hearer))
 
     ## Dynamics
     
@@ -239,4 +298,5 @@ if not BatchMode: plotStrategies(block=True)
 csv.writer(sys.stdout).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
     BasicUncertainty(Speaker), LucaTerminiUncertainty(Speaker), FrankeUncertainty(Speaker), CorreiaUncertainty(Speaker), NormalizedEntropy(Speaker), \
     BasicUncertainty(Hearer), LucaTerminiUncertainty(Hearer), FrankeUncertainty(Hearer), CorreiaUncertainty(Hearer), NormalizedEntropy(Hearer), \
-    ExpectedUtility(Speaker, Hearer, Utility), i])
+    Convexity(Speaker), Convexity(Hearer), \
+    ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i])
