@@ -14,19 +14,19 @@ import itertools
 def plotStrategies(block=False):
     plt.clf()
 
-    plt.subplot(4,2,1)
+    plt.subplot(3,2,1)
     plt.plot(PerceptualSpace, Priors)
     plt.ylim(ymin=0)
     plt.title('Priors')
 
-    plt.subplot(4,4,3)
+    plt.subplot(3,4,3)
     plt.imshow(Utility, origin='lower', interpolation='none')
     plt.title('Utility')
-    plt.subplot(4,4,4)
+    plt.subplot(3,4,4)
     plt.imshow(Confusion, origin='lower', interpolation='none')
     plt.title('Confusion')
 
-    plt.subplot(4,2,3)
+    plt.subplot(3,2,3)
     for m in xrange(NMessages):
         plt.plot(PerceptualSpace, Speaker[:,m], label='$m_{'+str(m)+'}$')
     for m in xrange(NMessages):
@@ -35,7 +35,7 @@ def plotStrategies(block=False):
     plt.legend(loc='lower left')
     plt.title('Speaker strategy')
 
-    plt.subplot(4,2,4)
+    plt.subplot(3,2,4)
     for m in xrange(NMessages):
         plt.plot(PerceptualSpace, Hearer[m,:], label='$m_{'+str(m)+'}$')
     for m in xrange(NMessages):
@@ -44,32 +44,15 @@ def plotStrategies(block=False):
     plt.legend(loc='lower left')
     plt.title('Hearer strategy')
 
-    plt.subplot(4,1,3)
-    plt.plot(ExpectedUtilityHistory)
-    plt.ylim(ymin=-0.1, ymax=1.1)
-    plt.title('Expected utility')
-
-    plt.subplot(4,2,7)
-    plt.plot(BasicUncertaintySpeakerHistory, label='basic')
-    plt.plot(LucaTerminiUncertaintySpeakerHistory, label='LT')
-    plt.plot(FrankeUncertaintySpeakerHistory, label='MF-2')
-    plt.plot(CorreiaUncertaintySpeakerHistory, label='JPC')
-    plt.plot(EntropySpeakerHistory, label='E')
-    plt.plot(ConvexitySpeakerHistory, label='conv')
+    plt.subplot(3,1,3)
+    plt.plot(ExpectedUtilityHistory, label='$U(\\sigma,\\rho)$')
+    plt.plot(EntropySpeakerHistory, label='$E(\\sigma)$', linestyle='--', color='green')
+    plt.plot(ConvexitySpeakerHistory, label='$C(\\sigma)$', linestyle='-.', color='green')
+    plt.plot(EntropyHearerHistory, label='$E(\\rho)$', linestyle='--', color='red')
+    plt.plot(ConvexityHearerHistory, label='$C(\\rho)$', linestyle='-.', color='red')
     plt.ylim(ymin=-0.1, ymax=1.1)
     plt.legend(loc='upper right')
-    plt.title('Uncertainty metrics speaker')
-
-    plt.subplot(4,2,8)
-    plt.plot(BasicUncertaintyHearerHistory, label='basic')
-    plt.plot(LucaTerminiUncertaintyHearerHistory, label='LT')
-    plt.plot(FrankeUncertaintyHearerHistory, label='MF-2')
-    plt.plot(CorreiaUncertaintyHearerHistory, label='JPC')
-    plt.plot(EntropyHearerHistory, label='E')
-    plt.plot(ConvexityHearerHistory, label='conv')
-    plt.ylim(ymin=-0.1)#, ymax=1.1)
-    plt.legend(loc='upper right')
-    plt.title('Uncertainty metrics hearer')
+    plt.title('Measures')
 
     plt.show(block=block)
     plt.pause(0.01)
@@ -85,32 +68,6 @@ def makePDF(Vector):
 def makePDFPerRow(Matrix):
     return np.array([ makePDF(Row) for Row in Matrix ])
     
-def ShannonEntropy(x):
-    if x == 0 or x == 1:
-        return 0
-    else:
-        return -x * np.log10(x) - (1 - x) * np.log10(1 - x)
-
-def BasicUncertainty(Strategy):
-    return np.mean([1 - abs(Strategy[c,a] - 0.5) / 0.5
-                    for c in xrange(Strategy.shape[0])
-                    for a in xrange(Strategy.shape[1])])
-
-def LucaTerminiUncertainty(Strategy):
-    return np.mean([(1.0/Strategy.shape[1]) * np.sum(ShannonEntropy(Strategy[c,a])
-                           for a in xrange(Strategy.shape[1]))
-                    for c in xrange(Strategy.shape[0])])
-    
-def FrankeUncertainty(Strategy):
-    return np.mean([np.min([-np.log10(Strategy[c,a]) if Strategy[c,a] != 0 else 0
-                            for a in xrange(Strategy.shape[1])])
-                    for c in xrange(Strategy.shape[0])])
-
-def CorreiaUncertainty(Strategy):
-    return np.mean([1 - (1.0/np.log(Strategy.shape[1])) * np.sum(np.log(Strategy.shape[1] * Strategy[c,a]) * Strategy[c,a] if Strategy[c,a] != 0 else 0
-                             for a in xrange(Strategy.shape[1]))
-                    for c in xrange(Strategy.shape[0])])
-
 def ExpectedUtility(Speaker, Hearer, Utility):
     return np.sum(Speaker[t1,m] * Hearer[m,t2] * Utility[t1,t2]
                   for t1 in xrange(Speaker.shape[0])
@@ -185,17 +142,7 @@ Hearer = random.dirichlet([1]*NStates,NMessages)
 
 ExpectedUtilityHistory = []
 
-# Uncertainty metrics
-BasicUncertaintySpeakerHistory = []
-LucaTerminiUncertaintySpeakerHistory = []
-FrankeUncertaintySpeakerHistory = []
-CorreiaUncertaintySpeakerHistory = []
 EntropySpeakerHistory = []
-
-BasicUncertaintyHearerHistory = []
-LucaTerminiUncertaintyHearerHistory = []
-FrankeUncertaintyHearerHistory = []
-CorreiaUncertaintyHearerHistory = []
 EntropyHearerHistory = []
 
 ConvexitySpeakerHistory = []
@@ -239,21 +186,9 @@ while not converged:
 
     ExpectedUtilityHistory.append(ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility)
 
-    # Uncertainty metrics
-    
-    BasicUncertaintySpeakerHistory.append(BasicUncertainty(Speaker))
-    LucaTerminiUncertaintySpeakerHistory.append(LucaTerminiUncertainty(Speaker))
-    FrankeUncertaintySpeakerHistory.append(FrankeUncertainty(Speaker))
-    CorreiaUncertaintySpeakerHistory.append(CorreiaUncertainty(Speaker))
     EntropySpeakerHistory.append(NormalizedEntropy(Speaker))
-
-    BasicUncertaintyHearerHistory.append(BasicUncertainty(Hearer))
-    LucaTerminiUncertaintyHearerHistory.append(LucaTerminiUncertainty(Hearer))
-    FrankeUncertaintyHearerHistory.append(FrankeUncertainty(Hearer))
-    CorreiaUncertaintyHearerHistory.append(CorreiaUncertainty(Hearer))
     EntropyHearerHistory.append(NormalizedEntropy(Hearer))
 
-    # Convexity metric
     ConvexitySpeakerHistory.append(Convexity(Speaker))
     ConvexityHearerHistory.append(Convexity(Hearer))
 
@@ -296,7 +231,6 @@ while not converged:
 if not BatchMode: plotStrategies(block=True)
 
 csv.writer(sys.stdout).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
-    BasicUncertainty(Speaker), LucaTerminiUncertainty(Speaker), FrankeUncertainty(Speaker), CorreiaUncertainty(Speaker), NormalizedEntropy(Speaker), \
-    BasicUncertainty(Hearer), LucaTerminiUncertainty(Hearer), FrankeUncertainty(Hearer), CorreiaUncertainty(Hearer), NormalizedEntropy(Hearer), \
+    NormalizedEntropy(Speaker), NormalizedEntropy(Hearer), \
     Convexity(Speaker), Convexity(Hearer), \
     ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i])
