@@ -233,4 +233,5 @@ if not BatchMode: plotStrategies(block=True)
 csv.writer(sys.stdout).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
     NormalizedEntropy(Speaker), NormalizedEntropy(Hearer), \
     Convexity(Speaker), Convexity(Hearer), \
-    ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i])
+    ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i, \
+    Speaker.tolist(), Hearer.tolist()])
