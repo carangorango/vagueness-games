@@ -148,30 +148,36 @@ EntropyHearerHistory = []
 ConvexitySpeakerHistory = []
 ConvexityHearerHistory = []
 
-SpeakerOptimal, HearerOptimal = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
-converged = False
-while not converged:
-
-    SpeakerOptimalBefore, HearerOptimalBefore = copy.deepcopy(SpeakerOptimal), copy.deepcopy(HearerOptimal)
-
-    UtilitySpeakerOptimal = np.array([ [ np.dot(HearerOptimal[m], Utility[t]) for m in xrange(NMessages) ] for t in xrange(NStates) ])
-
-    for t in xrange(NStates):
-        for m in xrange(NMessages):
-                SpeakerOptimal[t, m] = 1 if UtilitySpeakerOptimal[t, m] == max(UtilitySpeakerOptimal[t]) else 0
-
-    SpeakerOptimal = makePDFPerRow(SpeakerOptimal)
-
-    UtilityHearerOptimal = np.array([ [ np.dot(Priors * SpeakerOptimal[:, m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
-
-    for m in xrange(NMessages):
+if NMessages == 2:
+    SpeakerOptimal = np.array([[1, 0]] * (NStates / 2) + [[0, 1]] * (NStates / 2))
+    HearerOptimal = np.zeros((NMessages, NStates))
+    HearerOptimal[0, (NStates / 2 - 1) / 2] = 1
+    HearerOptimal[1, NStates - 1 - (NStates / 2 - 1) / 2] = 1
+else:
+    SpeakerOptimal, HearerOptimal = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
+    converged = False
+    while not converged:
+    
+        SpeakerOptimalBefore, HearerOptimalBefore = copy.deepcopy(SpeakerOptimal), copy.deepcopy(HearerOptimal)
+    
+        UtilitySpeakerOptimal = np.array([ [ np.dot(HearerOptimal[m], Utility[t]) for m in xrange(NMessages) ] for t in xrange(NStates) ])
+    
         for t in xrange(NStates):
-                HearerOptimal[m, t] = 1 if UtilityHearerOptimal[m, t] == max(UtilityHearerOptimal[m]) else 0
-
-    HearerOptimal = makePDFPerRow(HearerOptimal)
-
-    if np.sum(abs(SpeakerOptimal - SpeakerOptimalBefore)) == 0 and np.sum(abs(HearerOptimal - HearerOptimalBefore)) == 0:
-        converged = True
+            for m in xrange(NMessages):
+                    SpeakerOptimal[t, m] = 1 if UtilitySpeakerOptimal[t, m] == max(UtilitySpeakerOptimal[t]) else 0
+    
+        SpeakerOptimal = makePDFPerRow(SpeakerOptimal)
+    
+        UtilityHearerOptimal = np.array([ [ np.dot(Priors * SpeakerOptimal[:, m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
+    
+        for m in xrange(NMessages):
+            for t in xrange(NStates):
+                    HearerOptimal[m, t] = 1 if UtilityHearerOptimal[m, t] == max(UtilityHearerOptimal[m]) else 0
+    
+        HearerOptimal = makePDFPerRow(HearerOptimal)
+    
+        if np.sum(abs(SpeakerOptimal - SpeakerOptimalBefore)) == 0 and np.sum(abs(HearerOptimal - HearerOptimalBefore)) == 0:
+            converged = True
 
 OptimalExpectedUtility = ExpectedUtility(SpeakerOptimal, HearerOptimal, Utility)
 
