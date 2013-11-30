@@ -14,43 +14,43 @@ import itertools
 def plotStrategies(block=False):
     plt.clf()
 
-    plt.subplot(3,2,1)
+    plt.subplot(3, 2, 1)
     plt.plot(PerceptualSpace, Priors)
     plt.ylim(ymin=0)
     plt.title('Priors')
 
-    plt.subplot(3,4,3)
+    plt.subplot(3, 4, 3)
     plt.imshow(Utility, origin='lower', interpolation='none')
     plt.title('Utility')
-    plt.subplot(3,4,4)
+    plt.subplot(3, 4, 4)
     plt.imshow(Confusion, origin='lower', interpolation='none')
     plt.title('Confusion')
 
-    plt.subplot(3,2,3)
+    plt.subplot(3, 2, 3)
     for m in xrange(NMessages):
-        plt.plot(PerceptualSpace, Speaker[:,m], label='$m_{'+str(m)+'}$')
+        plt.plot(PerceptualSpace, Speaker[:, m], label='$m_{' + str(m) + '}$')
     for m in xrange(NMessages):
-        plt.plot(PerceptualSpace, SpeakerOptimal[:,m], linestyle='--', color='0.5')
-    plt.ylim(-0.1,1.1)
+        plt.plot(PerceptualSpace, SpeakerOptimal[:, m], linestyle='--', color='0.5')
+    plt.ylim(-0.1, 1.1)
     plt.legend(loc='lower left')
     plt.title('Speaker strategy')
 
-    plt.subplot(3,2,4)
+    plt.subplot(3, 2, 4)
     for m in xrange(NMessages):
-        plt.plot(PerceptualSpace, Hearer[m,:], label='$m_{'+str(m)+'}$')
+        plt.plot(PerceptualSpace, Hearer[m, :], label='$m_{' + str(m) + '}$')
     for m in xrange(NMessages):
-        plt.plot(PerceptualSpace, HearerOptimal[m,:], linestyle='--', color='0.5')
+        plt.plot(PerceptualSpace, HearerOptimal[m, :], linestyle='--', color='0.5')
     plt.ylim(ymin=0)
     plt.legend(loc='lower left')
     plt.title('Hearer strategy')
 
-    plt.subplot(3,1,3)
+    plt.subplot(3, 1, 3)
     plt.plot(ExpectedUtilityHistory, label='$U(\\sigma,\\rho)$')
     plt.plot(EntropySpeakerHistory, label='$E(\\sigma)$', linestyle='--', color='green')
     plt.plot(ConvexitySpeakerHistory, label='$C(\\sigma)$', linestyle='-.', color='green')
     plt.plot(EntropyHearerHistory, label='$E(\\rho)$', linestyle='--', color='red')
     plt.plot(ConvexityHearerHistory, label='$C(\\rho)$', linestyle='-.', color='red')
-    plt.ylim(ymin=-0.1, ymax=1.1)
+    plt.ylim(ymin= -0.1, ymax=1.1)
     plt.legend(loc='upper right')
     plt.title('Measures')
 
@@ -69,13 +69,13 @@ def makePDFPerRow(Matrix):
     return np.array([ makePDF(Row) for Row in Matrix ])
     
 def ExpectedUtility(Speaker, Hearer, Utility):
-    return np.sum(Speaker[t1,m] * Hearer[m,t2] * Utility[t1,t2]
+    return np.sum(Speaker[t1, m] * Hearer[m, t2] * Utility[t1, t2]
                   for t1 in xrange(Speaker.shape[0])
                   for m in xrange(Speaker.shape[1])
                   for t2 in xrange(Hearer.shape[1]))
 
 def NormalizedEntropy(Strategy):
-    return - sum(np.log(Strategy[c,a]) * Strategy[c,a] if Strategy[c,a] != 0 else 0
+    return -sum(np.log(Strategy[c, a]) * Strategy[c, a] if Strategy[c, a] != 0 else 0
                  for c in xrange(Strategy.shape[0]) for a in xrange(Strategy.shape[1])) / (Strategy.shape[0] * np.log(Strategy.shape[1]))
 
 def convex_sequences(options, length, current=None, acc=[]):
@@ -89,7 +89,7 @@ def convex_sequences(options, length, current=None, acc=[]):
             new_options = list(options)
             if x != current and current in new_options:
                 new_options.remove(current)
-            for seq in convex_sequences(new_options,length-1,x,new_acc):
+            for seq in convex_sequences(new_options, length - 1, x, new_acc):
                 result.append(seq)
         return result
 
@@ -98,9 +98,9 @@ def Convexity(Strategy):
     return sum(np.prod([ Strategy[c, s[c]] for c in xrange(Strategy.shape[0])])
                for s in ConvexPureStrategies)
 
-## Settings
+# # Settings
 
-NStates = 10
+NStates = 6
 PriorDistributionType = 'uniform'
 
 NMessages = 2
@@ -110,7 +110,7 @@ Impairment = 0.1
 
 Tolerance = 0.2
 
-## Batch mode
+# # Batch mode
 
 BatchMode = False
 
@@ -122,7 +122,7 @@ if BatchMode:
         NStates = int(sys.argv[1])
         Impairment = float(sys.argv[2])
 
-## Initialization
+# # Initialization
 
 PerceptualSpace = np.linspace(0, 1, NStates, endpoint=False)
 
@@ -133,12 +133,12 @@ elif PriorDistributionType == 'normal':
 
 Distance = np.array([ [ abs(x - y) for y in PerceptualSpace ] for x in PerceptualSpace ])
 
-Utility = np.exp( - (Distance ** 2 / Tolerance ** 2))
+Utility = np.exp(-(Distance ** 2 / Tolerance ** 2))
 
-Confusion = np.exp( - (Distance ** 2 / Impairment ** 2)) if Impairment != 0 else np.identity(NStates)
+Confusion = np.exp(-(Distance ** 2 / Impairment ** 2)) if Impairment != 0 else np.identity(NStates)
 
-Speaker = random.dirichlet([1]*NMessages,NStates)
-Hearer = random.dirichlet([1]*NStates,NMessages)
+Speaker = random.dirichlet([1] * NMessages, NStates)
+Hearer = random.dirichlet([1] * NStates, NMessages)
 
 ExpectedUtilityHistory = []
 
@@ -158,15 +158,15 @@ while not converged:
 
     for t in xrange(NStates):
         for m in xrange(NMessages):
-                SpeakerOptimal[t,m] = 1 if UtilitySpeakerOptimal[t,m] == max(UtilitySpeakerOptimal[t]) else 0
+                SpeakerOptimal[t, m] = 1 if UtilitySpeakerOptimal[t, m] == max(UtilitySpeakerOptimal[t]) else 0
 
     SpeakerOptimal = makePDFPerRow(SpeakerOptimal)
 
-    UtilityHearerOptimal = np.array([ [ np.dot(Priors * SpeakerOptimal[:,m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
+    UtilityHearerOptimal = np.array([ [ np.dot(Priors * SpeakerOptimal[:, m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
 
     for m in xrange(NMessages):
         for t in xrange(NStates):
-                HearerOptimal[m,t] = 1 if UtilityHearerOptimal[m,t] == max(UtilityHearerOptimal[m]) else 0
+                HearerOptimal[m, t] = 1 if UtilityHearerOptimal[m, t] == max(UtilityHearerOptimal[m]) else 0
 
     HearerOptimal = makePDFPerRow(HearerOptimal)
 
@@ -175,10 +175,10 @@ while not converged:
 
 OptimalExpectedUtility = ExpectedUtility(SpeakerOptimal, HearerOptimal, Utility)
 
-i=0
+i = 0
 converged = False
 while not converged:
-    i+=1
+    i += 1
     
     if not BatchMode: plotStrategies()
 
@@ -192,33 +192,33 @@ while not converged:
     ConvexitySpeakerHistory.append(Convexity(Speaker))
     ConvexityHearerHistory.append(Convexity(Hearer))
 
-    ## Dynamics
+    # # Dynamics
     
-    ## Speaker strategy
+    # # Speaker strategy
     
     UtilitySpeaker = np.array([ [ np.dot(Hearer[m], Utility[t]) for m in xrange(NMessages) ] for t in xrange(NStates) ])
 
     for t in xrange(NStates):
         for m in xrange(NMessages):
             if Dynamics == 'replicator dynamics':
-                Speaker[t,m] = Speaker[t,m] * UtilitySpeaker[t,m] * NMessages / sum(UtilitySpeaker[t])
+                Speaker[t, m] = Speaker[t, m] * UtilitySpeaker[t, m] * NMessages / sum(UtilitySpeaker[t])
             elif Dynamics == 'best response':
-                Speaker[t,m] = 1 if UtilitySpeaker[t,m] == max(UtilitySpeaker[t]) else 0
+                Speaker[t, m] = 1 if UtilitySpeaker[t, m] == max(UtilitySpeaker[t]) else 0
 
     Speaker = np.dot(Confusion, Speaker)
 
     Speaker = makePDFPerRow(Speaker)
     
-    ## Hearer strategy
+    # # Hearer strategy
     
-    UtilityHearer = np.array([ [ np.dot(Priors * Speaker[:,m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
+    UtilityHearer = np.array([ [ np.dot(Priors * Speaker[:, m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
 
     for m in xrange(NMessages):
         for t in xrange(NStates):
             if Dynamics == 'replicator dynamics':
-                Hearer[m,t] = Hearer[m,t] * UtilityHearer[m,t] * NStates / sum(UtilityHearer[m])
+                Hearer[m, t] = Hearer[m, t] * UtilityHearer[m, t] * NStates / sum(UtilityHearer[m])
             elif Dynamics == 'best response':
-                Hearer[m,t] = 1 if UtilityHearer[m,t] == max(UtilityHearer[m]) else 0
+                Hearer[m, t] = 1 if UtilityHearer[m, t] == max(UtilityHearer[m]) else 0
 
     Hearer = np.dot(Hearer, np.transpose(Confusion))
 
