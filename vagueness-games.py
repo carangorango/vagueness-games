@@ -32,7 +32,7 @@ def plotStrategies(block=False):
     for m in xrange(NMessages):
         plt.plot(PerceptualSpace, SpeakerOptimal[:, m], linestyle='--', color='0.5')
     plt.ylim(-0.1, 1.1)
-    plt.legend(loc='lower left')
+    plt.legend(loc='best')
     plt.title('Speaker strategy')
 
     plt.subplot(3, 2, 4)
@@ -41,7 +41,7 @@ def plotStrategies(block=False):
     for m in xrange(NMessages):
         plt.plot(PerceptualSpace, HearerOptimal[m, :], linestyle='--', color='0.5')
     plt.ylim(ymin=0)
-    plt.legend(loc='lower left')
+    plt.legend(loc='best')
     plt.title('Hearer strategy')
 
     plt.subplot(3, 1, 3)
@@ -49,9 +49,10 @@ def plotStrategies(block=False):
     plt.plot(EntropySpeakerHistory, label='$E(\\sigma)$', linestyle='--', color='green')
     plt.plot(ConvexitySpeakerHistory, label='$C(\\sigma)$', linestyle='-.', color='green')
     plt.plot(EntropyHearerHistory, label='$E(\\rho)$', linestyle='--', color='red')
-    plt.plot(ConvexityHearerHistory, label='$C(\\rho)$', linestyle='-.', color='red')
+#    plt.plot(ConvexityHearerHistory, label='$C(\\rho)$', linestyle='-.', color='red')
+    plt.plot(PrototypicalityHearerHistory, label='$P(\\rho)$', linestyle='-.', color='red')
     plt.ylim(ymin= -0.1, ymax=1.1)
-    plt.legend(loc='upper right')
+    plt.legend(loc='best')
     plt.title('Measures')
 
     plt.show(block=block)
@@ -97,6 +98,18 @@ def Convexity(Strategy):
     ConvexPureStrategies = convex_sequences(range(Strategy.shape[1]), Strategy.shape[0])
     return sum(np.prod([ Strategy[c, s[c]] for c in xrange(Strategy.shape[0])])
                for s in ConvexPureStrategies)
+    
+def Prototypicality(HearerStrategy, Similarity):
+    result = 0.0
+    for m in xrange(HearerStrategy.shape[0]):
+        p = np.argmax(HearerStrategy[m])
+        for t1 in xrange(HearerStrategy.shape[1]):
+            for t2 in xrange(HearerStrategy.shape[1]):
+                if (Similarity[t1, p] > Similarity[t2, p] and HearerStrategy[m, t1] > HearerStrategy[m, t2]) \
+                   or (Similarity[t1, p] < Similarity[t2, p] and HearerStrategy[m, t1] < HearerStrategy[m, t2]):
+                    result += 1
+    return result / (HearerStrategy.shape[0] * HearerStrategy.shape[1] * (HearerStrategy.shape[1] - 1))
+
 
 # # Settings
 
@@ -108,19 +121,23 @@ NMessages = 2
 Dynamics = 'replicator dynamics'
 Impairment = 0.1
 
-Tolerance = 0.2
+Tolerance = Impairment
+
+OutputFile = sys.stdout
 
 # # Batch mode
-
+ 
 BatchMode = False
 
 if BatchMode:
-    if len(sys.argv) < 3:
-        print "Usage: python", sys.argv[0], "<number of states> <acuity>"
+    if len(sys.argv) < 5:
+        print "Usage: python", sys.argv[0], "<number of states> <number of messages> <impairment> <output file>"
         sys.exit(1)
     else:
         NStates = int(sys.argv[1])
-        Impairment = float(sys.argv[2])
+        NMessages = int(sys.argv[2])
+        Impairment = float(sys.argv[3])
+        OutputFile = open(sys.argv[4], 'ab')
 
 # # Initialization
 
@@ -133,7 +150,9 @@ elif PriorDistributionType == 'normal':
 
 Distance = np.array([ [ abs(x - y) for y in PerceptualSpace ] for x in PerceptualSpace ])
 
-Utility = np.exp(-(Distance ** 2 / Tolerance ** 2))
+Similarity = np.exp(-(Distance ** 2 / Tolerance ** 2))
+
+Utility = Similarity
 
 Confusion = np.exp(-(Distance ** 2 / Impairment ** 2)) if Impairment != 0 else np.identity(NStates)
 
@@ -147,6 +166,8 @@ EntropyHearerHistory = []
 
 ConvexitySpeakerHistory = []
 ConvexityHearerHistory = []
+
+PrototypicalityHearerHistory = []
 
 if NMessages == 2:
     SpeakerOptimal = np.array([[1, 0]] * (NStates / 2) + [[0, 1]] * (NStates / 2))
@@ -197,6 +218,8 @@ while not converged:
 
     ConvexitySpeakerHistory.append(Convexity(Speaker))
     ConvexityHearerHistory.append(Convexity(Hearer))
+    
+    PrototypicalityHearerHistory.append(Prototypicality(Hearer, Similarity))
 
     # # Dynamics
     
@@ -236,7 +259,7 @@ while not converged:
 
 if not BatchMode: plotStrategies(block=True)
 
-csv.writer(sys.stdout).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
+csv.writer(OutputFile).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
     NormalizedEntropy(Speaker), NormalizedEntropy(Hearer), \
     Convexity(Speaker), Convexity(Hearer), \
     ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i, \
