@@ -48,9 +48,10 @@ def plotStrategies(block=False):
     plt.plot(ExpectedUtilityHistory, label='$U(\\sigma,\\rho)$')
     plt.plot(EntropySpeakerHistory, label='$E(\\sigma)$', linestyle='--', color='green')
     plt.plot(ConvexitySpeakerHistory, label='$C(\\sigma)$', linestyle='-.', color='green')
+    plt.plot(VoronoinessSpeakerHistory, label='$V(\\sigma)$', linestyle=':', color='green')
     plt.plot(EntropyHearerHistory, label='$E(\\rho)$', linestyle='--', color='red')
 #    plt.plot(ConvexityHearerHistory, label='$C(\\rho)$', linestyle='-.', color='red')
-    plt.plot(PrototypicalityHearerHistory, label='$P(\\rho)$', linestyle='-.', color='red')
+    plt.plot(VoronoinessHearerHistory, label='$V(\\rho)$', linestyle=':', color='red')
     plt.ylim(ymin= -0.1, ymax=1.1)
     plt.legend(loc='best')
     plt.title('Measures')
@@ -99,17 +100,31 @@ def Convexity(Strategy):
     return sum(np.prod([ Strategy[c, s[c]] for c in xrange(Strategy.shape[0])])
                for s in ConvexPureStrategies)
     
-def Prototypicality(HearerStrategy, Similarity):
-    result = 0.0
+def Voronoiness(HearerStrategy, SpeakerStrategy, StateSimilarity):
+    Prototypes = [ np.argmax(HearerStrategy[m]) for m in xrange(HearerStrategy.shape[0]) ]
+
+    acc = 0.0
     for m in xrange(HearerStrategy.shape[0]):
-        p = np.argmax(HearerStrategy[m])
+        p = Prototypes[m]
         for t1 in xrange(HearerStrategy.shape[1]):
             for t2 in xrange(HearerStrategy.shape[1]):
-                if (Similarity[t1, p] > Similarity[t2, p] and HearerStrategy[m, t1] > HearerStrategy[m, t2]) \
-                   or (Similarity[t1, p] < Similarity[t2, p] and HearerStrategy[m, t1] < HearerStrategy[m, t2]):
-                    result += 1
-    return result / (HearerStrategy.shape[0] * HearerStrategy.shape[1] * (HearerStrategy.shape[1] - 1))
+                if (StateSimilarity[t1, p] > StateSimilarity[t2, p] and HearerStrategy[m, t1] > HearerStrategy[m, t2]) \
+                   or (StateSimilarity[t1, p] <= StateSimilarity[t2, p] and HearerStrategy[m, t1] <= HearerStrategy[m, t2]):
+                    acc += 1
+    HearerVoronoiness = acc / (HearerStrategy.shape[0] * HearerStrategy.shape[1] * HearerStrategy.shape[1])
 
+    acc = 0.0
+    for t in xrange(SpeakerStrategy.shape[0]):
+        for m1 in xrange(SpeakerStrategy.shape[1]):
+            p1 = Prototypes[m1]
+            for m2 in xrange(SpeakerStrategy.shape[1]):
+                p2 = Prototypes[m2]
+                if (StateSimilarity[t, p1] > StateSimilarity[t, p2] and SpeakerStrategy[t, m1] > SpeakerStrategy[t, m2]) \
+                   or (StateSimilarity[t, p1] <= StateSimilarity[t, p2] and SpeakerStrategy[t, m1] <= SpeakerStrategy[t, m2]):
+                    acc += 1
+    SpeakerVoronoiness = acc / (SpeakerStrategy.shape[0] * SpeakerStrategy.shape[1] * SpeakerStrategy.shape[1])
+
+    return (SpeakerVoronoiness, HearerVoronoiness)
 
 # # Settings
 
@@ -167,7 +182,8 @@ EntropyHearerHistory = []
 ConvexitySpeakerHistory = []
 ConvexityHearerHistory = []
 
-PrototypicalityHearerHistory = []
+VoronoinessSpeakerHistory = []
+VoronoinessHearerHistory = []
 
 if NMessages == 2:
     SpeakerOptimal = np.array([[1, 0]] * (NStates / 2) + [[0, 1]] * (NStates / 2))
@@ -219,7 +235,9 @@ while not converged:
     ConvexitySpeakerHistory.append(Convexity(Speaker))
     ConvexityHearerHistory.append(Convexity(Hearer))
     
-    PrototypicalityHearerHistory.append(Prototypicality(Hearer, Similarity))
+    (SpeakerVoronoiness, HearerVoronoiness) = Voronoiness(Hearer, Speaker, Similarity)
+    VoronoinessSpeakerHistory.append(SpeakerVoronoiness)
+    VoronoinessHearerHistory.append(HearerVoronoiness)
 
     # # Dynamics
     
@@ -259,8 +277,10 @@ while not converged:
 
 if not BatchMode: plotStrategies(block=True)
 
+(SpeakerVoronoiness, HearerVoronoiness) = Voronoiness(Hearer, Speaker, Similarity)
 csv.writer(OutputFile).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
     NormalizedEntropy(Speaker), NormalizedEntropy(Hearer), \
     Convexity(Speaker), Convexity(Hearer), \
+    SpeakerVoronoiness, HearerVoronoiness, \
     ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i, \
     Speaker.tolist(), Hearer.tolist()])
