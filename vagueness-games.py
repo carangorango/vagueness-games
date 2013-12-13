@@ -142,7 +142,7 @@ OutputFile = sys.stdout
 
 # # Batch mode
  
-BatchMode = False
+BatchMode = len(sys.argv) > 1
 
 if BatchMode:
     if len(sys.argv) < 5:
