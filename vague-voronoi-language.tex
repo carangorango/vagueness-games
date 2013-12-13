@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{a4wide}
+\usepackage{amsmath}
+\usepackage{todonotes}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\title{Vagueness games}
+\author{José Pedro Correia \and Michael Franke}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Vague Voronoi languages}
+
+A \emph{vague Voronoi language} consists of a sender strategy $\sigma:T\rightarrow\Delta\left(M\right)$ and a receiver strategy $\rho:M\rightarrow \Delta\left(T\right)$ such that:
+
+\begin{enumerate}
+\item The receiver strategy assigns maximal probability to one state per message. The maximal element of a strategy for a message $m\in M$ can be understood as the prototype of that message:
+\begin{equation}
+\forall m\in M:\exists!t\in T:\forall t^{\prime}\in T:\rho\left(m,t\right)\geq\rho\left(m,t^{\prime}\right)
+\end{equation}
+Note that after we guarantee the uniqueness of message prototypes for a strategy $\rho$, we can define a prototype function $P_{\rho}:M\rightarrow T$
+which associates to each message its prototype as $P_{\rho}\left(m\right)=\argmax_{t\in T}\rho\left(m,t\right)$
+
+\item In the receiver strategy, for each message, the probability of a state being picked for that message increases with the state's similarity with the message's prototype:
+\begin{equation}
+\forall m\in M:\forall t,t^{\prime}\in T:s\left(t,P_{\rho}\left(m\right)\right)>s\left(t^{\prime},P_{\rho}\left(m\right)\right)\Rightarrow\rho\left(m,t\right)>\rho\left(m,t^{\prime}\right)
+\end{equation}
+\todo[inline]{Is this so far the same as defining $\rho\left(m\right)$ as a convez fuzzy set for every $m\in M$? Probably not...}
+
+\item In the sender strategy, the more similar a state is to a message's prototype in comparison with other prototypes, the higher the probability that message will be used:
+\begin{equation}
+\forall t\in T:\forall m,m^{\prime}\in M:s\left(t,P_{\rho}\left(m\right)\right)>s\left(t,P_{\rho}\left(m^{\prime}\right)\right)\Rightarrow\sigma\left(t,m\right)>\sigma\left(t,m^{\prime}\right)
+\end{equation}
+\todo[inline]{A non-vague language Voronoi language should be a special case of this. We should show that and add a criterion of non-triviality, right?}
+\end{enumerate}
+
+\end{document}
