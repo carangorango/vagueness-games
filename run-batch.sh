@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DATE=$(date +%Y%m%d-%H%M)
-HEADER="Number of states,Prior distribution type,Number of messages,Impairment,Tolerance,Dynamics,Speaker entropy,Hearer entropy,Speaker convexity,Hearer convexity,Expected utility,Iterations,Speaker strategy,Hearer strategy"
+HEADER="Number of states,Prior distribution type,Number of messages,Impairment,Tolerance,Dynamics,Speaker entropy,Hearer entropy,Speaker convexity,Hearer convexity,Speaker Voronoiness,Hearer Voronoiness,Expected utility,Iterations,Speaker strategy,Hearer strategy"
 
 echo $HEADER > results-$DATE.csv
 for t in 6 10 14 18 22
