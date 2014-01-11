@@ -156,7 +156,7 @@ if BatchMode:
 
 # # Initialization
 
-PerceptualSpace = np.linspace(0, 1, NStates, endpoint=False)
+PerceptualSpace = np.linspace(0, 1, NStates, endpoint=True)
 
 if PriorDistributionType == 'uniform':
     Priors = stats.uniform.pdf(PerceptualSpace, loc=0, scale=NStates)
