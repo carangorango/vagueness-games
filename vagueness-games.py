@@ -279,8 +279,8 @@ while not converged:
 
 if not BatchMode: plotStrategies(block=True)
 
-ResultsDirectory = 'results'
-SimulationID = datetime.today().strftime('%Y%m%d-%H%M%S')
+ResultsDirectory = 'results/strategies'
+SimulationID = datetime.today().strftime('%Y%m%d-%H%M%S-%f')
 SpeakerOutputFilename = ResultsDirectory + '/' + SimulationID + '-speaker.csv'
 HearerOutputFilename = ResultsDirectory + '/' + SimulationID + '-hearer.csv'
 np.savetxt(SpeakerOutputFilename, Speaker, delimiter=',')
