@@ -11,6 +11,8 @@ from scipy import stats as stats
 import matplotlib.pyplot as plt
 import itertools
 
+from datetime import datetime
+
 def plotStrategies(block=False):
     plt.clf()
 
@@ -277,10 +279,17 @@ while not converged:
 
 if not BatchMode: plotStrategies(block=True)
 
+ResultsDirectory = 'results'
+SimulationID = datetime.today().strftime('%Y%m%d-%H%M%S')
+SpeakerOutputFilename = ResultsDirectory + '/' + SimulationID + '-speaker.csv'
+HearerOutputFilename = ResultsDirectory + '/' + SimulationID + '-hearer.csv'
+np.savetxt(SpeakerOutputFilename, Speaker, delimiter=',')
+np.savetxt(HearerOutputFilename, Hearer, delimiter=',')
+
 (SpeakerVoronoiness, HearerVoronoiness) = Voronoiness(Hearer, Speaker, Similarity)
 csv.writer(OutputFile).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
     NormalizedEntropy(Speaker), NormalizedEntropy(Hearer), \
     Convexity(Speaker), Convexity(Hearer), \
     SpeakerVoronoiness, HearerVoronoiness, \
     ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i, \
-    Speaker.tolist(), Hearer.tolist()])
+    SpeakerOutputFilename, HearerOutputFilename])
