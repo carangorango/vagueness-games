@@ -135,20 +135,20 @@ def InformationQuantity(SpeakerStrategy, HearerStrategy, Priors):
     NMessages = SpeakerStrategy.shape[1]
     NActs = HearerStrategy.shape[1]
     
-    InformationalContentOnStates = np.zeros((NMessages,NStates))
+    InformationOnStatesPerMessage = np.zeros(NMessages)
     for m in xrange(NMessages):
-        MessageProbability = sum(Priors[t] * SpeakerStrategy[t,m] for t in xrange(NStates))
+        MessageProbability = sum(Priors[t] * SpeakerStrategy[t, m] for t in xrange(NStates))
         for t in xrange(NStates):
-            ConditionalProbability = (SpeakerStrategy[t,m] * Priors[t]) / MessageProbability
-            InformationalContentOnStates[m,t] = ConditionalProbability * np.log(ConditionalProbability / Priors[t])
-    InformationOnStates = sum(InformationalContentOnStates[m,t] for m in xrange(NMessages) for t in xrange(NStates)) / NMessages
+            ConditionalProbability = (SpeakerStrategy[t, m] * Priors[t]) / MessageProbability
+            InformationOnStatesPerMessage[m] += ConditionalProbability * np.log(ConditionalProbability / Priors[t]) if ConditionalProbability != 0 else 0
+    InformationOnStates = sum(InformationOnStatesPerMessage[m] for m in xrange(NMessages)) / NMessages
 
-    InformationalContentOnActs = np.zeros((NMessages,NActs))
+    InformationOnActsPerMessage = np.zeros(NMessages)
     for m in xrange(NMessages):
         for a in xrange(NActs):
-            ActProbability = sum(Priors[t] * SpeakerStrategy[t,m2] * HearerStrategy[m2,a] for t in xrange(NStates) for m2 in xrange(NMessages))
-            InformationalContentOnActs[m,a] = HearerStrategy[m,a] * np.log(HearerStrategy[m,a] / ActProbability)
-    InformationOnActs = sum(InformationalContentOnActs[m,a] for m in xrange(NMessages) for a in xrange(NActs)) / NMessages
+            ActProbability = sum(Priors[t] * SpeakerStrategy[t, m2] * HearerStrategy[m2, a] for t in xrange(NStates) for m2 in xrange(NMessages))
+            InformationOnActsPerMessage[m] += HearerStrategy[m, a] * np.log(HearerStrategy[m, a] / ActProbability) if HearerStrategy[m, a] != 0 else 0
+    InformationOnActs = sum(InformationOnActsPerMessage[m] for m in xrange(NMessages)) / NMessages
     
     return (InformationOnStates, InformationOnActs)
 
