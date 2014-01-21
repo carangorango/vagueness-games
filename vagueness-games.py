@@ -49,13 +49,15 @@ def plotStrategies(block=False):
     plt.subplot(3, 1, 3)
     plt.plot(ExpectedUtilityHistory, label='$U(\\sigma,\\rho)$')
     plt.plot(EntropySpeakerHistory, label='$E(\\sigma)$', linestyle='--', color='green')
-    plt.plot(ConvexitySpeakerHistory, label='$C(\\sigma)$', linestyle='-.', color='green')
-    plt.plot(VoronoinessSpeakerHistory, label='$V(\\sigma)$', linestyle=':', color='green')
-    plt.plot(EntropyHearerHistory, label='$E(\\rho)$', linestyle='--', color='red')
+    plt.plot(ConvexitySpeakerHistory, label='$C(\\sigma)$', linestyle='--', color='red')
+    plt.plot(VoronoinessSpeakerHistory, label='$V(\\sigma)$', linestyle='--', color='brown')
+    plt.plot(InformativitySpeakerHistory, label='$I(\\sigma)$', linestyle='--', color='purple')
+    plt.plot(EntropyHearerHistory, label='$E(\\rho)$', linestyle='-.', color='green')
 #    plt.plot(ConvexityHearerHistory, label='$C(\\rho)$', linestyle='-.', color='red')
-    plt.plot(VoronoinessHearerHistory, label='$V(\\rho)$', linestyle=':', color='red')
+    plt.plot(VoronoinessHearerHistory, label='$V(\\rho)$', linestyle='-.', color='brown')
+    plt.plot(InformativityHearerHistory, label='$I(\\rho)$', linestyle='-.', color='purple')
     plt.ylim(ymin= -0.1, ymax=1.1)
-    plt.legend(loc='best')
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1), ncol=8)
     plt.title('Measures')
 
     plt.show(block=block)
@@ -128,6 +130,28 @@ def Voronoiness(HearerStrategy, SpeakerStrategy, StateSimilarity):
 
     return (SpeakerVoronoiness, HearerVoronoiness)
 
+def InformationQuantity(SpeakerStrategy, HearerStrategy, Priors):
+    NStates = SpeakerStrategy.shape[0]
+    NMessages = SpeakerStrategy.shape[1]
+    NActs = HearerStrategy.shape[1]
+    
+    InformationalContentOnStates = np.zeros((NMessages,NStates))
+    for m in xrange(NMessages):
+        MessageProbability = sum(Priors[t] * SpeakerStrategy[t,m] for t in xrange(NStates))
+        for t in xrange(NStates):
+            ConditionalProbability = (SpeakerStrategy[t,m] * Priors[t]) / MessageProbability
+            InformationalContentOnStates[m,t] = ConditionalProbability * np.log(ConditionalProbability / Priors[t])
+    InformationOnStates = sum(InformationalContentOnStates[m,t] for m in xrange(NMessages) for t in xrange(NStates)) / NMessages
+
+    InformationalContentOnActs = np.zeros((NMessages,NActs))
+    for m in xrange(NMessages):
+        for a in xrange(NActs):
+            ActProbability = sum(Priors[t] * SpeakerStrategy[t,m2] * HearerStrategy[m2,a] for t in xrange(NStates) for m2 in xrange(NMessages))
+            InformationalContentOnActs[m,a] = HearerStrategy[m,a] * np.log(HearerStrategy[m,a] / ActProbability)
+    InformationOnActs = sum(InformationalContentOnActs[m,a] for m in xrange(NMessages) for a in xrange(NActs)) / NMessages
+    
+    return (InformationOnStates, InformationOnActs)
+
 # # Settings
 
 NStates = 6
@@ -187,6 +211,9 @@ ConvexityHearerHistory = []
 VoronoinessSpeakerHistory = []
 VoronoinessHearerHistory = []
 
+InformativitySpeakerHistory = []
+InformativityHearerHistory = []
+
 if NMessages == 2:
     SpeakerOptimal = np.array([[1, 0]] * (NStates / 2) + [[0, 1]] * (NStates / 2))
     HearerOptimal = np.zeros((NMessages, NStates))
@@ -240,6 +267,10 @@ while not converged:
     (SpeakerVoronoiness, HearerVoronoiness) = Voronoiness(Hearer, Speaker, Similarity)
     VoronoinessSpeakerHistory.append(SpeakerVoronoiness)
     VoronoinessHearerHistory.append(HearerVoronoiness)
+    
+    (InformativitySpeaker, InformativityHearer) = InformationQuantity(Speaker, Hearer, Priors)
+    InformativitySpeakerHistory.append(InformativitySpeaker)
+    InformativityHearerHistory.append(InformativityHearer)
 
     # # Dynamics
     
@@ -287,9 +318,11 @@ np.savetxt(SpeakerOutputFilename, Speaker, delimiter=',')
 np.savetxt(HearerOutputFilename, Hearer, delimiter=',')
 
 (SpeakerVoronoiness, HearerVoronoiness) = Voronoiness(Hearer, Speaker, Similarity)
+(InformativitySpeaker, InformativityHearer) = InformationQuantity(Speaker, Hearer, Priors)
 csv.writer(OutputFile).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
     NormalizedEntropy(Speaker), NormalizedEntropy(Hearer), \
     Convexity(Speaker), Convexity(Hearer), \
     SpeakerVoronoiness, HearerVoronoiness, \
+    InformativitySpeaker, InformativityHearer, \
     ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i, \
     SpeakerOutputFilename, HearerOutputFilename])
