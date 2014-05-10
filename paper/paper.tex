@@ -1,6 +1,9 @@
 \documentclass[fleqn,reqno,10pt]{article}
 
-\usepackage{myarticlestyledefault}
+\usepackage{../helpers/myarticlestyledefault}
+
+\renewcommand{\Smixed}{\ensuremath{\mathrm{\mathbf{s}}}}
+\renewcommand{\Rmixed}{\ensuremath{\mathrm{\mathbf{r}}}}
 
 \title{Vagueness, Noise and Communication}
 \author{Jos\'e Pedro Correia and Michael Franke}
@@ -8,6 +11,12 @@
 
 \begin{document}
 \maketitle
+
+\begin{abstract}
+  We introduce a noise-perturbed replicator dynamic, as a variant of
+  the replicator mutator dynamic, to study the evolution of vague
+  signaling strategies.
+\end{abstract}
 
 \input{01_intro}
 
@@ -19,6 +28,7 @@
 
 \input{05_conclusions}
 
+\input{06_appendix}
 
 
 \printbibliography[heading=bibintoc]
