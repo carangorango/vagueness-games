@@ -1,0 +1,119 @@
+\appendix
+
+\section{Proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:sender-eq}]
+  Fix $\Smixed$ and $\Sstrat = G(\Smixed)$. Look first at the rhs of
+  the consequent:
+  \begin{align*}
+    C(\Sstrat)(\messg_y \probbar \state_x) & =  \sum_{\state_l} C_{xl}
+    \cdot \Sstrat(\messg_y \probbar \state_l) \\
+    & =  \sum_{\state_l} C_{xl}
+    \cdot  \sum_{\Spure(\state_l) = \messg_y} \Smixed(\Spure) \\
+    & = \sum_{\state_l}
+    \sum_{\Spure(\state_l) = \messg_y} \Smixed(\Spure) \cdot C_{xl}\,.
+  \end{align*}
+  Next consider the lhs of the consequent:
+  \begin{align*}
+    G(Q^C(\Smixed))(\messg_y \probbar \state_x) & =
+    \sum_{\Spure_i(\state_x)=\messg_y} Q^C(\Smixed)(\Spure_i) \\
+    & = \sum_{\Spure_i(\state_x)=\messg_y} \sum_{\Spure_j}
+    \Smixed(\Spure_j) \cdot Q^C_{ji} \\
+    & = \sum_{\Spure_i(\state_x)=\messg_y} \sum_{\Spure_j}
+    \Smixed(\Spure_j) \cdot \prod_{\state_l} \sum_{\state_m \in
+      \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm} \\
+    & = \sum_{\Spure_j} \Smixed(\Spure_j) \cdot
+    \sum_{\Spure_i(\state_x)=\messg_y} \prod_{\state_l}
+    \sum_{\state_m \in \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm}
+  \end{align*}
+  To simplify this further we look at a fixed $\Spure_j$ and consider
+  the term: 
+  \begin{align}
+    \label{eq:term}
+    \sum_{\Spure_i(\state_x)=\messg_y} \prod_{\state_l} \sum_{\state_m
+      \in \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm}\,.
+  \end{align}
+  Let $Y$ be the row-stochastic matrix with $Y_{kl} = \sum_{\state_m
+    \in \Spure_j^{-1}(\messg_l)} C_{km}$. Every pure sender strategy
+  maps each state $\state_k$ onto exactly one $Y_{kl}$. If we quantify
+  over all pure strategies, we essentially look at each such
+  mapping. Term (\ref{eq:term}) above quantifies over all pure
+  strategies that map $\state_k$ onto $\messg_y$. The above term then
+  sums over all products whose factors are tuples in $\times_{k>2}
+  \set{y \setbar \exists l \mycolon y = Y_{kl}}$. So term
+  (\ref{eq:term}) expands to (where $e = \card{\States}$ and $d=\card{\Messgs}$):
+  \begin{align*}
+    & (Y_{11} \cdot Y_{21} \cdot Y_{31} \cdot \ldots \cdot Y_{e1}) +
+    (Y_{11} \cdot Y_{21} \cdot Y_{31} \cdot \ldots \cdot Y_{e2}) + 
+    \dots \\
+    & + (Y_{11} \cdot Y_{2d} \cdot
+    Y_{3d} \cdot \ldots \cdot
+    Y_{ed})\\
+    = &    
+  \end{align*}
+  But since $Y$ is a row-stochastic matrix, this simplifies to
+  $Y_{xy}$. Continuing the derivation with this:
+  \begin{align*}
+    G(Q^C(\Smixed))(\messg_y \probbar \state_x) 
+    & = \sum_{\Spure_j} \Smixed(\Spure_j) \cdot
+    \sum_{\state_l \in \Spure_j^{-1}(\messg_y)} C_{xl} \\
+    & = \sum_{\Spure_j} \sum_{\state_l \in \Spure_j^{-1}(\messg_y)} \Smixed(\Spure_j) \cdot
+     C_{xl} \\
+     & = \sum_{\state_l}
+    \sum_{\Spure(\state_l) = \messg_y} \Smixed(\Spure) \cdot C_{xl}\,.
+  \end{align*}
+
+\end{proof}
+
+\begin{proof}[Proof of \ref{thm:receiver-eq} ]
+  Fix $\Rmixed$ and $\Rstrat = G(\Rmixed)$. The rhs of the consequent
+  expands to:
+  \begin{align*}
+    C(\Rstrat)(\state_x \probbar \messg_y) & = \sum_{\state_j}
+    \sum_{i \in \set{k \setbar \Rpure_k(\messg_y) = \state_x}}
+    \Rmixed_i \cdot C_{jx} \\
+    & = \sum_{\Rpure_i} \sum_{j \in \set{k \setbar \Rpure_i(\messg_y) = \state_j}}
+    \Rmixed_i \cdot C_{jx} \\
+    & = \sum_{\Rpure_i} \Rmixed_i \cdot C_{\Rpure_i(\messg_y)x} \,.
+  \end{align*}
+  The rhs expands to:
+  \begin{align*}
+    G(R^C(\Rmixed))(\state_x \probbar \messg_y) & = \sum_{\Rpure_i}
+    \Rmixed_i \cdot \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) =
+        \state_x}} 
+    \prod_{\messg} C_{\Rpure_i(\messg)\Rpure_j(\messg)}
+  \end{align*}
+  Without loss of generality, assume that $x=y=1$, and fix
+  $\card{M}=d$ and let $e$ be the number of pure receiver
+  strategies. Then the last term can be rewritten as:
+  \begin{align*}
+    & = \sum_{i}
+    \Rmixed_i \cdot ( C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_1(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_1(\messg_d)} + \ldots  \\
+      & \textcolor{white}{ = \sum_{i}
+    \Rmixed_i  (}  +  C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_2(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_2(\messg_d)} + \ldots  \\
+      & \textcolor{white}{ = \sum_{i}
+    \Rmixed_i  (}  + C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_e(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_e(\messg_d)}) )
+  \end{align*}
+  Every for every messages $C_{\Rpure_i(\messg_l)}$ is a stochastic
+  vector. For $l>1$, all elements of these vectors appear equally
+  often. But that means that these cancel out. What remains is:
+  \begin{align*}
+    & = \sum_{\Rpure_i} \Rmixed_i \cdot C_{\Rpure_i(\messg_y)x} \,.
+  \end{align*}
+\end{proof}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% TeX-PDF-mode: t
+%%% End:
+
+
+
