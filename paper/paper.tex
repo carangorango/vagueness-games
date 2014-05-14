@@ -1,6 +1,38 @@
 \documentclass[fleqn,reqno,10pt]{article}
 
-\usepackage{../helpers/myarticlestyledefault}
+
+%========================================
+% Packages
+%========================================
+
+\usepackage[]{../helpers/mypackages}
+%\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
+\bibliography{../helpers/MyRefGlobal}
+\usepackage{../helpers/myenvironments}
+\usepackage{../helpers/mycommands}
+
+%========================================
+% Standard Layout
+%========================================
+
+% Itemize
+\renewcommand{\labelitemi}{\large{$\mathbf{\cdot}$}}    % itemize symbols
+\renewcommand{\labelitemii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiv}{\large{$\mathbf{\cdot}$}}
+% Description
+\renewcommand{\descriptionlabel}[1]{\hspace\labelsep\textsc{#1}}
+
+% Figure Captions
+\usepackage{caption} % use corresponding myfiguresize!
+\setlength{\captionmargin}{20pt}
+\renewcommand{\captionfont}{\small}
+\setlength{\belowcaptionskip}{7pt} % standard is 0pt
+
+%========================================
+% Additional layout & commands
+%========================================
+
 
 \renewcommand{\Smixed}{\ensuremath{\mathrm{\mathbf{s}}}}
 \renewcommand{\Rmixed}{\ensuremath{\mathrm{\mathbf{r}}}}
