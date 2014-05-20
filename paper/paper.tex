@@ -10,6 +10,7 @@
 \bibliography{../helpers/MyRefGlobal}
 \usepackage{../helpers/myenvironments}
 \usepackage{../helpers/mycommands}
+\usepackage{todonotes}
 
 %========================================
 % Standard Layout
@@ -36,6 +37,12 @@
 
 \renewcommand{\Smixed}{\ensuremath{\mathrm{\mathbf{s}}}}
 \renewcommand{\Rmixed}{\ensuremath{\mathrm{\mathbf{r}}}}
+
+% Annotations
+\newcommand{\mytodo}[2]{\todo[inline,color=yellow,author=#1]{#2}}
+\newcommand{\question}[2]{\todo[inline,color=blue,author=#1]{#2}}
+\newcommand{\answer}[2]{\todo[inline,color=green,author=#1]{#2}}
+
 
 \title{Vagueness, Noise and Communication}
 \author{Jos\'e Pedro Correia and Michael Franke}

@@ -1,5 +1,35 @@
 \section{Simulations}
 
+In order to study the long-term behavior of the noise-perturbed sim-max games, we conducted computer simulations for different combinations of initial parameters.
+Namely, we were interested in investigating the impact of different values of impairment and its relation with the size of the state space.
+\mytodo{JPC}{Justify why size of state space is interesting}
+
+\subsection{Measures}
+To be able to quantitively analyze the results of our simulations, we decided to define a number of measures to capture different characteristics of sim-max languages.
+
+\paragraph{Entropy.}
+This classic information-theoretic measure captures the amount of uncertainty in a signaling strategy.
+The most natural way is to define it in terms of mixed strategies rather than behavioral strategies.
+Let us recalle that mixed sender (receiver) strategies are functions $\Smixed \in \Delta(\Messgs^\States)$ ($\Rmixed \in (\Acts^\Messgs)$).
+We can define the entropy of a sender strategy (henceforth $\Sstrat$-entropy) as:
+\begin{align*}
+  E(\Smixed) = \sum_{\Spure \in \Messgs^\States} \Smixed(\Spure) \cdot \ln(\Smixed(\Spure)) \,.
+\end{align*} 
+and the entropy of a receiver strategy (henceforth $\Rstrat$-entropy) as:
+\begin{align*}
+  E(\Rmixed) = \sum_{\Rpure \in \Acts^\Messgs} \Rmixed(\Rpure) \cdot \ln(\Rmixed(\Rpure)) \,.
+\end{align*} 
+These measures are computationally expensive to calculate, since the size of the domain over which the sum is computed grows exponentially with the number of choice points.
+Therefore, we converted\footnote{See Appendix~\ref{sec:proofs}.} the above definitions into equivalent measures defined in terms of behavioral strategies.
+These are as follows:
+\begin{align*}
+  E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs} \Sstrat(\messg \probbar \state) \cdot \ln(\Sstrat(\messg \probbar \state)) \,.
+\end{align*} 
+\begin{align*}
+  E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\act \probbar \messg) \cdot \ln(\Rstrat(\act \probbar \messg)) \,.
+\end{align*}
+The measures are lower bounded by $0$ and upper bounded by, respectively, $\ln(|\Messgs^\States|) = |\States| \cdot ln(|\Messgs|)$ and $\ln(|\Acts^\Messgs|) = |\Messgs| \cdot ln(|\Acts|)$, thus we can normalize them by dividing by these values.
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "paper"
