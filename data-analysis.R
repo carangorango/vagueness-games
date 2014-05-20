@@ -39,6 +39,6 @@ plot.cluster <- function(language.names, data) {
     for (i in 1:length(language.names)) {
         plots[[i]] <- plot.language(data[language.names[i],'Speaker.strategy.file'], data[language.names[i],'Hearer.strategy.file'])
     }
-    do.call(arrangeGrob, plots)
+    do.call(grid.arrange, plots)
     
 }
