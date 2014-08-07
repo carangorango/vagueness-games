@@ -5,30 +5,69 @@ Namely, we were interested in investigating the impact of different values of im
 \mytodo{JPC}{Justify why size of state space is interesting}
 
 \subsection{Measures}
-To be able to quantitively analyze the results of our simulations, we decided to define a number of measures to capture different characteristics of sim-max languages.
+To be able to quantitively analyze the results of our simulations, we define a number of measures to capture different characteristics of sim-max languages.
 
 \paragraph{Entropy.}
 This classic information-theoretic measure captures the amount of uncertainty in a signaling strategy.
-The most natural way is to define it in terms of mixed strategies rather than behavioral strategies.
-Let us recalle that mixed sender (receiver) strategies are functions $\Smixed \in \Delta(\Messgs^\States)$ ($\Rmixed \in (\Acts^\Messgs)$).
-We can define the entropy of a sender strategy (henceforth $\Sstrat$-entropy) as:
+The most natural way to define it is in terms of mixed strategies rather than behavioral strategies.
+Let us recall that mixed sender (receiver) strategies are functions $\Smixed \in \Delta(\Messgs^\States)$ ($\Rmixed \in (\Acts^\Messgs)$).
+We can define the entropy of a sender strategy as
 \begin{align*}
-  E(\Smixed) = \sum_{\Spure \in \Messgs^\States} \Smixed(\Spure) \cdot \ln(\Smixed(\Spure)) \,.
+  E(\Smixed) = \sum_{\Spure \in \Messgs^\States} \Smixed(\Spure) \cdot \log(\Smixed(\Spure))
 \end{align*} 
-and the entropy of a receiver strategy (henceforth $\Rstrat$-entropy) as:
+and the entropy of a receiver strategy as
 \begin{align*}
-  E(\Rmixed) = \sum_{\Rpure \in \Acts^\Messgs} \Rmixed(\Rpure) \cdot \ln(\Rmixed(\Rpure)) \,.
+  E(\Rmixed) = \sum_{\Rpure \in \Acts^\Messgs} \Rmixed(\Rpure) \cdot \log(\Rmixed(\Rpure)) \,.
 \end{align*} 
 These measures are computationally expensive to calculate, since the size of the domain over which the sum is computed grows exponentially with the number of choice points.
 Therefore, we converted\footnote{See Appendix~\ref{sec:proofs}.} the above definitions into equivalent measures defined in terms of behavioral strategies.
 These are as follows:
 \begin{align*}
-  E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs} \Sstrat(\messg \probbar \state) \cdot \ln(\Sstrat(\messg \probbar \state)) \,.
+  E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs} \Sstrat(\messg \probbar \state) \cdot \log(\Sstrat(\messg \probbar \state))
 \end{align*} 
 \begin{align*}
-  E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\act \probbar \messg) \cdot \ln(\Rstrat(\act \probbar \messg)) \,.
+  E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\act \probbar \messg) \cdot \log(\Rstrat(\act \probbar \messg)) \,.
 \end{align*}
-The measures are lower bounded by $0$ and upper bounded by, respectively, $\ln(|\Messgs^\States|) = |\States| \cdot ln(|\Messgs|)$ and $\ln(|\Acts^\Messgs|) = |\Messgs| \cdot ln(|\Acts|)$, thus we can normalize them by dividing by these values.
+The measures are lower bounded by $0$ and upper bounded by, respectively, $\log(|\Messgs^\States|) = |\States| \cdot \log(|\Messgs|)$ and $\log(|\Acts^\Messgs|) = |\Messgs| \cdot \log(|\Acts|)$, thus we can normalize them by dividing by these values.
+
+\paragraph{Informativity.}
+\mytodo{JPC}{Informativity is perhaps a bad name for the receiver...}
+The quantity of information in a signal is an old notion that also goes back to the start of information theory.
+Skyrms~\citet[ch.~3]{Skyrms2010} discusses its use in the context of signaling games.
+The main idea is that we can quantify the amount of information about a state $\state$ in a message $\messg$ via the relation between the probability of the state given the message $\Pr(\state \,|\, \messg)$ and the unconditional probability of the state $\Pr(\state)$.
+Following Bayes' theorem, we can express $\Pr(\state \,|\, \messg)$ as $\frac{\Pr(\state) \cdot \Pr(\messg \,|\, \state)}{\Pr(\messg)}$.
+We then have $\Pr(\messg \,|\, \state) = \Sstrat(\state,\messg)$ and $\Pr(\messg) = \sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)$.
+Finally, we equate sender infomativity with the average overall information about states in each signal.
+Based on the definition by Skyrms~\citet[p.~36]{Skyrms2010}, and the considerations above, we define sender informativity as follows:
+\begin{align*}
+  I(\Sstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\state \in \States} \frac{\Pr(\state) \cdot \Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \cdot \log \left(\frac{\Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \right) \,.
+\end{align*}
+Conversely, we can quantify the amount of information about an act in a message.
+We equate receiver informativity with the average overall information about acts in each signal.
+Based on Skyrms' definition~\citet[p.~39]{Skyrms2010}, we define receiver informativity as follows:
+\begin{align*}
+  I(\Sstrat,\Rstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\messg,\act) \cdot \log \left(\frac{\Rstrat(\messg,\act)}{\sum_{\state \in \States} \Pr(\state) \cdot \sum_{\messg^\prime \in \Messgs} \Sstrat(\state,\messg^\prime) \cdot \Rstrat(\messg^\prime,\act)} \right) \,.
+\end{align*}
+Both measures are bounded between $0$ and $1$.
+
+\paragraph{Voronoiness.}
+This measure aims to quantify how close a strategy is to being a part of a Voronoi tessallation of the state space.
+Recalling the results by \cite{Jager2007}, the stable outcomes of a population of agents playing a similarity-maximization game using pure strategies and evolving according to the replicator dynamics are those where ``the sender strategy is consistent with the Voronoi tessallation that is induced by the image of the receiver strategy.''~(\cite{Jager2007}, p. 562).
+\mytodo{JPC}{Explain further?}
+Given we are working with behavioral strategies, rather than pure strategies, and that we perform numerical simulations, rather than calculate analytical results, instead of looking into a binary criterion of whether a simulation result is such a Voronoi tessallation of the state space or not, we want a more progressive measure to characterize that in terms of degrees.
+With that in mind, and given $\Acts = \States$, we define Voronoiness as follows.
+Let $\pi(\Rstrat, \messg) = \argmax_{\state \in \States}\Rstrat(\messg,\state)$ be the prototype of a message $\messg \in \Messgs$, then
+\begin{multline*}
+  V(\Sstrat, \Rstrat) = \sum_{\state \in \States} \sum_{\messg_1 \in \Messgs} \sum_{\messg_2 \in \Messgs} \textrm{if } s(\state, \pi(\Rstrat, \messg_1)) > s(\state, \pi(\Rstrat, \messg_2)) \bicond \Sstrat(\state, \messg_1) > \Sstrat(\state, \messg_2) \textrm{ then } 1 \textrm{ else } 0
+\end{multline*}
+is the Voronoiness of the sender strategy $\Sstrat$ given the receiver strategy $\Rstrat$ and
+\begin{align*}
+  V(\Rstrat) = \sum_{\messg \in \Messgs} \sum_{\state_1 \in \States} \sum_{\state_2 \in \States} \textrm{if } s(\state_1, \pi(\Rstrat, \messg)) > s(\state_2, \pi(\Rstrat, \messg)) \bicond \Rstrat(\messg, \state_1) > \Rstrat(\messg, \state_2) \textrm{ then } 1 \textrm{ else } 0
+\end{align*}
+is the Voronoiness of the receiver strategy $\Rstrat$.
+\mytodo{JPC}{Give some intuitions on these?}
+The measures are lower bounded by $0$ and upper bounded by, respectively, $|\States| \times |\Messgs|^2$ and $|\Messgs| \times |\States|^2$, thus we can normalize them by dividing by these values.
+
 
 %%% Local Variables: 
 %%% mode: latex
