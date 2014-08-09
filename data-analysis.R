@@ -2,7 +2,7 @@ require(ggplot2)
 require(reshape)
 require(gridExtra)
 
-theme_set(theme_minimal())
+theme_set(theme_bw())
 
 plot.language <- function(speaker.filename, hearer.filename) {
 
@@ -42,3 +42,21 @@ plot.cluster <- function(language.names, data) {
     do.call(grid.arrange, plots)
     
 }
+
+x <- read.csv('results/20140121-141158.csv', colClasses=c('numeric','factor','numeric','numeric','numeric','factor','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','character','character'))
+ggplot(x, aes(x=factor(Impairment), y=Speaker.entropy)) + geom_boxplot() + xlab('Impairment') + ylim(0, 1) + ylab(expression(E(sigma)))
+ggsave(filename=paste(sep='', 'paper/plots/', 'Speaker-entropy-', '20140121-141158.png'))
+ggplot(x, aes(x=factor(Impairment), y=Hearer.entropy)) + geom_boxplot() + xlab('Impairment') + ylim(0, 1) + ylab(expression(E(rho)))
+ggsave(filename=paste(sep='', 'paper/plots/', 'Hearer-entropy-', '20140121-141158.png'))
+ggplot(x, aes(x=factor(Impairment), y=Speaker.informativity)) + geom_boxplot() + xlab('Impairment') + ylim(0, 1) + ylab(expression(I(sigma)))
+ggsave(filename=paste(sep='', 'paper/plots/', 'Speaker-informativity-', '20140121-141158.png'))
+ggplot(x, aes(x=factor(Impairment), y=Hearer.informativity)) + geom_boxplot() + xlab('Impairment') + ylim(0, 1) + ylab(expression(I(rho)))
+ggsave(filename=paste(sep='', 'paper/plots/', 'Hearer-informativity-', '20140121-141158.png'))
+ggplot(x, aes(x=factor(Impairment), y=Speaker.Voronoiness)) + geom_boxplot() + xlab('Impairment') + ylim(0, 1) + ylab(expression(V(sigma)))
+ggsave(filename=paste(sep='', 'paper/plots/', 'Speaker-Voronoiness-', '20140121-141158.png'))
+ggplot(x, aes(x=factor(Impairment), y=Hearer.Voronoiness)) + geom_boxplot() + xlab('Impairment') + ylim(0, 1) + ylab(expression(V(rho)))
+ggsave(filename=paste(sep='', 'paper/plots/', 'Hearer-Voronoiness-', '20140121-141158.png'))
+ggplot(x, aes(x=factor(Impairment), y=Expected.utility)) + geom_boxplot() + xlab('Impairment') + ylim(0, 1) + ylab(expression(EU(sigma,rho)))
+ggsave(filename=paste(sep='', 'paper/plots/', 'Expected-utility-', '20140121-141158.png'))
+ggplot(x, aes(x=factor(Impairment), y=Iterations)) + geom_boxplot() + xlab('Impairment')
+ggsave(filename=paste(sep='', 'paper/plots/', 'Iterations-', '20140121-141158.png'))

@@ -98,6 +98,48 @@ and
 We perform a parameter sweep with size of the state space $n \in \{10, 50, 100, 200\}$ and impairment $\impairment \in \{0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4\}$.
 For each parameter combination, we perform $100$ trials.
 
+\subsection{Results}
+
+\begin{figure}
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+                \includegraphics[width=\textwidth]{plots/Speaker-entropy-20140121-141158}
+                \caption{Entropy of speaker strategy.}
+%                \label{fig:gull}
+        \end{subfigure}%
+        \begin{subfigure}{0.45\textwidth}
+                \includegraphics[width=\textwidth]{plots/Hearer-entropy-20140121-141158}
+                \caption{Entropy of hearer strategy.}
+        \end{subfigure}
+
+        \begin{subfigure}{0.45\textwidth}
+                \includegraphics[width=\textwidth]{plots/Speaker-informativity-20140121-141158}
+                \caption{Informativity of speaker strategy.}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+                \includegraphics[width=\textwidth]{plots/Hearer-informativity-20140121-141158}
+                \caption{Informativity of speaker strategy.}
+        \end{subfigure}
+
+        \begin{subfigure}{0.45\textwidth}
+                \includegraphics[width=\textwidth]{plots/Speaker-Voronoiness-20140121-141158}
+                \caption{Voronoiness of speaker strategy.}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+                \includegraphics[width=\textwidth]{plots/Hearer-Voronoiness-20140121-141158}
+                \caption{Voronoiness of hearer strategy.}
+        \end{subfigure}
+
+        \begin{subfigure}{0.45\textwidth}
+                \includegraphics[width=\textwidth]{plots/Expected-utility-20140121-141158}
+                \caption{Expected utility.}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+                \includegraphics[width=\textwidth]{plots/Iterations-20140121-141158}
+                \caption{Number of iterations until convergence.}
+        \end{subfigure}
+\end{figure}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "paper"
