@@ -5,6 +5,7 @@ Namely, we were interested in investigating the impact of different values of im
 \mytodo{JPC}{Justify why size of state space is interesting}
 
 \subsection{Measures}
+\label{sec:measures}
 To be able to quantitively analyze the results of our simulations, we define a number of measures to capture different characteristics of sim-max languages.
 
 \paragraph{Entropy.}
@@ -96,38 +97,40 @@ and
 \end{align*}
 
 We perform a parameter sweep with size of the state space $n \in \{10, 50, 100, 200\}$ and impairment $\impairment \in \{0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4\}$.
-For each parameter combination, we perform $100$ trials.
+For each parameter combination, we perform $100$ trials and record the values of each of the measures introduced in Section~\ref{sec:measures} after convergence, as well as two additional indicators: number of iterations taken until convergence, and the normalized expected utility.
+Expected utility is normalized by dividing by the expected utility of the theoretical optimum without impairment, \emph{i.e.}~a Voronoi tessalation of the state space. 
 
 \subsection{Results}
-
+In order to visualize the impact of the impairment factor on the outcome of simulations, in Figure~\ref{fig:metrics-boxplots} we plot the distribution of each of the measurements per impairment value.
+%
 \begin{figure}
         \centering
         \begin{subfigure}{0.45\textwidth}
                 \includegraphics[width=\textwidth]{plots/Speaker-entropy-20140121-141158}
-                \caption{Entropy of speaker strategy.}
+                \caption{Entropy of sender strategy.}
 %                \label{fig:gull}
-        \end{subfigure}%
+        \end{subfigure}
         \begin{subfigure}{0.45\textwidth}
                 \includegraphics[width=\textwidth]{plots/Hearer-entropy-20140121-141158}
-                \caption{Entropy of hearer strategy.}
+                \caption{Entropy of receiver strategy.}
         \end{subfigure}
 
         \begin{subfigure}{0.45\textwidth}
                 \includegraphics[width=\textwidth]{plots/Speaker-informativity-20140121-141158}
-                \caption{Informativity of speaker strategy.}
+                \caption{Informativity of sender strategy.}
         \end{subfigure}
         \begin{subfigure}{0.45\textwidth}
                 \includegraphics[width=\textwidth]{plots/Hearer-informativity-20140121-141158}
-                \caption{Informativity of speaker strategy.}
+                \caption{Informativity of receiver strategy.}
         \end{subfigure}
 
         \begin{subfigure}{0.45\textwidth}
                 \includegraphics[width=\textwidth]{plots/Speaker-Voronoiness-20140121-141158}
-                \caption{Voronoiness of speaker strategy.}
+                \caption{Voronoiness of sender strategy.}
         \end{subfigure}
         \begin{subfigure}{0.45\textwidth}
                 \includegraphics[width=\textwidth]{plots/Hearer-Voronoiness-20140121-141158}
-                \caption{Voronoiness of hearer strategy.}
+                \caption{Voronoiness of receiver strategy.}
         \end{subfigure}
 
         \begin{subfigure}{0.45\textwidth}
@@ -138,7 +141,26 @@ For each parameter combination, we perform $100$ trials.
                 \includegraphics[width=\textwidth]{plots/Iterations-20140121-141158}
                 \caption{Number of iterations until convergence.}
         \end{subfigure}
+        \caption{Boxplots of metrics per impairment value.}
+        \label{fig:metrics-boxplots}
 \end{figure}
+%
+Most trends are quite clear.
+Entropy seems to increase with higher impairment values for both sender and receiver.
+This is an expected outcome, since the higher the impairment value, the more likely each player is to confuse two states, thus the more uncertain he will be in unequivocally associating a state with a message, or vice-versa.
+The trend for informativity is also expected: more vague strategies convey less information, be it from the sender or the receiver perspective.
+
+Regarding Voronoiness, we observe that most simulation results approximate perfect Voronoi tessalations.
+This is not the case, however, for the lower values of impairment.
+We believe the explanation is that, with lower values of impairment, strategies can achieve a high expected utility without having perfect Voronoiness.
+Although the expected long term outcome in these situations is perfect Voronoiness (given J\"ager's analytical results~\cite{Jager2007}), actually reaching it involves minor refinements which at some point do not qualify as significant change given our convergence criterion.
+
+The trend for expected utility reflects Lipman's observation that vague languages are less optimal than non-vague ones~\cite{Lipman2009}: more impairment necessarily leads to lower expected utility.
+Finally, the plot for number of iterations until convergence shows that a certain level of impairment enables faster convergence.
+We will discuss this further in more detail in Section~\ref{sec:discussion}.
+
+\mytodo{JPC}{Present and discuss results per size of state space? Don't forget O'Connor's claim that speed of convergence is more important for larger \#state/\#message ratio}
+
 
 %%% Local Variables: 
 %%% mode: latex
