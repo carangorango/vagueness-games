@@ -3,6 +3,7 @@
 \documentclass[a4paper,english]{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
+\usepackage{units}
 \usepackage{amsmath}
 
 \makeatletter
@@ -31,6 +32,9 @@
 \maketitle
 
 \section{Quantitative measures of uncertainty}
+
+
+\subsection{Distance-based}
 
 Both sender and receiver strategies are of the form $s:C\rightarrow\Delta\left(A\right)$,
 \emph{i.e.}\ a function $s$ from a set of choice points $C$ to
@@ -82,4 +86,83 @@ the mean uncertainty per choice point:
 u\left(s\right)=\frac{1}{\left|C\right|}\sum_{c\in C}u\left(s,c\right)
 \]
 
+
+
+\subsection{Entropy-based}
+
+Another option is to define uncertainty in terms of entropy. The most
+natural way is to define it in terms of mixed strategies rather than
+behavioral strategies. Thus, let $\vec{s}:\Delta\left(A^{C}\right)$
+be a mixed strategy represented as a probability distribution over
+all possible pure strategies from choice points to actions $s:A^{C}$.
+We can define the entropy of such a strategy as:
+\[
+E\left(\vec{s}\right)=\sum_{s\in A^{C}}\vec{s}\left(s\right)\cdot\ln\left(\vec{s}\left(s\right)\right)
+\]
+This is computationally expensive to compute, since the size of the
+domain over which the sum is computed grows exponentially with the
+number of choice points. Therefore, we calculate an equivalent measure
+defined in terms of behavioral strategies. In general, a behavioral
+strategy can be converted into an infinite number of mixed strategies.
+However, we can define a unique mapping from a behavioral strategy
+$\sigma:C\rightarrow\Delta\left(A\right)$ to a mixed strategy $\vec{s}_{\sigma}$
+where $\vec{s}_{\sigma}\left(s\right)=\prod_{c\in C}\sigma\left(s\left(c\right)|c\right)$,
+for every $s\in A^{C}$. Based on that, we have the following equivalences:
+\begin{eqnarray}
+E\left(\sigma\right)= & E\left(\vec{s}_{\sigma}\right)\nonumber \\
+= & -\sum_{s\in A^{C}}\vec{s}_{\sigma}\left(s\right)\cdot\ln\left(\vec{s}_{\sigma}\left(s\right)\right)\nonumber \\
+= & -\sum_{s\in A^{C}}\left(\prod_{c\in C}\sigma\left(s\left(c\right)|c\right)\right)\cdot\ln\left(\prod_{c\in C}\sigma\left(s\left(c\right)|c\right)\right)\nonumber \\
+= & -\sum_{s\in A^{C}}\left(\prod_{c\in C}\sigma\left(s\left(c\right)|c\right)\right)\cdot\sum_{c\in C}\ln\left(\sigma\left(s\left(c\right)|c\right)\right)\nonumber \\
+= & -\sum_{s\in A^{C}}\sum_{c\in C}\ln\left(\sigma\left(s\left(c\right)|c\right)\right)\cdot\prod_{c^{\prime}\in C}\sigma\left(s\left(c^{\prime}\right)|c^{\prime}\right)\nonumber \\
+= & -\sum_{c\in C}\sum_{s\in A^{C}}\ln\left(\sigma\left(s\left(c\right)|c\right)\right)\cdot\sigma\left(s\left(c\right)|c\right)\cdot\prod_{c^{\prime}\in C\backslash\left\{ c\right\} }\sigma\left(s\left(c^{\prime}\right)|c^{\prime}\right)\label{eq:step-x}\\
+= & -\sum_{c\in C}\sum_{a\in A}\ln\left(\sigma\left(a|c\right)\right)\cdot\sigma\left(a|c\right)\cdot\sum_{s\in A^{\left\{ c\mapsto a\right\} \cup C\backslash\left\{ c\right\} }}\prod_{c^{\prime}\in C\backslash\left\{ c\right\} }\sigma\left(s\left(c^{\prime}\right)|c^{\prime}\right)\nonumber \\
+= & -\sum_{c\in C}\sum_{a\in A}\ln\left(\sigma\left(a|c\right)\right)\cdot\sigma\left(a|c\right)\cdot\prod_{c^{\prime}\in C\backslash\left\{ c\right\} }\sum_{a\in A}\sigma\left(a|c^{\prime}\right)\nonumber \\
+= & -\sum_{c\in C}\sum_{a\in A}\ln\left(\sigma\left(a|c\right)\right)\cdot\sigma\left(a|c\right)\cdot\prod_{c^{\prime}\in C\backslash\left\{ c\right\} }1\nonumber \\
+= & -\sum_{c\in C}\sum_{a\in A}\ln\left(\sigma\left(a|c\right)\right)\cdot\sigma\left(a|c\right)\label{eq:step-y}
+\end{eqnarray}
+To illustrate the transitions from (\ref{eq:step-x}) to (\ref{eq:step-y}),
+let us look at an example. Let $C=\left\{ c_{1},c_{2},c_{3}\right\} $,
+$A=\left\{ a_{1},a_{2}\right\} $, $\sigma_{xy}=\sigma\left(a_{y}|c_{x}\right)$,
+and $s_{xyz}=\left\{ c_{1}\mapsto a_{x},c_{2}\mapsto a_{y},c_{3}\mapsto a_{z}\right\} $.
+Take a given $c\in C$, for example $c=c_{1}$. The inner sum in (\ref{eq:step-x})
+expands to:
+\begin{eqnarray*}
+ & \ln\left(\sigma\left(s_{111}\left(c_{1}\right)|c_{1}\right)\right)\cdot\sigma\left(s_{111}\left(c_{1}\right)|c_{1}\right)\cdot\sigma\left(s_{111}\left(c_{2}\right)|c_{2}\right)\cdot\sigma\left(s_{111}\left(c_{3}\right)|c_{3}\right) & +\\
++ & \ln\left(\sigma\left(s_{112}\left(c_{1}\right)|c_{1}\right)\right)\cdot\sigma\left(s_{112}\left(c_{1}\right)|c_{1}\right)\cdot\sigma\left(s_{112}\left(c_{2}\right)|c_{2}\right)\cdot\sigma\left(s_{112}\left(c_{3}\right)|c_{3}\right) & +\\
++ & \vdots & +\\
++ & \ln\left(\sigma\left(s_{221}\left(c_{1}\right)|c_{1}\right)\right)\cdot\sigma\left(s_{221}\left(c_{1}\right)|c_{1}\right)\cdot\sigma\left(s_{221}\left(c_{2}\right)|c_{2}\right)\cdot\sigma\left(s_{221}\left(c_{3}\right)|c_{3}\right) & +\\
++ & \ln\left(\sigma\left(s_{222}\left(c_{1}\right)|c_{1}\right)\right)\cdot\sigma\left(s_{222}\left(c_{1}\right)|c_{1}\right)\cdot\sigma\left(s_{222}\left(c_{2}\right)|c_{2}\right)\cdot\sigma\left(s_{222}\left(c_{3}\right)|c_{3}\right)
+\end{eqnarray*}
+or:
+\begin{eqnarray*}
+ & \ln\left(\sigma_{11}\right)\cdot\sigma_{11}\cdot\sigma_{21}\cdot\sigma_{31} & +\\
++ & \ln\left(\sigma_{11}\right)\cdot\sigma_{11}\cdot\sigma_{21}\cdot\sigma_{32} & +\\
++ & \ln\left(\sigma_{11}\right)\cdot\sigma_{11}\cdot\sigma_{22}\cdot\sigma_{31} & +\\
++ & \ln\left(\sigma_{11}\right)\cdot\sigma_{11}\cdot\sigma_{22}\cdot\sigma_{32} & +\\
++ & \ln\left(\sigma_{12}\right)\cdot\sigma_{12}\cdot\sigma_{21}\cdot\sigma_{31} & +\\
++ & \ln\left(\sigma_{12}\right)\cdot\sigma_{12}\cdot\sigma_{21}\cdot\sigma_{32} & +\\
++ & \ln\left(\sigma_{12}\right)\cdot\sigma_{12}\cdot\sigma_{22}\cdot\sigma_{31} & +\\
++ & \ln\left(\sigma_{12}\right)\cdot\sigma_{12}\cdot\sigma_{22}\cdot\sigma_{32}
+\end{eqnarray*}
+We can split this sum into one part per action, namely:
+\begin{eqnarray*}
+ & \ln\left(\sigma_{11}\right)\cdot\sigma_{11}\cdot\left(\sigma_{21}\cdot\sigma_{31}+\sigma_{21}\cdot\sigma_{32}+\sigma_{22}\cdot\sigma_{31}+\sigma_{22}\cdot\sigma_{32}\right) & +\\
++ & \ln\left(\sigma_{12}\right)\cdot\sigma_{12}\cdot\left(\sigma_{21}\cdot\sigma_{31}+\sigma_{21}\cdot\sigma_{32}+\sigma_{22}\cdot\sigma_{31}+\sigma_{22}\cdot\sigma_{32}\right)
+\end{eqnarray*}
+The sums in parenthesis can be further rewritten as:
+\begin{eqnarray*}
+ & \ln\left(\sigma_{11}\right)\cdot\sigma_{11}\cdot\left(\sigma_{21}+\sigma_{22}\right)\cdot\left(\sigma_{31}+\sigma_{32}\right) & +\\
++ & \ln\left(\sigma_{12}\right)\cdot\sigma_{12}\cdot\left(\sigma_{21}+\sigma_{22}\right)\cdot\left(\sigma_{31}+\sigma_{32}\right)
+\end{eqnarray*}
+Given that $\sigma$ is row stochastic, each of the terms is equal
+to $1$, thus reducing the whole expression to:
+\[
+\ln\left(\sigma_{11}\right)\cdot\sigma_{11}+\ln\left(\sigma_{12}\right)\cdot\sigma_{12}
+\]
+
+
+The measure of entropy is lower bounded at $0$ and upper bounded
+at $\ln\left(\left|A^{C}\right|\right)=\ln\left(\left|A\right|^{\left|C\right|}\right)=\left|C\right|\cdot\ln\left(\left|A\right|\right)$,
+which means we can normalize $E\left(\sigma\right)$ between $0$
+and $1$ by dividing by $\nicefrac{1}{\left|C\right|\cdot\ln\left(\left|A\right|\right)}$.
 \end{document}
