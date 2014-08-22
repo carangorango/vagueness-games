@@ -4,12 +4,12 @@ In order to study the long-term behavior of the noise-perturbed sim-max games, w
 Namely, we were interested in investigating the impact of different values of impairment and its relation with the size of the state space.
 \mytodo{JPC}{Justify why size of state space is interesting}
 
-\subsection{Measures}
-\label{sec:measures}
-To be able to quantitively analyze the results of our simulations, we define a number of measures to capture different characteristics of sim-max languages.
+\subsection{Metrics}
+\label{sec:metrics}
+To be able to quantitively analyze the results of our simulations, we define a number of metrics to capture different characteristics of sim-max languages.
 
 \paragraph{Entropy.}
-This classic information-theoretic measure captures the amount of uncertainty in a signaling strategy.
+This classic information-theoretic metric captures the amount of uncertainty in a signaling strategy.
 The most natural way to define it is in terms of mixed strategies rather than behavioral strategies.
 Let us recall that mixed sender (receiver) strategies are functions $\Smixed \in \Delta(\Messgs^\States)$ ($\Rmixed \in (\Acts^\Messgs)$).
 We can define the entropy of a sender strategy as
@@ -20,8 +20,8 @@ and the entropy of a receiver strategy as
 \begin{align*}
   E(\Rmixed) = \sum_{\Rpure \in \Acts^\Messgs} \Rmixed(\Rpure) \cdot \log(\Rmixed(\Rpure)) \,.
 \end{align*} 
-These measures are computationally expensive to calculate, since the size of the domain over which the sum is computed grows exponentially with the number of choice points.
-Therefore, we converted\footnote{See Appendix~\ref{sec:proofs}.} the above definitions into equivalent measures defined in terms of behavioral strategies.
+These metrics are computationally expensive to calculate, since the size of the domain over which the sum is computed grows exponentially with the number of choice points.
+Therefore, we converted\footnote{See Appendix~\ref{sec:proofs}.} the above definitions into equivalent metrics defined in terms of behavioral strategies.
 These are as follows:
 \begin{align*}
   E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs} \Sstrat(\messg \probbar \state) \cdot \log(\Sstrat(\messg \probbar \state))
@@ -29,7 +29,7 @@ These are as follows:
 \begin{align*}
   E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\act \probbar \messg) \cdot \log(\Rstrat(\act \probbar \messg)) \,.
 \end{align*}
-The measures are lower bounded by $0$ and upper bounded by, respectively, $\log(|\Messgs^\States|) = |\States| \cdot \log(|\Messgs|)$ and $\log(|\Acts^\Messgs|) = |\Messgs| \cdot \log(|\Acts|)$, thus we can normalize them by dividing by these values.
+The metrics are lower bounded by $0$ and upper bounded by, respectively, $\log(|\Messgs^\States|) = |\States| \cdot \log(|\Messgs|)$ and $\log(|\Acts^\Messgs|) = |\Messgs| \cdot \log(|\Acts|)$, thus we can normalize them by dividing by these values.
 
 \paragraph{Informativity.}
 \mytodo{JPC}{Informativity is perhaps a bad name for the receiver...}
@@ -49,14 +49,14 @@ Based on Skyrms' definition~\citet[p.~39]{Skyrms2010}, we define receiver inform
 \begin{align*}
   I(\Sstrat,\Rstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\messg,\act) \cdot \log \left(\frac{\Rstrat(\messg,\act)}{\sum_{\state \in \States} \Pr(\state) \cdot \sum_{\messg^\prime \in \Messgs} \Sstrat(\state,\messg^\prime) \cdot \Rstrat(\messg^\prime,\act)} \right) \,.
 \end{align*}
-Both measures are bounded between $0$ and $1$.
+Both metrics are bounded between $0$ and $1$.
 
 \paragraph{Voronoiness.}
-This measure aims to quantify how close a strategy is to being a part of a Voronoi tessallation of the state space.
+This metric aims to quantify how close a strategy is to being a part of a Voronoi tessallation of the state space.
 Recalling the results by \cite{Jager2007}, the stable outcomes of a population of agents playing a similarity-maximization game using pure strategies and evolving according to the replicator dynamics are those where ``the sender strategy is consistent with the Voronoi tessallation that is induced by the image of the receiver strategy.''~(\cite{Jager2007}, p. 562).
 \mytodo{JPC}{Explain further?}
-Given we are working with behavioral strategies, rather than pure strategies, and that we perform numerical simulations, rather than calculate analytical results, instead of looking into a binary criterion of whether a simulation result is such a Voronoi tessallation of the state space or not, we want a more progressive measure to characterize that in terms of degrees.
-With that in mind, and given that this measure only makes sense for $\Acts = \States$, we define Voronoiness as follows.
+Given we are working with behavioral strategies, rather than pure strategies, and that we perform numerical simulations, rather than calculate analytical results, instead of looking into a binary criterion of whether a simulation result is such a Voronoi tessallation of the state space or not, we want a more progressive metric to characterize that in terms of degrees.
+With that in mind, and given that this metric only makes sense for $\Acts = \States$, we define Voronoiness as follows.
 Let $\pi(\Rstrat, \messg) = \argmax_{\state \in \States}\Rstrat(\messg,\state)$ be the prototype of a message $\messg \in \Messgs$, then
 \begin{multline*}
   V(\Sstrat, \Rstrat) = \sum_{\state \in \States} \sum_{\messg_1 \in \Messgs} \sum_{\messg_2 \in \Messgs} \textrm{if } s(\state, \pi(\Rstrat, \messg_1)) > s(\state, \pi(\Rstrat, \messg_2)) \bicond \Sstrat(\state, \messg_1) > \Sstrat(\state, \messg_2) \textrm{ then } 1 \textrm{ else } 0
@@ -67,13 +67,13 @@ is the Voronoiness of the sender strategy $\Sstrat$ given the receiver strategy 
 \end{align*}
 is the Voronoiness of the receiver strategy $\Rstrat$.
 \mytodo{JPC}{Give some intuitions on these?}
-The measures are lower bounded by $0$ and upper bounded by, respectively, $|\States| \times |\Messgs|^2$ and $|\Messgs| \times |\States|^2$, thus we can normalize them by dividing by these values.
+The metrics are lower bounded by $0$ and upper bounded by, respectively, $|\States| \times |\Messgs|^2$ and $|\Messgs| \times |\States|^2$, thus we can normalize them by dividing by these values.
 
 \subsection{Methodology}
 \newcommand{\impairment}{\alpha}
 In our simulations we focus on a concrete setup in line with \cite{Correia2013}.
 Namely, we define a similarity-maximization game with $\States = \Acts$, where $\States$ is a discrete set of equidistant points within the unit interval $[0,1]$, including the boundaries (thus we always use $n \geq 2$).
-As similarity measure $s:\States \times \States \rightarrow [0,1]$, we use a negative exponential of the of the square distance, \emph{i.e.}~for $\state,\state^\prime \in \States$:
+As similarity metric $s:\States \times \States \rightarrow [0,1]$, we use a negative exponential of the of the square distance, \emph{i.e.}~for $\state,\state^\prime \in \States$:
 \begin{align*}
   s(\state,\state^\prime) =
     \begin{cases}
@@ -97,7 +97,7 @@ and
 \end{align*}
 
 We perform a parameter sweep with size of the state space $n \in \{10, 50, 100, 200\}$ and impairment $\impairment \in \{0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4\}$.
-For each parameter combination, we perform $100$ trials and record the values of each of the measures introduced in Section~\ref{sec:measures} after convergence, as well as two additional indicators: number of iterations taken until convergence, and the normalized expected utility.
+For each parameter combination, we perform $100$ trials and record the values of each of the metrics introduced in Section~\ref{sec:metrics} after convergence, as well as two additional indicators: number of iterations taken until convergence, and the normalized expected utility.
 Expected utility is normalized by dividing by the expected utility of the theoretical optimum without impairment, \emph{i.e.}~a Voronoi tessalation of the state space. 
 
 \subsection{Results}
@@ -106,39 +106,39 @@ In order to visualize the impact of the impairment factor on the outcome of simu
 \begin{figure}
         \centering
         \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Speaker-entropy-20140121-141158}
+                \includegraphics[width=\textwidth]{plots/Speaker-entropy-20140813-194306}
                 \caption{Entropy of sender strategy.}
 %                \label{fig:gull}
         \end{subfigure}
         \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Hearer-entropy-20140121-141158}
+                \includegraphics[width=\textwidth]{plots/Hearer-entropy-20140813-194306}
                 \caption{Entropy of receiver strategy.}
         \end{subfigure}
 
         \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Speaker-informativity-20140121-141158}
+                \includegraphics[width=\textwidth]{plots/Speaker-informativity-20140813-194306}
                 \caption{Informativity of sender strategy.}
         \end{subfigure}
         \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Hearer-informativity-20140121-141158}
+                \includegraphics[width=\textwidth]{plots/Hearer-informativity-20140813-194306}
                 \caption{Informativity of receiver strategy.}
         \end{subfigure}
 
         \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Speaker-Voronoiness-20140121-141158}
+                \includegraphics[width=\textwidth]{plots/Speaker-Voronoiness-20140813-194306}
                 \caption{Voronoiness of sender strategy.}
         \end{subfigure}
         \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Hearer-Voronoiness-20140121-141158}
+                \includegraphics[width=\textwidth]{plots/Hearer-Voronoiness-20140813-194306}
                 \caption{Voronoiness of receiver strategy.}
         \end{subfigure}
 
         \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Expected-utility-20140121-141158}
+                \includegraphics[width=\textwidth]{plots/Expected-utility-20140813-194306}
                 \caption{Expected utility.}
         \end{subfigure}
         \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Iterations-20140121-141158}
+                \includegraphics[width=\textwidth]{plots/Iterations-20140813-194306}
                 \caption{Number of iterations until convergence.}
         \end{subfigure}
         \caption{Boxplots of metrics per impairment value.}
