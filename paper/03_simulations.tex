@@ -101,7 +101,7 @@ For each parameter combination, we perform $100$ trials and record the values of
 Expected utility is normalized by dividing by the expected utility of the theoretical optimum without impairment, \emph{i.e.}~a Voronoi tessalation of the state space. 
 
 \subsection{Results}
-In order to visualize the impact of the impairment factor on the outcome of simulations, in Figure~\ref{fig:metrics-boxplots} we plot the distribution of each of the measurements per impairment value.
+In order to visualize the impact of the impairment factor on the outcome of simulations, we plot in Figure~\ref{fig:metrics-boxplots} the distribution of each of the measurements per impairment value.
 %
 \begin{figure}
         \centering
@@ -151,11 +151,16 @@ This is an expected outcome, since the higher the impairment value, the more lik
 The trend for informativity is also expected: more vague strategies convey less information, be it from the sender or the receiver perspective.
 
 Regarding Voronoiness, we observe that most simulation results approximate perfect Voronoi tessalations.
-This is not the case, however, for the lower values of impairment.
-We believe the explanation is that, with lower values of impairment, strategies can achieve a high expected utility without having perfect Voronoiness.
+This is not the case, however, for impairment of $0$ (both sender and receiver) and $0.5$ (mostly sender only).
+\mytodo{JPC}{For impairment 0, the languages with the lowest sender voronoiness look like non-convex equilibria. Discuss in relation with Elliott's results?}
+For impairment of $0$,  the explanation is usually that strategies can achieve a high expected utility without having perfect Voronoiness.
 Although the expected long term outcome in these situations is perfect Voronoiness (given J\"ager's analytical results~\cite{Jager2007}), actually reaching it involves minor refinements which at some point do not qualify as significant change given our convergence criterion.
+The result is thus an artifact of stopping the simulations before they reach perfect convergence.
+For impairment of $0.5$ (and some cases with impairment of $0.4$), the reason is simply that the languages are representatives of something between babbling and pooling equilibria.
+These are equilibria where $\Sstrat(\state,\messg_1) \geq \Sstrat(\state,\messg_2)$ for all $\state \in \States$, but vary from situations where $\Sstrat(\state,\messg)$ is close to $0.5$ for both messages (babbling), or is significantly higher for one of them (pooling).
+\mytodo{JPC}{Plot examples}
 
-The trend for expected utility reflects Lipman's observation that vague languages are less optimal than non-vague ones~\cite{Lipman2009}: more impairment necessarily leads to lower expected utility.
+The trend for expected utility reflects Lipman's observation that vague languages are less optimal than non-vague ones~\cite{Lipman2009:Why-is-Language}: more impairment necessarily leads to lower expected utility.
 Finally, the plot for number of iterations until convergence shows that a certain level of impairment enables faster convergence.
 We will discuss this further in more detail in Section~\ref{sec:discussion}.
 

@@ -23,10 +23,10 @@ plot.language <- function(speaker.filename, hearer.filename) {
     melted.hearer$State <- states
     
     speaker.plot <- ggplot(melted.speaker, aes(x=State, y=value)) +
-        geom_line(aes(linetype=variable)) + labs(title='Speaker',x='State',y='') +
+        geom_line(aes(linetype=variable)) + labs(title='Sender',x='State',y='') +
         theme(legend.position = 'none') + ylim(0,1)
     hearer.plot <- ggplot(melted.hearer, aes(x=State, y=value)) +
-        geom_line(aes(linetype=variable)) + labs(title='Hearer',x='State',y='') + 
+        geom_line(aes(linetype=variable)) + labs(title='Receiver',x='State',y='') + 
         theme(legend.position = 'none')
     
     return(arrangeGrob(speaker.plot, hearer.plot))
