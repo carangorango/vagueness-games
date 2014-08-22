@@ -1,6 +1,31 @@
 \section{Discussion}
 \label{sec:discussion}
 
+\subsection{Model interpretation}
+The replicator-mutator equations are a mathematical model motivated by concepts from the theory of natural selection, namely natural variation, differential reproduction, and mutation.
+The most straightforward interpretation is thus a biological one: we can imagine signaling strategies as innate behaviorial tendencies of organisms, steps in the evolutionary process as successive generations, and selection as capturing the reproductive advantage of fitter individuals.
+In this interpretation, our proposed model is not an extremely interesting one, since the noise matrix simply corresponds to a restricted form of mutation.
+
+Another possibility is to take the equations as embodying cultural evolution.
+In this interpretation, what is subject to the evolutionary forces are not organisms but strategies themselves.
+This pressuposes that individuals can adopt strategies from other individuals.
+Fitness captures the success of strategies, which in the case of language can be thought of in terms of communicative success.
+Differential reproduction represents the tendency of more successful strategies to be more likely adopted by individuals, be it through imitation or some learning procedure within the population.
+Under this interpretation, the proposed noise perturbation becomes more interesting.
+Messages correspond to the overt data available to individuals, whereas states are interpreted as the more private aspect of the behavior.
+Futhermore, similarity-maximization games are especially interesting in situations where the number of states largely exceeds the number of messages available.
+When trying to adopt another individual's behavior, it is thus more likely that information about states is both less accessible and less practical to elicit, hence justifying a higher likelihood of mistakes and a more pressing need for a certain degree of generalization%
+\footnote{The consequence of perturbing a strategy with a noise matrix based on similarity can be seen as ``spreading'' the effects of the fitness of the behavior for a state to its more similar states, which can also be interpreted as generalization}%
+.
+
+Finally, the replicator dynamics are also related to some forms of reinforcement learning (\cite{Borgers1997,Hopkins2005,Beggs2005}), and can thus be interpreted in cognitive terms.
+
+
+
+\mytodo{JPC}{Discuss nature of noise}
+\mytodo{JPC}{Compare with O'Connor}
+\mytodo{JPC}{Compare with Franke2013}
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "paper"
