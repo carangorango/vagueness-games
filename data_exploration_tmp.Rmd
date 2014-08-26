@@ -1,0 +1,45 @@
+Data Exploration
+================
+
+load and pre-process the data
+
+``` {r}
+data = read.csv('results/20140813-194306.csv', 
+                colClasses=c('numeric','factor','numeric','numeric','numeric','factor','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','character','character'))
+
+ds = data[,c(1,4,5,7:16)] # only relevant data
+
+attach(ds)
+```
+
+plot all the relevant variables against each other
+
+``` {r warning = FALSE, fig.width=12, fig.height=12}
+
+pairs(~ Number.of.states + Impairment + Speaker.entropy + Hearer.entropy +
+        Speaker.convexity + Hearer.convexity + Speaker.Voronoiness + Hearer.Voronoiness +
+        Speaker.informativity + Hearer.informativity + Expected.utility + Iterations, data=ds)
+```
+
+some properties are very clearly positively correlated:
+
+* speaker informativity, hearer informativity & expected utility
+* impairment & speaker entropy
+
+these two "clusters" are also strongly negatively correlated
+
+``` {r warning = FALSE, fig.width=7, fig.height=7}
+
+pairs(~ Impairment + Speaker.entropy +
+        Speaker.informativity + Hearer.informativity + Expected.utility, data=ds)
+```
+
+The benefit of impairment (some thoughts)
+-------------------------
+
+we want to argue that (small?) levels of impairment can be helpful (i.e., boost EU); but unfortunately, impairment and EU are strongly negatively correlated; so we should look for stages before final convergence
+
+impairment does seem to speed up learning! that's different from Cailin's stuff, because there learning speed could be argued to be only due to more balls being added per learning step
+
+also speaker and hearer voronoiness seems to be much higher for at least some bit of impairment
+
