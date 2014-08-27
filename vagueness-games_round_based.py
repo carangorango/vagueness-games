@@ -171,7 +171,7 @@ else:
 OptimalExpectedUtility = ExpectedUtility(SpeakerOptimal, HearerOptimal, Utility)
 
 
-for i in xrange(101):
+for i in xrange(11):
 
     # # Dynamics
     
@@ -205,7 +205,7 @@ for i in xrange(101):
 
     Hearer = makePDFPerRow(Hearer)
 
-    if i % 5 == 0:
+    if i % 1 == 0:
 
         csv.writer(OutputFile).writerow([NStates, PriorDistributionType, NMessages, Impairment, Tolerance, Dynamics, \
             ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i])
