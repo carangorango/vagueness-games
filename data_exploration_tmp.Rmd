@@ -3,15 +3,21 @@ Data Exploration
 
 load and pre-process the data
 
-``` {r}
+``` {r warnings=FALSE, message=FALSE}
 
 require('ellipse')
 require('ggplot2')
+require('reshape2')
+source('~//Desktop//data//svn//programming//R//helpers//helpers.R')
 
 data = read.csv('results/20140813-194306.csv', 
-                colClasses=c('numeric','factor','numeric','numeric','numeric','factor','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','numeric','character','character'))
+                colClasses=c('numeric','factor','numeric','numeric','numeric',
+                             'factor','numeric','numeric','numeric','numeric',
+                             'numeric','numeric','numeric','numeric','numeric',
+                             'numeric','character','character'))
 
-ds = data[,c(1,4,5,7:16)] # only relevant data
+ds = data[,c(1,4,7,8,11:16)] # only relevant data
+dm = melt(ds,id.vars = c("Number.of.states", "Impairment")) # melted data
 
 attach(ds)
 ```
@@ -21,7 +27,7 @@ plot all the relevant variables against each other
 ``` {r warning = FALSE, fig.width=12, fig.height=12}
 
 pairs(~ Number.of.states + Impairment + Speaker.entropy + Hearer.entropy +
-        Speaker.convexity + Hearer.convexity +
+        Speaker.Voronoiness + Hearer.Voronoiness +
         Speaker.informativity + Hearer.informativity + Expected.utility + Iterations, data=ds)
 ```
 
@@ -34,43 +40,51 @@ these two "clusters" are also strongly negatively correlated
 
 ``` {r warning = FALSE, fig.width=7, fig.height=7}
 
-dss = ds[,c(2,4,10,11,12)]
+dss = ds[,c(2,3,7,8,9)]
 
 ctab <- cor(dss)
 
 plotcorr(ctab)
 
-# pairs(~ Impairment + Speaker.entropy +
-#         Speaker.informativity + Hearer.informativity + Expected.utility, data=dss)
 ```
 
-The benefit of impairment (some thoughts)
--------------------------
 
-we want to argue that (small?) levels of impairment can be helpful (i.e., boost EU); but unfortunately, impairment and EU are strongly negatively correlated; so we should look for stages before final convergence
+Replotting data for each combination of values of independent variables
+-----------------------------------------------------------------------
 
-impairment does seem to speed up learning! that's different from Cailin's stuff, because there learning speed could be argued to be only due to more balls being added per learning step
+We have two independent variables: impairment & number of states. The following plots show the means of all 100 data points for each combination of values for independent variables, together with the estimated confidence intervals.
 
-also speaker and hearer voronoiness seems to be much higher for at least some bit of impairment, but we left this notion out [why what that again?]
+We can exclude the informativity notions, because they are highly correlated with expected utility scores, and add no extra insight.
+
+
+```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
+
+dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "variable"), measurevar="value")
+dsub = subset(dms, !grepl("informativity",dms$variable) )
+
+pd <- position_dodge(.05)
+sp = ggplot(dsub, aes(x=Impairment, y=value, colour=factor(Number.of.states))) + 
+     geom_point(position = pd) +
+     geom_errorbar(aes(ymin=value-ci, ymax=value+ci), width=0, position=pd) +
+     geom_line(position=pd) 
+
+sp + facet_wrap(~ variable, ncol=2, scales="free")
+
+```
+
+We are particularly interested in the interplay between learning speed and EU. Generally, the fewer states, the faster we reach convergence (unsurprising). But speed to convergence also depends on the impairment value. For values 0.2, 0.3 and 0.5 we see a greatly reduced time to convergence. However, it is also clear that this increase in speed comes with a decline in expected utility. [Notice that the confidence intervals are very tight here, so that we can be sure that there is an almost functional realtionship between convergence speed and EU for each pair of independent parameter values.]
 
 Faster learning by impairment
 -----------------------------
 
+we want to argue that (small?) levels of impairment can be helpful
+
+unfortunately, impairment and EU are strongly negatively correlated; 
+
+however, impairment does seem to speed up learning;
+
+- that's different from Cailin's stuff, because there learning speed could be argued to be only due to more balls being added per learning step
+
 if learning is faster for some impairment, we should see these effects also in terms of higher EU at earlier stages
+- so we should look for stages before final convergence
 
-- plot EU at different stages in the nRD
-- show that early on slight impairment is beneficial to no impairment
-
-Next up
--------
-- evaluate impact of number of states
-- replot Fig 1 with seperated numbers of states
-
-
-``` {r}
-
-x = data
-
-ggplot(x, aes(x=factor(Impairment), y=Expected.utility, color=factor(Number.of.states))) + geom_boxplot() + xlab('Impairment') + ylim(0, 1) + ylab(expression(EU))
-
-```
