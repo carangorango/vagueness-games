@@ -1,0 +1,43 @@
+Data Exploration (round-based data)
+===================================
+
+load and pre-process the data
+
+``` {r warnings=FALSE, message=FALSE}
+
+require('ellipse')
+require('ggplot2')
+require('reshape2')
+source('~//Desktop//data//svn//programming//R//helpers//helpers.R')
+
+data = read.csv('results/20140827-121341.round_based.csv')
+
+ds = data[,c(1,4,7:12)] # only relevant data
+dm = melt(ds,id.vars = c("Number.of.states", "Impairment", "Iterations")) # melted data
+
+attach(ds)
+```
+
+Plot EU by round
+----------------
+
+We plot EU at every fifth round, depending on number of states and impairments.
+
+
+```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
+
+dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Iterations", "variable"), measurevar="value")
+dsub = subset(dms, dms$variable=="Expected.utility")
+
+
+pd <- position_dodge(.05)
+sp = ggplot(dsub, aes(x=Iterations, y=value, colour=factor(Impairment))) + 
+     geom_point(position = pd) +
+     geom_errorbar(aes(ymin=value-ci, ymax=value+ci), width=0, position=pd) +
+     geom_line(position=pd) 
+
+sp + facet_wrap(~ Number.of.states, ncol=2, scales="free")
+
+```
+
+Unfortunately, we see that lower impairment always trumps higher impairment.
