@@ -10,8 +10,8 @@ require('ggplot2')
 require('reshape2')
 source('~//Desktop//data//svn//programming//R//helpers//helpers.R')
 
-# data = read.csv('results/20140827-124230.round_based.csv')
-data = read.csv('results/20140828-002342.round_based.csv')
+data = read.csv('results/20140827-124230.round_based.csv')
+
 
 ds = data[,c(1,4,7:8)] # only relevant data
 dm = melt(ds,id.vars = c("Number.of.states", "Impairment", "Iterations")) # melted data
