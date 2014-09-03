@@ -27,7 +27,7 @@ show(D)
 The (Nosofsky-)utility of these with parameter a is:
 
 ```{r}
-a = 20
+a = 0.75
 U = D
 for (i in 1:4){
   for (j in 1:4){
@@ -57,13 +57,35 @@ Convex equilibria are more efficient than diagonal equilibria.
 
 We are interested in the basins of attraction of these under the replicator diffusion dynamic. 
 
+Inner category coherence
+------------------------
+
+Get inner category coherence to classify results
+
+```{r}
+icc = function(D,sen,theta=0.01){
+  S = sen
+  S[sen>theta] = 1
+  S[sen<=theta] = 0
+  S = prop.table(S,2)
+  out = rep(0,dim(sen)[2])
+  for (i in 1:dim(sen)[2]) {
+    X = rowSums(D * S[,i])
+    Y = sum(S[,i] * X)
+    out[i] = Y
+  }
+  return(sum(out))
+}
+```
+
+
 Replicator Dynamic
 ------------------
 
 We run several trials of the (discrete-time) replicator dynamic to find out which attracting states exist.
 
 ```{r}
-trials = 100
+trials = 50
 rounds = 100000
 break.point = 0.0000001
 
@@ -74,17 +96,15 @@ nm = 2
 priors = rep(1/ns,ns)
 costs = matrix(rep(0,nm*ns),nrow=ns)
 
-P = matrix(0,ncol=2*ns*nm+1,nrow=trials)
+P = matrix(0,ncol=2*ns*nm+2,nrow=trials)
 colnames(P) = c("S(t1,m1)", "S(t2,m1)", "S(t3,m1)", "S(t4,m1)",
                 "S(t1,m2)", "S(t2,m2)", "S(t3,m2)", "S(t4,m2)",
                 "R(m1,t1)", "R(m2,t1)", "R(m1,t2)", "R(m2,t2)",
                 "R(m1,t3)", "R(m2,t3)", "R(m1,t4)", "R(m2,t4)",
-                "EU")
+                "EU", "ICC")
 
 for (t in 1:trials){
-  
-  setTxtProgressBar(pb, t)
-  
+    
   sen = rdirichlet(ns,rep(1/nm,nm))
   rec = rdirichlet(nm,rep(1/ns,ns))
   
@@ -104,10 +124,13 @@ for (t in 1:trials){
     }
   }
   eu = get.eu(priors,U,sen,rec,costs)
-  P[t,] = c(as.vector(c(sen, rec)),eu)
+  icc.s = icc(D,sen)
+  P[t,] = c(as.vector(c(sen, rec)),eu,icc.s)
 }
 
-P = P[,c(1:8,9,11,13,15,10,12,14,16,17)]
+Q = P
+# P = P[,c(1:8,9,11,13,15,10,12,14,16,17,18,19)]
+P = P[,c(17,18)]
 
 ```
 
@@ -115,11 +138,11 @@ Show results:
 
 ```{r}
 X = round(P,4)
-Y = pamk(X,krange=2:22)
+Y = pamk(X,krange=2:15)
 show(table(Y$pamobject$clustering))
 show(Y$pamobject$medoids)
+show(Q[Y$pamobject$id.med,1:8])
 ```
-
 
 
 
