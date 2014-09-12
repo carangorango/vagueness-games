@@ -9,10 +9,23 @@ Iterated Diffusion
 
 The (discrete) Replicator Diffusion Dynamics first calculates the replicator dynamics and then applies diffusion, so to speak. To understand what diffusion does, we'd like to see it run without the replicator dynamics. We look at the sender and the receiver roles seperately.
 
+Preliminaries & Parameters
+--------------------------
+
+```{r}
+
+alpha= 0.2
+rounds = 1000
+ns = 7
+nm = 4
+states = seq(from=0,to=1,length.out = ns)
+C = get.confusion.matrix(states,alpha)
+```
+
 Diffusion
 ---------
 
-Diffusion is defined in terms of 
+Diffusion is defined as simple matrix product for sender and receiver strategies.
 
 ```{r}
 
@@ -27,39 +40,23 @@ get.nbr = function(response,noise.matrix){
 
 ```
 
+Iterated Diffusion
+------------------
 
-
-Preliminaries & Parameters
---------------------------
-
-```{r}
-
-alpha= 0.1
-rounds = 1000
-ns = 6
-nm = 3
-states = seq(from=0,to=1,length.out = ns)
-C = get.confusion.matrix(states,alpha)
-```
-
-Initialization
---------------
-
-Create an arbitrary sender and receiver strategy.
+Create an arbitrary sender and receiver strategy, and iterate the diffusion process.
 
 ```{r}
 
 sen = rdirichlet(ns,rep(1,nm))
 rec = rdirichlet(nm,rep(1,ns))
 
-show(rec)
-
 for (i in 1:rounds){
-#   sen = get.nbr(sen,C)
+  sen = get.nbr(sen,C)
   rec = get.nbr(rec,C)
 }
 
 show(rec)
+show(sen)
 
 
 ```
