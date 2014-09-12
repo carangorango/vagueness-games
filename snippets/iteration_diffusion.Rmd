@@ -1,0 +1,68 @@
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+library(MCMCpack) # for Dirichlet distribution
+source('~/Desktop/data/svn/programming/R/fuzzy-action/dev.r')
+```
+
+
+Iterated Diffusion
+==================
+
+The (discrete) Replicator Diffusion Dynamics first calculates the replicator dynamics and then applies diffusion, so to speak. To understand what diffusion does, we'd like to see it run without the replicator dynamics. We look at the sender and the receiver roles seperately.
+
+Diffusion
+---------
+
+Diffusion is defined in terms of 
+
+```{r}
+
+get.nbr = function(response,noise.matrix){
+    if (dim(noise.matrix)[1] == dim(response)[2]){  # receiver part
+        return(response %*% noise.matrix)
+    }
+    if (dim(noise.matrix)[2] == dim(response)[1]){  # sender part
+        return(noise.matrix %*% response)
+    }
+}
+
+```
+
+
+
+Preliminaries & Parameters
+--------------------------
+
+```{r}
+
+alpha= 0.1
+rounds = 1000
+ns = 6
+nm = 3
+states = seq(from=0,to=1,length.out = ns)
+C = get.confusion.matrix(states,alpha)
+```
+
+Initialization
+--------------
+
+Create an arbitrary sender and receiver strategy.
+
+```{r}
+
+sen = rdirichlet(ns,rep(1,nm))
+rec = rdirichlet(nm,rep(1,ns))
+
+show(rec)
+
+for (i in 1:rounds){
+#   sen = get.nbr(sen,C)
+  rec = get.nbr(rec,C)
+}
+
+show(rec)
+
+
+```
+
+
+
