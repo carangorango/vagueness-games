@@ -34,18 +34,18 @@ The metrics are lower bounded by $0$ and upper bounded by, respectively, $\log(|
 \paragraph{Informativity.}
 \mytodo{JPC}{Informativity is perhaps a bad name for the receiver...}
 The quantity of information in a signal is an old notion that also goes back to the start of information theory.
-Skyrms~\citet[ch.~3]{Skyrms2010} discusses its use in the context of signaling games.
+Skyrms~\citet[ch.~3]{Skyrms2010:Signals} discusses its use in the context of signaling games.
 The main idea is that we can quantify the amount of information about a state $\state$ in a message $\messg$ via the relation between the probability of the state given the message $\Pr(\state \,|\, \messg)$ and the unconditional probability of the state $\Pr(\state)$.
 Following Bayes' theorem, we can express $\Pr(\state \,|\, \messg)$ as $\frac{\Pr(\state) \cdot \Pr(\messg \,|\, \state)}{\Pr(\messg)}$.
 We then have $\Pr(\messg \,|\, \state) = \Sstrat(\state,\messg)$ and $\Pr(\messg) = \sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)$.
 Finally, we equate sender infomativity with the average overall information about states in each signal.
-Based on the definition by Skyrms~\citet[p.~36]{Skyrms2010}, and the considerations above, we define sender informativity as follows:
+Based on the definition by Skyrms~\citet[p.~36]{Skyrms2010:Signals}, and the considerations above, we define sender informativity as follows:
 \begin{align*}
   I(\Sstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\state \in \States} \frac{\Pr(\state) \cdot \Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \cdot \log \left(\frac{\Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \right) \,.
 \end{align*}
 Conversely, we can quantify the amount of information about an act in a message.
 We equate receiver informativity with the average overall information about acts in each signal.
-Based on Skyrms' definition~\citet[p.~39]{Skyrms2010}, we define receiver informativity as follows:
+Based on Skyrms' definition~\citet[p.~39]{Skyrms2010:Signals}, we define receiver informativity as follows:
 \begin{align*}
   I(\Sstrat,\Rstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\messg,\act) \cdot \log \left(\frac{\Rstrat(\messg,\act)}{\sum_{\state \in \States} \Pr(\state) \cdot \sum_{\messg^\prime \in \Messgs} \Sstrat(\state,\messg^\prime) \cdot \Rstrat(\messg^\prime,\act)} \right) \,.
 \end{align*}
@@ -71,7 +71,7 @@ The metrics are lower bounded by $0$ and upper bounded by, respectively, $|\Stat
 
 \subsection{Methodology}
 \newcommand{\impairment}{\alpha}
-In our simulations we focus on a concrete setup in line with \cite{Correia2013}.
+In our simulations we focus on a concrete setup in line with \cite{Correia2013:The-Bivalent-Tr}.
 Namely, we define a similarity-maximization game with $\States = \Acts$, where $\States$ is a discrete set of equidistant points within the unit interval $[0,1]$, including the boundaries (thus we always use $n \geq 2$).
 As similarity metric $s:\States \times \States \rightarrow [0,1]$, we use a negative exponential of the of the square distance, \emph{i.e.}~for $\state,\state^\prime \in \States$:
 \begin{align*}
@@ -83,7 +83,7 @@ As similarity metric $s:\States \times \States \rightarrow [0,1]$, we use a nega
     \end{cases}
 \end{align*}
 where $\impairment$ is an \emph{impairment} factor.
-Here we deviate from \cite{Correia2013} by working with impairment $\impairment$ rather than acuity $\theta$, since we are interested in exploring the case of having $0$ impairment, and acuity does not have a natural maximum as defined.
+Here we deviate from \cite{Correia2013:The-Bivalent-Tr} by working with impairment $\impairment$ rather than acuity $\theta$, since we are interested in exploring the case of having $0$ impairment, and acuity does not have a natural maximum as defined.
 Confusion is directly related with similarity, \emph{i.e.}~the more similar two states are, the more likely an agent is to perceive one as the other.
 For simplicity, we equate one with the other by defining $C_{ij} = s(\state_i,\state_j)$.
 

@@ -4,20 +4,23 @@ source('~/Desktop/data/svn/programming/R/fuzzy-action/dev.r')
 ```
 
 
-Iterated Diffusion
+(Iterated) Diffusion
 ==================
 
-The (discrete) Replicator Diffusion Dynamics first calculates the replicator dynamics and then applies diffusion, so to speak. To understand what diffusion does, we'd like to see it run without the replicator dynamics. We look at the sender and the receiver roles seperately.
+The (discrete) Replicator Diffusion Dynamic first calculates the replicator dynamic and then applies diffusion, so to speak. To understand what diffusion does, we'd like to see it run without the replicator dynamics. 
+
+Two things are interesting: (1) what does diffusion do in one step, (2) what does it do in iteration.
+
+We must look at the sender and the receiver roles seperately.
 
 Preliminaries & Parameters
 --------------------------
 
 ```{r}
-
-alpha= 0.2
-rounds = 1000
-ns = 7
-nm = 4
+alpha= 0.1
+rounds = 10000
+ns = 11
+nm = 3
 states = seq(from=0,to=1,length.out = ns)
 C = get.confusion.matrix(states,alpha)
 ```
@@ -40,6 +43,27 @@ get.nbr = function(response,noise.matrix){
 
 ```
 
+But that means that we can define iterated diffusion as either left or right multiplication with suitable powers of the confusion matrix. Therefore define a the n-th power of the confusion matrix.
+
+```{r}
+power = function(C,n){
+  # this could be improved for speed
+  if (n <=1){
+    return(C)
+  }
+  else{
+    if (n %% 2 ==0){
+      X = power(C,n/2)
+      return(X%*%X)
+    }
+    else{
+      return(C%*%power(C,n-1))
+    }
+  }
+}
+```
+
+
 Iterated Diffusion
 ------------------
 
@@ -50,14 +74,14 @@ Create an arbitrary sender and receiver strategy, and iterate the diffusion proc
 sen = rdirichlet(ns,rep(1,nm))
 rec = rdirichlet(nm,rep(1,ns))
 
-for (i in 1:rounds){
-  sen = get.nbr(sen,C)
-  rec = get.nbr(rec,C)
-}
+CPower = power(C,rounds)
+show(CPower)
 
-show(rec)
+sen = CPower %*% sen
 show(sen)
 
+rec = rec %*% CPower  
+show(rec)
 
 ```
 

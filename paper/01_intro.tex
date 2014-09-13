@@ -6,6 +6,95 @@
 \item \dots
 \end{itemize}
 
+\subsection{Situating our approach}
+
+A number of authors have recently tried to explain why vagueness
+evolved, based on considerations why a vague language might be useful
+\citep[e.g.][]{Jaegherde-Jaegher2003:A-Game-Theoreti,Deemter2009:Utility-and-Lan,Jaegherde-JaegherRooijvan-Rooij2010:Strategic-Vague,BlumeBoard2013:Intentional-Vag}. In
+contrast to these, others have argued that vagueness if a natural
+byproduct of limitations in information processing
+\citep[e.g.][]{FrankeJager2010:Vagueness-Signa,OConnor2013:The-Evolution-o}. This
+paper makes a contribution to the latter.
+
+The view that vagueness is a natural concomitant of cognitive
+limitations of language users has been formalized in a number of
+ways. As in other applications of evolutionary game theory, we can
+distinguish micro- and macro-level approaches. Micro-level approaches
+look at adaptive behavior of individual agents. Usually, changes in
+the behavioral dispositions of agents occur after every single
+interaction. In contrast, macro-level approaches outline more
+abstract, aggregate population-based dynamics. Usually, the dynamic
+captures changes of frequencies of behavioral types in the population
+over time. Previous accounts have suggested both micro- and
+macro-level dynamics to show how vague signal use can arise in sim-max
+games.\todo{what about Ewan Klein's stuff?}
+
+As for micro-dynamics, \citet{FrankeJager2010:Vagueness-Signa} show
+how limited memory of past interactions can lead to vague signal use,
+when averaging over a single agent's behavior over time or over the
+momentary behavior of a population of several language
+users. \citet{OConnor2013:The-Evolution-o} introduces a variant of
+reinforcement learning that includes a low-level form of stimulus
+generalization. Agents update their behavior after each round of play
+in such a way that similar states to the ones that actually occurred
+are subject to behavioral adjustment as well. (Alternative approaches
+are discussed in more detail in Section~XYZ, where we can compare them
+with the system introduced in this paper.)
+
+\citet{FrankeJager2010:Vagueness-Signa} also consider a macro-level
+approach, using the notion of a \emph{quantal response}. A quantal
+response function is a probabilistic choice rule that formalizes the
+idea that agents make small mistakes when calculating the expected
+utility of choice options. In aggregation, these probabilistic
+mistakes lead to systematic ``trembles'' that produce vague signal
+use. The approach we take here is only superficially similar. For one,
+we not only look at equilibria, but take a dynamic perspective
+here. For another, we demonstrate in Section~XYZ that quantal
+responses can give rise to counterintuitive predictions in sim-max
+games, which suggests that the source of stochastic trembles should
+better not be seen in mistakes in calculating expected utility, but
+rather, as we assume here, as confusion of similar states.
+
+Against this background, we introduce here a new macro-level approach
+to the evolution of vague signal use in sim-max games, where the
+source of vagueness is the agents' natural disability to sharply
+distinguish perceptually distinct states. This applies to both
+production and comprehension, i.e., both to the sender as well as to
+the receiver role. 
+
+We call our dynamic \textbf{replicator diffusion dynamic} (\rdd),
+because it is a special case of the replicator mutator dynamic
+(\rmd). It is a special case in the sense that the \rdd uses a special
+kind of mutation matrix that is based on the similarity of states (as
+defined in the sim-max game). More concretely, we start from the idea
+that similar states are more easily confused than less similar
+states. To formalize this idea, we assume that there is a confusion
+matrix $C$, where $C_{ij}$ is the probability that a state \mystate{i}
+is realized as a possibly different state \mystate{j}. (There is a
+slightly different sense of ``realization'' in the sender and the
+receiver side, and we will enlarge on this below.) Based on this, we
+show two things. For one, we show how the discrete-time formulation of
+the replicator dynamic can be easily adapted to integrate diffusion of
+behavior due to confusion of states. This yields the \rdd in its basic
+discrete-time formulation. For another, we also show that there exists
+a translation of the confusion matrix $C$ into a suitable mutation
+matrix $M_C$ such that the effect of $C$ and $M_C$ are ``equivalent''
+in a sense to be made precise. This supports the conclusion that the
+\rdd can indeed be thought of as a special case of the \rmd.
+
+To understand the workings of the \rdd, we study numerical simulations
+\dots
+
+The paper is structured as follows:
+\begin{enumerate}
+\item replicator diffusion dynamics
+\item relation to replicator mutator dynamics
+\item simulations of \rdd
+\item comparison with other approaches
+\item conclusions
+\end{enumerate}
+
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "paper"
