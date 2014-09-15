@@ -73,7 +73,7 @@ def makePDF(Vector):
 
 def makePDFPerRow(Matrix):
     return np.array([ makePDF(Row) for Row in Matrix ])
-    
+
 def ExpectedUtility(Speaker, Hearer, Utility):
     return np.sum(Speaker[t1, m] * Hearer[m, t2] * Utility[t1, t2]
                   for t1 in xrange(Speaker.shape[0])
@@ -103,7 +103,7 @@ def Convexity(Strategy):
     ConvexPureStrategies = convex_sequences(range(Strategy.shape[1]), Strategy.shape[0])
     return sum(np.prod([ Strategy[c, s[c]] for c in xrange(Strategy.shape[0])])
                for s in ConvexPureStrategies)
-    
+
 def Voronoiness(HearerStrategy, SpeakerStrategy, StateSimilarity):
     Prototypes = [ np.argmax(HearerStrategy[m]) for m in xrange(HearerStrategy.shape[0]) ]
 
@@ -134,7 +134,7 @@ def InformationQuantity(SpeakerStrategy, HearerStrategy, Priors):
     NStates = SpeakerStrategy.shape[0]
     NMessages = SpeakerStrategy.shape[1]
     NActs = HearerStrategy.shape[1]
-    
+
     InformationOnStatesPerMessage = np.zeros(NMessages)
     for m in xrange(NMessages):
         MessageProbability = sum(Priors[t] * SpeakerStrategy[t, m] for t in xrange(NStates))
@@ -149,7 +149,7 @@ def InformationQuantity(SpeakerStrategy, HearerStrategy, Priors):
             ActProbability = sum(Priors[t] * SpeakerStrategy[t, m2] * HearerStrategy[m2, a] for t in xrange(NStates) for m2 in xrange(NMessages))
             InformationOnActsPerMessage[m] += HearerStrategy[m, a] * np.log(HearerStrategy[m, a] / ActProbability) if HearerStrategy[m, a] != 0 else 0
     InformationOnActs = sum(InformationOnActsPerMessage[m] for m in xrange(NMessages)) / NMessages
-    
+
     return (InformationOnStates, InformationOnActs)
 
 # # Settings
@@ -160,14 +160,17 @@ PriorDistributionType = 'uniform'
 NMessages = 2
 
 Dynamics = 'replicator dynamics'
-Impairment = 0.1
 
-Tolerance = Impairment
+Impairment = 0.2
+Tolerance = 0.025
+
+convThreshold = 0.001
+rounds = 200
 
 OutputFile = sys.stdout
 
 # # Batch mode
- 
+
 BatchMode = len(sys.argv) > 1
 
 if BatchMode:
@@ -196,6 +199,7 @@ Similarity = np.exp(-(Distance ** 2 / Tolerance ** 2))
 Utility = Similarity
 
 Confusion = np.exp(-(Distance ** 2 / Impairment ** 2)) if Impairment != 0 else np.identity(NStates)
+Confusion = makePDFPerRow(Confusion)
 
 Speaker = random.dirichlet([1] * NMessages, NStates)
 Hearer = random.dirichlet([1] * NStates, NMessages)
@@ -223,25 +227,25 @@ else:
     SpeakerOptimal, HearerOptimal = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
     converged = False
     while not converged:
-    
+
         SpeakerOptimalBefore, HearerOptimalBefore = copy.deepcopy(SpeakerOptimal), copy.deepcopy(HearerOptimal)
-    
+
         UtilitySpeakerOptimal = np.array([ [ np.dot(HearerOptimal[m], Utility[t]) for m in xrange(NMessages) ] for t in xrange(NStates) ])
-    
+
         for t in xrange(NStates):
             for m in xrange(NMessages):
                     SpeakerOptimal[t, m] = 1 if UtilitySpeakerOptimal[t, m] == max(UtilitySpeakerOptimal[t]) else 0
-    
+
         SpeakerOptimal = makePDFPerRow(SpeakerOptimal)
-    
+
         UtilityHearerOptimal = np.array([ [ np.dot(Priors * SpeakerOptimal[:, m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
-    
+
         for m in xrange(NMessages):
             for t in xrange(NStates):
                     HearerOptimal[m, t] = 1 if UtilityHearerOptimal[m, t] == max(UtilityHearerOptimal[m]) else 0
-    
+
         HearerOptimal = makePDFPerRow(HearerOptimal)
-    
+
         if np.sum(abs(SpeakerOptimal - SpeakerOptimalBefore)) == 0 and np.sum(abs(HearerOptimal - HearerOptimalBefore)) == 0:
             converged = True
 
@@ -251,7 +255,7 @@ i = 0
 converged = False
 while not converged:
     i += 1
-    
+
     if not BatchMode: plotStrategies()
 
     SpeakerBefore, HearerBefore = copy.deepcopy(Speaker), copy.deepcopy(Hearer)
@@ -263,34 +267,34 @@ while not converged:
 
     ConvexitySpeakerHistory.append(Convexity(Speaker))
     ConvexityHearerHistory.append(Convexity(Hearer))
-    
+
     (SpeakerVoronoiness, HearerVoronoiness) = Voronoiness(Hearer, Speaker, Similarity)
     VoronoinessSpeakerHistory.append(SpeakerVoronoiness)
     VoronoinessHearerHistory.append(HearerVoronoiness)
-    
+
     (InformativitySpeaker, InformativityHearer) = InformationQuantity(Speaker, Hearer, Priors)
     InformativitySpeakerHistory.append(InformativitySpeaker)
     InformativityHearerHistory.append(InformativityHearer)
 
     # # Dynamics
-    
+
     # # Speaker strategy
-    
+
     UtilitySpeaker = np.array([ [ np.dot(Hearer[m], Utility[t]) for m in xrange(NMessages) ] for t in xrange(NStates) ])
 
     for t in xrange(NStates):
         for m in xrange(NMessages):
             if Dynamics == 'replicator dynamics':
-                Speaker[t, m] = Speaker[t, m] * UtilitySpeaker[t, m] * NMessages / sum(UtilitySpeaker[t])
+                Speaker[t, m] = Speaker[t, m] * UtilitySpeaker[t, m]
             elif Dynamics == 'best response':
                 Speaker[t, m] = 1 if UtilitySpeaker[t, m] == max(UtilitySpeaker[t]) else 0
 
+    if Dynamics == 'replicator dynamics': Speaker = makePDFPerRow(Speaker)
+
     Speaker = np.dot(Confusion, Speaker)
 
-    Speaker = makePDFPerRow(Speaker)
-    
     # # Hearer strategy
-    
+
     UtilityHearer = np.array([ [ np.dot(Priors * Speaker[:, m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
 
     for m in xrange(NMessages):
@@ -300,11 +304,11 @@ while not converged:
             elif Dynamics == 'best response':
                 Hearer[m, t] = 1 if UtilityHearer[m, t] == max(UtilityHearer[m]) else 0
 
-    Hearer = np.dot(Hearer, np.transpose(Confusion))
+    if Dynamics == 'replicator dynamics': Hearer = makePDFPerRow(Hearer)
 
-    Hearer = makePDFPerRow(Hearer)
+    Hearer = np.dot(Hearer, Confusion)
 
-    if np.sum(abs(Speaker - SpeakerBefore)) < 0.01 and np.sum(abs(Hearer - HearerBefore)) < 0.01:
+    if (np.sum(abs(Speaker - SpeakerBefore)) < convThreshold and np.sum(abs(Hearer - HearerBefore)) < convThreshold) or i > rounds:
         converged = True
         if not BatchMode: print 'Language converged!'
 

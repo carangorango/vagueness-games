@@ -1,10 +1,20 @@
-\section{Simulations}
+\section{Exploring the RDD}
+
+\subsection{(Iterated) Diffusion}
+
+We have seen that the \rdd can be conceptualized as a two-step
+procedure. We first calculate where the replicator dynamic would take
+us, and then apply diffusion. Since the latter step is the novel
+addition, we should look at diffusion in isolation to understand what
+the \rdd does.
+
+\subsection{Simulations}
 
 In order to study the long-term behavior of the noise-perturbed sim-max games, we conducted computer simulations for different combinations of initial parameters.
 Namely, we were interested in investigating the impact of different values of impairment and its relation with the size of the state space.
 \mytodo{JPC}{Justify why size of state space is interesting}
 
-\subsection{Metrics}
+\subsubsection{Metrics}
 \label{sec:metrics}
 To be able to quantitively analyze the results of our simulations, we define a number of metrics to capture different characteristics of sim-max languages.
 
@@ -69,7 +79,7 @@ is the Voronoiness of the receiver strategy $\Rstrat$.
 \mytodo{JPC}{Give some intuitions on these?}
 The metrics are lower bounded by $0$ and upper bounded by, respectively, $|\States| \times |\Messgs|^2$ and $|\Messgs| \times |\States|^2$, thus we can normalize them by dividing by these values.
 
-\subsection{Methodology}
+\subsubsection{Methodology}
 \newcommand{\impairment}{\alpha}
 In our simulations we focus on a concrete setup in line with \cite{Correia2013:The-Bivalent-Tr}.
 Namely, we define a similarity-maximization game with $\States = \Acts$, where $\States$ is a discrete set of equidistant points within the unit interval $[0,1]$, including the boundaries (thus we always use $n \geq 2$).
@@ -102,7 +112,7 @@ We perform a parameter sweep with size of the state space $n \in \{10,
 For each parameter combination, we perform $100$ trials and record the values of each of the metrics introduced in Section~\ref{sec:metrics} after convergence, as well as two additional indicators: number of iterations taken until convergence, and the normalized expected utility.
 Expected utility is normalized by dividing by the expected utility of the theoretical optimum without impairment, \emph{i.e.}~a Voronoi tessalation of the state space. 
 
-\subsection{Results}
+\subsubsection{Results}
 In order to visualize the impact of the impairment factor on the outcome of simulations, we plot in Figure~\ref{fig:metrics-boxplots} the distribution of each of the measurements per impairment value.
 %
 \begin{figure}

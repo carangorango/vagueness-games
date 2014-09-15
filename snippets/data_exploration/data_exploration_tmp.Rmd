@@ -8,9 +8,9 @@ load and pre-process the data
 require('ellipse')
 require('ggplot2')
 require('reshape2')
-source('~//Desktop//data//svn//programming//R//helpers//helpers.R')
+source('~/Desktop/data/svn/programming/R/helpers/helpers.R')
 
-data = read.csv('results/20140813-194306.csv', 
+data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140915-190401.csv', 
                 colClasses=c('numeric','factor','numeric','numeric','numeric',
                              'factor','numeric','numeric','numeric','numeric',
                              'numeric','numeric','numeric','numeric','numeric',
