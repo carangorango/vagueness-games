@@ -1,22 +1,20 @@
 Data Exploration
 ================
 
-load and pre-process the data
-
-``` {r warnings=FALSE, message=FALSE}
+``` {r warnings=FALSE, message=FALSE, echo=FALSE}
 
 require('ellipse')
 require('ggplot2')
 require('reshape2')
 source('~/Desktop/data/svn/programming/R/helpers/helpers.R')
 
-data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140915-190401.csv', 
+data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140916-133324.csv', 
                 colClasses=c('numeric','factor','numeric','numeric','numeric',
                              'factor','numeric','numeric','numeric','numeric',
                              'numeric','numeric','numeric','numeric','numeric',
-                             'numeric','character','character'))
+                             'numeric','factor','factor','character','character'))
 
-ds = data[,c(1,4,7,8,11:16)] # only relevant data
+ds = data[,c(1,4,7,8,9,10,11:16)] # only relevant data
 dm = melt(ds,id.vars = c("Number.of.states", "Impairment")) # melted data
 
 attach(ds)
@@ -26,7 +24,7 @@ plot all the relevant variables against each other
 
 ``` {r warning = FALSE, fig.width=12, fig.height=12}
 
-pairs(~ Number.of.states + Impairment + Speaker.entropy + Hearer.entropy +
+pairs(~ Number.of.states + Impairment + Speaker.entropy + Hearer.entropy + Speaker.convexity +
         Speaker.Voronoiness + Hearer.Voronoiness +
         Speaker.informativity + Hearer.informativity + Expected.utility + Iterations, data=ds)
 ```
@@ -62,7 +60,7 @@ We can exclude the informativity notions, because they are highly correlated wit
 dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "variable"), measurevar="value")
 dsub = subset(dms, !grepl("informativity",dms$variable) )
 
-pd <- position_dodge(.05)
+pd <- position_dodge(.01)
 sp = ggplot(dsub, aes(x=Impairment, y=value, colour=factor(Number.of.states))) + 
      geom_point(position = pd) +
      geom_errorbar(aes(ymin=value-ci, ymax=value+ci), width=0, position=pd) +

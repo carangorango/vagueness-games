@@ -1,0 +1,24 @@
+Data Exploration
+================
+
+``` {r warnings=FALSE, message=FALSE, echo=FALSE}
+
+require('ellipse')
+require('plyr')
+require('ggplot2')
+require('reshape2')
+source('~/Desktop/data/svn/programming/R/helpers/helpers.R')
+
+data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140916-134358.csv', 
+                colClasses=c('numeric','factor','numeric','numeric','numeric',
+                             'factor','numeric','numeric','numeric','numeric',
+                             'numeric','numeric','numeric','numeric','numeric',
+                             'numeric','numeric','numeric','character','character'))
+
+ddply(data, .(Impairment,Number.of.states), summarise, no.convex = sum(Speaker.Convex.Cat)) -> sumconv
+
+qplot(Impairment,no.convex,data=sumconv, geom=c("point","line"),ylab="percentage of convex outcomes", color=factor(Number.of.states))
+
+```
+
+

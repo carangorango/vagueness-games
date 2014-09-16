@@ -104,6 +104,11 @@ def Convexity(Strategy):
     return sum(np.prod([ Strategy[c, s[c]] for c in xrange(Strategy.shape[0])])
                for s in ConvexPureStrategies)
 
+def ConvexityCat(Strategy):
+    ConvexPureStrategies = convex_sequences(range(Strategy.shape[1]), Strategy.shape[0])
+    return sum(np.prod([ Strategy[c, s[c]] == max(Strategy[c]) for c in xrange(Strategy.shape[0])])
+               for s in ConvexPureStrategies)
+
 def Voronoiness(HearerStrategy, SpeakerStrategy, StateSimilarity):
     Prototypes = [ np.argmax(HearerStrategy[m]) for m in xrange(HearerStrategy.shape[0]) ]
 
@@ -329,4 +334,5 @@ csv.writer(OutputFile).writerow([NStates, PriorDistributionType, NMessages, Impa
     SpeakerVoronoiness, HearerVoronoiness, \
     InformativitySpeaker, InformativityHearer, \
     ExpectedUtility(Speaker, Hearer, Utility) / OptimalExpectedUtility, i, \
+    ConvexityCat(Speaker), ConvexityCat(Hearer), \
     SpeakerOutputFilename, HearerOutputFilename])
