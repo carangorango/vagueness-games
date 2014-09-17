@@ -36,11 +36,10 @@ the opponent's strategy:
 \cdot \EU(\act \myts ; \myts \messg,\Sstrat)\,.
 \end{align*}
 The discrete-time replicator dynamic maps current strategies $\Sstrat$
-and $\Rstrat$ to future strategies $\RD(\Sstrat)$ and $\RD(\Rstrat)$ in
-such a way that changes in frequency are proportional to expected
+and $\Rstrat$ to future strategies $\RD(\Sstrat)$ and $\RD(\Rstrat)$
+in such a way that changes in frequency are proportional to expected
 utilities. For behavioral strategies, the changes take place locally
-at each of the agents' choice points:\todo{could be shortened by using
-  $\propto$ notation}
+at each of the agents' choice points:
 \begin{align*}
   \RD(\Sstrat)(\messg \probbar \state) & = \frac{\Sstrat(\messg \probbar \state) \cdot
     \EU(\messg \myts ; \myts \state,\Rstrat)} {\Phi(\state,\Sstrat, \Rstrat)} \\
@@ -48,7 +47,6 @@ at each of the agents' choice points:\todo{could be shortened by using
     \EU(\act \myts ; \myts \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
 \end{align*}
 
-\todo[inline]{example? sim-max game 10 states, after so and so many rounds?}
 
 \subsection{Replicator diffusion dynamic in behavioral strategies}
 
@@ -140,9 +138,10 @@ strategies that describe the agents' actual noise-perturbed
 probabilistic behavior. If we conceive of behavioral strategies
 $\Sstrat$ and $\Rstrat$ as row-stochastic matrices, the effect of
 state confusability is easily captured by matrix multiplication as:
-\begin{align*}
+\begin{align}
+  \label{eq:confusion-function}
   C(\Sstrat) & = C \Sstrat &    C(\Rstrat) & = \Rstrat C\,.
-\end{align*}
+\end{align}
 
 The discrete-time replicator diffusion dynamic takes the replicator
 dynamic as basic, but factors in the confusion of states at each
@@ -157,7 +156,7 @@ formulation, given by \citet{Correia2013:The-Bivalent-Tr}:
   \frac{\Sstrat(\messg \probbar \state_j) \cdot
     \EU(\messg \myts ; \myts \state_j,\Rstrat)}
   {\Phi(\state_j,\Sstrat, \Rstrat)} \\
-    \RDD(\Rstrat)(\state_i \probbar \messg) & = \sum_{j} C_{ij} \cdot
+    \RDD(\Rstrat)(\state_i \probbar \messg) & = \sum_{j} C_{ji} \cdot
   \frac{\Rstrat(\state_j \probbar \messg) \cdot
     \EU(\state_j \myts ; \myts \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
 \end{align*}
@@ -173,9 +172,8 @@ close relative in the replicator mutator dynamic.
 
 \subsection{The replicator mutator dynamic}
 
-The replicator mutator dynamic (\rmd) has been proposed by Martin
-Nowak first in the context of signaling game models for the evolution
-of grammar
+The replicator mutator dynamic (\rmd) has been proposed first in the
+context of signaling game models for the evolution of grammar
 \citep[e.g.][]{KomarovaNiyogi2001:The-Evolutionar,NowakKomarova2001:Evolution-of-Un,Nowak2006:Evolutionary-Dy}. The
 relation of the \rmd to other prominent evolutionary dynamics is well
 understood \citep{PageNowak2002:Unifying-Evolut}. The \rmd has seen
@@ -233,21 +231,19 @@ interested in here.
 \paragraph{Replicator dynamic in mixed strategies.} To understand the
 replicator mutator dynamic in mixed strategies, we first introduce the
 replicator dynamic in mixed strategies as introduced by
-\citet{TaylorJonker1978:Evolutionary-St}.
+\citet{TaylorJonker1978:Evolutionary-St}. 
 
-For mixed strategies, we define the players' fitness in the
-usual manner. Let $F_i^{\Rmixed}$ be $\Spure_i$'s fitness given
-$\Rmixed$ and $F_i^{\Smixed}$ be $\Rpure_i$'s fitness given
-$\Smixed$. Then $\Phi(\Smixed,\Rmixed) = \sum_{k} \Smixed_k \cdot
-F_k^{\Rmixed}$ is the average fitness in the sender population and
+Let $F_i^{\Rmixed}$ be $\Spure_i$'s fitness given $\Rmixed$ and
+$F_i^{\Smixed}$ be $\Rpure_i$'s fitness given $\Smixed$. Then
+$\Phi(\Smixed,\Rmixed) = \sum_{k} \Smixed_k \cdot F_k^{\Rmixed}$ is
+the average fitness in the sender population and
 $\Phi(\Rmixed,\Smixed) = \sum_{k} \Rmixed_k \cdot F_k^{\Smixed}$ the
 average fitness in the receiver population.\todo{give actual
   definition of fitness etc.?}
 
-
 The continuous-time replicator dynamic defines the change of frequency
-of mixed strategies. Its so-called two-population version that takes
-sender and receiver roles into account separately is defined as:
+of mixed strategies. Its so-called two-population version, that takes
+sender and receiver roles into account separately, is defined as:
 \begin{align*}
   \dot{\Smixed_i} & = \Smixed_i \cdot \left ( F_i^{\Rmixed} -
   \Phi(\Smixed,\Rmixed) \right ) &   \dot{\Rmixed_i} &  = \Rmixed_i \cdot \left ( F_i^{\Smixed} -
@@ -303,12 +299,12 @@ intuition that motivated the formulation of the \rdd.
   from the discrete version if the discrete update steps get
   infinitely small so that:
   \begin{align*}
-    \dot{\Smixed_i} & = \Smixed_i' - \Smixed_i = \sum_{j} Q_{ji}
+    \dot{\Smixed_i} & = \RMD(\Smixed)_i - \Smixed_i = \sum_{j} Q_{ji}
     \frac{\Smixed_j \cdot F_j^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} -
     \Smixed_i = \sum_{j} \Smixed_j \left ( \frac{ Q_{ji} \cdot
         F_j^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} - \Smixed_i \right ) \\
     & = \sum_{j} \Smixed_j \left ( \frac{ Q_{ji} \cdot
-        F_j^{\Rmixed} - \Smixed_i \cdot \Phi(\Smixed,\Rmixed)}{ \Phi(\Smixed,\Rmixed)}  \right )
+        F_j^{\Rmixed} - \Smixed_i \cdot \Phi(\Smixed,\Rmixed)}{ \Phi(\Smixed,\Rmixed)}  \right )\,.
   \end{align*}
   As $\Phi(\Smixed,\Rmixed)$ is a constant rate of change, we can drop
   it to derive the non-payoff adjusted continuous version above,
@@ -349,14 +345,14 @@ The sequential reformulation of the \rmd in terms of a sequence of
 updates already closely resembles our initial formulation of the
 \rdd. However, there is a major difference between these. While the
 \rdd is a dynamic for behavioral strategies, the \rmd, as taken from
-the literature, is a dynamic for mixed strategies. Similarly, the
+the literature, applies to mixed strategies. Similarly, the
 confusability of states is an operation that is straightforwardly
-definable for behavioral strategies (see Equation~XYZ), while mutation
-in the \rmd is defined as mutation from one pure strategy to
-another. Nonetheless, it is possible to map each confusion matrix to a
-mutation matrix in such a way that the natural correspondence between
-strategies is conserved (see
-Figure~\ref{fig:correspondence-result}). This is the main result
+definable for behavioral strategies (see
+Equations~(\ref{eq:confusion-function})), while mutation in the \rmd is
+defined as mutation from one pure strategy to another. Nonetheless, it
+is possible to map each confusion matrix to a mutation matrix in such
+a way that the natural correspondence between strategies is conserved
+(see Figure~\ref{fig:correspondence-result}). This is the main result
 presented in this section, and it is our justification for regarding
 the \rdd as the behavioral-strategy analogue of the replicator-mutator
 dynamic when the only source of mutation is perceptual confusion of
@@ -425,14 +421,14 @@ behavioral to mixed strategies, we would like to show that there is a
 systematic translation from a confusion matrix $C$ to a mutation
 matrices $Q^C$ such that for each mixed sender strategy $\Smixed$, its
 unique corresponding behavioral strategy $\Sstrat = G(\Smixed)$ has a
-confusion-perturbation $C(\Sstrat)$ that corresponds, via $G$ to the
+confusion-perturbation $C(\Sstrat)$ that corresponds, via $G$, to the
 mutation-perturbation $Q^C(\Smixed)$ (see
 Figure~\ref{fig:correspondence-result}). In other words, we
 hypothesize that a confusion matrix $C$ should give rise to a unique
 mutation matrix $Q^C$ so that whenever $G(\Smixed) = \Sstrat$ we also
 have $G(Q^C(\Smixed)) = C(\Sstrat)$. Similarly, for the receiver. This
 is the content of Theorems~\ref{thm:sender-eq} and
-~\ref{thm:receiver-eq}), the proofs of which are in
+~\ref{thm:receiver-eq}, the proofs of which are in
 Appendix~\ref{sec:proofs}. The remainder of this section introduces
 the relevant construction that maps arbitrary $C$ to suitable $Q^C$.
 
@@ -442,12 +438,12 @@ we start with that.
 
 The probability that $\Rpure_i$ mutates into $\Rpure_j$ is the product of
 the probabilities for each $\messg$ that the state $\Rpure_i(\messg)$ is
-perceived as state $\Rpure_j(\messg)$. Abusing notation, by referring to
+perceived as state $\Rpure_j(\messg)$. Abusing notation by referring to
 the indices of states $\Rpure_i(\messg)$ and $\Rpure_j(\messg)$ with
 $\Rpure_i(\messg)$ and $\Rpure_j(\messg)$ directly, we define:
 \begin{align}
   \label{eq:construction-rec}
-  R^C_{ij} = \prod_{\messg} C_{\Rpure(\messg)\Rpure'(\messg)}\,.
+  R^C_{ij} = \prod_{\messg} C_{\Rpure_i(\messg)\Rpure_j\messg)}\,.
 \end{align}
 
 Now look at the sender. If $\Spure_j(\state_k)=\messg$ and

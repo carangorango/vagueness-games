@@ -1,6 +1,8 @@
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 library(MCMCpack) # for Dirichlet distribution
-source('~/Desktop/data/svn/programming/R/fuzzy-action/dev.r')
+library(ggplot2)
+library(reshape2)
+# source('~/Desktop/data/svn/programming/R/fuzzy-action/dev.r')
 ```
 
 
@@ -19,10 +21,26 @@ Preliminaries & Parameters
 ```{r}
 alpha= 0.1
 rounds = 10000
-ns = 11
-nm = 3
+ns = 60
+nm = 2
 states = seq(from=0,to=1,length.out = ns)
+
+get.confusion.matrix = function(states,alpha){
+  ns = length(states)
+  if (alpha <= 0){
+    return(diag(rep(1,ns)))
+  }
+  C = matrix(0,nrow=ns, ncol=ns)
+  for (i in 1:ns){
+    for (j in 1:ns){
+      C[i,j] = exp( - (states[i]-states[j])^2 / (alpha^2) )
+    }
+  }
+  return(prop.table(C,1))
+}
+
 C = get.confusion.matrix(states,alpha)
+
 ```
 
 Diffusion
@@ -43,7 +61,8 @@ get.nbr = function(response,noise.matrix){
 
 ```
 
-But that means that we can define iterated diffusion as either left or right multiplication with suitable powers of the confusion matrix. Therefore define a the n-th power of the confusion matrix.
+
+We can define iterated diffusion as either left or right multiplication with suitable powers of the confusion matrix. Therefore define a the n-th power of the confusion matrix.
 
 ```{r}
 power = function(C,n){
@@ -62,6 +81,46 @@ power = function(C,n){
   }
 }
 ```
+
+Simple Diffusion
+----------------
+
+Let's plot an arbitrary sender and receiver strategy, and apply some noise.
+
+First a function to plot an arbitrary sender and receiver strategy
+
+```{r}
+
+plotSender = function(sen){
+  senDF = melt(sen,varnames = c("state.index","message"), value.name = "probability")
+  senDF$states = states[senDF[,1]]
+  senDF$message = factor(senDF$message)
+  ggplot(senDF, aes(x = states, y=probability, color=message)) + geom_point() + geom_line()
+}
+
+```
+
+
+```{r}
+
+sen = rdirichlet(ns,rep(1,nm))
+
+plotSender(sen)
+plotSender(get.nbr(sen,C))
+plotSender(get.nbr(get.nbr(sen,C),C))
+
+sys.exit()
+
+# rec = rdirichlet(nm,rep(1,ns))
+
+
+
+
+```
+
+
+
+
 
 
 Iterated Diffusion
