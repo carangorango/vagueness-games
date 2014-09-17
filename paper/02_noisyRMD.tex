@@ -4,20 +4,21 @@ The replicator diffusion dynamic (\rdd) was first introduced by
 \citet{Correia2013:The-Bivalent-Tr} as a noise-perturbed variant of
 the replicator dynamic (\rd) in behavioral strategies. We begin by
 recapitulating the formulation of the \rd in behavioral
-strategies. Then we define the replicator diffusion dynamics in
+strategies. Then we define the replicator diffusion dynamic in
 behavioral strategies, following \citet{Correia2013:The-Bivalent-Tr}.
-Finally we show that the \rdd is a special case of the \rmd.
+Finally we show that the \rdd is a special case of the replicator
+mutator dynamic \citep[e.g.][]{Nowak2006:Evolutionary-Dy}.
 
 \subsection{Replicator dynamic in behavioral strategies}
 
-Fix a signaling game with states $\States$, messages $\Messgs$ and
-acts $\Acts$. Let $\Pr(\cdot) \in \Delta{\States}$ be the prior
+Fix a signaling game with finite states $\States$, messages $\Messgs$
+and acts $\Acts$. Let $\Pr(\cdot) \in \Delta{\States}$ be the prior
 distribution over states and $\Util_{\sen,\rec} \mycolon \States
 \times \Messgs \times \Acts \rightarrow \mathds{R}$ the senders's and
 receiver's utility functions. The sender's behavioral strategies are
 functions $\Sstrat \in \Delta(\Messgs)^\States$; the receiver's are
 functions $\Rstrat \in \Delta(\Acts)^\Messgs$. Define the expected
-utility of actions in each choice point are defined as usual:
+utility of actions in each choice point are as usual:
 \begin{align*}
   \EU(\messg \myts ; \myts \state, \Rstrat) & = \sum_{\act \in \Acts}
   \Rstrat(\act \probbar \messg) \cdot U_\sen(\state, \messg, \act) \\
@@ -41,10 +42,10 @@ utilities. For behavioral strategies, the changes take place locally
 at each of the agents' choice points:\todo{could be shortened by using
   $\propto$ notation}
 \begin{align*}
-  \RD(\Sstrat)(\messg \probbar \state_i) & = \frac{\Sstrat(\messg \probbar \state_j) \cdot
-    \EU(\messg,\state_j,\Rstrat)} {\Phi(\state_j,\Sstrat, \Rstrat)} \\
-    \RD(\Rstrat)(\state_i \probbar \messg) & = \frac{\Rstrat(\state_j \probbar \messg) \cdot
-    \EU(\state_j,\messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
+  \RD(\Sstrat)(\messg \probbar \state) & = \frac{\Sstrat(\messg \probbar \state) \cdot
+    \EU(\messg \myts ; \myts \state,\Rstrat)} {\Phi(\state,\Sstrat, \Rstrat)} \\
+    \RD(\Rstrat)(\act \probbar \messg) & = \frac{\Rstrat(\act \probbar \messg) \cdot
+    \EU(\act \myts ; \myts \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
 \end{align*}
 
 \todo[inline]{example? sim-max game 10 states, after so and so many rounds?}
@@ -52,7 +53,7 @@ at each of the agents' choice points:\todo{could be shortened by using
 \subsection{Replicator diffusion dynamic in behavioral strategies}
 
 The replicator diffusion dynamic adds probabilistic confusion of
-similar states to the replicator dynamics. Fix a sim-max game with
+similar states to the replicator dynamic. Fix a sim-max game with
 $\States = \Acts$ and a confusion matrix $C$. $C$ is a row-stochastic
 matrix whose elements $C_{ij}$ give the probability that $\state_i$ is
 realized as $\state_j$. The confusability of states affects senders
@@ -131,7 +132,7 @@ formed when \mystate{i} is the output of the receiver's strategy.
 
 The aggregate effect of confusion of states on behavioral strategies
 can be captured in a function that maps behavioral strategies
-$\Sstrat$ and $\Rstrat$ on their noise-perturbed realizations
+$\Sstrat$ and $\Rstrat$ to their noise-perturbed realizations
 $C(\Sstrat)$ and $C(\Rstrat)$. The idea is that $\Sstrat$ and
 $\Rstrat$ are what, on average, the idealized, confusion-free behavior
 would be, while $C(\Sstrat)$ and $C(\Rstrat)$ are behavioral
@@ -147,30 +148,30 @@ The discrete-time replicator diffusion dynamic takes the replicator
 dynamic as basic, but factors in the confusion of states at each
 update step in a sequential update:
 \begin{align*}
-  \RDD(\Sstrat) & = C(\RD(\Sstrat)) &   \RDD(\Rstrat) & = C(\RD(\Rstrat)) 
+  \RDD(\Sstrat) & = C(\RD(\Sstrat)) &   \RDD(\Rstrat) & = C(\RD(\Rstrat)) \,.
 \end{align*}
-This is equivalent to the following definition, given by
-\citet{Correia2013:The-Bivalent-Tr}:
+This is equivalent to the following, perhaps more transparent
+formulation, given by \citet{Correia2013:The-Bivalent-Tr}:
 \begin{align*}
   \RDD(\Sstrat)(\messg \probbar \state_i) & = \sum_{j} C_{ij} \cdot
   \frac{\Sstrat(\messg \probbar \state_j) \cdot
-    \EU(\messg,\state_j,\Rstrat)} {\Phi(\state_j,\Rstrat)} \\
+    \EU(\messg \myts ; \myts \state_j,\Rstrat)}
+  {\Phi(\state_j,\Sstrat, \Rstrat)} \\
     \RDD(\Rstrat)(\state_i \probbar \messg) & = \sum_{j} C_{ij} \cdot
   \frac{\Rstrat(\state_j \probbar \messg) \cdot
-    \EU(\state_j,\messg,\Sstrat)} {\Phi(\messg,\Sstrat)}  \,.
+    \EU(\state_j \myts ; \myts \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
 \end{align*}
 
 The idea behind the sequential definition of the \rdd is that, at each
 time step, strategies are gradually optimized along the current
 fitness landscape, as described by the \rd, but the realization of
-optimized strategies is bound to be noisy, due to confusion of
-states. It is obvious that other (discrete-time) evolutionary dynamics
-can be subjected to state-confusability in an analogous fashion
-\citep{Correia2013:The-Bivalent-Tr}. In the case of the \rd, however,
-perturbation by state-confusion has a prominent close relative in the
-replicator mutator dynamic.
+optimized strategies is noisy, due to confusion of states. It is
+obvious that other (discrete-time) evolutionary dynamics can be
+subjected to state-confusability in an analogous fashion. In the case
+of the \rd, however, perturbation by state-confusion has a prominent
+close relative in the replicator mutator dynamic.
 
-\subsection{Relation with the replicator mutator dynamic}
+\subsection{The replicator mutator dynamic}
 
 The replicator mutator dynamic (\rmd) has been proposed by Martin
 Nowak first in the context of signaling game models for the evolution
@@ -179,82 +180,122 @@ of grammar
 relation of the \rmd to other prominent evolutionary dynamics is well
 understood \citep{PageNowak2002:Unifying-Evolut}. The \rmd has seen
 further fruitful applications in the context of signaling games
-\citep{HutteggerSkyrms2010:Evolutionary-Dy}. It is therefore desirable
-to relate the \rdd that we propose here to the \rmd.
+\citep[e.g.][]{HutteggerSkyrms2010:Evolutionary-Dy,Deo2014:The-Semantic-an}. It
+is therefore desirable to relate the \rdd that we propose here to the
+\rmd.
 
 A direct comparison between \rdd and the \rmd is not possible, because
 the usual formulation of the latter is in its continuous-time form,
 and based on mixed strategies, not behavioral strategies. We therefore
 give a discrete-time formulation of the \rmd in behavioral strategies,
 which is independently useful. The relation between \rdd and \rmd will
-then be plain to see.
+then be plain to see. We start with a delineation of mixed and
+behavioral strategies.
 
-\subsubsection{Replicator mutator dynamic}
+\paragraph{Mixed strategies.} Pure sender (receiver) strategies are
+functions $\Spure \in \Messgs^\States$ ($\Rpure \in
+\Acts^\Messgs$). Mixed sender (receiver) strategies are functions
+$\Smixed \in \Delta(\Messgs^\States)$ ($\Rmixed \in
+(\Acts^\Messgs)$). The latter give the relative population frequencies
+of the former. We write $\Smixed_i$ for the frequency
+$\Smixed(\Spure_i)$ of pure strategy $\Spure_i$ (also for the
+receiver). 
 
-Pure sender (receiver) strategies are functions $\Spure \in
-\Messgs^\States$ ($\Rpure \in \Acts^\Messgs$). Mixed sender (receiver)
-strategies are functions $\Smixed \in \Delta(\Messgs^\States)$
-($\Rmixed \in (\Acts^\Messgs)$). The latter give the relative
-population frequencies of the former. We write $\Smixed_i$ for the
-frequency $\Smixed(\Spure_i)$ of pure strategy $\Spure_i$ (also for
-the receiver). For mixed strategies, we define the players' fitness in
-the usual manner. Let $F_i^{\Rmixed}$ be $\Spure_i$'s fitness given
+Mixed strategies hold more information than behavioral
+strategies. This is because every mixed strategy $\Smixed$ converts to
+a unique behavioral strategy defined by:
+\begin{align*}
+  \Sstrat(\messg \probbar \state) = \sum_{\Spure(\state) = \messg} \Smixed(\Spure)\,.
+\end{align*} 
+Let $G$ be this mapping from mixed to behavioral strategies. This $G$
+is \emph{not} an injection, as many mixed strategies map onto the same
+behavioral strategy. In this sense, mixed strategies hold more
+information about a distribution of pure strategies in a population.
+
+In the context of evolutionary dynamics, we can think of behavioral
+strategies as treating each choice point as an independent update site
+\citep[e.g.][]{Cressman2003:Evolutionary-Dy,Sandholm2013:Population-Game}. Dynamics
+for mixed strategies conceive of agents as adjusting their whole pure
+strategy globally. In this way, dependencies between different choices
+at different choice points can matter to the evolutionary path. In
+contrast, dynamics for behavioral strategies conceive of agents as
+adjusting their strategies locally at each choice point, regardless of
+what they are bound to do at other choice points. The latter
+perspective is then more coarse-grained, and not necessarily
+equivalent to the former. An advantage of dynamics in behavioral
+strategies is that they reduce complexity, which is especially helpful
+for computational simulations of larger games, like the ones we are
+interested in here.
+
+
+
+
+\paragraph{Replicator dynamic in mixed strategies.} To understand the
+replicator mutator dynamic in mixed strategies, we first introduce the
+replicator dynamic in mixed strategies as introduced by
+\citet{TaylorJonker1978:Evolutionary-St}.
+
+For mixed strategies, we define the players' fitness in the
+usual manner. Let $F_i^{\Rmixed}$ be $\Spure_i$'s fitness given
 $\Rmixed$ and $F_i^{\Smixed}$ be $\Rpure_i$'s fitness given
 $\Smixed$. Then $\Phi(\Smixed,\Rmixed) = \sum_{k} \Smixed_k \cdot
 F_k^{\Rmixed}$ is the average fitness in the sender population and
 $\Phi(\Rmixed,\Smixed) = \sum_{k} \Rmixed_k \cdot F_k^{\Smixed}$ the
-average fitness in the receiver population.
-
-Every mixed strategy $\Smixed$ converts to a unique behavioral
-strategy defined by:
-\begin{align*}
-  \Sstrat(\messg \probbar \state) = \sum_{\Spure(\state) = \messg} \Smixed(\Spure)\,.
-\end{align*} 
-Let $G$ be this mapping from mixed to behavioral strategies. Notice
-that $G$ is \emph{not} an injection, as many mixed strategies map onto
-the same behavioral strategy. \todo{this should not be here}
+average fitness in the receiver population.\todo{give actual
+  definition of fitness etc.?}
 
 
-
-\paragraph{Replicator dynamics in pure strategies.} The two-population
-(non-payoff adjusted) continuous replicator dynamics in pure
-strategies is defined as:
+The continuous-time replicator dynamic defines the change of frequency
+of mixed strategies. Its so-called two-population version that takes
+sender and receiver roles into account separately is defined as:
 \begin{align*}
   \dot{\Smixed_i} & = \Smixed_i \cdot \left ( F_i^{\Rmixed} -
   \Phi(\Smixed,\Rmixed) \right ) &   \dot{\Rmixed_i} &  = \Rmixed_i \cdot \left ( F_i^{\Smixed} -
   \Phi(\Rmixed,\Smixed) \right ) \,.
 \end{align*}
-The discrete time version is given by: 
+Similar to the version for behavioral strategies, a discrete-time
+version of the \rd for mixed strategies can be conceptualized as an
+update function that maps mixed strategies $\Smixed$ and $\Rmixed$
+onto mixed strategies $\RD(\Smixed)$ and $\RD(\Rmixed)$ respectively,
+such that:
 \begin{align*}
-  \Smixed_i' & = \frac{\Smixed_i \cdot
-  F_i^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} &     \Rmixed_i' & = \frac{\Rmixed_i \cdot
-  F_i^{\Smixed}}{ \Phi(\Rmixed,\Smixed)} \,.
+  \RD(\Smixed)_i & = \frac{\Smixed_i \cdot F_i^{\Rmixed}}{
+    \Phi(\Smixed,\Rmixed)} & \RD(\Rmixed)_i & = \frac{\Rmixed_i \cdot
+    F_i^{\Smixed}}{ \Phi(\Rmixed,\Smixed)} \,.
 \end{align*}
 
 
-\paragraph{Replicator-mutator equation.} Let $Q$ be a row-stochastic
-mutation matrix where $Q_{ji}$ gives the probability that pure sender
-strategy $\Spure_j$ mutates into $\Spure_i$. Similarly, let $R$ be a
-row-stochastic mutation matrix where $R_{ji}$ gives the probability
-that pure receiver strategy $\Rpure_j$ mutates into $\Rpure_i$.
+\paragraph{Replicator mutator dynamic.} The replicator mutator dynamic
+extends the \rd by adding probabilistic mutation. Let $Q$ be a
+row-stochastic mutation matrix where $Q_{ji}$ gives the probability
+that pure sender strategy $\Spure_j$ mutates into
+$\Spure_i$. Similarly, let $R$ be a row-stochastic mutation matrix
+where $R_{ji}$ gives the probability that pure receiver strategy
+$\Rpure_j$ mutates into $\Rpure_i$.
 
-The two-population (non-payoff adjusted) continuous replicator-mutator
-dynamics, is then given by::
+The \rmd is usually given only in its continuous-time form. A
+two-population (non-payoff adjusted) formulation is then:
 \begin{align*}
   \dot{\Smixed_i} & = \sum_{j}  Q_{ji} \cdot \Smixed_j
     \cdot F_j^{\Rmixed} - \Smixed_i \cdot \Phi(\Smixed,\Rmixed) &
     \dot{\Rmixed_i} & = \sum_{j}  R_{ji} \cdot \Rmixed_j
     \cdot F_j^{\Smixed} - \Rmixed_i \cdot \Phi(\Rmixed,\Smixed) \,.
 \end{align*}
-\begin{claim} A discrete time version of the above replicator mutator
-  dynamics is:
+Although a discrete-time formulation of the dynamics is absent from the
+literature, as far as we know, it is easy to spell out, and clearly
+demonstrates that the sequential nature of the \rmd, parallel to the
+intuition that motivated the formulation of the \rdd.
+
+\begin{claim} A discrete time version of the replicator mutator
+  dynamic is:
   \begin{align*}
-    \Smixed_i' & = \sum_{j} Q_{ji} \frac{\Smixed_j \cdot
-      F_j^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} & \Rmixed_i' & = \sum_{j}
-    R_{ji} \frac{\Rmixed_j \cdot F_j^{\Smixed}}{
+    \RMD(\Smixed)_i & = \sum_{j} Q_{ji} \frac{\Smixed_j \cdot
+      F_j^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} & \RDD(\Rmixed)_i & =
+    \sum_{j} R_{ji} \frac{\Rmixed_j \cdot F_j^{\Smixed}}{
       \Phi(\Rmixed,\Smixed)}\,.
   \end{align*}
 \end{claim}
+
 
 \begin{proof}
   It suffices to check either sender or receiver part. Focusing on the
@@ -284,97 +325,142 @@ dynamics, is then given by::
   \end{align*}
 \end{proof}
 
-The discrete time replicator-mutator dynamics has a nice sequential
-update property: first we compute the fitness-driven change according
-to the standard replicator dynamics; then we compute the perturbation
-from mutation.
-
-\subsection{Noise-perturbed replicator dynamics}
-
-We look at signaling games with $\States = \Acts$ and fix a confusion
-matrix $C$, which is a row-stochastic matrix whose elements $C_{ij}$
-give the probability that $\state_i$ is perceived as
-$\state_j$. Define the players' average utility at each choice point given
-the opponent's strategy as:
-\begin{align*}
-  \Phi(\state,\Rstrat) & = \sum_{\messg} \Sstrat(\messg \probbar \state) \cdot
-\EU(\messg,\state,\Rstrat) &
-\Phi(\messg,\Sstrat) & = \sum_{\state} \Rstrat(\state \probbar \messg)
-\cdot \EU(\state,\messg,\Sstrat)\,.
-\end{align*}
-The discrete noise-perturbed replicator dynamics on behavioral
-strategies proposed by \citet{Correia2013:The-Bivalent-Tr} is:
-\begin{align*}
-  \Sstrat'(\messg \probbar \state_i) & = \sum_{j} C_{ji} \cdot
-  \frac{\Sstrat(\messg \probbar \state_j) \cdot
-    \EU(\messg,\state_j,\Rstrat)} {\Phi(\state_j,\Rstrat)} \\
-    \Rstrat'(\state_i \probbar \messg) & = \sum_{j} C_{ji} \cdot
-  \frac{\Rstrat(\state_j \probbar \messg) \cdot
-    \EU(\state_j,\messg,\Sstrat)} {\Phi(\messg,\Sstrat)}  \,.
-\end{align*}
-Notice that this update is also sequential: first we calculate an
-update according to the standard replicator dynamics (in behavioral
-strategies), then we compute the perturbation from perceptual noise.
-
-
-\subsection{Exploring the relation}
-
-We will show that the noise-perturbed replicator dynamics defined
-above is the behavioral-strategy analogue to the replicator-mutator
-dynamics when the only source of mutation is perceptual confusion of
-states. Since, in general, the replicator dynamics in two-populations
-is not equivalent in its formulations for behavioral and mixed
-strategies \citep{Cressman2003:Evolutionary-Dy}, we abstract from the
-dynamics and look only at the effect of mutation and
-noise-perturbation. This is justified given the above mentioned
-sequential nature of both dynamics.
-
-Let the mutation $Q(\Smixed)$ ($R(\Rmixed)$) of a mixed sender
-(receiver) strategy be another mixed sender (receiver) strategy
-defined by:
+The discrete-time \rmd has the same sequential nature as the \rdd:
+first we compute the fitness-driven change according to the standard
+replicator dynamic; then we compute the perturbation from
+mutation. This becomes clear if we define an independent mutation
+function that maps mixed strategies onto the outcome of (one round of)
+mutation: 
 \begin{align*}
   Q(\Smixed)_i & =  \sum_j  \Smixed_j \cdot
   Q_{ji} &   R(\Rmixed)_i & =  \sum_{j}  \Rmixed_j \cdot
   R_{ji} \,.
 \end{align*}
-We would like to compare this to the noise perturbation $C(\Sstrat)$
-($C(\Rstrat)$) of behavioral strategy $\Sstrat$ ($\Rstrat)$, which is
-another behavioral strategy given by:
+The discrete-time \rmd given above can then be rewritten as:
 \begin{align*}
-  C(\Sstrat)(\messg \probbar \state_i) & = \sum_{j} C_{ji} \cdot
-  \Sstrat(\messg \probbar \state_j) & C(\Rstrat)(\state_i \probbar
-  \messg) & = \sum_{j} C_{ji} \cdot \Rstrat(\state_j \probbar \messg)
-  \,.
+  \RDD(\Smixed) &= Q(\RD(\Smixed)) &   \RDD(\Rmixed) &= Q(\RD(\Rmixed))\,. 
 \end{align*}
 
-We hypothesize that a confusion matrix $C$ should give rise to a
-unique mutation matrix $Q^C$ so that whenever $G(\Smixed) = \Sstrat$
-we also have $G(Q^C(\Smixed)) = C(\Sstrat)$. Similarly, for the
-receiver.
+
+
+\subsection{Diffusion as a special kind of mutation}
+
+The sequential reformulation of the \rmd in terms of a sequence of
+updates already closely resembles our initial formulation of the
+\rdd. However, there is a major difference between these. While the
+\rdd is a dynamic for behavioral strategies, the \rmd, as taken from
+the literature, is a dynamic for mixed strategies. Similarly, the
+confusability of states is an operation that is straightforwardly
+definable for behavioral strategies (see Equation~XYZ), while mutation
+in the \rmd is defined as mutation from one pure strategy to
+another. Nonetheless, it is possible to map each confusion matrix to a
+mutation matrix in such a way that the natural correspondence between
+strategies is conserved (see
+Figure~\ref{fig:correspondence-result}). This is the main result
+presented in this section, and it is our justification for regarding
+the \rdd as the behavioral-strategy analogue of the replicator-mutator
+dynamic when the only source of mutation is perceptual confusion of
+states.
+
+\begin{figure}
+  \centering
+  
+  \begin{tikzpicture}[node distance = 2cm]
+    
+    \begin{scope}
+      \node[] (mixed) {$\Smixed$};
+
+      \node[below of = mixed] (mutated) {$Q^C(\Smixed)$};
+
+      \node[left of = mixed, node distance = 1.5cm] (dummyl) {};
+
+      \node[right of = mixed, node distance = 1.5cm] (dummyr) {};
+
+      \draw[->, dotted, thick] (mixed) -> (mutated);
+
+  
+      \begin{pgfonlayer}{background}
+        \node [draw=black!50, fill=black!20,fit = (dummyl) 
+        (mutated) (dummyr)] (mixedSpace) {};
+      \end{pgfonlayer}
+
+      \node[below of = mixedSpace, node distance = 1.7cm] {space of
+        mixed strategies};
+    \end{scope}
+
+    \begin{scope}[xshift=6cm]
+      \node[] (behavioral) {$\Sstrat$};
+
+      \node[below of = behavioral] (mutatedBeh) {$C(\Sstrat)$};
+
+      \node[left of = behavioral, node distance = 1.5cm] (dummylB) {};
+
+      \node[right of = behavioral, node distance = 1.5cm] (dummyrB) {};
+
+      \draw[->, dotted, thick] (behavioral) -> (mutatedBeh);
+
+  
+      \begin{pgfonlayer}{background}
+        \node [draw=black!50, fill=black!20,
+              fit = (dummylB) (mutatedBeh) (dummyrB)] (behSpace) {};
+      \end{pgfonlayer}
+
+      \node[below of = behSpace, node distance = 1.7cm] {space of
+        behavioral strategies};
+    \end{scope}
+
+    \draw[->,thick,dotted] (mixed) -> (behavioral) node[midway,
+    above]{$G(\Smixed)$};
+
+    \draw[->,thick,dotted] (mutated) -> (mutatedBeh) node[midway, below]{$G(Q^C(\Smixed))$};
+
+  \end{tikzpicture}
+
+  \caption{Correspondence between state-confusion and mutation.}
+  \label{fig:correspondence-result}
+\end{figure}
+
+More concretely, since there is a non-injective mapping $G$ from
+behavioral to mixed strategies, we would like to show that there is a
+systematic translation from a confusion matrix $C$ to a mutation
+matrices $Q^C$ such that for each mixed sender strategy $\Smixed$, its
+unique corresponding behavioral strategy $\Sstrat = G(\Smixed)$ has a
+confusion-perturbation $C(\Sstrat)$ that corresponds, via $G$ to the
+mutation-perturbation $Q^C(\Smixed)$ (see
+Figure~\ref{fig:correspondence-result}). In other words, we
+hypothesize that a confusion matrix $C$ should give rise to a unique
+mutation matrix $Q^C$ so that whenever $G(\Smixed) = \Sstrat$ we also
+have $G(Q^C(\Smixed)) = C(\Sstrat)$. Similarly, for the receiver. This
+is the content of Theorems~\ref{thm:sender-eq} and
+~\ref{thm:receiver-eq}), the proofs of which are in
+Appendix~\ref{sec:proofs}. The remainder of this section introduces
+the relevant construction that maps arbitrary $C$ to suitable $Q^C$.
 
 \paragraph{Confusion-based mutations.} There are natural conversions
 of $C$ into $Q^C$ and $R^C$. The case for the receiver is easier, so
 we start with that.
 
-The probability that $\Rpure$ mutates into $\Rpure'$ is the product of
-the probabilities for each $\messg$ that $\Rpure(\messg)$ is perceived
-as $\Rpure'(\messg)$. Abusing notation, by refer to the index of
-$\Rpure(\messg)$ and $\Rpure'(\messg)$ with $\Rpure(\messg)$ and
-$\Rpure'(\messg)$ directly, we define:
-\begin{align*}
-  R^C_{ji} = \prod_{\messg} C_{\Rpure(\messg)\Rpure'(\messg)}\,.
-\end{align*}
+The probability that $\Rpure_i$ mutates into $\Rpure_j$ is the product of
+the probabilities for each $\messg$ that the state $\Rpure_i(\messg)$ is
+perceived as state $\Rpure_j(\messg)$. Abusing notation, by referring to
+the indices of states $\Rpure_i(\messg)$ and $\Rpure_j(\messg)$ with
+$\Rpure_i(\messg)$ and $\Rpure_j(\messg)$ directly, we define:
+\begin{align}
+  \label{eq:construction-rec}
+  R^C_{ij} = \prod_{\messg} C_{\Rpure(\messg)\Rpure'(\messg)}\,.
+\end{align}
 
 Now look at the sender. If $\Spure_j(\state_k)=\messg$ and
 $\Spure_i(\state_k)=\messg'$, then the probability of confusion at
 state $\state_k$ is given by the chance that $\state_k$ is perceived
 as a state $\state_l$ which $\Spure_j$ would map onto $\messg'$. The
-overal probability that $\Spure_j$ mutates into $\Sstrat_i$ is the
+overal probability that $\Spure_j$ mutates into $\Spure_i$ is the
 product of these chances for all states. So, define:
-\begin{align*}
+\begin{align}
+  \label{eq:construction-rec}
   Q^C_{ji} = \prod_{\state_k} \sum_{\state_l \in
     \Spure_j^{-1}(\Spure_i(\state_k))} C_{kl}\,.
-\end{align*}
+\end{align}
 
 For example, consider a signaling game with two states and two
 messages. Let the confusion matrix be:
@@ -403,14 +489,12 @@ Here, a pair like $21$, for example, refers to a pure sender strategy
 with $\Spure(\state_1=\messg_2$ and $\Spure(\state_2) =
 \messg_1$. Similarly for the receiver.
 
-\medskip
-
-\todo[inline]{necessary to prove that mutation matrices are row-stochastic?}
-
-\todo[inline]{maybe worthwhile to think about general properties of
-  the mutation matrices that ensue from perceptual confusion?}
-
-\medskip
+Based on the translations from confusion matrices $C$ to mutation
+matrices $Q^C$ and $R^C$ in Equations~(\ref{eq:construction-rec}) and
+(\ref{eq:construction-rec}), we can finally formulate the
+desired correspondence result, that reveals the \rdd as a special case
+of the \rmd in behavioral strategies where the source of mutation is
+imperfect discriminability of states.
 
 \begin{theorem}
   \label{thm:sender-eq}
@@ -422,6 +506,8 @@ with $\Spure(\state_1=\messg_2$ and $\Spure(\state_2) =
   \label{thm:receiver-eq}
   If $G(\Rmixed) = \Rstrat$, then $G(R^C(\Rmixed)) = C(\Rstrat)$.
 \end{theorem}
+
+\noindent Proofs are given in Appendix~\ref{sec:proofs}.
 
 %%% Local Variables: 
 %%% mode: latex
