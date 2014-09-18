@@ -8,6 +8,62 @@ us, and then apply diffusion. Since the latter step is the novel
 addition, we should look at diffusion in isolation to understand what
 the \rdd does.
 
+Confusion of states should intuitively be a function of their
+perceptual similarity. Here and in the following, we assume that the
+state space of the sim-max game consists of $n \ge 2$ states that are
+equally spaced across the unit interval, including $0$ and $1$. We
+assume here that the distance $\card{\mystate{i} - \mystate{j}}$ is
+the objective, physical similarity between two states $\mystate{i}$
+and $\mystate{j}$. Physical distance space feeds into a perceptual
+similarity function, as described by
+\citet{Nosofsky1986:Attention-Simil}:
+\begin{align}
+  \label{eq:NosofskySim}
+  \similarity(\mystate{i}, \mystate{j} \myts ; \myts \alpha) = \expo \left ( -
+    \frac{\card{\mystate{i} - \mystate{j}}^s}{ \alpha^2} \right ) \,,
+\end{align}
+where $\alpha$ is an imprecision parameter. When $\alpha=0$ agents
+perfectly discriminate between states; when $\alpha \rightarrow
+\infty$ agents cannot discriminate states at
+all. Figure~\ref{fig:NosofskySim} gives an impression of
+Nosofsky-similarity for different parameter values. Other
+formalizations of perceptual similarity are possible, including ones
+that allow for different discriminability in different areas of the
+state space, but we stick with Nosofsky's similarity function for the
+time being, because it is a mathematically simple, yet established
+notion in mathematical psychology.
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=\textwidth]{plots/NosofskySim.pdf}
+
+  \caption{Examples for Nosofsky-similarity (non-normalized) and
+    derived probability of state confusion (normalized) for different
+    values of $\alpha$ and $\card{\States} = 50$.}
+  \label{fig:NosofskySim}
+\end{figure}
+
+
+
+
+
+We further assume that the probability of confusing any two states
+$\mystate{i}$ and $\mystate{j}$ is proportional to their perceived
+similarity and therefore obtained by normalization:
+\begin{align*}
+  C_{ij} = \frac{\similarity(\mystate{i}, \mystate{j} \myts ; \myts
+  \alpha)} {\sum_j \similarity(\mystate{i}, \mystate{j} \myts ; \myts
+  \alpha)} \,.
+\end{align*}
+Confusion of states is then also a function of imprecision parameter
+$\alpha$ (see Figure~\ref{fig:NosofskySim}, bottom part). For $\alpha
+= 0$ the confusion matrix has $C_{ii} = 1$; for $\alpha > 0$ $C$ is
+positive, i.e., $C_{ij} >0$ for all $i$ and $j$; for $\alpha
+\rightarrow \infty$ we find $C_{ij} = \nicefrac{1}{\card{\States}}$ for all
+$i$ and $j$.
+
+
 \begin{itemize}
   \item which confusion matrices: normalized Nosofsky (positive matrices)
   \item repeated applications
@@ -18,6 +74,7 @@ the \rdd does.
     same thing in each choice point (states for the sender, messages
     for the receiver); this follows from the XYZ theorem
 \end{itemize}
+
 
 \begin{figure}
   \centering
@@ -33,7 +90,7 @@ the \rdd does.
   \label{fig:confusion-SenRec}
 \end{figure}
 
-
+\newpage
 
 \subsection{Simulations}
 

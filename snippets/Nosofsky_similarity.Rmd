@@ -1,0 +1,58 @@
+```{r warning=FALSE, echo=FALSE, message=FALSE}
+library(ggplot2)
+library(reshape2)
+```
+
+Nosofsky Similarity
+===================
+
+Nosofsky similarity is governed by a single parameter alpha.
+
+```{r}
+get.confusion.matrix = function(states,alpha){
+  ns = length(states)
+  if (alpha <= 0){
+    return(diag(rep(1,ns)))
+  }
+  C = matrix(0,nrow=ns, ncol=ns)
+  for (i in 1:ns){
+    for (j in 1:ns){
+      C[i,j] = exp( - (states[i]-states[j])^2 / (alpha^2) )
+    }
+  }
+  return(C)
+}
+```
+
+We can plot the similarity for different distances for different values of alpha.
+
+```{r}
+ns = 50
+alphas = c(0.05, 0.1, 0.2, 0.3)
+
+states = seq(0,1,length.out=ns)
+
+out = matrix(0,nrow=length(alphas),ncol=ns)
+outNorm = matrix(0,nrow=length(alphas),ncol=ns)
+
+for (a in 1:length(alphas)){
+  out[a,] = get.confusion.matrix(states,alphas[a])[1,]
+  outNorm[a,] = prop.table(get.confusion.matrix(states,alphas[a]),1)[1,]
+}
+
+simDF = data.frame(distance = rep(states,2*length(alphas)),
+                   alpha = factor(rep(rep(alphas, each=ns),2)),
+                   normalized = factor(rep(c("non-normalized", "normalized"),each=ns*length(alphas))),
+                   similarity = c(as.vector(t(out)),as.vector(t(outNorm)))  )
+
+p = ggplot(simDF, aes(x = distance, y = similarity, color=alpha)) + geom_point() +
+  geom_line() + facet_grid(normalized~. , scales = "free")
+
+show(p)
+
+pdf('paper/plots/NosofskySim.pdf', width=7, height=4)
+show(p)
+dev.off()
+```
+
+
