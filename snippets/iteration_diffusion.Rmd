@@ -23,7 +23,12 @@ alpha= 0.1
 rounds = 10000
 ns = 60
 nm = 2
-states = seq(from=0,to=1,length.out = ns)
+
+get.states = function(ns){
+  return(seq(from=0,to=1,length.out = ns))
+}
+
+states = get.states(ns)
 
 get.confusion.matrix = function(states,alpha){
   ns = length(states)
@@ -82,21 +87,109 @@ power = function(C,n){
 }
 ```
 
-Simple Diffusion
-----------------
+Single Diffusion Steps
+----------------------
 
-Let's plot an arbitrary sender and receiver strategy, and apply some noise.
+Let's plot an arbitrary sender and receiver strategy, and apply some noise, step by step until convergence.
 
-First a function to plot an arbitrary sender and receiver strategy
+Parameters
 
 ```{r}
 
-plotSender = function(sen){
-  senDF = melt(sen,varnames = c("state.index","message"), value.name = "probability")
-  senDF$states = states[senDF[,1]]
+ns = 50
+nm = 2
+rounds = c(1,2,10,50,1000)
+alphas = c(0.01,0.05,0.1,0.3)
+
+plotSender = function(ns,nm,alphas,rounds){
+  sen = rdirichlet(ns,rep(1,nm))
+  senDF = data.frame(state = 0,
+                     message = 0,
+                     round = 0,
+                     alpha = 0,
+                     probability = 0)
+
+  for (alpha in alphas){
+    C = get.confusion.matrix(get.states(ns),alpha)
+    newDF = data.frame(state = rep(get.states(ns),nm),
+                       message = rep(1:2,each=ns),
+                       round = rep(0,ns*nm),
+                       alpha = rep(alpha,ns*nm),
+                       probability = as.vector(sen))
+    for (r in rounds){
+      newC = power(C,r)
+      newSen = get.nbr(sen,newC)
+      newDF2 = data.frame(state = rep(get.states(ns),nm),
+                          message = rep(1:2,each=ns),
+                          round = rep(r,ns*nm),
+                          alpha = rep(alpha,ns*nm),
+                          probability = as.vector(newSen))
+      newDF = rbind(newDF,newDF2)                   
+      }
+    senDF = rbind(senDF,newDF)
+  }
+  senDF = senDF[-1,]
   senDF$message = factor(senDF$message)
-  ggplot(senDF, aes(x = states, y=probability, color=message)) + geom_point() + geom_line()
+  senDF$alpha = factor(senDF$alpha)
+  p = ggplot(senDF,aes(x = state, y = probability, color = message)) + 
+      geom_point(size=0.5) + geom_line() + facet_grid(alpha~round) +
+      scale_x_continuous(breaks=seq(0,1,1/2)) +
+      theme(axis.text.x  = element_text(angle=90, vjust=0.5)) + 
+      scale_y_continuous(breaks=seq(0,1,1/2))
+      
+  return(p)
 }
+
+plotReceiver = function(ns,nm,alphas,rounds){
+  rec = rdirichlet(nm,rep(1,ns))
+  recDF = data.frame(state = 0,
+                     message = 0,
+                     round = 0,
+                     alpha = 0,
+                     probability = 0)
+
+  for (alpha in alphas){
+    C = get.confusion.matrix(get.states(ns),alpha)
+    newDF = data.frame(state = rep(get.states(ns),nm),
+                       message = rep(1:2,each=ns),
+                       round = rep(0,ns*nm),
+                       alpha = rep(alpha,ns*nm),
+                       probability = as.vector(t(rec)))
+    for (r in rounds){
+      newC = power(C,r)
+      newRec = get.nbr(rec,newC)
+      newDF2 = data.frame(state = rep(get.states(ns),nm),
+                          message = rep(1:2,each=ns),
+                          round = rep(r,ns*nm),
+                          alpha = rep(alpha,ns*nm),
+                          probability = as.vector(t(newRec)))
+      newDF = rbind(newDF,newDF2)                   
+      }
+    recDF = rbind(recDF,newDF)
+  }
+  recDF = recDF[-1,]
+  recDF$message = factor(recDF$message)
+  recDF$alpha = factor(recDF$alpha)
+  p = ggplot(recDF,aes(x = state, y = probability, color = message)) + 
+      geom_point(size=0.5) + geom_line() + facet_grid(alpha~round) +
+      scale_x_continuous(breaks=seq(0,1,1/2)) +
+      theme(axis.text.x  = element_text(angle=90, vjust=0.5)) + 
+      scale_y_continuous(breaks=seq(0,round(max(recDF$probability),2),round(max(recDF$probability),2)/2))
+  return(p)
+}
+
+pSen = plotSender(ns,nm,alphas,rounds)
+pRec = plotReceiver(ns,nm,alphas,rounds)
+show(pSen)
+show(pRec)
+
+pdf(file = "paper/plots/confusion_sender.pdf", width = 7, height = 4)
+show(pSen)
+dev.off()
+
+pdf(file = "paper/plots/confusion_receiver.pdf", width = 7, height = 4)
+show(pRec)
+dev.off()
 
 ```
 

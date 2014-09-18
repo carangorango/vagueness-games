@@ -8,6 +8,33 @@ us, and then apply diffusion. Since the latter step is the novel
 addition, we should look at diffusion in isolation to understand what
 the \rdd does.
 
+\begin{itemize}
+  \item which confusion matrices: normalized Nosofsky (positive matrices)
+  \item repeated applications
+  \item diffusion leads to a smoothing out of sender and receiver
+    behavior to neighboring states
+  \item how much depends on the level of confusion (see Figure~\ref{fig:diffusion-SenRec})
+  \item in the limit, this will lead sender and receiver to do the
+    same thing in each choice point (states for the sender, messages
+    for the receiver); this follows from the XYZ theorem
+\end{itemize}
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=\textwidth]{plots/confusion_sender.pdf}
+  
+  \includegraphics[width=\textwidth]{plots/confusion_receiver.pdf}
+
+  \caption{Iterated diffusion for arbitraty sender (top) and receiver
+    strategy (bottom), with 50 states, 2 messages. Each row
+    corresponds to a different confusion level $\alpha$, each colum to
+    a different number of applications of iterated diffusion.}
+  \label{fig:confusion-SenRec}
+\end{figure}
+
+
+
 \subsection{Simulations}
 
 In order to study the long-term behavior of the noise-perturbed sim-max games, we conducted computer simulations for different combinations of initial parameters.
