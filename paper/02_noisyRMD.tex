@@ -130,24 +130,32 @@ formed when \mystate{i} is the output of the receiver's strategy.
 
 The aggregate effect of confusion of states on behavioral strategies
 can be captured in a function that maps behavioral strategies
-$\Sstrat$ and $\Rstrat$ to their noise-perturbed realizations
-$C(\Sstrat)$ and $C(\Rstrat)$. The idea is that $\Sstrat$ and
-$\Rstrat$ are what, on average, the idealized, confusion-free behavior
-would be, while $C(\Sstrat)$ and $C(\Rstrat)$ are behavioral
-strategies that describe the agents' actual noise-perturbed
-probabilistic behavior. If we conceive of behavioral strategies
-$\Sstrat$ and $\Rstrat$ as row-stochastic matrices, the effect of
-state confusability is easily captured by matrix multiplication as:
+$\Sstrat$ and $\Rstrat$ to their diffusions $D(\Sstrat)$ and
+$D(\Rstrat)$. The idea is that $\Sstrat$ and $\Rstrat$ are what, on
+average, the idealized, noise-free behavior would be, while
+$D(\Sstrat)$ and $D(\Rstrat)$ are behavioral strategies that describe
+the agents' actual noise-perturbed probabilistic behavior. Since the
+effect of confusion of states is that behavior at one choice point
+percolates to behavior at similar choice points, we speak of
+\emph{diffusion of behavior under confusion of states} (see
+Section~\ref{sec:iterated-diffusion} for an investigation into this
+diffusion process). If we conceive of behavioral strategies $\Sstrat$
+and $\Rstrat$ as row-stochastic matrices, the diffusion effect of
+state confusability is easily captured by matrix multiplication as a
+diffusion function $\Diff_C$ that, based on confusion matrix $C$, maps
+behavioral strategies on their diffused realizations:
 \begin{align}
   \label{eq:confusion-function}
-  C(\Sstrat) & = C \Sstrat &    C(\Rstrat) & = \Rstrat C\,.
+  \Diff_C(\Sstrat) & = C \Sstrat &    \Diff_C(\Rstrat) & = \Rstrat C\,.
 \end{align}
+
+
 
 The discrete-time replicator diffusion dynamic takes the replicator
 dynamic as basic, but factors in the confusion of states at each
 update step in a sequential update:
 \begin{align*}
-  \RDD(\Sstrat) & = C(\RD(\Sstrat)) &   \RDD(\Rstrat) & = C(\RD(\Rstrat)) \,.
+  \RDD(\Sstrat) & = \Diff_C(\RD(\Sstrat)) &   \RDD(\Rstrat) & = \Diff_C(\RD(\Rstrat)) \,.
 \end{align*}
 This is equivalent to the following, perhaps more transparent
 formulation, given by \citet{Correia2013:The-Bivalent-Tr}:
@@ -324,17 +332,17 @@ intuition that motivated the formulation of the \rdd.
 The discrete-time \rmd has the same sequential nature as the \rdd:
 first we compute the fitness-driven change according to the standard
 replicator dynamic; then we compute the perturbation from
-mutation. This becomes clear if we define an independent mutation
-function that maps mixed strategies onto the outcome of (one round of)
-mutation: 
+mutation. This becomes clear if we define independent mutation
+functions $\Mutate_{Q,R}$ that maps mixed strategies onto the outcome
+of (one round of) mutation:
 \begin{align*}
-  Q(\Smixed)_i & =  \sum_j  \Smixed_j \cdot
-  Q_{ji} &   R(\Rmixed)_i & =  \sum_{j}  \Rmixed_j \cdot
+  \Mutate_Q(\Smixed)_i & =  \sum_j  \Smixed_j \cdot
+  Q_{ji} &   \Mutate_R(\Rmixed)_i & =  \sum_{j}  \Rmixed_j \cdot
   R_{ji} \,.
 \end{align*}
 The discrete-time \rmd given above can then be rewritten as:
 \begin{align*}
-  \RDD(\Smixed) &= Q(\RD(\Smixed)) &   \RDD(\Rmixed) &= Q(\RD(\Rmixed))\,. 
+  \RDD(\Smixed) &= \Mutate_Q(\RD(\Smixed)) &   \RDD(\Rmixed) &= \Mutate_R(\RD(\Rmixed))\,. 
 \end{align*}
 
 
@@ -469,7 +477,7 @@ messages. Let the confusion matrix be:
 \end{align*}
 The resulting mutation matrices are:
 \begin{align*}
-S^C & = \bordermatrix{ ~ & 11 & 12 & 21 & 22 \cr
+Q^C & = \bordermatrix{ ~ & 11 & 12 & 21 & 22 \cr
                       11 & 1 & 0 & 0 & 0 \cr
                       12 & .16 & .64 & .04 & .16 \cr
                       21 & .16 & .04 & .64 & .16 \cr
@@ -494,13 +502,13 @@ imperfect discriminability of states.
 
 \begin{theorem}
   \label{thm:sender-eq}
-  If $G(\Smixed) = \Sstrat$, then $G(Q^C(\Smixed)) = C(\Sstrat)$.
+  If $G(\Smixed) = \Sstrat$, then $G(\Mutate_{Q^C}(\Smixed)) = \Diff_C(\Sstrat)$.
 \end{theorem}
 
 
 \begin{theorem}
   \label{thm:receiver-eq}
-  If $G(\Rmixed) = \Rstrat$, then $G(R^C(\Rmixed)) = C(\Rstrat)$.
+  If $G(\Rmixed) = \Rstrat$, then $G(\Mutate_{R^C}(\Rmixed)) = \Diff_C(\Rstrat)$.
 \end{theorem}
 
 \noindent Proofs are given in Appendix~\ref{sec:proofs}.

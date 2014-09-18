@@ -1,12 +1,17 @@
 \section{Exploring the RDD}
 
-\subsection{(Iterated) Diffusion}
+The previous section showed that the \rdd can be conceptualized as a
+two-step procedure. We first calculate where the replicator dynamic
+would take us, and then apply diffusion. Since the latter step is the
+novel addition, we should look at diffusion in isolation to understand
+what the \rdd does. This is what we will do in
+Section~\ref{sec:iterated-diffusion}. Section~\ref{sec:simulations}
+\dots does something else \dots
 
-We have seen that the \rdd can be conceptualized as a two-step
-procedure. We first calculate where the replicator dynamic would take
-us, and then apply diffusion. Since the latter step is the novel
-addition, we should look at diffusion in isolation to understand what
-the \rdd does.
+\subsection{(Iterated) Diffusion}
+\label{sec:iterated-diffusion}
+
+
 
 Confusion of states should intuitively be a function of their
 perceptual similarity. Here and in the following, we assume that the
@@ -14,7 +19,7 @@ state space of the sim-max game consists of $n \ge 2$ states that are
 equally spaced across the unit interval, including $0$ and $1$. We
 assume here that the distance $\card{\mystate{i} - \mystate{j}}$ is
 the objective, physical similarity between two states $\mystate{i}$
-and $\mystate{j}$. Physical distance space feeds into a perceptual
+and $\mystate{j}$. Distance in physical space feeds into a perceptual
 similarity function, as described by
 \citet{Nosofsky1986:Attention-Simil}:
 \begin{align}
@@ -63,18 +68,39 @@ positive, i.e., $C_{ij} >0$ for all $i$ and $j$; for $\alpha
 \rightarrow \infty$ we find $C_{ij} = \nicefrac{1}{\card{\States}}$ for all
 $i$ and $j$.
 
+Difusion of behavior under confusion of states was defined in
+Equation~(\ref{eq:confusion-function}), repeated here:
+\begin{align*}
+  \Diff_C(\Sstrat) & = C \Sstrat &    \Diff_C(\Rstrat) & = \Rstrat C\,.
+\end{align*}
+If states are confused on average with a probability proportional to
+their similarity, the effect on noise-perturbed behavior is that
+behavioral dispositions gradually diffuse along a gradient of
+similarity of states as well. Consequently, iterated diffusion leads
+to a smoothing out and an eventual equalization of behavioral
+strategies, for both the sender and the
+receiver. Figure~\ref{fig:confusion-SenRec} shows an arbitrary sender
+and receiver strategy after one or several rounds of iterated
+application of diffusion, for different values of perceptual
+imprecision $\alpha$.
 
-\begin{itemize}
-  \item which confusion matrices: normalized Nosofsky (positive matrices)
-  \item repeated applications
-  \item diffusion leads to a smoothing out of sender and receiver
-    behavior to neighboring states
-  \item how much depends on the level of confusion (see Figure~\ref{fig:diffusion-SenRec})
-  \item in the limit, this will lead sender and receiver to do the
-    same thing in each choice point (states for the sender, messages
-    for the receiver); this follows from the XYZ theorem
-\end{itemize}
-
+The example in Figure~\ref{fig:confusion-SenRec} shows that iterated
+diffusion leads to sender and receiver behavior that is the same at
+all choice points. After $n$ steps of diffusion an initial sender
+strategy $\Sstrat$ will be $C^n \Sstrat$, and an initial receiver
+strategy will be $\Rstrat C^n$. If we assume that $\alpha > 0$ and so
+$C$ is a positive row-stochastic matrix (each state could in principle
+be confused as any other state, albeit with possibly a very low
+probability), it follows from the Perron-Frobenius theorem that the
+limit $C^\infty = \lim_{n \rightarrow \infty} C^n$ exists (it is the
+Perron-projection) and all of its rows are identical. That is why, in
+the limit of iterated diffusion, $C^\infty S$ has identical rows
+(messages are sent with the same probability in each state), and $R
+C^\infty$ likewise has identical rows (every message is interpreted
+equally). All of this is in line with the intuition that diffusion of
+behavior under confusion of states iteratively equalizes behavior for
+similar states; if all states can be confused for one another in
+principle, behavior smoothes out entirely in the limit.
 
 \begin{figure}
   \centering
@@ -83,16 +109,20 @@ $i$ and $j$.
   
   \includegraphics[width=\textwidth]{plots/confusion_receiver.pdf}
 
-  \caption{Iterated diffusion for arbitraty sender (top) and receiver
-    strategy (bottom), with 50 states, 2 messages. Each row
-    corresponds to a different confusion level $\alpha$, each colum to
-    a different number of applications of iterated diffusion.}
+  \caption{Iterated diffusion for one arbitrary sender (top) and one
+    receiver strategy (bottom), for a game with 50 states and 2
+    messages. Each row corresponds to a different confusion level
+    $\alpha$, each colum to a different number of applications of
+    iterated diffusion.}
   \label{fig:confusion-SenRec}
 \end{figure}
 
-\newpage
+Now that we understand better what diffusion does, let us look at how
+diffusion interacts with optimization of behavior, as described by the
+replicator dynamics.
 
-\subsection{Simulations}
+\subsection{Exploring the replicator diffusion dynamics}
+\label{sec:simulations}
 
 In order to study the long-term behavior of the noise-perturbed sim-max games, we conducted computer simulations for different combinations of initial parameters.
 Namely, we were interested in investigating the impact of different values of impairment and its relation with the size of the state space.
