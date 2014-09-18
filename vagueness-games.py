@@ -159,7 +159,7 @@ def InformationQuantity(SpeakerStrategy, HearerStrategy, Priors):
 
 # # Settings
 
-NStates = 6
+NStates = 10
 PriorDistributionType = 'uniform'
 
 NMessages = 2
@@ -180,13 +180,14 @@ BatchMode = len(sys.argv) > 1
 
 if BatchMode:
     if len(sys.argv) < 5:
-        print "Usage: python", sys.argv[0], "<number of states> <number of messages> <impairment> <output file>"
+        print "Usage: python", sys.argv[0], "<number of states> <number of messages> <impairment> <tolerance> <output file>"
         sys.exit(1)
     else:
         NStates = int(sys.argv[1])
         NMessages = int(sys.argv[2])
         Impairment = float(sys.argv[3])
-        OutputFile = open(sys.argv[4], 'ab')
+        Tolerance = float(sys.argv[4])
+        OutputFile = open(sys.argv[5], 'ab')
 
 # # Initialization
 
