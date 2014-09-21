@@ -6,9 +6,11 @@ Data Exploration
 require('ellipse')
 require('ggplot2')
 require('reshape2')
+require('plyr')
 source('~/Desktop/data/svn/programming/R/helpers/helpers.R')
+source('~/Desktop/data/svn/vagueness-games/data-analysis.R')
 
-data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140918-142408.csv', 
+data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140918-142408.varTolerance.csv', 
                 colClasses=c('numeric','factor','numeric','numeric','numeric',
                              'factor','numeric','numeric','numeric','numeric',
                              'numeric','numeric','numeric','numeric','numeric',
@@ -18,13 +20,26 @@ ds = data[,c(1,4,5,7,8,11:17)] # only relevant data
 dm = melt(ds,id.vars = c("Number.of.states", "Impairment", "Tolerance")) # melted data
 
 attach(ds)
+
+plot.language.byindex = function(dataFrame,rowindex){
+  plot.language(dataFrame[rowindex,]$Speaker.strategy.file,
+                dataFrame[rowindex,]$Hearer.strategy.file)
+}
+
+plot.language.MinMaxProperty = function(dataFrame,colindex){
+  show(names(dataFrame)[colindex])
+  show(summary(dataFrame[,colindex]))
+  p = arrangeGrob(plot.language.byindex(dataFrame,which.min(dataFrame[,colindex])),
+                  plot.language.byindex(dataFrame,which.max(dataFrame[,colindex])))
+}
+
 ```
 
 plot all the relevant variables against each other
 
 ``` {r warning = FALSE, fig.width=12, fig.height=12}
 
-pairs(~ Number.of.states + Impairment + Tolerance + Speaker.entropy + Hearer.entropy + Speaker.convexity +
+pairs(~ Number.of.states + Impairment + Tolerance + Speaker.entropy + Hearer.entropy + 
         Speaker.Voronoiness + Hearer.Voronoiness +
         Speaker.informativity + Hearer.informativity + Expected.utility + Iterations +
         Speaker.Convex.Cat, data=ds)
@@ -59,7 +74,7 @@ We can exclude the informativity notions, because they are highly correlated wit
 ```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
 
 dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Tolerance", "variable"), measurevar="value")
-dsub = subset(dms, !grepl("informativity",dms$variable) )
+dsub = dms
 
 pd <- position_dodge(.01)
 sp = ggplot(dsub, aes(x=Impairment, y=value, colour=factor(Number.of.states))) + 
@@ -87,3 +102,83 @@ however, impairment does seem to speed up learning;
 if learning is faster for some impairment, we should see these effects also in terms of higher EU at earlier stages
 - so we should look for stages before final convergence
 
+Informativity
+-------------
+
+This is the notion from Skyrms. It seems very well-behaved. There is a clear positive correlations between speaker and hearer informativity.
+
+```{r}
+cor.test(data$Speaker.informativity, data$Hearer.informativity)
+qplot(data$Speaker.informativity, data$Hearer.informativity) + geom_smooth(method=lm)
+```
+
+There is a clear negative correlation between impairment and informativity. The remaining variance here must and can be accounted for in terms of Number.of.states (see main plot).
+
+```{r}
+cor.test(data$Impairment, data$Speaker.informativity)
+qplot(data$Impairment, data$Speaker.informativity) + geom_smooth(method=lm)
+```
+
+Let's look at the 50 state case, with impairment 0.1 and Tolerance 0.2.
+
+```{r}
+d = subset(data, Impairment == 0.05 & Number.of.states == 50 & Tolerance == 0.2)
+colindex = which(names(d) == "Speaker.informativity")
+show(plot.language.MinMaxProperty(d,colindex))
+```
+
+How much identity in outcomes?
+------------------------------
+
+I'm curious how much different properties actually differ within each triplet of dependent variables (tolerance, impairment, number of states). We can plot the difference between the maximmal and the minimal value of each property for each triplet of independent variables.
+
+```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
+
+dm = melt(subset(ds,Iterations < 205)[,-which(names(ds) == "Iterations")],
+          id.vars = c("Number.of.states", "Impairment", "Tolerance")) # melted data
+
+MinMaxProperty = ddply(dm, .(Number.of.states, Impairment, Tolerance, variable), 
+                      summarise, 
+                      MaxMinDiff = max(value) - min(value),
+                      MinProperty = min(value), MaxProperty = max(value), MeanProperty = mean(value))
+
+pd <- position_dodge(.01)
+sp = ggplot(MinMaxProperty, aes(x=Impairment, y=MaxMinDiff, colour=factor(Number.of.states))) + 
+     geom_point(position = pd)
+
+sp + facet_grid(variable ~ Tolerance, scales="free")
+```
+
+We can then look at the maximal difference among all properties. (Removing Voronoiness here, because it screws up the y-axis dimensions.)
+
+```{r}
+diffTrials = ddply(subset(MinMaxProperty, variable != "Speaker.Voronoiness" & variable != "Hearer.Voronoiness"),
+                   .(Number.of.states, Impairment, Tolerance), 
+                  summarise, 
+                  diffTrials = max(MaxMinDiff) <=1e-5,
+                  maxDiffTrials = max(MaxMinDiff) )
+
+ggplot(diffTrials, aes(x=Impairment, y=maxDiffTrials, )) + 
+     geom_point() + facet_grid(Number.of.states ~ Tolerance, scales="free")
+
+
+
+```
+
+We see clearly that, all else equal (e.g. fixed tolerance and number of states), impairment 'unifies' evolutionary outcomes. The outcomes are all almost identical (in terms of the recorded properties).
+
+But we should check whether this 'uniformity' is different from just convexity vs. non-convexity.
+
+```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
+
+d = subset(dsub, dsub$variable =="Speaker.Convex.Cat")
+
+pd <- position_dodge(.01)
+sp = ggplot(d, aes(x=Impairment, y=1-value )) + 
+     geom_point(position = pd)
+
+sp + facet_grid(Number.of.states ~ Tolerance, scales="free")
+
+```
+
+By visual inspection, there are differences in evolutionary outcomes that not due to convexity issues.

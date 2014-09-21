@@ -6,6 +6,9 @@ theme_set(theme_bw())
 
 plot.language <- function(speaker.filename, hearer.filename) {
 
+    speaker.filename = paste("~/Desktop/data/svn/vagueness-games/", speaker.filename, sep="",col="")
+    hearer.filename = paste("~/Desktop/data/svn/vagueness-games/" , hearer.filename , sep="",col="")
+  
     speaker <- read.csv(speaker.filename, header=FALSE, colClasses='numeric')
     hearer <- read.csv(hearer.filename, header=FALSE, colClasses='numeric')
 
