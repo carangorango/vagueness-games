@@ -16,6 +16,14 @@ data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140918-142408.varT
                              'numeric','numeric','numeric','numeric','numeric',
                              'numeric','numeric','numeric','character','character'))
 
+# no idea why these numbers are messed up, but this fix seems to solve it
+data$Speaker.Voronoiness = ifelse(data$Speaker.Voronoiness > 1, 
+                                  yes = data$Speaker.Voronoiness / 1000, 
+                                  no = data$Speaker.Voronoiness)
+data$Hearer.Voronoiness = ifelse(data$Hearer.Voronoiness > 1, 
+                                  yes = data$Hearer.Voronoiness / 1000, 
+                                  no = data$Hearer.Voronoiness)
+
 ds = data[,c(1,4,5,7,8,11:17)] # only relevant data
 dm = melt(ds,id.vars = c("Number.of.states", "Impairment", "Tolerance")) # melted data
 
@@ -54,7 +62,8 @@ these two "clusters" are also strongly negatively correlated
 
 ``` {r warning = FALSE, fig.width=7, fig.height=7}
 
-dss = ds[,c(2,3,7,8,9)]
+dss = ds[c("Impairment", "Speaker.informativity", "Hearer.informativity", "Expected.utility",
+           "Speaker.entropy")]
 
 ctab <- cor(dss)
 
@@ -66,10 +75,7 @@ plotcorr(ctab)
 Replotting data for each combination of values of independent variables
 -----------------------------------------------------------------------
 
-We have two independent variables: impairment & number of states. The following plots show the means of all 100 data points for each combination of values for independent variables, together with the estimated confidence intervals.
-
-We can exclude the informativity notions, because they are highly correlated with expected utility scores, and add no extra insight.
-
+We have three independent variables: impairment, tolerance & number of states. The following plots show the means of all 50 data points for each combination of values for independent variables, together with the estimated confidence intervals.
 
 ```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
 
@@ -86,51 +92,28 @@ sp + facet_grid(variable ~ Tolerance, scales="free")
 
 ```
 
-We are particularly interested in the interplay between learning speed and EU. Generally, the fewer states, the faster we reach convergence (unsurprising). But speed to convergence also depends on the impairment value. For values 0.2, 0.3 and 0.5 we see a greatly reduced time to convergence. However, it is also clear that this increase in speed comes with a decline in expected utility. [Notice that the confidence intervals are very tight here, so that we can be sure that there is an almost functional realtionship between convergence speed and EU for each pair of independent parameter values.]
-
-Faster learning by impairment
------------------------------
-
-we want to argue that (small?) levels of impairment can be helpful
-
-unfortunately, impairment and EU are strongly negatively correlated; 
-
-however, impairment does seem to speed up learning;
-
-- that's different from Cailin's stuff, because there learning speed could be argued to be only due to more balls being added per learning step
-
-if learning is faster for some impairment, we should see these effects also in terms of higher EU at earlier stages
-- so we should look for stages before final convergence
-
 Informativity
 -------------
 
-This is the notion from Skyrms. It seems very well-behaved. There is a clear positive correlations between speaker and hearer informativity.
+This is the notion from Skyrms. It seems very well-behaved. There is a clear positive correlation between speaker and hearer informativity.
 
-```{r}
+```{r fig.width=5, fig.height=5}
 cor.test(data$Speaker.informativity, data$Hearer.informativity)
 qplot(data$Speaker.informativity, data$Hearer.informativity) + geom_smooth(method=lm)
 ```
 
 There is a clear negative correlation between impairment and informativity. The remaining variance here must and can be accounted for in terms of Number.of.states (see main plot).
 
-```{r}
+```{r fig.width=5, fig.height=5}
 cor.test(data$Impairment, data$Speaker.informativity)
 qplot(data$Impairment, data$Speaker.informativity) + geom_smooth(method=lm)
 ```
 
-Let's look at the 50 state case, with impairment 0.1 and Tolerance 0.2.
-
-```{r}
-d = subset(data, Impairment == 0.05 & Number.of.states == 50 & Tolerance == 0.2)
-colindex = which(names(d) == "Speaker.informativity")
-show(plot.language.MinMaxProperty(d,colindex))
-```
 
 How much identity in outcomes?
 ------------------------------
 
-I'm curious how much different properties actually differ within each triplet of dependent variables (tolerance, impairment, number of states). We can plot the difference between the maximmal and the minimal value of each property for each triplet of independent variables.
+It turns out that there is surprisingly little variance in the recorded values of dependent variables, at least for some triples of independent variables (tolerance, impairment, number of states). We can plot the difference between the maximmal and the minimal value of each property for each triplet of independent variables.
 
 ```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
 
@@ -149,10 +132,10 @@ sp = ggplot(MinMaxProperty, aes(x=Impairment, y=MaxMinDiff, colour=factor(Number
 sp + facet_grid(variable ~ Tolerance, scales="free")
 ```
 
-We can then look at the maximal difference among all properties. (Removing Voronoiness here, because it screws up the y-axis dimensions.)
+We can then look at the maximal difference among all properties. (This works because all relevant dependent measures scale inbetween 0 and 1.)
 
 ```{r}
-diffTrials = ddply(subset(MinMaxProperty, variable != "Speaker.Voronoiness" & variable != "Hearer.Voronoiness"),
+diffTrials = ddply(MinMaxProperty,
                    .(Number.of.states, Impairment, Tolerance), 
                   summarise, 
                   diffTrials = max(MaxMinDiff) <=1e-5,
@@ -165,11 +148,11 @@ ggplot(diffTrials, aes(x=Impairment, y=maxDiffTrials, )) +
 
 ```
 
-We see clearly that, all else equal (e.g. fixed tolerance and number of states), impairment 'unifies' evolutionary outcomes. The outcomes are all almost identical (in terms of the recorded properties).
+We see clearly that, all else equal (e.g. fixed tolerance and number of states), impairment 'unifies' evolutionary outcomes. When impairment is at least 0.1, outcomes are all almost identical (in terms of the recorded properties).
 
-But we should check whether this 'uniformity' is different from just convexity vs. non-convexity.
+Notice that this 'uniformity' is different from just convexity vs. non-convexity!
 
-```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
+```{r message=FALSE, warning=FALSE, fig.width=5, fig.height=5}
 
 d = subset(dsub, dsub$variable =="Speaker.Convex.Cat")
 
@@ -181,4 +164,26 @@ sp + facet_grid(Number.of.states ~ Tolerance, scales="free")
 
 ```
 
-By visual inspection, there are differences in evolutionary outcomes that not due to convexity issues.
+There are strategies whose speaker strategies are all convex (e.g. for ns = 6, tolerance = 0.3 and impairment = 0.05), but whose other properties differ. Here are two strategies from that class of independent variable values that differ maximally in terms of expected utility.
+
+```{r message=FALSE, warning=FALSE, fig.width=7, fig.height=7}
+
+d = subset(data, Number.of.states == 6 & Tolerance == 0.3 &
+             Impairment == 0.05 & Speaker.Convex.Cat == 1)
+
+show(plot.language.MinMaxProperty(d, which(names(d) == "Expected.utility")))
+
+```
+
+In contrast, if we look at a "uniform" class of independent parameter values, such as with ns = 50, tolerance = 0.1, impairment = 0.1, then the strategies whose EU are minimal and or maximal in that class don't differ optically at all (modulo arbitrariness of message use).
+
+```{r message=FALSE, warning=FALSE, fig.width=7, fig.height=7}
+
+d = subset(data, Number.of.states == 50 & Tolerance == 0.1 &
+             Impairment == 0.1)
+
+show(plot.language.MinMaxProperty(d, which(names(d) == "Expected.utility")))
+
+```
+
+What this suggests is that the differences in some of the groups might be due to non-evenly splitting the interval. Impairment leads to even splits and therefore to uniformity of evolutionary outcomes.
