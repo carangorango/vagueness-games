@@ -167,7 +167,7 @@ NMessages = 2
 Dynamics = 'replicator dynamics'
 
 Impairment = 0.2
-Tolerance = 0.025
+Tolerance = 0.05
 
 convThreshold = 0.001
 rounds = 200

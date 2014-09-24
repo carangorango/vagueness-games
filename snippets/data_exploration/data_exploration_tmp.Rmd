@@ -9,6 +9,7 @@ require('reshape2')
 require('plyr')
 source('~/Desktop/data/svn/programming/R/helpers/helpers.R')
 source('~/Desktop/data/svn/vagueness-games/data-analysis.R')
+source('~/Desktop/data/svn/vagueness-games/helper_functions.R')
 
 data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140918-142408.varTolerance.csv', 
                 colClasses=c('numeric','factor','numeric','numeric','numeric',
@@ -29,17 +30,7 @@ dm = melt(ds,id.vars = c("Number.of.states", "Impairment", "Tolerance")) # melte
 
 attach(ds)
 
-plot.language.byindex = function(dataFrame,rowindex){
-  plot.language(dataFrame[rowindex,]$Speaker.strategy.file,
-                dataFrame[rowindex,]$Hearer.strategy.file)
-}
 
-plot.language.MinMaxProperty = function(dataFrame,colindex){
-  show(names(dataFrame)[colindex])
-  show(summary(dataFrame[,colindex]))
-  p = arrangeGrob(plot.language.byindex(dataFrame,which.min(dataFrame[,colindex])),
-                  plot.language.byindex(dataFrame,which.max(dataFrame[,colindex])))
-}
 
 ```
 
