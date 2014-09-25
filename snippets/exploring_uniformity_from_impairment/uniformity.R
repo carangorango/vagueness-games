@@ -216,7 +216,9 @@ meanEUs = ddply(data,
                    .(Number.of.states, Impairment, Tolerance), 
                    summarise, 
                    Speaker.meanEU = mean(Speaker.meanEU),
-                   Hearer.meanEU = mean(Hearer.meanEU))
+                   Hearer.meanEU = mean(Hearer.meanEU),
+                    convexProportion = mean(Speaker.Convex.Cat),
+                    meanEU = mean(Expected.utility))
 
 # mean EUs of speaker and hearer strategies are pretty much perfectly aligned
 qplot(meanEUs$Speaker.meanEU, meanEUs$Hearer.meanEU)
@@ -227,17 +229,19 @@ sPlot = ggplot(meanEUs, aes(x=Impairment, y=Speaker.meanEU)) +
   geom_point() + facet_grid(Number.of.states ~ Tolerance) + geom_line() +
   ylab("average EU against group")
 
-show(sPlot)
+# show(sPlot)
 
 # Combine distance and average Group EU
 
-D$Speaker.meanEU = meanEUs$Speaker.meanEU
+D$withinGroupEU = meanEUs$Speaker.meanEU
+D$individualEU = meanEUs$meanEU
+D$convexProportion = meanEUs$convexProportion
 
 Dmelt = melt(D, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
 
 combPlot = ggplot(Dmelt, aes(x=Impairment, y=value, color = variable)) + 
   geom_point() + facet_grid(Number.of.states ~ Tolerance) + geom_line()
 
-show(sPlot)
+# show(combPlot)
 
 
