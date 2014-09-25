@@ -1,5 +1,5 @@
 computeD = FALSE
-computeEU = TRUE
+computeEU = FALSE
 
 require('plyr')
 require('reshape2')
@@ -106,21 +106,21 @@ hearer.strategy.distance = function(data = data, i , j){
 # 
 # # compute distances for speaker strategies
 # 
-# ds = data[,c(1,4,5,19)] # only relevant "data" is speaker strategy file name
-# # ds = subset(ds,Number.of.states == 50 & Impairment == 0 & Tolerance <= 0.3)
-# dm = melt(ds,id.vars = c("Number.of.states", "Impairment", "Tolerance")) # melted data
-# 
-# if (computeD == TRUE){
-#   D = ddply(dm, .(Number.of.states, Impairment, Tolerance), summarise, 
-#             inGroupDistance = speaker.vector.distance(value))
-# } else{
-#   D = read.csv("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/D.csv")
-# }
-# 
-# pd <- position_dodge(.01)
-# sp = ggplot(D, aes(x=Impairment, y=inGroupDistance)) + 
-#   geom_point(position = pd) + geom_line()
-# sp + facet_grid(Number.of.states ~ Tolerance, scales="free")
+ds = data[,c(1,4,5,19)] # only relevant "data" is speaker strategy file name
+# ds = subset(ds,Number.of.states == 50 & Impairment == 0 & Tolerance <= 0.3)
+dm = melt(ds,id.vars = c("Number.of.states", "Impairment", "Tolerance")) # melted data
+
+if (computeD == TRUE){
+  D = ddply(dm, .(Number.of.states, Impairment, Tolerance), summarise, 
+            inGroupDistance = speaker.vector.distance(value))
+} else{
+  D = read.csv("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/D.csv")
+}
+
+pd <- position_dodge(.01)
+sp = ggplot(D, aes(x=Impairment, y=inGroupDistance)) + 
+  geom_point(position = pd) + geom_line()
+sp + facet_grid(Number.of.states ~ Tolerance)
 
 # compute average EU between different strategies from the same parameter triple
 
@@ -205,12 +205,12 @@ if (computeEU){
   }
   
   close(pb)
+  write.csv(data, paste("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/dataSec",Sys.time() , ".csv", sep = "", collapse = ""))
 } else{
-  data$Speaker.meanEU = 0
-  data$Hearer.meanEU = 0
+  data = read.csv("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/dataSec.csv")
 }
 
-write.csv(data, "snippets//exploring_uniformity_from_impairment//dataSec2.csv")
+
 
 meanEUs = ddply(data,
                    .(Number.of.states, Impairment, Tolerance), 
@@ -218,6 +218,26 @@ meanEUs = ddply(data,
                    Speaker.meanEU = mean(Speaker.meanEU),
                    Hearer.meanEU = mean(Hearer.meanEU))
 
-ggplot(meanEUs, aes(x=Impairment, y=Speaker.meanEU)) + 
-  geom_point() + facet_grid(Number.of.states ~ Tolerance, scales="free")
+# mean EUs of speaker and hearer strategies are pretty much perfectly aligned
+qplot(meanEUs$Speaker.meanEU, meanEUs$Hearer.meanEU)
+
+# it therefore suffices to show only the sender's part
+
+sPlot = ggplot(meanEUs, aes(x=Impairment, y=Speaker.meanEU)) + 
+  geom_point() + facet_grid(Number.of.states ~ Tolerance) + geom_line() +
+  ylab("average EU against group")
+
+show(sPlot)
+
+# Combine distance and average Group EU
+
+D$Speaker.meanEU = meanEUs$Speaker.meanEU
+
+Dmelt = melt(D, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
+
+combPlot = ggplot(Dmelt, aes(x=Impairment, y=value, color = variable)) + 
+  geom_point() + facet_grid(Number.of.states ~ Tolerance) + geom_line()
+
+show(sPlot)
+
 
