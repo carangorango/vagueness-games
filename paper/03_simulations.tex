@@ -1,12 +1,12 @@
 \section{Exploring the RDD}
 
 The previous section showed that the \rdd can be conceptualized as a
-two-step procedure. We first calculate where the replicator dynamic
-would take us, and then apply diffusion. Since the latter step is the
+two-step procedure: we first calculate where the replicator dynamic
+would take us, then apply diffusion. Since the latter step is the
 novel addition, we should look at diffusion in isolation to understand
 what the \rdd does. This is what we will do in
 Section~\ref{sec:iterated-diffusion}. Section~\ref{sec:simulations}
-\dots does something else \dots
+ then explores how diffusion and fitness-based selection interact.
 
 \subsection{(Iterated) Diffusion}
 \label{sec:iterated-diffusion}
@@ -31,16 +31,16 @@ similarity function, as described by
  \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \impairment^2} \right ) \,,& \textrm{otherwise} \\
     \end{cases}
 \end{align}
-where $\impairment >= 0$ is an imprecision parameter. When $\impairment=0$ agents
-perfectly discriminate between states; when $\impairment \rightarrow
-\infty$ agents cannot discriminate states at
-all. Figure~\ref{fig:NosofskySim} gives an impression of
-Nosofsky-similarity for different parameter values. Other
-formalizations of perceptual similarity are possible, including ones
-that allow for different discriminability in different areas of the
-state space, but we stick with Nosofsky's similarity function for the
-time being, because it is a mathematically simple, yet established
-notion in mathematical psychology.
+where $\impairment >= 0$ is an imprecision or indiscriminability
+parameter. When $\impairment=0$ agents perfectly discriminate between
+states; when $\impairment \rightarrow \infty$ agents cannot
+discriminate states at all. Figure~\ref{fig:NosofskySim} gives an
+impression of Nosofsky-similarity for different parameter
+values. Other formalizations of perceptual similarity are possible,
+including ones that allow for different discriminability in different
+areas of the state space, but we stick with Nosofsky's similarity
+function for the time being, because it is a mathematically simple,
+yet established notion in mathematical psychology.
 
 \begin{figure}
   \centering
@@ -48,8 +48,9 @@ notion in mathematical psychology.
   \includegraphics[width=\textwidth]{plots/NosofskySim.pdf}
 
   \caption{Examples for Nosofsky-similarity (non-normalized) and
-    derived probability of state confusion (normalized) for different
-    values of $\impairment$ and $\card{\States} = 50$.}
+    derived probability of state confusion (normalized) for
+    $\card{\States} = 50$ and different
+    values of $\impairment$.}
   \label{fig:NosofskySim}
 \end{figure}
 
@@ -88,23 +89,24 @@ and receiver strategy after one or several rounds of iterated
 application of diffusion, for different values of perceptual
 imprecision $\impairment$.
 
-The example in Figure~\ref{fig:confusion-SenRec} shows that iterated
-diffusion leads to sender and receiver behavior that is the same at
-all choice points. After $n$ steps of diffusion an initial sender
-strategy $\Sstrat$ will be $C^n \Sstrat$, and an initial receiver
-strategy will be $\Rstrat C^n$. If we assume that $\impairment > 0$ and so
-$C$ is a positive row-stochastic matrix (each state could in principle
-be confused as any other state, albeit with possibly a very low
-probability), it follows from the Perron-Frobenius theorem that the
-limit $C^\infty = \lim_{n \rightarrow \infty} C^n$ exists (it is the
-Perron-projection) and all of its rows are identical. That is why, in
-the limit of iterated diffusion, $C^\infty S$ has identical rows
-(messages are sent with the same probability in each state), and $R
-C^\infty$ likewise has identical rows (every message is interpreted
-equally). All of this is in line with the intuition that diffusion of
-behavior under confusion of states iteratively equalizes behavior for
-similar states; if all states can be confused for one another in
-principle, behavior smoothes out entirely in the limit.
+The example in Figure~\ref{fig:confusion-SenRec} suggests that
+iterated diffusion leads to sender and receiver behavior that is the
+same at all choice points. This holds in general. After $n$ steps of
+diffusion an initial sender strategy $\Sstrat$ will be $C^n \Sstrat$,
+and an initial receiver strategy $\Rstrat$ will be $\Rstrat C^n$. If
+we assume that $\impairment > 0$, $C$ is a positive row-stochastic
+matrix (each state could in principle be confused as any other state,
+albeit with possibly a very low probability). It then follows from the
+Perron-Frobenius theorem that the limit $C^\infty = \lim_{n
+  \rightarrow \infty} C^n$ exists (it is the Perron-projection) and
+all of its rows are identical. That is why, in the limit of iterated
+diffusion, $C^\infty S$ has identical rows (messages are sent with the
+same probability in each state), and $R C^\infty$ likewise has
+identical rows (every message is interpreted equally). All of this is
+in line with the intuition that diffusion of behavior under confusion
+of states iteratively equalizes behavior for similar states; if all
+states can be confused for one another in principle, behavior smoothes
+out entirely in the limit.
 
 \begin{figure}
   \centering
@@ -128,11 +130,87 @@ replicator dynamics.
 \subsection{Exploring the replicator diffusion dynamics}
 \label{sec:simulations}
 
+The main question we should address is whether diffusion and
+fitness-based replication reasonably interact, and if so, whether the
+inclusion of diffusion has any noteworthy effects on the evolving
+meaning of signals. Clearly, if $\impairment = 0$, the \rdd reduces to
+the \rd. If $\impairment \rightarrow \infty$, the diffusion component
+takes over and the \rdd reduces to the trivial iterated diffusion that
+we looked at in the previous section. For reasonable, in-between
+levels of imprecision $\impairment$, the \rdd leads to communicatively
+successful, yet vague signal meaning. Moreover, suitable levels of
+imprecision can have further accelerating and, therefore, unifying
+effects on meaning evolution.
+
+To explore the \rdd, we looked at numerical simulations in sim-max
+games with two signals whose states were evenly spaced elements of the
+unit interval. The state space always included 0 and 1. We assumed
+that priors were flat: $\Pr(\state) = \Pr(\state')$ for all $\state,
+\state'$. As for utility functions, we implemented another
+Nosofsky-style function:
+\begin{align}
+  \label{eq:NosofskyUtil}
+  \util(\mystate{i}, \mystate{j} \myts ; \myts \toler) =
+      \begin{cases}
+    1 & \textrm{if } \impairment = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
+    0 & \textrm{if } \impairment = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
+ \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \toler^2} \right ) \,,& \textrm{otherwise} \\
+    \end{cases}
+\end{align}
+The tolerance parameter $\toler$ models the amount of tolerable
+pragmatic slack or communicative imprecision. For This choice of
+utility function is governed partly by convenience in parallel to the
+similarity function, but also because it has, as we believe, the right
+general properties for a communicative payoff function. Unlike
+utilities that are, say, linearly or quadratically decreasing
+\citep[as used
+by][]{JagerMetzger2011:Voronoi-Languag,FrankeJager2010:Vagueness-Signa},
+utilities that are exponentially decreasing in negative quadratic
+distance can model situations where a small amount of imprecision in
+communication is tolerable, whereas similarly small differences in
+intolerably off interpretations matter very little, with a smooth
+transition between these regimes.
+
+\begin{figure}
+  \centering
+  \subfloat[][$\ns = 90$, $\toler = 0.2$, $\impairment = 0.1$]{
+    \includegraphics[width = 0.5\textwidth]{plots/strat_example_NS-90_tol-2_imp1_ind3501.pdf}
+  }
+  \subfloat[][$\ns = 90$, $\toler = 0.05$, $\impairment = 0$]{
+    \includegraphics[width = 0.5\textwidth]{plots/strat_example_NS-90_tol-005_imp0_ind3002.pdf}
+  }
+
+  \subfloat[][$\ns = 10$, $\toler = 0.05$, $\impairment = 0$]{
+    \includegraphics[width = 0.5\textwidth]{plots/strat_example_NS-10_tol-005_imp0_ind1001.pdf}
+  }
+  \subfloat[][$\ns = 6$, $\toler = 0.05$, $\impairment = 0.05$]{
+    \includegraphics[width = 0.5\textwidth]{plots/strat_example_NS-10_tol-005_imp005_ind1201.pdf}
+  }
+  \caption{Example strategies under \rdd at stopping time of our simulations.}
+  \label{fig:example_strats}
+\end{figure}
+
+We ran 50 trials of the \rdd, starting with randomly samples sender
+and receiver strategies, for each triplet of independent parameter
+values: $\ns = \card{T} \in \set{6, 10, 50, 90}$, $\impairment \in
+\set{0, 0.05, 0.1, 0.2, 0.3}$, $\toler \in \set{0.05, 0.1, 0.2,
+  0.3}$. Each trial ran for a maximum of 200 update steps of the
+\rdd. This may not be enough to guarantee convergence to the eventual
+attracting state, but we were interested especially in whether the
+dynamics could lead to reasonable outcomes in reasonable time. A trial
+was considered converged if the total amount of change between
+strategies before and after the current \rdd step was smaller than
+0.001. Examples for the resulting strategy pairs at stopping time are
+given in Figure~\ref{fig:example_strats}.
+
 \begin{itemize}
-\item utility function: another Nosofsky-style function
-\item get data for different set sizes, impairment and utility parameters
-\item 
+\item we see some interesting stuff in these strategies
+\item now we look at the whole bunch
+\item introduce some measures
 \end{itemize}
+
+
+
 
 \newpage
 
@@ -243,47 +321,47 @@ Expected utility is normalized by dividing by the expected utility of the theore
 \subsubsection{Results}
 In order to visualize the impact of the impairment factor on the outcome of simulations, we plot in Figure~\ref{fig:metrics-boxplots} the distribution of each of the measurements per impairment value.
 %
-\begin{figure}
-        \centering
-        \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Speaker-entropy-20140813-194306}
-                \caption{Entropy of sender strategy.}
-%                \label{fig:gull}
-        \end{subfigure}
-        \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Hearer-entropy-20140813-194306}
-                \caption{Entropy of receiver strategy.}
-        \end{subfigure}
+% \begin{figure}
+%         \centering
+%         \begin{subfigure}{0.45\textwidth}
+%                 \includegraphics[width=\textwidth]{plots/Speaker-entropy-20140813-194306}
+%                 \caption{Entropy of sender strategy.}
+% %                \label{fig:gull}
+%         \end{subfigure}
+%         \begin{subfigure}{0.45\textwidth}
+%                 \includegraphics[width=\textwidth]{plots/Hearer-entropy-20140813-194306}
+%                 \caption{Entropy of receiver strategy.}
+%         \end{subfigure}
 
-        \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Speaker-informativity-20140813-194306}
-                \caption{Informativity of sender strategy.}
-        \end{subfigure}
-        \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Hearer-informativity-20140813-194306}
-                \caption{Informativity of receiver strategy.}
-        \end{subfigure}
+%         \begin{subfigure}{0.45\textwidth}
+%                 \includegraphics[width=\textwidth]{plots/Speaker-informativity-20140813-194306}
+%                 \caption{Informativity of sender strategy.}
+%         \end{subfigure}
+%         \begin{subfigure}{0.45\textwidth}
+%                 \includegraphics[width=\textwidth]{plots/Hearer-informativity-20140813-194306}
+%                 \caption{Informativity of receiver strategy.}
+%         \end{subfigure}
 
-        \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Speaker-Voronoiness-20140813-194306}
-                \caption{Voronoiness of sender strategy.}
-        \end{subfigure}
-        \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Hearer-Voronoiness-20140813-194306}
-                \caption{Voronoiness of receiver strategy.}
-        \end{subfigure}
+%         \begin{subfigure}{0.45\textwidth}
+%                 \includegraphics[width=\textwidth]{plots/Speaker-Voronoiness-20140813-194306}
+%                 \caption{Voronoiness of sender strategy.}
+%         \end{subfigure}
+%         \begin{subfigure}{0.45\textwidth}
+%                 \includegraphics[width=\textwidth]{plots/Hearer-Voronoiness-20140813-194306}
+%                 \caption{Voronoiness of receiver strategy.}
+%         \end{subfigure}
 
-        \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Expected-utility-20140813-194306}
-                \caption{Expected utility.}
-        \end{subfigure}
-        \begin{subfigure}{0.45\textwidth}
-                \includegraphics[width=\textwidth]{plots/Iterations-20140813-194306}
-                \caption{Number of iterations until convergence.}
-        \end{subfigure}
-        \caption{Boxplots of metrics per impairment value.}
-        \label{fig:metrics-boxplots}
-\end{figure}
+%         \begin{subfigure}{0.45\textwidth}
+%                 \includegraphics[width=\textwidth]{plots/Expected-utility-20140813-194306}
+%                 \caption{Expected utility.}
+%         \end{subfigure}
+%         \begin{subfigure}{0.45\textwidth}
+%                 \includegraphics[width=\textwidth]{plots/Iterations-20140813-194306}
+%                 \caption{Number of iterations until convergence.}
+%         \end{subfigure}
+%         \caption{Boxplots of metrics per impairment value.}
+%         \label{fig:metrics-boxplots}
+% \end{figure}
 %
 Most trends are quite clear.
 Entropy seems to increase with higher impairment values for both sender and receiver.

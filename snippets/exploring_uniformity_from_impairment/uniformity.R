@@ -25,29 +25,6 @@ strategy.distance = function(P,Q){
   sum(sapply(1:nc, function(x) return(HD(P[x,], Q[x,]) ) ) ) / nc 
 }
 
-# Reading a strategy.
-
-read.speaker.strategy = function(dataFrame = data, rowIndex){
-  speaker.filename = paste("~/Desktop/data/svn/vagueness-games/", 
-                           dataFrame[rowIndex,]$Speaker.strategy.file, sep="",col="")
-  speaker <- prop.table(as.matrix(read.csv(speaker.filename, header=FALSE, colClasses='numeric')),1)
-  return(as.matrix(speaker))
-}
-
-read.hearer.strategy = function(dataFrame = data, rowIndex){
-  hearer.filename = paste("~/Desktop/data/svn/vagueness-games/", 
-                           dataFrame[rowIndex,]$Hearer.strategy.file, sep="",col="")
-  hearer <- prop.table(as.matrix(read.csv(hearer.filename, header=FALSE, colClasses='numeric')),1)
-  return(as.matrix(hearer))
-}
-
-read.strategy.byString = function(String){
-  speaker.filename = paste("~/Desktop/data/svn/vagueness-games/", 
-                           String, sep="",col="")
-  speaker <- prop.table(as.matrix(read.csv(speaker.filename, header=FALSE, colClasses='numeric')),1)
-  return(as.matrix(speaker))
-}
-
 
 # Get HD-strategy distance between two strategies.
 
