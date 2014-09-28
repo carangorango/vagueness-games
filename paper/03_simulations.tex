@@ -123,31 +123,28 @@ out entirely in the limit.
   \label{fig:confusion-SenRec}
 \end{figure}
 
-Now that we understand better what diffusion does, let us look at how
-diffusion interacts with optimization of behavior, as described by the
-replicator dynamics.
-
 \subsection{Exploring the replicator diffusion dynamics}
 \label{sec:simulations}
 
-The main question we should address is whether diffusion and
-fitness-based replication reasonably interact, and if so, whether the
-inclusion of diffusion has any noteworthy effects on the evolving
-meaning of signals. Clearly, if $\impairment = 0$, the \rdd reduces to
-the \rd. If $\impairment \rightarrow \infty$, the diffusion component
-takes over and the \rdd reduces to the trivial iterated diffusion that
-we looked at in the previous section. For reasonable, in-between
-levels of imprecision $\impairment$, the \rdd leads to communicatively
-successful, yet vague signal meaning. Moreover, suitable levels of
-imprecision can have further accelerating and, therefore, unifying
-effects on meaning evolution.
+Now that we understand better what diffusion does, let us look at how
+diffusion interacts with optimization of behavior, as described by the
+replicator dynamics. The main question we should address is whether
+diffusion and fitness-based replication reasonably interact, and if
+so, whether the inclusion of diffusion has any noteworthy effects on
+the evolving meaning of signals. Clearly, if $\impairment = 0$, the
+\rdd reduces to the \rd. If $\impairment \rightarrow \infty$, the
+diffusion component takes over and the \rdd reduces to the trivial
+iterated diffusion that we looked at in the previous section. For
+reasonable in-between levels of imprecision $\impairment$, the \rdd
+leads to communicatively successful, yet vague signal
+meaning. Moreover, suitable levels of imprecision can have further
+accelerating and, therefore, unifying effects on meaning evolution.
 
 To explore the \rdd, we looked at numerical simulations in sim-max
 games with two signals whose states were evenly spaced elements of the
-unit interval. The state space always included 0 and 1. We assumed
-that priors were flat: $\Pr(\state) = \Pr(\state')$ for all $\state,
-\state'$. As for utility functions, we implemented another
-Nosofsky-style function:
+unit interval that always included 0 and 1. We assumed that priors
+were flat: $\Pr(\state) = \Pr(\state')$ for all $\state, \state'$. As
+for utility functions, we implemented another Nosofsky-style function:
 \begin{align}
   \label{eq:NosofskyUtil}
   \util(\mystate{i}, \mystate{j} \myts ; \myts \toler) =
@@ -158,8 +155,8 @@ Nosofsky-style function:
     \end{cases}
 \end{align}
 The tolerance parameter $\toler$ models the amount of tolerable
-pragmatic slack or communicative imprecision. For This choice of
-utility function is governed partly by convenience in parallel to the
+pragmatic slack or communicative imprecision. This choice of utility
+function is governed partly by convenience in parallel to the
 similarity function, but also because it has, as we believe, the right
 general properties for a communicative payoff function. Unlike
 utilities that are, say, linearly or quadratically decreasing
@@ -169,28 +166,41 @@ utilities that are exponentially decreasing in negative quadratic
 distance can model situations where a small amount of imprecision in
 communication is tolerable, whereas similarly small differences in
 intolerably off interpretations matter very little, with a smooth
-transition between these regimes.
+transition between these regimes \citep{OConnor2013:The-Evolution-o}.
 
 \begin{figure}
   \centering
-  \subfloat[][$\ns = 90$, $\toler = 0.2$, $\impairment = 0.1$]{
-    \includegraphics[width = 0.5\textwidth]{plots/strat_example_NS-90_tol-2_imp1_ind3501.pdf}
-  }
-  \subfloat[][$\ns = 90$, $\toler = 0.05$, $\impairment = 0$]{
-    \includegraphics[width = 0.5\textwidth]{plots/strat_example_NS-90_tol-005_imp0_ind3002.pdf}
-  }
 
-  \subfloat[][$\ns = 10$, $\toler = 0.05$, $\impairment = 0$]{
-    \includegraphics[width = 0.5\textwidth]{plots/strat_example_NS-10_tol-005_imp0_ind1001.pdf}
-  }
-  \subfloat[][$\ns = 6$, $\toler = 0.05$, $\impairment = 0.05$]{
-    \includegraphics[width = 0.5\textwidth]{plots/strat_example_NS-10_tol-005_imp005_ind1201.pdf}
-  }
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/strat_example_NS-90_tol-01_imp0_ind3098.pdf}
+    \caption{$\ns = 90$, $\toler = 0.1$, $\impairment = 0$}
+    \label{fig:example_stratsA}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/strat_example_NS-90_tol-01_imp01_ind3452.pdf}
+    \caption{$\ns = 90$, $\toler = 0.1$, $\impairment = 0.1$}
+    \label{fig:example_stratsB}
+  \end{subfigure}
+
+  % \begin{subfigure}[]{0.45\textwidth}
+  %   \includegraphics[width=\textwidth]{plots/strat_example_NS-10_tol-005_imp0_ind1001.pdf}
+  %   \caption{$\ns = 10$, $\toler = 0.1$, $\impairment = 0$}
+  %   \label{fig:example_stratsC}
+  % \end{subfigure}
+  % \hfill
+  % \begin{subfigure}[]{0.45\textwidth}
+  %   \includegraphics[width=\textwidth]{plots/strat_example_NS-10_tol-005_imp005_ind1201.pdf}
+  %   \caption{$\ns = 10$, $\toler = 0.1$, $\impairment = 0.05$}
+  %   \label{fig:example_stratsD}
+  % \end{subfigure}
+
+
   \caption{Example strategies under \rdd at stopping time of our simulations.}
   \label{fig:example_strats}
 \end{figure}
 
-We ran 50 trials of the \rdd, starting with randomly samples sender
+We ran 50 trials of the \rdd, starting with randomly sampled sender
 and receiver strategies, for each triplet of independent parameter
 values: $\ns = \card{T} \in \set{6, 10, 50, 90}$, $\impairment \in
 \set{0, 0.05, 0.1, 0.2, 0.3}$, $\toler \in \set{0.05, 0.1, 0.2,
@@ -198,64 +208,97 @@ values: $\ns = \card{T} \in \set{6, 10, 50, 90}$, $\impairment \in
 \rdd. This may not be enough to guarantee convergence to the eventual
 attracting state, but we were interested especially in whether the
 dynamics could lead to reasonable outcomes in reasonable time. A trial
-was considered converged if the total amount of change between
-strategies before and after the current \rdd step was smaller than
-0.001. Examples for the resulting strategy pairs at stopping time are
-given in Figure~\ref{fig:example_strats}.
-
-\begin{itemize}
-\item we see some interesting stuff in these strategies
-\item now we look at the whole bunch
-\item introduce some measures
-\end{itemize}
-
-
-
-
-\newpage
-
-
-
-In order to study the long-term behavior of the noise-perturbed sim-max games, we conducted computer simulations for different combinations of initial parameters.
-Namely, we were interested in investigating the impact of different values of impairment and its relation with the size of the state space.
-\mytodo{JPC}{Justify why size of state space is interesting}
-
-\subsubsection{Metrics}
-\label{sec:metrics}
-To be able to quantitively analyze the results of our simulations, we define a number of metrics to capture different characteristics of sim-max languages.
-
-\paragraph{Entropy.}
-This classic information-theoretic metric captures the amount of uncertainty in a signaling strategy.
-The most natural way to define it is in terms of mixed strategies rather than behavioral strategies.
-Let us recall that mixed sender (receiver) strategies are functions $\Smixed \in \Delta(\Messgs^\States)$ ($\Rmixed \in (\Acts^\Messgs)$).
-We can define the entropy of a sender strategy as
+was considered converged and stopped before the maximum of 200 rounds
+if the total amount of change between strategies before and after the
+current \rdd step was smaller than 0.001, i.e., if both:\todo{say what
+the prime means}
 \begin{align*}
-  E(\Smixed) = \sum_{\Spure \in \Messgs^\States} \Smixed(\Spure) \cdot \log(\Smixed(\Spure))
-\end{align*} 
-and the entropy of a receiver strategy as
-\begin{align*}
-  E(\Rmixed) = \sum_{\Rpure \in \Acts^\Messgs} \Rmixed(\Rpure) \cdot \log(\Rmixed(\Rpure)) \,.
-\end{align*} 
-These metrics are computationally expensive to calculate, since the size of the domain over which the sum is computed grows exponentially with the number of choice points.
-Therefore, we converted\footnote{See Appendix~\ref{sec:proofs}.} the above definitions into equivalent metrics defined in terms of behavioral strategies.
-These are as follows:
-\begin{align*}
-  E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs} \Sstrat(\messg \probbar \state) \cdot \log(\Sstrat(\messg \probbar \state))
-\end{align*} 
-\begin{align*}
-  E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\act \probbar \messg) \cdot \log(\Rstrat(\act \probbar \messg)) \,.
+  \sum_{\state \in \States} \sum_{\messg \in \Messgs} \left|
+    \Sstrat^\prime(\state,\messg) - \Sstrat(\state,\messg) \right| <
+  0.001 & \text{\ \ and} &
+  \sum_{\messg \in \Messgs} \sum_{\state \in \States} \left| \Rstrat^\prime(\messg,\state) - \Rstrat(\messg,\state) \right| < 0.001 \,.
 \end{align*}
-The metrics are lower bounded by $0$ and upper bounded by, respectively, $\log(|\Messgs^\States|) = |\States| \cdot \log(|\Messgs|)$ and $\log(|\Acts^\Messgs|) = |\Messgs| \cdot \log(|\Acts|)$, thus we can normalize them by dividing by these values.
+Representative examples for the resulting strategy pairs at stopping
+time are given in Figure~\ref{fig:example_strats}.
 
-\paragraph{Informativity.}
-\mytodo{JPC}{Informativity is perhaps a bad name for the receiver...}
-The quantity of information in a signal is an old notion that also goes back to the start of information theory.
-Skyrms~\citet[ch.~3]{Skyrms2010:Signals} discusses its use in the context of signaling games.
-The main idea is that we can quantify the amount of information about a state $\state$ in a message $\messg$ via the relation between the probability of the state given the message $\Pr(\state \,|\, \messg)$ and the unconditional probability of the state $\Pr(\state)$.
-Following Bayes' theorem, we can express $\Pr(\state \,|\, \messg)$ as $\frac{\Pr(\state) \cdot \Pr(\messg \,|\, \state)}{\Pr(\messg)}$.
-We then have $\Pr(\messg \,|\, \state) = \Sstrat(\state,\messg)$ and $\Pr(\messg) = \sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)$.
-Finally, we equate sender infomativity with the average overall information about states in each signal.
-Based on the definition by Skyrms~\citet[p.~36]{Skyrms2010:Signals}, and the considerations above, we define sender informativity as follows:
+Figure~\ref{fig:example_stratsA} shows a strategy pair at stopping
+time with 90 states, tolerance $\toler = 0.1$ and imprecision
+$\impairment = 0$. The latter means that the trial was effectively a
+plain application of the \rd. Noteworthily, the given sender strategy
+approximate a pure sender strategy that crisply partitions the state
+space into non-convex sets. The irregular shape of the receiver
+strategy shows clearly that the pictured strategy pair has not yet
+reached a dynamically stable state under the \rd. Indeed, the trial
+did not converge in our technical sense, but was obtained by stopping
+after 200 rounds of iterated \rdd. In contrast, the outcome of a trial
+with identical parameters, except that imprecision was $\impairment =
+0.1$, is shown in Figure~\ref{fig:example_stratsB} had converged after
+98 rounds of iterated \rdd. The sender strategy shows a smooth
+blending from one ``category'' to the other, and the receiver's
+interpretations are rather extended curves, peaking at a central point
+in the relevant ``categories''. What these examples show is that (i)
+(speaker) strategies can approach non-convex strategies and that (ii)
+inclusion of imprecision can lead to seemingly well-behaved, yet vague
+strategies in the sense that we are after.
+
+To explore further what happened in all of our 50 trials for each
+parameter triple, we defined a small number of metrics that aim to
+capture numerically how vague, communicatively efficient and generally
+well-structured the resulting strategy pairs were.
+
+
+
+\paragraph{Entropy.} This classic information-theoretic metric captures
+the amount of uncertainty in a signaling strategy.  The most natural
+way to define it is in terms of mixed strategies rather than
+behavioral strategies.  Let us recall that mixed sender (receiver)
+strategies are functions $\Smixed \in \Delta(\Messgs^\States)$
+($\Rmixed \in (\Acts^\Messgs)$).  We can define the entropy of a
+sender and receiver strategy as
+\begin{align*}
+  E(\Smixed) & = \sum_{\Spure \in \Messgs^\States} \Smixed(\Spure) \cdot
+  \log(\Smixed(\Spure)) & 
+  E(\Rmixed) & = \sum_{\Rpure \in \Acts^\Messgs} \Rmixed(\Rpure) \cdot \log(\Rmixed(\Rpure)) \,.
+\end{align*} 
+These metrics are computationally expensive to calculate, since the
+size of the domain over which the sum is computed grows exponentially
+with the number of choice points.  Therefore, we
+converted\footnote{See Appendix~\ref{sec:proofs}.}\todo{include this!?} the above
+definitions into equivalent metrics defined in terms of behavioral
+strategies.  These are as follows:
+\begin{align*}
+  E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs}
+  \Sstrat(\messg \probbar \state) \cdot \log(\Sstrat(\messg \probbar
+  \state)) 
+\end{align*} 
+\begin{align*}
+  E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\act \in \Acts}
+  \Rstrat(\act \probbar \messg) \cdot \log(\Rstrat(\act \probbar
+  \messg)) \,. 
+\end{align*}
+The metrics are lower bounded by $0$ and upper bounded by,
+respectively, $\log(|\Messgs^\States|) = |\States| \cdot
+\log(|\Messgs|)$ and $\log(|\Acts^\Messgs|) = |\Messgs| \cdot
+\log(|\Acts|)$, thus we can normalize them by dividing by these
+values. The reported values are these normalized values.
+
+\paragraph{Informativity.} The quantity of information in a signal is
+an old notion that also goes back to the start of information theory.
+Skyrms~\citet[ch.~3]{Skyrms2010:Signals} discusses its use in the
+context of signaling games.  The main idea is that we can quantify the
+amount of information about a state $\state$ in a message $\messg$ via
+the relation between the probability of the state given the message
+$\Pr(\state \,|\, \messg)$ and the unconditional probability of the
+state $\Pr(\state)$.  Following Bayes' theorem, we can express
+$\Pr(\state \,|\, \messg)$ as $\frac{\Pr(\state) \cdot \Pr(\messg
+  \,|\, \state)}{\Pr(\messg)}$.  We then have $\Pr(\messg \,|\,
+\state) = \Sstrat(\state,\messg)$ and $\Pr(\messg) =
+\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot
+\Sstrat(\state^\prime,\messg)$.  Finally, we equate sender
+infomativity with the average overall information about states in each
+signal.  Based on the definition by
+Skyrms~\citet[p.~36]{Skyrms2010:Signals}, and the considerations
+above, we define sender informativity as follows:
 \begin{align*}
   I(\Sstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\state \in \States} \frac{\Pr(\state) \cdot \Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \cdot \log \left(\frac{\Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \right) \,.
 \end{align*}
@@ -304,13 +347,7 @@ Confusion is directly related with similarity, \emph{i.e.}~the more similar two 
 For simplicity, we equate one with the other by defining $C_{ij} = s(\state_i,\state_j)$.
 
 We run the noise-perturbed replicator dynamics with random initial strategies $\Sstrat_0$ and $\Rstrat_0$ until a convergence criterion is met, namely that the total absolute change in both sender and receiver strategies does not amount to more than $0.01$, \emph{i.e.}:
-\begin{align*}
-  \sum_{\state \in \States} \sum_{\messg \in \Messgs} \left| \Sstrat^\prime(\state,\messg) - \Sstrat(\state,\messg) \right| < 0.01
-\end{align*}
-and
-\begin{align*}
-  \sum_{\messg \in \Messgs} \sum_{\state \in \States} \left| \Rstrat^\prime(\messg,\state) - \Rstrat(\messg,\state) \right| < 0.01 \,.
-\end{align*}
+
 
 We perform a parameter sweep with size of the state space $n \in \{10,
 50, 90, 130\}$ and impairment $\impairment \in \{0, 0.1, 0.2, 0.3,

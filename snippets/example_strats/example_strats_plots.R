@@ -16,6 +16,6 @@ plot.and.save.language.by.index = function(data, index){
 }
 
 plot.and.save.language.by.index(data,1201)
-plot.and.save.language.by.index(data,3002)
-plot.and.save.language.by.index(data,3501)
 plot.and.save.language.by.index(data,1001)
+plot.and.save.language.by.index(data,3098)
+plot.and.save.language.by.index(data,3452)
