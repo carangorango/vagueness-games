@@ -15,7 +15,18 @@ plot.and.save.language.by.index = function(data, index){
   dev.off()
 }
 
-plot.and.save.language.by.index(data,1201)
-plot.and.save.language.by.index(data,1001)
-plot.and.save.language.by.index(data,3098)
-plot.and.save.language.by.index(data,3452)
+stratsToPlot = c(1201, 1001, 3098, 3452)
+
+# for (strat in stratsToPlot){
+#   plot.and.save.language.by.index(data,strat)
+# }
+
+
+show(ds[stratsToPlot,])
+
+d = subset(data, Number.of.states == 6 & Tolerance == 0.3 & Impairment == 0.05 & Speaker.Convex.Cat == 1)
+
+
+plot.and.save.language.by.index(d, which.min(d$Expected.utility))
+plot.and.save.language.by.index(d, which.max(d$Expected.utility))
+d[c(which.min(d$Expected.utility), which.max(d$Expected.utility)),]

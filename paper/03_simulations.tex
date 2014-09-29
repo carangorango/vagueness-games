@@ -134,11 +134,12 @@ so, whether the inclusion of diffusion has any noteworthy effects on
 the evolving meaning of signals. Clearly, if $\impairment = 0$, the
 \rdd reduces to the \rd. If $\impairment \rightarrow \infty$, the
 diffusion component takes over and the \rdd reduces to the trivial
-iterated diffusion that we looked at in the previous section. For
-reasonable in-between levels of imprecision $\impairment$, the \rdd
-leads to communicatively successful, yet vague signal
-meaning. Moreover, suitable levels of imprecision can have further
-accelerating and, therefore, unifying effects on meaning evolution.
+iterated diffusion that we looked at in the previous section. We will
+show presently that for reasonable in-between levels of imprecision
+$\impairment$, the \rdd leads to communicatively successful, yet vague
+signal meaning. Moreover, suitable levels of imprecision can have
+further accelerating and, therefore, unifying effects on meaning
+evolution.
 
 To explore the \rdd, we looked at numerical simulations in sim-max
 games with two signals whose states were evenly spaced elements of the
@@ -154,19 +155,20 @@ for utility functions, we implemented another Nosofsky-style function:
  \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \toler^2} \right ) \,,& \textrm{otherwise} \\
     \end{cases}
 \end{align}
-The tolerance parameter $\toler$ models the amount of tolerable
+The tolerance parameter $\toler > 0$ models the amount of tolerable
 pragmatic slack or communicative imprecision. This choice of utility
 function is governed partly by convenience in parallel to the
 similarity function, but also because it has, as we believe, the right
 general properties for a communicative payoff function. Unlike
-utilities that are, say, linearly or quadratically decreasing
-\citep[as used
+utilities that are, say, linearly or quadratically decreasing in
+physical distance \citep[as used
 by][]{JagerMetzger2011:Voronoi-Languag,FrankeJager2010:Vagueness-Signa},
 utilities that are exponentially decreasing in negative quadratic
 distance can model situations where a small amount of imprecision in
 communication is tolerable, whereas similarly small differences in
-intolerably off interpretations matter very little, with a smooth
-transition between these regimes \citep{OConnor2013:The-Evolution-o}.
+intolerably far away interpretations matter very little, with a smooth
+transition between these regimes
+\citep[c.f.][]{OConnor2013:The-Evolution-o}.
 
 \begin{figure}
   \centering
@@ -210,31 +212,33 @@ attracting state, but we were interested especially in whether the
 dynamics could lead to reasonable outcomes in reasonable time. A trial
 was considered converged and stopped before the maximum of 200 rounds
 if the total amount of change between strategies before and after the
-current \rdd step was smaller than 0.001, i.e., if both:\todo{say what
-the prime means}
+current \rdd step was smaller than 0.001, i.e., if:
 \begin{align*}
   \sum_{\state \in \States} \sum_{\messg \in \Messgs} \left|
-    \Sstrat^\prime(\state,\messg) - \Sstrat(\state,\messg) \right| <
-  0.001 & \text{\ \ and} &
-  \sum_{\messg \in \Messgs} \sum_{\state \in \States} \left| \Rstrat^\prime(\messg,\state) - \Rstrat(\messg,\state) \right| < 0.001 \,.
+    \rdd(\Sstrat)(\state,\messg) - \Sstrat(\state,\messg) \right| <
+  0.001\,, & \text{\ \ and} \\
+  \sum_{\messg \in \Messgs} \sum_{\state \in \States} \left|
+    \rdd(\Rstrat)(\messg,\state) - \Rstrat(\messg,\state) \right| <
+  0.001 & \,.
 \end{align*}
-Representative examples for the resulting strategy pairs at stopping
-time are given in Figure~\ref{fig:example_strats}.
 
-Figure~\ref{fig:example_stratsA} shows a strategy pair at stopping
-time with 90 states, tolerance $\toler = 0.1$ and imprecision
-$\impairment = 0$. The latter means that the trial was effectively a
-plain application of the \rd. Noteworthily, the given sender strategy
-approximate a pure sender strategy that crisply partitions the state
-space into non-convex sets. The irregular shape of the receiver
-strategy shows clearly that the pictured strategy pair has not yet
-reached a dynamically stable state under the \rd. Indeed, the trial
-did not converge in our technical sense, but was obtained by stopping
-after 200 rounds of iterated \rdd. In contrast, the outcome of a trial
-with identical parameters, except that imprecision was $\impairment =
-0.1$, is shown in Figure~\ref{fig:example_stratsB} had converged after
-98 rounds of iterated \rdd. The sender strategy shows a smooth
-blending from one ``category'' to the other, and the receiver's
+Representative examples for resulting strategy pairs at stopping time
+are given in
+Figure~\ref{fig:example_strats}. Figure~\ref{fig:example_stratsA}
+shows a strategy pair at stopping time with 90 states, tolerance
+$\toler = 0.1$ and imprecision $\impairment = 0$. The latter means
+that the trial was effectively a plain application of the
+\rd. Noteworthily, the given sender strategy approximates a pure
+sender strategy that crisply partitions the state space into
+non-convex sets. The irregular shape of the receiver strategy shows
+clearly that the pictured strategy pair has not yet reached a
+dynamically stable state under the \rd. Indeed, the trial did not
+converge in our technical sense, but was stopped after 200 rounds of
+iterated \rdd. In contrast, the outcome of a trial with identical
+parameters, except that imprecision was $\impairment = 0.1$, is shown
+in Figure~\ref{fig:example_stratsB} had converged (in our technical
+sense) after 98 rounds of iterated \rdd. The sender strategy shows a
+smooth blending from one ``category'' to the other, and the receiver's
 interpretations are rather extended curves, peaking at a central point
 in the relevant ``categories''. What these examples show is that (i)
 (speaker) strategies can approach non-convex strategies and that (ii)
@@ -244,28 +248,34 @@ strategies in the sense that we are after.
 To explore further what happened in all of our 50 trials for each
 parameter triple, we defined a small number of metrics that aim to
 capture numerically how vague, communicatively efficient and generally
-well-structured the resulting strategy pairs were.
+well-structured the resulting strategy pairs were. Entropy and
+informativity capture (slightly different aspects of) the amount of
+systematicity or regularity in a language. Voronoiness and convexity
+are, respectively, gradient and categorical measures for the coherence
+of linguistically formed categories.
 
+\paragraph{Entropy.} This classic information-theoretic metric
+captures the amount of uncertainty in a signaling strategy. Roughly
+put, entropy of a strategy captures inverse distance from a pure
+strategy in the present context. Vague languages will have higher
+entropy than crisp ones.
 
-
-\paragraph{Entropy.} This classic information-theoretic metric captures
-the amount of uncertainty in a signaling strategy.  The most natural
-way to define it is in terms of mixed strategies rather than
-behavioral strategies.  Let us recall that mixed sender (receiver)
-strategies are functions $\Smixed \in \Delta(\Messgs^\States)$
-($\Rmixed \in (\Acts^\Messgs)$).  We can define the entropy of a
-sender and receiver strategy as
+The most natural way to define it is in terms of mixed strategies
+rather than behavioral strategies.  Let us recall that mixed sender
+(receiver) strategies are functions $\Smixed \in
+\Delta(\Messgs^\States)$ ($\Rmixed \in (\Acts^\Messgs)$).  We can
+define the entropy of a sender and receiver strategy as
 \begin{align*}
   E(\Smixed) & = \sum_{\Spure \in \Messgs^\States} \Smixed(\Spure) \cdot
   \log(\Smixed(\Spure)) & 
   E(\Rmixed) & = \sum_{\Rpure \in \Acts^\Messgs} \Rmixed(\Rpure) \cdot \log(\Rmixed(\Rpure)) \,.
 \end{align*} 
-These metrics are computationally expensive to calculate, since the
+These measures are computationally expensive to calculate, since the
 size of the domain over which the sum is computed grows exponentially
 with the number of choice points.  Therefore, we
-converted\footnote{See Appendix~\ref{sec:proofs}.}\todo{include this!?} the above
-definitions into equivalent metrics defined in terms of behavioral
-strategies.  These are as follows:
+converted\footnote{See Appendix~\ref{sec:proofs}.}\todo{include
+  this!?} the above definitions into equivalent metrics defined in
+terms of behavioral strategies.  These are as follows:
 \begin{align*}
   E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs}
   \Sstrat(\messg \probbar \state) \cdot \log(\Sstrat(\messg \probbar
@@ -276,18 +286,31 @@ strategies.  These are as follows:
   \Rstrat(\act \probbar \messg) \cdot \log(\Rstrat(\act \probbar
   \messg)) \,. 
 \end{align*}
-The metrics are lower bounded by $0$ and upper bounded by,
-respectively, $\log(|\Messgs^\States|) = |\States| \cdot
-\log(|\Messgs|)$ and $\log(|\Acts^\Messgs|) = |\Messgs| \cdot
-\log(|\Acts|)$, thus we can normalize them by dividing by these
-values. The reported values are these normalized values.
+Values obtained by these definitions are lower bounded by $0$ and
+upper bounded by, respectively, $\log(|\Messgs^\States|) = |\States|
+\cdot \log(|\Messgs|)$ and $\log(|\Acts^\Messgs|) = |\Messgs| \cdot
+\log(|\Acts|)$. We work with normalized values. 
+
+The speaker strategies in Figures~\ref{fig:example_stratsA} and
+\ref{fig:example_stratsB} have entropy $1.19e^{-5}$ and $0.21$,
+respectively. The receiver strategies have respective entropies $0.43$
+and $0.84$.
+
+
 
 \paragraph{Informativity.} The quantity of information in a signal is
 an old notion that also goes back to the start of information theory.
 Skyrms~\citet[ch.~3]{Skyrms2010:Signals} discusses its use in the
-context of signaling games.  The main idea is that we can quantify the
-amount of information about a state $\state$ in a message $\messg$ via
-the relation between the probability of the state given the message
+context of signaling games. Intuitively speaking, informativity in
+Skyrms' sense measures how revealing the message use is about which
+state is actual. It therefore measures, in our given set-up with flat
+priors, a sense of well-behavedness or regularity of a sender
+strategy. Vague languages will have lower informativity than crisp
+ones. 
+
+The main idea behind Skyrm's notion is that we can quantify the amount
+of information about a state $\state$ in a message $\messg$ via the
+relation between the probability of the state given the message
 $\Pr(\state \,|\, \messg)$ and the unconditional probability of the
 state $\Pr(\state)$.  Following Bayes' theorem, we can express
 $\Pr(\state \,|\, \messg)$ as $\frac{\Pr(\state) \cdot \Pr(\messg
@@ -296,130 +319,193 @@ $\Pr(\state \,|\, \messg)$ as $\frac{\Pr(\state) \cdot \Pr(\messg
 \sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot
 \Sstrat(\state^\prime,\messg)$.  Finally, we equate sender
 infomativity with the average overall information about states in each
-signal.  Based on the definition by
-Skyrms~\citet[p.~36]{Skyrms2010:Signals}, and the considerations
-above, we define sender informativity as follows:
+signal.  Following \citet[p.~36]{Skyrms2010:Signals}, and the
+considerations above, the informativity about states conveyed by a
+sender strategy is:
 \begin{align*}
-  I(\Sstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\state \in \States} \frac{\Pr(\state) \cdot \Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \cdot \log \left(\frac{\Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \right) \,.
+  I(\Sstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs}
+  \sum_{\state \in \States} \frac{\Pr(\state) \cdot
+    \Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States}
+    \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \cdot \log
+  \left(\frac{\Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States}
+      \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \right)
+  \,. 
 \end{align*}
-Conversely, we can quantify the amount of information about an act in a message.
-We equate receiver informativity with the average overall information about acts in each signal.
-Based on Skyrms' definition~\citet[p.~39]{Skyrms2010:Signals}, we define receiver informativity as follows:
-\begin{align*}
-  I(\Sstrat,\Rstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\messg,\act) \cdot \log \left(\frac{\Rstrat(\messg,\act)}{\sum_{\state \in \States} \Pr(\state) \cdot \sum_{\messg^\prime \in \Messgs} \Sstrat(\state,\messg^\prime) \cdot \Rstrat(\messg^\prime,\act)} \right) \,.
-\end{align*}
-Both metrics are bounded between $0$ and $1$.
+This measure is bounded between $0$ and $1$. The speaker strategies in
+Figures~\ref{fig:example_stratsA} and \ref{fig:example_stratsB} have
+informativity $0.69$ and $0.54$, respectively.
+
+\citet[p.~39]{Skyrms2010:Signals} also offers a notion of
+informativity about the acts performed by the receiver, but it turns
+out that this is perfectly correlated with information about the
+states in the results of our simulations. We therefore only look at
+informativity about states. 
+
+% Conversely, we can quantify the amount of information about an act in a message.
+% We equate receiver informativity with the average overall information about acts in each signal.
+% Based on Skyrms' definition~\citet[p.~39]{Skyrms2010:Signals}, we define receiver informativity as follows:
+% \begin{align*}
+%   I(\Sstrat,\Rstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\messg,\act) \cdot \log \left(\frac{\Rstrat(\messg,\act)}{\sum_{\state \in \States} \Pr(\state) \cdot \sum_{\messg^\prime \in \Messgs} \Sstrat(\state,\messg^\prime) \cdot \Rstrat(\messg^\prime,\act)} \right) \,.
+% \end{align*}
+
+
+
+
 
 \paragraph{Voronoiness.}
-This metric aims to quantify how close a strategy is to being a part of a Voronoi tessallation of the state space.
-Recalling the results by \cite{Jager2007}, the stable outcomes of a population of agents playing a similarity-maximization game using pure strategies and evolving according to the replicator dynamics are those where ``the sender strategy is consistent with the Voronoi tessallation that is induced by the image of the receiver strategy.''~(\cite{Jager2007}, p. 562).
-\mytodo{JPC}{Explain further?}
-Given we are working with behavioral strategies, rather than pure strategies, and that we perform numerical simulations, rather than calculate analytical results, instead of looking into a binary criterion of whether a simulation result is such a Voronoi tessallation of the state space or not, we want a more progressive metric to characterize that in terms of degrees.
-With that in mind, and given that this metric only makes sense for $\Acts = \States$, we define Voronoiness as follows.
-Let $\pi(\Rstrat, \messg) = \argmax_{\state \in \States}\Rstrat(\messg,\state)$ be the prototype of a message $\messg \in \Messgs$, then
+This metric aims to quantify how close a strategy is to being a part
+of a Voronoi tessallation of the state space. Bearing in mind that
+this metric is specifically geared towards the sim-max games in our
+set-up, we define Voronoiness as follows. Let $\pi(\Rstrat, \messg) =
+\argmax_{\state \in \States}\Rstrat(\messg,\state)$ be the prototype
+of a message $\messg \in \Messgs$, then
 \begin{multline*}
-  V(\Sstrat, \Rstrat) = \sum_{\state \in \States} \sum_{\messg_1 \in \Messgs} \sum_{\messg_2 \in \Messgs} \textrm{if } s(\state, \pi(\Rstrat, \messg_1)) > s(\state, \pi(\Rstrat, \messg_2)) \bicond \Sstrat(\state, \messg_1) > \Sstrat(\state, \messg_2) \textrm{ then } 1 \textrm{ else } 0
+  V(\Sstrat, \Rstrat) = \sum_{\state \in \States} \sum_{\messg_1 \in
+    \Messgs} \sum_{\messg_2 \in \Messgs} \textrm{if } s(\state,
+  \pi(\Rstrat, \messg_1)) > s(\state, \pi(\Rstrat, \messg_2)) \bicond
+  \Sstrat(\state, \messg_1) > \Sstrat(\state, \messg_2) \textrm{ then
+  } 1 \textrm{ else } 0 
 \end{multline*}
-is the Voronoiness of the sender strategy $\Sstrat$ given the receiver strategy $\Rstrat$ and
+is the Voronoiness of the sender strategy $\Sstrat$ given the receiver
+strategy $\Rstrat$ and
 \begin{align*}
-  V(\Rstrat) = \sum_{\messg \in \Messgs} \sum_{\state_1 \in \States} \sum_{\state_2 \in \States} \textrm{if } s(\state_1, \pi(\Rstrat, \messg)) > s(\state_2, \pi(\Rstrat, \messg)) \bicond \Rstrat(\messg, \state_1) > \Rstrat(\messg, \state_2) \textrm{ then } 1 \textrm{ else } 0
+  V(\Rstrat) = \sum_{\messg \in \Messgs} \sum_{\state_1 \in \States}
+  \sum_{\state_2 \in \States} \textrm{if } s(\state_1, \pi(\Rstrat,
+  \messg)) > s(\state_2, \pi(\Rstrat, \messg)) \bicond \Rstrat(\messg,
+  \state_1) > \Rstrat(\messg, \state_2) \textrm{ then } 1 \textrm{
+    else } 0
 \end{align*}
-is the Voronoiness of the receiver strategy $\Rstrat$.
-\mytodo{JPC}{Give some intuitions on these?}
-The metrics are lower bounded by $0$ and upper bounded by, respectively, $|\States| \times |\Messgs|^2$ and $|\Messgs| \times |\States|^2$, thus we can normalize them by dividing by these values.
+is the Voronoiness of the receiver strategy $\Rstrat$.  The metrics
+are lower bounded by $0$ and upper bounded by, respectively,
+$|\States| \times |\Messgs|^2$ and $|\Messgs| \times |\States|^2$,
+thus we can normalize them by dividing by these values.
 
-\subsubsection{Methodology}
+Despite being vague, a language can have maximal Voronoiness according
+to this gradient measure. For instance, the sender strategies in
+Figures~\ref{fig:example_stratsA} and \ref{fig:example_stratsB} have
+Voronoiness $0.91$ and $1$, respectively. The receiver strategies have
+Voronoiness $0.78$ and $1$, respectively.
 
-In our simulations we focus on a concrete setup in line with \cite{Correia2013:The-Bivalent-Tr}.
-Namely, we define a similarity-maximization game with $\States = \Acts$, where $\States$ is a discrete set of equidistant points within the unit interval $[0,1]$, including the boundaries (thus we always use $n \geq 2$).
-As similarity metric $s:\States \times \States \rightarrow [0,1]$, we use a negative exponential of the of the square distance, \emph{i.e.}~for $\state,\state^\prime \in \States$:
+\paragraph{Convexity.} At least for speaker strategies, which converge
+faster, it also makes sense to define a categorical measure of
+convexity, that compensates for potential vagueness. To determine
+whether a sender strategy $\Sstrat$ was convex despite possibly being
+vague, we looked at the derived pure strategy $\Spure$ for which
+$\Spure(\state) = \messg$ only if $\Sstrat(\state,\messg) =
+\max_{\messg' \in \Messgs} \Sstrat(\state,\messg')$. If that $\Spure$
+was convex, we also counted $\Sstrat$ as convex.
+
+\paragraph{Expected utility.} We also recorded the expected utility of
+a strategy pair:
 \begin{align*}
-  s(\state,\state^\prime) =
-    \begin{cases}
-    1 & \textrm{if } \impairment = 0 \textrm{ and } \state = \state^\prime \\
-    0 & \textrm{if } \impairment = 0 \textrm{ and } \state \neq \state^\prime \\
-    e^{-\frac{\lVert \state - \state^\prime \rVert ^2}{\impairment^2}} & \textrm{otherwise} \\
-    \end{cases}
+  \EU(\Sstrat,\Rstrat \myts ; \myts \toler) = \sum_{\state \in
+    \States} \sum_{\messg \in \Messgs} \sum_{\state' \in \States}
+  \Pr(\state) \cdot \Sstrat(\state, \messg) \cdot \Rstrat(\messg,
+  \state') \cdot \Util(\state,\state' \myts ; \myts \toler)\,.
 \end{align*}
-where $\impairment$ is an \emph{impairment} factor.
-Here we deviate from \cite{Correia2013:The-Bivalent-Tr} by working with impairment $\impairment$ rather than acuity $\theta$, since we are interested in exploring the case of having $0$ impairment, and acuity does not have a natural maximum as defined.
-Confusion is directly related with similarity, \emph{i.e.}~the more similar two states are, the more likely an agent is to perceive one as the other.
-For simplicity, we equate one with the other by defining $C_{ij} = s(\state_i,\state_j)$.
-
-We run the noise-perturbed replicator dynamics with random initial strategies $\Sstrat_0$ and $\Rstrat_0$ until a convergence criterion is met, namely that the total absolute change in both sender and receiver strategies does not amount to more than $0.01$, \emph{i.e.}:
-
-
-We perform a parameter sweep with size of the state space $n \in \{10,
-50, 90, 130\}$ and impairment $\impairment \in \{0, 0.1, 0.2, 0.3,
-0.4, 0.5\}$.
-For each parameter combination, we perform $100$ trials and record the values of each of the metrics introduced in Section~\ref{sec:metrics} after convergence, as well as two additional indicators: number of iterations taken until convergence, and the normalized expected utility.
-Expected utility is normalized by dividing by the expected utility of the theoretical optimum without impairment, \emph{i.e.}~a Voronoi tessalation of the state space. 
+To make direct comparisons across different parameter settings, we
+normalized expected utility by the maximal amount of expected utility
+obtainable in the relevant game.
 
 \subsubsection{Results}
-In order to visualize the impact of the impairment factor on the outcome of simulations, we plot in Figure~\ref{fig:metrics-boxplots} the distribution of each of the measurements per impairment value.
-%
-% \begin{figure}
-%         \centering
-%         \begin{subfigure}{0.45\textwidth}
-%                 \includegraphics[width=\textwidth]{plots/Speaker-entropy-20140813-194306}
-%                 \caption{Entropy of sender strategy.}
-% %                \label{fig:gull}
-%         \end{subfigure}
-%         \begin{subfigure}{0.45\textwidth}
-%                 \includegraphics[width=\textwidth]{plots/Hearer-entropy-20140813-194306}
-%                 \caption{Entropy of receiver strategy.}
-%         \end{subfigure}
+Figure~\ref{fig:MeanMetrics} shows the means of the recorded metrics,
+together with their estimated 95\% confidence intervals, for each
+triple of independent variables. Most trends are quite clear. Entropy
+of sender and receiver strategies are increasing in imprecision
+$\impairment$, as can be expected. Entropy of speaker strategies
+hardly seems independent of tolerance levels and the number of states,
+while there seems to be an effect of both parameters on the entropy of
+the hearer strategy. 
 
-%         \begin{subfigure}{0.45\textwidth}
-%                 \includegraphics[width=\textwidth]{plots/Speaker-informativity-20140813-194306}
-%                 \caption{Informativity of sender strategy.}
-%         \end{subfigure}
-%         \begin{subfigure}{0.45\textwidth}
-%                 \includegraphics[width=\textwidth]{plots/Hearer-informativity-20140813-194306}
-%                 \caption{Informativity of receiver strategy.}
-%         \end{subfigure}
+\begin{figure}
+  \centering
+  
+  \includegraphics[width=\textwidth]{plots/MeanMetrics.pdf}
 
-%         \begin{subfigure}{0.45\textwidth}
-%                 \includegraphics[width=\textwidth]{plots/Speaker-Voronoiness-20140813-194306}
-%                 \caption{Voronoiness of sender strategy.}
-%         \end{subfigure}
-%         \begin{subfigure}{0.45\textwidth}
-%                 \includegraphics[width=\textwidth]{plots/Hearer-Voronoiness-20140813-194306}
-%                 \caption{Voronoiness of receiver strategy.}
-%         \end{subfigure}
+  \caption{Means of recorded metrics for each triple of independent variables.}
+  \label{fig:MeanMetrics}
+\end{figure}
 
-%         \begin{subfigure}{0.45\textwidth}
-%                 \includegraphics[width=\textwidth]{plots/Expected-utility-20140813-194306}
-%                 \caption{Expected utility.}
-%         \end{subfigure}
-%         \begin{subfigure}{0.45\textwidth}
-%                 \includegraphics[width=\textwidth]{plots/Iterations-20140813-194306}
-%                 \caption{Number of iterations until convergence.}
-%         \end{subfigure}
-%         \caption{Boxplots of metrics per impairment value.}
-%         \label{fig:metrics-boxplots}
-% \end{figure}
-%
-Most trends are quite clear.
-Entropy seems to increase with higher impairment values for both sender and receiver.
-This is an expected outcome, since the higher the impairment value, the more likely each player is to confuse two states, thus the more uncertain he will be in unequivocally associating a state with a message, or vice-versa.
-The trend for informativity is also expected: more vague strategies convey less information, be it from the sender or the receiver perspective.
+Speaker informativity and expected utility are decreasing under
+growing imprecision, again, as should be expected. There seem to be
+mild effects of the number of states in the game, but hardly any in
+terms of pragmatic tolerance. 
 
-Regarding Voronoiness, we observe that most simulation results approximate perfect Voronoi tessalations.
-This is not the case, however, for impairment of $0$ (both sender and receiver) and $0.5$ (mostly sender only).
-\mytodo{JPC}{For impairment 0, the languages with the lowest sender voronoiness look like non-convex equilibria. Discuss in relation with Elliott's results?}
-For impairment of $0$,  the explanation is usually that strategies can achieve a high expected utility without having perfect Voronoiness.
-Although the expected long term outcome in these situations is perfect Voronoiness (given J\"ager's analytical results~\cite{Jager2007}), actually reaching it involves minor refinements which at some point do not qualify as significant change given our convergence criterion.
-The result is thus an artifact of stopping the simulations before they reach perfect convergence.
-For impairment of $0.5$ (and some cases with impairment of $0.4$), the reason is simply that the languages are representatives of something between babbling and pooling equilibria.
-These are equilibria where $\Sstrat(\state,\messg_1) \geq \Sstrat(\state,\messg_2)$ for all $\state \in \States$, but vary from situations where $\Sstrat(\state,\messg)$ is close to $0.5$ for both messages (babbling), or is significantly higher for one of them (pooling).
-\mytodo{JPC}{Plot examples}
+Interestingly, voronoiness of both sender and receiver strategies are
+appear to be non-decreasing under increasing impairment and peaking at
+the maximal value. The only exception is the 6 states games and the
+transition from $\impairment = 0$ to $\impairment = 0.05$. This
+suggests that impairment can help evolve more regular, well-behaved
+languages.
 
-The trend for expected utility reflects Lipman's observation that vague languages are less optimal than non-vague ones~\cite{Lipman2009:Why-is-Language}: more impairment necessarily leads to lower expected utility.
-Finally, the plot for number of iterations until convergence shows that a certain level of impairment enables faster convergence.
-We will discuss this further in more detail in Section~\ref{sec:discussion}.
+This impression is also supported by the proportion of converged and
+convex trials, pictured in
+Figure~\ref{fig:CategoricalMeasures}. Non-converged and non-convex
+speaker strategies showed for several values of parameters in the
+absence of impairment. Increasing impairment always assured
+convergence and convexity.
 
-\mytodo{JPC}{Present and discuss results per size of state space? Don't forget O'Connor's claim that speed of convergence is more important for larger \#state/\#message ratio}
+\begin{figure}
+  \centering
+  
+  \includegraphics[width=\textwidth]{plots/CategoricalMeasures.pdf}
+
+  \caption{Proportion of converged and convex trials for each triple
+    of independent variables.}
+  \label{fig:CategoricalMeasures}
+\end{figure}
+
+Summarizing so far, it seems that diffusion increases entropy and
+vagueness, decreases informativity and expected utility, but it also
+speeds up convergence to a convex and well-behaved outcome.
+
+Diffusion of strategies from confusion of states has another
+interesting regularizing effect on the evolution of signaling. If we
+look at the confidence intervals in Figure~\ref{fig:MeanMetrics}, we
+see that there is very little variation in the recorded metrics for
+evolved strategies, at least for higher values of impairment. On
+closer inspection, it turns out that variability in low-impairment
+conditions is not only due to non-convergence and/or associated
+non-convexity. Figure~\ref{fig:MoreExample_strats} gives two more
+examples of strategy pairs at stopping time. Both are obtained for the
+same triple of parameters, both converged and are convex. However,
+they are not equally efficient. In fact, the pair in
+Figure~\ref{fig:example_stratsC} has a normalized expected utility of
+$0.99$ while the one in Figure~\ref{fig:example_stratsD} only has
+$0.89$.
+
+
+\begin{figure}
+  \centering
+
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/strat_example_NS-6_tol-03_imp005_ind41.pdf}
+    \caption{$\ns = 6$, $\toler = 0.2$, $\impairment = 0$}
+    \label{fig:example_stratsC}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/strat_example_NS-6_tol-03_imp005_ind23.pdf}
+    \caption{$\ns = 6$, $\toler = 0.2$, $\impairment = 0$}
+    \label{fig:example_stratsD}
+  \end{subfigure}
+
+  \caption{More example strategies under \rdd at stopping time of our simulations.}
+  \label{fig:MoreExample_strats}
+\end{figure}
+
+This type of variability in evolutionary outcomes is also weeded out
+by mild increases in impairment. 
+
+\begin{figure}
+  \centering
+
+    \includegraphics[width=\textwidth]{plots/AverageEUinGroups.pdf}
+
+   \caption{Average normalized expected utility between evolved strategies within each triplet of independent parameter values.}
+  \label{fig:AverageEUinGroups}
+\end{figure}
+
 
 
 %%% Local Variables: 

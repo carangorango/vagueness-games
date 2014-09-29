@@ -105,6 +105,11 @@ Mean distance between speaker strategies
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.width=7, fig.height=7}
   show(sPlot)
+
+pdf("~/Desktop/data/svn/vagueness-games/paper/plots/AverageEUinGroups.pdf", height = 6, width = 8)
+show(sPlot)
+dev.off()
+
 ```
 
 Putting it all together 

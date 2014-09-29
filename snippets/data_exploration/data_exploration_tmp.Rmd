@@ -17,9 +17,8 @@ plot all the relevant variables against each other
 
 ``` {r warning = FALSE, fig.width=12, fig.height=12}
 
-pairs(~ Number.of.states + Impairment + Tolerance + Speaker.entropy + Hearer.entropy + 
-        Speaker.Voronoiness + Hearer.Voronoiness +
-        Speaker.informativity + Hearer.informativity + Expected.utility + Iterations +
+pairs(~ Speaker.entropy + Hearer.entropy + Speaker.Voronoiness + Hearer.Voronoiness +
+        Speaker.informativity + Hearer.informativity + Expected.utility +
         Speaker.Convex.Cat, data=ds)
 ```
 
@@ -49,6 +48,14 @@ We have three independent variables: impairment, tolerance & number of states. T
 
 ```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
 
+ds = data[,c("Number.of.states", "Impairment", "Tolerance", 
+             "Speaker.entropy", "Hearer.entropy",
+             "Speaker.informativity",
+             "Speaker.Voronoiness", "Hearer.Voronoiness",
+             "Expected.utility")]
+
+dm = melt(ds, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
+
 dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Tolerance", "variable"), measurevar="value")
 dsub = dms
 
@@ -58,9 +65,24 @@ sp = ggplot(dsub, aes(x=Impairment, y=value, colour=factor(Number.of.states))) +
      geom_errorbar(aes(ymin=value-ci, ymax=value+ci), width=0, position=pd) +
      geom_line(position=pd) 
 
-sp + facet_grid(variable ~ Tolerance, scales="free")
+sp = sp + facet_grid(variable ~ Tolerance, scales="free")
+
+show(sp)
+
+pdf("~/Desktop/data/svn/vagueness-games/paper/plots/MeanMetrics.pdf", width=8, height = 8)
+show(sp)
+dev.off()
 
 ```
+
+Entropy
+-------
+
+```{r fig.width=5, fig.height=5}
+cor.test(data$Speaker.entropy, data$Hearer.entropy)
+qplot(data$Speaker.entropy, data$Hearer.entropy) + geom_smooth(method=lm)
+```
+
 
 Informativity
 -------------
@@ -77,5 +99,41 @@ There is a clear negative correlation between impairment and informativity. The 
 ```{r fig.width=5, fig.height=5}
 cor.test(data$Impairment, data$Speaker.informativity)
 qplot(data$Impairment, data$Speaker.informativity) + geom_smooth(method=lm)
+```
+
+Voronoiness
+-------
+
+```{r fig.width=5, fig.height=5}
+cor.test(data$Speaker.Voronoiness, data$Hearer.Voronoiness)
+qplot(data$Speaker.Voronoiness, data$Hearer.Voronoiness) + geom_smooth(method=lm)
+```
+
+Percentage of Converged and Convex strategies
+---------------------------------------------
+
+```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
+
+data$Converged = data$Iterations < 201
+data$Convex = data$Speaker.Convex.Cat
+
+ds = data[,c("Number.of.states", "Impairment", "Tolerance", 
+             "Converged", "Convex")]
+
+dm = melt(ds, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
+
+dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Tolerance", "variable"), measurevar="value")
+dsub = dms
+
+sp = ggplot(dms, aes(x=factor(Impairment), y = value)) 
+sp = sp + geom_bar(aes(fill = variable), color = "black", stat="identity", position= position_dodge(0.4), width = 0.3)
+sp = sp + facet_grid(Number.of.states ~ Tolerance, scales="free")
+
+show(sp)
+
+pdf("~/Desktop/data/svn/vagueness-games/paper/plots/CategoricalMeasures.pdf", width=8, height = 6)
+show(sp)
+dev.off()
+
 ```
 
