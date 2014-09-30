@@ -125,21 +125,7 @@ expected.utility.byIndeces = function(data, i, j){
   return(max(eu1,eu2))
 }
 
-# Optimal sender & receiver strategy [
-#  works ONLY for 2 messages, ns %% 2 == 0 and ns/2 %% 2 == 1,  and flat priors only
 
-optimal.strategies = function(ns) {
-  if (!(ns %% 2 == 0 & (ns/2) %% 2 == 1)) {
-    stop("cannot get optimal strategies for this state number")
-  }
-  sen = matrix(0, nrow =ns, ncol = 2)
-  sen[1:(ns/2),1] = 1
-  sen[(ns/2+1):ns,2] = 1
-  rec = matrix(0, nrow = 2, ncol = ns)
-  rec[1,median(1:(ns/2))] = 1
-  rec[2,median((ns/2+1):ns)] = 1
-  return(list(sen,rec))
-}
 
 # utility of optimal sender & receiver strategy
 

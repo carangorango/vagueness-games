@@ -58,18 +58,19 @@ dm = melt(ds, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
 
 dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Tolerance", "variable"), measurevar="value")
 dsub = dms
+dsub$Number.of.states = factor(dsub$Number.of.states)
 
 pd <- position_dodge(.01)
-sp = ggplot(dsub, aes(x=Impairment, y=value, colour=factor(Number.of.states))) + 
+sp = ggplot(dsub, aes(x=Impairment, y=value, colour=Number.of.states)) + 
      geom_point(position = pd) +
      geom_errorbar(aes(ymin=value-ci, ymax=value+ci), width=0, position=pd) +
-     geom_line(position=pd) 
+     geom_line(position=pd) + xlab("imprecision")
 
 sp = sp + facet_grid(variable ~ Tolerance, scales="free")
 
 show(sp)
 
-pdf("~/Desktop/data/svn/vagueness-games/paper/plots/MeanMetrics.pdf", width=8, height = 8)
+pdf("~/Desktop/data/svn/vagueness-games/paper/plots/MeanMetrics.pdf", width=8, height = 6)
 show(sp)
 dev.off()
 
@@ -126,12 +127,12 @@ dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Tolerance",
 dsub = dms
 
 sp = ggplot(dms, aes(x=factor(Impairment), y = value)) 
-sp = sp + geom_bar(aes(fill = variable), color = "black", stat="identity", position= position_dodge(0.4), width = 0.3)
-sp = sp + facet_grid(Number.of.states ~ Tolerance, scales="free")
+sp = sp + geom_bar(aes(fill = variable), color = "black", stat="identity", position= position_dodge(0.4), width = 0.35)
+sp = sp + facet_grid(Number.of.states ~ Tolerance, scales="free") + ylab("proportion") + xlab("imprecision")
 
 show(sp)
 
-pdf("~/Desktop/data/svn/vagueness-games/paper/plots/CategoricalMeasures.pdf", width=8, height = 6)
+pdf("~/Desktop/data/svn/vagueness-games/paper/plots/CategoricalMeasures.pdf", width=8, height = 5)
 show(sp)
 dev.off()
 
