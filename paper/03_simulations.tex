@@ -137,9 +137,10 @@ diffusion component takes over and the \rdd reduces to the trivial
 iterated diffusion that we looked at in the previous section. We will
 show presently that for reasonable in-between levels of imprecision
 $\impairment$, the \rdd leads to communicatively successful, yet vague
-signal meaning. Moreover, suitable levels of imprecision can have
-further accelerating and, therefore, unifying effects on meaning
-evolution.
+signal meaning. Suitable levels of imprecision can have further
+accelerating and unifying effects on meaning evolution.
+
+\subsubsection{Experimental set-up}
 
 To explore the \rdd, we looked at numerical simulations in sim-max
 games with two signals whose states were evenly spaced elements of the
@@ -237,14 +238,18 @@ converge in our technical sense, but was stopped after 200 rounds of
 iterated \rdd. In contrast, the outcome of a trial with identical
 parameters, except that imprecision was $\impairment = 0.1$, is shown
 in Figure~\ref{fig:example_stratsB} had converged (in our technical
-sense) after 98 rounds of iterated \rdd. The sender strategy shows a
+sense) after 99 rounds of iterated \rdd. The sender strategy shows a
 smooth blending from one ``category'' to the other, and the receiver's
 interpretations are rather extended curves, peaking at a central point
-in the relevant ``categories''. What these examples show is that (i)
-(speaker) strategies can approach non-convex strategies and that (ii)
-inclusion of imprecision can lead to seemingly well-behaved, yet vague
-strategies in the sense that we are after.
+in the relevant ``categories''. What these examples show is that (i),
+contrary to the limiting results of
+\citet{Jager2007:The-Evolution-o,JagerMetzger2011:Voronoi-Languag},
+(speaker) strategies can approach non-convex pure strategies and that
+(ii) inclusion of imprecision can lead to seemingly well-behaved, yet
+vague strategies in the sense that we are after.
 
+\subsubsection{Dependent measures}
+ 
 To explore further what happened in all of our 50 trials for each
 parameter triple, we defined a small number of metrics that aim to
 capture numerically how vague, communicatively efficient and generally
@@ -252,17 +257,15 @@ well-structured the resulting strategy pairs were. Entropy and
 informativity capture (slightly different aspects of) the amount of
 systematicity or regularity in a language. Voronoiness and convexity
 are, respectively, gradient and categorical measures for the coherence
-of linguistically formed categories.
+of linguistically formed categories. Expected utility measures the
+communicative efficiency of evolved strategy pairs. 
 
 \paragraph{Entropy.} This classic information-theoretic metric
 captures the amount of uncertainty in a signaling strategy. Roughly
 put, entropy of a strategy captures inverse distance from a pure
-strategy in the present context. Vague languages will have higher
-entropy than crisp ones.
-
-The most natural way to define it is in terms of mixed strategies
-rather than behavioral strategies.  Let us recall that mixed sender
-(receiver) strategies are functions $\Smixed \in
+strategy. The most natural way to define it is in terms of mixed
+strategies rather than behavioral strategies.  Let us recall that
+mixed sender (receiver) strategies are functions $\Smixed \in
 \Delta(\Messgs^\States)$ ($\Rmixed \in (\Acts^\Messgs)$).  We can
 define the entropy of a sender and receiver strategy as
 \begin{align*}
@@ -294,19 +297,19 @@ upper bounded by, respectively, $\log(|\Messgs^\States|) = |\States|
 The speaker strategies in Figures~\ref{fig:example_stratsA} and
 \ref{fig:example_stratsB} have entropy $1.19e^{-5}$ and $0.21$,
 respectively. The receiver strategies have respective entropies $0.43$
-and $0.84$.
+and $0.84$. In general, we expect that vague languages will have
+higher entropy than crisp ones and that increasing imprecision will
+also increase entropy, all else being equal.
 
 
 
 \paragraph{Informativity.} The quantity of information in a signal is
 an old notion that also goes back to the start of information theory.
-Skyrms~\citet[ch.~3]{Skyrms2010:Signals} discusses its use in the
-context of signaling games. Intuitively speaking, informativity in
-Skyrms' sense measures how revealing the message use is about which
-state is actual. It therefore measures, in our given set-up with flat
-priors, a sense of well-behavedness or regularity of a sender
-strategy. Vague languages will have lower informativity than crisp
-ones. 
+\citet[ch.~3]{Skyrms2010:Signals} discusses its use in the context of
+signaling games. Intuitively speaking, informativity in Skyrms' sense
+measures how revealing the sender's signal use is about which state is
+actual. It therefore measures, in our given set-up with flat priors, a
+sense of well-behavedness or regularity of a sender strategy.
 
 The main idea behind Skyrm's notion is that we can quantify the amount
 of information about a state $\state$ in a message $\messg$ via the
@@ -333,7 +336,9 @@ sender strategy is:
 \end{align*}
 This measure is bounded between $0$ and $1$. The speaker strategies in
 Figures~\ref{fig:example_stratsA} and \ref{fig:example_stratsB} have
-informativity $0.69$ and $0.54$, respectively.
+informativity $0.69$ and $0.54$, respectively. In general, we expect
+that vague languages will have lower informativity than crisp
+ones and that increasing imprecision will decrease informativity. 
 
 \citet[p.~39]{Skyrms2010:Signals} also offers a notion of
 informativity about the acts performed by the receiver, but it turns
@@ -347,10 +352,6 @@ informativity about states.
 % \begin{align*}
 %   I(\Sstrat,\Rstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\messg,\act) \cdot \log \left(\frac{\Rstrat(\messg,\act)}{\sum_{\state \in \States} \Pr(\state) \cdot \sum_{\messg^\prime \in \Messgs} \Sstrat(\state,\messg^\prime) \cdot \Rstrat(\messg^\prime,\act)} \right) \,.
 % \end{align*}
-
-
-
-
 
 \paragraph{Voronoiness.}
 This metric aims to quantify how close a strategy is to being a part
@@ -384,16 +385,22 @@ Despite being vague, a language can have maximal Voronoiness according
 to this gradient measure. For instance, the sender strategies in
 Figures~\ref{fig:example_stratsA} and \ref{fig:example_stratsB} have
 Voronoiness $0.91$ and $1$, respectively. The receiver strategies have
-Voronoiness $0.78$ and $1$, respectively.
+Voronoiness $0.78$ and $1$, respectively. We do not \emph{prima facie}
+expect a conceptual connection between vagueness and Voronoiness, and
+so do not predict a clear effect of imprecision on Voronoiness either.
 
 \paragraph{Convexity.} At least for speaker strategies, which converge
 faster, it also makes sense to define a categorical measure of
 convexity, that compensates for potential vagueness. To determine
 whether a sender strategy $\Sstrat$ was convex despite possibly being
 vague, we looked at the derived pure strategy $\Spure$ for which
-$\Spure(\state) = \messg$ only if $\Sstrat(\state,\messg) =
-\max_{\messg' \in \Messgs} \Sstrat(\state,\messg')$. If that $\Spure$
-was convex, we also counted $\Sstrat$ as convex.
+$\Spure(\state) = \messg$ only if $\messg =
+\argmax_{\messg' \in \Messgs} \Sstrat(\state,\messg')$. If that $\Spure$
+was convex, we also counted $\Sstrat$ as convex. The sender strategy
+in Figure~\ref{fig:example_stratsA} is not convex, while the one in
+Figure~\ref{fig:example_stratsB} is. Again, we do not expect a
+conceptual relation between vagueness and imprecision, on the one
+hand, and convexity on the other.
 
 \paragraph{Expected utility.} We also recorded the expected utility of
 a strategy pair:
@@ -410,12 +417,24 @@ obtainable in the relevant game.
 \subsubsection{Results}
 Figure~\ref{fig:MeanMetrics} shows the means of the recorded metrics,
 together with their estimated 95\% confidence intervals, for each
-triple of independent variables. Most trends are quite clear. Entropy
-of sender and receiver strategies are increasing in imprecision
-$\impairment$, as can be expected. Entropy of speaker strategies
-hardly seems independent of tolerance levels and the number of states,
-while there seems to be an effect of both parameters on the entropy of
-the hearer strategy. 
+triple of independent variables. Most trends are quite clear, and not
+unexpected. Entropy of sender and receiver strategies are increasing
+in imprecision. Entropy of speaker strategies seems independent of
+tolerance levels and the number of states, while there seems to be an
+effect of both parameters on the entropy of the hearer
+strategy. Speaker informativity and expected utility are decreasing
+under growing imprecision. There seem to be mild effects of the number
+of states in the game, but hardly any in terms of pragmatic
+tolerance. Interestingly, Voronoiness of both sender and receiver
+strategies appear to be non-decreasing under increasing impairment and
+peaking at the maximal value. The only exception is the 6 states games
+and the transition from $\impairment = 0$ to $\impairment =
+0.05$. Expected utility of evolved languages mostly decreases in
+increasing imprecision, with the sole exception of a rise for $\toler
+= 0.2$ and $ns = 6$ at $\impairment = 0.1$. Still, normalized expected
+utility of evolved strategy pairs under mild values of imprecision are
+not necessarily much worse than their respective perfect precision
+\rd-analogues. 
 
 \begin{figure}
   \centering
@@ -426,24 +445,18 @@ the hearer strategy.
   \label{fig:MeanMetrics}
 \end{figure}
 
-Speaker informativity and expected utility are decreasing under
-growing imprecision, again, as should be expected. There seem to be
-mild effects of the number of states in the game, but hardly any in
-terms of pragmatic tolerance. 
 
-Interestingly, voronoiness of both sender and receiver strategies are
-appear to be non-decreasing under increasing impairment and peaking at
-the maximal value. The only exception is the 6 states games and the
-transition from $\impairment = 0$ to $\impairment = 0.05$. This
-suggests that impairment can help evolve more regular, well-behaved
-languages.
-
-This impression is also supported by the proportion of converged and
-convex trials, pictured in
+Taken together, these findings suggest the following effect of
+imprecise perception and diffusion of behavior. Mild forms of
+perceptual imprecision lead to slightly less communicative efficiency
+in the evolving strategy pairs, more vagueness and more regular,
+well-behaved languages. This impression is also supported by the
+proportion of converged and convex trials, pictured in
 Figure~\ref{fig:CategoricalMeasures}. Non-converged and non-convex
 speaker strategies showed for several values of parameters in the
 absence of impairment. Increasing impairment always assured
-convergence and convexity.
+convergence and convexity: perceptual imprecision speeds up
+convergence to a convex and regular language.
 
 \begin{figure}
   \centering
@@ -454,10 +467,6 @@ convergence and convexity.
     of independent variables.}
   \label{fig:CategoricalMeasures}
 \end{figure}
-
-Summarizing so far, it seems that diffusion increases entropy and
-vagueness, decreases informativity and expected utility, but it also
-speeds up convergence to a convex and well-behaved outcome.
 
 Diffusion of strategies from confusion of states has another
 interesting regularizing effect on the evolution of signaling. If we
@@ -494,19 +503,60 @@ $0.89$.
   \label{fig:MoreExample_strats}
 \end{figure}
 
-This type of variability in evolutionary outcomes is also weeded out
-by mild increases in impairment. 
+Interestingly, this type of variability in evolutionary outcomes is
+also weeded out by mild increases in impairment. To see this, we
+calculated the average distance between evolved sender strategies
+within each group of trials that had identical independent
+parameters. We determined the distance between sender strategies
+$\Sstrat$ and $\Sstrat'$ as the average Hellinger distance between
+probability distributions $\Sstrat(\state)$ and $\Sstrat'(\state)$
+over messages at each choice point $\state$:
+\begin{align*}
+  \text{HD}(\Sstrat,\Sstrat') & = \frac{1}{{\card{\States} \cdot
+     \sqrt{2}}} \cdot  \sum_{\state \in \States} 
+ \sqrt{\sum_{\messg \in  \Messgs}
+         \left ( \sqrt{\Sstrat(\state,\messg)} -
+         \sqrt{\Sstrat'(\state,\messg)} \right )^2 }\,.
+      \\
+\end{align*}
+To compensate for the arbitrariness of message use, we set the
+distance between strategies $\Sstrat$ and $\Sstrat'$ to be the maximum
+of $\text{HD}(\Sstrat,\Sstrat')$ and $\text{HD}(\Sstrat^*,\Sstrat')$
+where $\Sstrat^*$ is $Sstrat$ with reversed message indices. The
+average distances between sender strategies in this sense is plotted
+in Figure~\ref{fig:AverageEUinGroups}. This clearly shows that with
+increasing imprecision, the sender strategies evolving under \rdd were
+exactly alike, modulo which message was used for which part of the
+unit interval. In other words, perceptual imprecision clearly unifies
+evolutionary outcomes, and in fact guarantees sender strategies that
+are not only convex, but also maximally efficient in that they induce
+a vague category split exactly in the middle of the unit interval.
 
 \begin{figure}
   \centering
 
-    \includegraphics[width=\textwidth]{plots/AverageEUinGroups.pdf}
+    \includegraphics[width=\textwidth]{plots/WithinGroupMeasures.pdf}
 
-   \caption{Average normalized expected utility between evolved strategies within each triplet of independent parameter values.}
+    \caption{Mean group measures as defined in the main text. For each
+      group, i.e., triplet of independent variables, the plot shows
+      (i) average normalized expected utility when playing against an
+      arbitrary other language from the group, (ii) the mean distance
+      between evolved strategies in the group.}
   \label{fig:AverageEUinGroups}
 \end{figure}
 
-
+This unifying property of perceptual imprecision could be considered
+an evolutionary beneficial side-effect. When we look at the normalized
+average expected utility that each evolved language (i.e., pair of
+sender and receiver strategy at stopping time) scored when playing
+against an arbitrary other language of the same group in
+Figure~\ref{fig:MoreExample_strats}, we see that higher imprecision
+can lead to higher such average expected utility. What this means is
+that, imprecision might decrease the communicative efficiency of
+individual languages, it increases the conceptual coherence and
+communicative success between independently evolving strategies. It is
+almost as if mere confusability of states imposes a regularity
+constraint on evolving linguistic meanings.
 
 %%% Local Variables: 
 %%% mode: latex

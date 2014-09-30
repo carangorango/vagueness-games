@@ -27,6 +27,6 @@ show(ds[stratsToPlot,])
 d = subset(data, Number.of.states == 6 & Tolerance == 0.3 & Impairment == 0.05 & Speaker.Convex.Cat == 1)
 
 
-plot.and.save.language.by.index(d, which.min(d$Expected.utility))
-plot.and.save.language.by.index(d, which.max(d$Expected.utility))
-d[c(which.min(d$Expected.utility), which.max(d$Expected.utility)),]
+# plot.and.save.language.by.index(d, which.min(d$Expected.utility))
+# plot.and.save.language.by.index(d, which.max(d$Expected.utility))
+# d[c(which.min(d$Expected.utility), which.max(d$Expected.utility)),]

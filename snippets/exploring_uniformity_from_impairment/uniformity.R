@@ -18,7 +18,7 @@ HD = function(x, y){
   return( sqrt(sum(sapply(1:length(x), function(i) (sqrt(x[i]) - sqrt(y[i]))^2  )) ) / (sqrt(2)) )
 }
 
-# Distance between two strategis as Hellinger distances at each choice point.
+# Distance between two strategis as mean Hellinger distances at each choice point.
 
 strategy.distance = function(P,Q){
   nc = dim(P)[1]
@@ -210,15 +210,20 @@ sPlot = ggplot(meanEUs, aes(x=Impairment, y=Speaker.meanEU)) +
 
 # Combine distance and average Group EU
 
-D$withinGroupEU = meanEUs$Speaker.meanEU
-D$individualEU = meanEUs$meanEU
-D$convexProportion = meanEUs$convexProportion
+D$meanEUGroup = meanEUs$Speaker.meanEU
+# D$meanEUIndiv = meanEUs$meanEU
+# D$convexProportion = meanEUs$convexProportion
 
 Dmelt = melt(D, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
 
 combPlot = ggplot(Dmelt, aes(x=Impairment, y=value, color = variable)) + 
-  geom_point() + facet_grid(Number.of.states ~ Tolerance) + geom_line()
+  geom_point(aes(shape = variable)) + facet_grid(Number.of.states ~ Tolerance) + geom_line()
 
-# show(combPlot)
+show(combPlot)
+
+pdf("~/Desktop/data/svn/vagueness-games/paper/plots/WithinGroupMeasures.pdf", height=6, width=8)
+show(combPlot)
+dev.off()
+
 
 
