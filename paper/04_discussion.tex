@@ -19,10 +19,70 @@ When trying to adopt another individual's behavior, it is thus more likely that 
 \footnote{The consequence of perturbing a strategy with a noise matrix based on similarity can be seen as ``spreading'' the effects of the fitness of the behavior for a state to its more similar states, which can also be interpreted as generalization}%
 .
 
-Finally, the replicator dynamics are also related to some forms of reinforcement learning (\cite{Borgers1997,Hopkins2005,Beggs2005}), and can thus be interpreted in cognitive terms.
+
 
 
 \subsection{Relation with previous accounts}
+
+\paragraph{Generalized reinforcement.}
+\citet{OConnor2013:The-Evolution-o} introduces a generalization of
+Herrnstein reinforcement learning for sim-max games and showed that
+this not only leads to vague signaling patterns, but can speed-up
+evolution of efficient signaling strategies, especially in games with
+many states. 
+
+Under plain Herrnstein reinforcement learning, sender and receiver
+play the game repeatedly and adjust their dispositions to act after
+each round of play, in such a way that the actual (non-negative)
+payoff gained in the current interaction is added to the
+non-normalized propensities for acting in exactly the way that they
+acted in the current round of play. For sim-max games, this means that
+when the sender chose $\messg$ in state $\state$, and this resulted in
+some non-negative payoff (which is guaranteed by our choice of utility
+function), the probability that the sender chooses $\messg$ again in
+$\state$ is increased, but nothing else changes. In particular, the
+speakers behavior in other choice points does not change. Generalized
+reinforcement learning is different here. When the use of $\messg$ in
+$\state$ gave positive payoff, then not only will its future use
+probability be promoted at $\state$ but also at other states,
+proportional to how similar these are to $\state$. Similar amendments
+take care of the way that the receiver updates his choice
+dispositions.
+
+\citet{OConnor2013:The-Evolution-o} shows that this extension not only
+leads to vague signaling of the appropriate kind, but also speeds up
+learning in such a way that, especially for games with higher numbers
+of states, higher levels of communicative success are reached in
+shorter learning periods than is possible without stimulus
+generalization. Technically, this result is partly due to the fact
+that signalers make bigger changes to their behavioral strategies
+after each round of play under generalized reinforcement than under
+the plain variety. But that only explains the speed of adaptation, not
+necessarily that generalization also leads to regularity and
+communicative efficiency. 
+
+Diffusion of strategies in the \rdd can be conceived of as a form of
+generalization as well, and works in large part quite analogous to
+stimulus generalization in \citeauthor{OConnor2013:The-Evolution-o}'s
+approach. This holds for the effect of diffusion and generalization,
+but not necessarily for the way that the effect is achieved. We also
+saw that diffusion in \rdd leads to more regular languages and
+speedier convergence. However, the \rdd is a more abstract framework
+than generalized reinforcement learning. The latter is foremost
+motivated as a learning dynamic that has two players adapt their
+individual strategies after each concrete round of play. In contrast,
+the \rdd describes a more abstract, average dynamical change in
+behavioral dispositions. Although the dynamics of (some forms of)
+reinforcement learning mirror those of the replicator dynamics (at
+some stage in time) (\cite{Borgers1997,Hopkins2005,Beggs2005}), this
+does not mean that \emph{generalized} reinforcement learning, in which
+stimulus generalization is best motivated at the level of a single
+agent's dispositional generalization after one round of play, is also
+directly a plausible high-level description of, say, generalized
+learning in a population of agents. Seen in this light, generalized
+reinforcement learning and the \rdd nicely complement each other, as
+similarly-minded accounts operating at different levels of
+abstraction. 
 
 \paragraph{Quantal response equilibria.}
 \citet{FrankeJager2010:Vagueness-Signa} suggested a number of ways in
@@ -41,47 +101,24 @@ choose $\act$ with a probability proportional to $\expo(\lambda \cdot
 U(\act))$, where $\lambda$ is a rationality parameter. If $\lambda
 \rightarrow \infty$ we retrieve the behavior of the best response
 choice function, but if it is positive but finite, any choice $\act$
-will receive a positive probability of being chosen, but acts with
-higher expected utility will be more
-likely. \citet{FrankeJager2010:Vagueness-Signa} show that quantal
-response equilibria of sim-max games, i.e., pairs of sender and
-receiver strategies such that the sender strategy is the quantal
-response to the expected utilities under the receiver strategy and
-vice versa, show the desired marks of vague
-signaling. Figure~\ref{fig:exampleQRE_stratsA} shows an example of a
+will receive a positive probability, but acts with higher expected
+utility will be more likely. The underlying motivation for this choice
+rule is the assumption that there is noise in the computation of
+expected utilities and/or in maximization of expected
+utilities. Consequently, choices with almost equal expected utilities
+will be chosen with almost equal probability (for moderate values of
+$\lambda$). 
+
+\citet{FrankeJager2010:Vagueness-Signa} show that quantal response
+equilibria of sim-max games, i.e., pairs of sender and receiver
+strategies such that the sender strategy is the quantal response to
+the expected utilities under the receiver strategy and vice versa, can
+show the desired marks of vague
+signaling. Figure~\ref{fig:exampleQRE_stratsA} gives an example of a
 quantal response equilibrium for a sim-max game, as used in our set-up
-with $\toler = 0.5$. Sender and receiver strategies look very much
-like what evolves under \rdd with modest values of perceptual
-imprecision. 
-
-There is a major conceptual difference in the source of vagueness
-between the quantal response approach and our favored approach in
-terms of perceptual noise. When we choose a lower level of pragmatic
-tolerance, like we used in our simulations, the predictions of the
-quantal response approach look
-different. Figure~\ref{fig:exampleQRE_stratsB} shows such an example
-that clearly shows that, unlike the evolving strategies under \rdd,
-sender strategies have vague boundaries also towards the end of the
-unit intervals. This is because quantal responses equalize message use
-far away from the ``prototypical'' interpretation. That this is
-conceptually odd shows even more clearly in a case where the state
-space is intuitively unbounded, as for instance for the property
-``tall''. If the usual interpretation of a ``tall man'' peaks at
-around, say, 195cm then when meeting a giant of $n$ meters speaker
-would, according to the quantal response approach, be ever more
-inclined to describe the giant as ``short''. This is because, as the
-distance from the prototype increases for larger $n$, the expected
-utilities of saying ``short'' or ``tall'' will both converge to zero,
-and the difference between the two will also converge to zero. Whence
-that the quantal response approach would predict that speakers would
-grow indifferent between choice of antonyms as $n$ grows, which seems
-weird. (Notice that this argument hinges on the choice of utility
-function. Still, to the extent that the chosen lower bounded utility
-functions are reasonable ---and we think they are very reasonable---,
-this is a conceptual oddity.)
-
-The \rdd approach does not have this peculiarity. \dots
-
+but with higher tolerance $\toler = 0.5$. Sender and receiver
+strategies look very much like what evolves under \rdd with modest
+values of perceptual imprecision. 
 
 \begin{figure}
   \centering
@@ -103,10 +140,46 @@ The \rdd approach does not have this peculiarity. \dots
 \end{figure}
 
 
+But not all quantal response equilibria are equally plausible
+explanations of vague language use, and the ones that are not suggest
+that it is less plausible to think of vagueness as arising because of
+errors in the computation and maximization of expected utility, as the
+quantal response approach assumes, than that it arises due to
+confusion of similar states, as the \rdd proposes. To see what the
+problem is, we can look at cases like given in
+Figure~\ref{fig:exampleQRE_stratsB}, which is the quantal response
+equilibrium for a game with lower tolerance $\toler = 0.05$. Unlike
+what evolves under \rdd in this case, sender strategies have vague
+boundaries also towards the end of the unit intervals. Technically,
+this is because quantal responses equalize message use far away from
+the ``prototypical'' interpretation, not just in-between categories,
+so to speak. This, in turn, is because quantal responses introduce
+noise into the decision making at the level of computing or maximizing
+expected utility of choices.
 
-\mytodo{JPC}{Discuss nature of noise}
-\mytodo{JPC}{Compare with O'Connor}
-\mytodo{JPC}{Compare with Franke2013}
+That this is conceptually odd shows even more clearly in a case where
+the state space is intuitively unbounded, as for instance for the
+property ``tall''. If the usual interpretation of a ``tall man'' peaks
+at around, say, 195cm then when meeting a giant of $n$ meters speakers
+would, according to the quantal response approach, be ever more
+inclined to describe the giant indifferently as either ``tall'' or
+``short'' the larger $n$ gets. This is because, as the distance from
+the prototype increases for larger $n$, the difference between the
+expected utilities of saying ``short'' or ``tall'' will converge to
+zero. Whence that the quantal response approach would predict that
+speakers would grow indifferent between choice of antonyms as $n$
+grows, which seems weird. 
+
+Admittedly, this argument hinges on the choice of utility
+function. Still, to the extent that the chosen lower bounded utility
+functions are reasonable ---and we think they are very reasonable---,
+the case suggests that quantal responses are not a good model,
+intuitively speaking, for why linguistic categories are
+vague. Vagueness is more plausibly an effect of perceptual confusion
+of similar states, than of computational errors in maximizing expected
+utility.
+
+
 
 %%% Local Variables: 
 %%% mode: latex
