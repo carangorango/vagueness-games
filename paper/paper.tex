@@ -7,8 +7,8 @@
 
 \usepackage[]{../helpers/mypackages}
 %\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
-\bibliography{../helpers/MyRefGlobal}
-\bibliography{paper}
+\bibliography{MyRefGlobal}
+% \bibliography{paper}
 \usepackage{../helpers/myenvironments}
 \usepackage{../helpers/mycommands}
 \usepackage{todonotes}
@@ -64,26 +64,29 @@
 
 
 \title{Vagueness, Noise, and Communication}
-\author{Jos\'e Pedro Correia and Michael Franke}
+% \author{Jos\'e Pedro Correia and Michael Franke}
 \date{}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-  Signaling games have been garnering a lot of attention as models for
-  studying natural language meaning.  One important aspect that is
+  Signaling games have attracted a lot of attention as models for
+  studying the evolution of meaning. One important aspect that is
   nevertheless typically missing from most models in the literature is
-  the possibility for vagueness as a feature of successful languages.
-  Recently, some models have been proposed to explicitly address this
-  limitation.  In this paper we explore one such model and establish a
-  link between the dynamics in the model and the replicator-mutator
-  equations.  Furthermore, we study the long term behavior of the
-  model using computer simulations.  The results indicate that vague
-  languages, despite having lower expected utility and informativity,
-  are faster to converge to an equilibrium than non-vague ones.  We
-  argue that this could be an important advantage that contributes to
-  the pervasiveness of vagueness in natural language.
+  the possibility for vagueness as a feature of successful signaling.
+  Complementing recent models that have been proposed to explicitly
+  address this limitation, we introduce the replicator diffusion
+  dynamic, provably a special case of the replicator mutator dynamic,
+  which implements a versatile and natural integration of stochastic
+  noise in the form of probabilistic confusion of similar stimuli, on
+  the one hand, and evolutionary pressure on optimal signal use, on
+  the other. Applying the replicator diffusion dynamic to a
+  generalization of David Lewis' signaling games, so-called
+  similarity-maximizing games, we show that stochastic noise can not
+  only lead to vague, yet communicative efficient signal use, but can
+  also unify evolutionary outcomes and help avoid inefficient
+  categorization.
 \end{abstract}
 
 \input{01_intro}
