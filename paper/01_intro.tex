@@ -82,7 +82,10 @@ signaling games, so called similarity-maximizing games or sim-max
 games, for short
 \citep{FrankeJager2010:Vagueness-Signa,OConnor2013:Evolving-Percep,OConnor2013:The-Evolution-o}. Our
 contribution is best seen in relation to these accounts, as it also
-relies on sim-max games. Let's introduce these first.
+relies on sim-max games. Let's introduce these first, and then zoom in
+on the problem of vagueness.
+
+\subsection{Sim-max games}
 
 Signaling games, as introduced by \citet{Lewis_1969:Convention}, have
 a sender and a receiver. The sender knows the true state of the world,
@@ -91,27 +94,43 @@ to reveal to the receiver, who then chooses an act. In Lewis' games,
 states are maximally distinct from each other and the receiver's acts
 are related to them one-to-one. If the receiver chooses the act that
 corresponds to the actual state, the play is a success, otherwise a
-failure. Similarity-maximizing games are generalizations of Lewis'
-games in that they allow different states to be more or less similar
-to one another, and, roughly put, to make success of communication a
-function of that similarity. Signaling games with utility-relevant
+failure. Certain regular combinations of sender signaling and receiver
+reaction make messages meaningful, in the sense that their use is
+correlated systematically to certain states or acts. To investigate
+the conditions under which such meaning-generating behavior can evolve
+is a highly interesting topic that we are only beginning to fully
+understand
+\citep[e.g.][]{Warneryd1993:Cheap-Talk-Coor,BlumeKim1993:Evolutionary-St,Zollman2005:Talking-to-Neig,Huttegger2007:Evolution-and-t,Pawlowitsch2008:Why-Evolution-d,Barrett2009:The-Evolution-o,Wagner2009:Communication-a,HutteggerSkyrms2010:Evolutionary-Dy,Skyrms2010:Signals,HutteggerZollman2011:Signaling-Games}.
+
+Similarity-maximizing games are generalizations of Lewis' games in
+that they allow different states to be more or less similar to one
+another, and, roughly put, make success of communication a function of
+that similarity. Intuitively speaking, while Lewis' games treated
+communicative success as a matter of black and white, sim-max games
+allow for a gradient notion of communicative success: the more similar
+the receiver's interpretation is to the actual state, the more
+successful the play was. Signaling games with utility-relevant
 similarities in the state space are fairly standard in economics
 \citep[e.g.][]{Spence1973:Job-market-sign,CrawfordSobel1982:Strategic-Infor},
 but have received particular attention in a more philosophical and
-linguistic context by the more recent work of
-\citet{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct,JagerMetzger2011:Voronoi-Languag}. 
+linguistic context by the more recent work for reasons that will
+become clear presently
+\citep{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct,JagerMetzger2011:Voronoi-Languag}.
 
 More concretely, a sim-max game, in the relevant sense here, consists
-of a set of states $\States$, a set of messages $\Messgs$, a
-similarity metric on states: $\similarity \mycolon \States \times
+of a set of states $\States$, a set of messages $\Messgs$ with much
+fever messages than states, a probability distribution $\Pr \in
+\Delta(\States)$ that gives the occurrence probabilities of states, a
+similarity metric on states $\similarity \mycolon \States \times
 \States \rightarrow \mathds{R}$, and a utility function $\Utils
 \mycolon \States \times \States \rightarrow \mathds{R}$. We identify
 the receiver's acts with the states of the world, so that the game is
 one of guessing the actual state, so to speak. We also assume that
-sender and receivers interests are alike, so we only have one utility
-function. We do not consider message costs, so utilities only depend
-on the actual state, and the receiver's response. The similarity function
-should satisfies the usual requirements for a metric:
+sender's and receiver's interests are alike, so we only have one
+utility function. We do not consider message costs, so utilities only
+depend on the actual state, and the receiver's response. The
+similarity function should satisfy the usual requirements for a
+metric:
 \begin{align*}
   & \similarity(\mystate{1}, \mystate{2}) \ge 0 &&
   \similarity(\mystate{1}, \mystate{2}) = 0 \Leftrightarrow
@@ -129,31 +148,135 @@ similarity:
   \Utils(\mystate{1},\mystate{3})\,.
 \end{align*}
 To keep matters simple, we only look at cases where $\States$ contains
-finitely many points from the unit interval, with similarity given by
-the Euclidean distance in this one-dimensional space.\todo{introduce
-  utilities here?}
+finitely many points from the unit interval, all of which have equal
+probability, and with similarity given by the Euclidean distance in
+this one-dimensional space.\todo{introduce utilities here?}
+
+\citet{JagerMetzger2011:Voronoi-Languag} showed that the
+evolutionarily stable states of sim-max games are remarkably
+systematic. Their results were obtained for games with infinitely many
+states in $n$-dimensional Euclidean space $\States \subseteq
+\mathds{R}^n$ and a quadratic loss function for utilities
+$\Utils(\mystate{1}, \mystate{2}) = - (\mystate{1} -
+\mystate{2})^2$. For these games, the evolutionarily stable states are
+demonstrably so-called Voronoi-languages. Intuitively speaking, a
+Voronoi language is a pair of sender and receiver strategies, such
+that the sender strategy (quasi-)partitions the state space into
+convex categories, while the receiver's interpretations are the
+central spots in each category. Figure~\ref{fig:VoronoiLanguage} gives
+an example for such a Voronoi-language for a sim-max game with
+$\States = [0,1]$, two messages, and a flat prior distribution that
+selects all states equally likely. The sender's strategy (a function
+from states to messages; more below) uses one message exclusively for
+all points in the lower interval and another for all points in the
+upper interval. The receiver's interpretations of messages are the
+central points in the respective intervals. 
+
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}[scale=3]
+
+        \begin{scope}
+
+          \draw[-,thick] (0,0) -- (1.5,0);
+
+          \draw (0,0) node {\color{red}{\big{[}}};
+
+          \draw (.75,0) node {\color{red}{\big{)}}};
+
+          \draw (.76,0) node {\color{red}{\big{(}}};
+
+          \draw (1.5,0) node {\color{red}{\big{]}}};
+
+            \draw (.325,.15) node
+            {\color{red}{$\Spure(\mymessg{1}  \probbar \cdot)$}};
+
+            \draw (1.075,.15) node
+            {\color{red}{$\Spure(\mymessg{2} \probbar \cdot)$}};
+
+            \node at (.375,0) (node1) {\color{blue}{$\bullet$}};
+
+            \node at (.375,-.3) (label1)
+            {\color{blue}{${\Rpure}(\cdot \probbar \mymessg{1})$}};
+
+            \draw[-,color=blue] (node1) -- (label1);
+
+            \node at (1.125,0) (node2) {\color{blue}{$\bullet$}};
+
+            \node at (1.125,-.3) (label2)
+            {\color{blue}{${\Rpure}(\cdot \probbar \mymessg{2})$}};
+
+            \draw[-] (node2) -- (label2);
+
+            \draw (0,-.2) node {$0$};
+
+            \draw (.75,-.2) node {$0.5$};
+
+            \draw (1.5,-.2) node {$1$};
+
+          \end{scope}
+ 
+        \end{tikzpicture}
+
+  \caption{Example of a Voronoi-language on $\States = [0,1]$. The
+    sender strategy $\Spure$ uses one signal for the lower half, and
+    another for the upper half of the unit interval. The receiver
+    strategy $\Rpure$ interprets messages as the central elements in the
+    respective intervals.}
+  \label{fig:VoronoiLanguage}
+\end{figure}
+
+
+This result is particularly interesting, because it demonstrates that
+signaling can impose orderly categories on a metric space, without
+that being the ulterior purpose of it all. Sender and receiver can be
+distinct entities, whose purpose it is to communicate effectively
+about the actual state. In that case, evolving Voronoi-languages would
+explain why linguistic categories are well-behaved and orderly in the
+way they appear to be. More abstractly, sender and receiver can also
+be thought of as distinct modules in a single system, where the first
+module that must discretize the information that it is fed into a
+small sample of, suggestively, category labels to pass to a second
+system that tries to decode the original information. In this case,
+evolving Voronoi-languages would explain why conceptual categories are
+well-behaved and orderly in the way that they appear to be
+\citep[see][for more on this latter
+interpretation]{OConnor2013:Evolving-Percep}.
+
+Seen in this light, sim-max games appear to have the potential of
+providing a foundation to approaches in cognitive semantics that rely
+on the notion of conceptual spaces
+\citep[e.g.][]{Gardenfors2000:Conceptual-Spac}.
+
+
+
+\bigskip
 
 \begin{itemize}
 \item ESSs of sim-max games
 \item Voronoi tessallations
 \item conceptual spaces
-\item 
+\item desiderata on vagueness: higher order vagueness \dots
+\item no vagueness normally, but possible Franke, O'Connor ...
 \end{itemize}
 
 \bigskip
 
+\subsection{Vague signaling in sim-max games}
 
-As in other applications of
-evolutionary game theory, we can distinguish micro- and macro-level
-approaches. Micro-level approaches look at adaptive behavior of
-individual agents. Usually, changes in the behavioral dispositions of
-agents occur after every single interaction. In contrast, macro-level
-approaches outline more abstract, aggregate dynamics, happening in a
-huge population of agents, or otherwise abstracting from seemingly
-irrelevant detail. Usually, a macro-level dynamic captures changes of
-frequencies of behavioral types in the population over time. Previous
-accounts have suggested both micro- and macro-level dynamics to show
-how vague signal use can arise in sim-max games.
+
+As in other applications of evolutionary game theory, we can
+distinguish micro- and macro-level approaches. Micro-level approaches
+look at adaptive behavior of individual agents. Usually, changes in
+the behavioral dispositions of agents occur after every single
+interaction. In contrast, macro-level approaches outline more
+abstract, aggregate dynamics, happening in a huge population of
+agents, or otherwise abstracting from seemingly irrelevant
+detail. Usually, a macro-level dynamic captures changes of frequencies
+of behavioral types in the population over time. Previous accounts
+have suggested both micro- and macro-level dynamics to show how vague
+signal use can arise in sim-max games.
 
 As for micro-dynamics, \citet{FrankeJager2010:Vagueness-Signa} show
 how limited memory of past interactions can lead to vague signal use,
