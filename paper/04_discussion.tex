@@ -1,27 +1,102 @@
 \section{Discussion}
 \label{sec:discussion}
 
+We have introduced a new variant of the replicator mutator dynamics
+that implements specifically stochastic noise in the form of
+confusability of similar states. The probabilities of confusing nearby
+similar states is easily implemented in behavioral strategies, but can
+also be translated into a mutation matrix for pure strategies. This
+allows, in principle, several conceptual interpretations of the \rdd,
+on which we will briefly enlarge below in
+Section~\ref{sec:model-interpretation}.
+
+Next to this technical contribution, the results of our numerical
+simulations also advance our understanding of the possibility of
+evolving regular and efficient categories despite their (higher-order)
+vagueness. Section~\ref{sec:relat-with-prev} zooms in on the relation
+with closely related accounts once more, to delineate the present
+approach more precisely.
+
 \subsection{Model interpretation}
-The replicator-mutator equations are a mathematical model motivated by concepts from the theory of natural selection, namely natural variation, differential reproduction, and mutation.
-The most straightforward interpretation is thus a biological one: we can imagine signaling strategies as innate behaviorial tendencies of organisms, steps in the evolutionary process as successive generations, and selection as capturing the reproductive advantage of fitter individuals.
-In this interpretation, our proposed model is not an extremely interesting one, since the noise matrix simply corresponds to a restricted form of mutation.
+\label{sec:model-interpretation}
 
-Another possibility is to take the equations as embodying cultural evolution.
-In this interpretation, what is subject to the evolutionary forces are not organisms but strategies themselves.
-This pressuposes that individuals can adopt strategies from other individuals.
-Fitness captures the success of strategies, which in the case of language can be thought of in terms of communicative success.
-Differential reproduction represents the tendency of more successful strategies to be more likely adopted by individuals, be it through imitation or some learning procedure within the population.
-Under this interpretation, the proposed noise perturbation becomes more interesting.
-Messages correspond to the overt data available to individuals, whereas states are interpreted as the more private aspect of the behavior.
-Futhermore, similarity-maximization games are especially interesting in situations where the number of states largely exceeds the number of messages available.
-When trying to adopt another individual's behavior, it is thus more likely that information about states is both less accessible and less practical to elicit, hence justifying a higher likelihood of mistakes and a more pressing need for a certain degree of generalization%
-\footnote{The consequence of perturbing a strategy with a noise matrix based on similarity can be seen as ``spreading'' the effects of the fitness of the behavior for a state to its more similar states, which can also be interpreted as generalization}%
-.
+We mentioned in passing in Section~\ref{sec:repl-diff-dynam-1} that
+adding diffusion to other discrete-time evolutionary dynamics that
+operate on behavioral strategies is entirely straightforward. We
+could, for instance, easily diffuse the outcome of a best-response
+dynamic at each time step. That would make sense if we thought of
+agents as prone to confusing similar states that are otherwise
+rational optimizers of behavior. The reason that we chose the
+replicator dynamics to combine with diffusion is twofold. A minor
+reason is that it makes for a conceptually interesting link with the
+replicator mutator dynamics. A more important reason is that the
+replicator dynamic is especially versatile and non-committal about
+what the exact process of adaption is that is being modelled.
 
+Originally the \rd was introduced as mathematical model of evolution
+under asexual reproduction, motivated by concepts from the theory of
+natural selection \citep{TaylorJonker1978:Evolutionary-St}. The most
+conservative interpretation of the \rdd in our present context is thus
+a biological one: we can imagine signaling strategies as innate or
+fixed behaviorial tendencies of organisms, steps in the evolutionary
+process as successive generations, and selection as capturing the
+reproductive advantage of fitter individuals. This interpretation,
+strictly speaking, requires formalization in terms of mixed strategies
+via the \rmd, and possibly also a symmetrizing of the game, so that
+every agent is assumed to have a unique sender and receiver role at
+the same time the is bequeathed onto the next generation. Diffusion,
+in this context, could be either of two things. It could be
+differential mutation probabilities in line with other interpretation
+of mutation in the \rmd
+\citep[e.g.][]{NowakKomarova2001:Evolution-of-Un,KomarovaNiyogi2001:The-Evolutionar}:
+pure strategies are not faithfully reproduced, and mistakes in
+bequeathing pure strategies are more likely if they result from the
+confusion of similar states. Another possible biological
+interpretation of the \rdd, is that inheritance is faithful, but
+strategies are noisily realized. Strategies are not necessarily
+selected for what they are, but rather for how they are realized, once
+noise is factored in. 
 
+But the replicator dynamic is not only a model of biological
+evolution. It can also be interpreted as a high-level description of
+the likely development of other behavioral adaptation processes, like
+differential imitation and cultural evolution in general
+\citep[see][for various derivations of the
+\rd]{Sandholm2013:Population-Game}. Under this interpretation, the \rd
+is consistent with the idea that what is subject to the evolutionary
+forces are not organisms but behavior: individuals can adapt their
+behavior to the perceived environment or adopt strategies from other
+individuals. Fitness captures the success of behavioral patterns,
+which in the case of language can be thought of in terms of
+communicative success.  Differential reproduction represents the
+tendency of more successful strategies to be more likely adopted by
+individuals, be it through imitation or some learning procedure within
+the population.  
+
+Under this non-biological interpretation, we have again two options of
+picturing what diffusion is, similar to the biological cases
+before. One possibility is that diffusion is noise in the adoption of
+strategies, say, by conditional imitation, of strategies by other
+signalers. Another possibility is that diffusion is again noise on the
+realization of strategies: while behavior is optimized to be efficient
+(be it due to learning, introspection or imitation), realization of
+strategies is bound to be noisy due to confusability of similar
+states. 
+
+We believe that all of the four mentioned interpretations are, on
+first approximations, feasible conceptualizations of the \rdd, and
+that it is a good thing to know of a working account of vague
+signaling that sketches where fitness-based selection under
+state-confusability will take is, abstracting away from the details of
+actually playing the game, inheriting, imitating or otherwise
+optimizing behavior in whatever particular way. It is a good thing to
+know this on the macro-level, especially since there are also
+micro-level accounts that nicely complement the picture. We turn to
+one such next.
 
 
 \subsection{Relation with previous accounts}
+\label{sec:relat-with-prev}
 
 \paragraph{Generalized reinforcement.}
 \citet{OConnor2013:The-Evolution-o} introduces a generalization of
@@ -178,16 +253,6 @@ intuitively speaking, for why linguistic categories are
 vague. Vagueness is more plausibly an effect of perceptual confusion
 of similar states, than of computational errors in maximizing expected
 utility.
-
-\paragraph{The conceptual spaces approach.}
-
-\begin{itemize}
-\item can only ``construct'' (fuzzy) tessellation's given the
-  prototypes (or prototype regions); but cannot explain how the
-  prototypes come about
-\end{itemize}
-
-
 
 %%% Local Variables: 
 %%% mode: latex
