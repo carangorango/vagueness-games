@@ -85,7 +85,7 @@ contribution is best seen in relation to these accounts, as it also
 relies on sim-max games. Let's introduce these first, and then zoom in
 on the problem of vagueness.
 
-\subsection{Sim-max games}
+\subsection{Sim-max games \& conceptual spaces}
 
 Signaling games, as introduced by \citet{Lewis_1969:Convention}, have
 a sender and a receiver. The sender knows the true state of the world,
@@ -246,37 +246,71 @@ interpretation]{OConnor2013:Evolving-Percep}.
 
 Seen in this light, sim-max games appear to have the potential of
 providing a foundation to approaches in cognitive semantics that rely
-on the notion of conceptual spaces
-\citep[e.g.][]{Gardenfors2000:Conceptual-Spac}.
+on the notion of conceptual spaces.
+\citet[][70--77]{Gardenfors2000:Conceptual-Spac}, for example, has
+prominently argued that natural categories are convex regions in a
+suitable conceptual space. If the conceptual space has a suitable
+metric, then it is possible to think of these convex categories as
+derived from a set of prototypes. Fixing a set of prototypes, we
+consider the category corresponding to each prototype $p$ as the set
+of points that are more similar to $p$ than to any other
+\citep[e.g.][]{OkabeBoots2000:Spatial-Tessell}. In this way,
+\citet{Gardenfors2000:Conceptual-Spac} argues, an efficient
+categorization system can be obtained: storing the prototypes lets us
+recover the categories without having to store each categories
+extension. However, what is left unexplained so far, is where the
+prototypes come from, and why we would not see just any distribution
+of prototypes as an equally efficient classification system. This is
+where sim-max games, might chip in a principled approach to deriving
+in an independent way, not only convex categories, but also
+prototypical exemplars belonging to them.
 
-
-
-\bigskip
-
-\begin{itemize}
-\item ESSs of sim-max games
-\item Voronoi tessallations
-\item conceptual spaces
-\item desiderata on vagueness: higher order vagueness \dots
-\item no vagueness normally, but possible Franke, O'Connor ...
-\end{itemize}
-
-\bigskip
 
 \subsection{Vague signaling in sim-max games}
 
+The brief outline of an approach to conceptual categorization using
+sim-max games leaves many problems unaddressed. One of them is that
+natural categories for continuously variable stimuli, like shades of
+color, pitch heights, spatial dimension and the like, do not have
+unique prototypes and clear category boundaries. We would like to
+account for the possibility of vagueness, in particular the following
+criteria
+\citep[e.g.][]{Sainsbury1991:Is-There-Higher,KeefeSmith1997:Vagueness:-A-Re,Smith2008:Vagueness-and-D}:
+(i) clear positive examples of a vague category should show a
+gradient, perhaps smooth, transition to negative examples to
+accommodate also ``higher-order vagueness'' ; (ii) prototypes should
+likewise be gradient regions, peaking at the center of the vague
+category they represent.
 
-As in other applications of evolutionary game theory, we can
-distinguish micro- and macro-level approaches. Micro-level approaches
-look at adaptive behavior of individual agents. Usually, changes in
-the behavioral dispositions of agents occur after every single
-interaction. In contrast, macro-level approaches outline more
-abstract, aggregate dynamics, happening in a huge population of
-agents, or otherwise abstracting from seemingly irrelevant
-detail. Usually, a macro-level dynamic captures changes of frequencies
-of behavioral types in the population over time. Previous accounts
-have suggested both micro- and macro-level dynamics to show how vague
-signal use can arise in sim-max games.
+
+\citet{DouvenDecock2011:Vagueness:-A-Co} show that
+\citeauthor{Gardenfors2000:Conceptual-Spac}'s conceptual spaces
+approach can be extended to account for the existence of borderline
+cases. From the assumption that prototypes are not unitary points, but
+extended, yet convex regions in conceptual space,
+\citeauthor{DouvenDecock2011:Vagueness:-A-Co} give a construction
+algorithm that yields ``collated Voronoi diagrams'' with thick,
+extended boundaries representing borderline regions. Building on this
+work, \citet{DecockDouven2012:What-is-Graded-} show further how it is
+possible to arrive at ``higher-order vagueness'' and degrees of
+category membership, by, essentially, weighing in the distance of
+different borderline examples to various prototypical regions. This
+accounts for the first of the two desiderata mentioned above, but
+still assumes that crisp non-gradient prototype regions must be
+pre-given.
+
+An alternative approach is taken by
+\citet{FrankeJager2010:Vagueness-Signa} and
+\citet{OConnor2013:The-Evolution-o} who show how the above desiderata
+can be met by evolving strategies in sim-max games for certain types
+of solution concepts, that can be divided into micro- and macro-level
+approaches. Micro-level approaches look at adaptive behavior of
+individual agents. Usually, changes in the behavioral dispositions of
+agents occur after every single interaction. In contrast, macro-level
+approaches outline more abstract, aggregate dynamics, happening in a
+huge population of agents, or otherwise abstracting from seemingly
+irrelevant detail. Usually, a macro-level dynamic captures changes of
+frequencies of behavioral types in the population over time.
 
 As for micro-dynamics, \citet{FrankeJager2010:Vagueness-Signa} show
 how limited memory of past interactions can lead to vague signal use,
@@ -287,8 +321,8 @@ reinforcement learning that includes a low-level form of stimulus
 generalization. Agents update their behavior after each round of play
 in such a way that similar states to the ones that actually occurred
 are subject to behavioral adjustment as well. (Alternative approaches
-are discussed in more detail in Section~XYZ, where we can compare them
-with the system introduced in this paper.)
+are discussed in more detail in Section~\ref{sec:discussion}, where we
+can compare them with the system introduced in this paper.)
 
 \citet{FrankeJager2010:Vagueness-Signa} also consider a macro-level
 approach, using the notion of a \emph{quantal response}. A quantal
@@ -297,41 +331,52 @@ idea that agents make small mistakes when calculating the expected
 utility of choice options. In aggregation, these probabilistic
 mistakes lead to systematic ``trembles'' that produce vague signal
 use. The approach we take here is superficially similar, but there are
-crucial divergences. For one, we adopt a dynamic perspective by
-looking at the stable states of a suitable population dynamics. For
-another, we demonstrate in Section~XYZ that quantal responses can give
-rise to counterintuitive predictions. These counterintuitive examples
-suggest that vagueness in signaling use is not convincingly explained
-by appeal to mistakes in calculating expected utility, but rather, as
-we assume here, as the result of confusing similar states of the word.
+crucial differences. For one, we adopt a dynamic perspective by
+looking at limited-time outcomes of a dynamic process. For another, we
+demonstrate in Section~\ref{sec:discussion} that quantal responses can
+give rise to counterintuitive predictions. These counterintuitive
+examples suggest that vagueness in signaling use is not convincingly
+explained by appeal to mistakes in calculating expected utility, but
+rather, as we assume here, as the result of confusing similar states
+of the word.
 
-Against this background, we introduce a new macro-level approach
-to the evolution of vague signal use in sim-max games, where the
-source of vagueness is the agents' natural disability to sharply
-distinguish perceptually distinct states. This applies to both
-production and comprehension, i.e., both to the sender as well as to
-the receiver role. 
-
-We call our dynamic \textbf{replicator diffusion dynamic} (\rdd),
-because it is a special case of the replicator mutator dynamic
-(\rmd). It is a special case in the sense that the \rdd incorporates a
-special kind of mutation that is based on the similarity of states (as
-defined in the sim-max game). More concretely, we start from the idea
-that similar states are more easily confused than less similar
-states. To formalize this idea, we assume that there is a confusion
-matrix $C$, where $C_{ij}$ is the probability that a state \mystate{i}
-is realized as a possibly different state \mystate{j}. (There is a
-slightly different sense of ``realization'' in the sender and the
-receiver side, and we will enlarge on this below.) Based on this, we
-show two things. For one, we show how the discrete-time formulation of
-the replicator dynamic can be easily adapted to integrate diffusion of
-behavior due to confusion of states. This yields the \rdd in its basic
+Against this background, we introduce a new macro-level approach to
+the evolution of vague signal use in sim-max games, where the source
+of vagueness is the agents' natural inability to sharply distinguish
+perceptually distinct states. This applies to the sender as well as to
+the receiver role (albeit in slightly different manner). We call our
+dynamic \emph{replicator diffusion dynamic} (\rdd), because it is a
+special case of the replicator mutator dynamic (\rmd). It is a special
+case in the sense that the \rdd incorporates a particular kind of
+mutation that is based on the similarity of states (as defined in the
+sim-max game). More concretely, we start from the idea that similar
+states are more easily confused than less similar states. To formalize
+this idea, we assume that there is a confusion matrix $C$, where
+$C_{ij}$ is the probability that a state \mystate{i} is realized as a
+possibly different state \mystate{j}. (There is a slightly different
+sense of ``realization'' in the sender and the receiver side, and we
+will enlarge on this below.) Based on this, we show two things. For
+one, we show how the discrete-time formulation of the replicator
+dynamic can be easily adapted to integrate diffusion of behavior due
+to confusion of states. This yields the \rdd in its basic
 discrete-time formulation. For another, we also show that there exists
 a translation of the confusion matrix $C$ into a suitable mutation
 matrix $M_C$ such that the effect of $C$ and $M_C$ are ``equivalent''
 in a sense to be made precise. This supports the conclusion that the
 \rdd can indeed be thought of as a special case of the \rmd.
 
+Based on data from numerical simulations, we show that the inclusion
+of mild levels of such stochastic noise in the replicator dynamics
+does not disrupt the possibility of evolving communicative efficient
+signaling strategies at all. On the contrary, there might even be a
+higher-order benefit to the presence of perceptual imprecision, in
+that it accelerates converges, but also unifies and regularizes
+evolutionary outcomes in such a way that inefficient categorization is
+avoided. These results complement similar results by
+\citet{OConnor2013:The-Evolution-o}, obtained for a micro-dynamic
+extension of reinforcement learning. The \rdd adds to this a more
+general, abstract framework that is not tied to the specific
+assumptions of turn-based reinforcement. 
 
 
 %%% Local Variables: 
