@@ -166,12 +166,12 @@ Voronoi language is a pair of sender and receiver strategies, such
 that the sender strategy (quasi-)partitions the state space into
 convex categories, while the receiver's interpretations are the
 central spots in each category. Figure~\ref{fig:VoronoiLanguage} gives
-an example for such a Voronoi-language for a sim-max game with
+an example of such a Voronoi-language for a sim-max game with
 $\States = [0,1]$, two messages, and a flat prior distribution that
 selects all states equally likely. The sender's strategy (a function
 from states to messages; more below) uses one message exclusively for
-all points in the lower interval and another for all points in the
-upper interval. The receiver's interpretations of messages are the
+all points in the lower half of the interval and another for all points in the
+upper half. The receiver's interpretations of messages are the
 central points in the respective intervals. 
 
 \begin{figure}
@@ -233,7 +233,7 @@ central points in the respective intervals.
 This result is particularly interesting, because it demonstrates that
 signaling can impose orderly categories on a metric space, without
 that being the ulterior purpose of it all. Sender and receiver can be
-distinct entities, whose purpose it is to communicate effectively
+distinct entities, whose purpose is to communicate effectively
 about the actual state. In that case, evolving Voronoi-languages would
 explain why linguistic categories are well-behaved and orderly in the
 way they appear to be. More abstractly, sender and receiver can also
@@ -263,8 +263,8 @@ recover the categories without having to store each categories
 extension. However, what is left unexplained so far, is where the
 prototypes come from, and why we would not see just any distribution
 of prototypes as an equally efficient classification system. This is
-where sim-max games, might chip in a principled approach to deriving
-in an independent way, not only convex categories, but also
+where sim-max games might chip in a principled approach to deriving,
+in an independent way, not only convex categories but also
 prototypical exemplars belonging to them.
 
 
@@ -280,7 +280,7 @@ criteria
 \citep[e.g.][]{Sainsbury1991:Is-There-Higher,KeefeSmith1997:Vagueness:-A-Re,Smith2008:Vagueness-and-D}:
 (i) clear positive examples of a vague category should show a
 gradient, perhaps smooth, transition to negative examples to
-accommodate also ``higher-order vagueness'' ; (ii) prototypes should
+accommodate also higher-order vagueness; (ii) prototypes should
 likewise be gradient regions, peaking at the center of the vague
 category they represent.
 
@@ -305,7 +305,7 @@ An alternative approach is taken by
 \citet{FrankeJager2010:Vagueness-Signa} and
 \citet{OConnor2013:The-Evolution-o} who show how the above desiderata
 can be met by evolving strategies in sim-max games for certain types
-of solution concepts, that can be divided into micro- and macro-level
+of solution concepts which can be divided into micro- and macro-level
 approaches. Micro-level approaches look at adaptive behavior of
 individual agents. Usually, changes in the behavioral dispositions of
 agents occur after every single interaction. In contrast, macro-level
