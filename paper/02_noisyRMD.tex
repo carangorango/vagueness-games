@@ -54,7 +54,7 @@ at each of the agents' choice points:
 
 The replicator diffusion dynamic adds probabilistic confusion of
 similar states to the replicator dynamic. Fix a sim-max game with
-$\States = \Acts$ and a confusion matrix $C$. $C$ is a row-stochastic
+$\States = \Acts$ and a confusion matrix $C : \States \times \States$. $C$ is a row-stochastic
 matrix whose elements $C_{ij}$ give the probability that $\state_i$ is
 realized as $\state_j$. The confusability of states affects senders
 and receivers alike, but in slightly different ways (see
@@ -62,7 +62,7 @@ Figure~\ref{fig:noise-perturbation-of-strategies}). For the sender,
 $C_{ij}$ is the probability that the actual states \mystate{i} is
 perceived as \mystate{j}. For the receiver, $C_{ij}$ is the
 probability that \mystate{j} is the interpretation that is actually
-formed when \mystate{i} is the output of the receiver's strategy.
+formed when \mystate{i} is the intended interpretation.
 
 \begin{figure}
   \centering
@@ -210,16 +210,14 @@ of the former. We write $\Smixed_i$ for the frequency
 $\Smixed(\Spure_i)$ of pure strategy $\Spure_i$ (also for the
 receiver). 
 
-Mixed strategies hold more information than behavioral
-strategies. This is because every mixed strategy $\Smixed$ converts to
-a unique behavioral strategy defined by:
+Every mixed strategy $\Smixed$ converts to a unique behavioral strategy defined by:
 \begin{align*}
   \Sstrat(\messg \probbar \state) = \sum_{\Spure(\state) = \messg} \Smixed(\Spure)\,.
 \end{align*} 
 Let $G$ be this mapping from mixed to behavioral strategies. This $G$
 is \emph{not} an injection, as many mixed strategies map onto the same
 behavioral strategy. In this sense, mixed strategies hold more
-information about a distribution of pure strategies in a population.
+information than behavioral strategies about the distribution of pure strategies in a population.
 
 In the context of evolutionary dynamics, we can think of behavioral
 strategies as treating each choice point as an independent update site
