@@ -312,7 +312,7 @@ measures how revealing the sender's signal use is about which state is
 actual. It therefore measures, in our given set-up with flat priors, a
 sense of well-behavedness or regularity of a sender strategy.
 
-The main idea behind Skyrm's notion is that we can quantify the amount
+The main idea behind Skyrms' notion is that we can quantify the amount
 of information about a state $\state$ in a message $\messg$ via the
 relation between the probability of the state given the message
 $\Pr(\state \,|\, \messg)$ and the unconditional probability of the
@@ -393,17 +393,17 @@ so do not predict a clear effect of imprecision on Voronoiness either.
 \paragraph{Convexity.} At least for speaker strategies, which converge
 faster, it also makes sense to define a categorical measure of
 convexity, that compensates for potential vagueness. To determine
-whether a sender strategy $\Sstrat$ was convex despite possibly being
-vague, we looked at the derived pure strategy $\Spure$ for which
+whether a sender strategy $\Sstrat$ is convex despite possibly being
+vague, we look at the derived pure strategy $\Spure$ for which
 $\Spure(\state) = \messg$ only if $\messg =
 \argmax_{\messg' \in \Messgs} \Sstrat(\state,\messg')$. If that $\Spure$
-was convex, we also counted $\Sstrat$ as convex. The sender strategy
+is convex, we also count $\Sstrat$ as convex. The sender strategy
 in Figure~\ref{fig:example_stratsA} is not convex, while the one in
 Figure~\ref{fig:example_stratsB} is. Again, we do not expect a
 conceptual relation between vagueness and imprecision, on the one
 hand, and convexity on the other.
 
-\paragraph{Expected utility.} We also recorded the expected utility of
+\paragraph{Expected utility.} We also record the expected utility of
 a strategy pair:
 \begin{align*}
   \EU(\Sstrat,\Rstrat \myts ; \myts \toler) = \sum_{\state \in
@@ -412,7 +412,7 @@ a strategy pair:
   \state') \cdot \Util(\state,\state' \myts ; \myts \toler)\,.
 \end{align*}
 To make direct comparisons across different parameter settings, we
-normalized expected utility by the maximal amount of expected utility
+normalize expected utility by the maximal amount of expected utility
 obtainable in the relevant game. 
 
 The strategy pair in Figure~\ref{fig:example_stratsA} has a normalized
@@ -438,7 +438,7 @@ Figure~\ref{fig:MeanMetrics} shows the means of the recorded metrics,
 together with their estimated 95\% confidence intervals, for each
 triple of independent variables. Most trends are quite clear, and not
 unexpected. Entropy of sender and receiver strategies are increasing
-in imprecision. Entropy of speaker strategies seems independent of
+with imprecision. Entropy of speaker strategies seems independent of
 tolerance levels and the number of states, while there seems to be an
 effect of both parameters on the entropy of the hearer
 strategy. Speaker informativity and expected utility are decreasing
