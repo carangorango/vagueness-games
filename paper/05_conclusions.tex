@@ -1,6 +1,37 @@
 \section{Conclusions}
 \label{sec:conclusions}
 
+It is a special case in the sense that the \rdd incorporates a
+particular kind of mutation that is based on the similarity of states
+(as defined in the sim-max game). More concretely, we start from the
+idea that similar states are more easily confused than less similar
+states. To formalize this idea, we assume that there is a confusion
+matrix $C$, where $C_{ij}$ is the probability that a state \mystate{i}
+is realized as a possibly different state \mystate{j}. (There is a
+slightly different sense of ``realization'' in the sender and the
+receiver side, and we will enlarge on this below.) Based on this, we
+show two things. For one, we show how the discrete-time formulation of
+the replicator dynamic can be easily adapted to integrate diffusion of
+behavior due to confusion of states. This yields the \rdd in its basic
+discrete-time formulation. For another, we also show that there exists
+a translation of the confusion matrix $C$ into a suitable mutation
+matrix $M_C$ such that the effect of $C$ and $M_C$ are ``equivalent''
+in a sense to be made precise. This supports the conclusion that the
+\rdd can indeed be thought of as a special case of the \rmd.
+
+Based on data from numerical simulations, we show that the inclusion
+of mild levels of such stochastic noise in the replicator dynamics
+does not disrupt the possibility of evolving communicative efficient
+signaling strategies at all. On the contrary, there might even be a
+higher-order benefit to the presence of perceptual imprecision, in
+that it accelerates converges, but also unifies and regularizes
+evolutionary outcomes in such a way that inefficient categorization is
+avoided. These results complement similar results by
+\citet{OConnor2013:The-Evolution-o}, obtained for a micro-dynamic
+extension of reinforcement learning. The \rdd adds to this a more
+general, abstract framework that is not tied to the specific
+assumptions of turn-based reinforcement. 
+
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "paper"

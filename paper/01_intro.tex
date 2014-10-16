@@ -2,19 +2,23 @@
 
 Many of our concepts and words are vague. A vague category knows clear
 cases that fall under it, clear cases that do not, and also so-called
-borderline cases in-between that neither clearly apply, nor clearly
-not apply, but might themselves not be equal in terms of how well they
-represent the category in question. Vagueness does not seem to
-dramatically affect the success of everyday communication, but it is
-troublesome for some of our theories of language. This is especially the case for the
-logico-semantic tradition of Frege, Russell and the young Wittgenstein
-which is challenged by the paradoxes vagueness gives rise to. As
-can be expected, many proponents of this tradition have tried to address the
-problem, ranging from suggesting that there is nothing wrong with the classical
-approach and the problem is of a different nature, as in Williamson's epistemic view~\citep*{Williamson1994:Vagueness},
-to proposing various kinds of modifications to either semantics, logic, or both, as in for example
-supervaluationism \citep{Mehlberg1958,Fine1975}, many-valued logic \citep{Zadeh1975,Machina1976,Edgington1997},
-or paraconsistent logic \citep{CobrerosEgre2012:Tolerant-Classi}.
+borderline cases. Borderline cases neither clearly apply, nor clearly
+not apply, and there may be differences between borderline cases in
+terms of how well they represent the category in question. Vagueness
+does not seem to dramatically affect the success of everyday
+communication, but it is troublesome for some of our theories of
+language. This is especially the case for the logico-semantic
+tradition of Frege, Russell and the young Wittgenstein which is
+challenged by the paradoxes vagueness gives rise to. As can be
+expected, many proponents of this tradition have tried to address the
+problem, ranging from suggesting that there is nothing wrong with the
+classical approach since the problem is of a different nature, as in
+Williamson's epistemic view~\citep*{Williamson1994:Vagueness}, to
+proposing various kinds of modifications to either semantics, logic,
+or both, as in for example supervaluationism
+\citep[e.g.][]{Mehlberg1958,Fine1975}, many-valued logic
+\citep[e.g.][]{Zadeh1975,Machina1976,Edgington1997}, or paraconsistent
+logic \citep[e.g.][]{CobrerosEgre2012:Tolerant-Classi}.
 
 Yet there are other intriguing aspects about vagueness. The
 puzzle that we are concerned with here is how vagueness could arise
@@ -32,19 +36,18 @@ This problem, call it Lipman's problem, has a conceptual and a
 technical side to it. Conceptually, it asks for reasons and general
 mechanisms by which we could plausibly conceive of vagueness as
 resisting the pressure of evolutionary selection for precision. Such
-reasons and general mechanisms are, arguably, not hard to imagine. We
-will address some presently. But each putative explanation, no matter
-how plausible intuitively, must also be checked for internal
-consistency and its potential to account for the fact that we see
-vagueness as a part of a by-and-large efficient system of
-categorization and communication. In other words, not all first-shot
-rebuttals of Lipman's problem will do. Denying that there is any
-functional pressure on efficient communication, for instance, is a
-non-starter, because it leaves the relative efficiency of our
-communication with vague words entirely unexplained. In sum, the
-technical answer to Lipman's problem is to give, ideally, a model of
-evolution of categorization or language use that shows how competing
-forces that realize both by-and-large efficient categories and
+reasons and general mechanisms are, arguably, not hard to imagine.
+But each putative explanation, no matter how plausible intuitively,
+must also be checked for internal consistency and its potential to
+account for the fact that we see vagueness as a part of a by-and-large
+efficient system of categorization and communication. In other words,
+not all first-shot rebuttals of Lipman's problem will do. Denying that
+there is any functional pressure on efficient communication, for
+instance, is a non-starter, because it leaves the relative efficiency
+of our communication with vague words entirely unexplained. In sum,
+the technical answer to Lipman's problem is to give, ideally, a
+conceptually sound model of evolution of categorization or language
+use that yields by-and-large efficient categories \emph{and}
 vagueness.
 
 A number of authors have recently tried to explain why vagueness
@@ -54,14 +57,15 @@ contrast to these, others have argued that vagueness is a natural
 byproduct of limitations in information processing
 \citep[e.g.][]{FrankeJager2010:Vagueness-Signa,OConnor2013:The-Evolution-o,QingFranke2014:Gradable-Adject}. This
 paper makes a contribution to the latter line of thought.  Concretely,
-we introduce a novel variant of the replicator mutator dynamic that
-integrates stochastic noise on the differential confusability of
-similar stimuli. Our main contribution, therefore, is a technical
-answer to Lipman's problem in the sense introduced above. The dynamic
-proposed here nicely generalizes on and complements previous like-minded
-accounts. We show that stochastic noise can not only lead to
-vague, yet communicative efficient signal use, but can also unify
-evolutionary outcomes and help avoid inefficient categorization.
+we introduce the replicator diffusion dynamics ---a novel variant of
+the replicator mutator dynamic--- that integrates stochastic noise on
+the differential confusability of similar stimuli. Our main
+contribution, therefore, is a technical answer to Lipman's problem in
+the sense introduced above. The dynamic proposed here generalizes and
+complements previous like-minded accounts. We show that stochastic
+noise can not only lead to vague, yet communicative efficient signal
+use, but can also unify evolutionary outcomes and help avoid
+suboptimal categorization.
 
 The next section introduces the background against which the work
 presented here can be appreciated. Section~\ref{sec:repl-diff-dynam}
@@ -80,8 +84,8 @@ more detail.
 The view that vagueness is a natural concomitant of cognitive
 limitations of language users has been formalized in a number of ways,
 using evolutionary game theory and certain generalizations of
-signaling games, so called similarity-maximizing games or sim-max
-games, for short
+signaling games, so called \emph{similarity-maximizing games}, or
+\emph{sim-max games}, for short
 \citep{FrankeJager2010:Vagueness-Signa,OConnor2013:Evolving-Percep,OConnor2013:The-Evolution-o}. Our
 contribution is best seen in relation to these accounts, as it also
 relies on sim-max games. Let's introduce these first, and then zoom in
@@ -111,17 +115,17 @@ that similarity. Intuitively speaking, while Lewis' games treated
 communicative success as a matter of black and white, sim-max games
 allow for a gradient notion of communicative success: the more similar
 the receiver's interpretation is to the actual state, the more
-successful the play was. Signaling games with utility-relevant
-similarities in the state space are fairly standard in economics
+successful the play is taken to be. Signaling games with
+utility-relevant similarities in the state space are fairly standard
+in economics
 \citep[e.g.][]{Spence1973:Job-market-sign,CrawfordSobel1982:Strategic-Infor},
 but have received particular attention in a more philosophical and
-linguistic context by the more recent work for reasons that will
-become clear presently
+linguistic context for reasons that will become clear presently
 \citep{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct,JagerMetzger2011:Voronoi-Languag}.
 
-More concretely, a sim-max game, in the relevant sense here, consists
-of a set of states $\States$, a set of messages $\Messgs$ with much
-fever messages than states, a probability distribution $\Pr \in
+A sim-max game, in the relevant sense here, consists of a set of
+states $\States$, a set of messages $\Messgs$ with much fever messages
+than states, a prior probability distribution $\Pr \in
 \Delta(\States)$ that gives the occurrence probabilities of states, a
 similarity metric on states $\similarity \mycolon \States \times
 \States \rightarrow \mathds{R}$, and a utility function $\Utils
@@ -149,10 +153,10 @@ similarity:
   \Utils(\mystate{1},\mystate{2}) \ge
   \Utils(\mystate{1},\mystate{3})\,.
 \end{align*}
-To keep matters simple, we only look at cases where $\States$ contains
-finitely many points from the unit interval, all of which have equal
-probability, and with similarity given by the Euclidean distance in
-this one-dimensional space.
+To keep matters simple, we here only look at cases where $\States$
+contains finitely many points from the unit interval, all of which
+have equal probability, and with similarity given by the Euclidean
+distance in this one-dimensional space.
 
 \citet{JagerMetzger2011:Voronoi-Languag} showed that the
 evolutionarily stable states of sim-max games are remarkably
@@ -166,13 +170,12 @@ Voronoi language is a pair of sender and receiver strategies, such
 that the sender strategy (quasi-)partitions the state space into
 convex categories, while the receiver's interpretations are the
 central spots in each category. Figure~\ref{fig:VoronoiLanguage} gives
-an example of such a Voronoi-language for a sim-max game with
-$\States = [0,1]$, two messages, and a flat prior distribution that
-selects all states equally likely. The sender's strategy (a function
-from states to messages; more below) uses one message exclusively for
-all points in the lower half of the interval and another for all points in the
-upper half. The receiver's interpretations of messages are the
-central points in the respective intervals. 
+an example of such a Voronoi-language for a sim-max game with $\States
+= [0,1]$, two messages, and a flat prior distribution over states. The
+sender uses one message exclusively for all points in the lower half
+of the interval and another for all points in the upper half. The
+receiver's interpretations of messages are the central points in the
+respective intervals.
 
 \begin{figure}
   \centering
@@ -221,65 +224,66 @@ central points in the respective intervals.
  
         \end{tikzpicture}
 
-  \caption{Example of a Voronoi-language on $\States = [0,1]$. The
-    sender strategy $\Spure$ uses one signal for the lower half, and
-    another for the upper half of the unit interval. The receiver
-    strategy $\Rpure$ interprets messages as the central elements in the
-    respective intervals.}
+        \caption{Example of a Voronoi-language on $\States =
+          [0,1]$. The (pure) sender strategy $\Spure \in
+          \Messgs^\States$ uses one signal for the lower half, and
+          another for the upper half of the unit interval. The (pure)
+          receiver strategy $\Rpure \in \States^\Messgs$ selects the
+          central elements in the respective intervals.}
   \label{fig:VoronoiLanguage}
 \end{figure}
 
 
-This result is particularly interesting, because it demonstrates that
-signaling can impose orderly categories on a metric space, without
-that being the ulterior purpose of it all. Sender and receiver can be
-distinct entities, whose purpose is to communicate effectively
-about the actual state. In that case, evolving Voronoi-languages would
-explain why linguistic categories are well-behaved and orderly in the
-way they appear to be. More abstractly, sender and receiver can also
-be thought of as distinct modules in a single system, where the first
-module that must discretize the information that it is fed into a
-small sample of, suggestively, category labels to pass to a second
-system that tries to decode the original information. In this case,
-evolving Voronoi-languages would explain why conceptual categories are
+This result is interesting, because it demonstrates that signaling can
+impose orderly categories on a metric space, without that being the
+ulterior purpose of it all. Sender and receiver can be distinct
+entities, whose purpose is to communicate effectively about the actual
+state. In that case, evolving Voronoi-languages would explain why
+linguistic categories are well-behaved and orderly in the way they
+appear to be. More abstractly, sender and receiver can also be thought
+of as distinct modules in a single system, where the first module must
+discretize the information by selecting a small sample of,
+suggestively, category labels. These are passed to a second module
+that tries to decode the original information. In this case, evolving
+Voronoi-languages would explain why conceptual categories are
 well-behaved and orderly in the way that they appear to be
-\citep[see][for more on this latter
+\citep[e.g.][for more on this latter
 interpretation]{OConnor2013:Evolving-Percep}.
 
 Seen in this light, sim-max games appear to have the potential of
 providing a foundation to approaches in cognitive semantics that rely
 on the notion of conceptual spaces.
 \citet[][70--77]{Gardenfors2000:Conceptual-Spac}, for example, has
-prominently argued that natural categories are convex regions in a
-suitable conceptual space. If the conceptual space has a suitable
-metric, then it is possible to think of these convex categories as
-derived from a set of prototypes. Fixing a set of prototypes, we
-consider the category corresponding to each prototype $p$ as the set
-of points that are more similar to $p$ than to any other
+prominently argued that natural categories are convex regions in
+conceptual space. If the conceptual space has a suitable metric, then
+it is possible to think of these convex categories as derived from a
+set of prototypes. Fixing a set of prototypes, we consider the
+category corresponding to each prototype $p$ as the set of points that
+are more similar to $p$ than to any other
 \citep[e.g.][]{OkabeBoots2000:Spatial-Tessell}. In this way,
 \citet{Gardenfors2000:Conceptual-Spac} argues, an efficient
 categorization system can be obtained: storing the prototypes lets us
-recover the categories without having to store each categories
+recover the categories without having to store each category's
 extension. However, what is left unexplained so far, is where the
 prototypes come from, and why we would not see just any distribution
 of prototypes as an equally efficient classification system. This is
-where sim-max games might chip in a principled approach to deriving,
+where sim-max games can contribute a principled approach to deriving,
 in an independent way, not only convex categories but also
 prototypical exemplars belonging to them.
 
 
 \subsection{Vague signaling in sim-max games}
 
-The brief outline of an approach to conceptual categorization using
+This brief outline of an approach to conceptual categorization using
 sim-max games leaves many problems unaddressed. One of them is that
 natural categories for continuously variable stimuli, like shades of
 color, pitch heights, spatial dimension and the like, do not have
-unique prototypes and clear category boundaries. We would like to
-account for the possibility of vagueness, in particular the following
-criteria
+unique, point-valued prototypes and clear category boundaries. We
+would like to account for the possibility of such vagueness, and that
+means in particular for the following criteria
 \citep[e.g.][]{Sainsbury1991:Is-There-Higher,KeefeSmith1997:Vagueness:-A-Re,Smith2008:Vagueness-and-D}:
 (i) clear positive examples of a vague category should show a
-gradient, perhaps smooth, transition to negative examples to
+gradient, perhaps smooth, transition to clear negative examples to
 accommodate also higher-order vagueness; (ii) prototypes should
 likewise be gradient regions, peaking at the center of the vague
 category they represent.
@@ -294,23 +298,22 @@ extended, yet convex regions in conceptual space,
 algorithm that yields ``collated Voronoi diagrams'' with thick,
 extended boundaries representing borderline regions. Building on this
 work, \citet{DecockDouven2012:What-is-Graded-} show further how it is
-possible to arrive at ``higher-order vagueness'' and degrees of
-category membership, by, essentially, weighing in the distance of
-different borderline examples to various prototypical regions. This
-accounts for the first of the two desiderata mentioned above, but
-still assumes that crisp non-gradient prototype regions must be
-pre-given.
+possible to arrive at higher-order vagueness and degrees of category
+membership, by, essentially, weighing in the distance of different
+borderline cases to various prototypical regions. This accounts for
+the first of the two desiderata mentioned above, but still assumes
+that crisp non-gradient prototype regions must be pre-given.
 
 An alternative approach is taken by
 \citet{FrankeJager2010:Vagueness-Signa} and
 \citet{OConnor2013:The-Evolution-o} who show how the above desiderata
-can be met by evolving strategies in sim-max games for certain types
-of solution concepts which can be divided into micro- and macro-level
+can be met by evolving strategies in sim-max games for various types
+of solution concepts. These can be divided into micro- and macro-level
 approaches. Micro-level approaches look at adaptive behavior of
 individual agents. Usually, changes in the behavioral dispositions of
 agents occur after every single interaction. In contrast, macro-level
 approaches outline more abstract, aggregate dynamics, happening in a
-huge population of agents, or otherwise abstracting from seemingly
+population of agents, or otherwise abstracting from seemingly
 irrelevant detail. Usually, a macro-level dynamic captures changes of
 frequencies of behavioral types in the population over time.
 
@@ -319,12 +322,13 @@ how limited memory of past interactions can lead to vague signal use,
 when averaging over a single agent's behavior over time or over the
 momentary behavior of a population of several language
 users. \citet{OConnor2013:The-Evolution-o} introduces a variant of
-reinforcement learning that includes a low-level form of stimulus
+reinforcement learning that entails a low-level form of stimulus
 generalization. Agents update their behavior after each round of play
-in such a way that similar states to the ones that actually occurred
-are subject to behavioral adjustment as well. (Alternative approaches
-are discussed in more detail in Section~\ref{sec:discussion}, where we
-can compare them with the system introduced in this paper.)
+in such a way that states similar to the one that actually occurred
+are subject to behavioral adjustment as well. (A more detailed
+discussion of alternative approaches is deferred until
+Section~\ref{sec:discussion}, where we can compare them better with the
+system introduced in this paper.)
 
 \citet{FrankeJager2010:Vagueness-Signa} also consider a macro-level
 approach, using the notion of a \emph{quantal response}. A quantal
@@ -337,48 +341,12 @@ crucial differences. For one, we adopt a dynamic perspective by
 looking at limited-time outcomes of a dynamic process. For another, we
 demonstrate in Section~\ref{sec:discussion} that quantal responses can
 give rise to counterintuitive predictions. These counterintuitive
-examples suggest that vagueness in signaling use is not convincingly
+examples suggest that vagueness in sim-max games is not convincingly
 explained by appeal to mistakes in calculating expected utility, but
-rather, as we assume here, as the result of confusing similar states
-of the word.
+rather, as we assume here, as the result of confusing similar
+states.
 
-Against this background, we introduce a new macro-level approach to
-the evolution of vague signal use in sim-max games, where the source
-of vagueness is the agents' natural inability to sharply distinguish
-perceptually distinct states. This applies to the sender as well as to
-the receiver role (albeit in slightly different manner). We call our
-dynamic \emph{replicator diffusion dynamic} (\rdd), because it is a
-special case of the replicator mutator dynamic (\rmd). It is a special
-case in the sense that the \rdd incorporates a particular kind of
-mutation that is based on the similarity of states (as defined in the
-sim-max game). More concretely, we start from the idea that similar
-states are more easily confused than less similar states. To formalize
-this idea, we assume that there is a confusion matrix $C$, where
-$C_{ij}$ is the probability that a state \mystate{i} is realized as a
-possibly different state \mystate{j}. (There is a slightly different
-sense of ``realization'' in the sender and the receiver side, and we
-will enlarge on this below.) Based on this, we show two things. For
-one, we show how the discrete-time formulation of the replicator
-dynamic can be easily adapted to integrate diffusion of behavior due
-to confusion of states. This yields the \rdd in its basic
-discrete-time formulation. For another, we also show that there exists
-a translation of the confusion matrix $C$ into a suitable mutation
-matrix $M_C$ such that the effect of $C$ and $M_C$ are ``equivalent''
-in a sense to be made precise. This supports the conclusion that the
-\rdd can indeed be thought of as a special case of the \rmd.
 
-Based on data from numerical simulations, we show that the inclusion
-of mild levels of such stochastic noise in the replicator dynamics
-does not disrupt the possibility of evolving communicative efficient
-signaling strategies at all. On the contrary, there might even be a
-higher-order benefit to the presence of perceptual imprecision, in
-that it accelerates converges, but also unifies and regularizes
-evolutionary outcomes in such a way that inefficient categorization is
-avoided. These results complement similar results by
-\citet{OConnor2013:The-Evolution-o}, obtained for a micro-dynamic
-extension of reinforcement learning. The \rdd adds to this a more
-general, abstract framework that is not tied to the specific
-assumptions of turn-based reinforcement. 
 
 
 %%% Local Variables: 
