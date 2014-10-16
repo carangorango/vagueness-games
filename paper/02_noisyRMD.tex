@@ -224,9 +224,10 @@ $\Smixed(\Spure_i)$ of pure strategy $\Spure_i$. Likewise for the
 receiver.
 
 Every mixed strategy $\Smixed$ converts to a unique behavioral strategy defined by:
-\begin{align*}
+\begin{align}
+  \label{eq:CorrespondenceBehavioralMixed}
   \Sstrat(\messg \probbar \state) = \sum_{\Spure(\state) = \messg} \Smixed(\Spure)\,.
-\end{align*} 
+\end{align} 
 Let $G$ be this mapping from mixed to behavioral strategies. This $G$
 is \emph{not} an injection, as many mixed strategies map onto the same
 behavioral strategy. In this sense, mixed strategies hold more
@@ -337,11 +338,12 @@ replicator dynamic; then we compute the perturbation from
 mutation. This becomes clear if we define independent mutation
 functions $\Mutate_{Q,R}$ that map mixed strategies onto the outcome
 of (one round of) mutation:
-\begin{align*}
+\begin{align}
+  \label{eq:Mutation}
   \Mutate_Q(\Smixed)_i & =  \sum_j  \Smixed_j \cdot
   Q_{ji} &   \Mutate_R(\Rmixed)_i & =  \sum_{j}  \Rmixed_j \cdot
   R_{ji} \,.
-\end{align*}
+\end{align}
 The discrete-time \rmd given above can then be rewritten as:
 \begin{align*}
   \RDD(\Smixed) &= \Mutate_Q(\RD(\Smixed)) &   \RDD(\Rmixed) &= \Mutate_R(\RD(\Rmixed))\,. 
