@@ -1,36 +1,82 @@
 \section{Conclusions}
 \label{sec:conclusions}
 
-It is a special case in the sense that the \rdd incorporates a
-particular kind of mutation that is based on the similarity of states
-(as defined in the sim-max game). More concretely, we start from the
-idea that similar states are more easily confused than less similar
-states. To formalize this idea, we assume that there is a confusion
-matrix $C$, where $C_{ij}$ is the probability that a state \mystate{i}
-is realized as a possibly different state \mystate{j}. (There is a
-slightly different sense of ``realization'' in the sender and the
-receiver side, and we will enlarge on this below.) Based on this, we
-show two things. For one, we show how the discrete-time formulation of
-the replicator dynamic can be easily adapted to integrate diffusion of
-behavior due to confusion of states. This yields the \rdd in its basic
-discrete-time formulation. For another, we also show that there exists
-a translation of the confusion matrix $C$ into a suitable mutation
-matrix $M_C$ such that the effect of $C$ and $M_C$ are ``equivalent''
-in a sense to be made precise. This supports the conclusion that the
-\rdd can indeed be thought of as a special case of the \rmd.
+Vagueness is a pervasive but seemingly non-disruptive feature of
+natural communication and classification systems. From an evolutionary
+point of view, the challenge arises to explain how vagueness can
+persist under selective pressure for precision. While intuitive
+reasons for vagueness abound, this is foremost a technical challenge,
+probing for the possibility of integrating into a consistent model
+forces that lead to vagueness with forces that lead to efficient
+information transfer. This paper proposed one such model in the
+context of sim-max games and explored some of its consequences.
 
-Based on data from numerical simulations, we show that the inclusion
-of mild levels of such stochastic noise in the replicator dynamics
-does not disrupt the possibility of evolving communicative efficient
-signaling strategies at all. On the contrary, there might even be a
-higher-order benefit to the presence of perceptual imprecision, in
-that it accelerates converges, but also unifies and regularizes
-evolutionary outcomes in such a way that inefficient categorization is
-avoided. These results complement similar results by
-\citet{OConnor2013:The-Evolution-o}, obtained for a micro-dynamic
-extension of reinforcement learning. The \rdd adds to this a more
-general, abstract framework that is not tied to the specific
-assumptions of turn-based reinforcement. 
+We introduced the replicator diffusion dynamic as a special case of
+the established replicator mutator dynamic. It is a special case in
+the sense that the \rdd incorporates a particular kind of mutation
+that is based on the similarity of states (as defined in the sim-max
+games). More concretely, we started from the idea that similar states
+are more easily confused than less similar states. To formalize this
+idea, we assumed that there is a confusion matrix $C$, where $C_{ij}$
+is the probability that a state \mystate{i} is realized as a possibly
+different state \mystate{j}. Based on this, we showed two things. For
+one, we showed how the discrete-time formulation of the replicator
+dynamic can be easily adapted to integrate diffusion of behavior due
+to confusion of states. This yielded the \rdd in its basic
+discrete-time formulation. For another, we also showed that there
+exists a translation of the confusion matrix $C$ into a suitable
+mutation matrix $M_C$ such that the effect of $C$ and $M_C$ are
+effectively equivalent. This supports the conclusion that the \rdd can
+indeed be thought of as a special case of the \rmd.
+
+Based on data from numerical simulations, we showed that the inclusion
+of mild levels of stochastic confusability of states does not
+undermine the possibility of evolving communicatively successful
+signaling strategies at all. On the contrary, strategies that evolved
+under mild diffusion induce a highly regular and systematic category
+structure that shows the signs of vagueness as desired. Moreover, we
+noted that there might even be a higher-order benefit to the presence
+of imprecision, in that can accelerates convergence to optimal
+categorization, by preventing evolutionary paths to stay near
+inefficient non-convex strategies for a long time. Diffusion thus also
+unifies and regularizes evolutionary outcomes in such a way that
+sub-optimal categorization is avoided. These results complement
+similar results by \citet{OConnor2013:The-Evolution-o}, obtained for a
+micro-dynamic extension of reinforcement learning. The \rdd adds to
+this a more general, abstract framework that is not tied to the
+specific assumptions of turn-based reinforcement.
+
+Many interesting issues arise in this context that we have not yet
+explored. Firstly, we concentrated on the \rdd in behavioral
+strategies, because these are much less complex and unwieldy than
+mixed strategies or analyses of the symmetrized game. But we also
+noted that for especially biological interpretations of the dynamic,
+symmetrizing would be conceptually more plausible. It remains to be
+seen whether there are substantial differences between the symmetrized
+version of the \rdd and the behavioral strategy version that
+we have explored here.
+
+Secondly, we have only explored the effect of a single confusion
+matrix that affected both sender and receiver roles. Obviously, we
+could allow different roles to be affected differently by
+confusability of states. We might hypothesize that for the unifying
+and regularizing effects of diffusion, it is less important that the
+receiver's strategies are diffused, as long as the sender's are. But,
+again, this issues must wait for further exploration. Connected to
+that is the obvious extension that also allows for stochastic
+confusability of signals.
+
+Further promising extensions of the work presented here include
+investigating higher-dimensional state spaces, possibly with less
+uniform, more psychologically real similarity metrics, such as the
+three-dimensional color space. Also, to compare the work presented
+here better to other work on efficient categorization
+\citep[e.g.][]{Mohlin2014:Optimal-Categor}, it would be worthwhile
+exploring the possibility of signal innovation
+\citep[e.g.][]{McKenzie-AlexanderSkymrs2012:Inventing-New-S} also for
+sim-max games. This way, the game dynamics would ideally lead to an
+optimal number of categories, not only an optimal shape of a
+predefined number of categories.
 
 %%% Local Variables: 
 %%% mode: latex
