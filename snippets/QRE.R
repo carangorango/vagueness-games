@@ -31,9 +31,6 @@ for (i in 1:100){
 
 outPlot = arrangeGrob(plot.sender.strat(sen,states),
                       plot.receiver.strat(rec,states))
-
 show(outPlot)
-filename = paste("~/Desktop/data/svn/vagueness-games/paper/plots/exampleStratQRE_tolerance0", tolerance*10, ".pdf", sep = "", collapse = "")
-pdf(filename, height = 5, width = 6)
-show(outPlot)
-dev.off()
+filename = paste("paper/plots/exampleStratQRE_tolerance0", tolerance*10, ".pdf", sep = "", collapse = "")
+ggsave(outPlot, file = filename, height = 5, width = 5)

@@ -3,6 +3,7 @@ computeEU = FALSE
 
 require('plyr')
 require('reshape2')
+theme_set(theme_bw())
 
 source('~/Desktop/data/svn/vagueness-games/helper_functions.R')
 
@@ -202,14 +203,15 @@ D$meanEUGroup = meanEUs$Speaker.meanEU
 
 Dmelt = melt(D, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
 
-combPlot = ggplot(Dmelt, aes(x=Impairment, y=value, color = variable)) + 
-  geom_point(aes(shape = variable)) + facet_grid(Number.of.states ~ Tolerance) + geom_line()
-
+combPlot = ggplot(Dmelt, aes(x=Impairment, y=value, group = variable, shape = variable, linetype = variable)) +  
+  geom_line( color = "grey") + geom_point() + facet_grid(Number.of.states ~ Tolerance) +
+  xlab("imprecision") +
+  scale_shape_discrete(name = "property", 
+                       labels = c("distance", "utility")) + 
+  scale_linetype_discrete(name = "property", 
+                          labels = c("distance", "utility"))
 show(combPlot)
-
-pdf("~/Desktop/data/svn/vagueness-games/paper/plots/WithinGroupMeasures.pdf", height=6, width=8)
-show(combPlot)
-dev.off()
+ggsave(combPlot, file = "~/Desktop/data/svn/vagueness-games/paper/plots/WithinGroupMeasures.pdf", height=5, width=8)
 
 
 

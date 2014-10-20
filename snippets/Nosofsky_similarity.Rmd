@@ -1,6 +1,7 @@
 ```{r warning=FALSE, echo=FALSE, message=FALSE}
 library(ggplot2)
 library(reshape2)
+theme_set(theme_bw())
 ```
 
 Nosofsky Similarity
@@ -42,17 +43,20 @@ for (a in 1:length(alphas)){
 
 simDF = data.frame(distance = rep(states,2*length(alphas)),
                    alpha_i = factor(rep(rep(alphas, each=ns),2)),
-                   normalized = factor(rep(c("non-normalized", "normalized"),each=ns*length(alphas))),
+                   normalized = factor(rep(c("Nosofsky similarity", "confusion probability"),each=ns*length(alphas)),
+                                       levels = c("Nosofsky similarity", "confusion probability")),
                    similarity = c(as.vector(t(out)),as.vector(t(outNorm)))  )
 
-p = ggplot(simDF, aes(x = distance, y = similarity, color=alpha_i)) + geom_point() +
-  geom_line() + facet_grid(normalized~. , scales = "free") + ylab("") + xlab("distance in physical space")
+p = ggplot(simDF, aes(x = distance, y = similarity, shape = alpha_i))+
+  geom_line(color='grey')  + geom_point()  + 
+  facet_grid(normalized~. , scales = "free") + ylab("") + 
+  xlab("distance in physical space") +
+  scale_shape_discrete(name="imprecision")
 
 show(p)
 
-pdf('paper/plots/NosofskySim.pdf', width=7, height=4)
-show(p)
-dev.off()
+ggsave(p, file="paper/plots/NosofskySim.pdf", width=7, height=4)
+
 ```
 
 

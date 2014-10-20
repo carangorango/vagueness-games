@@ -1,5 +1,6 @@
 require('plyr')
 require('reshape2')
+theme_set(theme_bw())
 
 source('~/Desktop/data/svn/vagueness-games/helper_functions.R')
 source('~/Desktop/data/svn/vagueness-games/data-analysis.R')

@@ -2,6 +2,8 @@
 library(MCMCpack) # for Dirichlet distribution
 library(ggplot2)
 library(reshape2)
+theme_set(theme_bw())
+greyPalette = c("#999999", "#222222", "#999999", "#000000", "#999999", "#000000", "#999999", "#000000")
 # source('~/Desktop/data/svn/programming/R/fuzzy-action/dev.r')
 ```
 
@@ -132,7 +134,9 @@ plotSender = function(ns,nm,alphas,rounds){
   senDF$message = factor(senDF$message)
   senDF$alpha = factor(senDF$alpha)
   p = ggplot(senDF,aes(x = state, y = probability, color = message)) + 
-      geom_point(size=0.5) + geom_line() + facet_grid(alpha~round) +
+      geom_line() + facet_grid(alpha~round) +
+                                          scale_colour_manual(values=greyPalette) +
+      ggtitle("sender") +
       scale_x_continuous(breaks=seq(0,1,1/2)) +
       theme(axis.text.x  = element_text(angle=90, vjust=0.5)) + 
       scale_y_continuous(breaks=seq(0,1,1/2))
@@ -171,8 +175,10 @@ plotReceiver = function(ns,nm,alphas,rounds){
   recDF$message = factor(recDF$message)
   recDF$alpha = factor(recDF$alpha)
   p = ggplot(recDF,aes(x = state, y = probability, color = message)) + 
-      geom_point(size=0.5) + geom_line() + facet_grid(alpha~round) +
+       geom_line() + facet_grid(alpha~round) +
+                                          scale_colour_manual(values=greyPalette) +
       scale_x_continuous(breaks=seq(0,1,1/2)) +
+      ggtitle("receiver") +
       theme(axis.text.x  = element_text(angle=90, vjust=0.5)) + 
       scale_y_continuous(breaks=seq(0,round(max(recDF$probability),2),round(max(recDF$probability),2)/2))
   return(p)
@@ -183,13 +189,9 @@ pRec = plotReceiver(ns,nm,alphas,rounds)
 show(pSen)
 show(pRec)
 
-pdf(file = "paper/plots/confusion_sender.pdf", width = 7, height = 4)
-show(pSen)
-dev.off()
+ggsave(pSen, file = "paper/plots/confusion_sender.pdf", width = 7, height = 4)
 
-pdf(file = "paper/plots/confusion_receiver.pdf", width = 7, height = 4)
-show(pRec)
-dev.off()
+ggsave(pRec, file = "paper/plots/confusion_receiver.pdf", width = 7, height = 4)
 
 ```
 

@@ -60,19 +60,39 @@ dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Tolerance",
 dsub = dms
 dsub$Number.of.states = factor(dsub$Number.of.states)
 
+myLabeller <- function(var, value){
+    value <- as.character(value)
+    if (var=="variable") { 
+        value[value=="Speaker.entropy"] <- "entropy sen"
+        value[value=="Hearer.entropy"] <- "entropy rec"
+        value[value=="Speaker.informativity"] <- "informativity"
+        value[value=="Speaker.Voronoiness"] <- "Voronoiness sen"
+        value[value=="Hearer.Voronoiness"] <- "Voronoiness rec"
+        value[value=="Expected.utility"] <- "expected utility"
+    }
+    return(value)
+}
+
+
 pd <- position_dodge(.01)
-sp = ggplot(dsub, aes(x=Impairment, y=value, colour=Number.of.states)) + 
-     geom_point(position = pd) +
+mysize = 1.65
+sp = ggplot(dsub, aes(x=Impairment, y=value, color = Number.of.states, shape=Number.of.states, linetype=Number.of.states)) + 
+    geom_line(color="gray", position = pd) + xlab("imprecision") +
+     geom_point(position = pd, size = mysize) +
      geom_errorbar(aes(ymin=value-ci, ymax=value+ci), width=0, position=pd) +
-     geom_line(position=pd) + xlab("imprecision")
+    scale_shape_discrete(name = "# states") +
+    scale_linetype_discrete(name = "# states") +
+    scale_color_discrete(name = "# states")
+     
 
-sp = sp + facet_grid(variable ~ Tolerance, scales="free")
+sp = sp + facet_grid(variable ~ Tolerance, scales="free", labeller=myLabeller)
 
+
+sp + facet_grid(. ~ sex, labeller=mf_labeller)
 show(sp)
 
-pdf("~/Desktop/data/svn/vagueness-games/paper/plots/MeanMetrics.pdf", width=8, height = 6)
-show(sp)
-dev.off()
+ggsave(sp, file = "paper/plots/MeanMetrics.pdf", width=8, height = 8)
+
 
 ```
 
@@ -126,15 +146,14 @@ dm = melt(ds, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
 dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Tolerance", "variable"), measurevar="value")
 dsub = dms
 
-sp = ggplot(dms, aes(x=factor(Impairment), y = value)) 
-sp = sp + geom_bar(aes(fill = variable), color = "black", stat="identity", position= position_dodge(0.4), width = 0.35)
-sp = sp + facet_grid(Number.of.states ~ Tolerance, scales="free") + ylab("proportion") + xlab("imprecision")
-
+pd <- position_dodge(.05)
+sp = ggplot(dms, aes(x=factor(Impairment), y = value, group = variable, shape = variable, linetype = variable)) 
+sp = sp + geom_line(position = pd, color = "grey") + geom_point(position = pd)
+sp = sp + facet_grid(Number.of.states ~ Tolerance, scales="free") + ylab("proportion") + xlab("imprecision") +
+  scale_shape_discrete(name = "property") +
+  scale_linetype_discrete(name = "property")
 show(sp)
-
-pdf("~/Desktop/data/svn/vagueness-games/paper/plots/CategoricalMeasures.pdf", width=8, height = 5)
-show(sp)
-dev.off()
+ggsave(sp, file = "paper/plots/CategoricalMeasures.pdf", width=8, height = 5)
 
 ```
 
