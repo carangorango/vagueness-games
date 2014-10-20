@@ -4,12 +4,11 @@
 Vagueness is a pervasive but seemingly non-disruptive feature of
 natural communication and classification systems. From an evolutionary
 point of view, the challenge arises to explain how vagueness can
-persist under selective pressure for precision. While intuitive
-reasons for vagueness abound, this is foremost a technical challenge,
-probing for the possibility of integrating into a consistent model
-forces that lead to vagueness with forces that lead to efficient
-information transfer. This paper proposed one such model in the
-context of sim-max games and explored some of its consequences.
+persist under selective pressure for precision. This is foremost a
+technical challenge, probing for the possibility of integrating into a
+consistent model forces that lead to vagueness with forces that lead
+to efficient information transfer. This paper proposed one such model
+in the context of sim-max games and explored some of its consequences.
 
 We introduced the replicator diffusion dynamic as a special case of
 the established replicator mutator dynamic. It is a special case in
@@ -23,38 +22,40 @@ different state \mystate{j}. Based on this, we showed two things. For
 one, we showed how the discrete-time formulation of the replicator
 dynamic can be easily adapted to integrate diffusion of behavior due
 to confusion of states. This yielded the \rdd in its basic
-discrete-time formulation. For another, we also showed that there
-exists a translation of the confusion matrix $C$ into a suitable
-mutation matrix $M_C$ such that the effect of $C$ and $M_C$ are
-effectively equivalent. This supports the conclusion that the \rdd can
-indeed be thought of as a special case of the \rmd.
+discrete-time formulation for behavioral strategies. For another, we
+also showed that there exists a translation of the confusion matrix
+$C$ into a suitable mutation matrices $Q_C$ and $R_C$ such that the
+effect of former and latter are effectively equivalent, although $C$
+applies to behavioral strategies, while $Q_C$ and $R_C$ apply to mixed
+strategies. This shows that the \rdd may be thought of as a special
+case of the \rmd.
 
-Based on data from numerical simulations, we showed that the inclusion
-of mild levels of stochastic confusability of states does not
-undermine the possibility of evolving communicatively successful
+Based on data from numerical simulations, we demonstrated that the
+inclusion of mild levels of stochastic confusability of states does
+not undermine the possibility of evolving communicatively successful
 signaling strategies at all. On the contrary, strategies that evolved
 under mild diffusion induce a highly regular and systematic category
-structure that shows the signs of vagueness as desired. Moreover, we
-noted that there might even be a higher-order benefit to the presence
-of imprecision, in that can accelerates convergence to optimal
-categorization, by preventing evolutionary paths to stay near
-inefficient non-convex strategies for a long time. Diffusion thus also
-unifies and regularizes evolutionary outcomes in such a way that
-sub-optimal categorization is avoided. These results complement
-similar results by \citet{OConnor2013:The-Evolution-o}, obtained for a
-micro-dynamic extension of reinforcement learning. The \rdd adds to
-this a more general, abstract framework that is not tied to the
-specific assumptions of turn-based reinforcement.
+structure that shows the signs of vagueness as desired. There might
+even be a higher-order benefit to the presence of imprecision, in that
+it can accelerate convergence to optimal categorization, by preventing
+evolutionary paths to stay near inefficient non-convex strategies for
+a long time. Diffusion thus also unifies and regularizes evolutionary
+outcomes in such a way that sub-optimal categorization is
+avoided. These results complement similar findings by
+\citet{OConnor2013:The-Evolution-o}, obtained for a micro-dynamic
+extension of reinforcement learning. The \rdd adds to this a more
+general, abstract framework that is not tied to the specific
+assumptions of turn-based reinforcement.
 
 Many interesting issues arise in this context that we have not yet
 explored. Firstly, we concentrated on the \rdd in behavioral
-strategies, because these are much less complex and unwieldy than
-mixed strategies or analyses of the symmetrized game. But we also
-noted that for especially biological interpretations of the dynamic,
-symmetrizing would be conceptually more plausible. It remains to be
-seen whether there are substantial differences between the symmetrized
-version of the \rdd and the behavioral strategy version that
-we have explored here.
+strategies, because numerical simulations of these are much less
+complex and unwieldy than of mixed strategies or analyses of the
+symmetrized game. But we also noted that for especially biological
+interpretations of the dynamic, symmetrizing would be conceptually
+more plausible. It remains to be seen whether there are substantial
+differences between the symmetrized version of the \rdd and the
+behavioral strategy version that we have explored here.
 
 Secondly, we have only explored the effect of a single confusion
 matrix that affected both sender and receiver roles. Obviously, we
