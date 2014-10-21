@@ -6,17 +6,15 @@ the evolution of vague signal use in sim-max games, where the source
 of vagueness is the agents' natural inability to sharply distinguish
 similar states. This applies to the sender as well as to
 the receiver role (albeit in slightly different manner). We call our
-dynamic \emph{replicator diffusion dynamic} (\rdd), because it is a
-special case of the replicator mutator dynamic (\rmd).
+dynamic \emph{replicator diffusion dynamic} (\rdd), because it is an
+extension of the replicator dynamic (\rd) that adds diffusion
+of behavior. It is also a special case of the replicator mutator dynamic (\rmd).
 
-The \rdd was first introduced by \citet{Correia2013:The-Bivalent-Tr}
-as a noise-perturbed variant of the replicator dynamic (\rd) in
-behavioral strategies. We begin by recapitulating this formulation of
-the \rd in Section~\ref{sec:repl-dynam-behav}. Then we introduce the
-\rdd in Section~\ref{sec:repl-diff-dynam-1}.
+We begin by recapitulating the formulation of the \rd in Section~\ref{sec:repl-dynam-behav}.
+Then we introduce the \rdd in Section~\ref{sec:repl-diff-dynam-1}.
 Section~\ref{sec:repl-mutat-dynam} introduces the \rmd, and
 Section~\ref{sec:diffusion-as-special} shows in what sense the \rdd is
-a special case of the \rdd.
+a special case of the \rmd.
 
 \subsection{Replicator dynamic in behavioral strategies}
 \label{sec:repl-dynam-behav}
@@ -30,9 +28,9 @@ functions $\Sstrat \in \Delta(\Messgs)^\States$; the receiver's are
 functions $\Rstrat \in \Delta(\Acts)^\Messgs$. Define the expected
 utility of choices in each choice point as usual:
 \begin{align*}
-  \EU(\messg \myts ; \myts \state, \Rstrat) & = \sum_{\act \in \Acts}
+  \EU(\messg, \state, \Rstrat) & = \sum_{\act \in \Acts}
   \Rstrat(\act \probbar \messg) \cdot U_\sen(\state, \messg, \act) \\
-  \EU(\act \myts ; \myts \messg, \Sstrat) & = \sum_{\state \in
+  \EU(\act, \messg, \Sstrat) & = \sum_{\state \in
     \States} \Pr(\state) \cdot \Sstrat(\messg \probbar \state) \cdot
   U_\rec(\state, \messg, \act) \,.
 \end{align*}
@@ -41,9 +39,9 @@ frequency-weighted average of expected utilities of each choice, given
 the opponent's strategy:
 \begin{align*}
   \Phi(\state,\Sstrat, \Rstrat) & = \sum_{\messg} \Sstrat(\messg \probbar \state) \cdot
-\EU(\messg \myts ; \myts\state,\Rstrat) \\
+\EU(\messg, \state,\Rstrat) \\
 \Phi(\messg,\Sstrat, \Rstrat) & = \sum_{\act} \Rstrat(\act \probbar \messg)
-\cdot \EU(\act \myts ; \myts \messg,\Sstrat)\,.
+\cdot \EU(\act, \messg,\Sstrat)\,.
 \end{align*}
 The discrete-time replicator dynamic maps current strategies $\Sstrat$
 and $\Rstrat$ to future strategies $\RD(\Sstrat)$ and $\RD(\Rstrat)$
@@ -52,17 +50,18 @@ utilities. For behavioral strategies, the changes take place locally
 at each of the agents' choice points:
 \begin{align*}
   \RD(\Sstrat)(\messg \probbar \state) & = \frac{\Sstrat(\messg \probbar \state) \cdot
-    \EU(\messg \myts ; \myts \state,\Rstrat)} {\Phi(\state,\Sstrat, \Rstrat)} \\
+    \EU(\messg, \state,\Rstrat)} {\Phi(\state,\Sstrat, \Rstrat)} \\
     \RD(\Rstrat)(\act \probbar \messg) & = \frac{\Rstrat(\act \probbar \messg) \cdot
-    \EU(\act \myts ; \myts \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
+    \EU(\act, \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
 \end{align*}
 
 
 \subsection{Replicator diffusion dynamic in behavioral strategies}
 \label{sec:repl-diff-dynam-1}
 
-The replicator diffusion dynamic adds probabilistic confusion of
-similar states to the replicator dynamic. Fix a sim-max game with
+The replicator diffusion dynamic was first introduced by \citet{Correia2013:The-Bivalent-Tr}
+as a noise-perturbed variant of the replicator dynamic (\rd) in
+behavioral strategies. Fix a sim-max game with
 $\States = \Acts$ and a confusion matrix $C : \States \times
 \States$. $C$ is a row-stochastic matrix whose elements $C_{ij}$ give
 the probability that $\state_i$ is realized as $\state_j$. The
@@ -100,10 +99,10 @@ formed when \mystate{i} is the intended interpretation.
       {strategy $\Sstrat(\messg \probbar \mystate{j})$};
 
    
-      \begin{pgfonlayer}{background}
-        \node [draw=black!50, fill=black!20,fit=(actual) (label)
-        (output)] {};
-      \end{pgfonlayer}
+%      \begin{pgfonlayer}{background}
+%        \node [draw=black!50, fill=black!20,fit=(actual) (label)
+%        (output)] {};
+%      \end{pgfonlayer}
     \end{scope}
 
 
@@ -127,10 +126,10 @@ formed when \mystate{i} is the intended interpretation.
       \draw[->] (target) -> (realized) node[midway,right]  {noise $C_{ij}$};
 
    
-      \begin{pgfonlayer}{background}
-        \node [draw=black!50, fill=black!20,fit = (message) 
-        (realized) (bla)] {};
-      \end{pgfonlayer}
+%      \begin{pgfonlayer}{background}
+%        \node [draw=black!50, fill=black!20,fit = (message) 
+%        (realized) (bla)] {};
+%      \end{pgfonlayer}
     \end{scope}
 
   \end{tikzpicture}
@@ -173,11 +172,11 @@ formulation, given by \citet{Correia2013:The-Bivalent-Tr}:
 \begin{align*}
   \RDD(\Sstrat)(\messg \probbar \state_i) & = \sum_{j} C_{ij} \cdot
   \frac{\Sstrat(\messg \probbar \state_j) \cdot
-    \EU(\messg \myts ; \myts \state_j,\Rstrat)}
+    \EU(\messg, \state_j,\Rstrat)}
   {\Phi(\state_j,\Sstrat, \Rstrat)} \\
     \RDD(\Rstrat)(\state_i \probbar \messg) & = \sum_{j} C_{ji} \cdot
   \frac{\Rstrat(\state_j \probbar \messg) \cdot
-    \EU(\state_j \myts ; \myts \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
+    \EU(\state_j, \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
 \end{align*}
 
 The idea behind the sequential definition of the \rdd is that, at each
@@ -196,7 +195,7 @@ relative in the replicator mutator dynamic.
 The \rmd has been proposed first in the context of signaling game
 models for the evolution of grammar
 \citep[e.g.][]{KomarovaNiyogi2001:The-Evolutionar,NowakKomarova2001:Evolution-of-Un,Nowak2006:Evolutionary-Dy}. It
-adds to the replicator dynamic stochastic mutation that captures, in
+adds stochastic mutation to the replicator dynamic in order to capture, in
 the context of grammar evolution, the differential learning success of
 different dispositions in first language acquisition. The relation of
 the \rmd to other prominent evolutionary dynamics is well understood
@@ -228,7 +227,7 @@ Every mixed strategy $\Smixed$ converts to a unique behavioral strategy defined 
   \label{eq:CorrespondenceBehavioralMixed}
   \Sstrat(\messg \probbar \state) = \sum_{\Spure(\state) = \messg} \Smixed(\Spure)\,.
 \end{align} 
-Let $G$ be this mapping from mixed to behavioral strategies. This $G$
+Let $G$ be this mapping from mixed to behavioral strategies. Note that $G$
 is \emph{not} an injection, as many mixed strategies map onto the same
 behavioral strategy. In this sense, mixed strategies hold more
 information than behavioral strategies about the distribution of pure strategies in a population.
@@ -293,7 +292,7 @@ two-population (non-payoff adjusted) formulation is then:
     \dot{\Rmixed_i} & = \sum_{j}  R_{ji} \cdot \Rmixed_j
     \cdot F_j^{\Smixed} - \Rmixed_i \cdot \Phi(\Rmixed,\Smixed) \,.
 \end{align*}
-A discrete-time, two-population formulation of the \rmd is this 
+A discrete-time, two-population formulation of the \rmd can be defined as follows 
 \citep[c.f.][97]{PageNowak2002:Unifying-Evolut}:
 
 \begin{align*}
@@ -437,11 +436,11 @@ mutation-perturbation $Q^C(\Smixed)$ (see
 Figure~\ref{fig:correspondence-result}). In other words, we
 hypothesize that a confusion matrix $C$ should give rise to a unique
 mutation matrix $Q^C$ so that whenever $G(\Smixed) = \Sstrat$ we also
-have $G(Q^C(\Smixed)) = C(\Sstrat)$. Similarly, for the receiver. This
-is the content of Theorem~\ref{thm:Correspondence} given below, a
-proof for which is in Appendix~\ref{sec:proofs}. The remainder of this
-section introduces the relevant construction that maps arbitrary $C$
-to suitable $Q^C$.
+have $G(Q^C(\Smixed)) = C(\Sstrat)$. Similarly, for the receiver.
+%This is the content of Theorem~\ref{thm:Correspondence} given below, a
+%proof for which is in Appendix~\ref{sec:proofs}. The remainder of this
+%section introduces the relevant construction that maps arbitrary $C$
+%to suitable $Q^C$.
 
 \paragraph{Confusion-based mutations.} There are natural conversions
 of $C$ into $Q^C$ and $R^C$. The case for the receiver is easier, so

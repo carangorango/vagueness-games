@@ -86,8 +86,9 @@ limitations of language users has been formalized in a number of ways,
 using evolutionary game theory and certain generalizations of
 signaling games, so called \emph{similarity-maximizing games}, or
 \emph{sim-max games}, for short
-\citep{FrankeJager2010:Vagueness-Signa,OConnor2013:Evolving-Percep,OConnor2013:The-Evolution-o}. Our
-contribution is best seen in relation to these accounts, as it also
+\citep{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct}.
+%\citep{FrankeJager2010:Vagueness-Signa,OConnor2013:Evolving-Percep,OConnor2013:The-Evolution-o}.
+Our contribution is best seen in relation to these accounts, as it also
 relies on sim-max games. Let's introduce these first, and then zoom in
 on the problem of vagueness.
 
@@ -108,9 +109,9 @@ is a highly interesting topic that we are only beginning to fully
 understand
 \citep[e.g.][]{Warneryd1993:Cheap-Talk-Coor,BlumeKim1993:Evolutionary-St,Zollman2005:Talking-to-Neig,Huttegger2007:Evolution-and-t,Pawlowitsch2008:Why-Evolution-d,Barrett2009:The-Evolution-o,Wagner2009:Communication-a,HutteggerSkyrms2010:Evolutionary-Dy,Skyrms2010:Signals,HutteggerZollman2011:Signaling-Games}.
 
-Similarity-maximizing games are generalizations of Lewis' games in
-that they allow different states to be more or less similar to one
-another, and, roughly put, make success of communication a function of
+Similarity-maximizing games are generalizations of Lewis' games where
+different states are allowed to be more or less similar to one
+another, and, roughly put, success of communication is a function of
 that similarity. Intuitively speaking, while Lewis' games treated
 communicative success as a matter of black and white, sim-max games
 allow for a gradient notion of communicative success: the more similar
@@ -153,7 +154,7 @@ similarity:
   \Utils(\mystate{1},\mystate{2}) \ge
   \Utils(\mystate{1},\mystate{3})\,.
 \end{align*}
-To keep matters simple, we here only look at cases where $\States$
+To keep matters simple, in this paper we mostly focus on cases where $\States$
 contains finitely many points from the unit interval, all of which
 have equal probability, and with similarity given by the Euclidean
 distance in this one-dimensional space.
@@ -165,12 +166,12 @@ states in $n$-dimensional Euclidean space $\States \subseteq
 \mathds{R}^n$ and a quadratic loss function for utilities
 $\Utils(\mystate{1}, \mystate{2}) = - (\mystate{1} -
 \mystate{2})^2$. For these games, the evolutionarily stable states are
-demonstrably so-called Voronoi-languages. Intuitively speaking, a
+demonstrably so-called Voronoi languages. Intuitively speaking, a
 Voronoi language is a pair of sender and receiver strategies, such
 that the sender strategy (quasi-)partitions the state space into
 convex categories, while the receiver's interpretations are the
 central spots in each category. Figure~\ref{fig:VoronoiLanguage} gives
-an example of such a Voronoi-language for a sim-max game with $\States
+an example of such a Voronoi language for a sim-max game with $\States
 = [0,1]$, two messages, and a flat prior distribution over states. The
 sender uses one message exclusively for all points in the lower half
 of the interval and another for all points in the upper half. The
@@ -224,7 +225,7 @@ respective intervals.
  
         \end{tikzpicture}
 
-        \caption{Example of a Voronoi-language on $\States =
+        \caption{Example of a Voronoi language on $\States =
           [0,1]$. The (pure) sender strategy $\Spure \in
           \Messgs^\States$ uses one signal for the lower half, and
           another for the upper half of the unit interval. The (pure)
@@ -238,14 +239,14 @@ This result is interesting, because it demonstrates that signaling can
 impose orderly categories on a metric space, without that being the
 ulterior purpose of it all. Sender and receiver can be distinct
 entities, whose purpose is to communicate effectively about the actual
-state. In that case, evolving Voronoi-languages would explain why
+state. In that case, evolving Voronoi languages would explain why
 linguistic categories are well-behaved and orderly in the way they
 appear to be. More abstractly, sender and receiver can also be thought
 of as distinct modules in a single system, where the first module must
 discretize the information by selecting a small sample of,
 suggestively, category labels. These are passed to a second module
 that tries to decode the original information. In this case, evolving
-Voronoi-languages would explain why conceptual categories are
+Voronoi languages would explain why conceptual categories are
 well-behaved and orderly in the way that they appear to be
 \citep[e.g.][for more on this latter
 interpretation]{OConnor2013:Evolving-Percep}.
@@ -325,10 +326,7 @@ users. \citet{OConnor2013:The-Evolution-o} introduces a variant of
 reinforcement learning that entails a low-level form of stimulus
 generalization. Agents update their behavior after each round of play
 in such a way that states similar to the one that actually occurred
-are subject to behavioral adjustment as well. (A more detailed
-discussion of alternative approaches is deferred until
-Section~\ref{sec:discussion}, where we can compare them better with the
-system introduced in this paper.)
+are subject to behavioral adjustment as well.
 
 \citet{FrankeJager2010:Vagueness-Signa} also consider a macro-level
 approach, using the notion of a \emph{quantal response}. A quantal
@@ -336,7 +334,9 @@ response function is a probabilistic choice rule that formalizes the
 idea that agents make small mistakes when calculating the expected
 utility of choice options. In aggregation, these probabilistic
 mistakes lead to systematic ``trembles'' that produce vague signal
-use. The approach we take here is superficially similar, but there are
+use.
+
+The approach we take here is superficially similar, but there are
 crucial differences. For one, we adopt a dynamic perspective by
 looking at limited-time outcomes of a dynamic process. For another, we
 demonstrate in Section~\ref{sec:discussion} that quantal responses can
@@ -344,8 +344,9 @@ give rise to counterintuitive predictions. These counterintuitive
 examples suggest that vagueness in sim-max games is not convincingly
 explained by appeal to mistakes in calculating expected utility, but
 rather, as we assume here, as the result of confusing similar
-states.
-
+states. A more in-depth discussion of alternative approaches is deferred until
+Section~\ref{sec:discussion}.
+Let us first look into our own proposal in more detail.
 
 
 

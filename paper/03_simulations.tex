@@ -4,8 +4,8 @@
 The previous section showed that the \rdd can be conceptualized as a
 two-step procedure: we first calculate where the replicator dynamic
 would take us, then apply diffusion. To understand the \rdd
-better, Section~\ref{sec:iterated-diffusion} looks closer at the novel
-diffusion part, before Section~\ref{sec:simulations} explores how
+better, in Section~\ref{sec:iterated-diffusion} we look closer at the novel
+diffusion part, before exploring in Section~\ref{sec:simulations} how
 diffusion and fitness-based selection interact.
 
 \subsection{(Iterated) Diffusion}
@@ -38,7 +38,7 @@ Nosofsky-similarity for different parameter values. Other
 formalizations of perceptual similarity are possible, including ones
 that allow for different discriminability in different areas of the
 state space, but we stick with Nosofsky's similarity function for the
-time being, because it is a mathematically simple, yet established
+time being, because it is mathematically simple, yet an established
 notion in mathematical psychology.
 
 \begin{figure}
@@ -46,7 +46,7 @@ notion in mathematical psychology.
 
   \includegraphics[width=\textwidth]{plots/NosofskySim.pdf}
 
-  \caption{Examples for Nosofsky-similarity (non-normalized) and
+  \caption{Examples of Nosofsky-similarity (non-normalized) and
     derived probability of state confusion (normalized) for
     $\card{\States} = 50$ and different
     values of imprecision $\impairment$.}
@@ -235,7 +235,7 @@ clearly that the pictured strategy pair has not yet reached a
 dynamically stable state under the \rd. Indeed, the trial did not
 converge in our technical sense, but was stopped after the maximum of
 200 rounds. In contrast, the outcome of a trial with identical
-parameters, except that imprecision was $\impairment = 0.1$, which is
+parameters, except with imprecision $\impairment = 0.1$, which is
 shown in Figure~\ref{fig:example_stratsB}, had converged (in our
 technical sense) after 99 rounds of iterated \rdd. The sender strategy
 shows a smooth blending from one ``category'' to the other, and the
@@ -268,7 +268,7 @@ strategies.
 
 \subsubsection{Dependent measures}
  
-To explore further what happened in all of our 50 trials for each
+To further explore what happened in all of our 50 trials for each
 parameter triple, we defined a small number of metrics that aim to
 capture numerically how vague, communicatively efficient and generally
 well-structured the resulting strategy pairs were. \emph{Entropy} and
@@ -475,7 +475,7 @@ under growing imprecision. There seem to be mild effects of the number
 of states in the game, but hardly any in terms of pragmatic
 tolerance. What was not expected \emph{a priori} was that Voronoiness
 of both sender and receiver strategies appear to be non-decreasing
-under increasing impairment, with the only exception the 6 states
+under increasing impairment, with the only exception being the 6 states
 games and the transition from $\impairment = 0$ to $\impairment =
 0.05$. Expected utility of evolved languages mostly decreases in
 increasing imprecision, with the sole exception of a rise for $\toler
