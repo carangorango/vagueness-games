@@ -48,11 +48,15 @@ We have three independent variables: impairment, tolerance & number of states. T
 
 ```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
 
+data$converged = data$Iterations < 201
+data$convex = data$Speaker.Convex.Cat
+
 ds = data[,c("Number.of.states", "Impairment", "Tolerance", 
              "Speaker.entropy", "Hearer.entropy",
-             "Speaker.informativity",
              "Speaker.Voronoiness", "Hearer.Voronoiness",
-             "Expected.utility")]
+             "Expected.utility",
+             "convex", "converged"
+             )]
 
 dm = melt(ds, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
 
@@ -65,7 +69,6 @@ myLabeller <- function(var, value){
     if (var=="variable") { 
         value[value=="Speaker.entropy"] <- "entropy sen"
         value[value=="Hearer.entropy"] <- "entropy rec"
-        value[value=="Speaker.informativity"] <- "informativity"
         value[value=="Speaker.Voronoiness"] <- "Voronoiness sen"
         value[value=="Hearer.Voronoiness"] <- "Voronoiness rec"
         value[value=="Expected.utility"] <- "expected utility"
@@ -80,19 +83,17 @@ sp = ggplot(dsub, aes(x=Impairment, y=value, color = Number.of.states, shape=Num
     geom_line(color="gray", position = pd) + xlab("imprecision") +
      geom_point(position = pd, size = mysize) +
      geom_errorbar(aes(ymin=value-ci, ymax=value+ci), width=0, position=pd) +
-    scale_shape_discrete(name = "# states") +
-    scale_linetype_discrete(name = "# states") +
-    scale_color_discrete(name = "# states")
-     
+    scale_shape_discrete(name = "# states", guide = guide_legend()) +
+    scale_linetype_discrete(name = "# states", guide = guide_legend()) +
+    scale_color_discrete(name = "# states", guide = guide_legend()) +
+    theme(legend.position="top")
 
 sp = sp + facet_grid(variable ~ Tolerance, scales="free", labeller=myLabeller)
-
 
 sp + facet_grid(. ~ sex, labeller=mf_labeller)
 show(sp)
 
-ggsave(sp, file = "paper/plots/MeanMetrics.pdf", width=8, height = 8)
-
+ggsave(sp, file = "paper/plots/MeanMetrics2.pdf", width=8, height = 10)
 
 ```
 
