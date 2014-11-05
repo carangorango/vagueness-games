@@ -1,6 +1,5 @@
 \documentclass[fleqn,reqno,10pt]{article}
 
-
 %========================================
 % Packages
 %========================================
@@ -64,7 +63,7 @@
 
 \newcommand{\similarity}{\ensuremath{\mathrm{Sim}}} % similarity function
 
-% \linespread{1.5}
+\doublespacing
 
 \title{Vagueness, Noise, and Signaling}
 % \author{Michael Franke \and Jos\'e Pedro Correia}
@@ -76,7 +75,7 @@
 
 \begin{abstract}
   Signaling games are popular models for studying the evolution of
-  meaning, but typical approaches do not allow for vagueness as a
+  meaning, but typical approaches do not incorporate vagueness as a
   feature of successful signaling.  Complementing recent like-minded
   models, we introduce the replicator diffusion dynamic as a special
   case of the replicator mutator dynamic that combines evolutionary
@@ -84,19 +83,18 @@
   processing of similar stimuli. Applying this new dynamic to a
   generalization of Lewis' signaling games, we show that stochastic
   imprecision leads to vague, yet communicative efficient signal use,
-  and, moreover, also unifies evolutionary outcomes and helps avoid
+  and, moreover, unifies evolutionary outcomes and helps avoid
   suboptimal categorization.
 \end{abstract}
 
-Many of our concepts and words are vague. A vague category knows clear
+Many concepts and expressions are vague. A vague category knows clear
 cases that fall under it, clear cases that do not, and also so-called
 borderline cases. Borderline cases do not clearly apply, nor do they
 clearly not apply, and there may be differences between borderline
 cases in terms of how well they represent the category in
 question. Vagueness does not seem to dramatically affect the success
 of everyday communication, but it is troublesome for some of the most
-prominent theories of language and meaning. This is especially the
-case for the logico-semantic tradition of Frege, Russell and the young
+prominent theories of language and meaning. This is especially so for the logico-semantic tradition of Frege, Russell and the young
 Wittgenstein which is challenged by the paradoxes vagueness gives rise
 to. 
 
@@ -383,10 +381,9 @@ at each of the agents' choice points:
 \subsection{Replicator diffusion dynamic in behavioral strategies}
 \label{sec:repl-diff-dynam-1}
 
-The replicator diffusion dynamic was first introduced by \citet{Correia2013:The-Bivalent-Tr}
-as a noise-perturbed variant of the replicator dynamic (\rd) in
-behavioral strategies. Fix a sim-max game with
-$\States = \Acts$ and a confusion matrix $C : \States \times
+The replicator diffusion dynamic is a noise-perturbed variant of the
+replicator dynamic (\rd) in behavioral strategies. Fix a sim-max game
+with $\States = \Acts$ and a confusion matrix $C : \States \times
 \States$. $C$ is a row-stochastic matrix whose elements $C_{ij}$ give
 the probability that $\state_i$ is realized as $\state_j$. The
 confusability of states affects senders and receivers alike, but in
@@ -492,7 +489,7 @@ update step in a sequential update:
   \RDD(\Sstrat) & = \Diff_C(\RD(\Sstrat)) &   \RDD(\Rstrat) & = \Diff_C(\RD(\Rstrat)) \,.
 \end{align*}
 This is equivalent to the following, perhaps more transparent
-formulation, given by \citet{Correia2013:The-Bivalent-Tr}:
+formulation:
 \begin{align*}
   \RDD(\Sstrat)(\messg \probbar \state_i) & = \sum_{j} C_{ij} \cdot
   \frac{\Sstrat(\messg \probbar \state_j) \cdot
