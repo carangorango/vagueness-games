@@ -178,3 +178,20 @@ plot.receiver.strat = function(rec,states){
     geom_line(aes(linetype=message)) + labs(title='Receiver',x='State',y='') + 
     theme(legend.position = 'none')
 }
+
+plot.strats = function(sen, rec, states){
+  senMelt = melt(sen, varnames = c("state", "message"))
+  senMelt$state = rep(states, dim(sen)[2])
+  senMelt$message = factor(senMelt$message)
+  senMelt$role = "sender"
+  recMelt = melt(rec, varnames = c("message", "state"))
+  recMelt$state = rep(states, each = dim(rec)[1])
+  recMelt$message = factor(recMelt$message)
+  recMelt$role = "receiver"
+  plotData = rbind(senMelt, recMelt)
+  plotData$role = factor(plotData$role, levels = c("sender", "receiver"))
+  outplot = ggplot(data = plotData, aes(x = state, y = value)) + 
+    geom_line(aes(linetype=message)) + labs(title='',x='State',y='') +
+    theme(legend.position = 'none') + facet_grid(role ~ ., scale = "free_y")
+  return(outplot)
+}

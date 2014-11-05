@@ -7,7 +7,7 @@ source('~/Desktop/data/svn/vagueness-games/helper_functions.R')
 len = 1
 ns = 50
 lambda = 15
-tolerance = 0.05
+tolerance = 0.5
 
 states = seq(0, len, length.out = ns)
 priors = rep(1/ns, ns)
@@ -29,8 +29,8 @@ for (i in 1:100){
   rec = recNext
 }
 
-outPlot = arrangeGrob(plot.sender.strat(sen,states),
-                      plot.receiver.strat(rec,states))
+outPlot = plot.strats(sen,rec,states)
+
 show(outPlot)
 filename = paste("paper/plots/exampleStratQRE_tolerance0", tolerance*10, ".pdf", sep = "", collapse = "")
 ggsave(outPlot, file = filename, height = 5, width = 5)

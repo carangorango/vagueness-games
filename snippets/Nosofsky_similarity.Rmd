@@ -55,7 +55,19 @@ p = ggplot(simDF, aes(x = distance, y = similarity, shape = alpha_i))+
 
 show(p)
 
-ggsave(p, file="paper/plots/NosofskySim.pdf", width=7, height=4)
+ggsave(p, file="paper/plots/NosofskySimConf.pdf", width=7, height=4)
+
+simDF = subset(simDF, simDF$normalized == "Nosofsky similarity")
+
+p = ggplot(simDF, aes(x = distance, y = similarity, shape = alpha_i))+
+  geom_line(color='grey')  + geom_point()  + 
+  ylab("") + 
+  xlab("distance in physical space") +
+  scale_shape_discrete(name="imprecision")
+
+show(p)
+
+ggsave(p, file="paper/plots/NosofskySim.pdf", width=6, height=2.25)
 
 ```
 

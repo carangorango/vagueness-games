@@ -10,24 +10,25 @@ plot.and.save.language.by.index = function(data, index){
   tolerance = data[index,]$Tolerance
   impairment = data[index,]$Impairment
   stratPlot = plot.language.byindex(data,index)
-  filename = paste("~/Desktop/data/svn/vagueness-games/paper/plots/strat_example_", "NS-", ns,                    "_tol-", tolerance, "_imp", impairment, "_ind", index, ".pdf", sep = "", collapse = "")
-  pdf(file = filename, height = 5, width = 5)
+  filename = paste("~/Desktop/data/svn/vagueness-games/paper/plots/strat_example_", "ind", index, ".pdf", sep = "", collapse = "")
+  pdf(file = filename, height = 2.75, width = 3)
   show(stratPlot)
   dev.off()
+  show(stratPlot)
 }
 
-stratsToPlot = c(1201, 1001, 3098, 3452)
+stratsToPlot = c(1201, 1001, 3098, 3452, 41, 23)
 
-# for (strat in stratsToPlot){
-#   plot.and.save.language.by.index(data,strat)
-# }
+for (strat in stratsToPlot){
+  plot.and.save.language.by.index(data,strat)
+}
 
 
 show(ds[stratsToPlot,])
 
-d = subset(data, Number.of.states == 6 & Tolerance == 0.3 & Impairment == 0.05 & Speaker.Convex.Cat == 1)
+d = subset(data, Number.of.states == 6 & Tolerance == 0.2 & Impairment == 0 & Speaker.Convex.Cat == 1)
 
 
-# plot.and.save.language.by.index(d, which.min(d$Expected.utility))
-# plot.and.save.language.by.index(d, which.max(d$Expected.utility))
-# d[c(which.min(d$Expected.utility), which.max(d$Expected.utility)),]
+plot.and.save.language.by.index(d, which.min(d$Expected.utility))
+plot.and.save.language.by.index(d, which.max(d$Expected.utility))
+d[c(which.min(d$Expected.utility), which.max(d$Expected.utility)),]

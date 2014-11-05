@@ -75,17 +75,17 @@
 \maketitle
 
 \begin{abstract}
-  Signaling games are appealing models for studying the evolution of
-  meaning, but typically do not explain vagueness as a feature of
-  successful signaling.  Complementing recent like-minded models, we
-  introduce the replicator diffusion dynamic as a special case of the
-  replicator mutator dynamic that combines evolutionary pressure on
-  optimal signal use with stochastic noise in the processing of
-  similar stimuli. Applying this new dynamic to a generalization of
-  Lewis' signaling games, we show that stochastic imprecision leads to
-  vague, yet communicative efficient signal use, and, moreover, also
-  unifies evolutionary outcomes and helps avoid suboptimal
-  categorization.
+  Signaling games are popular models for studying the evolution of
+  meaning, but typical approaches do not allow for vagueness as a
+  feature of successful signaling.  Complementing recent like-minded
+  models, we introduce the replicator diffusion dynamic as a special
+  case of the replicator mutator dynamic that combines evolutionary
+  pressure on optimal signal use with stochastic noise in the
+  processing of similar stimuli. Applying this new dynamic to a
+  generalization of Lewis' signaling games, we show that stochastic
+  imprecision leads to vague, yet communicative efficient signal use,
+  and, moreover, also unifies evolutionary outcomes and helps avoid
+  suboptimal categorization.
 \end{abstract}
 
 Many of our concepts and words are vague. A vague category knows clear
@@ -98,10 +98,11 @@ of everyday communication, but it is troublesome for some of the most
 prominent theories of language and meaning. This is especially the
 case for the logico-semantic tradition of Frege, Russell and the young
 Wittgenstein which is challenged by the paradoxes vagueness gives rise
-to. But there are other intriguing aspects about vagueness.
+to. 
 
-The puzzle that we are concerned with here is how vagueness could
-arise and be maintained in the first place. This is a serious worry to
+But there are other intriguing aspects about vagueness. The puzzle
+that we are concerned with here is how vagueness could arise and be
+maintained in the first place. This is a serious worry to
 functionalist accounts that maintain that our concepts and language
 use evolved in order to be efficient. Since the existence of unclear
 borderline cases seems to entail inefficiency of categorization or
@@ -109,10 +110,10 @@ communication, the challenge, succinctly put forward by
 \citet{Lipman2009:Why-is-Language}, is to explain how vagueness can
 exist despite its obvious and demonstrable functional deficiency under
 evolutionary pressure to be optimally expressive. We address
-\emph{Lipman's problem} as a technical challenge,
-namely to find a conceptually sound and mathematically coherent formal
-model of the evolution of categorization and language use that yields
-by-and-large efficient categories \emph{and} vagueness.
+\emph{Lipman's problem} as a technical challenge, namely to find a
+conceptually sound and mathematically coherent formal model of the
+evolution of categorization and language use that yields by-and-large
+efficient categories \emph{and} vagueness.
 
 A number of authors have recently tried to explain why vagueness
 evolved as something that is itself useful
@@ -125,9 +126,9 @@ introduce the replicator diffusion dynamics ---a novel variant of the
 replicator mutator dynamic--- that integrates stochastic noise on the
 differential confusability of similar stimuli. The dynamic proposed
 here generalizes and complements previous like-minded accounts. We
-show that stochastic noise can not only lead to vague, yet
-communicative efficient signal use, but can also unify evolutionary
-outcomes and help avoid suboptimal categorization.
+show that stochastic noise can not only lead to vague, yet efficient
+signal use, but can also unify evolutionary outcomes and help avoid
+suboptimal categorization.
 
 The next section introduces the background against which the work
 presented here can be appreciated. Section~\ref{sec:repl-diff-dynam}
@@ -191,7 +192,7 @@ the receiver's acts with the states of the world, so that the game is
 one of guessing the actual state, so to speak. We also assume that
 sender's and receiver's interests are alike, so we only have one
 utility function. We do not consider message costs, so utilities only
-depend on the actual state, and the receiver's response. The
+depend on the actual state and the receiver's response. The
 similarity function should satisfy the usual requirements for a metric
 and the utility function should be a monotonically decreasing function
 of similarity.
@@ -208,11 +209,11 @@ language is a pair of sender and receiver strategies, such that the
 sender strategy partitions the state space into convex categories,
 while the receiver's interpretations are the central spots in each
 category. For example, if \States is the unit interval and all states
-are equiprobable, an \ESS of a sim-max game with two messages would
-have the sender use one message exclusively for all points in the
-lower half of the unit interval and another for all points in the upper
-half; the receiver's interpretations of messages are the central
-points in the respective intervals.
+are equiprobable, a Voronoi language with two messages would have the
+sender use one message exclusively for all points in the lower half of
+the unit interval and another for all points in the upper half; the
+receiver's interpretations of messages are the central points, .25 and
+.75, in the respective intervals.
 
 This result is interesting, because it demonstrates that signaling can
 impose orderly categories on a metric space, without that being the
@@ -222,11 +223,12 @@ state. In that case, evolving Voronoi languages would explain why
 \emph{linguistic categories} are well-behaved and orderly in the way
 they appear to be. More abstractly, sender and receiver can also be
 thought of as distinct modules in a single system, where the first
-module must discretize the information by selecting a small sample of,
-suggestively, category labels. These are passed to a second module
-that tries to decode the original information. In this case, evolving
-Voronoi languages would explain why \emph{conceptual categories} are
-well-behaved and orderly in the way that they appear to be.
+module must discretize the information it is fed by selecting a small
+sample of, suggestively, category labels. These are passed to a second
+module that tries to decode the original information. In this case,
+evolving Voronoi languages would explain why \emph{conceptual
+  categories} are well-behaved and orderly in the way that they appear
+to be.
 
 Seen in this light, sim-max games may provide a foundation to
 approaches in cognitive semantics that rely on the notion of
@@ -235,8 +237,7 @@ for example, has prominently argued that natural categories are convex
 regions in conceptual space. If the conceptual space has a suitable
 metric, convex categories can be derived from a set of prototypes. The
 category corresponding to prototype $p$ is the set of points that are
-more similar to $p$ than to any other
-\citep[e.g.][]{OkabeBoots2000:Spatial-Tessell}. In this way,
+more similar to $p$ than to any other. In this way,
 \citet{Gardenfors2000:Conceptual-Spac} argues, an efficient
 categorization system can be obtained: storing the prototypes lets us
 recover the categories without having to store each category's
@@ -255,9 +256,9 @@ leaves many problems unaddressed. One of them is that natural
 categories for continuously variable stimuli usually do not have
 unique, point-valued prototypes and clear category boundaries. We
 would like to account for the possibility of such vagueness, in
-particular for the following criteria: (i) clear positive examples of
+particular: (i) clear positive examples of
 a vague category should show a gradient transition to clear negative
-examples to (so-called \emph{higher-order vagueness}); (ii) prototypes
+examples (so-called \emph{higher-order vagueness}); (ii) prototypes
 should likewise be gradient regions, peaking at the center of the
 vague category they represent
 \citep[e.g.][]{Sainsbury1991:Is-There-Higher,KeefeSmith1997:Vagueness:-A-Re}.
@@ -266,7 +267,7 @@ vague category they represent
 \citeauthor{Gardenfors2000:Conceptual-Spac}'s conceptual spaces
 approach can be extended to account for the existence of borderline
 cases. From the assumption that prototypes are extended, yet convex
-regions in conceptual space, they give a construction algorithm that
+regions in conceptual space, a construction algorithm is available that
 yields ``collated Voronoi diagrams'' with thick boundaries
 representing borderline
 regions. \citet{DecockDouven2012:What-is-Graded-} show further how it
@@ -399,20 +400,20 @@ formed when \mystate{i} is the intended interpretation.
 \begin{figure}
   \centering
 
-    \begin{tikzpicture}[node distance = 2cm, thick]
+    \begin{tikzpicture}[node distance = 1.6cm, thick]
 
       \begin{scope}
   
-      \node[rectangle, draw=mycol, fill=mycol!25, thick] (actual)
+      \node[rectangle, draw=black!50, fill=black!10, thick] (actual)
       {actual state $\mystate{i}$};
 
-      \node[rectangle, draw=mycol, fill=mycol!25, thick, below of =
+      \node[rectangle, draw=black!50, fill=black!10, thick, below of =
       actual] (perceived) {perceived state $\mystate{j}$};
 
-      \node[rectangle, draw=mycol, fill=mycol!25, thick, below of =
+      \node[rectangle, draw=black!50, fill=black!10, thick, below of =
       perceived] (output) {chosen message $\messg$};
 
-      \node[rectangle, thick, below of = output, node distance=1cm]
+      \node[rectangle, thick, above of = actual, node distance=0.75cm]
       (sender) {sender};
 
       \draw[->] (actual) -> (perceived) node[midway,left] {noise
@@ -431,17 +432,17 @@ formed when \mystate{i} is the intended interpretation.
 
       \begin{scope}[xshift=5cm]
   
-      \node[rectangle, draw=mycol, fill=mycol!25, thick] (message)
+      \node[rectangle, draw=black!50, fill=black!10, thick] (message)
       {observed message $\messg$};
 
-      \node[rectangle, draw=mycol, fill=mycol!25, thick, below of =
+      \node[rectangle, draw=black!50, fill=black!10, thick, below of =
       message] (target) {target interpretation $\mystate{i}$};
 
-      \node[rectangle, draw=mycol, fill=mycol!25, thick, below of =
+      \node[rectangle, draw=black!50, fill=black!10, thick, below of =
       target] (realized) {realized interpretation $\mystate{j}$};
 
-      \node[rectangle, thick, below of = realized, node distance=1cm]
-      (sender) {receiver};
+      \node[rectangle, thick, above of = message, node distance=0.75cm]
+      (receiver) {receiver};
 
       \draw[->] (message) -> (target) node[midway,right] (bla) {strategy
         $\Rstrat(\mystate{i} \probbar \messg)$};
@@ -713,7 +714,7 @@ the only source of mutation is confusability of states.
         (mutated) (dummyr)] (mixedSpace) {};
       \end{pgfonlayer}
 
-      \node[below of = mixedSpace, node distance = 1.7cm] {space of
+      \node[above of = mixedSpace, node distance = 1.4cm] {space of
         mixed strategies};
     \end{scope}
 
@@ -734,7 +735,7 @@ the only source of mutation is confusability of states.
               fit = (dummylB) (mutatedBeh) (dummyrB)] (behSpace) {};
       \end{pgfonlayer}
 
-      \node[below of = behSpace, node distance = 1.7cm] {space of
+      \node[above of = behSpace, node distance = 1.4cm] {space of
         behavioral strategies};
     \end{scope}
 
@@ -795,39 +796,9 @@ would map unto $\Spure_i(\mystate{k})$. So, define:
     \Spure_j^{-1}(\Spure_i(\state_k))} C_{kl}\,.
 \end{align}
 
-For example, consider a signaling game with two states and two
-messages. Let the confusion matrix be:
-\begin{align*}
-  C=
-  \begin{pmatrix}
-    .8 & .2 \\
-    .2 & .8 
-  \end{pmatrix}\,.
-\end{align*}
-The resulting mutation matrices are:
-\begin{align*}
-Q^C & = \bordermatrix{ ~ & 11 & 12 & 21 & 22 \cr
-                      11 & 1 & 0 & 0 & 0 \cr
-                      12 & .16 & .64 & .04 & .16 \cr
-                      21 & .16 & .04 & .64 & .16 \cr
-                      22 & 0 & 0 & 0 & 1 \cr}
-&                    
-  R^C & = \bordermatrix{ ~ & 11 & 12 & 21 & 22 \cr
-                      11 & .64 & .16 & .16 & .04 \cr
-                      12 & .16 & .64 & .04 & .16 \cr
-                      21 & .16 & .04 & .64 & .16 \cr
-                      22 & .04 & .12 & .12 & .64 \cr}\,.
-\end{align*}
-Here, a pair like $21$, for example, refers to a pure sender strategy
-with $\Spure(\state_1)=\messg_2$ and $\Spure(\state_2) =
-\messg_1$. Similarly for the receiver.
-
-Based on the translations from confusion matrices $C$ to mutation
-matrices $Q^C$ and $R^C$ in Equations~(\ref{eq:construction-rec}) and
-(\ref{eq:construction-sen}), we can finally formulate the
-desired correspondence result, that reveals the \rdd as a special case
-of the \rmd in behavioral strategies where the only source of mutation is
-imperfect discriminability of states.
+Based on Equations~(\ref{eq:construction-rec}) and
+(\ref{eq:construction-sen}), we can formulate the desired
+correspondence result. A proof is given in Appendix~\ref{sec:proofs}.
 
 \begin{theorem}
   \label{thm:Correspondence}
@@ -836,7 +807,6 @@ imperfect discriminability of states.
   $G(\Mutate_{R^C}(\Rmixed)) = \Diff_C(\Rstrat)$.
 \end{theorem}
 
-\noindent A proof is given in Appendix~\ref{sec:proofs}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -886,7 +856,7 @@ notion in mathematical psychology.
 \begin{figure}
   \centering
 
-  \includegraphics[width=0.85\textwidth]{plots/NosofskySim.pdf}
+  \includegraphics[width=0.7\textwidth]{plots/NosofskySim.pdf}
 
   \caption{Examples of Nosofsky-similarity (non-normalized) and
     derived probability of state confusion (normalized) for
@@ -985,13 +955,13 @@ transition between these regimes
   \centering
 
   \begin{subfigure}[]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/strat_example_NS-90_tol-01_imp0_ind3098.pdf}
+    \includegraphics[width=\textwidth]{plots/strat_example_ind3098.pdf}
     \caption{$\ns = 90$, $\toler = 0.1$, $\impairment = 0$}
     \label{fig:example_stratsA}
   \end{subfigure}
   \hfill
   \begin{subfigure}[]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/strat_example_NS-90_tol-01_imp01_ind3452.pdf}
+    \includegraphics[width=\textwidth]{plots/strat_example_ind3452.pdf}
     \caption{$\ns = 90$, $\toler = 0.1$, $\impairment = 0.1$}
     \label{fig:example_stratsB}
   \end{subfigure}
@@ -1077,12 +1047,11 @@ vicinity of non-convex strategies.
 To further explore our simulation results, we defined a small number
 of metrics that aim to capture numerically how vague, communicatively
 efficient and generally well-structured the resulting strategy pairs
-were. \emph{Entropy} and \emph{informativity} capture (slightly
-different aspects of) the amount of systematicity or regularity in
-signal use. \emph{Voronoiness} and \emph{convexity} are, respectively,
-gradient and categorical measures for the coherence of signal-induced
-categories. \emph{Expected utility} measures the communicative
-efficiency of evolved strategy pairs.
+were. \emph{Entropy} captures the amount of systematicity or
+regularity in signal use. \emph{Voronoiness} and \emph{convexity} are,
+respectively, gradient and categorical measures for the coherence of
+signal-induced categories. \emph{Expected utility} measures the
+communicative efficiency of evolved strategy pairs.
 
 \paragraph{Entropy.} This classic information-theoretic notion
 captures the amount of uncertainty in a probability
@@ -1118,59 +1087,7 @@ The sender strategies in Figures~\ref{fig:example_stratsA} and
 respectively. The receiver strategies have respective entropies $0.43$
 and $0.84$. In general, we expect that vague languages will have
 higher entropy than crisp ones and that increasing imprecision will
-also increase entropy, all else being equal.
-
-
-
-\paragraph{Informativity.} The quantity of information in a signal is
-an old notion that also goes back to the start of information theory.
-\citet[ch.~3]{Skyrms2010:Signals} discusses its use in the context of
-signaling games. Intuitively speaking, informativity in Skyrms' sense
-measures how revealing the sender's signal use is about which state is
-actual. It therefore measures, in our given set-up with flat priors, a
-sense of well-behavedness or regularity of a sender strategy.
-
-The main idea behind Skyrms' notion is that we can quantify the amount
-of information about a state $\state$ in a message $\messg$ via the
-relation between the probability of the state given the message
-$\Pr(\state \,|\, \messg)$ and the unconditional probability of the
-state $\Pr(\state)$.  Following Bayes' theorem, we can express
-$\Pr(\state \,|\, \messg)$ as $\frac{\Pr(\state) \cdot \Pr(\messg
-  \,|\, \state)}{\Pr(\messg)}$.  We then have $\Pr(\messg \,|\,
-\state) = \Sstrat(\state,\messg)$ and $\Pr(\messg) =
-\sum_{\state^\prime \in \States} \Pr(\state^\prime) \cdot
-\Sstrat(\state^\prime,\messg)$.  Finally, we equate sender
-infomativity with the average overall information about states in each
-signal.  Following \citet[p.~36]{Skyrms2010:Signals}, and the
-considerations above, the informativity about states conveyed by a
-sender strategy is:
-\begin{align*}
-  I(\Sstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs}
-  \sum_{\state \in \States} \frac{\Pr(\state) \cdot
-    \Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States}
-    \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \cdot \log
-  \left(\frac{\Sstrat(\state,\messg)}{\sum_{\state^\prime \in \States}
-      \Pr(\state^\prime) \cdot \Sstrat(\state^\prime,\messg)} \right)
-  \,. 
-\end{align*}
-This measure is bounded between $0$ and $1$. The sender strategies in
-Figures~\ref{fig:example_stratsA} and \ref{fig:example_stratsB} have
-informativity $0.69$ and $0.54$, respectively. In general, we expect
-that vague languages will have lower informativity than crisp
-ones and that increasing imprecision will decrease informativity. 
-
-\citet[p.~39]{Skyrms2010:Signals} also offers a notion of
-informativity about the acts performed by the receiver, but it turns
-out that this is perfectly correlated with information about the
-states in the results of our simulations. We therefore only look at
-informativity about states. 
-
-% Conversely, we can quantify the amount of information about an act in a message.
-% We equate receiver informativity with the average overall information about acts in each signal.
-% Based on Skyrms' definition~\citet[p.~39]{Skyrms2010:Signals}, we define receiver informativity as follows:
-% \begin{align*}
-%   I(\Sstrat,\Rstrat) = \frac{1}{|\Messgs|} \sum_{\messg \in \Messgs} \sum_{\act \in \Acts} \Rstrat(\messg,\act) \cdot \log \left(\frac{\Rstrat(\messg,\act)}{\sum_{\state \in \States} \Pr(\state) \cdot \sum_{\messg^\prime \in \Messgs} \Sstrat(\state,\messg^\prime) \cdot \Rstrat(\messg^\prime,\act)} \right) \,.
-% \end{align*}
+increase entropy, all else equal.
 
 \paragraph{Voronoiness.}
 This metric aims to quantify how close a strategy is to being a part
@@ -1190,7 +1107,7 @@ of a message $\messg \in \Messgs$, then
     \similarity(\state, \pi(\Rstrat, \messg_2)) \bicond \\
     &  \ \ \ \ \ \Sstrat(\state, \messg_1) >
     \Sstrat(\state, \messg_2) \\
-    0 & \text{otherwise.}
+    0 & \text{otherwise}
   \end{cases}
 \end{align*}
 is the Voronoiness of the sender strategy $\Sstrat$ given the receiver
@@ -1205,7 +1122,7 @@ strategy $\Rstrat$ and
   \messg)) > \similarity(\state_2, \pi(\Rstrat, \messg)) \\
   & \ \ \ \ \ \bicond \Rstrat(\messg,
   \state_1) > \Rstrat(\messg, \state_2) \\
-    0 & \text{otherwise.}
+    0 & \text{otherwise}
   \end{cases}
 \end{align*}
 is the Voronoiness of the receiver strategy $\Rstrat$.  The metrics
@@ -1275,21 +1192,17 @@ unexpected. Entropy of sender and receiver strategies are increasing
 with imprecision. Entropy of sender strategies seems independent of
 tolerance levels and the number of states, while there seems to be an
 effect of both parameters on the entropy of the receiver
-strategy. Sender informativity and expected utility are decreasing
-under growing imprecision. There seem to be mild effects of the number
-of states in the game, but hardly any in terms of pragmatic
-tolerance. What was not expected \emph{a priori} was that Voronoiness
+strategy. What was not expected \emph{a priori} was that Voronoiness
 of both sender and receiver strategies appear to be non-decreasing
-under increasing impairment, with the only exception being the 6 states
-games and the transition from $\impairment = 0$ to $\impairment =
+under increasing impairment, with the only exception being games with
+6 states and the transition from $\impairment = 0$ to $\impairment =
 0.05$. Expected utility of evolved languages mostly decreases in
 increasing imprecision, with the sole exception of a rise for $\toler
-= 0.2$ and $n_s = 6$ at $\impairment = 0.1$. Still, normalized expected
-utility of evolved strategy pairs under mild values of imprecision are
-not necessarily much worse than their respective perfect precision
-\rd-analogues. This is especially so for lower numbers of states
-(which increase the chance of non-convergence and non-convexity; see
-Figure~\ref{fig:CategoricalMeasures} and the discussion below).
+= 0.2$ and $n_s = 6$ at $\impairment = 0.1$. Still, normalized
+expected utility of evolved strategy pairs under mild values of
+imprecision are not necessarily much worse than their respective
+perfect precision \rd-analogues. This is especially so for lower
+numbers of states (see discussion below).
 
 Taken together, these findings suggest the following effect of
 confusability of states and diffusion of behavior. Mild forms of
@@ -1297,20 +1210,20 @@ perceptual imprecision lead to slightly less communicative efficiency,
 more vagueness and more regular, well-behaved languages. This
 impression is also supported by the proportion of converged and convex
 trials, pictured in
-Figure~\ref{fig:CategoricalMeasures}. Non-converged and non-convex
+Figure~\ref{fig:MeanMetrics}. Non-converged and non-convex
 sender strategies showed for several values of parameters in the
 absence of impairment. Increasing impairment always assured
 convergence and convexity: diffusion speeds up convergence to a convex
 and regular language.
 
-\begin{figure}
-  \centering
+% \begin{figure}
+%   \centering
   
-  \includegraphics[width=0.8\textwidth]{plots/CategoricalMeasures.pdf}
+%   \includegraphics[width=0.8\textwidth]{plots/CategoricalMeasures.pdf}
 
-  \caption{Proportion of converged and convex trials.}
-  \label{fig:CategoricalMeasures}
-\end{figure}
+%   \caption{Proportion of converged and convex trials.}
+%   \label{fig:CategoricalMeasures}
+% \end{figure}
 
 Diffusion also has another interesting regularizing effect on the
 evolution of signaling. If we look at the confidence intervals in
@@ -1331,13 +1244,13 @@ $0.89$.
   \centering
 
   \begin{subfigure}[]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/strat_example_NS-6_tol-03_imp005_ind41.pdf}
+    \includegraphics[width=\textwidth]{plots/strat_example_ind21.pdf}
     \caption{$\ns = 6$, $\toler = 0.2$, $\impairment = 0$}
     \label{fig:example_stratsC}
   \end{subfigure}
   \hfill
   \begin{subfigure}[]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/strat_example_NS-6_tol-03_imp005_ind23.pdf}
+    \includegraphics[width=\textwidth]{plots/strat_example_ind23.pdf}
     \caption{$\ns = 6$, $\toler = 0.2$, $\impairment = 0$}
     \label{fig:example_stratsD}
   \end{subfigure}
@@ -1440,7 +1353,7 @@ pure strategies are not faithfully reproduced, e.g. by imperfections
 of learning or underdetermination of input, and mistakes in inheriting
 pure strategies are more likely if they result from the confusion of
 similar states. Another possible biological interpretation of the
-\rdd, is that inheritance is faithful, but strategies are noisily
+\rdd is that inheritance is faithful, but strategies are noisily
 realized. Strategies are not necessarily selected for what they are,
 but rather for how they are realized, once noise is factored in.
 
@@ -1456,14 +1369,13 @@ realized, be it through imitation or some solitary learning or
 optimization mechanism.
 
 Under this non-biological interpretation, we have again two options of
-picturing what diffusion is, similar to the biological cases
-before. One possibility is that diffusion is noise in the adoption of
-strategies, e.g. by conditional imitation, of strategies by other
-signalers. Another possibility is, again, that diffusion is noise on
-the realization of strategies: while behavior is optimized to be
-efficient (be it due to learning, introspection or imitation),
-realization of strategies is bound to be noisy due to confusability of
-similar states.
+picturing what diffusion is. One possibility is that diffusion is
+noise in the adoption of strategies, e.g. by conditional imitation, of
+strategies by other signalers. Another possibility is, again, that
+diffusion is noise on the realization of strategies: while behavior is
+optimized to be efficient (be it due to learning, introspection or
+imitation), realization of strategies is bound to be noisy due to
+confusability of similar states.
 
 We believe that all of the four mentioned interpretations are, on
 first approximations, feasible conceptualizations of the \rdd, and
@@ -1651,7 +1563,7 @@ in the context of sim-max games and explored some of its consequences.
 
 We introduced the replicator diffusion dynamic as a special case of
 the replicator mutator dynamic. The \rdd incorporates a special kind
-of stochastic mutation based on differential confusability of similar
+of stochastic mutation due to differential confusability of similar
 states. Based on data from numerical simulations, we demonstrated that
 the inclusion of mild levels of stochastic confusability of states
 does not undermine the possibility of evolving communicatively
