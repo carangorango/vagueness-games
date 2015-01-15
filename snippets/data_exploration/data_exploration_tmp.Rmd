@@ -97,6 +97,53 @@ ggsave(sp, file = "paper/plots/MeanMetrics2.pdf", width=8, height = 10)
 
 ```
 
+More concise plot for second revision of paper
+
+```{r message=FALSE, warning=FALSE, fig.width=10, fig.height=10}
+
+data$converged = data$Iterations < 201
+data$convex = data$Speaker.Convex.Cat
+data$entropy = (data$Speaker.entropy + data$Hearer.entropy) / 2
+
+
+ds = data[,c("Number.of.states", "Impairment", "Tolerance", 
+             "entropy",
+             "Expected.utility",
+             "convex", "converged"
+             )]
+
+dm = melt(ds, id.vars = c("Number.of.states", "Impairment", "Tolerance"))
+
+dms = summarySE(dm, groupvars = c("Number.of.states", "Impairment", "Tolerance", "variable"), measurevar="value")
+dsub = subset(dms, dms$Tolerance == 0.1 & dms$Number.of.states < 90)
+dsub$Number.of.states = factor(dsub$Number.of.states)
+
+myLabeller <- function(var, value){
+    value <- as.character(value)
+    if (var=="variable") { 
+        value[value=="Expected.utility"] <- "exp. utility"
+    }
+    return(value)
+}
+
+
+pd <- position_dodge(.01)
+mysize = 2.5
+sp = ggplot(dsub, aes(x=Impairment, y=value, color = Number.of.states, shape=Number.of.states, linetype=Number.of.states)) + 
+   geom_line(color="gray", position = pd) + xlab("imprecision") +
+   geom_point(position = pd, size = mysize) +
+    scale_shape_discrete(name = "# states", guide = guide_legend()) +
+    scale_linetype_discrete(name = "# states", guide = guide_legend()) +
+    scale_color_discrete(name = "# states", guide = guide_legend()) +
+    theme(legend.position="top")
+
+sp = sp + facet_grid(variable ~ ., scales="free", labeller=myLabeller)
+show(sp)
+
+ggsave(sp, file = "paper/version_02/plots/MeanMetrics3.pdf", width=5, height = 5.5)
+
+```
+
 Entropy
 -------
 

@@ -211,7 +211,22 @@ combPlot = ggplot(Dmelt, aes(x=Impairment, y=value, group = variable, shape = va
   scale_linetype_discrete(name = "property", 
                           labels = c("distance", "utility"))
 show(combPlot)
-ggsave(combPlot, file = "~/Desktop/data/svn/vagueness-games/paper/plots/WithinGroupMeasures.pdf", height=5, width=8)
+# ggsave(combPlot, file = "~/Desktop/data/svn/vagueness-games/paper/plots/WithinGroupMeasures.pdf", height=5, width=8)
 
 
+## reduced plots for revision 2 of paper
 
+# focus on tolerance = 0.1 and 10 states:
+dsub = subset(D, D$Number.of.states == 10 & D$Tolerance == 0.1)
+wgdConcise = ggplot(dsub, aes(x = Impairment, y = inGroupDistance)) + 
+  geom_line( color = "grey") + geom_point() +
+  xlab("Impairment") + ylab("")
+show(wgdConcise)
+ggsave(wgdConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_02/plots/WithinGroupDistanceConcise.pdf", height=2, width=3) 
+
+eusub = subset(meanEUs, meanEUs$Number.of.states == 10 & meanEUs$Tolerance == 0.1)
+EUConcise = ggplot(eusub, aes(x = Impairment, y = Speaker.meanEU)) + 
+  geom_line( color = "grey") + geom_point() +
+  xlab("Impairment") + ylab("")
+show(EUConcise)
+ggsave(EUConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_02/plots/WithinGroupEUConcise.pdf", height=2, width=3) 

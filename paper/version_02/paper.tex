@@ -1130,10 +1130,10 @@ vagueness and imprecision.
 
 \subsubsection{Results}
 
-\begin{figure}
+\begin{figure}[t]
   \centering
   
-  \includegraphics[width=\textwidth]{plots/MeanMetrics2.pdf}
+  \includegraphics[width=0.75\textwidth]{plots/MeanMetrics3.pdf}
 
   \caption{Means of gradient and proportions of categorical measures
     for $\toler = 0.1$, $\ns \in \set{6, 10, 50}$, and $\impairment
@@ -1210,9 +1210,9 @@ distance between strategies $\Sstrat$ and $\Sstrat'$ to be the maximum
 of $\text{HD}(\Sstrat,\Sstrat')$ and $\text{HD}(\Sstrat^*,\Sstrat')$
 where $\Sstrat^*$ is $\Sstrat$ with reversed message indices. The
 \emph{within group distances}, i.e., the average distances between all
-sender strategies in each parameter group, are plotted exemplarily in
-Figure~\ref{fig:AverageEUinGroups} for $\beta = 0.1$ and $n_s =
-10$. Despite minor quantitative differences the is the same for all
+sender strategies in each parameter group, are plotted exemplarily on
+the left in Figure~\ref{fig:GroupMeasures} for $\beta = 0.1$ and $n_s
+= 10$. Despite minor quantitative differences the is the same for all
 other parameter settings that we tested: with increasing imprecision,
 the sender strategies evolving under \rdd were exactly alike (modulo
 swapping of messages). This means that perceptual imprecision unifies
@@ -1223,12 +1223,14 @@ split exactly in the middle of the unit interval.
 \begin{figure}
   \centering
 
-    \includegraphics[width=0.8\textwidth]{plots/WithinGroupMeasures.pdf}
+    \includegraphics[width=0.475\textwidth]{plots/WithinGroupDistanceConcise.pdf}
+    \hfill
+    \includegraphics[width=0.475\textwidth]{plots/WithinGroupEUConcise.pdf}
 
-    \caption{For each group, i.e., triplet of independent variables,
-      the plots show (i) within group distances and (ii) within group
-      expected utilities, as defined in the main text.}
-  \label{fig:AverageEUinGroups}
+    \caption{Within group distance (left) and within group expected
+      utility (right) as a function of impairment for all runs with
+      $\toler = 0.1$ and $n_s = 10$.}
+  \label{fig:GroupMeasures}
 \end{figure}
 
 This unifying property of perceptual imprecision could be considered
@@ -1236,14 +1238,14 @@ an evolutionary beneficial side-effect. Higher imprecision can lead to
 higher \emph{within group expected utility}, defined as the average
 expected utility that each evolved language (i.e., pair of sender and
 receiver strategy at stopping time) scored when playing against an
-arbitrary other language of the same parameter
-group. Figure~\ref{fig:AverageEUinGroups}) gives the representative
-example of $\toler = 0.1$ and $n_s = 10$. The observation repeats for
-other parameter values: while imprecision might decrease the
-communicative efficiency of individual languages, it increases the
-conceptual coherence and communicative success between independently
-evolving strategies. It is almost as if mere confusability of states
-imposes a regularity constraint on evolving categories.
+arbitrary other language of the same parameter group. The right side
+of Figure~\ref{fig:GroupMeasures}) gives a representative example. The
+observation repeats for other parameter values: while imprecision
+might decrease the communicative efficiency of individual languages,
+it increases the conceptual coherence and communicative success
+between independently evolving strategies. It is almost as if mere
+confusability of states imposes a regularity constraint on evolving
+categories.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
