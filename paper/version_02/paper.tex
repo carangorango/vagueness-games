@@ -83,9 +83,12 @@
   processing of similar stimuli. Applying this new dynamic to a
   generalization of Lewis' signaling games, we show that stochastic
   imprecision leads to vague, yet by-and-large communicative efficient
-  signal use, and, moreover, unifies evolutionary outcomes and helps
-  avoid suboptimal categorization.
+  signal use, and, moreover, that it unifies evolutionary outcomes and helps
+  avoiding suboptimal categorization.
 \end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
 
 Many concepts and expressions are vague. A vague category knows clear
 cases that fall under it, clear cases that do not, and also so-called
@@ -100,9 +103,9 @@ to.
 
 But there are other intriguing aspects about vagueness. The puzzle
 that we are concerned with here is how vagueness could arise and be
-maintained in the first place. This is a serious worry to
+maintained in the first place. This is a serious issue for
 functionalist accounts that maintain that concepts and linguistic
-meanings evolved in order to be efficient. Since the existence of
+meanings evolved driven towards efficiency. Since the existence of
 unclear borderline cases seems to entail inefficiency of
 categorization or communication, the challenge, succinctly put forward
 by \citet{Lipman2009:Why-is-Language}, is to explain how vagueness can
@@ -110,7 +113,7 @@ persist under evolutionary pressure to be optimally discriminative. We
 address \emph{Lipman's problem} as a technical challenge, namely to
 find a conceptually sound and mathematically coherent formal model of
 the evolution of categorization and language use that yields
-by-and-large efficient categories \emph{and} vagueness.
+by-and-large efficient categorization \emph{and} vagueness.
 
 A number of authors have recently tried to explain why vagueness
 evolved as something that is itself useful
@@ -120,12 +123,12 @@ limitations in information processing or particular learning
 strategies
 \citep[e.g.][]{FrankeJager2010:Vagueness-Signa,OConnor2013:The-Evolution-o}. This
 paper contributes to the latter line of thought. Concretely, we
-introduce the replicator diffusion dynamics ---a novel variant of the
-replicator mutator dynamic--- that integrates stochastic noise on the
+introduce the replicator diffusion dynamics---a novel variant of the
+replicator mutator dynamic---that integrates stochastic noise on the
 differential confusability of similar stimuli. The dynamic proposed
 here generalizes and complements previous like-minded accounts. We
 show that stochastic noise can not only lead to vague, yet relatively
-efficient signal use, but can also unify evolutionary outcomes and
+efficient signal use, but also unify evolutionary outcomes and
 help avoid suboptimal categorization.
 
 The next section introduces the background against which the work
@@ -278,11 +281,15 @@ An alternative approach is taken by
 \citet{OConnor2013:The-Evolution-o} who show how the above desiderata
 can be met by evolving strategies in sim-max games. The approach we
 take here is similar in spirit, but different in relevant detail. We
-are argue here that \citeauthor{FrankeJager2010:Vagueness-Signa}'s
-approach builds on a dubious assumption about the source of
-vagueness. While \citeauthor{OConnor2013:The-Evolution-o} gives an
-agent-level learning dynamic under which vague signaling arises, we
-complement the picture by giving a population-level dynamic that
+argue here that \citeauthor{FrankeJager2010:Vagueness-Signa}'s
+approach gives rise to problematic predictions under certain conditions
+which are avoided in our approach. However, the two are not necessarily
+competing explanations since they are motivated differently and it is
+certainly possible that both the mechanisms proposed by them, as the
+ones proposed here play a role in the whole phenomenon.
+Regarding the work by \citeauthor{OConnor2013:The-Evolution-o}, while she
+gives an agent-level learning dynamic under which vague signaling arises,
+we complement the picture by giving a population-level dynamic that
 abstracts from the concrete behavior of signalers. A more in-depth
 comparison is deferred until Section~\ref{sec:discussion}. Let us
 first look into our own proposal in more detail.
@@ -308,8 +315,8 @@ below). Dynamics on behavioral strategies assume that agents can adapt
 their behavior locally, so to speak, i.e., independently at each
 choice point. This greatly reduces the complexity of the dynamic and
 simplifies numerical simulations. But it also points towards an
-interpretation as a process of cultural evolution, rather than
-biological evolution: signaling strategies are not inherited as a
+interpretation of the process as cultural evolution, rather than
+biological evolution. Signaling strategies are not inherited as a
 whole, but adapted piece-meal, e.g., by conditional imitation of
 ``local'' behavior at a given choice point (more below). Still, the
 approach we suggest here is compatible with a formulation in terms of
@@ -369,7 +376,7 @@ at each of the agents' choice points:
     \EU(\act, \messg,\Sstrat)} {\Phi(\messg,\Sstrat, \Rstrat)}  \,.
 \end{align*}
 The \rd in behavioral strategies describes the most likely path of
-development of average behavior in a (huge and homogeneous) population
+development of average behavior in a population
 of agents when behavioral adaptations occur independently at each
 choice point, e.g., when agents adopt the behavior of another agent
 \emph{at a given choice point} if that ``local'' behavior is
@@ -510,7 +517,7 @@ formulation:\footnote{To see this, start with $\RDD(\Sstrat)(\messg_k
 
 The most natural interpretation of this sequential definition is that
 the \rdd captures the most likely path of development of aggregate
-behavior in a (huge \& homogeneous) society, in which behavioral
+behavior in a society, in which behavioral
 changes occur independently at each choice point, as described by the
 \rd for behavioral strategies. Whatever strategy an agent does
 actually hold, its realization is perturbed by imperfect
@@ -808,12 +815,12 @@ would map unto $\Spure_i(\mystate{k})$. So, define:
 
 Based on Equations~(\ref{eq:construction-rec}) and
 (\ref{eq:construction-sen}), we can formulate the desired
-correspondence result. A proof is given in Appendix~\ref{sec:proofs}.
+correspondence result, a proof for which is given in Appendix~\ref{sec:proofs}.
 
 \begin{theorem}
   \label{thm:Correspondence}
   (i) If $G(\Smixed) = \Sstrat$, then $G(\Mutate_{Q^C}(\Smixed)) =
-  \Diff_C(\Sstrat)$. And, (ii) if $G(\Rmixed) = \Rstrat$, then
+  \Diff_C(\Sstrat)$. (ii) If $G(\Rmixed) = \Rstrat$, then
   $G(\Mutate_{R^C}(\Rmixed)) = \Diff_C(\Rstrat)$.
 \end{theorem}
 
@@ -831,7 +838,7 @@ isolate the novel diffusion part in
 Section~\ref{sec:iterated-diffusion}, before exploring how diffusion
 and fitness-based selection interact in Section~\ref{sec:simulations}.
 
-\subsection{(Iterated) Diffusion}
+\subsection{Iterated diffusion}
 \label{sec:iterated-diffusion}
 
 Confusion of states should intuitively be a function of their
@@ -1050,8 +1057,9 @@ vicinity of non-convex strategies.
 
 \subsubsection{Dependent measures}
  
-To further explore our simulation results, we track how vague,
-communicatively efficient and generally well-structured the recorded
+To further explore our simulation results, we calculated
+metrics that aim to numerically capture how vague, generally
+well-structured, and communicatively efficient the recorded
 strategy pairs were. \emph{Entropy} captures the amount of
 systematicity or regularity in signal use. \emph{Convexity} captures
 whether a behavioral strategy would project onto a convex pure
@@ -1081,7 +1089,7 @@ strategies in Figures~\ref{fig:example_stratsA} and
 respectively. The receiver strategies have respective entropies $0.43$
 and $0.84$. In general, we expected that vague languages would have
 higher entropy than crisp ones and that increasing imprecision would
-increase entropy, all else equal.
+lead to increased entropy, all else being equal.
 
 \paragraph{Convexity.} At least for sender strategies, which converge
 faster, it also makes sense to define a categorical measure of
@@ -1092,9 +1100,8 @@ $\Spure(\state) = \argmax_{\messg' \in \Messgs}
 \Sstrat(\state,\messg')$. If that $\Spure$ is convex, we also count
 $\Sstrat$ as convex. The sender strategy in
 Figure~\ref{fig:example_stratsA} is not convex, while the one in
-Figure~\ref{fig:example_stratsB} is.  One would perhaps not expect a
-systematic relation between vagueness and imprecision, on the one
-hand, and convexity on the other.
+Figure~\ref{fig:example_stratsB} is.  One would a priori not expect a
+systematic relation between imprecision and convexity.
 
 \paragraph{Expected utility.} We also recorded the expected utility of
 a strategy pair:
@@ -1137,22 +1144,25 @@ whole set of results.
 
 As expected, increasing imprecision leads to higher entropy and lower
 expected utility. Importantly, however, imprecision does not
-necessarily lead to disastrous decline of communicative success. On
-the other hand, imprecision increased the number of outcomes with
-convex sender strategies, and led to higher proportions of
+necessarily lead to disastrous decline of communicative success. What was
+not expected, on the other hand, was a relation between imprecision and
+convexity. However, the corresponding plot clearly shows that
+higher imprecision led to a higher number of outcomes with
+convex sender strategies. Moreover, it also led to higher likelihood of
 convergence. In fact, sufficient impairment always ensured convergence
 and convexity. It appears that perceptual imprecision leads to
-slightly less communicative efficiency, more vagueness but more
+more entropy, slightly less communicative efficiency, but more
 regular, well-behaved languages in shorter time.
 
-Beyond promoting convexity, diffusion also has another interesting
+Beyond promoting convexity and convergence, diffusion also has another interesting
 regularizing effect on the evolution of signaling. There was very
 little variation in the recorded metrics for evolved strategies, at
 least for higher values of impairment. On closer inspection, it turns
 out that variability in low-impairment conditions is not only due to
 non-convergence or non-convexity. Figure~\ref{fig:MoreExample_strats}
 gives two more examples of strategy pairs at stopping time. Both are
-obtained for the same triple of parameters, both converged and have
+obtained for the same triple of parameters, both converged before the
+maximum number of rounds, and both have
 convex sender strategies. However, they are not equally efficient. In
 fact, the pair in Figure~\ref{fig:example_stratsC} has a normalized
 expected utility of $0.99$ while the one in
@@ -1179,7 +1189,7 @@ Figure~\ref{fig:example_stratsD} only has $0.89$.
 \end{figure}
 
 Interestingly, this type of variability in evolutionary outcomes can
-be weeded out by impairment. To see this, we calculated the average
+be weeded out by impairment. To investigate this, we calculated the average
 distance between evolved sender strategies within each group of trials
 that had identical parameter values. We determined the distance
 between strategies $\Sstrat$ and $\Sstrat'$ as the average Hellinger
@@ -1195,14 +1205,14 @@ $\Sstrat'(\state)$ at each choice point $\state$:
 To compensate for the arbitrariness of message use, we set the
 distance between strategies $\Sstrat$ and $\Sstrat'$ to be the maximum
 of $\text{HD}(\Sstrat,\Sstrat')$ and $\text{HD}(\Sstrat^*,\Sstrat')$
-where $\Sstrat^*$ is $\Sstrat$ with reversed message indices. The
+where $\Sstrat^*$ is $\Sstrat$ with reversed message indices. An example of the
 \emph{within group distances}, i.e., the average distances between all
-sender strategies obtained for the same parameter values, are plotted
-exemplarily on the left in Figure~\ref{fig:GroupMeasures} for $\beta =
-0.1$ and $n_s = 10$. Despite minor quantitative differences, the
-picture is the same for all other parameter settings that we tested:
+sender strategies obtained for the same parameter values, is plotted
+on the left in Figure~\ref{fig:GroupMeasures} for $\beta =
+0.1$ and $n_s = 10$. Despite some quantitative differences, the
+general trend is the same for all other parameter settings that we tested:
 with increasing imprecision, the sender strategies evolving under \rdd
-were exactly alike (modulo swapping of messages). This means that
+were much more alike (modulo swapping of messages). This means that
 perceptual imprecision unifies evolutionary outcomes and guarantees
 sender strategies that are not only convex, but also regular in that
 they induce a vague category split exactly in the middle of the unit
@@ -1270,7 +1280,7 @@ prospect of evolving regular and by-and-large efficient signaling
 behavior. On the other hand, there appears to be a possibly beneficial
 side-effect of state confusability: it speeds up convergence to
 regularly shaped and convex categories. This suggests that diffusion
-of behavior, as we implemented it here, could also be seen as a form
+of behavior, as we implemented here, could also be seen as a form
 of stimulus-generalization that is evolutionarily beneficial, because
 it accelerates the emergence of uniform category formation. This
 latter view is also suggested by a like-minded account to which we
@@ -1352,8 +1362,8 @@ quantal response function is a paramterized generalization of the
 classic best response function. For example, if $U \mycolon \Acts
 \rightarrow \mathds{R}$ is the measure of expected utility over
 choices $\Acts$ of an agent, then a best response function would have
-the agent choose $\act$ only if $U(\act) = \max_{\act' \in \Acts}
-U(a)$. A quantal response function rather assumes that agents would
+the agent choose $\act$ only if $U(\act) = \max_{\act^\prime \in \Acts}
+U(\act^\prime)$. A quantal response function rather assumes that agents would
 choose $\act$ with a probability proportional to $\expo(\lambda \cdot
 U(\act))$, where $\lambda$ is a rationality parameter. If $\lambda
 \rightarrow \infty$ we retrieve the behavior of the best response
@@ -1396,11 +1406,12 @@ values of perceptual imprecision.
 \end{figure}
 
 
-But not all quantal response equilibria are equally plausible, and the
-ones that are not suggest that it is less natural to think of
-vagueness as arising from errors in the computation or maximization of
-expected utility than that it arises from confusion of similar
-states. To see what the problem is, consider
+But not all quantal response equilibria are equally plausible.
+%, and the
+%ones that are not suggest that it is less natural to think of
+%vagueness as arising from errors in the computation or maximization of
+%expected utility than that it arises from confusion of similar states
+To see what the problem is, consider
 Figure~\ref{fig:exampleQRE_stratsB}, which is the quantal response
 equilibrium for a game with lower tolerance $\toler = 0.05$. Unlike
 what evolves under \rdd in this case, sender strategies have vague
@@ -1411,7 +1422,7 @@ so to speak. This, in turn, is because quantal responses introduce
 noise into the decision making at the level of computing or maximizing
 expected utility of choices.
 
-That this is conceptually odd shows even more clearly in a case where
+That this is problematic shows even more clearly in a case where
 the state space is intuitively unbounded, as for instance for the
 property ``tall.'' If the usual interpretation of a ``tall man'' peaks
 at around, say, 195cm then when meeting a giant of $n$ meters, senders
@@ -1427,11 +1438,15 @@ zero.
 
 Admittedly, this argument hinges on the choice of utility
 function. Still, to the extent that the utility functions we chose are
-reasonable---and we think they are very reasonable--- the case
-suggests that quantal responses are not a good model, intuitively
-speaking, for why linguistic categories are vague. Vagueness is more
-plausibly an effect of perceptual confusion of similar states than of
-computational errors in maximizing expected utility.
+reasonable---and we think they are very reasonable---the case
+suggests that quantal responses do not paint a complete picture. Naturally,
+we cannot claim our approach provides valid predictions for all cases.
+Given the complexity of the phenomenon, and the fact that
+the quantal response approach is built on very reasonable assumptions,
+it is likely that both proposals are relevant pieces of the puzzle.
+%Vagueness is more
+%plausibly an effect of perceptual confusion of similar states than of
+%computational errors in maximizing expected utility.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
