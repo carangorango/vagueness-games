@@ -1010,18 +1010,25 @@ and receiver strategies, for each triplet of independent parameter
 values: $\ns = \card{T} \in \set{6, 10, 50, 90}$, $\impairment \in
 \set{0, 0.05, 0.1, 0.2, 0.3}$, $\toler \in \set{0.05, 0.1, 0.2,
   0.3}$. Each trial ran for a maximum of 200 update steps of the
-\rdd. A trial was considered converged and stopped before the maximum
-of 200 rounds if the total amount of change between strategies before
-and after the current \rdd step was smaller than a suitably chosen
+\rdd. A trial was considered converged, and thus stopped before the maximum
+of 200 rounds, if the total amount of change between strategies before
+and after an \rdd step was smaller than a suitably chosen
 threshold. It is not guaranteed that strategies at halting time had
 converged to the eventual attracting state, whether they ran for 200
-rounds or not. Our notion of convergence therefore is only a
-categorical measure for the speed of approaching some state in which
-the force of evolutionary optimization has fallen under a
-(well-considered, but eventually arbitrary) threshold. In other words,
-we need to think of convergence in our sense as speed of evolution
-towards the first evolutionary slowdown.\todo{check and improve
-  this}
+rounds or not. Our notion of convergence is therefore only a
+categorical measure for reaching a certain (well-considered, but
+eventually arbitrary) degree of stability. In principle, rather than
+setting a hard limit on the maximum number of rounds and analyzing
+convergence categorically, one could also run each trial until reaching
+our criterion for convergence and analyze the number of rounds it took to get there.
+Our choice was initially motivated by pragmatic concerns regarding length of
+simulation time, but it is also justifiable if we reflect on the
+nature of language evolution as a continuous process.
+Language adapts to an ever-changing reality; it is rare, if not impossible,
+that a lexicon has an infinite amount of time to neatly converge to a stable
+state. Therefore, investigating speed of convergence within a limited
+time frame can be seen as better reflecting the natural constraints of
+language evolution.
 
 Representative examples for resulting strategy pairs are given in
 Figure~\ref{fig:example_strats}. Figure~\ref{fig:example_stratsA}
