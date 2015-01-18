@@ -133,8 +133,8 @@ help avoid suboptimal categorization.
 
 The next section introduces the background against which the work
 presented here can be appreciated. Section~\ref{sec:repl-diff-dynam}
-introduces the replicator diffusion dynamic and elaborates on its
-relation with the replicator mutator
+introduces the replicator diffusion dynamic and Section~\ref{sec:diffusion-as-special}
+elaborates on its relation with the replicator mutator
 dynamic. Section~\ref{sec:exploring-rdd} explores the replicator
 diffusion dynamic. Section~\ref{sec:discussion} reflects and compares
 our approach to others.
@@ -310,8 +310,8 @@ of the replicator dynamic (\rd) and a special case of the replicator
 mutator dynamic (\rmd).
 
 The formulation of the \rdd given and explored here is in terms of
-behavioral strategies, not in terms of mixed strategies (more on this
-below). Dynamics on behavioral strategies assume that agents can adapt
+behavioral strategies, not in terms of mixed strategies. Dynamics on
+behavioral strategies assume that agents can adapt
 their behavior locally, so to speak, i.e., independently at each
 choice point. This greatly reduces the complexity of the dynamic and
 simplifies numerical simulations. But it also points towards an
@@ -321,19 +321,21 @@ whole, but adapted piece-meal, e.g., by conditional imitation of
 ``local'' behavior at a given choice point (more below). Still, the
 approach we suggest here is compatible with a formulation in terms of
 mixed strategies and an interpretation as biological evolution as
-well. To show this, we translate our initial formulation of the \rdd
+well. In Section~\ref{sec:diffusion-as-special}, we
+translate our initial formulation of the \rdd
 into one using mixed strategies. Doing so identifies the \rdd as a
-special case of the \rmd.
+special case of the \rmd. For now, let us first focus on the
+formulation of the dynamic in terms of behavioral strategies alone.
 
 We begin by recapitulating the \rd in
 Section~\ref{sec:repl-dynam-behav}, and introduce the \rdd in
 Section~\ref{sec:repl-diff-dynam-1}.
-Section~\ref{sec:repl-mutat-dynam} introduces the \rmd, and
-Section~\ref{sec:diffusion-as-special} shows in what sense the \rdd is
-a special case of the \rmd. Sections~\ref{sec:repl-mutat-dynam} and
-\ref{sec:diffusion-as-special} are conceptually important, but rather
-technical and not strictly necessary to appreciate the main point of
-the paper.
+%Section~\ref{sec:repl-mutat-dynam} introduces the \rmd, and
+%Section~\ref{sec:diffusion-as-special} shows in what sense the \rdd is
+%a special case of the \rmd. Sections~\ref{sec:repl-mutat-dynam} and
+%\ref{sec:diffusion-as-special} are conceptually important, but rather
+%technical and not strictly necessary to appreciate the main point of
+%the paper.
 
 \subsection{Replicator dynamic in behavioral strategies}
 \label{sec:repl-dynam-behav}
@@ -540,8 +542,17 @@ behavior, without presupposing extravagant higher cognitive abilities
 behavioral-strategy version of the replicator mutator dynamics. This
 is important to know because it enables similar applications of
 diffusion from perceptual confusion also in models of biological
-evolution. The remainder of this section therefore works out the
-relation between the \rdd and the \rmd.
+evolution.
+
+The following section works out the relation between the \rdd and the \rmd.
+Although this section is conceptually important, it is also rather
+technical and not strictly necessary to appreciate the main point of
+the paper.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Diffusion as mutation}
+\label{sec:diffusion-as-special}
 
 \subsection{The replicator mutator dynamic}
 \label{sec:repl-mutat-dynam}
@@ -688,10 +699,7 @@ The discrete-time \rmd given above can then be rewritten as:
   \RDD(\Smixed) &= \Mutate_Q(\RD(\Smixed)) &   \RDD(\Rmixed) &= \Mutate_R(\RD(\Rmixed))\,. 
 \end{align*}
 
-
-
-\subsection{Diffusion as mutation}
-\label{sec:diffusion-as-special}
+\subsection{Relating the dynamics}
 
 The sequential reformulation of the \rmd closely resembles our initial
 formulation of the \rdd. However, there is a major difference between
@@ -831,7 +839,7 @@ correspondence result, a proof for which is given in Appendix~\ref{sec:proofs}.
 \section{Exploring the RDD}
 \label{sec:exploring-rdd}
 
-The previous section showed that the \rdd can be conceptualized as a
+The previous sections showed that the \rdd can be conceptualized as a
 two-step procedure: we first calculate where the replicator dynamic
 would take us, then apply diffusion. To understand the \rdd better, we
 isolate the novel diffusion part in
@@ -1265,7 +1273,7 @@ interpretation as a process of cultural evolution is most salient,
 according to which agents adapt their choice dispositions locally at
 each choice point. But the \rdd is also extensible to biological
 evolution on mixed strategies, in which case it is a special case of
-the \rmd with mutation matrices derived from confusion matrices as
+the \rmd with mutation matrices derived from confusion matrices, as
 shown in Section~\ref{sec:diffusion-as-special}. 
 
 The \rdd is not only compatible with several interpretations of how,
