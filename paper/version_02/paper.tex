@@ -84,7 +84,7 @@
   generalization of Lewis' signaling games, we show that stochastic
   imprecision leads to vague, yet by-and-large communicative efficient
   signal use, and, moreover, that it unifies evolutionary outcomes and helps
-  avoiding suboptimal categorization.
+  avoid suboptimal categorization.
 \end{abstract}
 
 \section{Introduction}
@@ -280,17 +280,14 @@ An alternative approach is taken by
 can be met by evolving strategies in sim-max games. The approach we
 take here is similar in spirit, but different in relevant detail. We
 argue here that \citeauthor{FrankeJager2010:Vagueness-Signa}'s
-approach gives rise to problematic predictions under certain conditions
-which are avoided in our approach. However, the two are not necessarily
-competing explanations since they are motivated differently and it is
-certainly possible that both the mechanisms proposed by them, as the
-ones proposed here play a role in the whole phenomenon.
-Regarding the work by \citeauthor{OConnor2013:The-Evolution-o}, while she
-gives an agent-level learning dynamic under which vague signaling arises,
-we complement the picture by giving a population-level dynamic that
-abstracts from the concrete behavior of signalers. A more in-depth
-comparison is deferred until Section~\ref{sec:discussion}. Let us
-first look into our own proposal in more detail.
+approach gives rise to problematic predictions under certain
+conditions which are avoided in our approach. While
+\citeauthor{OConnor2013:The-Evolution-o} gives an agent-level learning
+dynamic under which vague signaling arises, we complement the picture
+by giving a population-level dynamic that abstracts from the concrete
+behavior of signalers. A more in-depth comparison is deferred until
+Section~\ref{sec:discussion}. Let us first look into our own proposal
+in more detail.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -515,26 +512,26 @@ formulation:\footnote{To see this, start with $\RDD(\Sstrat)(\messg_k
     \EU(\state_j, \messg_k,\Sstrat)} {\Phi(\messg_k,\Sstrat, \Rstrat)}  \,.
 \end{align*}
 
-The most natural interpretation of this sequential definition is that
-the \rdd captures the most likely path of development of aggregate
-behavior in a society, in which behavioral
-changes occur independently at each choice point, as described by the
-\rd for behavioral strategies. Whatever strategy an agent does
-actually hold, its realization is perturbed by imperfect
-discriminability of states in such a way that the expected overall
-aggregate behavior is the diffusion of the strategies that the agents
-would play in a noise-free world. Any agent-level interpretation of
-the \rd in behavioral strategies seems compatible with this
+The most straightforward interpretation of this sequential definition
+is that the \rdd captures the most likely path of development of
+aggregate behavior in a society, in which behavioral changes occur
+independently at each choice point, as described by the \rd for
+behavioral strategies. Whatever strategy an agent does actually hold,
+its realization is perturbed by imperfect discriminability of states
+in such a way that the expected overall aggregate behavior is the
+diffusion of the strategies that the agents would play in a noise-free
+world. Any agent-level interpretation of the \rd in behavioral
+strategies seems \emph{prima facie} compatible with this
 interpretation.
 
 The sequential definition highlights that other (discrete-time)
 evolutionary dynamics can be subjected to state-confusability in an
-analogous fashion. It would be entirely straightforward, for instance,
-to perturb a best-response dynamic in case we wanted to model
-cognizing, rational agents with a noisy perceptual system. Our choice
-of the \rd as a carrier dynamic is motivated by its generality and
-austerity, being compatible with a variety of implicit agent-level
-behavior, without presupposing extravagant higher cognitive abilities
+analogous fashion. It is easy, for instance, to perturb a
+best-response dynamic in case we wanted to model cognizing, rational
+agents with a noisy perceptual system. Our choice of the \rd as a
+carrier dynamic is motivated by its generality and austerity, being
+compatible with a variety of implicit agent-level behavior, without
+presupposing extravagant higher cognitive abilities
 \citep[c.f.][]{Sandholm2013:Population-Game}. Moreover, by using the
 \rd as a carrier for diffusion, we actually obtain a special case of a
 behavioral-strategy version of the replicator mutator dynamics. This
@@ -611,7 +608,7 @@ other, so that the total expected utility of the first strategy is
 higher. Under evolutionary dynamics that work on entire strategies the
 first strategy will increase in proportion, relative to the
 second. Consequently, a locally less efficient type of behavior can be
-demoted because it is correlated with efficient behavior at another
+promoted because it is correlated with efficient behavior at another
 choice point. Evolutionary dynamics working on behavioral strategies
 do not allow for that. Behavioral adaptations occur independently at
 different choice points.
@@ -624,8 +621,9 @@ a more natural choice for cultural dynamics, e.g., when an agent
 observes and imitates another agent's strategy: it may be more
 plausible that agents adopt the use of a single word, not an entire
 lexicon, so to speak. On the other hand, biological evolution seems
-more naturally modeled in terms of mixed strategies: it is a full set
-of behavioral disposition that is bequeathed to the next generation.
+more naturally modeled in terms of mixed strategies, when it is a full
+set of behavioral disposition that is bequeathed to the next
+generation.
 
 \paragraph{Replicator dynamic in mixed strategies.} To understand the
 \rmd in mixed strategies, we first introduce the \rd in mixed
@@ -880,10 +878,8 @@ an established notion in mathematical psychology.
 
   \includegraphics[width=0.7\textwidth]{plots/NosofskySim.pdf}
 
-  \caption{Examples of Nosofsky-similarity (non-normalized) and
-    derived probability of state confusion (normalized) for
-    $\card{\States} = 50$ and different
-    values of imprecision $\impairment$.}
+  \caption{Examples of Nosofsky-similarity for different values of
+    imprecision.}
   \label{fig:NosofskySim}
 \end{figure}
 
@@ -897,11 +893,10 @@ similarity and therefore obtained by normalization:
   \impairment)} \,.
 \end{align*}
 Confusion of states is then also a function of imprecision parameter
-$\impairment$ (see Figure~\ref{fig:NosofskySim}). For $\impairment =
-0$ the confusion matrix has $C_{ii} = 1$; for $\impairment > 0$, $C$
-is positive, i.e., $C_{ij} >0$ for all $i$ and $j$; for $\impairment
-\rightarrow \infty$ we find $C_{ij} = \nicefrac{1}{\card{\States}}$
-for all $i$ and $j$.
+$\impairment$. For $\impairment = 0$, the confusion matrix has $C_{ii}
+= 1$; for $\impairment > 0$, $C$ is positive, i.e., $C_{ij} >0$ for
+all $i$ and $j$; for $\impairment \rightarrow \infty$, we find $C_{ij}
+= \nicefrac{1}{\card{\States}}$ for all $i$ and $j$.
 
 If states are confused on average with a probability proportional to
 their similarity, repeated application of the operation in
@@ -1056,9 +1051,10 @@ Figure~\ref{fig:example_stratsB} identifies clear positive and clear
 negative cases for each signal, with a smooth transition
 in-between. The receiver's interpretations of signals can be seen as
 smoothed-out prototype regions. Secondly, (sender) strategies can
-approach non-convex pure strategies under the replicator dynamic. We
-see this in our limited-time simulations, but this also holds, for
-some types of utility functions, for the limiting case. This was first
+approach non-convex pure strategies under the replicator dynamic and
+linger there for vast amounts of time, possibly indefinitely. We see
+this in our limited-time simulations, but this also holds, for some
+types of utility functions, for the limiting case. This was first
 observed by Elliott Wagner in unpublished work
 \citep[c.f.][]{OConnor2013:Evolving-Percep}. A full analysis of the
 dynamics of sim-max games is beyond the scope of this paper, but we
@@ -1070,14 +1066,14 @@ vicinity of non-convex strategies.
 
 \subsubsection{Dependent measures}
  
-To further explore our simulation results, we calculated
-metrics that aim to numerically capture how vague, generally
-well-structured, and communicatively efficient the recorded
-strategy pairs were. \emph{Entropy} captures the amount of
-systematicity or regularity in signal use. \emph{Convexity} captures
-whether a behavioral strategy would project onto a convex pure
+To further explore our simulation results, we calculated metrics that
+aim to numerically capture how vague, generally well-structured, and
+communicatively efficient the recorded strategy pairs
+were. \emph{Entropy} captures the amount of systematicity or
+regularity in signal use. \emph{Convexity} captures whether a
+behavioral strategy would project onto a convex pure
 strategy. \emph{Expected utility} measures the communicative
-efficiency of evolved strategy pairs.\todo{take average of entropy}
+efficiency of evolved strategy pairs.
 
 \paragraph{Entropy.} This classic information-theoretic notion
 captures the amount of uncertainty in a probability
@@ -1104,12 +1100,12 @@ and $0.84$. In general, we expected that vague languages would have
 higher entropy than crisp ones and that increasing imprecision would
 lead to increased entropy, all else being equal.
 
-\paragraph{Convexity.} At least for sender strategies, which converge
-faster, it also makes sense to define a categorical measure of
-convexity that compensates for potential vagueness. To determine
-whether a sender strategy $\Sstrat$ is convex despite possibly being
-vague, we look at the derived pure strategy $\Spure$ for which
-$\Spure(\state) = \argmax_{\messg' \in \Messgs}
+\paragraph{Convexity.} At least for sender strategies, which develop
+faster than receiver strategies, it also makes sense to define a
+categorical measure of convexity that compensates for potential
+vagueness. To determine whether a sender strategy $\Sstrat$ is convex
+despite possibly being vague, we look at the derived pure strategy
+$\Spure$ for which $\Spure(\state) = \argmax_{\messg' \in \Messgs}
 \Sstrat(\state,\messg')$. If that $\Spure$ is convex, we also count
 $\Sstrat$ as convex. The sender strategy in
 Figure~\ref{fig:example_stratsA} is not convex, while the one in
@@ -1157,15 +1153,15 @@ whole set of results.
 
 As expected, increasing imprecision leads to higher entropy and lower
 expected utility. Importantly, however, imprecision does not
-necessarily lead to disastrous decline of communicative success. What was
-not expected, on the other hand, was a relation between imprecision and
-convexity. However, the corresponding plot clearly shows that
-higher imprecision led to a higher number of outcomes with
-convex sender strategies. Moreover, it also led to higher likelihood of
-convergence. In fact, sufficient impairment always ensured convergence
-and convexity. It appears that perceptual imprecision leads to
-more entropy, slightly less communicative efficiency, but more
-regular, well-behaved languages in shorter time.
+necessarily lead to disastrous decline of communicative success. What
+was not expected, on the other hand, was a relation between
+imprecision and convexity. However, the corresponding plot clearly
+shows that higher imprecision led to a higher number of outcomes with
+convex sender strategies. Moreover, it also led to higher likelihood
+of convergence. In fact, sufficient impairment always ensured
+convergence and convexity. It appears that perceptual imprecision
+leads to more vagueness, slightly less communicative efficiency, but
+more regular, well-behaved languages in shorter time.
 
 Beyond promoting convexity and convergence, diffusion also has another interesting
 regularizing effect on the evolution of signaling. There was very
@@ -1219,7 +1215,7 @@ To compensate for the arbitrariness of message use, we set the
 distance between strategies $\Sstrat$ and $\Sstrat'$ to be the maximum
 of $\text{HD}(\Sstrat,\Sstrat')$ and $\text{HD}(\Sstrat^*,\Sstrat')$
 where $\Sstrat^*$ is $\Sstrat$ with reversed message indices. An example of the
-\emph{within group distances}, i.e., the average distances between all
+\emph{within group distance}, i.e., the average distances between all
 sender strategies obtained for the same parameter values, is plotted
 on the left in Figure~\ref{fig:GroupMeasures} for $\beta =
 0.1$ and $n_s = 10$. Despite some quantitative differences, the
@@ -1451,15 +1447,17 @@ zero.
 
 Admittedly, this argument hinges on the choice of utility
 function. Still, to the extent that the utility functions we chose are
-reasonable---and we think they are very reasonable---the case
-suggests that quantal responses do not paint a complete picture. Naturally,
-we cannot claim our approach provides valid predictions for all cases.
-Given the complexity of the phenomenon, and the fact that
-the quantal response approach is built on very reasonable assumptions,
-it is likely that both proposals are relevant pieces of the puzzle.
-%Vagueness is more
-%plausibly an effect of perceptual confusion of similar states than of
-%computational errors in maximizing expected utility.
+reasonable---and we think they are very reasonable--- the case
+suggests that quantal responses alone are not a good model,
+intuitively speaking, for why linguistic categories are
+vague. Vagueness is more plausibly an effect of perceptual confusion
+of similar states than of computational errors in maximizing expected
+utility. Even more plausibly, though, perceptual confusion \emph{and}
+computational errors, together with even further factors such as
+limited observations, imperfect memory and more, are needed for a
+complete understanding of why vague categorization and linguistic
+meaning as a natural concomitant of a distinguished cognitive
+make-up.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
