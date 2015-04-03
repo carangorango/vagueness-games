@@ -1,0 +1,207 @@
+\documentclass[fleqn,reqno,10pt]{article}
+
+%========================================
+% Packages
+%========================================
+
+\usepackage[]{../../helpers/mypackages}
+%\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
+%\bibliography{MyRefGlobal}
+\bibliography{../../helpers/MyRefGlobal}
+\bibliography{paper} 
+\usepackage{../../helpers/myenvironments}
+\usepackage{../../helpers/mycommands}
+\usepackage{todonotes}
+\usepackage{subcaption}
+
+
+
+%========================================
+% Standard Layout
+%========================================
+
+% Itemize
+\renewcommand{\labelitemi}{\large{$\mathbf{\cdot}$}}    % itemize symbols
+\renewcommand{\labelitemii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiv}{\large{$\mathbf{\cdot}$}}
+% Description
+\renewcommand{\descriptionlabel}[1]{\hspace\labelsep\textsc{#1}}
+
+% Figure Captions
+\usepackage{caption} % use corresponding myfiguresize!
+\setlength{\captionmargin}{20pt}
+\renewcommand{\captionfont}{\small}
+\setlength{\belowcaptionskip}{7pt} % standard is 0pt
+
+%========================================
+% Additional layout & commands
+%========================================
+
+
+\renewcommand{\Smixed}{\ensuremath{\mathrm{\mathbf{s}}}}
+\renewcommand{\Rmixed}{\ensuremath{\mathrm{\mathbf{r}}}}
+
+% Annotations
+\newcommand{\mytodo}[2]{\todo[inline,color=yellow,author=#1]{#2}}
+\newcommand{\question}[2]{\todo[inline,color=blue,author=#1]{#2}}
+\newcommand{\answer}[2]{\todo[inline,color=green,author=#1]{#2}}
+
+\newcommand{\rd}{\acro{rd}} % replicator dynamic
+\newcommand{\rmd}{\acro{rmd}} % replicator mutator dynamic
+\newcommand{\rdd}{\acro{rdd}} % replicator diffusion dynamic
+\newcommand{\RD}{\ensuremath{\mathrm{RD}}} % replicator dynamic
+\newcommand{\RDD}{\ensuremath{\mathrm{RDD}}} % replicator diffusion dynamic
+\newcommand{\RMD}{\ensuremath{\mathrm{RMD}}} % replicator mutator
+                                
+\newcommand{\Diff}{\ensuremath{\mathrm{D}}} % Difusion 
+\newcommand{\Mutate}{\ensuremath{\mathrm{M}}} % Mutation 
+
+\newcommand{\impairment}{\ensuremath{\alpha}} % impairment
+\newcommand{\toler}{\ensuremath{\beta}} % tolerance
+\newcommand{\ns}{\ensuremath{n_s}} % number of states
+
+\newcommand{\similarity}{\ensuremath{\mathrm{Sim}}} % similarity function
+
+\doublespacing
+
+\begin{document}
+
+\section*{Derivation of the RDD by imitation-based revision}
+
+We derive the proposed \rdd as the mean field of an imitative revision
+protocol, following the example 4.3.1 of
+\citet{Sandholm2010:Population-Game}. Our derivation relies on the
+usual assumptions about conditional imitation at the agent level, but
+must add special assumptions about how noise affects revision
+probabilities. In keeping with the idea that agents in evolutionary
+models are largely myopic, we assume here that noise is real but that
+agents are unaware of it. When agents perceive the actual expected
+utility of their choice and of another agent's choice (as is usual in
+the motivation of imitation-based revision protocols), we assume
+additionally that agents confuse their possibly non-veridical
+subjective representations of states with the actual ones (details
+below).
+
+\paragraph{Notation.} As previously in this paper, let
+$\Sstrat(\mymessg{i} \probbar \mystate{o})$ be the probability that a
+speaker randomly picked from the population chooses $\mymessg{i}$ if
+the actual/objective state is $\mystate{o}$. This factors in the
+possibility that the sampled speaker perceives the objective state
+$\mystate{o}$ as some subjective state $\mystate{s}$. In contrast, let
+$\Sstrat_s(\mymessg{i} \probbar \mystate{s})$ be the probability that
+a randomly sampled speaker chooses $\mymessg{i}$ if she experiences
+some objective state $\mystate{o}$ as $\mystate{s}$. This is then the
+hypothetical behavior of the speaker population in a (possibly
+counterfactual) world without perceptual confusion. It is also what
+the speakers actually do from their subjective point of view, and it
+is this that changes in behavior (e.g., by imitation) will change in
+the first place. Changes to $\Sstrat_s$ will, of course, also imply
+changes in $\Sstrat$, as the latter is the result of what actually
+happens when agents would like to do behave as in $\Sstrat_s$ in a
+noisy world, as described by Equation~XYZ.
+
+Similarly, $\Rstrat(\mystate{o} \probbar \messg)$ is the probability
+that a randomly sampled receiver actually realizes objective state
+$\mystate{o}$. $\Rstrat_s(\mystate{s} \probbar \messg)$ is the
+probability of a subjectively intended interpretation $\mystate{s}$
+that a randomly sampled receiver would pick in a noise-free
+world. Again, behavior changes cause changes in $\Rstrat_s$, which in
+turn influence $\Rstrat$.
+
+Let $\EU(\messg)$ be short for $\EU(\messg,\state,\Rstrat)$ whenever
+$\state$ and $\Rstrat$ are implicit, similarly for $\EU(\state)$ as a
+shorthand for $\EU(\state,\messg,\Sstrat)$.
+
+\paragraph{Standard assumptions.} Let's assume that we are in an
+entirely noise-free world so that $\Sstrat = \Sstrat_s$ and $\Rstrat =
+\Rstrat_s$. The standard assumptions for imitation-based revisions are
+these. Agents get revision opportunities for all actual choice points
+with equal probability (independently of how likely these would occur
+in actual play). Take the case of a sender (receiver side is
+parallel). If agent $A$ is given a revision opportunity for actual
+state $\state$, she consults her own choice, which is $\mymessg{i}$
+with probability $\Sstrat(\mymessg{i} \probbar \state)$, and observes
+the behavior of one randomly picked other agent $B$, which is
+$\mymessg{j}$ with probability $\Sstrat(\mymessg{j} \probbar
+\state)$. $A$ also observes the expected utility of both choices (at
+$\state$) and switches to $B$'s choice with probability $r_{ij} = [
+\EU(\mymessg{j}) - \EU(\mymessg{i}) ]_+$, so that the overall
+switching probability of an agent like $A$ who samples $\mymessg{i}$
+for $\state$ is $p_{ij} = \Sstrat(\mymessg{j} \probbar \state) \
+r_{ij}$.
+
+\paragraph{Imitation under perceptual noise.} There are many
+conceivable ways in which perceptual noise might influence the above
+revision protocol. Our choice here is guided by theoretical and
+practical considerations alike. We would like maintain the assumption
+that agents in evolutionary models are not necessarily fully aware of
+their surroundings. In particular, we assume here that agents are not
+themselves aware of perceptual noise. Switching probabilities are
+therefore to be defined in terms of actual expected utility (and not
+subjective expectations about actual expected utility that take noise
+into consideration). Moreover, we assume that agents who have
+(unconscious) access to expected utilities for actual states
+$\mystate{o}$ will confuse whatever subjective representation
+$\mystate{s}$ they may have had during their revision opportunity for
+the actual state $\mystate{o}$.
+
+Concretely, suppose agent $A$ has a revision opportunity for objective
+state $\mystate{o}$, and chooses $\mymessg{i}$ with probability
+$\Sstrat(\mymessg{i} \probbar \mystate{o})$. Similarly, $B$ chooses
+$\mymessg{j}$ with probability $\Sstrat(\mymessg{j} \probbar
+\mystate{o})$. It may be that $A$ perceived $\mystate{o}$ as
+$\mystate{s_A}$ and that $B$ perceived $\mystate{s_B}$, but if $A$ is
+unaware of noise he would see expect and see no difference. A observes
+(as usual) the actual expected utilities of $\mymessg{i}$ and
+$\mymessg{j}$ for the actual state $\mystate{o}$. Consequently, he
+updates his subjective behavior for $\mystate{o}$ (even if he has
+actually chosen $\mymessg{i}$ since he perceived
+$\mystate{s_A}$). This myopic revision behavior gives rise to expected
+changes in the average subjective/noise-free behavior $\Sstrat_s$ as
+follows:
+\begin{align*}
+  \dot{\Sstrat}_s(\mymessg{i} \probbar \state) & = \sum_j
+  \Sstrat(\mymessg{j} \probbar \state) \cdot p_{ji} -  
+  \Sstrat(\mymessg{i} \probbar \state) \cdot \sum_j p_{ij} \\
+  & = \sum_j  \Sstrat(\mymessg{j} \probbar \state) \cdot
+    \Sstrat(\mymessg{i} \probbar \state) \cdot [\EU(\mymessg{i}) -
+    \EU(\mymessg{j})]_+ \\ 
+   & \ \ \ \  - \Sstrat(\mymessg{i} \probbar \state) \cdot \sum_j
+   \Sstrat(\mymessg{j} \probbar \state) \cdot [\EU(\mymessg{j}) -
+    \EU(\mymessg{i})]_+ \\
+   & = \Sstrat(\mymessg{i} \probbar \state) \cdot \left ( \sum_j
+     \Sstrat(\mymessg{j} \probbar \state) \cdot \EU(\mymessg{i}) - \sum_j
+     \Sstrat(\mymessg{j} \probbar \state) \cdot \EU(\mymessg{j})
+   \right ) \\
+   & = \Sstrat(\mymessg{i} \probbar \state) \cdot \left (
+     \EU(\mymessg{i}) - \text{average EU at $\state$} \right )
+\end{align*}
+This is the (continuous-time) replicator dynamics for behavioral
+strategies.
+
+Similar arguments let us derive the receiver part. Suppose that agent
+$A$ has a revision opportunity for choice point $\messg$. He and a
+random other agent $B$ actually choose $\mystate{o_A}$ and
+$\mystate{o_B}$ with probability $\Rstrat(\mystate{o_{A,B}} \probbar
+\messg)$, even though they may have intended to realize different
+interpretations $\mystate{s_A}$ and $\mystate{s_B}$ coming from
+$\Rstrat_s(\mystate{o_{A,B}} \probbar \messg)$, but then
+noise-perturbed. Agent $A$ observes the actual expected utility for
+the actually realized interpretations and, by assumptions, believes
+(myopically) that he had actually wanted to realize $\mystate{o_A}$
+and that $B$ had wanted to realize $\mystate{o_B}$. Under these
+assumptions, the derivation of the replicator dynamic for subjectively
+intended (noise-free) receiver behavior $\Rstrat_s$ proceeds in
+parallel with the above sender case.
+
+At each time step, the noise-free behavior of agents is, of course,
+perturbed by noise. This is why, after each update step, the \rdd
+defined in Equation~XYZ perturbes the outcome of the replicator step
+with perceptual noise.
+
+
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
