@@ -26,3 +26,5 @@ auto
 .idea/
 helper_functions.R
 *.html
+paper.pdf
+*.bcf
