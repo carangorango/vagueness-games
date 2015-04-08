@@ -6,7 +6,7 @@
 >
 > 1) The authors might consider moving section 4 to the appendix.  While this work is quite interesting on its own and should be published, it is peripheral to the central arguments of the paper.  For this reason the appendix is a nice way to include it without drawing attention away from the focus on vagueness.  This also helps with the 'too technical' issue.
 
-
+This section has been moved to an appendix and the main text adapted accordingly.
 
 > 2) Pictures could simplify explanation in a few places.  First, when the authors describe Voronoi languages a picture of one could be very helpful.  When the authors describe sim-max games a picture of the state space would likewise be helpful.  The picture of Nosofsky-similarity functions is good.
 
