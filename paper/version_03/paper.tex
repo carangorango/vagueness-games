@@ -213,7 +213,15 @@ interval and all states are equiprobable, a Voronoi language with two
 messages would have the sender use one message exclusively for all
 points in the lower half of the unit interval and another for all
 points in the upper half; the receiver's interpretations of messages
-are the central points, .25 and .75, in the respective intervals.
+are the central points, .25 and .75, in the respective intervals
+(see Figure~\ref{fig:Voronoi-language-example} for an illustration).
+
+\begin{figure}
+  \centering
+  \missingfigure{Example of Voronoi language for unit interval}
+  \caption{}
+  \label{fig:Voronoi-language-example}
+\end{figure}
 
 This result is interesting, because it demonstrates that signaling can
 impose orderly categories on a metric space, without that being the
@@ -579,8 +587,9 @@ similarity function, as described by
  \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \impairment^2} \right ) & \textrm{otherwise,} \\
     \end{cases}
 \end{align*}
-where $\impairment \ge 0$ is an imprecision or indiscriminability
-parameter. When $\impairment=0$ agents perfectly discriminate between
+where $\impairment \ge 0$ is an impairment, imprecision or indiscriminability
+parameter\footnote{We use these terms interchangeably throughout the paper.}.
+When $\impairment=0$ agents perfectly discriminate between
 states; when $\impairment \rightarrow \infty$ agents cannot
 discriminate states at all. Figure~\ref{fig:NosofskySim} gives an
 impression of Nosofsky-similarity for different parameter
