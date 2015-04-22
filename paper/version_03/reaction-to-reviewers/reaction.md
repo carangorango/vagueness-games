@@ -29,7 +29,7 @@ XXXXXXXXXXXXXXXXXXX Is this enough or should we redo the plots? XXXXXXXXXXXXXXXX
 
 > ii) Section 6.2 could still be a bit shorter, though it's fine as is.
 
-
+Given this is not a strict requirement, we chose to leave the section as it is given that we find the content important to situate our contribution in the context of similar work.
 
 > iii) In fig 4, why is one of the categories 0-~.2 and then .6-1?  Does the similarity metric go around in a circle?  If not, it seems weird that 0-.2 evolved to be the first message rather than the second (which has a response closer to it).
 
