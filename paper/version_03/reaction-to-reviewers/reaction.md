@@ -40,6 +40,6 @@ XXXXXXXXXXXXXXXXXXX I don't see the problem... XXXXXXXXXXXXXXXXXXX
 
 > iv) On a related note, given the similarities between generalized reinforcement learning and RDD, have you thought at all about whether there is a mathematical connection?  (Mean field dynamics??)
 
-
+Although it would be interesting to pursue such a connection, doing so is certainly a non-trivial task and would probably be enough work to stand and be presented on its own. We thus consider it out of scope, but we added a sentence in the paper pointing to it as possible future work.
 
 > v) Given your discussion on the top of pg 5, you might be interested in O'Connor's 2014 'Evolving Perceptual Categories', which has a discussion of how 'conceptual spaces' might arise in the first place that employs sim-max games.
