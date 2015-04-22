@@ -25,6 +25,7 @@ This section has been moved to an appendix and the main text adapted accordingly
 > i) What is 'impairment' as compared to 'imprecision'?  Are they both \alpha?  Is there some reason one term shows up in fig 5 and the other in fig 7?
 
 "Impairment" and "imprecision" are indeed the same thing: \alpha. We added a footnote alerting the reader for the fact that the terms are used interchangeably.
+
 XXXXXXXXXXXXXXXXXXX Is this enough or should we redo the plots? XXXXXXXXXXXXXXXXXXX
 
 > ii) Section 6.2 could still be a bit shorter, though it's fine as is.
@@ -33,7 +34,9 @@ Given this is not a strict requirement, we chose to leave the section as it is g
 
 > iii) In fig 4, why is one of the categories 0-~.2 and then .6-1?  Does the similarity metric go around in a circle?  If not, it seems weird that 0-.2 evolved to be the first message rather than the second (which has a response closer to it).
 
+The similarity metric does not go around in a circle. In the unit interval, distance is maximal between 0 and 1, and minimal between every point and itself, and so is perceptual similarity which is proportional to distance (see Figure 3).
 
+XXXXXXXXXXXXXXXXXXX I don't see the problem... XXXXXXXXXXXXXXXXXXX
 
 > iv) On a related note, given the similarities between generalized reinforcement learning and RDD, have you thought at all about whether there is a mathematical connection?  (Mean field dynamics??)
 
