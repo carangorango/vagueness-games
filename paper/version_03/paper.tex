@@ -133,12 +133,12 @@ help avoid suboptimal categorization.
 
 The next section introduces the background against which the work
 presented here can be appreciated. Section~\ref{sec:repl-diff-dynam}
-introduces the replicator diffusion dynamic. Section~\ref{sec:exploring-rdd} explores the replicator
-diffusion dynamic. Section~\ref{sec:discussion} reflects and compares
+introduces the replicator diffusion dynamic, which is then explored in Section~\ref{sec:exploring-rdd}.
+Section~\ref{sec:discussion} reflects and compares
 our approach to others.
 In Appendix~\ref{sec:diffusion-as-special} we give a formal elaboration on the relation between the replicator diffusion dynamic and the replicator mutator dynamic.
 This finding is not necessary to understand the main points of this paper regarding vagueness, hence its inclusion in an appendix.
-We decided to nevertheless include it since it is related, conceptually interesting, and potentially valuable for future work related to the model introduced in this paper.
+We nevertheless include it since it is related, conceptually interesting, and potentially valuable for future work related to the model introduced here.
 
 \section{Background}
 \label{sec:background}
@@ -169,8 +169,9 @@ such meaning-generating behavior can evolve is a highly interesting
 topic that we are only beginning to fully understand
 \citep[e.g.][]{Warneryd1993:Cheap-Talk-Coor,BlumeKim1993:Evolutionary-St,Huttegger2007:Evolution-and-t,Pawlowitsch2008:Why-Evolution-d,Barrett2009:The-Evolution-o,HutteggerSkyrms2010:Evolutionary-Dy,Skyrms2010:Signals}.
 
-Similarity-maximizing (short: sim-max) games are generalizations of
-Lewis' games where different states are allowed to be more or less
+Similarity-maximizing (short: sim-max) games are a variation of
+Lewis' games where the receiver's actions are equated with the state
+space (one can think of the actions as choosing states) and different states are allowed to be more or less
 similar to one another. While Lewis' games treated communicative
 success as a matter of black and white, sim-max games allow for a
 gradient notion: the more similar the receiver's interpretation is to
@@ -254,7 +255,7 @@ prototypes as an equally efficient classification system. This is
 where sim-max games can contribute a principled approach to deriving,
 in an independent way, not only convex categories but also
 prototypical exemplars belonging to them.
-Development of these ideas, and more, were carried out by \citet{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct,JagerMetzger2011:Voronoi-Languag,OConnor2014-OCOEPC}.
+These ideas, and more, are developed further by \citet{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct,JagerMetzger2011:Voronoi-Languag,OConnor2014-OCOEPC}, among others.
 
 \subsection{Vague signaling in sim-max games}
 
@@ -327,9 +328,10 @@ mixed strategies and an interpretation as biological evolution as
 well. In Appendix~\ref{sec:diffusion-as-special}, we
 translate our initial formulation of the \rdd
 into one using mixed strategies. Doing so identifies the \rdd as a
-special case of the \rmd. For now, let us first focus on the
-formulation of the dynamic in terms of behavioral strategies alone.
+special case of the \rmd.
 
+For now, let us first focus on the
+formulation of the dynamic in terms of behavioral strategies alone.
 We begin by recapitulating the \rd in
 Section~\ref{sec:repl-dynam-behav}, and introduce the \rdd in
 Section~\ref{sec:repl-diff-dynam-1}.
@@ -350,8 +352,8 @@ distribution over states and $\Util_{\sen,\rec} \mycolon \States
 receiver's utility functions. A behavioral strategy is a function that
 maps an agent's choice points to a probability distribution over
 available choices. The sender's behavioral strategies are functions
-$\Sstrat \in \Delta(\Messgs)^\States$; the receiver's are functions
-$\Rstrat \in \Delta(\Acts)^\Messgs$. The expected utility of choices
+$\Sstrat \in \Delta(\Messgs)^\States$, thus mapping each state $\state \in \States$ to a probability of each message $\messg \in \Messgs$ being sent; the receiver's are functions
+$\Rstrat \in \Delta(\Acts)^\Messgs$, thus mapping each message $\messg \in \Messgs$ to a probability of each state $\state \in \States$ being interpreted by the receiver given $\messg$. The expected utility of choices
 at each choice point is:
 \begin{align*}
   \EU(\messg, \state, \Rstrat) & = \sum_{\act \in \Acts}
@@ -360,6 +362,9 @@ at each choice point is:
     \States} \Pr(\state) \cdot \Sstrat(\messg \probbar \state) \cdot
   U_\rec(\state, \messg, \act) \,.
 \end{align*}
+This means that the expected utility for the sender of choosing message $\messg \in \Messgs$, given a state $\state \in \States$ and a receiver strategy $\Rstrat$ is the sum, for each act $\act \in \Acts$, of the probability the receiver will choose act $\act$ given message $\messg$ times the actual utility of using act $\act$ for state $\state$.
+Conversely, the expected utility for the receiver of choosing act $\act \in \Acts$, given a message $\messg \in \Messgs$ and a sender strategy $\Sstrat$ is the sum, for each state $\state \in \States$, of the prior probability of state $\state$ occurring, times the probability the sender will choose message $\messg$ given state $\state$, times the actual utility of using act $\act$ for state $\state$.
+
 The \emph{fitness} of a behavioral strategy at a choice point is the
 frequency-weighted average of expected utilities of each choice, given
 the opponent's strategy:

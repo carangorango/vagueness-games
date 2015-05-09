@@ -14,7 +14,7 @@ A picture was added to illustrate the first example of a Voronoi language for th
 
 > 3) Where equations are presented, describe them in words.  It shouldn't be too hard to use everyday language to make a few of your equations easier to follow.  (The introduction to expected utility in 3.1, for example, 'The first equation shows the sender's expected utility given a particular message, state, and receiver strategy…)
 
-
+Added description for sender/receiver strategies, expected utility functions
 
 > 4) Be sure when you introduce new terms to think about what the audience will know.  To give examples, consider the bottom of pg 3 where you introduce the sim-max game.  It takes one line to say what a similarity metric is, and one like to say what a probability distribution is in this instance.
 
