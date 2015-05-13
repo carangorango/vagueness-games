@@ -404,16 +404,16 @@ form games and behavioral strategies).
 
 The replicator diffusion dynamic is a noise-perturbed variant of the
 \rd in behavioral strategies. Fix a sim-max game with $\States =
-\Acts$ and a confusion matrix $C : \States \times \States$. $C$ is a
-row-stochastic matrix, i.e., each row is a probability
+\Acts$ and a confusion matrix $C : \States \times \States$, where $C$ is
+row-stochastic, i.e., each row is a probability
 distribution. Elements $C_{ij}$ give the probability that $\state_i$
 is realized as $\state_j$. The confusability of states affects senders
-and receivers alike, but in slightly different ways (see
-Figure~\ref{fig:noise-perturbation-of-strategies}). For the sender,
+and receivers alike, but in slightly different ways. For the sender,
 $C_{ij}$ is the probability that the actual state \mystate{i} is
 perceived as \mystate{j}. For the receiver, $C_{ij}$ is the
 probability that \mystate{j} is the interpretation that is actually
 formed when \mystate{i} is the intended interpretation.
+See Figure~\ref{fig:noise-perturbation-of-strategies} for an illustration.
 
 \begin{figure}
   \centering
@@ -493,12 +493,14 @@ choice point percolates to behavior at similar choice points, we speak
 of \emph{diffusion of behavior under confusion of states}. If we
 conceive of behavioral strategies $\Sstrat$ and $\Rstrat$ as
 row-stochastic matrices (rows are choice points, columns are choices;
-each row is a probability distribution), the diffusion effect of
-confusion matrix $C$ is just matrix multiplication:
+each row is a probability distribution), we can define the diffusion effect of
+confusion matrix $C$ as matrix multiplication:
 \begin{align}
   \label{eq:confusion-function}
   \Diff_C(\Sstrat) & = C \Sstrat &    \Diff_C(\Rstrat) & = \Rstrat C\,.
 \end{align}
+For example, diffusion thus defined determines that, on the diffused sender strategy, the probability that message $\messg$ is chosen given a state $\state_i$ is given by $\sum_{j} C_{ij} \cdot \Sstrat(\messg \probbar \state_j)$.
+This means that the original probability given by $\Sstrat$ is increased by the original probability of this message being chosen in other states, proportionally to how likely it is that they are mistaken for $\state_i$.
 
 The discrete-time replicator diffusion dynamic takes the replicator
 dynamic as basic, but factors in the confusion of states at each step
@@ -551,12 +553,8 @@ behavioral-strategy version of the replicator mutator dynamics. This
 is important to know because it enables similar applications of
 diffusion from perceptual confusion also in models of biological
 evolution.
-
-%The following section works out the relation between the \rdd and the \rmd.
-%Although this section is conceptually important, it is also rather
-%technical and not strictly necessary to appreciate the main point of
-%the paper.
-
+We worked out the relation between the \rdd and the \rmd, but given that it is rather technical and not strictly necessary to appreciate the main point of the paper, we defer it to Appendix~\ref{sec:diffusion-as-special}.
+In the following section we explore the long-term effects of using the \rdd.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -575,7 +573,8 @@ and fitness-based selection interact in Section~\ref{sec:simulations}.
 \label{sec:iterated-diffusion}
 
 Confusion of states should intuitively be a function of their
-perceptual similarity. To make this concrete, let us assume that the
+perceptual similarity: the more similar two states are, the more likely they could be mistaken for each other.
+To make this concrete, let us assume that the
 state space of the sim-max game consists of $n \ge 2$ states that are
 equally spaced across the unit interval, including $0$ and $1$. The
 distance $\card{\mystate{i} - \mystate{j}}$ is the objective, physical
@@ -624,9 +623,9 @@ similarity and therefore obtained by normalization:
 \end{align*}
 Confusion of states is then also a function of imprecision parameter
 $\impairment$. For $\impairment = 0$, the confusion matrix has $C_{ii}
-= 1$; for $\impairment > 0$, $C$ is positive, i.e., $C_{ij} >0$ for
-all $i$ and $j$; for $\impairment \rightarrow \infty$, we find $C_{ij}
-= \nicefrac{1}{\card{\States}}$ for all $i$ and $j$.
+= 1$ and $C_{ij} = 0$ for $i \neq j$. For $\impairment > 0$, $C$ is positive, i.e., $C_{ij} >0$ for
+all $i$ and $j$. For $\impairment \rightarrow \infty$, we find $C_{ij}
+\rightarrow \nicefrac{1}{\card{\States}}$ for all $i$ and $j$.
 
 If states are confused on average with a probability proportional to
 their similarity, repeated application of the operation in
@@ -698,6 +697,31 @@ intolerably far away interpretations matter very little, with a smooth
 transition between these regimes
 \citep[c.f.][]{OConnor2013:The-Evolution-o}.
 
+We ran 50 trials of the \rdd, starting with randomly sampled sender
+and receiver strategies, for each triplet of independent parameter
+values: $\ns = \card{T} \in \set{6, 10, 50, 90}$, $\impairment \in
+\set{0, 0.05, 0.1, 0.2, 0.3}$, $\toler \in \set{0.05, 0.1, 0.2,
+  0.3}$. Each trial ran for a maximum of 200 update steps of the
+\rdd. A trial was considered converged, and thus stopped before the maximum
+of 200 rounds, if the total amount of change between strategies before
+and after an \rdd step was smaller than a suitably chosen
+threshold. It is not guaranteed that strategies at halting time had
+converged to the eventual attracting state, whether they ran for 200
+rounds or not. Our notion of convergence is therefore only a
+categorical measure for reaching a certain (well-considered, but
+eventually arbitrary) degree of stability. In principle, rather than
+setting a hard limit on the maximum number of rounds and analyzing
+convergence categorically, one could also run each trial until reaching
+our criterion for convergence and analyze the number of rounds it took to get there.
+Our choice was initially motivated by pragmatic concerns regarding length of
+simulation time, but it is also justifiable if we reflect on the
+nature of language evolution as a continuous process.
+Language adapts to an ever-changing reality; it is rare, if not impossible,
+that a lexicon has an infinite amount of time to neatly converge to a stable
+state. Therefore, investigating speed of convergence within a limited
+time frame can be seen as better reflecting the natural constraints of
+language evolution.
+
 \begin{figure}
   \centering
 
@@ -730,31 +754,6 @@ transition between these regimes
   \label{fig:example_strats}
 \end{figure}
 
-We ran 50 trials of the \rdd, starting with randomly sampled sender
-and receiver strategies, for each triplet of independent parameter
-values: $\ns = \card{T} \in \set{6, 10, 50, 90}$, $\impairment \in
-\set{0, 0.05, 0.1, 0.2, 0.3}$, $\toler \in \set{0.05, 0.1, 0.2,
-  0.3}$. Each trial ran for a maximum of 200 update steps of the
-\rdd. A trial was considered converged, and thus stopped before the maximum
-of 200 rounds, if the total amount of change between strategies before
-and after an \rdd step was smaller than a suitably chosen
-threshold. It is not guaranteed that strategies at halting time had
-converged to the eventual attracting state, whether they ran for 200
-rounds or not. Our notion of convergence is therefore only a
-categorical measure for reaching a certain (well-considered, but
-eventually arbitrary) degree of stability. In principle, rather than
-setting a hard limit on the maximum number of rounds and analyzing
-convergence categorically, one could also run each trial until reaching
-our criterion for convergence and analyze the number of rounds it took to get there.
-Our choice was initially motivated by pragmatic concerns regarding length of
-simulation time, but it is also justifiable if we reflect on the
-nature of language evolution as a continuous process.
-Language adapts to an ever-changing reality; it is rare, if not impossible,
-that a lexicon has an infinite amount of time to neatly converge to a stable
-state. Therefore, investigating speed of convergence within a limited
-time frame can be seen as better reflecting the natural constraints of
-language evolution.
-
 Representative examples for resulting strategy pairs are given in
 Figure~\ref{fig:example_strats}. Figure~\ref{fig:example_stratsA}
 shows a strategy pair at stopping time with 90 states, tolerance
@@ -765,7 +764,7 @@ sender strategy that crisply partitions the state space into
 non-convex sets. The irregular shape of the receiver strategy shows
 clearly that the pictured strategy pair has not yet reached a
 dynamically stable state under the \rd. Indeed, the trial was stopped
-after the maximum of 200 rounds. In contrast, the outcome of a trial
+for reaching the maximum of 200 rounds. In contrast, the outcome of a trial
 with identical parameters, except with imprecision $\impairment =
 0.1$, which is shown in Figure~\ref{fig:example_stratsB}, had
 converged (in our technical sense) after 99 rounds of iterated
@@ -874,10 +873,11 @@ levels of vagueness and imprecision.
   \label{fig:MeanMetrics}
 \end{figure}
 
-Figure~\ref{fig:MeanMetrics} shows plots summarizing the results of
-our simulation. For perspicuity, we only plot results for one level of
+Figure~\ref{fig:MeanMetrics} shows plots summarizing some results.
+%of our simulation.
+For perspicuity, we only plot results for one level of
 tolerance $\beta = 0.1$, and leave out the case of $n_s = 90$. Still,
-every qualitative trend we mention in the following applies to the
+every qualitative trend mentioned in the following applies to the
 whole set of results.
 
 As expected, increasing imprecision leads to higher entropy and lower
@@ -945,8 +945,7 @@ distance between strategies $\Sstrat$ and $\Sstrat'$ to be the maximum
 of $\text{HD}(\Sstrat,\Sstrat')$ and $\text{HD}(\Sstrat^*,\Sstrat')$
 where $\Sstrat^*$ is $\Sstrat$ with reversed message indices. An example of the
 \emph{within group distance}, i.e., the average distances between all
-sender strategies obtained for the same parameter values, is plotted
-on the left in Figure~\ref{fig:GroupMeasures} for $\beta =
+sender strategies obtained for the same parameter values, is plotted in Figure~\ref{fig:GroupMeasuresA} for $\beta =
 0.1$ and $n_s = 10$. Despite some quantitative differences, the
 general trend is the same for all other parameter settings that we tested:
 with increasing imprecision, the sender strategies evolving under \rdd
@@ -959,23 +958,27 @@ interval.
 \begin{figure}
   \centering
 
-    \includegraphics[width=0.475\textwidth]{plots/WithinGroupDistanceConcise.pdf}
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/WithinGroupDistanceConcise.pdf}
+    \caption{Within group distance}
+    \label{fig:GroupMeasuresA}
+  \end{subfigure}
     \hfill
-    \includegraphics[width=0.475\textwidth]{plots/WithinGroupEUConcise.pdf}
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/WithinGroupEUConcise.pdf}
+    \caption{Within group expected utility}
+    \label{fig:GroupMeasuresB}
+  \end{subfigure}
 
-    \caption{Within group distance (left) and within group expected
-      utility (right) as a function of impairment for all runs with
-      $\toler = 0.1$ and $n_s = 10$.}
+    \caption{Within group measures for all runs with $\toler = 0.1$ and $n_s = 10$.}
   \label{fig:GroupMeasures}
 \end{figure}
 
 This unifying property of perceptual imprecision could be considered
 an evolutionary beneficial side-effect. Higher imprecision can lead to
 higher \emph{within group expected utility}, defined as the average
-expected utility that each evolved language (i.e., pair of sender and
-receiver strategy at stopping time) scored when playing against an
-arbitrary other language obtained for the same parameter values. The
-right side of Figure~\ref{fig:GroupMeasures} gives a representative
+expected utility that each evolved language scored when playing against an
+arbitrary other language obtained for the same parameter values. Figure~\ref{fig:GroupMeasuresB} gives a representative
 example. The observation repeats for other parameter values: while
 imprecision might decrease the communicative efficiency of individual
 languages, it increases the conceptual coherence and communicative
