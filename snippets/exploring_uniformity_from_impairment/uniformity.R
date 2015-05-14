@@ -220,13 +220,13 @@ show(combPlot)
 dsub = subset(D, D$Number.of.states == 10 & D$Tolerance == 0.1)
 wgdConcise = ggplot(dsub, aes(x = Impairment, y = inGroupDistance)) + 
   geom_line( color = "grey") + geom_point() +
-  xlab("Impairment") + ylab("")
+  xlab("Imprecision") + ylab("")
 show(wgdConcise)
-ggsave(wgdConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_02/plots/WithinGroupDistanceConcise.pdf", height=2, width=3) 
+ggsave(wgdConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_03/plots/WithinGroupDistanceConcise.pdf", height=2, width=3) 
 
 eusub = subset(meanEUs, meanEUs$Number.of.states == 10 & meanEUs$Tolerance == 0.1)
 EUConcise = ggplot(eusub, aes(x = Impairment, y = Speaker.meanEU)) + 
   geom_line( color = "grey") + geom_point() +
-  xlab("Impairment") + ylab("")
+  xlab("Imprecision") + ylab("")
 show(EUConcise)
-ggsave(EUConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_02/plots/WithinGroupEUConcise.pdf", height=2, width=3) 
+ggsave(EUConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_03/plots/WithinGroupEUConcise.pdf", height=2, width=3) 
