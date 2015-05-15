@@ -118,19 +118,19 @@ Others have argued that vagueness is a natural byproduct of limitations in infor
 processing or particular learning strategies
 \citep[e.g.][]{FrankeJager2010:Vagueness-Signa,OConnor2013:The-Evolution-o}. This paper
 contributes to the latter line of thought. Concretely, we introduce the replicator diffusion
-dynamics that integrates stochastic noise on the differential confusability of similar
-stimuli. The dynamic proposed here generalizes and complements previous like-minded
-accounts. We show that stochastic noise can not only lead to vague, yet relatively efficient
-signal use, but can also unify evolutionary outcomes and help avoid suboptimal categorization.
+dynamic that integrates confusability of similar stimuli. The dynamic proposed here generalizes
+and complements previous like-minded accounts. We show that stochastic noise can not only lead
+to vague, yet relatively efficient signal use, but can also unify evolutionary outcomes and
+help avoid suboptimal categorization.
 
 The next section introduces the background against which the work presented here can be
 appreciated. Section~\ref{sec:repl-diff-dynam} introduces the replicator diffusion dynamic,
 which is then explored in Section~\ref{sec:exploring-rdd}.  Section~\ref{sec:discussion}
 reflects and compares our approach to others. Two appendices cover technical material that is
 not strictly necessary to appreciate the main conceptual points of the paper.
-Appendix~\ref{sec:repl-mutat-dynam} shows that out replicator diffusion dynamic is a special
-case of the well-known replicator mutator dynamics. Appendix~\ref{sec:deriv-rdd-imit} gives a
-derivation of our dynamic as the most-likely path of a population whose agents imitate
+Appendix~\ref{sec:diffusion-as-special} shows that our replicator diffusion dynamic is a
+special case of the well-known replicator mutator dynamic. Appendix~\ref{sec:deriv-rdd-imit}
+gives a derivation of our dynamic as the most-likely path of a population whose agents imitate
 successful behavior without being aware of perceptual noise themselves.
 
 \section{Background}
@@ -175,11 +175,12 @@ but have received particular attention in a more philosophical context
 for reasons that will become clear presently.
 
 A sim-max game consists of a set of states $\States$, a set of messages $\Messgs$ with much
-fewer messages than states, a prior probability distribution $\Pr \in \Delta(\States)$ such
-that $\Pr(\state)$ gives the probability that state $\state$ occurs, a similarity
-metric\footnote{A metric is a function of distance between any two points in a given space. It
-  should satisfy certain axioms that one would intuitively expect from the words ``similarity''
-  and ``distance'' alone, but these details do not matter for the purposes of this paper.}
+fewer messages than states, a probability distribution $\Pr \in \Delta(\States)$ such that
+$\Pr(\state)$ gives the probability that state $\state$ occurs, a similarity metric\footnote{A
+  metric is a function of distance between any two points in a given space. It should satisfy
+  certain axioms that ensure behavior that one would intuitively expect from the words
+  ``similarity'' and ``distance'' alone, but these details do not matter for the purposes of
+  this paper.}
   % : similarity should always be non-negative, zero only for the distance
   % between an element and itself, symmetric, and satisfy the triangle inequality that
   % $\similarity(x,z) \le \similarity(x,y) + \similarity(y,z)$
@@ -192,26 +193,21 @@ identify the receiver's acts with the states of the world, so that the game is o
 the actual state, so to speak. The utility function should be a monotonically decreasing
 function of similarity.
 
-\citet{JagerMetzger2011:Voronoi-Languag} showed that the
-evolutionarily stable states of sim-max games are remarkably
-systematic. Their results were obtained for games with infinitely many
-states in $n$-dimensional Euclidean space $\States \subseteq
-\mathds{R}^n$ and a quadratic loss function for utilities
-$\Utils(\mystate{1}, \mystate{2}) = - (\mystate{1} -
-\mystate{2})^2$. For these games, the evolutionarily stable states are
-demonstrably so-called Voronoi languages. Roughly put, a Voronoi
-language is a pair of sender and receiver strategies, such that the
-sender strategy partitions the state space into convex categories,
-while the receiver's interpretations are the central spots in each
-category. A subset $X$ of $\mathds{R}^n$ is convex if, informally put,
-all points in $X$ are connected via a straight line that lies entirely
-in $X$; $X$ has no gaps or dents. For example, if \States is the unit
-interval and all states are equiprobable, a Voronoi language with two
-messages would have the sender use one message exclusively for all
-points in the lower half of the unit interval and another for all
-points in the upper half; the receiver's interpretations of messages
-are the central points, .25 and .75, in the respective intervals.
-See Figure~\ref{fig:Voronoi-language-example} for an illustration.
+\citet{JagerMetzger2011:Voronoi-Languag} showed that the evolutionarily stable states of
+sim-max games are remarkably systematic: the evolutionarily stable states are demonstrably
+so-called Voronoi languages.\footnote{Their results were obtained for games with infinitely
+  many states in $n$-dimensional Euclidean space $\States \subseteq \mathds{R}^n$ and a
+  quadratic loss function for utilities
+  $\Utils(\mystate{1}, \mystate{2}) = - (\mystate{1} - \mystate{2})^2$.} Roughly put, a Voronoi
+language is a pair of sender and receiver strategies, such that the sender strategy partitions
+the state space into convex categories, while the receiver's interpretations are the central
+spots in each category. A subset $X$ of $\mathds{R}^n$ is convex if, informally put, all points
+in $X$ are connected via a straight line that lies entirely in $X$; $X$ has no gaps or
+dents. For example, if \States is the unit interval and all states are equiprobable, a Voronoi
+language with two messages would have the sender use one message exclusively for all points in
+the lower half of the unit interval and another for all points in the upper half; the
+receiver's interpretations of messages are the central points, .25 and .75, in the respective
+intervals.  See Figure~\ref{fig:Voronoi-language-example} for an illustration.
 
 \begin{figure}
   \centering
@@ -269,7 +265,7 @@ See Figure~\ref{fig:Voronoi-language-example} for an illustration.
 \end{figure}
 
 
-This result is interesting, because it demonstrates that signaling can
+This result is interesting because it demonstrates that signaling can
 impose orderly categories on a metric space, without that being the
 ulterior purpose of it all. Sender and receiver can be distinct
 entities, whose purpose is to communicate effectively about the actual
@@ -329,20 +325,11 @@ prototypical regions. This accounts for the first of the two
 desiderata mentioned above, but still assumes that crisp prototype
 regions must be given.
 
-An alternative approach is taken by
-\citet{FrankeJager2010:Vagueness-Signa} and
-\citet{OConnor2013:The-Evolution-o} who show how the above desiderata
-can be met by evolving strategies in sim-max games. The approach we
-take here is similar in spirit, but different in relevant detail. We
-argue here that \citeauthor{FrankeJager2010:Vagueness-Signa}'s
-approach gives rise to problematic predictions under certain
-conditions which are avoided in our approach. While
-\citeauthor{OConnor2013:The-Evolution-o} gives an agent-level learning
-dynamic under which vague signaling arises, we complement the picture
-by giving a population-level dynamic that abstracts from the concrete
-behavior of signalers. A more in-depth comparison is deferred until
-Section~\ref{sec:discussion}. Let us first look into our own proposal
-in more detail.
+An alternative approach is taken by \citet{FrankeJager2010:Vagueness-Signa} and
+\citet{OConnor2013:The-Evolution-o} who show how the above desiderata can be met by evolving
+strategies in sim-max games. The approach we take here is similar in spirit, but different in
+relevant detail. A more in-depth comparison is deferred until Section~\ref{sec:discussion}. Let
+us first look into our own proposal in more detail.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -355,15 +342,15 @@ We introduce a population-level dynamic in which communicatively more
 efficient strategies increase in proportion, as usual, but where the
 realization of signaling strategies is noisy because of the agents'
 inability to sharply distinguish similar states. We call our dynamic
-\emph{replicator diffusion dynamic} (\rdd), because it is an extension
+\emph{replicator diffusion dynamic} (\rdd) because it is an extension
 of the replicator dynamic (\rd) and a special case of the replicator
 mutator dynamic (\rmd).
 
 The formulation of the \rdd given and explored here is in terms of behavioral strategies, not
 in terms of mixed strategies. Dynamics on behavioral strategies assume that agents can adapt
 their behavior locally, so to speak, i.e., independently at each choice
-point. Section~\ref{sec:repl-mutat-dynam} elaborates on the
-difference. Section~\ref{sec:relating-dynamics} shows how to translate our initial formulation
+point. Appendix~\ref{sec:repl-mutat-dynam} elaborates on the
+difference. Appendix~\ref{sec:relating-dynamics} shows how to translate our initial formulation
 of the \rdd into one using mixed strategies. Doing so identifies the \rdd as a special case of
 the \rmd.
 
@@ -372,13 +359,12 @@ numerical simulations. But it also points towards an interpretation of the proce
 evolution, rather than biological evolution. Signaling strategies are not inherited as a whole,
 but adapted piece-meal, e.g., by conditional imitation of ``local'' behavior at a given choice
 point. Appendix~\ref{sec:deriv-rdd-imit} gives one possible derivation of our dynamic as the
-most likely path in a population of agents that imitate successful behavior while being
-entirely unaware of perceptual imprecision themselves. Still, the possibility to formulate the
-\rdd as a special case of the \rmd (Appendix~\ref{sec:diffusion-as-special}) also suggests that
-an interpretation as a process of biological evolution may be feasible.
+most likely path of development in a population of agents that imitate successful behavior
+while being entirely unaware of perceptual imprecision themselves. Still, the possibility to
+formulate the \rdd as a special case of the \rmd (Appendix~\ref{sec:diffusion-as-special}) also
+suggests that an interpretation as a process of biological evolution may be feasible.
 
-For now, let us first focus on the formulation of the dynamic in terms of behavioral strategies
-alone.  We begin by recapitulating the \rd in Section~\ref{sec:repl-dynam-behav}, and introduce
+We begin by recapitulating the \rd in Section~\ref{sec:repl-dynam-behav}, and introduce
 the \rdd in Section~\ref{sec:repl-diff-dynam-1}.
 %Section~\ref{sec:repl-mutat-dynam} introduces the \rmd, and
 %Section~\ref{sec:diffusion-as-special} shows in what sense the \rdd is
@@ -440,7 +426,7 @@ The \rd in behavioral strategies describes the most likely path of development o
 behavior in a population of agents when behavioral adaptations occur independently at each
 choice point, e.g., when agents adopt the behavior of another agent \emph{at a given choice
   point} if that ``local'' behavior is ``locally'' better than their own (see
-\cite{Sandholm2010:Population-Game} for agent-level interpretations of the replicator dynamics
+\cite{Sandholm2010:Population-Game} for agent-level interpretations of the replicator dynamic
 and \citeauthor{Cressman2003:Evolutionary-Dy} \citeyear{Cressman2003:Evolutionary-Dy} for
 applications to extensive form games and behavioral strategies).
 
@@ -545,8 +531,12 @@ confusion matrix $C$ as matrix multiplication:
   \label{eq:confusion-function}
   \Diff_C(\Sstrat) & = C \Sstrat &    \Diff_C(\Rstrat) & = \Rstrat C\,.
 \end{align}
-For example, diffusion thus defined determines that, on the diffused sender strategy, the probability that message $\messg$ is chosen given a state $\state_i$ is given by $\sum_{j} C_{ij} \cdot \Sstrat(\messg \probbar \state_j)$.
-This means that the original probability given by $\Sstrat$ is increased by the original probability of this message being chosen in other states, proportionally to how likely it is that they are mistaken for $\state_i$.
+For example, diffusion thus defined determines that, on the diffused sender strategy, the
+probability that message $\messg$ is chosen given a state $\mystate{i}$ is given by
+$\sum_{j} C_{ij} \cdot \Sstrat(\messg \probbar \mystate{j})$.  This means that the original
+probability given by $\Sstrat$ is increased by the original probability of this message being
+chosen in other states $\mystate{j}$, proportionally to how likely it is that $\mystate{i}$ is
+(mistakenly) perceived as $\mystate{j}$.
 
 The discrete-time replicator diffusion dynamic takes the replicator
 dynamic as basic, but factors in the confusion of states at each step
@@ -578,7 +568,7 @@ The most straightforward interpretation of this sequential definition is that th
 the most likely path of development of aggregate behavior in a society, in which behavioral
 changes occur independently at each choice point, as described by the \rd for behavioral
 strategies. Perceptual noise affects the realization of behavior, but not the fitness-based
-selection thereof. Alternative noise-perturbed versions of the replicator dynamics in which the
+selection thereof. Alternative noise-perturbed versions of the replicator dynamic in which the
 fitness-based selection of strategies takes noise into account are conceivable, but we must put
 the exploration of alternatives aside here. We suggest that our approach is practical,
 conservative and plausible: it is practical because it is easy to implement; it is conservative
@@ -593,8 +583,8 @@ themselves are unaware of perceptual noise (see Appendix~\ref{sec:deriv-rdd-imit
 \section{Exploring the RDD}
 \label{sec:exploring-rdd}
 
-The \rdd is as a two-step procedure: first calculate where the replicator dynamic takes us,
-then apply diffusion. To understand the \rdd better, we isolate the novel diffusion part in
+The \rdd is a two-step procedure: first calculate where the replicator dynamic takes us, then
+apply diffusion. To understand the \rdd better, we isolate the novel diffusion part in
 Section~\ref{sec:iterated-diffusion}, before exploring how diffusion and fitness-based
 selection interact in Section~\ref{sec:simulations}.
 
@@ -680,7 +670,7 @@ principle, behavior smoothes out entirely in the limit.
 
 Now that we understand better what diffusion does, let us look at how
 diffusion interacts with optimization of behavior, as described by the
-replicator dynamics. The main question we should address is whether
+replicator dynamic. The main question we should address is whether
 diffusion and fitness-based replication reasonably interact, and if
 so, whether the inclusion of diffusion has any noteworthy effects on
 the evolving meaning of signals. Clearly, if $\imprecision = 0$, the
@@ -1007,19 +997,14 @@ evolving categories.
 \subsection{Interpretation of model and results}
 \label{sec:model-interpretation}
 
-The \rdd adds expected confusion of similar states to the \rd in
-behavioral strategies. The result is an abstract evolutionary dynamic
-that describes the most likely path of development of aggregate
-population behavior in which any process of behavioral adaptation at
-the agent level that is consistent with the \rd in behavioral
-strategies is perturbed by systematic noise in the realization of the
-agents' strategies. Given the use of behavioral strategies, an
-interpretation as a process of cultural evolution is most salient,
-according to which agents adapt their choice dispositions locally at
-each choice point. But the \rdd is also extensible to biological
-evolution on mixed strategies, in which case it is a special case of
-the \rmd with mutation matrices derived from confusion matrices, as
-shown in Appendix~\ref{sec:diffusion-as-special}.
+The \rdd adds expected confusion of similar states to the \rd in behavioral strategies. The
+result is an abstract evolutionary dynamic that describes the most likely path of development
+of aggregate population behavior that is consistent with the idea that agents imitate other
+agents' behavior (Appendix~\ref{sec:deriv-rdd-imit}). This would be a process of cultural
+evolution operating on behavioral strategies. But we speculate that the \rdd is also extensible
+to biological evolution on mixed strategies, in which case it is a special case of the \rmd
+with mutation matrices derived from confusion matrices, as shown in
+Appendix~\ref{sec:diffusion-as-special}.
 
 The \rdd is not only compatible with several interpretations of how,
 at an agent level, the population-level changes in strategy
@@ -1060,44 +1045,40 @@ turn next.
 % $\state$. Similar amendments take care of the way that the receiver
 % updates his choice dispositions.
 
-\citet{OConnor2013:The-Evolution-o} introduces a generalization of classical Herrnstein
-reinforcement learning for sim-max games, in which successful play leads to reinforcement of
-acts also for states similar to the one that actually occurred. This generalization not only
-leads to vague signaling of the appropriate kind, but also speeds up learning in such a way
-that, especially for sim-max games with higher numbers of states, higher levels of
-communicative success are reached in shorter learning periods. % Technically, this result is
+\citet{OConnor2013:The-Evolution-o} introduces a variant of classical Herrnstein reinforcement
+learning for sim-max games, in which successful play leads to reinforcement of acts also for
+states similar to the one that actually occurred. This is a form of generalization to unseen
+contingencies. It not only leads to vague signaling of the appropriate kind, but also speeds up
+learning in such a way that, especially for sim-max games with higher numbers of states, higher
+levels of communicative success are reached in shorter learning
+periods. % Technically, this result is
 % partly due to the fact that signalers make bigger changes to their behavioral strategies
 % after each round of play under generalized reinforcement than under the Herrnstein
 % variety. That only explains the speed of adaptation, not necessarily that generalization also
 % leads to regularity and communicative efficiency, but it does.
 
-Diffusion of strategies in the \rdd can also be conceived of as a form
-of generalization, and works in large part quite analogously to stimulus
-generalization in \citeauthor{OConnor2013:The-Evolution-o}'s
-approach. But there are still
-differences. \citeauthor{OConnor2013:The-Evolution-o} showed that
-generalized reinforcement learning can speed up the development of
-efficient signaling, especially for higher numbers of
-states. Complementing this, we showed that diffusion regularizes
-evolutionary outcomes and prevents meandering around sub-optimal and
-non-convex strategies, also for low numbers of states.
+Diffusion of strategies in the \rdd can also be conceived of as a form of generalization, and
+works in large part quite analogously to stimulus generalization in
+\citeauthor{OConnor2013:The-Evolution-o}'s approach. But there are still
+differences. \citeauthor{OConnor2013:The-Evolution-o} showed that her generalized reinforcement
+learning can speed up the development of efficient signaling, especially for higher numbers of
+states. Complementing this, we showed that diffusion regularizes evolutionary outcomes and
+prevents meandering around sub-optimal and non-convex strategies, also for low numbers of
+states.
 
-Conceptually, the \rdd is a more abstract framework than generalized
-reinforcement learning. The latter is most naturally seen as an
-agent-based learning dynamic that has two players adapt their
-individual strategies after each concrete round of play. In contrast,
-the \rdd describes a more abstract, average dynamical change in
-behavioral dispositions at the aggregate population level. Although
-the behavior of (some forms of) reinforcement learning mirror those of
-the \rd at some stage in time
+Conceptually, the \rdd is a more abstract framework than generalized reinforcement
+learning. The latter is most naturally seen as an agent-based learning dynamic that has two
+players adapt their individual strategies after each concrete round of play. In contrast, the
+\rdd describes a more abstract, average dynamical change in behavioral dispositions at the
+aggregate population level. Although the behavior of (some forms of) reinforcement learning
+mirror those of the \rd at some stage in time
 (\cite{BorgersSarin997:Learning-Throug,HopkinsPosch2005:Attainability-o,Beggs2005:On-the-Converge}),
-this does not mean that \emph{generalized} reinforcement learning is
-also necessarily a plausible population-level description of, say,
-generalized learning in a population of agents. Seen in this light,
-generalized reinforcement learning and the \rdd nicely complement each
-other, as similarly-minded accounts operating at different levels of
-abstraction.
-Although it would be interesting to explore the possibility of a mathematical connection between the two, this is beyond the scope of this paper and thus left as future work.
+this does not mean that \emph{generalized} reinforcement learning is also necessarily a
+plausible population-level description of, say, generalized learning in a population of
+agents. Seen in this light, generalized reinforcement learning and the \rdd nicely complement
+each other, as similarly-minded accounts operating at different levels of abstraction.
+Although it would be interesting to explore the possibility of a mathematical connection
+between the two, this is beyond the scope of this paper.
 
 \paragraph{Quantal response equilibria.}
 \citet{FrankeJager2010:Vagueness-Signa} suggested a number of ways in which
@@ -1109,11 +1090,13 @@ quantal response is a stochastic generalization of the best response function (i
 deterministic choice of an action that maximizes expected utility). Quantal responses factor in
 stochastic trembles at the level of the computation or maximization of expected utilities:
 agents may make mistakes in calculating how good given choice options really are for
-them. \citet{FrankeJager2010:Vagueness-Signa} show that quantal response equilibria of sim-max
-games can show the desired marks of vague signaling. Figure~\ref{fig:exampleQRE_stratsA} gives
-an example of a quantal response equilibrium for a sim-max game, as used in our set-up but with
-higher tolerance $\toler = 0.5$. Sender and receiver strategies look very much like what
-evolves under \rdd with modest values of perceptual imprecision.
+them. \citet{FrankeJager2010:Vagueness-Signa} demonstrate that quantal response equilibria of
+sim-max games can show the desired marks of vague
+signaling. Figure~\ref{fig:exampleQRE_stratsA} gives an example of a quantal response
+equilibrium for a sim-max game, as used in our set-up but with higher tolerance $\toler =
+0.5$.
+Sender and receiver strategies look very much like what evolves under \rdd with modest values
+of perceptual imprecision.
 
 \begin{figure}
   \centering
@@ -1174,16 +1157,16 @@ We introduced the replicator diffusion dynamic and identified it as a special ca
 replicator mutator dynamic (Appendix~\ref{sec:diffusion-as-special}). The \rdd incorporates a
 special kind of stochastic mutation due to differential confusability of similar states. It can
 be thought of as the aggregate population-level behavior process that results from imitation
-among agents that are unaware of noise (Appendix~\ref{sec:deriv-rdd-imit}). Based on data from
-numerical simulations, we demonstrated that the inclusion of mild levels of stochastic
-confusability of states does not undermine the possibility of evolving relatively successful
-signaling strategies. On the contrary, strategies that evolved under mild diffusion induce a
-highly regular and systematic category structure that shows the signs of vagueness as
-desired. There might even be a higher-order benefit to the presence of imprecision, in that it
-can accelerate convergence to optimal categorization, by preventing evolutionary paths to stay
-near inefficient non-convex strategies for a long time. Diffusion thus also unifies and
-regularizes evolutionary outcomes in such a way that sub-optimal categorization is avoided in
-short-term trajectories.
+among agents that are unaware of perceptual confusion
+(Appendix~\ref{sec:deriv-rdd-imit}). Based on data from numerical simulations, we demonstrated
+that the inclusion of mild levels of perceptual imprecision does not undermine the possibility
+of evolving relatively successful signaling strategies. On the contrary, strategies that
+evolved under mild imprecision induce a highly regular and systematic category structure that
+shows the signs of vagueness as desired. There might even be a higher-order benefit to the
+presence of imprecision, in that it can accelerate convergence to optimal categorization, by
+preventing evolutionary paths to stay near inefficient non-convex strategies for a long time. A
+little imprecision thus also unifies and regularizes evolutionary outcomes in such a way that
+sub-optimal categorization is avoided in short-term trajectories.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1206,13 +1189,12 @@ the \rmd to other prominent evolutionary dynamics is well understood
 fruitful applications in the context of signaling games
 \citep[e.g.][]{HutteggerSkyrms2010:Evolutionary-Dy}.
 
-The usual formulation of the \rmd is based on mixed, not behavioral
-strategies. But a discrete-time formulation of the \rmd in behavioral
-strategies clearly identifies the \rdd to be a special case. It
-follows that a mixed strategy version of the \rdd is just the \rmd
-with suitably defined mutation matrices. From this, even a
-continuous-time version can easily be retrieved if desired. To show
-this, we start with a delineation of mixed and behavioral strategies.
+The usual formulation of the \rmd is based on mixed, not behavioral strategies. But a
+discrete-time formulation of the \rmd in behavioral strategies clearly identifies the \rdd to
+be a special case. It follows that a mixed-strategy version of the \rdd is just the \rmd with
+suitably defined mutation matrices. From this, even a continuous-time version can easily be
+retrieved if desired. To show this, we start with a delineation of mixed and behavioral
+strategies.
 
 \paragraph{Mixed strategies.} Pure sender (receiver) strategies are
 functions $\Spure \in \Messgs^\States$ ($\Rpure \in
@@ -1590,16 +1572,15 @@ We can prove this theorem as follows.
 \section{Derivation of the RDD by imitation-based revision}
 \label{sec:deriv-rdd-imit}
 
-We can derive the proposed \rdd as a mean dynamic of an imitative revision protocol. For
-expository reasons we follow closely the example 4.3.1 of \citet{Sandholm2010:Population-Game},
-but other possibilities exist. Our derivation relies on the usual assumptions about conditional
-imitation at the agent level, but must add special assumptions about how noise affects revision
-probabilities. In keeping with the idea that agents are of possibly limited cognitive
-capacities, we assume here that noise is real but that agents are unaware of it. When agents
-perceive the actual expected utility of their choice and of another agent's choice (as is usual
-in the motivation of imitation-based revision protocols), we assume additionally that agents
-mistake their possibly non-veridical subjective representations of states for the actual ones
-(details below).
+We can derive the proposed \rdd as a mean dynamic of an imitative revision protocol, following
+closely the example 4.3.1 of \citet{Sandholm2010:Population-Game}. Our derivation relies on the
+usual assumptions about conditional imitation at the agent level, but must add special
+assumptions about how noise affects revision probabilities. In keeping with the idea that
+agents are of possibly limited cognitive capacities, we assume here that noise is real but that
+agents are unaware of it. When agents perceive the actual expected utility of their choice and
+of another agent's choice (as is usual in the motivation of imitation-based revision
+protocols), we assume additionally that agents mistake their possibly non-veridical subjective
+representations of states for the actual ones.
 
 \paragraph{Notation.} As before, let $\Sstrat(\mymessg{i} \probbar \mystate{o})$ be the
 probability that a speaker randomly picked from the population chooses $\mymessg{i}$ if the
@@ -1639,7 +1620,7 @@ r_{ij}$.
 
 \paragraph{Imitation under perceptual noise.} There are many conceivable ways in which
 perceptual noise might influence the above revision protocol. Our choice here is guided by
-theoretical and practical considerations alike. We would like maintain the common assumption
+theoretical and practical considerations alike. We would like to maintain the common assumption
 that agents might not be ideally rational and not necessarily fully aware of their
 surroundings. In particular, we assume here that agents are not aware of perceptual
 noise. Switching probabilities are therefore defined in terms of actual expected utility (and
@@ -1678,7 +1659,7 @@ $\Sstrat_s(\mymessg{i} \probbar \state)$ as follows:
    & = \Sstrat(\mymessg{i} \probbar \state) \cdot \left (
      \EU(\mymessg{i}) - \text{average EU at $\state$} \right )
 \end{align*}
-This is the (continuous-time) replicator dynamics for behavioral
+This is the (continuous-time) replicator dynamic for behavioral
 strategies.
 
 Similar considerations motivate the receiver part. Suppose that agent

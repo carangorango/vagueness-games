@@ -1,6 +1,6 @@
 ## Main changes 
 
-We have tried to address all of the reviewers comments as well as we could, while keeping an eye on the length of the paper.
+We have tried to address all of the reviewers' comments as well as we could, while keeping an eye on the length of the paper.
 
 The most important changes are that, as reviewer 1 suggested, we moved the comparison between the RDD and the RMD into the appendix and we shortened the comparison to alternative approaches (saving ca. 1.5 pages).
 
@@ -9,7 +9,7 @@ In response to reviewer 2's comments we have also included another technical app
 
 We also added a Figure (an example of a Voronoi language, as suggested by reviewer 1) and added explanation of the formulas and concepts in the main text (we kept the appendices fairly technical for reasons of space). To compensate for the additions, we also removed some lines and paragraphs that were more peripheral to our main concerns.
 
-In total, the new version has ca. 200 words of main text more than the previous. 
+In total, the new version has ca. 150 words of main text more than the previous. 
 
 ## Reaction to reviewers
 
@@ -31,7 +31,7 @@ We added verbal descriptions for the most important things: sender/receiver stra
 
 > 4)** Be sure when you introduce new terms to think about what the audience will know. ** To give examples, consider the bottom of pg 3 where you introduce the sim-max game.  It takes one line to say what a similarity metric is, and one like to say what a probability distribution is in this instance.
 
-We added more explanation for state probabilities, similarity metric and utilities. We did not give definitions for any of these and the paper is technical enough as it is. Again, we sought a tradeoff with length, focusing on elaborating on the concepts that are most important to follow the main argument, without going into irrelevant technical detail either.
+We added more explanation for state probabilities, similarity metric and utilities. We did not give definitions for any of these, as this would serve no direct purpose. Again, we sought a tradeoff with length, focusing on elaborating on the concepts that are most important to follow the main argument, without going into irrelevant technical detail either.
 
 
 > A few little things:
@@ -66,8 +66,8 @@ Before saying anything else, we would like to thank the reviewer for making us t
 
 > This is an interesting paper. It makes some clear contributions to our growing understanding of how vagueness can emerge and be sustained in signaling games. Unfortunately, **I am still not convinced that the authors’ equations for the replicator diffusion dynamic correctly reflect their written description of the process and the visualization provided in Figure 1 [now Figure 2]**. Below I have attempted to thoroughly explain some reasons for my skepticism. From my point of view, I think **the authors have two options**. **If I’m wrong about the mismatch, then they should include a correct derivation of their dynamic from “first principles,” so to speak.** This is what I’ve begun below. Start with payoffs in the game with confused states, and work from the bottom-up to derive the dynamic. **If I’m correct about the mismatch, then they should rewrite a few paragraphs early in the paper so that their description of the process matches the mathematics.** Even if I’m correct about the mismatch, the authors have still made a solid contribution to the literature and with a non-misleading write-up the results should be published.
 
-Being presented with two options, we chose a third and did both. Most importantly, we have added an appendix section that gives a derivation of the RDD in terms of an imitation-based update protocol. But we have also amended the text to do justice to this new material and to try to avoid further misunderstanding. The most important change is the last paragraph of Section 3.2, which explains what we think the RDD could reflect.
+Being presented with two options, we chose a third and did both. We have added an appendix section that gives a derivation of the RDD in terms of an imitation-based update protocol. But we have also amended the text to do justice to this new material and to avoid further misunderstanding. The most important change is the last paragraph of Section 3.2, which explains what we think the RDD could reflect.
 
 This paragraph also stresses that there are other options for "merging" perceptual noise with the replicator dynamic. So, in direct response to the reviewer's comments and sketched formalization, our view of the RDD is that fitness-based selection (including calculation of expected utilities) is not influenced by perceptual noise. This is a simplifying, perhaps simplistic assumption that can definitely be debated (and maybe should be at some point). Our appendix section tries to justify this assumption by showing that the RDD could be considered the outcome of an imitation-based update protocol in which the agents themselves are not aware of the noise. When deriving our dynamic from imitation-based updates, this seems like a reasonable assumption, because the opposite, the assumption that agents can calculate expected utilities in such a way as to factor in perceptual noise, seems much less plausible and less in line with the idea of evolutionary game theory as modeling rather unsophisticated agents. (Yes, we admit that our derivation makes some strong assumptions about how noise is weeded out in the imitation-process, but these are not much more implausible than the usual assumptions for imitation-based update protocols which also assume that the updating agent faithfully perceives or knows the expected utility of the act (or even full strategy) of some other agent.)
 
-This is then the main difference between ours and the approach that the reviewer seems to suggest: the issue is whether noise should be factored into the calculation of expected utilities and thereby to affect fitness-based selection. It seems to us that saying 'yes' (the reviewer's approach in as far as we understand it), 'no' (our present approach) and  also 'yes and no' can be plausible depending on what we think of the agent-level process that motivates the population-level dynamic. It would be an interesting enterprise to sort out the consequences of these alternatives. But, surely, this is not something we can do in this paper.
+This is then the main difference between ours and the approach that the reviewer seems to suggest: the issue is whether noise should be factored into the calculation of expected utilities and thereby to affect fitness-based selection. It seems to us that saying 'yes' (the reviewer's approach in as far as we understand it), 'no' (our present approach) and  also 'yes and no' can be plausible depending on what we think of the agent-level process that motivates the population-level dynamic. It would be an interesting enterprise to sort out the consequences of these alternatives. But, surely, this is not something we should do in this paper.
