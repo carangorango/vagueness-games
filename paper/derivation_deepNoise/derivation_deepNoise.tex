@@ -1,0 +1,218 @@
+\documentclass[fleqn,reqno,11pt]{article}
+
+%========================================
+% Packages
+%========================================
+
+\usepackage[]{../../helpers/mypackages}
+%\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
+%\bibliography{MyRefGlobal}
+\bibliography{../../helpers/MyRefGlobal}
+\bibliography{paper} 
+\usepackage{../../helpers/myenvironments}
+\usepackage{../../helpers/mycommands}
+\usepackage{todonotes}
+\usepackage{subcaption}
+
+
+
+%========================================
+% Standard Layout
+%========================================
+
+% Itemize
+\renewcommand{\labelitemi}{\large{$\mathbf{\cdot}$}}    % itemize symbols
+\renewcommand{\labelitemii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiv}{\large{$\mathbf{\cdot}$}}
+% Description
+\renewcommand{\descriptionlabel}[1]{\hspace\labelsep\textsc{#1}}
+
+% Figure Captions
+\usepackage{caption} % use corresponding myfiguresize!
+\setlength{\captionmargin}{20pt}
+\renewcommand{\captionfont}{\small}
+\setlength{\belowcaptionskip}{7pt} % standard is 0pt
+
+%========================================
+% Additional layout & commands
+%========================================
+
+
+\renewcommand{\Smixed}{\ensuremath{\mathrm{\mathbf{s}}}}
+\renewcommand{\Rmixed}{\ensuremath{\mathrm{\mathbf{r}}}}
+
+% Annotations
+\newcommand{\mytodo}[2]{\todo[inline,color=yellow,author=#1]{#2}}
+\newcommand{\question}[2]{\todo[inline,color=blue,author=#1]{#2}}
+\newcommand{\answer}[2]{\todo[inline,color=green,author=#1]{#2}}
+
+\newcommand{\rd}{\acro{rd}} % replicator dynamic
+\newcommand{\rmd}{\acro{rmd}} % replicator mutator dynamic
+\newcommand{\rdd}{\acro{rdd}} % replicator diffusion dynamic
+\newcommand{\RD}{\ensuremath{\mathrm{RD}}} % replicator dynamic
+\newcommand{\RDD}{\ensuremath{\mathrm{RDD}}} % replicator diffusion dynamic
+\newcommand{\RMD}{\ensuremath{\mathrm{RMD}}} % replicator mutator
+                                
+\newcommand{\Diff}{\ensuremath{\mathrm{D}}} % Difusion 
+\newcommand{\Mutate}{\ensuremath{\mathrm{M}}} % Mutation 
+
+\newcommand{\impairment}{\ensuremath{\alpha}} % impairment
+\newcommand{\toler}{\ensuremath{\beta}} % tolerance
+\newcommand{\ns}{\ensuremath{n_s}} % number of states
+
+\newcommand{\similarity}{\ensuremath{\mathrm{Sim}}} % similarity function
+
+\usepackage{fullpage}
+
+% \doublespacing
+
+\begin{document}
+
+Our goal is to derive a simple and practical dynamic for behavioral adaptations in a sim-max
+game given noisy perception and realization of states. We want to take noise into account at
+all levels: the realization of strategies and imperfections in perceiving other agents'
+strategy choices (for imitation). The focus here in on adaptations triggered by imitation of
+behavior, so that we look at adaptations of local behavior, in terms of behavioral strategies.
+
+Fix a sim-max game and fix behavioral strategies $\Sstrat$ and $\Rstrat$ that represent the
+actual behavior of agents without noise or perturbations. As usual, we assume that agents carry
+pure strategies and that behavioral strategies express population frequencies. So:
+$\Sstrat(\messg \probbar \mystate{o})$ is the probability with which a randomly drawn sender
+from the population plays $\messg$ when she perceives the state $\mystate{o}$;
+$\Rstrat(\mystate{i} \probbar \messg)$ is the probability that a receiver, randomly drawn from
+the population will intend to play $\mystate{i}$ when hearing message $\messg$. There could be
+various sources of noise that perturb: (i) what agents observe (conditional probability
+distribution $P_o$, see below) and (ii) how receivers realize intended state (interpretation)
+choices (conditional probability distribution $P_r$, see below). Together with the basic priors
+over states, these are the basic probabilities from which everything else will be derived. The
+replicator dynamic is the limiting case where $P_o$ and $P_r$ are trivial.
+
+Concretely, we think of the process of playing the sim-max game as subject to several pieces of
+stochasticity:
+\begin{enumerate}
+\item the actual state $\mystate{a}$ occurs with $P(\mystate{a}$)
+\item any randomly sampled sender would observes state $\mystate{o}$ with probability
+  $P_o(\mystate{o} \probbar \mystate{a})$
+  \begin{itemize}
+  \item given observed $\mystate{o}$, the probability of actual state $\mystate{a}$ is
+    $P_{\overline{o}}(\mystate{a} \probbar \mystate{o}) \propto P(\mystate{a}) P_o(\mystate{o}
+    \probbar \mystate{a})$
+  \end{itemize}
+\item a randomly sampled sender will play $\messg$ when observing $\mystate{o}$ with
+  probability $\Sstrat(\messg \probbar \mystate{o})$
+  \begin{itemize}
+  \item when the true state is $\mystate{a}$ the probability that a randomly sampled sender
+    plays $\messg$ is $P_\Sstrat(\messg \probbar \mystate{a}) = \sum_{\mystate{o}}
+    P_o(\mystate{o} \probbar \mystate{a}) \Sstrat(\messg \probbar \mystate{o})$
+  \end{itemize}
+\item given $\messg$ the probability that a randomly drawn receiver will intend to interpret
+  with $\mystate{i}$ is $\Rstrat(\mystate{i} \probbar \messg)$
+\item if a receiver intends to realize $\mystate{i}$, the probability that he realizes
+  $\mystate{r}$ is $P_r(\mystate{r} \probbar \mystate{i})$
+\item $P_\Rstrat(\mystate{r} \probbar \messg) = \sum_{\mystate{i}} P_r(\mystate{r} \ \probbar
+  \mystate{i}) \Rstrat(\mystate{i} \probbar \messg)$ is the probability that a randomly sampled
+  receiver realizes $\mystate{r}$ when observing $\messg$
+\end{enumerate}
+
+We want to define a protocol with which agents update their behavior locally, for each choice
+point. Given that we have many aspects of noise in the system, revision protocols will be
+subject to this noise as well. As a consequence, it appears that \textbf{different revision
+  protocol that would all give rise to the replicator dynamic in a noise-free setting, can give
+  rise to different mean field dynamics if we take noise seriously}. Our aim here is to
+consider one revision protocol, namely ``imitation of success'' (Sandholm) that is plausible
+enough and yields a practical and elegant mean field dynamic that we can study/implement.
+
+Revision by ``imitation of success'' generally proceeds as follows. Call the possibly
+updating/switching agent ``learner'' and the possibly to-be-imitated agent ``teacher''. A
+random learner is drawn from the population and given a chance to change her behavior at choice
+point $k$. Suppose, she currently plays $c$ at $k$. She observes what a randomly sampled
+teacher would do at choice point $k$, say $c'$ and switches from $c$ to $c'$ with switch
+probability $\text{SWITCH}(c \rightarrow c' , k)$. For the imitation of success protocol, this
+latter switching probability is just the expected utility of $c'$ at choice point $k$ (if that
+is always positive, like in our case). The mean change induced by this is:
+\begin{align*}
+  \text{mean change of frequency $c$, at $k$} & = \text{probability of switchers $c'
+    \rightarrow c$ at $k$ (inflow)} \\
+& - \text{probability of switchers $c \rightarrow c'$ at $k$ (outflow)} \\
+\end{align*}
+with
+\begin{align*}
+  \text{inflow} & = \sum_{c'} \text{probability learner plays $c'$ at $k$} \\
+  & \ \ \ \times \text{probability teacher plays $c$ at $k$} \\
+  & \ \ \ \times \text{SWITCH}(c' \rightarrow c , k) \\
+  \text{outflow} & = \sum_{c'} \text{probability learner plays $c$ at $k$} \\
+  & \ \ \ \times \text{probability teacher plays $c'$ at $k$} \\
+  & \ \ \ \times \text{SWITCH}(c \rightarrow c' , k) \\
+\end{align*}
+
+Given noise in a sim-max game, as described, this update protocol must be adapted so as to take
+into account that learners may not always perfectly perceive what the teacher is doing, and
+that expected utilities (and hence switching probabilities) are also subject to noisy
+realizations of strategies. This gives us:
+
+\begin{align*}
+  \text{inflow} & = \sum_{c'} \text{probability learner actually plays $c'$ at perceived $k$} \\
+  & \ \ \ \times \text{probability learner observes teacher play $c$ at $k$} \\
+  & \ \ \ \times \text{SWITCH}(c' \rightarrow c , k) \\
+  \text{outflow} & = \sum_{c'} \text{probability learner actually plays $c$ at perceived $k$} \\
+  & \ \ \ \times \text{probability learner observes teacher play $c'$ at $k$} \\
+  & \ \ \ \times \text{SWITCH}(c \rightarrow c' , k) \\
+\end{align*}
+
+Define:
+\begin{itemize}
+\item $P_o(\messg \probbar \mystate{o}) = \sum_{\mystate{a}} P_{\overline{o}}(\mystate{a}
+  \probbar \mystate{o}) \myts P_{\Sstrat}(\messg \probbar \mystate{a})$ is the probability that
+  a learner with revision opportunity for $\mystate{o}$ perceives a random teacher produce $\messg$
+\item $P_o(\mystate{o} \probbar \messg) =  \sum_{\mystate{r}} P_o(\mystate{o} \probbar
+  \mystate{r}) \myts P_{\Rstrat}(\mystate{r} \probbar \messg)$ is the probability that a
+  learner with a revision opportunity for $\messg$ perceives a random teacher produce
+  $\mystate{o}$\footnote{We assume that the noise that applies to the sender's observations
+    also applies to the receiver's observations when trying to imitate other agents'
+    strategies}
+\item $\EU(\messg , \mystate{o}, \Rstrat) = \sum_{\mystate{a}} \sum_{\mystate{r}}
+  P_{\overline{o}}(\mystate{a} \probbar \mystate{o})  P_\Rstrat(\mystate{r} \probbar
+  \messg) \utils(\mystate{a}, \messg, \mystate{r})$ is the actual noise-aware utility of
+  sending message $\messg$ when perceiving state $\mystate{o}$ given that the receiver
+  population plays a noisy realization of $\Rstrat$
+\item $P_{\overline{\Sstrat}}(\mystate{a} \probbar \messg) \propto P(\mystate{a})
+  P_{\Sstrat}(\messg \probbar \mystate{a})$ is the probability that the real state is
+  $\mystate{a}$ given that a random sender produced $\messg$
+\item $\EU(\mystate{i} , \messg, \Sstrat) = \sum_{\mystate{a}}
+  P_{\overline{\Sstrat}}(\mystate{a} \probbar \messg) \sum_{\mystate{r}}
+  P_{r}(\mystate{r} \probbar \mystate{i})  \utils(\mystate{a}, \messg, \mystate{r})$ is the actual noise-aware utility of
+  intending to realize interpretation $\mystate{i}$ given message $\messg$ when the sender
+  population plays a noisy realization of $\Sstrat$
+\end{itemize}
+
+Given this we can derive the continuous time expected change in behavioral sender strategies as
+follows:
+\begin{align*}
+  \Sstrat(\messg \probbar \state) & = \sum_{\messg'} \Sstrat(\messg' \probbar \state) \myts
+  P_o(\messg \probbar \state) \myts \EU(\messg, \state, \Rstrat) - \sum_{\messg'} \Sstrat(\messg \probbar \state) \myts
+  P_o(\messg' \probbar \state) \myts \EU(\messg', \state, \Rstrat) \\
+  & = P_o(\messg \probbar \state) \myts \EU(\messg, \state, \Rstrat) - \Sstrat(\messg \probbar \state) \myts \sum_{\messg'} 
+  P_o(\messg' \probbar \state) \myts \EU(\messg', \state, \Rstrat)
+\end{align*}
+which has a discrete-time solution that is easily implementable:
+\begin{align*}
+  \Sstrat'(\messg \probbar \state) \propto P_o(\messg \probbar \state) \myts \EU(\messg,
+  \state, \Rstrat)
+\end{align*}
+The case of the receiver is analogous:
+\begin{align*}
+  \Rstrat(\state \probbar \messg) & = \sum_{\state'} \Rstrat(\state' \probbar \messg) \myts
+  P_o(\state \probbar \messg) \myts \EU(\state, \messg, \Sstrat) - \sum_{\state'} \Rstrat(\state \probbar \messg) \myts
+  P_o(\state' \probbar \messg) \myts \EU(\state', \messg, \Sstrat) \\
+  & = P_o(\state \probbar \messg) \myts \EU(\state, \messg, \Sstrat) - \Rstrat(\state \probbar \messg) \myts \sum_{\state'} 
+  P_o(\state' \probbar \messg) \myts \EU(\state', \messg, \Sstrat)\\
+  \Rstrat'(\state \probbar \messg) & \propto P_o(\state \probbar \messg) \myts \EU(\state,
+  \messg, \Sstrat)
+\end{align*}
+
+
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
