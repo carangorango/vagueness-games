@@ -157,6 +157,7 @@ def InformationQuantity(SpeakerStrategy, HearerStrategy, Priors):
 
     return (InformationOnStates, InformationOnActs)
 
+
 # # Settings
 
 NStates = 90
@@ -166,8 +167,9 @@ NMessages = 2
 
 Dynamics = 'replicator dynamics'
 
-Impairment = 0.2
-Tolerance = 0.05
+Impairment = 0.1
+ImpairmentR = Impairment
+Tolerance = 0.1
 
 convThreshold = 0.001
 rounds = 200
@@ -186,6 +188,7 @@ if BatchMode:
         NStates = int(sys.argv[1])
         NMessages = int(sys.argv[2])
         Impairment = float(sys.argv[3])
+        ImpairmentR = Impairment
         Tolerance = float(sys.argv[4])
         OutputFile = open(sys.argv[5], 'ab')
 
@@ -206,6 +209,9 @@ Utility = Similarity
 
 Confusion = np.exp(-(Distance ** 2 / Impairment ** 2)) if Impairment != 0 else np.identity(NStates)
 Confusion = makePDFPerRow(Confusion)
+
+ConfusionR = np.exp(-(Distance ** 2 / ImpairmentR ** 2)) if ImpairmentR != 0 else np.identity(NStates)
+ConfusionR = makePDFPerRow(ConfusionR)
 
 Speaker = random.dirichlet([1] * NMessages, NStates)
 Hearer = random.dirichlet([1] * NStates, NMessages)
@@ -286,33 +292,25 @@ while not converged:
 
     # # Speaker strategy
 
-    UtilitySpeaker = np.array([ [ np.dot(Hearer[m], Utility[t]) for m in xrange(NMessages) ] for t in xrange(NStates) ])
-
-    for t in xrange(NStates):
-        for m in xrange(NMessages):
-            if Dynamics == 'replicator dynamics':
-                Speaker[t, m] = Speaker[t, m] * UtilitySpeaker[t, m]
-            elif Dynamics == 'best response':
-                Speaker[t, m] = 1 if UtilitySpeaker[t, m] == max(UtilitySpeaker[t]) else 0
-
-    if Dynamics == 'replicator dynamics': Speaker = makePDFPerRow(Speaker)
-
-    Speaker = np.dot(Confusion, Speaker)
+    PoT = makePDFPerRow(Priors * np.transpose(Confusion))
+    PSigma = np.dot(Confusion, Speaker)
+    PoSender = np.dot(PoT, PSigma)
+    PRho = np.dot(Hearer, ConfusionR)
+    ExpUS = np.array([
+        [np.sum([PoT[to, ta] * PRho[m, tr] * Utility[ta, tr] for ta in xrange(NStates) for tr in xrange(NStates)])
+         for m in xrange(NMessages)]
+         for to in xrange(NStates)])
+    Speaker = makePDFPerRow(PoSender * ExpUS)
 
     # # Hearer strategy
 
-    UtilityHearer = np.array([ [ np.dot(Priors * Speaker[:, m], Utility[t]) for t in xrange(NStates) ] for m in xrange(NMessages) ])
-
-    for m in xrange(NMessages):
-        for t in xrange(NStates):
-            if Dynamics == 'replicator dynamics':
-                Hearer[m, t] = Hearer[m, t] * UtilityHearer[m, t] * NStates / sum(UtilityHearer[m])
-            elif Dynamics == 'best response':
-                Hearer[m, t] = 1 if UtilityHearer[m, t] == max(UtilityHearer[m]) else 0
-
-    if Dynamics == 'replicator dynamics': Hearer = makePDFPerRow(Hearer)
-
-    Hearer = np.dot(Hearer, Confusion)
+    PoReceiver = np.dot(PRho, Confusion)
+    PSigmaInverse = makePDFPerRow(Priors * np.transpose(PSigma))
+    ExpUR = np.array([
+        [np.sum([PSigmaInverse[m, ta] * ConfusionR[ti, tr] * Utility[ta, tr] for ta in xrange(NStates) for tr in xrange(NStates)])
+         for ti in xrange(NStates)]
+         for m in xrange(NMessages)])
+    Hearer = makePDFPerRow(PoReceiver * ExpUR)
 
     if (np.sum(abs(Speaker - SpeakerBefore)) < convThreshold and np.sum(abs(Hearer - HearerBefore)) < convThreshold) or i > rounds:
         converged = True
