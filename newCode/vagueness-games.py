@@ -160,7 +160,7 @@ def InformationQuantity(SpeakerStrategy, HearerStrategy, Priors):
 
 # # Settings
 
-NStates = 90
+NStates = 5
 PriorDistributionType = 'uniform'
 
 NMessages = 2
@@ -292,24 +292,23 @@ while not converged:
 
     # # Speaker strategy
 
-    PoT = makePDFPerRow(Priors * np.transpose(Confusion))
-    PSigma = np.dot(Confusion, Speaker)
-    PoSender = np.dot(PoT, PSigma)
-    PRho = np.dot(Hearer, ConfusionR)
+    PoT = makePDFPerRow(Priors * np.transpose(Confusion)) # prob actual state (col) given observed state (row)
+    PSigma = np.dot(Confusion, Speaker) # prob mess (col) given actual state (row)
+    PoSender = np.dot(PoT, PSigma) # P_o(m|t_o) prob of seeing agent j do mess (row) given agent i sees t_o
+    PRho = np.dot(Hearer, ConfusionR) # prob receiver plays act (row) given message (column)
     ExpUS = np.array([
         [np.sum([PoT[to, ta] * PRho[m, tr] * Utility[ta, tr] for ta in xrange(NStates) for tr in xrange(NStates)])
-         for m in xrange(NMessages)]
-         for to in xrange(NStates)])
+          for m in xrange(NMessages)]  for to in xrange(NStates)])
     Speaker = makePDFPerRow(PoSender * ExpUS)
 
     # # Hearer strategy
 
-    PoReceiver = np.dot(PRho, Confusion)
+    PoReceiver = np.dot(PRho, Confusion) # P_o(t_o|m)
     PSigmaInverse = makePDFPerRow(Priors * np.transpose(PSigma))
     ExpUR = np.array([
-        [np.sum([PSigmaInverse[m, ta] * ConfusionR[ti, tr] * Utility[ta, tr] for ta in xrange(NStates) for tr in xrange(NStates)])
-         for ti in xrange(NStates)]
-         for m in xrange(NMessages)])
+        [np.sum([PSigmaInverse[m, ta] * ConfusionR[ti, tr] * Utility[ta, tr] for ta in xrange(NStates) for tr in
+                 xrange(NStates)])
+         for ti in xrange(NStates)] for m in xrange(NMessages)])
     Hearer = makePDFPerRow(PoReceiver * ExpUR)
 
     if (np.sum(abs(Speaker - SpeakerBefore)) < convThreshold and np.sum(abs(Hearer - HearerBefore)) < convThreshold) or i > rounds:

@@ -6,7 +6,8 @@ greyPalette = c("#999999", "#222222", "#999999", "#000000", "#999999", "#000000"
 
 ##################
 ## load data
-data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140918-142408.varTolerance.csv', 
+# data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140918-142408.varTolerance.csv', 
+data = read.csv('~/Desktop/data/svn/vagueness-games/results/20150729-104740.csv', 
                 colClasses=c('numeric','factor','numeric','numeric','numeric',
                              'factor','numeric','numeric','numeric','numeric',
                              'numeric','numeric','numeric','numeric','numeric',

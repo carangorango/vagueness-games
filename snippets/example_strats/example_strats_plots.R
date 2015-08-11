@@ -1,5 +1,6 @@
 require('plyr')
 require('reshape2')
+require('dplyr')
 theme_set(theme_bw())
 
 source('~/Desktop/data/svn/vagueness-games/helper_functions.R')
@@ -10,7 +11,7 @@ plot.and.save.language.by.index = function(data, index){
   tolerance = data[index,]$Tolerance
   impairment = data[index,]$Impairment
   stratPlot = plot.language.byindex(data,index)
-  filename = paste("~/Desktop/data/svn/vagueness-games/paper/plots/strat_example_", "ind", index, ".pdf", sep = "", collapse = "")
+  filename = paste("~/Desktop/data/svn/vagueness-games/paper/version_04/plots/strat_example_", "ind", index, ".pdf", sep = "", collapse = "")
   pdf(file = filename, height = 2.75, width = 3)
   show(stratPlot)
   dev.off()
@@ -27,7 +28,7 @@ for (strat in stratsToPlot){
 show(ds[stratsToPlot,])
 
 d = subset(data, Number.of.states == 6 & Tolerance == 0.2 & Impairment == 0 & Speaker.Convex.Cat == 1)
-
+# d = filter(data, Number.of.states == 90, Tolerance == 0.1, Impairment == 0.05)
 
 plot.and.save.language.by.index(d, which.min(d$Expected.utility))
 plot.and.save.language.by.index(d, which.max(d$Expected.utility))

@@ -1,0 +1,1808 @@
+\documentclass[fleqn,reqno,10pt]{article}
+
+%========================================
+% Packages
+%========================================
+
+\usepackage[]{../../helpers/mypackages}
+%\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
+%\bibliography{MyRefGlobal}
+\bibliography{../../helpers/MyRefGlobal}
+\bibliography{paper} 
+\usepackage{../../helpers/myenvironments}
+\usepackage{../../helpers/mycommands}
+\usepackage{todonotes}
+\usepackage{subcaption}
+
+
+
+%========================================
+% Standard Layout
+%========================================
+
+% Itemize
+\renewcommand{\labelitemi}{\large{$\mathbf{\cdot}$}}    % itemize symbols
+\renewcommand{\labelitemii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiv}{\large{$\mathbf{\cdot}$}}
+% Description
+\renewcommand{\descriptionlabel}[1]{\hspace\labelsep\textsc{#1}}
+
+% Figure Captions
+\usepackage{caption} % use corresponding myfiguresize!
+\setlength{\captionmargin}{20pt}
+\renewcommand{\captionfont}{\small}
+\setlength{\belowcaptionskip}{7pt} % standard is 0pt
+
+%========================================
+% Additional layout & commands
+%========================================
+
+
+\renewcommand{\Smixed}{\ensuremath{\mathrm{\mathbf{s}}}}
+\renewcommand{\Rmixed}{\ensuremath{\mathrm{\mathbf{r}}}}
+
+% Annotations
+\newcommand{\mytodo}[2]{\todo[inline,color=yellow,author=#1]{#2}}
+\newcommand{\question}[2]{\todo[inline,color=blue,author=#1]{#2}}
+\newcommand{\answer}[2]{\todo[inline,color=green,author=#1]{#2}}
+
+\newcommand{\rd}{\acro{rd}} % replicator dynamic
+\newcommand{\rmd}{\acro{rmd}} % replicator mutator dynamic
+\newcommand{\rdd}{\acro{rdd}} % replicator diffusion dynamic
+\newcommand{\RD}{\ensuremath{\mathrm{RD}}} % replicator dynamic
+\newcommand{\RDD}{\ensuremath{\mathrm{RDD}}} % replicator diffusion dynamic
+\newcommand{\RMD}{\ensuremath{\mathrm{RMD}}} % replicator mutator
+\newcommand{\icid}{\acro{icid}} % imprecise conditional imitation dynamic
+\newcommand{\ICID}{\ensuremath{\mathrm{ICID}}} % imprecise conditional imitation dynamic
+                                
+\newcommand{\Diff}{\ensuremath{\mathrm{D}}} % Difusion 
+\newcommand{\Mutate}{\ensuremath{\mathrm{M}}} % Mutation 
+
+\newcommand{\imprecision}{\ensuremath{\alpha}} % imprecision
+\newcommand{\toler}{\ensuremath{\beta}} % tolerance
+\newcommand{\ns}{\ensuremath{n_s}} % number of states
+
+\newcommand{\similarity}{\ensuremath{\mathrm{Sim}}} % similarity function
+
+
+\newcommand{\myred}[1]{\textcolor{red}{#1}} 
+
+\doublespacing
+
+\title{Vagueness, Noise, and Signaling}
+% \author{Michael Franke \and Jos\'e Pedro Correia}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  Signaling games are popular models for studying the evolution of meaning, but typical
+  approaches do not incorporate vagueness as a feature of successful signaling.  Complementing
+  recent like-minded models, we describe an aggregate population-level dynamic that describes a
+  process of imitation of successful signaling behavior under imprecise perception and
+  realization of similar stimuli. Applying this new dynamic to a generalization of Lewis'
+  signaling games, we show that stochastic imprecision leads to vague, yet by-and-large
+  efficient signal use, and, moreover, that it unifies evolutionary outcomes and helps avoid
+  suboptimal categorization. \myred{The upshot of this is that generalization emerges, at an
+    aggregate level, without agents actually generalizing.}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Many concepts and expressions are vague. A vague category knows clear
+cases that fall under it, clear cases that do not, and also so-called
+borderline cases. Borderline cases do not clearly apply, nor do they
+clearly not apply, and there may be differences between borderline
+cases in terms of how well they represent the category in
+question. Vagueness does not seem to dramatically affect the success
+of everyday communication, but it is troublesome for some of the most
+prominent theories of language and meaning. This is especially so for the logico-semantic tradition of Frege, Russell and the young
+Wittgenstein which is challenged by the paradoxes vagueness gives rise
+to. 
+
+But there are other intriguing aspects about vagueness. The puzzle
+that we are concerned with here is how vagueness could arise and be
+maintained in the first place. This is a serious issue for
+functionalist accounts that maintain that concepts and linguistic
+meanings evolved driven towards efficiency. Since the existence of
+unclear borderline cases seems to entail inefficiency of
+categorization or communication, the challenge, succinctly put forward
+by \citet{Lipman2009:Why-is-Language}, is to explain how vagueness can
+persist under evolutionary pressure to be optimally discriminative. We
+address \emph{Lipman's problem} as a technical challenge, namely to
+find a conceptually sound and mathematically coherent formal model of
+the evolution of categorization and language use that yields
+by-and-large efficient categorization \emph{and} vagueness.
+
+A number of authors have recently tried to explain why vagueness evolved as something that is
+itself useful
+\citep[e.g.][]{Jaegherde-Jaegher2003:A-Game-Theoreti,Deemter2009:Utility-and-Lan,BlumeBoard2013:Intentional-Vag}.
+Others have argued that vagueness is a natural byproduct of limitations in information
+processing \citep[e.g.][]{FrankeJager2010:Vagueness-Signa} or the result of particular
+low-level learning strategies \citep[e.g.][]{OConnor2013:The-Evolution-o}. This paper
+contributes to the latter line of thought. Concretely, we introduce an dynamic that describes
+average behavior resulting from imitation under confusability of similar stimuli. The dynamic
+proposed here complements previous like-minded accounts. We show that stochastic noise can not
+only lead to vague, yet relatively efficient signal use, but can also unify evolutionary
+outcomes and help avoid suboptimal categorization. Moreover, the system shows generalization
+behavior without a single generalizing agent.
+
+The next section introduces the background against which the work presented here can be
+appreciated. Section~\ref{sec:repl-diff-dynam} introduces our noise-affected imitation dynamic,
+which is then explored in Section~\ref{sec:exploring-rdd}.  Section~\ref{sec:discussion}
+reflects and compares our approach to others. % Two appendices cover technical material that is
+% not strictly necessary to appreciate the main conceptual points of the paper.
+% Appendix~\ref{sec:diffusion-as-special} shows that our replicator diffusion dynamic is a
+% special case of the well-known replicator mutator dynamic. Appendix~\ref{sec:deriv-rdd-imit}
+% gives a derivation of our dynamic as the most-likely path of a population whose agents imitate
+% successful behavior without being aware of perceptual noise themselves.
+
+\section{Background}
+\label{sec:background}
+
+% The view that vagueness is a natural concomitant of cognitive
+% limitations of language users has been formalized in a number of ways,
+% using evolutionary game theory and certain generalizations of Lewis'
+% signaling games \citep{Lewis_1969:Convention}, so called
+% \emph{similarity-maximizing games}, or \emph{sim-max games}, for short
+% \citep{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct}.
+% %\citep{FrankeJager2010:Vagueness-Signa,OConnor2013:Evolving-Percep,OConnor2013:The-Evolution-o}.
+% Our contribution is best seen in relation to these accounts, as it also
+% relies on sim-max games. Let's introduce these first, and then zoom in
+% on the problem of vagueness.
+
+\subsection{Sim-max games \& conceptual spaces}
+
+Signaling games, as introduced by \citet{Lewis_1969:Convention}, have
+a sender and a receiver. The sender knows the true state of the world,
+but the receiver does not. The sender can select a signal, or message,
+to reveal to the receiver, who then chooses an act. In Lewis' games,
+if the receiver chooses the act that corresponds to the actual state,
+the play is a success, otherwise a failure. Certain regular
+combinations of sender signaling and receiver reaction make messages
+meaningful, in the sense that their use is correlated systematically
+to certain states or acts. To investigate the conditions under which
+such meaning-generating behavior can evolve is a highly interesting
+topic that we are only beginning to fully understand
+\citep[e.g.][]{Warneryd1993:Cheap-Talk-Coor,BlumeKim1993:Evolutionary-St,Huttegger2007:Evolution-and-t,Pawlowitsch2008:Why-Evolution-d,Barrett2009:The-Evolution-o,HutteggerSkyrms2010:Evolutionary-Dy,Skyrms2010:Signals}.
+
+Similarity-maximizing (short: sim-max) games are a variation of
+Lewis' games where the receiver's actions are equated with the state
+space (one can think of the actions as choosing states) and different states are allowed to be more or less
+similar to one another. While Lewis' games treated communicative
+success as a matter of black and white, sim-max games allow for a
+gradient notion: the more similar the receiver's interpretation is to
+the actual state, the better. Signaling games with utility-relevant
+similarities in the state space are fairly standard in economics
+\citep[e.g.][]{Spence1973:Job-market-sign,CrawfordSobel1982:Strategic-Infor},
+but have received particular attention in a more philosophical context
+for reasons that will become clear presently.
+
+A sim-max game consists of a set of states $\States$, a set of messages $\Messgs$ with much
+fewer messages than states, a probability distribution $\Pr \in \Delta(\States)$ such that
+$\Pr(\state)$ gives the probability that state $\state$ occurs, a similarity metric\footnote{A
+  metric is a function of distance between any two points in a given space. It should satisfy
+  certain axioms that ensure behavior that one would intuitively expect from the words
+  ``similarity'' and ``distance'' alone, but these details do not matter for the purposes of
+  this paper.}
+  % : similarity should always be non-negative, zero only for the distance
+  % between an element and itself, symmetric, and satisfy the triangle inequality that
+  % $\similarity(x,z) \le \similarity(x,y) + \similarity(y,z)$
+on states $\similarity \mycolon \States \times \States \rightarrow \mathds{R}$ such that
+$\similarity(\mystate{1}, \mystate{2})$ is the (perceptual) similarity between $\mystate{1}$
+and $\mystate{2}$, and a utility function $\Utils \mycolon \States \times \States \rightarrow
+\mathds{R}$ such that $\Utils(\mystate{1}, \mystate{2})$ is the payoff for sender and receiver
+for a play with actual state $\mystate{1}$ and receiver interpretation $\mystate{2}$. We
+identify the receiver's acts with the states of the world, so that the game is one of guessing
+the actual state, so to speak. The utility function should be a monotonically decreasing
+function of similarity.
+
+\citet{JagerMetzger2011:Voronoi-Languag} showed that the evolutionarily stable states of
+sim-max games are remarkably systematic: the evolutionarily stable states are demonstrably
+so-called Voronoi languages.\footnote{Their results were obtained for games with infinitely
+  many states in $n$-dimensional Euclidean space $\States \subseteq \mathds{R}^n$ and a
+  quadratic loss function for utilities
+  $\Utils(\mystate{1}, \mystate{2}) = - (\mystate{1} - \mystate{2})^2$.} Roughly put, a Voronoi
+language is a pair of sender and receiver strategies, such that the sender strategy partitions
+the state space into convex categories, while the receiver's interpretations are the central
+spots in each category. A subset $X$ of $\mathds{R}^n$ is convex if, informally put, all points
+in $X$ are connected via a straight line that lies entirely in $X$; $X$ has no gaps or
+dents. For example, if \States is the unit interval and all states are equiprobable, a Voronoi
+language with two messages would have the sender use one message exclusively for all points in
+the lower half of the unit interval and another for all points in the upper half; the
+receiver's interpretations of messages are the central points, .25 and .75, in the respective
+intervals.  See Figure~\ref{fig:Voronoi-language-example} for an illustration.
+
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}[scale=3]
+
+        \begin{scope}
+
+          \draw[-,thick] (0,0) -- (1.5,0);
+
+          \draw (0,0) node {\color{red}{\big{[}}};
+
+          \draw (.75,0) node {\color{red}{\big{)}}};
+
+          \draw (.76,0) node {\color{red}{\big{(}}};
+
+          \draw (1.5,0) node {\color{red}{\big{]}}};
+
+            \draw (.325,.15) node
+            {\color{red}{$\Spure(\mymessg{1}  \probbar \cdot)$}};
+
+            \draw (1.075,.15) node
+            {\color{red}{$\Spure(\mymessg{2} \probbar \cdot)$}};
+
+            \node at (.375,0) (node1) {\color{blue}{$\bullet$}};
+
+            \node at (.375,-.3) (label1)
+            {\color{blue}{${\Rpure}(\cdot \probbar \mymessg{1})$}};
+
+            \draw[-,color=blue] (node1) -- (label1);
+
+            \node at (1.125,0) (node2) {\color{blue}{$\bullet$}};
+
+            \node at (1.125,-.3) (label2)
+            {\color{blue}{${\Rpure}(\cdot \probbar \mymessg{2})$}};
+
+            \draw[-] (node2) -- (label2);
+
+            \draw (0,-.2) node {$0$};
+
+            \draw (.75,-.2) node {$0.5$};
+
+            \draw (1.5,-.2) node {$1$};
+
+          \end{scope}
+ 
+        \end{tikzpicture}
+
+        \caption{Example of a Voronoi language on $\States = [0,1]$. The (pure) sender strategy
+          $\Spure \in \Messgs^\States$ uses one signal for the lower half, and another for the
+          upper half of the unit interval. The (pure) receiver strategy $\Rpure \in
+          \States^\Messgs$ selects the central elements in the respective intervals. See
+          \citet{JagerMetzger2011:Voronoi-Languag} for further details.}
+  \label{fig:Voronoi-language-example}
+\end{figure}
+
+
+This result is interesting because it demonstrates that signaling can
+impose orderly categories on a metric space, without that being the
+ulterior purpose of it all. Sender and receiver can be distinct
+entities, whose purpose is to communicate effectively about the actual
+state. In that case, evolving Voronoi languages would explain why
+\emph{linguistic categories} are well-behaved and orderly in the way
+they appear to be. More abstractly, sender and receiver can also be
+thought of as distinct modules in a single system, where the first
+module must discretize the information it is fed by selecting a small
+sample of, suggestively, category labels. These are passed to a second
+module that tries to decode the original information. In this case,
+evolving Voronoi languages would explain why \emph{conceptual
+  categories} are well-behaved and orderly in the way that they appear
+to be.
+
+Seen in this light, sim-max games may provide a foundation to approaches in cognitive semantics
+that rely on the notion of conceptual spaces.
+\citet[][70--77]{Gardenfors2000:Conceptual-Spac}, for example, has prominently argued that
+natural categories are convex regions in conceptual space. If the conceptual space has a
+suitable metric, convex categories can be derived from a set of prototypes. The category
+corresponding to prototype $p$ is the set of points that are more similar to $p$ than to any
+other. In this way, \citet{Gardenfors2000:Conceptual-Spac} argues, an efficient categorization
+system can be obtained: storing the prototypes lets us recover the categories without having to
+store each category's extension. However, what is left unexplained, is where the prototypes
+come from, and why we would not see just any distribution of prototypes as an equally efficient
+classification system. This is where sim-max games can contribute a principled approach to
+deriving, in an independent way, not only convex categories but also prototypical exemplars
+belonging to them.  These ideas, and more, are developed further by
+\citet{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct,JagerMetzger2011:Voronoi-Languag,OConnor2014-OCOEPC},
+among others.
+
+\subsection{Vague signaling in sim-max games}
+
+This outline of an approach to categorization using sim-max games
+leaves many problems unaddressed. One of them is that natural
+categories for continuously variable stimuli usually do not have
+unique, point-valued prototypes and clear category boundaries. We
+would like to account for the possibility of such vagueness, in
+particular: (i) clear positive examples of a vague category should
+show a gradient transition to clear negative examples;
+(ii) prototypes should likewise be gradient regions, peaking at the
+center of the vague category they represent.
+
+\citet{DouvenDecock2011:Vagueness:-A-Co} show that
+\citeauthor{Gardenfors2000:Conceptual-Spac}'s conceptual spaces
+approach can be extended to account for the existence of borderline
+cases. From the assumption that prototypes are extended, yet convex
+regions in conceptual space, a construction algorithm is available
+that yields ``collated Voronoi diagrams'' with thick boundaries
+representing borderline
+regions. \citet{DecockDouven2012:What-is-Graded-} show further how it
+is possible to arrive at a gradient transition between categories, by
+weighing in the distance of different borderline cases to various
+prototypical regions. This accounts for the first of the two
+desiderata mentioned above, but still assumes that crisp prototype
+regions must be given.
+
+An alternative approach is taken by \citet{FrankeJager2010:Vagueness-Signa} and
+\citet{OConnor2013:The-Evolution-o} who show how the above desiderata can be met by evolving
+strategies in sim-max games. The approach we take here is similar in spirit, but different in
+relevant detail. A more in-depth comparison is deferred until Section~\ref{sec:discussion}. Let
+us first look into our own proposal in more detail.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Imprecise conditional imitation}
+\label{sec:repl-diff-dynam}
+
+Signaling agents can adapt their dispositions to act, given some feedback about their past
+success, in multiple ways. Usually, we would assume that changes in behavior should, at least
+on average, lean towards increasing chances of communicative success. Such a population
+of signaling agents and their behavioral adaptations can be described at different levels of
+abstraction. At the level of individual agents, we can describe a more or less idealized
+process of how each agent adapts dispositions for future actions based on detailed descriptions
+of information available to the agent, e.g., about the game, the other players' behavior and
+the like. More abstractly, at the level of a population of agents, we can describe how
+average behavioral dispositions will evolve. The latter population-level perspective abstracts
+over petty stochastic fluctuations and zooms in on the general tendency or direction of
+evolution that ensues from some (often: simplified) behavior at the agent-level.
+
+We are interested here in exploring how a tendency to favor communicatively successful
+strategies is affected by imprecise perception and realization of states. We therefore look at
+a population-level dynamic that describes the most likely evolutionary path of a population of
+signaling agents who imitate other agents' behavior (proportional to how successful it is) but
+may occasionally confuse states for one another (proportional to how similar they are). We call
+our dynamic \emph{imprecise conditional imitation dynamic} (\icid), because it derives from an
+update protocol based on conditional imitation and allows for imprecise perception and
+realization of states. In the special limiting case where imprecision vanishes, the process is
+just the well-known replicator dynamic. To appreciate the \icid and its motivation, we first
+briefly review the replicator dynamic and its derivation from conditional imitation of
+successes.
+
+
+
+\subsection{Replicator dynamic in behavioral strategies}
+\label{sec:repl-dynam-behav}
+
+Fix a signaling game with finite states $\States$, messages $\Messgs$ and acts $\Acts$. Let
+$\Pr(\cdot) \in \Delta(\States)$ be the prior distribution over states and
+$\Util_{\sen,\rec} \mycolon \States \times \Messgs \times \Acts \rightarrow \mathds{R}$ the
+sender's and receiver's utility functions. A \emph{behavioral strategy} is a function that maps
+an agent's choice points to a probability distribution over available choices.\footnote{Our
+  focus is on behavioral strategies, not \emph{mixed strategies}, i.e., probability
+  distributions over functions from each choice point to an act, such as
+  $s \in \Delta(\Messgs^{\States})$.  Dynamics on behavioral strategies assume that agents can
+  adapt their behavior locally, so to speak, i.e., independently at each choice point. Our
+  focus on behavioral strategies greatly reduces the complexity of the dynamic and simplifies
+  numerical simulations. But it also seems the more plausible choice for imitation-based update
+  protocols: agents only observe how, on some occasion, some other agent behaved in \emph{one}
+  particular situation, not how that agent would behave in \emph{all} relevant choice
+  situations; they imitate the use of a single word, so to speak, not a whole lexicon. (See
+  \citet{Cressman2003:Evolutionary-Dy} for more on the difference between dynamics on mixed or
+  behavioral strategies.)} The sender's behavioral strategies are functions
+$\Sstrat \in \Delta(\Messgs)^\States$, thus mapping each state $\state \in \States$ to a
+probability of each message $\messg \in \Messgs$ being sent; the receiver's are functions
+$\Rstrat \in \Delta(\Acts)^\Messgs$, thus mapping each message $\messg \in \Messgs$ to a
+probability of each state $\state \in \States$ being interpreted by the receiver given
+$\messg$. Although behavioral strategies are probabilistic, we may conveniently imagine that
+every individual agent has a non-probabilistic strategy nonetheless. If the population is large
+enough, the number $\Sstrat(\messg \probbar \state)$, for instance, is then the probability
+that a randomly sampled sender would have a strategy that responds with $\messg$ to $\state$.
+
+The \emph{expected utility} of choices at each choice point is:
+\begin{align*}
+  \EU(\messg, \state, \Rstrat) & = \sum_{\act \in \Acts}
+  \Rstrat(\act \probbar \messg) \cdot U_\sen(\state, \messg, \act) \\
+  \EU(\act, \messg, \Sstrat) & = \sum_{\state \in
+    \States} \Pr(\state) \cdot \Sstrat(\messg \probbar \state) \cdot
+  U_\rec(\state, \messg, \act) \,.
+\end{align*}
+This means that the expected utility for the sender of choosing message $\messg \in \Messgs$,
+given tate $\state \in \States$ and a receiver strategy $\Rstrat$ is the sum, for each act
+$\act \in \Acts$, of the probability that the receiver will choose act $\act$ given message
+$\messg$ times the actual utility of using act $\act$ for state $\state$.  The expected utility
+for the receiver of choosing act $\act \in \Acts$, given a message $\messg \in \Messgs$ and a
+sender strategy $\Sstrat$ is the sum, for each state $\state \in \States$, of the prior
+probability of state $\state$ occurring, times the probability the sender will choose message
+$\messg$ given state $\state$, times the actual utility of using act $\act$ for state $\state$.
+
+% The \emph{fitness} of a behavioral strategy at a choice point is the
+% frequency-weighted average of expected utilities of each choice, given
+% the opponent's strategy:
+% \begin{align*}
+%   \Phi(\state,\Sstrat, \Rstrat) & = \sum_{\messg} \Sstrat(\messg \probbar \state) \cdot
+% \EU(\messg, \state,\Rstrat) \\
+% \Phi(\messg,\Sstrat, \Rstrat) & = \sum_{\act} \Rstrat(\act \probbar \messg)
+% \cdot \EU(\act, \messg,\Sstrat)\,.
+% \end{align*}
+
+The discrete-time replicator dynamic maps current strategies $\Sstrat$ and $\Rstrat$ to future
+strategies $\RD(\Sstrat)$ and $\RD(\Rstrat)$ in such a way that changes in frequency are
+proportional to expected utilities:
+\begin{align}
+  \label{eq:RDDiscrete}
+  \RD(\Sstrat)(\messg \probbar \state) & = \frac{\Sstrat(\messg \probbar \state) \cdot
+    \EU(\messg, \state,\Rstrat)} {\sum_{\messg'} \Sstrat(\messg' \probbar \state) \cdot
+   \EU(\messg', \state,\Rstrat)} \\
+    \RD(\Rstrat)(\act \probbar \messg) & = \frac{\Rstrat(\act \probbar \messg) \cdot
+    \EU(\act, \messg,\Sstrat)} {\sum_{\act'} \Rstrat(\act' \probbar \messg)
+    \cdot \EU(\act', \messg,\Sstrat)}  \,. \nonumber
+\end{align}
+Intuitively put, this definition updates the average frequency with which each choice (message
+or act) will occur, independently at each choice point (state or message). For a given choice
+point, say a state $\state$, the probability of seeing $\messg$ played by an average agent in
+the population \emph{before} the update is $\Sstrat{\messg \probbar \state}$. \emph{After} the
+update it will be proportional to the frequency before the update times the expected utility of
+$\messg$ at state $\state$. The denominator is then a normalizing constant to make sure that we
+obtain probabilities that sum to one from this. In particular, the denominator in the
+definition above captures the average expected utility of all choices at the relevant choice
+point.
+
+
+\subsection{Conditional imitation of success}
+\label{sec:cond-imit-succ}
+
+The replicator dynamic is an abstract population-level dynamic that describes the mean,
+to-be-expected change in behavioral dispositions in a population of signalers. There are
+several ways of deriving the replicator dynamic from agent-level processes of behavioral
+adaptation. We focus here on one of the simplest: \emph{conditional imitation of success}
+\citep[see][for this and many other ways of deriving the replicator
+dynamics]{Sandholm2010:Population-Game}. We choose this agent-level derivation, because it is
+more convenient than its alternatives when we want to add imprecision in the following. The
+main idea is that agents imitate the behavior of another agent at some choice point with a
+probability that is proportional to the expected utility of the latter agent's act for that
+choice point. Since the sim-max games that we will be looking at have all expected utilities
+conveniently lie between 0 and 1, we may even identify the switching probability with the
+expected utility directly.
+
+Let's consider sender strategies, as the receiver case is parallel (as long as there is no
+noise or imprecision). Revision by imitation of success proceeds as follows. Call
+(misleadingly!) the agent who gets a chance to change behavior ``learner'' and the possibly
+to-be-imitated agent ``teacher.'' A random learner is drawn from the population and given a
+chance to change behavior at choice point $\state$. The probability that that learner plays
+$\messg$ is $\Sstrat(\messg \probbar \state)$. The learner observes what a randomly sampled
+teacher does at $\state$. That would be $\messg'$ with probability $\Sstrat(\messg' \probbar
+\state)$. The learner then starts using $\messg'$ instead of $\messg$ with probability
+$\EU(\messg', \state, \Rstrat)$. (Of course, $\messg'$ and $\messg$ could be the same.)
+
+If agents get repeated updating chances for their choice points, the \emph{expected change} of
+frequency for $\messg$ at $\state$ becomes:
+\begin{align}
+  \label{eq:MeanChange}
+  \dot{\Sstrat}(\messg \probbar \state) = P(\messg' \rightarrow m, \state) - P(\messg \rightarrow m', \state)\,,
+\end{align}
+where $P(\messg' \rightarrow m, \state)$ is the ``inflow'' probability that agents switch from
+$\messg'$ to $\messg$ and $P(\messg \rightarrow m', \state)$ is the ``outflow'' probability
+that agents switch from $\messg$ to $\messg'$. Since we are dealing with expectations in a huge
+population, these probabilities can be given as:
+\begin{align*}
+  P(\messg' \rightarrow m, \state) & = \sum_{\messg'} \underbrace{\Sstrat(\messg' \probbar
+    \state)}_{\text{learner plays $\messg'$}} \cdot
+  \underbrace{\Sstrat(\messg \probbar \state)}_{\text{teacher plays $\messg$}} \cdot
+  \underbrace{\EU(\messg, \state, \Rstrat)}_{\text{EU teacher choice}} \\
+  P(\messg \rightarrow m', \state) & = \sum_{\messg'} \underbrace{\Sstrat(\messg \probbar
+    \state)}_{\text{learner plays $\messg$}} \cdot
+  \underbrace{\Sstrat(\messg' \probbar \state)}_{\text{teacher plays $\messg'$}} \cdot
+  \underbrace{\EU(\messg', \state, \Rstrat)}_{\text{EU teacher choice}}
+\end{align*}
+
+From this, we can simplify the expression of expected change in Equation~(\ref{eq:MeanChange})
+to:
+\begin{align*}
+  \dot{\Sstrat}(\messg \probbar \state) & = \Sstrat(\messg \probbar \state) \cdot \EU(\messg,
+  \state, \Rstrat) - \Sstrat(\messg \probbar \state) \cdot  \sum_{\messg'}
+      \Sstrat(\messg' \probbar \state) \cdot \EU(\messg',\state,\Rstrat) \\
+& = \underbrace{\Sstrat(\messg \probbar \state)}_{\text{frequency of $\messg$ at $\state$}}  ( \underbrace{\EU(\messg,
+  \state, \Rstrat)}_{\text{EU of $\messg$ at $\state$}} -   \underbrace{\sum_{\messg'}
+      \Sstrat(\messg' \probbar \state) \cdot \EU(\messg',\state,\Rstrat)}_{\text{average
+      EU at choice point $\state$}}  ) 
+\end{align*}
+This is the continuous-time formulation of the replicator dynamics for behavioral
+strategies. The discrete time formulation in Equation (\ref{eq:RDDiscrete}) solves this
+continuous-time formulation by assuming that discrete update steps are infinitesimally
+small:\footnote{Notice that we drop the denominator here, to obtain the non-payoff corrected
+  replicator dynamic.}
+\begin{align*}
+  \dot{\Sstrat}(\messg \probbar \state) & = \RD(\Sstrat)(\messg \probbar \state) -
+  \Sstrat(\messg \probbar \state) \\
+  & = \frac{\Sstrat(\messg \probbar \state) \cdot \EU(\messg, \state,\Rstrat)} {\sum_{\messg'}
+    \Sstrat(\messg' \probbar \state) \cdot
+    \EU(\messg', \state,\Rstrat)} - \Sstrat(\messg \probbar \state) \\
+  & = \frac{\Sstrat(\messg \probbar \state) \cdot \EU(\messg, \state,\Rstrat) - \Sstrat(\messg
+    \probbar \state) \cdot \sum_{\messg'} \Sstrat(\messg' \probbar \state) \cdot \EU(\messg',
+    \state,\Rstrat)} {\sum_{\messg'} \Sstrat(\messg' \probbar \state) \cdot
+    \EU(\messg', \state,\Rstrat)}  \\
+  & \propto \Sstrat(\messg \probbar \state) \cdot \left ( \EU(\messg, \state,\Rstrat) - \sum_{\messg'} \Sstrat(\messg' \probbar \state) \cdot \EU(\messg',
+  \state,\Rstrat) \right )
+\end{align*}
+
+
+
+\bigskip
+
+
+ Suppose, she currently plays $c$ at $k$. She
+observes what a randomly sampled teacher would do at choice point $k$, say $c'$ and switches
+from $c$ to $c'$ with switch probability $\text{SWITCH}(c \rightarrow c' , k)$, which we can
+here identify with the expected utility $\EU(c',k)$ of $c'$ at $k$. The mean change induced by
+offering all agents imitation chances for $k$ is:
+\begin{align*}
+  \text{mean change of frequency $c$, at $k$} & = \text{probability of switchers $c'
+    \rightarrow c$ at $k$ \mygray{(inflow)}} \\
+& - \text{probability of switchers $c \rightarrow c'$ at $k$ \mygray{(outflow)}}
+\end{align*}
+We should spell out the inflow and outflow here with some care, so as to prepare ourselves for
+the subsequent addition of imprecise perception and realization of stimuli. So in general, we
+would define:
+\begin{align*}
+  \text{inflow} & = \sum_{c'} \text{prob.~random learner maps $k$ to $c'$} \\
+  & \ \ \ \times \text{prob.~learner observes $c$ by random teacher} \\
+  & \ \ \ \times \EU(c', k) \\
+  \text{outflow} & = \sum_{c'} \text{prob.~random learner maps $k$ to $c$} \\
+  & \ \ \ \times \text{prob.~learner observes random teacher play $c'$ at $k$} \\
+  & \ \ \ \times \text{SWITCH}(c \rightarrow c' , k)
+\end{align*}
+
+Suffice it to look at the case of a sender. 
+
+\subsection{Replicator diffusion dynamic in behavioral strategies}
+\label{sec:repl-diff-dynam-1}
+
+The replicator diffusion dynamic is a noise-perturbed variant of the
+\rd in behavioral strategies. Fix a sim-max game with $\States =
+\Acts$ and a confusion matrix $C : \States \times \States$, where $C$ is
+row-stochastic, i.e., each row is a probability
+distribution. Elements $C_{ij}$ give the probability that $\state_i$
+is realized as $\state_j$. The confusability of states affects senders
+and receivers alike, but in slightly different ways. For the sender,
+$C_{ij}$ is the probability that the actual state \mystate{i} is
+perceived as \mystate{j}. For the receiver, $C_{ij}$ is the
+probability that \mystate{j} is the interpretation that is actually
+formed when \mystate{i} is the intended interpretation.
+See Figure~\ref{fig:noise-perturbation-of-strategies} for an illustration.
+
+\begin{figure}
+  \centering
+
+    \begin{tikzpicture}[node distance = 1.6cm, thick]
+
+      \begin{scope}
+  
+      \node[rectangle, draw=black!50, fill=black!10, thick] (actual)
+      {actual state $\mystate{i}$};
+
+      \node[rectangle, draw=black!50, fill=black!10, thick, below of =
+      actual] (perceived) {perceived state $\mystate{j}$};
+
+      \node[rectangle, draw=black!50, fill=black!10, thick, below of =
+      perceived] (output) {chosen message $\messg$};
+
+      \node[rectangle, thick, above of = actual, node distance=0.75cm]
+      (sender) {sender};
+
+      \draw[->] (actual) -> (perceived) node[midway,left] {noise
+        $C_{ij}$};
+
+      \draw[->] (perceived) -> (output) node[midway,left] (label)
+      {strategy $\Sstrat(\messg \probbar \mystate{j})$};
+
+   
+%      \begin{pgfonlayer}{background}
+%        \node [draw=black!50, fill=black!20,fit=(actual) (label)
+%        (output)] {};
+%      \end{pgfonlayer}
+    \end{scope}
+
+
+      \begin{scope}[xshift=5cm]
+  
+      \node[rectangle, draw=black!50, fill=black!10, thick] (message)
+      {observed message $\messg$};
+
+      \node[rectangle, draw=black!50, fill=black!10, thick, below of =
+      message] (target) {target interpretation $\mystate{i}$};
+
+      \node[rectangle, draw=black!50, fill=black!10, thick, below of =
+      target] (realized) {realized interpretation $\mystate{j}$};
+
+      \node[rectangle, thick, above of = message, node distance=0.75cm]
+      (receiver) {receiver};
+
+      \draw[->] (message) -> (target) node[midway,right] (bla) {strategy
+        $\Rstrat(\mystate{i} \probbar \messg)$};
+
+      \draw[->] (target) -> (realized) node[midway,right]  {noise $C_{ij}$};
+
+   
+%      \begin{pgfonlayer}{background}
+%        \node [draw=black!50, fill=black!20,fit = (message) 
+%        (realized) (bla)] {};
+%      \end{pgfonlayer}
+    \end{scope}
+
+  \end{tikzpicture}
+
+  \caption{Effect of confusion of states on sender and receiver
+    choices.}
+  \label{fig:noise-perturbation-of-strategies}
+\end{figure}
+
+The aggregate effect of confusion of states on behavioral strategies
+can be captured in a function that maps behavioral strategies
+$\Sstrat$ and $\Rstrat$ to their \emph{diffusions} $D(\Sstrat)$ and
+$D(\Rstrat)$. Suppose that $\Sstrat$ and $\Rstrat$ represent a
+population's average signaling behavior if there was no confusion of
+states. Then $D(\Sstrat)$ and $D(\Rstrat)$ give the expected aggregate
+population behavior under the actual noise-perturbed behavior of each
+agent. Since the effect of confusion of states is that behavior at one
+choice point percolates to behavior at similar choice points, we speak
+of \emph{diffusion of behavior under confusion of states}. If we
+conceive of behavioral strategies $\Sstrat$ and $\Rstrat$ as
+row-stochastic matrices (rows are choice points, columns are choices;
+each row is a probability distribution), we can define the diffusion effect of
+confusion matrix $C$ as matrix multiplication:
+\begin{align}
+  \label{eq:confusion-function}
+  \Diff_C(\Sstrat) & = C \Sstrat &    \Diff_C(\Rstrat) & = \Rstrat C\,.
+\end{align}
+For example, diffusion thus defined determines that, on the diffused sender strategy, the
+probability that message $\messg$ is chosen given a state $\mystate{i}$ is given by
+$\sum_{j} C_{ij} \cdot \Sstrat(\messg \probbar \mystate{j})$.  This means that the original
+probability given by $\Sstrat$ is increased by the original probability of this message being
+chosen in other states $\mystate{j}$, proportionally to how likely it is that $\mystate{i}$ is
+(mistakenly) perceived as $\mystate{j}$.
+
+The discrete-time replicator diffusion dynamic takes the replicator
+dynamic as basic, but factors in the confusion of states at each step
+in a sequential manner:
+\begin{align}
+  \label{eq:RDD-Def}
+  \RDD(\Sstrat) & = \Diff_C(\RD(\Sstrat)) &   \RDD(\Rstrat) & = \Diff_C(\RD(\Rstrat)) \,.
+\end{align}
+This is equivalent to the following, perhaps more transparent
+formulation:\footnote{To see this, start with $\RDD(\Sstrat)(\messg_k
+  \probbar \state_i)$. If $\RDD(\Sstrat)$ is considered as a matrix,
+  we can rewrite this as $(RDD(\Sstrat)_{ik}$. By
+  Equation~(\ref{eq:confusion-function}), we get $(C \
+  \RD(\Sstrat))_{ik}$, which by definition of matrix multiplication is
+  $\sum_j C_{ij} \cdot \RD(\Sstrat)_{jk}$. Substituting the definition
+  of $\RD(\Sstrat)$ completes the derivation. Similarly for the
+  receiver.}
+\begin{align*}
+  \RDD(\Sstrat)(\messg_k \probbar \state_i) & = \sum_{j} C_{ij} \cdot
+  \frac{\Sstrat(\messg_k \probbar \state_j) \cdot
+    \EU(\messg_k, \state_j,\Rstrat)}
+  {\Phi(\state_j,\Sstrat, \Rstrat)} \\
+    \RDD(\Rstrat)(\state_i \probbar \messg_k) & = \sum_{j} C_{ji} \cdot
+  \frac{\Rstrat(\state_j \probbar \messg_k) \cdot
+    \EU(\state_j, \messg_k,\Sstrat)} {\Phi(\messg_k,\Sstrat, \Rstrat)}  \,.
+\end{align*}
+
+The most straightforward interpretation of this sequential definition is that the \rdd captures
+the most likely path of development of aggregate behavior in a society, in which behavioral
+changes occur independently at each choice point, as described by the \rd for behavioral
+strategies. Perceptual noise affects the realization of behavior, but not the fitness-based
+selection thereof. Alternative noise-perturbed versions of the replicator dynamic in which the
+fitness-based selection of strategies takes noise into account are conceivable, but we must put
+the exploration of alternatives aside here. We suggest that our approach is practical,
+conservative and plausible: it is practical because it is easy to implement; it is conservative
+because it connects the \rdd with the \rmd (see Appendix~\ref{sec:diffusion-as-special}); it is
+also plausible because the \rdd can be derived from a myopic update protocol in which agents
+themselves are unaware of perceptual noise (see Appendix~\ref{sec:deriv-rdd-imit}).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exploring the RDD}
+\label{sec:exploring-rdd}
+
+The \rdd is a two-step procedure: first calculate where the replicator dynamic takes us, then
+apply diffusion. To understand the \rdd better, we isolate the novel diffusion part in
+Section~\ref{sec:iterated-diffusion}, before exploring how diffusion and fitness-based
+selection interact in Section~\ref{sec:simulations}.
+
+\subsection{Iterated diffusion}
+\label{sec:iterated-diffusion}
+
+Confusion of states should intuitively be a function of their
+perceptual similarity: the more similar two states are, the more likely they could be mistaken for each other.
+To make this concrete, let us assume that the
+state space of the sim-max game consists of $n \ge 2$ states that are
+equally spaced across the unit interval, including $0$ and $1$. The
+distance $\card{\mystate{i} - \mystate{j}}$ is the objective, physical
+similarity between two states $\mystate{i}$ and
+$\mystate{j}$. Distance in physical space feeds into a perceptual
+similarity function, as described by
+\citet{Nosofsky1986:Attention-Simil}:
+\begin{align*}
+  \similarity(\mystate{i}, \mystate{j} \myts ; \myts \imprecision) =
+      \begin{cases}
+    1 & \textrm{if } \imprecision = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
+    0 & \textrm{if } \imprecision = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
+ \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \imprecision^2} \right ) & \textrm{otherwise,} \\
+    \end{cases}
+\end{align*}
+where $\imprecision \ge 0$ is a imprecision parameter. When $\imprecision=0$ agents perfectly
+discriminate between states; when $\imprecision \rightarrow \infty$ agents cannot discriminate
+states at all. Figure~\ref{fig:NosofskySim} gives an impression of Nosofsky-similarity for
+different parameter values. Other formalizations of perceptual similarity are possible,
+including ones that allow for different discriminability in different areas of the state space,
+but we stick with Nosofsky's similarity function for the time being, because it is
+mathematically simple, yet an established notion in mathematical psychology.
+
+\begin{figure}
+  \centering
+
+  \includegraphics[width=0.7\textwidth]{plots/NosofskySim.pdf}
+
+  \caption{Examples of Nosofsky-similarity for different values of
+    imprecision.}
+  \label{fig:NosofskySim}
+\end{figure}
+
+
+We further assume that the probability of confusing any two states
+$\mystate{i}$ and $\mystate{j}$ is proportional to their perceived
+similarity and therefore obtained by normalization:
+\begin{align*}
+  C_{ij} = \frac{\similarity(\mystate{i}, \mystate{j} \myts ; \myts
+  \imprecision)} {\sum_j \similarity(\mystate{i}, \mystate{j} \myts ; \myts
+  \imprecision)} \,.
+\end{align*}
+Confusion of states is then also a function of imprecision parameter
+$\imprecision$. For $\imprecision = 0$, the confusion matrix has $C_{ii}
+= 1$ and $C_{ij} = 0$ for $i \neq j$. For $\imprecision > 0$, $C$ is positive, i.e., $C_{ij} >0$ for
+all $i$ and $j$. For $\imprecision \rightarrow \infty$, we find $C_{ij}
+\rightarrow \nicefrac{1}{\card{\States}}$ for all $i$ and $j$.
+
+If states are confused on average with a probability proportional to
+their similarity, repeated application of the operation in
+Equation~(\ref{eq:confusion-function}) causes behavioral dispositions
+gradually to diffuse along a gradient of similarity of
+states. Consequently, iterated diffusion leads to a smoothing out and
+an eventual equalization of behavioral strategies, for both the sender
+and the receiver. After $n$ steps of iterated diffusion an initial
+sender strategy $\Sstrat$ will be $C^n \Sstrat$, and an initial
+receiver strategy $\Rstrat$ will be $\Rstrat C^n$. If we assume that
+$\imprecision > 0$, $C$ is a positive row-stochastic matrix (each state
+could in principle be confused as any other state, albeit with
+possibly a very low probability). It then follows from the
+Perron-Frobenius theorem that the limit $C^\infty = \lim_{n
+  \rightarrow \infty} C^n$ exists (it is the Perron-projection) and
+all of its rows are identical. That is why, in the limit of iterated
+diffusion, $C^\infty \Sstrat$ has identical rows (messages are sent
+with the same probability in each state), and $\Rstrat C^\infty$
+likewise has identical rows (every message is interpreted
+equally). All of this is in line with the intuition that diffusion of
+behavior under confusion of states iteratively equalizes behavior for
+similar states; if all states can be confused for one another in
+principle, behavior smoothes out entirely in the limit.
+
+\subsection{Numerical simulations}
+\label{sec:simulations}
+
+Now that we understand better what diffusion does, let us look at how
+diffusion interacts with optimization of behavior, as described by the
+replicator dynamic. The main question we should address is whether
+diffusion and fitness-based replication reasonably interact, and if
+so, whether the inclusion of diffusion has any noteworthy effects on
+the evolving meaning of signals. Clearly, if $\imprecision = 0$, the
+\rdd reduces to the \rd. If $\imprecision \rightarrow \infty$, the
+diffusion component takes over and the \rdd reduces to the trivial
+iterated diffusion process that we looked at in the previous
+section. We will show presently that for reasonable in-between levels
+of imprecision $\imprecision$, the \rdd can lead to reasonably
+efficient, yet vague signaling behavior. Suitable levels of
+imprecision can have further accelerating and, surprisingly, unifying
+effects on meaning evolution.
+
+\subsubsection{Experimental set-up}
+
+To explore the \rdd, we turn to numerical simulations. Let states be
+evenly spaced elements of the unit interval that always include 0 and
+1, and let priors be flat: $\Pr(\state) = \Pr(\state')$ for all
+$\state, \state'$. As for utility functions, we take another
+Nosofsky-style function:
+\begin{align*}
+  \util(\mystate{i}, \mystate{j} \myts ; \myts \toler) =
+      \begin{cases}
+    1 & \textrm{if } \toler = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
+    0 & \textrm{if } \toler = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
+ \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \toler^2} \right ) & \textrm{otherwise.} \\
+    \end{cases}
+\end{align*}
+The tolerance parameter $\toler \ge 0$ models the amount of tolerable
+pragmatic slack or communicative imprecision. This choice of utility
+function is governed partly by convenience in parallel to the
+similarity function, but also because it has, as we believe, the right
+general properties for a communicative payoff function. Unlike
+utilities that are, say, linearly or quadratically decreasing in
+physical distance \citep[c.f.][]{JagerMetzger2011:Voronoi-Languag,FrankeJager2010:Vagueness-Signa},
+utilities that are exponentially decreasing in negative quadratic
+distance can model situations where a small amount of imprecision in
+communication is tolerable, whereas similarly small differences in
+intolerably far away interpretations matter very little, with a smooth
+transition between these regimes
+\citep[c.f.][]{OConnor2013:The-Evolution-o}.
+
+We ran 50 trials of the \rdd, starting with randomly sampled sender
+and receiver strategies, for each triplet of independent parameter
+values: $\ns = \card{T} \in \set{6, 10, 50, 90}$, $\imprecision \in
+\set{0, 0.05, 0.1, 0.2, 0.3}$, $\toler \in \set{0.05, 0.1, 0.2,
+  0.3}$. Each trial ran for a maximum of 200 update steps of the
+\rdd. A trial was considered converged, and thus stopped before the maximum
+of 200 rounds, if the total amount of change between strategies before
+and after an \rdd step was smaller than a suitably chosen
+threshold. It is not guaranteed that strategies at halting time had
+converged to the eventual attracting state, whether they ran for 200
+rounds or not. Our notion of convergence is therefore only a
+categorical measure for reaching a certain (well-considered, but
+eventually arbitrary) degree of stability. In principle, rather than
+setting a hard limit on the maximum number of rounds and analyzing
+convergence categorically, one could also run each trial until reaching
+our criterion for convergence and analyze the number of rounds it took to get there.
+Our choice was initially motivated by pragmatic concerns regarding length of
+simulation time, but it is also justifiable if we reflect on the
+nature of language evolution as a continuous process.
+Language adapts to an ever-changing reality; it is rare, if not impossible,
+that a lexicon has an infinite amount of time to neatly converge to a stable
+state. Therefore, investigating speed of convergence within a limited
+time frame can be seen as better reflecting the natural constraints of
+language evolution.
+
+\begin{figure}
+  \centering
+
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/strat_example_ind3098.pdf}
+    \caption{$\ns = 90$, $\toler = 0.1$, $\imprecision = 0$}
+    \label{fig:example_stratsA}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/strat_example_ind1.pdf}
+    \caption{$\ns = 90$, $\toler = 0.1$, $\imprecision = 0.0.5$}
+    \label{fig:example_stratsB}
+  \end{subfigure}
+
+  % \begin{subfigure}[]{0.45\textwidth}
+  %   \includegraphics[width=\textwidth]{plots/strat_example_NS-10_tol-005_imp0_ind1001.pdf}
+  %   \caption{$\ns = 10$, $\toler = 0.1$, $\imprecision = 0$}
+  %   \label{fig:example_stratsC}
+  % \end{subfigure}
+  % \hfill
+  % \begin{subfigure}[]{0.45\textwidth}
+  %   \includegraphics[width=\textwidth]{plots/strat_example_NS-10_tol-005_imp005_ind1201.pdf}
+  %   \caption{$\ns = 10$, $\toler = 0.1$, $\imprecision = 0.05$}
+  %   \label{fig:example_stratsD}
+  % \end{subfigure}
+
+
+  \caption{Example strategies under \rdd at stopping time of our simulations.}
+  \label{fig:example_strats}
+\end{figure}
+
+Representative examples for resulting strategy pairs are given in
+Figure~\ref{fig:example_strats}. Figure~\ref{fig:example_stratsA} shows a strategy pair at
+stopping time with 90 states, tolerance $\toler = 0.1$ and imprecision $\imprecision = 0$. Zero
+imprecision means that the trial was effectively an application of the plain \rd. Noteworthily,
+the given sender strategy approximates a pure sender strategy that crisply partitions the state
+space into non-convex sets. The irregular shape of the receiver strategy suggests that the
+pictured strategy pair has not yet reached a dynamically stable state under the \rd. Indeed,
+the trial was stopped for reaching the maximum of 200 rounds. In contrast, the outcome of a
+trial with identical parameters, except with imprecision $\imprecision = 0.0.5$, which is shown
+in Figure~\ref{fig:example_stratsB}, had converged (in our technical sense) after 99 rounds of
+iterated \rdd. The sender strategy shows a smooth blending from one ``category'' to the other,
+and the receiver's interpretations are rather extended curves, peaking at a central point in
+the relevant ``categories.''
+
+These examples already show two interesting things. Firstly, inclusion of imprecision can lead
+to seemingly well-behaved, yet vague strategies in the sense that we are after. The sender
+strategy in Figure~\ref{fig:example_stratsB} identifies clear positive and clear negative cases
+for each signal, with a smooth transition in-between. The receiver's interpretations of signals
+can be seen as smoothed-out prototype regions. Secondly, (sender) strategies can approach
+non-convex pure strategies under the replicator dynamic and linger there for vast amounts of
+time, possibly indefinitely. We see this in our limited-time simulations (e.g.,
+Figure~\ref{fig:example_stratsA}), but this also holds, for some types of utility functions,
+for the limiting case. This was first observed by Elliott Wagner, as mentioned by
+\citet{OConnor2014-OCOEPC}.  A full analysis of the dynamics of sim-max games is beyond the
+scope of this paper, but we will shortly see that diffusion from confusability of states
+clearly prevents evolutionary paths that meander for a long time in the vicinity of non-convex
+strategies.
+
+
+
+\subsubsection{Dependent measures}
+ 
+To further explore our simulation results, we calculated metrics that
+aim to numerically capture how vague, generally well-structured, and
+communicatively efficient the recorded strategy pairs
+were. \emph{Entropy} captures the amount of systematicity or
+regularity in signal use. \emph{Convexity} captures whether a
+behavioral strategy would project onto a convex pure
+strategy. \emph{Expected utility} measures the communicative
+efficiency of evolved strategy pairs.
+
+\paragraph{Entropy.} This classic information-theoretic notion
+captures the amount of uncertainty in a probability
+distribution. Roughly put, entropy of a signaling strategy captures
+inverse distance from a pure strategy. The usual definition of entropy
+applies directly to mixed strategies, but provably equivalent metrics
+for behavioral strategies are ready to hand:
+\begin{align*}
+  E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs}
+  \Sstrat(\messg \probbar \state) \cdot \log(\Sstrat(\messg \probbar
+  \state)) \\
+  E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\state \in \States}
+  \Rstrat(\state \probbar \messg) \cdot \log(\Rstrat(\state \probbar
+  \messg)) \,. 
+\end{align*}
+Values obtained by these definitions are lower bounded by $0$ and
+upper bounded by, respectively, $\log(|\Messgs^\States|) = |\States|
+\cdot \log(|\Messgs|)$ and $\log(|\States^\Messgs|) = |\Messgs| \cdot
+\log(|\States|)$. We work with normalized values. The sender
+strategies in Figures~\ref{fig:example_stratsA} and
+\ref{fig:example_stratsB} have entropy $1.19e^{-5}$ and $0.08$,
+respectively. The receiver strategies have respective entropies $0.43$
+and $0.81$. In general, we expected that vague languages would have
+higher entropy than crisp ones and that increasing imprecision would
+lead to increased entropy, all else being equal.
+
+\paragraph{Convexity.} At least for sender strategies, which develop
+faster than receiver strategies, it also makes sense to define a
+categorical measure of convexity that compensates for potential
+vagueness. To determine whether a sender strategy $\Sstrat$ is convex
+despite possibly being vague, we look at the derived pure strategy
+$\Spure$ for which $\Spure(\state) = \argmax_{\messg' \in \Messgs}
+\Sstrat(\state,\messg')$. If that $\Spure$ is convex, we also count
+$\Sstrat$ as convex. The sender strategy in
+Figure~\ref{fig:example_stratsA} is not convex, while the one in
+Figure~\ref{fig:example_stratsB} is.  One would a priori not expect a
+systematic relation between imprecision and convexity.
+
+\paragraph{Expected utility.} We also recorded the expected utility of
+a strategy pair:
+\begin{align*}
+  \EU(\Sstrat,\Rstrat \myts ; \myts \toler) = \sum_{\state \in
+    \States} \sum_{\messg \in \Messgs} \sum_{\state' \in \States}
+  \Pr(\state) \cdot \Sstrat(\state, \messg) \cdot \Rstrat(\messg,
+  \state') \cdot \Util(\state,\state' \myts ; \myts \toler)\,.
+\end{align*}
+To make direct comparisons across different parameter settings, we
+normalize expected utility by the maximal amount of expected utility
+obtainable in the relevant game. The strategy pair in
+Figure~\ref{fig:example_stratsA} has a normalized expected utility of
+$0.99$, the pair in Figure~\ref{fig:example_stratsB} has
+$0.95$. Generally, vagueness and imprecision can be expected to
+decrease expected utility
+\citep[c.f.][]{Lipman2009:Why-is-Language}. The crucial question is
+whether communicative success drops unacceptably fast with moderate
+levels of vagueness and imprecision.
+
+\subsubsection{Results}
+
+\begin{figure}[t]
+  \centering
+  
+  \includegraphics[width=0.75\textwidth]{plots/MeanMetrics3.pdf}
+
+  \caption{Means of gradient and proportions of categorical measures
+    for $\toler = 0.1$, $\ns \in \set{6, 10, 50}$, and $\imprecision
+    \in \set{0, 0.05, 0.1, 0.2, 0.3}$. The plot shows the average of
+    the entropies for the sender and receiver strategy.}
+  \label{fig:MeanMetrics}
+\end{figure}
+
+Figure~\ref{fig:MeanMetrics} shows plots summarizing some results.  For perspicuity, we only
+plot results for one level of tolerance $\beta = 0.1$, and leave out the case of $n_s =
+90$. Still, every qualitative trend mentioned in the following applies to the whole set of
+results.
+
+As expected, increasing imprecision leads to higher entropy and lower
+expected utility. Importantly, however, imprecision does not
+necessarily lead to disastrous decline of communicative success. What
+was not expected, on the other hand, was a relation between
+imprecision and convexity. However, the corresponding plot clearly
+shows that higher imprecision led to a higher number of outcomes with
+convex sender strategies. Moreover, it also led to higher likelihood
+of convergence. In fact, sufficient imprecision always ensured
+convergence and convexity. It appears that perceptual imprecision
+leads to more vagueness, slightly less communicative efficiency, but
+more regular, well-behaved languages in shorter time.
+
+Beyond promoting convexity and convergence, diffusion also has another interesting
+regularizing effect on the evolution of signaling. There was very
+little variation in the recorded metrics for evolved strategies, at
+least for higher values of imprecision. On closer inspection, it turns
+out that variability in low-imprecision conditions is not only due to
+non-convergence or non-convexity. Figure~\ref{fig:MoreExample_strats}
+gives two more examples of strategy pairs at stopping time. Both are
+obtained for the same triple of parameters, both converged before the
+maximum number of rounds, and both have
+convex sender strategies. However, they are not equally efficient. In
+fact, the pair in Figure~\ref{fig:example_stratsC} has a normalized
+expected utility of $0.99$ while the one in
+Figure~\ref{fig:example_stratsD} only has $0.89$.
+
+
+\begin{figure}
+  \centering
+
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/strat_example_ind21.pdf}
+    \caption{$\ns = 6$, $\toler = 0.2$, $\imprecision = 0$}
+    \label{fig:example_stratsC}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/strat_example_ind23.pdf}
+    \caption{$\ns = 6$, $\toler = 0.2$, $\imprecision = 0$}
+    \label{fig:example_stratsD}
+  \end{subfigure}
+
+  \caption{More example strategies under \rdd at stopping time of our simulations.}
+  \label{fig:MoreExample_strats}
+\end{figure}
+
+Interestingly, this type of variability in evolutionary outcomes can
+be weeded out by imprecision. To investigate this, we calculated the average
+distance between evolved sender strategies within each group of trials
+that had identical parameter values. We determined the distance
+between strategies $\Sstrat$ and $\Sstrat'$ as the average Hellinger
+distance between distributions $\Sstrat(\state)$ and
+$\Sstrat'(\state)$ at each choice point $\state$:
+\begin{align*}
+  \text{HD}(\Sstrat,\Sstrat') & = \frac{1}{{\card{\States} \cdot
+     \sqrt{2}}} \cdot  \sum_{\state \in \States} 
+ \sqrt{\sum_{\messg \in  \Messgs}
+         \left ( \sqrt{\Sstrat(\state,\messg)} -
+         \sqrt{\Sstrat'(\state,\messg)} \right )^2 }\,.
+\end{align*}
+To compensate for the arbitrariness of message use, we set the distance between strategies
+$\Sstrat$ and $\Sstrat'$ to be the maximum of $\text{HD}(\Sstrat,\Sstrat')$ and
+$\text{HD}(\Sstrat^*,\Sstrat')$ where $\Sstrat^*$ is $\Sstrat$ with reversed message
+indices. An example of the \emph{within group distance}, i.e., the average distances between
+all sender strategies obtained for the same parameter values, is plotted in
+Figure~\ref{fig:GroupMeasuresA} for $\beta = 0.1$ and $n_s = 10$. Despite some quantitative
+differences, the general trend is the same for all other parameter settings that we tested:
+with increasing imprecision, the sender strategies evolving under the \rdd were much more alike
+(modulo swapping of messages). This means that perceptual imprecision unifies evolutionary
+outcomes and guarantees sender strategies that are not only convex, but also regular in that
+they induce a vague category split exactly in the middle of the unit interval.
+
+\begin{figure}
+  \centering
+
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/WithinGroupDistanceConcise.pdf}
+    \caption{Within group distance}
+    \label{fig:GroupMeasuresA}
+  \end{subfigure}
+    \hfill
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/WithinGroupEUConcise.pdf}
+    \caption{Within group expected utility}
+    \label{fig:GroupMeasuresB}
+  \end{subfigure}
+
+    \caption{Within group measures for all runs with $\toler = 0.1$ and $n_s = 10$.}
+  \label{fig:GroupMeasures}
+\end{figure}
+
+This unifying property of perceptual imprecision could be considered
+an evolutionary beneficial side-effect. Higher imprecision can lead to
+higher \emph{within group expected utility}, defined as the average
+expected utility that each evolved language scored when playing against an
+arbitrary other language obtained for the same parameter values. Figure~\ref{fig:GroupMeasuresB} gives a representative
+example. The observation repeats for other parameter values: while
+imprecision might decrease the communicative efficiency of individual
+languages, it increases the conceptual coherence and communicative
+success between independently evolving strategies. It is almost as if
+mere confusability of states imposes a regularity constraint on
+evolving categories.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Interpretation of model and results}
+\label{sec:model-interpretation}
+
+The \rdd adds expected confusion of similar states to the \rd in behavioral strategies. The
+result is an abstract evolutionary dynamic that describes the most likely path of development
+of aggregate population behavior that is consistent with the idea that agents imitate other
+agents' behavior (Appendix~\ref{sec:deriv-rdd-imit}). This would be a process of cultural
+evolution operating on behavioral strategies. But we speculate that the \rdd is also extensible
+to biological evolution on mixed strategies, in which case it is a special case of the \rmd
+with mutation matrices derived from confusion matrices, as shown in
+Appendix~\ref{sec:diffusion-as-special}.
+
+The \rdd is not only compatible with several interpretations of how,
+at an agent level, the population-level changes in strategy
+proportions come about. It is also compatible with several
+interpretations of diffusion. Diffusion can be pictured as a flaw or a
+virtue. If we think of perceptual imprecision as a hard limitation on
+information processing, vagueness is a natural byproduct of language
+evolution. Results from numerical simulations show that such
+imprecision leads to vagueness, but does not need to undermine the
+prospect of evolving regular and by-and-large efficient signaling
+behavior. On the other hand, there appears to be a possibly beneficial
+side-effect of state confusability: it speeds up convergence to
+regularly shaped and convex categories. This suggests that diffusion
+of behavior, as we implemented here, could also be seen as a form
+of stimulus-generalization that is evolutionarily beneficial, because
+it accelerates the emergence of uniform category formation. This
+latter view is also suggested by a like-minded account to which we
+turn next.
+
+\subsection{Relation with previous accounts}
+\label{sec:relat-with-prev}
+
+\paragraph{Generalized reinforcement.}
+
+% Under \emph{Herrnstein reinforcement learning}, sender and receiver
+% adjust their dispositions to act after each round of play, in such a
+% way that the actual (non-negative) payoff gained in the previous
+% interaction is added to the non-normalized propensities for repeating
+% the same behavior. For sim-max games, this means that, when the sender
+% chose $\messg$ in state $\state$, and this resulted in some
+% non-negative payoff, the probability that the sender chooses $\messg$
+% again in $\state$ is increased, but nothing else changes. In
+% particular, the sender's behavior in other choice points does not
+% change. \emph{Generalized reinforcement learning} is different. When
+% the use of $\messg$ in $\state$ gave positive payoff, then not only
+% will the probability of its future use be promoted at $\state$ but also at
+% other states, proportional to how similar these are to
+% $\state$. Similar amendments take care of the way that the receiver
+% updates his choice dispositions.
+
+\citet{OConnor2013:The-Evolution-o} introduces a variant of classical Herrnstein reinforcement
+learning for sim-max games, in which successful play leads to reinforcement of acts also for
+states similar to the one that actually occurred. This is a form of generalization to unseen
+contingencies. It not only leads to vague signaling of the appropriate kind, but also speeds up
+learning in such a way that, especially for sim-max games with higher numbers of states, higher
+levels of communicative success are reached in shorter learning
+periods. % Technically, this result is
+% partly due to the fact that signalers make bigger changes to their behavioral strategies
+% after each round of play under generalized reinforcement than under the Herrnstein
+% variety. That only explains the speed of adaptation, not necessarily that generalization also
+% leads to regularity and communicative efficiency, but it does.
+
+Diffusion of strategies in the \rdd can also be conceived of as a form of generalization, and
+works in large part quite analogously to stimulus generalization in
+\citeauthor{OConnor2013:The-Evolution-o}'s approach. But there are still
+differences. \citeauthor{OConnor2013:The-Evolution-o} showed that her generalized reinforcement
+learning can speed up the development of efficient signaling, especially for higher numbers of
+states. Complementing this, we showed that diffusion regularizes evolutionary outcomes and
+prevents meandering around sub-optimal and non-convex strategies, also for low numbers of
+states.
+
+Conceptually, the \rdd is a more abstract framework than generalized reinforcement
+learning. The latter is most naturally seen as an agent-based learning dynamic that has two
+players adapt their individual strategies after each concrete round of play. In contrast, the
+\rdd describes a more abstract, average dynamical change in behavioral dispositions at the
+aggregate population level. Although the behavior of (some forms of) reinforcement learning
+mirror those of the \rd at some stage in time
+(\cite{BorgersSarin997:Learning-Throug,HopkinsPosch2005:Attainability-o,Beggs2005:On-the-Converge}),
+this does not mean that \emph{generalized} reinforcement learning is also necessarily a
+plausible population-level description of, say, generalized learning in a population of
+agents. Seen in this light, generalized reinforcement learning and the \rdd nicely complement
+each other, as similarly-minded accounts operating at different levels of abstraction.
+Although it would be interesting to explore the possibility of a mathematical connection
+between the two, this is beyond the scope of this paper.
+
+\paragraph{Quantal response equilibria.}
+\citet{FrankeJager2010:Vagueness-Signa} suggested a number of ways in which
+information-processing limitations could lead to vague strategies. The model that is most
+clearly related to the present approach uses the notion of a \emph{quantal response}, also
+known as a \emph{soft-max function}
+\citep[e.g.][]{Luce1959:Individual-Choi,McFadden1976:Quantal-Choice-,GoereeHolt2008:Quantal-Respons}. A
+quantal response is a stochastic generalization of the best response function (i.e., the
+deterministic choice of an action that maximizes expected utility). Quantal responses factor in
+stochastic trembles at the level of the computation or maximization of expected utilities:
+agents may make mistakes in calculating how good given choice options really are for
+them. \citet{FrankeJager2010:Vagueness-Signa} demonstrate that quantal response equilibria of
+sim-max games can show the desired marks of vague
+signaling. Figure~\ref{fig:exampleQRE_stratsA} gives an example of a quantal response
+equilibrium for a sim-max game, as used in our set-up but with higher tolerance $\toler =
+0.5$.
+Sender and receiver strategies look very much like what evolves under \rdd with modest values
+of perceptual imprecision.
+
+\begin{figure}
+  \centering
+  
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/exampleStratQRE_tolerance05.pdf}
+    \caption{$\ns = 90$, $\lambda = 15$, $\toler = 0.5$}
+    \label{fig:exampleQRE_stratsA}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{plots/exampleStratQRE_tolerance005.pdf}
+    \caption{$\ns = 90$, $\lambda = 15$, $\toler = 0.05$}
+    \label{fig:exampleQRE_stratsB}
+  \end{subfigure}
+
+  \caption{Examples of vague quantal response equilibria. Here, $\lambda$ is an imprecision
+    parameter measuring the extent of noise in the calculation of expected utilities
+    \citep[see][for details]{FrankeJager2010:Vagueness-Signa}.}
+  \label{fig:exampleQREs}
+\end{figure}
+
+
+But not all quantal response equilibria are equally plausible.  To see what the problem is,
+consider Figure~\ref{fig:exampleQRE_stratsB}, which is the quantal response equilibrium for a
+game with lower tolerance $\toler = 0.05$. Unlike what evolves under \rdd in this case, sender
+strategies have vague boundaries also towards the end of the unit intervals. Technically, this
+is because quantal responses equalize message use far away from the ``prototypical''
+interpretation, not just in-between categories, so to speak. Conceptually, this is because
+quantal responses introduce noise at the level of computing or maximizing expected utility of
+choices. 
+
+In contrast, the \rdd implements noise at the level of the perception of different
+states. Unintuitive outcomes like in Figure~\ref{fig:exampleQRE_stratsB} are thereby
+avoided. Still, we believe that it would be most plausible to assume that both perceptual
+confusion \emph{and} computational errors in maximizing expected utility play a role in making
+vague categorization a pervasive feature of natural language meaning. Perhaps even further
+factors, such as limited observations, imperfect memory or uncertainty about the exact prior
+distribution of states, should be considered in order to form a more complete understanding of
+the phenomenon of vagueness.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Conclusions}
+\label{sec:conclusions}
+
+Vagueness is a pervasive but seemingly non-disruptive feature of
+natural communication and classification systems. From an evolutionary
+point of view, the challenge arises to explain how vagueness can
+persist under selective pressure for precision. This is foremost a
+technical challenge, probing for the possibility of integrating into a
+consistent model forces that lead to vagueness and forces that lead
+to efficient information transfer. This paper proposed one such model
+in the context of sim-max games and explored some of its consequences.
+
+We introduced the replicator diffusion dynamic and identified it as a special case of the
+replicator mutator dynamic (Appendix~\ref{sec:diffusion-as-special}). The \rdd incorporates a
+special kind of stochastic mutation due to differential confusability of similar states. It can
+be thought of as the aggregate population-level behavior process that results from imitation
+among agents that are unaware of perceptual confusion
+(Appendix~\ref{sec:deriv-rdd-imit}). Based on data from numerical simulations, we demonstrated
+that the inclusion of mild levels of perceptual imprecision does not undermine the possibility
+of evolving relatively successful signaling strategies. On the contrary, strategies that
+evolved under mild imprecision induce a highly regular and systematic category structure that
+shows the signs of vagueness as desired. There might even be a higher-order benefit to the
+presence of imprecision, in that it can accelerate convergence to optimal categorization, by
+preventing evolutionary paths to stay near inefficient non-convex strategies for a long time. A
+little imprecision thus also unifies and regularizes evolutionary outcomes in such a way that
+sub-optimal categorization is avoided in short-term trajectories.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\section{Diffusion as mutation}
+\label{sec:diffusion-as-special}
+
+\subsection{The replicator mutator dynamic}
+\label{sec:repl-mutat-dynam}
+
+The \rmd has first been proposed as a tool for studying the evolution
+of grammar
+\citep[e.g.][]{KomarovaNiyogi2001:The-Evolutionar,NowakKomarova2001:Evolution-of-Un}. It
+adds stochastic mutation to the replicator dynamic. The relation of
+the \rmd to other prominent evolutionary dynamics is well understood
+\citep{PageNowak2002:Unifying-Evolut}. The \rmd has seen further
+fruitful applications in the context of signaling games
+\citep[e.g.][]{HutteggerSkyrms2010:Evolutionary-Dy}.
+
+The usual formulation of the \rmd is based on mixed, not behavioral strategies. But a
+discrete-time formulation of the \rmd in behavioral strategies clearly identifies the \rdd to
+be a special case. It follows that a mixed-strategy version of the \rdd is just the \rmd with
+suitably defined mutation matrices. From this, even a continuous-time version can easily be
+retrieved if desired. To show this, we start with a delineation of mixed and behavioral
+strategies.
+
+\paragraph{Mixed strategies.} Pure sender (receiver) strategies are
+functions $\Spure \in \Messgs^\States$ ($\Rpure \in
+\Acts^\Messgs$). Mixed sender (receiver) strategies are functions
+$\Smixed \in \Delta(\Messgs^\States)$ ($\Rmixed \in
+(\Acts^\Messgs)$). The latter give the relative population frequencies
+of the former. We write $\Smixed_i$ for the frequency
+$\Smixed(\Spure_i)$ of pure strategy $\Spure_i$. Likewise for the
+receiver.
+
+Every mixed strategy $\Smixed$ converts to a unique behavioral
+strategy defined by:
+\begin{align}
+  \label{eq:CorrespondenceBehavioralMixed}
+  \Sstrat(\messg \probbar \state) = \sum_{\Spure(\state) = \messg} \Smixed(\Spure)\,.
+\end{align}
+Let $G$ be this mapping from mixed to behavioral strategies. Note that $G$
+is \emph{not} an injection, as many mixed strategies map onto the same
+behavioral strategy. In this sense, mixed strategies hold more
+information than behavioral strategies about the distribution of pure strategies in a population.
+
+In the context of evolutionary dynamics for signaling games (where
+each agent only chooses once), we can think of behavioral strategies
+as treating each choice point as an independent update site
+\citep[e.g.][]{Cressman2003:Evolutionary-Dy}. Dynamics for mixed
+strategies conceive of agents as adjusting their entire pure
+strategy. In this way, dependencies between different choices at
+different choice points can matter to the evolutionary path. In
+contrast, dynamics for behavioral strategies conceive of agents as
+adjusting their strategies locally at each choice point, regardless of
+what they are disposed to do at other choice points.
+
+This can matter to evolutionary dynamics. For illustration, take two
+sender strategies whose behavior is different only at two
+states. Compared to the second strategy, the first scores a much
+higher expected utility at one state, but a slightly lower at the
+other, so that the total expected utility of the first strategy is
+higher. Under evolutionary dynamics that work on entire strategies the
+first strategy will increase in proportion, relative to the
+second. Consequently, a locally less efficient type of behavior can be
+promoted because it is correlated with efficient behavior at another
+choice point. Evolutionary dynamics working on behavioral strategies
+do not allow for that. Behavioral adaptations occur independently at
+different choice points.
+
+As a result, dynamics on behavioral strategies are more coarse-grained
+and not necessarily equivalent to dynamics on mixed strategies. An
+advantage of dynamics in behavioral strategies is that they reduce
+complexity, which helps with numerical simulations. They might also be
+a more natural choice for cultural dynamics, e.g., when an agent
+observes and imitates another agent's strategy: it may be more
+plausible that agents adopt the use of a single word, not an entire
+lexicon, so to speak. On the other hand, biological evolution seems
+more naturally modeled in terms of mixed strategies whenever it is a
+full set of behavioral disposition that is bequeathed to the next
+generation.
+
+\paragraph{Replicator dynamic in mixed strategies.} To understand the
+\rmd in mixed strategies, we first introduce the \rd in mixed
+strategies. Let $F_i^{\Rmixed}$ be $\Spure_i$'s fitness given
+$\Rmixed$ and $F_i^{\Smixed}$ be $\Rpure_i$'s fitness given
+$\Smixed$. Then $\Phi(\Smixed,\Rmixed) = \sum_{k} \Smixed_k \cdot
+F_k^{\Rmixed}$ is the average fitness in the sender population and
+$\Phi(\Rmixed,\Smixed) = \sum_{k} \Rmixed_k \cdot F_k^{\Smixed}$ the
+average fitness in the receiver population.
+
+% The continuous-time replicator dynamic defines the change of frequency
+% of mixed strategies. Its so-called two-population version, that takes
+% sender and receiver roles as separate update sites is:
+% \begin{align*}
+%   \dot{\Smixed_i} & = \Smixed_i \cdot \left ( F_i^{\Rmixed} -
+%   \Phi(\Smixed,\Rmixed) \right ) &   \dot{\Rmixed_i} &  = \Rmixed_i \cdot \left ( F_i^{\Smixed} -
+%   \Phi(\Rmixed,\Smixed) \right ) \,.
+% \end{align*}
+Similar to the version for behavioral strategies, a discrete-time
+formulation of the \rd for mixed strategies can be conceptualized as an
+update function that maps mixed strategies $\Smixed$ and $\Rmixed$
+onto mixed strategies $\RD(\Smixed)$ and $\RD(\Rmixed)$ respectively,
+such that:
+\begin{align*}
+  \RD(\Smixed)_i & = \frac{\Smixed_i \cdot F_i^{\Rmixed}}{
+    \Phi(\Smixed,\Rmixed)} & \RD(\Rmixed)_i & = \frac{\Rmixed_i \cdot
+    F_i^{\Smixed}}{ \Phi(\Rmixed,\Smixed)} \,.
+\end{align*}
+
+
+\paragraph{Replicator mutator dynamic.} The replicator mutator dynamic
+extends the \rd by adding probabilistic mutation. Let $Q$ be a
+row-stochastic mutation matrix where $Q_{ji}$ gives the probability
+that pure sender strategy $\Spure_j$ mutates into
+$\Spure_i$. Similarly, let $R$ be a row-stochastic mutation matrix
+where $R_{ji}$ gives the probability that pure receiver strategy
+$\Rpure_j$ mutates into $\Rpure_i$.
+
+The \rmd is usually given only in its continuous-time form. % A
+% two-population (non-payoff adjusted) formulation is then:
+% \begin{align*}
+%   \dot{\Smixed_i} & = \sum_{j}  Q_{ji} \cdot \Smixed_j
+%     \cdot F_j^{\Rmixed} - \Smixed_i \cdot \Phi(\Smixed,\Rmixed) &
+%     \dot{\Rmixed_i} & = \sum_{j}  R_{ji} \cdot \Rmixed_j
+%     \cdot F_j^{\Smixed} - \Rmixed_i \cdot \Phi(\Rmixed,\Smixed) \,.
+% \end{align*}
+But a discrete-time, two-population formulation of the \rmd is
+available too \citep[c.f.][97]{PageNowak2002:Unifying-Evolut}:
+\begin{align*}
+  \RMD(\Smixed)_i & = \sum_{j} Q_{ji} \frac{\Smixed_j \cdot
+    F_j^{\Rmixed}}{ \Phi(\Smixed,\Rmixed)} & \RDD(\Rmixed)_i & =
+  \sum_{j} R_{ji} \frac{\Rmixed_j \cdot F_j^{\Smixed}}{
+    \Phi(\Rmixed,\Smixed)}\,.
+\end{align*}
+The discrete-time \rmd has the same sequential nature as the \rdd:
+first we compute the fitness-driven change according to the standard
+replicator dynamic; then we compute the perturbation from
+mutation. This becomes clear if we define independent mutation
+functions $\Mutate_{Q,R}$ that map mixed strategies onto the outcome
+of (one round of) mutation:
+\begin{align}
+  \label{eq:Mutation}
+  \Mutate_Q(\Smixed)_i & =  \sum_j  \Smixed_j \cdot
+  Q_{ji} &   \Mutate_R(\Rmixed)_i & =  \sum_{j}  \Rmixed_j \cdot
+  R_{ji} \,.
+\end{align}
+The discrete-time \rmd given above can then be rewritten as:
+\begin{align*}
+  \RDD(\Smixed) &= \Mutate_Q(\RD(\Smixed)) &   \RDD(\Rmixed) &= \Mutate_R(\RD(\Rmixed))\,.
+\end{align*}
+
+\subsection{Relating the dynamics}
+\label{sec:relating-dynamics}
+
+The sequential reformulation of the \rmd closely resembles our initial
+formulation of the \rdd. However, there is a major difference between
+these. While the \rdd is a dynamic for behavioral strategies, the
+\rmd, as taken from the literature, applies to mixed
+strategies. Similarly, the confusability of states is an operation
+that is straightforwardly definable for behavioral strategies (see
+Equation~(\ref{eq:confusion-function})), while mutation in the \rmd is
+defined as mutation from one pure strategy to another. Nonetheless, it
+is possible to map each confusion matrix to a mutation matrix in a
+natural way so that the correspondence between mixed and behavioral
+strategies are conserved. This is the main result presented in this
+section, and it is our justification for regarding the \rdd as the
+behavioral-strategy analogue of the replicator-mutator dynamic when
+the only source of mutation is confusability of states.
+
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}[node distance = 1cm]
+
+    \begin{scope}
+      \node[] (mixed) {$\Smixed$};
+
+      \node[below of = mixed] (mutated) {$\Mutate_{Q^C}(\Smixed)$};
+
+      \node[left of = mixed, node distance = 1.5cm] (dummyl) {};
+
+      \node[right of = mixed, node distance = 1.5cm] (dummyr) {};
+
+      \draw[->, dotted, thick] (mixed) -> (mutated);
+
+
+      \begin{pgfonlayer}{background}
+        \node [draw=black!50, fill=black!10,fit = (dummyl)
+        (mutated) (dummyr)] (mixedSpace) {};
+      \end{pgfonlayer}
+
+      \node[above of = mixedSpace, node distance = 1.4cm] {space of
+        mixed strategies};
+    \end{scope}
+
+    \begin{scope}[xshift=6cm]
+      \node[] (behavioral) {$\Sstrat$};
+
+      \node[below of = behavioral] (mutatedBeh) {$\Diff_C(\Sstrat)$};
+
+      \node[left of = behavioral, node distance = 1.5cm] (dummylB) {};
+
+      \node[right of = behavioral, node distance = 1.5cm] (dummyrB) {};
+
+      \draw[->, dotted, thick] (behavioral) -> (mutatedBeh);
+
+
+      \begin{pgfonlayer}{background}
+        \node [draw=black!50, fill=black!10,
+              fit = (dummylB) (mutatedBeh) (dummyrB)] (behSpace) {};
+      \end{pgfonlayer}
+
+      \node[above of = behSpace, node distance = 1.4cm] {space of
+        behavioral strategies};
+    \end{scope}
+
+    \draw[->,thick,dotted] (mixed) -> (behavioral) node[midway,
+    above]{$G(\Smixed)$};
+
+    \draw[->,thick,dotted] (mutated) -> (mutatedBeh) node[midway, below]{$G(\Mutate_{Q^C}(\Smixed))$};
+
+  \end{tikzpicture}
+
+  \caption{Correspondence between state-confusion and mutation.}
+  \label{fig:correspondence-result}
+\end{figure}
+
+More concretely, given the non-injective mapping $G$ from mixed to
+behavioral strategies, we show that there is a systematic translation
+from a confusion matrix $C$ to a mutation matrix $Q^C$ such that for
+each mixed sender strategy $\Smixed$, its unique corresponding
+behavioral strategy $\Sstrat = G(\Smixed)$ has a
+confusion-perturbation $\Diff_C(\Sstrat)$ that corresponds, via $G$,
+to the mutation-perturbation $\Mutate_{Q^C}(\Smixed)$ (see
+Figure~\ref{fig:correspondence-result}). In other words, we
+hypothesize that a confusion matrix $C$ should give rise to a unique
+mutation matrix $Q^C$ so that whenever $G(\Smixed) = \Sstrat$ we also
+have $G(\Mutate_{Q^C}(\Smixed)) = \Diff_C(\Sstrat)$. Similarly, for
+the receiver.
+%This is the content of Theorem~\ref{thm:Correspondence} given below, a
+%proof for which is in Appendix~\ref{sec:proofs}. The remainder of this
+%section introduces the relevant construction that maps arbitrary $C$
+%to suitable $Q^C$.
+
+\paragraph{Confusion-based mutations.} There are natural conversions
+of $C$ into $Q^C$ and $R^C$. The case for the receiver is easier, so
+we start with that.
+
+The probability that $\Rpure_i$ is realized as $\Rpure_j$ under
+diffusion with $C$ is the product of the probabilities, for each
+$\messg$, that the state $\Rpure_i(\messg)$ is perceived as state
+$\Rpure_j(\messg)$. Abusing notation by referring to the indices of
+states $\Rpure_i(\messg)$ and $\Rpure_j(\messg)$ with
+$\Rpure_i(\messg)$ and $\Rpure_j(\messg)$ directly, we define:
+\begin{align}
+  \label{eq:construction-rec}
+  R^C_{ij} = \prod_{\messg} C_{\Rpure_i(\messg)\Rpure_j(\messg)}\,.
+\end{align}
+
+Now look at the sender. The probability that $\Spure_j$ is realized as
+$\Spure_i$ under diffusion with $C$ is the product of the
+probabilities, over all states $\mystate{k}$, that the message
+$\Spure_i(\mystate{k})$, that $\Spure_i$ would produce at state
+$\mystate{k}$ in the absence of noise, is produced by a noisy
+realization of $\Spure_j$, which is the probability $\sum_{\state_l
+  \in \Spure_j^{-1}(\Spure_i(\state_k))} C_{kl}$ that the state
+$\mystate{k}$ is realized as a state $\mystate{l}$ which $\Spure_j$
+would map unto $\Spure_i(\mystate{k})$. So, define:
+\begin{align}
+  \label{eq:construction-sen}
+  Q^C_{ji} = \prod_{\state_k} \sum_{\state_l \in
+    \Spure_j^{-1}(\Spure_i(\state_k))} C_{kl}\,.
+\end{align}
+
+Based on Equations~(\ref{eq:construction-rec}) and
+(\ref{eq:construction-sen}), we can formulate the desired
+correspondence result:
+
+\begin{theorem}
+  \label{thm:Correspondence}
+  (i) If $G(\Smixed) = \Sstrat$, then $G(\Mutate_{Q^C}(\Smixed)) =
+  \Diff_C(\Sstrat)$. (ii) If $G(\Rmixed) = \Rstrat$, then
+  $G(\Mutate_{R^C}(\Rmixed)) = \Diff_C(\Rstrat)$.
+\end{theorem}
+
+We can prove this theorem as follows.
+%\section{Proof of Theorem}
+%\label{sec:proofs}
+
+\begin{proof}[Part (i).]
+  Fix $\Smixed$ and $\Sstrat = G(\Smixed)$. Look first at the rhs of
+  the consequent:
+  \begin{align*}
+    \Diff_C(\Sstrat)(\messg_y \probbar \state_x) & =  \sum_{\state_l} C_{xl}
+    \cdot \Sstrat(\messg_y \probbar \state_l) && \text{(by Equation~(\ref{eq:confusion-function}))} \\
+    & =  \sum_{\state_l} C_{xl}
+    \cdot  \sum_{\Spure_i(\state_l) = \messg_y} \Smixed_i && \text{(by Equation~(\ref{eq:CorrespondenceBehavioralMixed}))} \\
+    & = \sum_{\state_l}
+    \sum_{\Spure_i(\state_l) = \messg_y} \Smixed_i \cdot C_{xl}\,.
+  \end{align*}
+  Next consider the lhs of the consequent:
+  \begin{align*}
+    G(\Mutate_{Q^C}(\Smixed))(\messg_y \probbar \state_x) & =
+    \sum_{\Spure_i(\state_x)=\messg_y} \Mutate_{Q^C}(\Smixed_i) &&
+    \text{(by Equation~(\ref{eq:CorrespondenceBehavioralMixed}))} \\
+    & = \sum_{\Spure_i(\state_x)=\messg_y} \sum_{\Spure_j}
+    \Smixed_j \cdot Q^C_{ji} &&
+    \text{(by Equation~(\ref{eq:Mutation}))} \\
+    & = \sum_{\Spure_i(\state_x)=\messg_y} \sum_{\Spure_j}
+    \Smixed_j \cdot \prod_{\state_l} \sum_{\state_m \in
+      \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm} &&
+    \text{(by Equation~(\ref{eq:construction-sen}))} \\
+    & = \sum_{\Spure_j} \Smixed_j \cdot
+    \sum_{\Spure_i(\state_x)=\messg_y} \prod_{\state_l}
+    \sum_{\state_m \in \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm}
+  \end{align*}
+  To simplify this further we look at a fixed $\Spure_j$ and consider
+  the term: 
+  \begin{align}
+    \label{eq:term}
+    \sum_{\Spure_i(\state_x)=\messg_y} \prod_{\state_l} \sum_{\state_m
+      \in \Spure_j^{-1}(\Spure_i(\state_l))} C_{lm}\,.
+  \end{align}
+  Let $Y$ be the row-stochastic matrix with $Y_{kl} = \sum_{\state_m
+    \in \Spure_j^{-1}(\messg_l)} C_{km}$. Every pure sender strategy
+  maps each state $\state_k$ onto exactly one $Y_{kl}$. If we quantify
+  over all pure strategies, we essentially look at each such
+  mapping. Term (\ref{eq:term}) above sums over all pure strategies
+  that map $\state_k$ onto $\messg_y$. The above term then sums over
+  all products whose factors are tuples in $\times_{k>2} \set{y
+    \setbar \exists l \mycolon y = Y_{kl}}$. So term (\ref{eq:term})
+  expands to (where $e = \card{\States}$ and $d=\card{\Messgs}$):
+  \begin{align*}
+    & (Y_{11} \cdot Y_{21} \cdot Y_{31} \cdot \ldots \cdot Y_{e1}) +
+    (Y_{11} \cdot Y_{21} \cdot Y_{31} \cdot \ldots \cdot Y_{e2}) + 
+    \dots \\
+    & + (Y_{11} \cdot Y_{2d} \cdot
+    Y_{3d} \cdot \ldots \cdot
+    Y_{ed}) 
+  \end{align*}
+  But since $Y$ is a row-stochastic matrix, this simplifies to
+  $Y_{xy}$. Continuing the derivation with this:
+  \begin{align*}
+    G(\Mutate_{Q^C}(\Smixed))(\messg_y \probbar \state_x) 
+    & = \sum_{\Spure_j} \Smixed_j \cdot
+    \sum_{\state_l \in \Spure_j^{-1}(\messg_y)} C_{xl} \\
+    & = \sum_{\Spure_j} \sum_{\state_l \in \Spure_j^{-1}(\messg_y)} \Smixed_j \cdot
+     C_{xl} \\
+     & = \sum_{\state_l}
+    \sum_{\Spure_i(\state_l) = \messg_y} \Smixed_i \cdot C_{xl}\,.
+  \end{align*}
+
+\end{proof}
+
+\begin{proof}[Part (ii).]
+  Fix $\Rmixed$ and $\Rstrat = G(\Rmixed)$. The rhs of the consequent
+  expands to:
+  \begin{align*}
+    \Diff_C(\Rstrat)(\state_x \probbar \messg_y) & = \sum_{\state_j}
+    \sum_{i \in \set{k \setbar \Rpure_k(\messg_y) = \state_x}}
+    \Rmixed_i \cdot C_{jx} && \text{(by Equation~(\ref{eq:confusion-function}))} \\
+    & = \sum_{\Rpure_i} \sum_{j \in \set{k \setbar \Rpure_i(\messg_y) = \state_j}}
+    \Rmixed_i \cdot C_{jx} \\
+    & = \sum_{\Rpure_i} \Rmixed_i \cdot C_{\Rpure_i(\messg_y)x} \,.
+  \end{align*}
+  The rhs expands to (by Equations~(\ref{eq:CorrespondenceBehavioralMixed}),
+  (\ref{eq:Mutation}) and (\ref{eq:construction-rec})):
+  \begin{align*}
+    G(\Mutate_{R^C}(\Rmixed))(\state_x \probbar \messg_y) & = \sum_{\Rpure_i}
+    \Rmixed_i \cdot \sum_{j \in \set{j \setbar \Rpure_k(\messg_y) =
+        \state_x}} 
+    \prod_{\messg} C_{\Rpure_i(\messg)\Rpure_j(\messg)} \,.
+  \end{align*}
+  Without loss of generality, assume that $x=y=1$, and fix
+  $\card{M}=d$ and let $e$ be the number of pure receiver
+  strategies. Then the last term can be rewritten as:
+  \begin{align*}
+    & = \sum_{i}
+    \Rmixed_i \cdot ( C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_1(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_1(\messg_d)} + \ldots  \\
+      & \textcolor{white}{ = \sum_{i}
+    \Rmixed_i  (}  +  C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_2(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_2(\messg_d)} + \ldots  \\
+      & \textcolor{white}{ = \sum_{i}
+    \Rmixed_i  (}  + C_{\Rpure_i(\messg_1)1} \cdot
+      C_{\Rpure_i(\messg_2)\Rpure_e(\messg_2)} \cdot \ldots \cdot
+      C_{\Rpure_i(\messg_d)\Rpure_e(\messg_d)}) ) \,.
+  \end{align*}
+  For every messages $\messg_l$, $C_{\Rpure_i(\messg_l)}$ is a stochastic
+  vector. For $l>1$, all elements of these vectors appear equally
+  often. But that means that these cancel out. What remains is:
+  \begin{align*}
+    & = \sum_{\Rpure_i} \Rmixed_i \cdot C_{\Rpure_i(\messg_y)x} \,.
+  \end{align*}
+\end{proof}
+
+\section{Derivation of the RDD by imitation-based revision}
+\label{sec:deriv-rdd-imit}
+
+We can derive the proposed \rdd as a mean dynamic of an imitative revision protocol, following
+closely the example 4.3.1 of \citet{Sandholm2010:Population-Game}. Our derivation relies on the
+usual assumptions about conditional imitation at the agent level, but must add special
+assumptions about how noise affects revision probabilities. In keeping with the idea that
+agents are of possibly limited cognitive capacities, we assume here that noise is real but that
+agents are unaware of it. When agents perceive the actual expected utility of their choice and
+of another agent's choice (as is usual in the motivation of imitation-based revision
+protocols), we assume additionally that agents mistake their possibly non-veridical subjective
+representations of states for the actual ones.
+
+\paragraph{Notation.} As before, let $\Sstrat(\mymessg{i} \probbar \mystate{o})$ be the
+probability that a speaker randomly picked from the population chooses $\mymessg{i}$ if the
+actual/objective state is $\mystate{o}$. This speaker may perceive the objective state
+$\mystate{o}$ subjectively as $\mystate{s}$. In contrast, let $\Sstrat_s(\mymessg{i} \probbar
+\mystate{s})$ be the probability that a randomly sampled speaker chooses $\mymessg{i}$ if she
+experiences some objective state $\mystate{o}$ as $\mystate{s}$. The latter is the average
+sender behavior in a (possibly counterfactual) world without perceptual confusion. It is also
+where behavioral changes first take effect, to then percolate to $\Sstrat$ as well.
+
+Similarly, $\Rstrat(\mystate{o} \probbar \messg)$ is the probability that a randomly sampled
+receiver actually chooses interpretation $\mystate{o}$. $\Rstrat_s(\mystate{s} \probbar
+\messg)$ is the probability of a subjectively intended interpretation $\mystate{s}$. Again,
+behavioral changes first target $\Rstrat_s$ but cause changes in $\Rstrat$ as well.
+
+Let $\EU(\messg)$ be short for $\EU(\messg,\state,\Rstrat)$ whenever
+$\state$ and $\Rstrat$ are implicit, similarly for $\EU(\state)$ as a
+shorthand for $\EU(\state,\messg,\Sstrat)$.
+
+\paragraph{Standard assumptions.} Let's assume that we are in an
+entirely noise-free world so that $\Sstrat = \Sstrat_s$ and $\Rstrat =
+\Rstrat_s$. The standard assumptions for imitation-based revisions are
+these. Agents get revision opportunities for all actual choice points
+with equal probability (independently of how likely these would occur
+in actual play). Take the case of a sender (receiver side is
+parallel). If agent $A$ is given a revision opportunity for actual
+state $\state$, she consults her own choice, which is $\mymessg{i}$
+with probability $\Sstrat(\mymessg{i} \probbar \state)$, and observes
+the behavior of one randomly picked other agent $B$, which is
+$\mymessg{j}$ with probability $\Sstrat(\mymessg{j} \probbar
+\state)$. $A$ also observes the expected utility of both choices (at
+$\state$) and switches to $B$'s choice with probability $r_{ij} = [
+\EU(\mymessg{j}) - \EU(\mymessg{i}) ]_+$, so that the overall
+switching probability of an agent like $A$ who samples $\mymessg{i}$
+for $\state$ is $p_{ij} = \Sstrat(\mymessg{j} \probbar \state) \
+r_{ij}$.
+
+\paragraph{Imitation under perceptual noise.} There are many conceivable ways in which
+perceptual noise might influence the above revision protocol. Our choice here is guided by
+theoretical and practical considerations alike. We would like to maintain the common assumption
+that agents might not be ideally rational and not necessarily fully aware of their
+surroundings. In particular, we assume here that agents are not aware of perceptual
+noise. Switching probabilities are therefore defined in terms of actual expected utility (and
+not subjective expectations that take noise into consideration). Moreover, we assume that
+agents who have (unconscious) access to expected utilities for actual states $\mystate{o}$ will
+also (mistakenly) treat whatever subjective state $\mystate{s}$ they may have experienced
+during their revision opportunity as if it had been the actual state $\mystate{o}$.
+
+Concretely, suppose agent $A$ has a revision opportunity for objective
+state $\mystate{o}$, and chooses $\mymessg{i}$ with probability
+$\Sstrat(\mymessg{i} \probbar \mystate{o})$. Similarly, $B$ chooses
+$\mymessg{j}$ with probability $\Sstrat(\mymessg{j} \probbar
+\mystate{o})$. It may be that $A$ perceived $\mystate{o}$ as
+$\mystate{s_A}$ and that $B$ perceived $\mystate{s_B}$, but since $A$
+is unaware of noise he expects no difference. $A$ observes (as usual)
+the actual expected utilities of $\mymessg{i}$ and $\mymessg{j}$ for
+$\mystate{o}$. Consequently, he updates his subjective behavior for
+$\mystate{o}$ (not being aware that the perceived $\mystate{s_A}$
+might have been different). This myopic revision behavior gives rise
+to expected changes in the subjective/noise-free choice probabilities
+$\Sstrat_s(\mymessg{i} \probbar \state)$ as follows:
+\begin{align*}
+  \dot{\Sstrat}_s(\mymessg{i} \probbar \state) & = \sum_j
+  \Sstrat(\mymessg{j} \probbar \state) \cdot p_{ji} -  
+  \Sstrat(\mymessg{i} \probbar \state) \cdot \sum_j p_{ij} \\
+  & = \sum_j  \Sstrat(\mymessg{j} \probbar \state) \cdot
+    \Sstrat(\mymessg{i} \probbar \state) \cdot [\EU(\mymessg{i}) -
+    \EU(\mymessg{j})]_+ \\ 
+   & \ \ \ \  - \Sstrat(\mymessg{i} \probbar \state) \cdot \sum_j
+   \Sstrat(\mymessg{j} \probbar \state) \cdot [\EU(\mymessg{j}) -
+    \EU(\mymessg{i})]_+ \\
+   & = \Sstrat(\mymessg{i} \probbar \state) \cdot \left ( \sum_j
+     \Sstrat(\mymessg{j} \probbar \state) \cdot \EU(\mymessg{i}) - \sum_j
+     \Sstrat(\mymessg{j} \probbar \state) \cdot \EU(\mymessg{j})
+   \right ) \\
+   & = \Sstrat(\mymessg{i} \probbar \state) \cdot \left (
+     \EU(\mymessg{i}) - \text{average EU at $\state$} \right )
+\end{align*}
+This is the (continuous-time) replicator dynamic for behavioral
+strategies.
+
+Similar considerations motivate the receiver part. Suppose that agent
+$A$ has a revision opportunity for choice point $\messg$. He and a
+random other agent $B$ actually choose $\mystate{o_A}$ and
+$\mystate{o_B}$ with probability $\Rstrat(\mystate{o_{A,B}} \probbar
+\messg)$, even though they may have intended interpretations
+$\mystate{s_A}$ and $\mystate{s_B}$. Agent $A$ observes the actual
+expected utility and, by assumption, believes (myopically) that he had
+wanted to realize $\mystate{o_A}$ and that $B$ had wanted to realize
+$\mystate{o_B}$. Under these assumptions, the derivation of the
+replicator dynamic for subjectively intended (noise-free) receiver
+behavior $\Rstrat_s$ proceeds in parallel with the above sender case.
+
+At each time step, the noise-free behavior of agents is, of course, perturbed by noise. This is
+why, after each update step, the \rdd defined in Equation~(\ref{eq:RDD-Def}) perturbes the
+outcome of the replicator step with perceptual noise.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\printbibliography[heading=bibintoc]
+
+\end{document}

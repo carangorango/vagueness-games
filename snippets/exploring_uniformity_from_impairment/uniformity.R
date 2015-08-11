@@ -7,11 +7,13 @@ theme_set(theme_bw())
 
 source('~/Desktop/data/svn/vagueness-games/helper_functions.R')
 
-data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140918-142408.varTolerance.csv', 
+#data = read.csv('~/Desktop/data/svn/vagueness-games/results/20140918-142408.varTolerance.csv', 
+data = read.csv('~/Desktop/data/svn/vagueness-games/results/20150729-104740.csv', 
                 colClasses=c('numeric','factor','numeric','numeric','numeric',
                              'factor','numeric','numeric','numeric','numeric',
                              'numeric','numeric','numeric','numeric','numeric',
                              'numeric','numeric','numeric','character','character'))
+data = subset(data, data$Number.of.states < 90)
 
 # Hellinger distance.
 
@@ -92,7 +94,7 @@ if (computeD == TRUE){
   D = ddply(dm, .(Number.of.states, Impairment, Tolerance), summarise, 
             inGroupDistance = speaker.vector.distance(value))
 } else{
-  D = read.csv("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/D.csv")
+  D = read.csv("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/DNew.csv")
 }
 
 pd <- position_dodge(.01)
@@ -169,9 +171,9 @@ if (computeEU){
   }
   
   close(pb)
-  write.csv(data, paste("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/dataSec",Sys.time() , ".csv", sep = "", collapse = ""))
+  write.csv(data, paste("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/dataSecNew",Sys.time() , ".csv", sep = "", collapse = ""))
 } else{
-  data = read.csv("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/dataSec.csv")
+  data = read.csv("~/Desktop/data/svn/vagueness-games/snippets/exploring_uniformity_from_impairment/dataSecNew.csv")
 }
 
 
@@ -222,11 +224,11 @@ wgdConcise = ggplot(dsub, aes(x = Impairment, y = inGroupDistance)) +
   geom_line( color = "grey") + geom_point() +
   xlab("Imprecision") + ylab("")
 show(wgdConcise)
-ggsave(wgdConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_03/plots/WithinGroupDistanceConcise.pdf", height=2, width=3) 
+ggsave(wgdConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_04/plots/WithinGroupDistanceConcise.pdf", height=2, width=3) 
 
 eusub = subset(meanEUs, meanEUs$Number.of.states == 10 & meanEUs$Tolerance == 0.1)
 EUConcise = ggplot(eusub, aes(x = Impairment, y = Speaker.meanEU)) + 
   geom_line( color = "grey") + geom_point() +
   xlab("Imprecision") + ylab("")
 show(EUConcise)
-ggsave(EUConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_03/plots/WithinGroupEUConcise.pdf", height=2, width=3) 
+ggsave(EUConcise, file = "~/Desktop/data/svn/vagueness-games/paper/version_04/plots/WithinGroupEUConcise.pdf", height=2, width=3) 
