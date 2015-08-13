@@ -86,8 +86,8 @@
   realization of similar stimuli. Applying this new dynamic to a generalization of Lewis'
   signaling games, we show that stochastic imprecision leads to vague, yet by-and-large
   efficient signal use, and, moreover, that it unifies evolutionary outcomes and helps avoid
-  suboptimal categorization. \myred{The upshot of this is that generalization emerges, at an
-    aggregate level, without agents actually generalizing.}
+  suboptimal categorization. The upshot of this is that we see \emph{as-if}-generalization at
+  an aggregate level, without agents actually generalizing.
 \end{abstract}
 
 \section{Introduction}
@@ -124,12 +124,12 @@ itself useful
 Others have argued that vagueness is a natural byproduct of limitations in information
 processing \citep[e.g.][]{FrankeJager2010:Vagueness-Signa} or the result of particular
 low-level learning strategies \citep[e.g.][]{OConnor2013:The-Evolution-o}. This paper
-contributes to the latter line of thought. Concretely, we introduce an dynamic that describes
-average behavior resulting from imitation under confusability of similar stimuli. The dynamic
-proposed here complements previous like-minded accounts. We show that stochastic noise can not
-only lead to vague, yet relatively efficient signal use, but can also unify evolutionary
-outcomes and help avoid suboptimal categorization. Moreover, the system shows generalization
-behavior without a single generalizing agent.
+contributes to the latter line of thought. Concretely, we introduce a dynamic that describes
+average behavior resulting from imitation under confusability of similar stimuli. We show that
+stochastic noise can not only lead to vague, yet relatively efficient signal use, but can also
+unify evolutionary outcomes and help avoid suboptimal categorization: regularities in
+confusability of stimuli also regularize signaling behavior and evolving categories. The system
+gives rise to generalization behavior without agents actually generalizing.
 
 The next section introduces the background against which the work presented here can be
 appreciated. Section~\ref{sec:repl-diff-dynam} introduces our noise-affected imitation dynamic,
@@ -686,21 +686,32 @@ classic case in (\ref{eq:RDDiscrete}).
 \section{Exploring noisy imitation}
 \label{sec:exploring-rdd}
 
-How does a tendency to confuse similar states interact with a drive towards more efficient
-signaling strategies under the imprecise conditional imitation dynamic? To be able to properly
-address this question, it pays to be more precise about similarity of states, the conditional
-confusion probabilities $P_o$ and $P_r$ and the utilities of our sim-max games.
+How does a tendency to confuse similar states interact with selective pressure towards more
+efficient signaling strategies under the imprecise conditional imitation dynamic? If confusion
+probabilities are moderate and regular, in that they track similarity of states, we might
+expect a regularizing effect also on evolving signaling strategies. Indeed, we hypothesize that
+confusion of states can give rise to population-level aggregate behavior that looks \emph{as
+  if} information about what is good for one state percolates also to similar states. In other
+words, imprecise imitation may make signaling behavior on average look like agents generalize
+across similar states, even if no agent actually generalizes. To explore whether confusion of
+states can have this effect, we turn to numerical simulation.
 
-\subsection{Confusion \& utilities}
-\label{sec:iterated-diffusion}
 
-Confusion of states should intuitively be a function of their perceptual similarity: the more
-similar two states are, the more likely they could be mistaken for each other.  To make this
-concrete, let us assume that the state space of the sim-max game consists of $n \ge 2$ states
-that are equally spaced across the unit interval, including $0$ and $1$. The distance
-$\card{\mystate{i} - \mystate{j}}$ is the objective, physical similarity between two states
-$\mystate{i}$ and $\mystate{j}$. Distance in physical space feeds into a perceptual similarity
-function, as described by \citet{Nosofsky1986:Attention-Simil}:
+
+
+\subsection{Setting the stage}
+\label{sec:setting-stage}
+
+To obtain concrete results, we must fix how to represent states, similarity of states, the
+conditional confusion probabilities $P_o$ and $P_r$ and the utilities of our sim-max
+games. Confusion probabilities between states should be a function of perceptual similarity:
+the more similar two states are, the more likely they could be mistaken for each other. 
+
+Let the state space consist of $n \ge 2$ states that are equally spaced across the unit
+interval, including $0$ and $1$. All states occur, for simplicity, with the same probability.
+The distance $\card{\mystate{i} - \mystate{j}}$ is the objective, physical similarity between
+two states $\mystate{i}$ and $\mystate{j}$. Distance in physical space feeds into a perceptual
+similarity function, as described by \citet{Nosofsky1986:Attention-Simil}:
 \begin{align*}
   \similarity(\mystate{i}, \mystate{j} \myts ; \myts \imprecision) =
       \begin{cases}
@@ -737,12 +748,11 @@ that both are governed by the same imprecision parameter $\alpha$:
   \imprecision) &   P_r(\mystate{r} \probbar \mystate{i}) & \propto \similarity(\mystate{r}, \mystate{i} \myts ; \myts
   \imprecision) \,.
 \end{align*}
-For $\imprecision = 0$, we obtain trivial confusion probabilities, i.e., confusion probability
-zero between non-identical states and our dynamic reduces to the replicator dynamics. For
-$\imprecision > 0$, any state can be confused for any other state with some positive
-probability. For the uninteresting case of $\imprecision \rightarrow \infty$, confusion is
-maximal and every state can be perceived or realized as any other state with probability
-$\nicefrac{1}{\card{\States}}$.
+For $\imprecision = 0$, we obtain trivial confusion probabilities for which everything is reduced
+to the replicator dynamic. For $\imprecision > 0$, any state can be confused for any other
+state with some positive probability. For the uninteresting case of
+$\imprecision \rightarrow \infty$, confusion is maximal and every state can be perceived or
+realized as any other state with probability $\nicefrac{1}{\card{\States}}$.
 
 As for utility functions, we take another Nosofsky-style function:
 \begin{align*}
@@ -764,45 +774,31 @@ small amount of imprecision in communication is tolerable, whereas similarly sma
 in intolerably far away interpretations matter very little, with a smooth transition between
 these regimes \citep[c.f.][]{OConnor2013:The-Evolution-o}.
 
-In conclusion, to structure thinking about the behavior of the \icid, the system is governed by
-two parameters: imprecision $\imprecision$ and tolerance $\toler$, which can vary
-independently.
+In sum, to structure thinking about the behavior of our imprecise imitation dynamic, the system
+is governed by three parameters: the number $\ns = \card{T}s$ of states in the state space,
+imprecision $\imprecision$ and tolerance $\toler$.
 
 
-\subsection{Numerical simulations}
+\subsection{Experimental set-up}
 \label{sec:simulations}
 
-The main question we should address is whether state confusability and utility-driven imitation
-reasonably interact, and if so, whether the inclusion of confusability has any noteworthy
-effects on the evolving meaning of signals. It transpires that moderate levels of imprecision
-$\imprecision$ can lead to reasonably efficient, yet vague signaling behavior. Moreover,
-imprecision can have further accelerating and, surprisingly, unifying effects on meaning
-evolution. It appears that state confusability has an effect on aggregate signaling behavior
-that can be described as generalization or systematization, as if ``conclusions'' about what
-works for one state are ``carried over'' to similar states. This, however, is merely an
-emergent phenomenon in the sense no single agent genuinely generalizes over stimuli or reasons
-about what a more systematic signaling strategy would be.
+We ran 50 trials of the discrete-time dynamic in (\ref{eq:nRD}), starting with randomly sampled
+sender and receiver strategies, for each triplet of independent parameter values:
+$\ns \in \set{6, 10, 50, 90}$, $\imprecision \in \set{0, 0.05, 0.1, 0.2, 0.3}$,
+$\toler \in \set{0.05, 0.1, 0.2, 0.3}$. Each trial ran for a maximum of 200 update steps of the
+\rdd. A trial was considered converged, and thus stopped before the maximum of 200 rounds, if
+the total amount of change between strategies before and after an update step was smaller than
+a suitably chosen threshold. It is not guaranteed that strategies at halting time had converged
+to the eventual attracting state, whether they ran for 200 rounds or not. Our notion of
+convergence is therefore only a categorical measure for reaching a certain (well-considered,
+but eventually arbitrary) degree of stability. In other words, out notion of ``convergence'' is
+a measure of relative speed: it is true that the system reached a state in which evolutionary
+adaptations had slowed down almost to a halt before 200 update steps? This is motivated by
+pragmatic concerns regarding length of simulation time, but also theoretically justified,
+because we hypothesize that confusability of states leads to regularization of evolving
+strategies, which would show exactly in an increased speed of evolutionary trajectories towards
+well-behaved and regular signaling behavior.
 
-For all simulations, priors were flat: $P_a(\state) = P_a(\state')$ for all
-$\state, \state'$. We ran 50 trials of the discrete-time dynamic in (\ref{eq:nRD}), starting
-with randomly sampled sender and receiver strategies, for each triplet of independent parameter
-values: $\ns = \card{T} \in \set{6, 10, 50, 90}$,
-$\imprecision \in \set{0, 0.05, 0.1, 0.2, 0.3}$, $\toler \in \set{0.05, 0.1, 0.2, 0.3}$. Each
-trial ran for a maximum of 200 update steps of the \rdd. A trial was considered converged, and
-thus stopped before the maximum of 200 rounds, if the total amount of change between strategies
-before and after an \rdd step was smaller than a suitably chosen threshold. It is not
-guaranteed that strategies at halting time had converged to the eventual attracting state,
-whether they ran for 200 rounds or not. Our notion of convergence is therefore only a
-categorical measure for reaching a certain (well-considered, but eventually arbitrary) degree
-of stability. In principle, rather than setting a hard limit on the maximum number of rounds
-and analyzing convergence categorically, one could also run each trial until reaching our
-criterion for convergence and analyze the number of rounds it took to get there.  Our choice
-was initially motivated by pragmatic concerns regarding length of simulation time, but it is
-also justifiable if we reflect on the nature of language evolution as a continuous process.
-Language adapts to an ever-changing reality; it is rare, if not impossible, that a lexicon has
-an infinite amount of time to neatly converge to a stable state. Therefore, investigating speed
-of convergence within a limited time frame can be seen as better reflecting the natural
-constraints of language evolution.
 
 \begin{figure}
   \centering
@@ -836,19 +832,19 @@ constraints of language evolution.
   \label{fig:example_strats}
 \end{figure}
 
- Representative examples for resulting strategy pairs are given in
+Representative examples for resulting strategy pairs are given in
 Figure~\ref{fig:example_strats}. Figure~\ref{fig:example_stratsA} shows a strategy pair at
 stopping time with 90 states, tolerance $\toler = 0.1$ and imprecision $\imprecision = 0$. Zero
 imprecision means that the trial was effectively an application of the plain \rd. Noteworthily,
 the given sender strategy approximates a pure sender strategy that crisply partitions the state
 space into non-convex sets. The irregular shape of the receiver strategy suggests that the
 pictured strategy pair has not yet reached a dynamically stable state under the \rd. Indeed,
-the trial was stopped for reaching the maximum of 200 rounds. In contrast, the outcome of a
-trial with identical parameters, except with imprecision $\imprecision = 0.0.5$, which is shown
-in Figure~\ref{fig:example_stratsB}, had converged (in our technical sense) after 99 rounds of
-iterated \rdd. The sender strategy shows a smooth blending from one ``category'' to the other,
-and the receiver's interpretations are rather extended curves, peaking at a central point in
-the relevant ``categories.''
+the trial was stopped when reaching the maximum of 200 rounds. In contrast, the outcome of a
+trial with identical parameters, except with imprecision $\imprecision = 0.05$, which is shown
+in Figure~\ref{fig:example_stratsB}, had converged (in our technical sense) after 99
+rounds. The sender strategy shows a smooth blending from one ``category'' to the other, and the
+receiver's interpretations are rather extended curves, peaking at a central point in the
+relevant ``categories.''
 
 These examples already show two interesting things. Firstly, inclusion of imprecision can lead
 to seemingly well-behaved, yet vague strategies in the sense that we are after. The sender
@@ -864,18 +860,14 @@ scope of this paper, but we will shortly see that diffusion from confusability o
 clearly prevents evolutionary paths that meander for a long time in the vicinity of non-convex
 strategies.
 
-
-
-\subsubsection{Dependent measures}
+\subsection{Dependent measures}
  
-To further explore our simulation results, we calculated metrics that
-aim to numerically capture how vague, generally well-structured, and
-communicatively efficient the recorded strategy pairs
-were. \emph{Entropy} captures the amount of systematicity or
-regularity in signal use. \emph{Convexity} captures whether a
-behavioral strategy would project onto a convex pure
-strategy. \emph{Expected utility} measures the communicative
-efficiency of evolved strategy pairs.
+To further explore our simulation results, we calculated metrics that aim to numerically
+capture how vague, generally well-structured, and communicatively efficient the recorded
+strategy pairs were. \emph{Entropy} captures the amount of systematicity or regularity in
+signal use. \emph{Convexity} captures whether a behavioral strategy would project onto a convex
+pure strategy. \emph{Expected utility} measures the communicative efficiency of evolved
+strategy pairs.
 
 \paragraph{Entropy.} This classic information-theoretic notion
 captures the amount of uncertainty in a probability
@@ -902,17 +894,16 @@ and $0.81$. In general, we expected that vague languages would have
 higher entropy than crisp ones and that increasing imprecision would
 lead to increased entropy, all else being equal.
 
-\paragraph{Convexity.} At least for sender strategies, which develop
-faster than receiver strategies, it also makes sense to define a
-categorical measure of convexity that compensates for potential
-vagueness. To determine whether a sender strategy $\Sstrat$ is convex
-despite possibly being vague, we look at the derived pure strategy
-$\Spure$ for which $\Spure(\state) = \argmax_{\messg' \in \Messgs}
-\Sstrat(\state,\messg')$. If that $\Spure$ is convex, we also count
-$\Sstrat$ as convex. The sender strategy in
+\paragraph{Convexity.} At least for sender strategies, which develop faster than receiver
+strategies, it also makes sense to define a categorical measure of convexity that compensates
+for potential vagueness. To determine whether a sender strategy $\Sstrat$ is convex despite
+possibly being vague, we look at the derived pure strategy $\Spure$ for which
+$\Spure(\state) = \argmax_{\messg' \in \Messgs} \Sstrat(\state,\messg')$. If that $\Spure$ is
+convex, we also count $\Sstrat$ as convex. The sender strategy in
 Figure~\ref{fig:example_stratsA} is not convex, while the one in
-Figure~\ref{fig:example_stratsB} is.  One would a priori not expect a
-systematic relation between imprecision and convexity.
+Figure~\ref{fig:example_stratsB} is.  If confusion of states can regularize signaling
+strategies, like we hypothesized, we should see more convexity with increasing impairment all
+else equal.
 
 \paragraph{Expected utility.} We also recorded the expected utility of
 a strategy pair:
@@ -933,7 +924,7 @@ decrease expected utility
 whether communicative success drops unacceptably fast with moderate
 levels of vagueness and imprecision.
 
-\subsubsection{Results}
+\subsection{Results}
 
 \begin{figure}[t]
   \centering
@@ -947,22 +938,20 @@ levels of vagueness and imprecision.
   \label{fig:MeanMetrics}
 \end{figure}
 
-Figure~\ref{fig:MeanMetrics} shows plots summarizing some results.  For perspicuity, we only
-plot results for one level of tolerance $\beta = 0.1$, and leave out the case of $n_s =
-90$. Still, every qualitative trend mentioned in the following applies to the whole set of
-results.
+Figure~\ref{fig:MeanMetrics} shows plots summarizing a selected part of our findings.  For
+perspicuity, we only plot results for one level of tolerance $\beta = 0.1$, and leave out the
+case of $n_s = 90$. Still, every qualitative trend mentioned in the following applies to the
+whole set of results.
 
-As expected, increasing imprecision leads to higher entropy and lower
-expected utility. Importantly, however, imprecision does not
-necessarily lead to disastrous decline of communicative success. What
-was not expected, on the other hand, was a relation between
-imprecision and convexity. However, the corresponding plot clearly
-shows that higher imprecision led to a higher number of outcomes with
-convex sender strategies. Moreover, it also led to higher likelihood
-of convergence. In fact, sufficient imprecision always ensured
-convergence and convexity. It appears that perceptual imprecision
-leads to more vagueness, slightly less communicative efficiency, but
-more regular, well-behaved languages in shorter time.
+As expected, increasing imprecision leads to higher entropy and lower expected
+utility. Importantly, however, imprecision does not necessarily lead to disastrous decline of
+communicative success. What is more, in line with our hypothesis that mere imprecision in
+imitation behavior can lead to behavior that looks like agents generalize across similar
+stimuli, higher imprecision led to a higher number of outcomes with convex sender
+strategies. It also led to higher rates of convergence. In fact, sufficient imprecision always
+ensured convergence and convexity. It appears that perceptual imprecision leads to more
+vagueness, slightly less communicative efficiency, but more regular, well-behaved languages in
+shorter time.
 
 Beyond promoting convexity and convergence, diffusion also has another interesting
 regularizing effect on the evolution of signaling. There was very
@@ -1019,10 +1008,11 @@ indices. An example of the \emph{within group distance}, i.e., the average dista
 all sender strategies obtained for the same parameter values, is plotted in
 Figure~\ref{fig:GroupMeasuresA} for $\beta = 0.1$ and $n_s = 10$. Despite some quantitative
 differences, the general trend is the same for all other parameter settings that we tested:
-with increasing imprecision, the sender strategies evolving under the \rdd were much more alike
-(modulo swapping of messages). This means that perceptual imprecision unifies evolutionary
-outcomes and guarantees sender strategies that are not only convex, but also regular in that
-they induce a vague category split exactly in the middle of the unit interval.
+with increasing imprecision, the resulting sender strategies were much more alike (modulo
+swapping of messages). This means that perceptual imprecision can speed up and unify
+evolutionary outcomes. It can amplify the emergence of sender strategies that are not only
+convex, but also regular in that they induce a vague category split exactly in the middle of
+the unit interval.
 
 \begin{figure}
   \centering
@@ -1043,197 +1033,74 @@ they induce a vague category split exactly in the middle of the unit interval.
   \label{fig:GroupMeasures}
 \end{figure}
 
-This unifying property of perceptual imprecision could be considered
-an evolutionary beneficial side-effect. Higher imprecision can lead to
-higher \emph{within group expected utility}, defined as the average
-expected utility that each evolved language scored when playing against an
-arbitrary other language obtained for the same parameter values. Figure~\ref{fig:GroupMeasuresB} gives a representative
-example. The observation repeats for other parameter values: while
-imprecision might decrease the communicative efficiency of individual
-languages, it increases the conceptual coherence and communicative
-success between independently evolving strategies. It is almost as if
-mere confusability of states imposes a regularity constraint on
-evolving categories.
+This unifying property of perceptual imprecision could be considered an evolutionary beneficial
+side-effect. Higher imprecision can lead to higher \emph{within group expected utility},
+defined as the average expected utility that each evolved language scored when playing against
+an arbitrary other language obtained for the same parameter
+values. Figure~\ref{fig:GroupMeasuresB} gives a representative example. The observation repeats
+for other parameter values: while imprecision might decrease the communicative efficiency of
+individual languages, it increases the conceptual coherence and communicative success between
+independently evolving strategies. It is as if mere confusability of states imposes a
+regularity constraint on evolving categories.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Discussion}
+\section{Conclusion}
 \label{sec:discussion}
 
-\subsection{Interpretation of model and results}
-\label{sec:model-interpretation}
+We set out to meet a technical challenge posed by Lipman's problem
+\citep{Lipman2009:Why-is-Language}: is there a conceptually sound and mathematically coherent
+formal model that shows how vague language can evolve under selective pressure for efficient
+communication? On the assumption that agents are likely to mistake states for one another,
+especially when they are perceptually similar, derived a generalization of the replicator
+dynamic in terms of imitation of successes. The resulting population-level dynamic produced
+signaling behavior that is at the same time regular and by-and-large communicatively efficient,
+while also showing the crucial marks of vagueness. In a sense, the model derives vagueness as a
+by-product of an arguably natural limitation on the discriminatory power of signaling agents.
 
-The \rdd adds expected confusion of similar states to the \rd in behavioral strategies. The
-result is an abstract evolutionary dynamic that describes the most likely path of development
-of aggregate population behavior that is consistent with the idea that agents imitate other
-agents' behavior (Appendix~\ref{sec:deriv-rdd-imit}). This would be a process of cultural
-evolution operating on behavioral strategies. But we speculate that the \rdd is also extensible
-to biological evolution on mixed strategies, in which case it is a special case of the \rmd
-with mutation matrices derived from confusion matrices, as shown in
-Appendix~\ref{sec:diffusion-as-special}.
+But the inclusion of confusability of similar states also had noteworthy effects on the
+evolving meaning of signals. It transpired that imprecision can have further accelerating and,
+surprisingly, unifying effects on meaning evolution. State confusability has an effect on
+aggregate signaling behavior that can be described as generalization without generalizers: the
+dynamics of imprecise imitation look as if ``conclusions'' about what works for one state are
+``carried over'' to similar states. This, however, is merely an epiphenomenon in the sense no
+single agent genuinely generalizes over stimuli or reasons about what a more systematic
+signaling strategy would be.
 
-The \rdd is not only compatible with several interpretations of how,
-at an agent level, the population-level changes in strategy
-proportions come about. It is also compatible with several
-interpretations of diffusion. Diffusion can be pictured as a flaw or a
-virtue. If we think of perceptual imprecision as a hard limitation on
-information processing, vagueness is a natural byproduct of language
-evolution. Results from numerical simulations show that such
-imprecision leads to vagueness, but does not need to undermine the
-prospect of evolving regular and by-and-large efficient signaling
-behavior. On the other hand, there appears to be a possibly beneficial
-side-effect of state confusability: it speeds up convergence to
-regularly shaped and convex categories. This suggests that diffusion
-of behavior, as we implemented here, could also be seen as a form
-of stimulus-generalization that is evolutionarily beneficial, because
-it accelerates the emergence of uniform category formation. This
-latter view is also suggested by a like-minded account to which we
-turn next.
+In sum, inability to sharply discriminate similar stimuli may lead to vagueness and bring about
+a (slight) decrease in communicative efficiency. But there may also be an advantage, not of
+vagueness itself, but of its reason: systematicity in the confusability of states (which may be
+a natural by-product of the perceptual system) supports \emph{as-if}-generalization at the
+population-level without having to assume that agents themselves have any generalization power.
 
-\subsection{Relation with previous accounts}
-\label{sec:relat-with-prev}
+\citet{OConnor2013:The-Evolution-o} makes a related case based on a version of reinforcement
+learning for sim-max games, in which successful play leads to reinforcement of choice options
+also for states similar to the ones that actually occurred. This not only leads to vague
+signaling of the appropriate kind, but also speeds up learning in such a way that, especially
+for sim-max games with higher numbers of states, higher levels of communicative success are
+reached in shorter learning periods. Our results complement and extend
+\citeauthor{OConnor2013:The-Evolution-o}'s. The most important differences are that we obtain
+similar regularizing effects also for cases with low numbers of states and do not assume that
+agents have any kind of generalizing capacity in and of themselves, even if that is only
+implicit, as in \citeauthor{OConnor2013:The-Evolution-o}'s generalized reinforcement learning.
 
-\paragraph{Generalized reinforcement.}
-
-% Under \emph{Herrnstein reinforcement learning}, sender and receiver
-% adjust their dispositions to act after each round of play, in such a
-% way that the actual (non-negative) payoff gained in the previous
-% interaction is added to the non-normalized propensities for repeating
-% the same behavior. For sim-max games, this means that, when the sender
-% chose $\messg$ in state $\state$, and this resulted in some
-% non-negative payoff, the probability that the sender chooses $\messg$
-% again in $\state$ is increased, but nothing else changes. In
-% particular, the sender's behavior in other choice points does not
-% change. \emph{Generalized reinforcement learning} is different. When
-% the use of $\messg$ in $\state$ gave positive payoff, then not only
-% will the probability of its future use be promoted at $\state$ but also at
-% other states, proportional to how similar these are to
-% $\state$. Similar amendments take care of the way that the receiver
-% updates his choice dispositions.
-
-\citet{OConnor2013:The-Evolution-o} introduces a variant of classical Herrnstein reinforcement
-learning for sim-max games, in which successful play leads to reinforcement of acts also for
-states similar to the one that actually occurred. This is a form of generalization to unseen
-contingencies. It not only leads to vague signaling of the appropriate kind, but also speeds up
-learning in such a way that, especially for sim-max games with higher numbers of states, higher
-levels of communicative success are reached in shorter learning
-periods. % Technically, this result is
-% partly due to the fact that signalers make bigger changes to their behavioral strategies
-% after each round of play under generalized reinforcement than under the Herrnstein
-% variety. That only explains the speed of adaptation, not necessarily that generalization also
-% leads to regularity and communicative efficiency, but it does.
-
-Diffusion of strategies in the \rdd can also be conceived of as a form of generalization, and
-works in large part quite analogously to stimulus generalization in
-\citeauthor{OConnor2013:The-Evolution-o}'s approach. But there are still
-differences. \citeauthor{OConnor2013:The-Evolution-o} showed that her generalized reinforcement
-learning can speed up the development of efficient signaling, especially for higher numbers of
-states. Complementing this, we showed that diffusion regularizes evolutionary outcomes and
-prevents meandering around sub-optimal and non-convex strategies, also for low numbers of
-states.
-
-Conceptually, the \rdd is a more abstract framework than generalized reinforcement
-learning. The latter is most naturally seen as an agent-based learning dynamic that has two
-players adapt their individual strategies after each concrete round of play. In contrast, the
-\rdd describes a more abstract, average dynamical change in behavioral dispositions at the
-aggregate population level. Although the behavior of (some forms of) reinforcement learning
-mirror those of the \rd at some stage in time
-(\cite{BorgersSarin997:Learning-Throug,HopkinsPosch2005:Attainability-o,Beggs2005:On-the-Converge}),
-this does not mean that \emph{generalized} reinforcement learning is also necessarily a
-plausible population-level description of, say, generalized learning in a population of
-agents. Seen in this light, generalized reinforcement learning and the \rdd nicely complement
-each other, as similarly-minded accounts operating at different levels of abstraction.
-Although it would be interesting to explore the possibility of a mathematical connection
-between the two, this is beyond the scope of this paper.
-
-\paragraph{Quantal response equilibria.}
 \citet{FrankeJager2010:Vagueness-Signa} suggested a number of ways in which
 information-processing limitations could lead to vague strategies. The model that is most
 clearly related to the present approach uses the notion of a \emph{quantal response}, also
 known as a \emph{soft-max function}
-\citep[e.g.][]{Luce1959:Individual-Choi,McFadden1976:Quantal-Choice-,GoereeHolt2008:Quantal-Respons}. A
-quantal response is a stochastic generalization of the best response function (i.e., the
-deterministic choice of an action that maximizes expected utility). Quantal responses factor in
-stochastic trembles at the level of the computation or maximization of expected utilities:
-agents may make mistakes in calculating how good given choice options really are for
-them. \citet{FrankeJager2010:Vagueness-Signa} demonstrate that quantal response equilibria of
-sim-max games can show the desired marks of vague
-signaling. Figure~\ref{fig:exampleQRE_stratsA} gives an example of a quantal response
-equilibrium for a sim-max game, as used in our set-up but with higher tolerance $\toler =
-0.5$.
-Sender and receiver strategies look very much like what evolves under \rdd with modest values
-of perceptual imprecision.
+\citep[e.g.][]{Luce1959:Individual-Choi,McFadden1976:Quantal-Choice-,GoereeHolt2008:Quantal-Respons}. The
+main difference between this and our present approach is in where stochastic noise is assumed
+to reside. In case of a quantal response dynamic, it is the computation of expected utilities;
+in case of imprecise imitation, it is perception and realization of similar states. There are
+cases, then, where evolving signaling behavior, as predicted by these two approaches, is quite
+different. Intuitively speaking, for a case with two messages, the further we venture away from
+a prototypical interpretation of either message, the less discriminative a signaling strategy
+would be when the source of ``trembles'' is the computation of expected utilities: to wit,
+since both ``tall'' and ``short'' are almost equally bad descriptions for a giant, quantal
+response dynamics predict that speaker's would be almost indifferent. Speaker behavior that
+evolves under confusion of states does not have this puzzling property.
 
-\begin{figure}
-  \centering
-  
-  \begin{subfigure}[]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/exampleStratQRE_tolerance05.pdf}
-    \caption{$\ns = 90$, $\lambda = 15$, $\toler = 0.5$}
-    \label{fig:exampleQRE_stratsA}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{plots/exampleStratQRE_tolerance005.pdf}
-    \caption{$\ns = 90$, $\lambda = 15$, $\toler = 0.05$}
-    \label{fig:exampleQRE_stratsB}
-  \end{subfigure}
-
-  \caption{Examples of vague quantal response equilibria. Here, $\lambda$ is an imprecision
-    parameter measuring the extent of noise in the calculation of expected utilities
-    \citep[see][for details]{FrankeJager2010:Vagueness-Signa}.}
-  \label{fig:exampleQREs}
-\end{figure}
-
-
-But not all quantal response equilibria are equally plausible.  To see what the problem is,
-consider Figure~\ref{fig:exampleQRE_stratsB}, which is the quantal response equilibrium for a
-game with lower tolerance $\toler = 0.05$. Unlike what evolves under \rdd in this case, sender
-strategies have vague boundaries also towards the end of the unit intervals. Technically, this
-is because quantal responses equalize message use far away from the ``prototypical''
-interpretation, not just in-between categories, so to speak. Conceptually, this is because
-quantal responses introduce noise at the level of computing or maximizing expected utility of
-choices. 
-
-In contrast, the \rdd implements noise at the level of the perception of different
-states. Unintuitive outcomes like in Figure~\ref{fig:exampleQRE_stratsB} are thereby
-avoided. Still, we believe that it would be most plausible to assume that both perceptual
-confusion \emph{and} computational errors in maximizing expected utility play a role in making
-vague categorization a pervasive feature of natural language meaning. Perhaps even further
-factors, such as limited observations, imperfect memory or uncertainty about the exact prior
-distribution of states, should be considered in order to form a more complete understanding of
-the phenomenon of vagueness.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Conclusions}
-\label{sec:conclusions}
-
-Vagueness is a pervasive but seemingly non-disruptive feature of
-natural communication and classification systems. From an evolutionary
-point of view, the challenge arises to explain how vagueness can
-persist under selective pressure for precision. This is foremost a
-technical challenge, probing for the possibility of integrating into a
-consistent model forces that lead to vagueness and forces that lead
-to efficient information transfer. This paper proposed one such model
-in the context of sim-max games and explored some of its consequences.
-
-We introduced the replicator diffusion dynamic and identified it as a special case of the
-replicator mutator dynamic (Appendix~\ref{sec:diffusion-as-special}). The \rdd incorporates a
-special kind of stochastic mutation due to differential confusability of similar states. It can
-be thought of as the aggregate population-level behavior process that results from imitation
-among agents that are unaware of perceptual confusion
-(Appendix~\ref{sec:deriv-rdd-imit}). Based on data from numerical simulations, we demonstrated
-that the inclusion of mild levels of perceptual imprecision does not undermine the possibility
-of evolving relatively successful signaling strategies. On the contrary, strategies that
-evolved under mild imprecision induce a highly regular and systematic category structure that
-shows the signs of vagueness as desired. There might even be a higher-order benefit to the
-presence of imprecision, in that it can accelerate convergence to optimal categorization, by
-preventing evolutionary paths to stay near inefficient non-convex strategies for a long time. A
-little imprecision thus also unifies and regularizes evolutionary outcomes in such a way that
-sub-optimal categorization is avoided in short-term trajectories.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
