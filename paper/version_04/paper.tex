@@ -1040,16 +1040,22 @@ the unit interval.
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{Vagueness and evolution}
-The inclusion of confusability of similar states has noteworthy effects on the
-evolving meaning of signals. It transpired from our results that imprecision can have further accelerating and,
-surprisingly, unifying effects on meaning evolution. State confusability has an effect on
-aggregate signaling behavior that can be described as generalization without generalizers: the
-dynamics of imprecise imitation look as if ``conclusions'' about what works for one state are
-``carried over'' to similar states. This, however, is merely an epiphenomenon in the sense no
-single agent genuinely generalizes over stimuli or reasons about what a more systematic
-signaling strategy would be.
+\subsection{Levels of vagueness}
+The main motivation and intuitions given in Section~\ref{sec:repl-diff-dynam} describe probabilities in sender and receiver strategies as capturing the overall distribution of pure strategies in a population: $\Sstrat(\messg \probbar \state)$ was said to represent the probability that a randomly sampled sender would have a strategy that responds with $\messg$ to $\state$ (likewise for the receiver).
+This is in line with the standard interpretation of the replicator equation, but we should consider its philosophical implications.
+Based on this interpretation and our model, vagueness is seemingly being characterized as a strictly population-level phenomenon since it arises in a signaling system from the inability of individual agents to fully align their (non-vague) strategies because of imprecision.
+This is, we believe, a plausible mechanism that can already explain the existence of vagueness in a language even if we assume each agent commands a non-vague idiolect.
 
+We do not, however, want to commit to the idea that vagueness does not exist at the level of individual agents.
+The fact is that the model can be interpreted in alternative ways.
+The probability $\Sstrat(\messg \probbar \state)$ merely gives us the likelihood that $\messg$ will be used by a sender when observing state $\state$.
+Whether the uncertainty represents variations in a population of agents playing pure strategies, a single sender using a non-deterministic strategy, or even a heterogeneous population of non-deterministic senders, is up for interpretation.
+The first option supported what we believe to be a plausible motivation for the mechanism of imitation of success with imprecision, but other motivations could be imagined to better fit an interpretation that includes non-deterministic agents.
+We thus believe that the model introduced in this paper does not exclude vagueness at the individual level, but to explore all possible interpretations would go beyond our current scope.
+
+\subsection{Evolutionary benefits of imprecision}
+The inclusion of confusability of similar states has noteworthy effects on the evolving meaning of signals.
+It transpired from our results that imprecision can have further accelerating and, surprisingly, unifying effects on meaning evolution.
 The unifying property of perceptual imprecision could be considered an evolutionary beneficial
 side-effect. Higher imprecision can lead to higher \emph{within group expected utility},
 defined as the average expected utility that each evolved language scored when playing against
@@ -1060,12 +1066,14 @@ individual languages, it increases the conceptual coherence and communicative su
 independently evolving strategies. It is as if mere confusability of states imposes a
 regularity constraint on evolving categories.
 
-Although in our model the imprecision parameter was fixed for each simulation run, and thus not subject to evolutionary selection.
-However, given the benefit of a certain amount of imprecision we observe when comparing within group expected utility, it would be interesting to study whether, under certain conditions, this group level advantage could trump the individual level disadvantage of a vague language, and thus actually select for a certain amount of imprecision.
-This is for now purely speculative, but it makes sense especially if we consider it in the eyes of multilevel selection theory \citep{Wilson1994,OGorman2008}.
+The phenomenon could potentially not just be a side effect.
+Given the benefit of a certain amount of imprecision we observe when comparing within group expected utility, it would be interesting to study whether, under certain conditions, this group level advantage could trump the individual level disadvantage of a vague language, and thus actually select for a certain amount of imprecision.
+This could be achieved by letting the imprecision parameter be subject to the evolutionary dynamics.
+The idea is for now mostly speculative, but we consider it an interesting avenue for future research.
+There is additional motivation to consider its potential if we see it in the eyes of multilevel selection theory \citep{Wilson1994,OGorman2008}.
 
 \subsection{Related work}
-\citet{OConnor2013:The-Evolution-o} makes a related case based on a version of reinforcement
+\citet{OConnor2013:The-Evolution-o} makes a proposal related to ours based on a version of reinforcement
 learning for sim-max games, in which successful play leads to reinforcement of choice options
 also for states similar to the ones that actually occurred. This not only leads to vague
 signaling of the appropriate kind, but also speeds up learning in such a way that, especially
@@ -1075,9 +1083,16 @@ reached in shorter learning periods. Our results complement and extend
 similar regularizing effects also for cases with low numbers of states and do not assume that
 agents have any kind of generalizing capacity in and of themselves, even if that is only
 implicit, as in \citeauthor{OConnor2013:The-Evolution-o}'s generalized reinforcement learning.
+State confusability has an effect on
+aggregate signaling behavior that can be described as generalization without generalizers: the
+dynamics of imprecise imitation look as if ``conclusions'' about what works for one state are
+``carried over'' to similar states. This, however, is merely an epiphenomenon in the sense no
+single agent genuinely generalizes over stimuli or reasons about what a more systematic
+signaling strategy would be.
+
 
 \citet{FrankeJager2010:Vagueness-Signa} suggested a number of ways in which
-information-processing limitations could lead to vague strategies. The model that is most
+in\-for\-ma\-tion-processing limitations could lead to vague strategies. The model that is most
 clearly related to the present approach uses the notion of a \emph{quantal response}, also
 known as a \emph{soft-max function}
 \citep[e.g.][]{Luce1959:Individual-Choi,McFadden1976:Quantal-Choice-,GoereeHolt2008:Quantal-Respons}. The
@@ -1089,7 +1104,7 @@ different. Intuitively speaking, for a case with two messages, the further we ve
 a prototypical interpretation of either message, the less discriminative a signaling strategy
 would be when the source of ``trembles'' is the computation of expected utilities: to wit,
 since both ``tall'' and ``short'' are almost equally bad descriptions for a giant, quantal
-response dynamics predict that speaker's would be almost indifferent. Speaker behavior that
+response dynamics predict that senders would be almost indifferent. Sender behavior that
 evolves under confusion of states does not have this puzzling property.
 
 
