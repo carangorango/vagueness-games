@@ -170,6 +170,28 @@ such meaning-generating behavior can evolve is a highly interesting
 topic that we are only beginning to fully understand
 \citep[e.g.][]{Warneryd1993:Cheap-Talk-Coor,BlumeKim1993:Evolutionary-St,Huttegger2007:Evolution-and-t,Pawlowitsch2008:Why-Evolution-d,Barrett2009:The-Evolution-o,HutteggerSkyrms2010:Evolutionary-Dy,Skyrms2010:Signals}.
 
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}[->,auto,semithick,>=stealth',every label/.style={gray},node distance=0.9cm]
+
+  \node (1) {};
+  \node (2) [right=of 1,label=below:$\Pr(\mystate{1})$] {$\mystate{1} \in \States$};
+  \node (3) [right=of 2] {$\messg = \Spure(\mystate{1}) \in \Messgs$};
+  \node (4) [right=of 3] {$\mystate{2} = \Rpure(\messg) \in \States$};
+
+  \path
+    (1) edge node {N} (2)
+    (2) edge node {S} (3)
+    (3) edge node {R} (4);
+
+  \end{tikzpicture}
+
+  \caption{A round of play in a sim-max game: Nature (N) chooses a state $\mystate{1}$ with probability $\Pr(\mystate{1})$; a sender (S) selects a message $\messg = \Spure(\mystate{1})$ determined by his pure strategy; a receiver (R) selects a state $\mystate{2} = \Rpure(\messg)$ determined by her pure strategy. Payoff for both sender and receiver is given by $\Utils(\mystate{1}, \mystate{2})$.}
+   %which is typically proportional to state similarity $\similarity(\mystate{1}, \mystate{2})$.}
+  \label{fig:sim-max-illustration}
+\end{figure}
+
 Similarity-maximizing (short: sim-max) games are a variation of
 Lewis' games where the receiver's actions are equated with the state
 space (one can think of the actions as choosing states) and different states are allowed to be more or less
@@ -182,7 +204,7 @@ similarities in the state space are fairly standard in economics
 but have received particular attention in a more philosophical context
 for reasons that will become clear presently.
 
-A sim-max game consists of a set of states $\States$, a set of messages $\Messgs$ with much
+Formally, a sim-max game consists of a set of states $\States$, a set of messages $\Messgs$ typically with much
 fewer messages than states, a probability distribution $\Pr \in \Delta(\States)$ such that
 $\Pr(\state)$ gives the probability that state $\state$ occurs, a similarity metric\footnote{A
   metric is a function of distance between any two points in a given space. It should satisfy
@@ -200,6 +222,8 @@ for a play with actual state $\mystate{1}$ and receiver interpretation $\mystate
 identify the receiver's acts with the states of the world, so that the game is one of guessing
 the actual state, so to speak. The utility function should be a monotonically decreasing
 function of similarity.
+In its original formulation, a sender's behavior is represented by a pure strategy $\Spure \in \Messgs^\States$ which associates states to messages (given a state $\state \in \States$ which message $\messg \in \Messgs$ would be sent), and a receiver's behavior by a pure strategy $\Rpure \in \States^\Messgs$ which does the opposite.
+A play in such a game is illustrated in Figure~\ref{fig:sim-max-illustration}.
 
 \citet{JagerMetzger2011:Voronoi-Languag} showed that the evolutionarily stable states of
 sim-max games are remarkably systematic: the evolutionarily stable states are demonstrably
@@ -529,16 +553,37 @@ the probability with which state $\mystate{r}$ is realized.  Section~\ref{sec:ex
 gives a concrete (parameterized) specification of $P_o$ and $P_r$ in terms of similarity of
 states. For the time being, it is best to treat $P_o$ and $P_r$ as arbitrary conditional
 confusion probabilities.
-
 A single round of play of a sim-max game is then governed by five pieces of stochastic
-information, where previously there were only three. At the outset, the actual state is chosen
-with probability $P_a(\mystate{a})$. A randomly sampled sender observes $\mystate{o}$ with
-probability $P_o(\mystate{o} \probbar \mystate{a})$ and so we expect $\messg$ with probability
-$\Sstrat(\messg \probbar \mystate{o})$. (Senders respond to observations, not the actual
-state!) As perception of messages is flawless, we expect a randomly sampled receiver to intend
-to realize interpretation $\mystate{i}$ with probability
-$\Rstrat(\mystate{i} \probbar \messg)$.  The actually realized interpretation will be
-$\mystate{r}$ with probability $P_r(\mystate{r} \probbar \mystate{i})$.
+information, where previously there were only three.
+An illustration is given in Figure~\ref{fig:imprecise-sim-max-illustration}.
+Note that, and this is crucial, senders respond to observations not actual states, receiver strategies determine intentions not realized states, but payoff is calculated based on actual and realized states.
+
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}[->,auto,semithick,>=stealth',every label/.style={gray},node distance=0.9cm]
+
+  \node (1) {};
+  \node (2) [right=of 1,label=below:$P_a(\mystate{a})$] {$\mystate{a} \in \States$};
+  \node (2') [right=of 2,label=below:$P_o(\mystate{o} \probbar \mystate{a})$] {$\mystate{o} \in \States$};
+  \node (3) [right=of 2',label=below:$\Sstrat(\messg \probbar \mystate{o})$] {$\messg \in \Messgs$};
+  \node (4) [right=of 3,label=below:$\Rstrat(\mystate{i} \probbar \messg)$] {$\mystate{i} \in \States$};
+  \node (4') [right=of 4,label=below:$P_r(\mystate{r} \probbar \mystate{i})$] {$\mystate{r} \in \States$};
+
+  \path
+    (1) edge node {N} (2)
+    (2) edge node {} (2')
+    (2') edge node {S} (3)
+    (3) edge node {R} (4)
+    (4) edge node {} (4');
+
+  \end{tikzpicture}
+
+  \caption{A round of play in a sim-max game with imprecise imitation: Nature (N) chooses an actual state with probability $P_a(\mystate{a})$; a randomly sampled sender (S) observes $\mystate{o}$ with probability $P_o(\mystate{o} \probbar \mystate{a})$ and subsequently selects $\messg$ with probability $\Sstrat(\messg \probbar \mystate{o})$; a randomly sampled receiver (R) intends to realize interpretation $\mystate{i}$ with probability $\Rstrat(\mystate{i} \probbar \messg)$ but actually realizes interpretation $\mystate{r}$ with probability $P_r(\mystate{r} \probbar \mystate{i})$. Payoff for both sender and receiver is given by $\Utils(\mystate{a}, \messg, \mystate{r})$.}
+  %which is typically proportional to state similarity $\similarity(\mystate{a}, \mystate{r})$.}
+  \label{fig:imprecise-sim-max-illustration}
+\end{figure}
+
 
 Expected utilities of choices at choice points should likewise take into account that actual states
 need not be observed states, and intended interpretations need not be realized
