@@ -167,32 +167,6 @@ such meaning-generating behavior can evolve is a highly interesting
 topic that we are only beginning to fully understand
 \citep[e.g.][]{Warneryd1993:Cheap-Talk-Coor,BlumeKim1993:Evolutionary-St,Huttegger2007:Evolution-and-t,Pawlowitsch2008:Why-Evolution-d,Barrett2009:The-Evolution-o,HutteggerSkyrms2010:Evolutionary-Dy,Skyrms2010:Signals}.
 
-\begin{figure}
-  \centering
-
-  \begin{tikzpicture}[->,auto,semithick,>=stealth',every label/.style={gray},node distance=0.9cm]
-
-  \node (1) {};
-  \node (2) [right=of 1,label=below:$\Pr(\mystate{1})$] {$\mystate{1} \in \States$};
-  \node (3) [right=of 2] {$\messg = \Spure(\mystate{1}) \in \Messgs$};
-  \node (4) [right=of 3] {$\mystate{2} = \Rpure(\messg) \in \States$};
-
-  \path
-    (1) edge node {N} (2)
-    (2) edge node {S} (3)
-    (3) edge node {R} (4);
-
-  \end{tikzpicture}
-
-  \caption{A round of play in a sim-max game: Nature (N) chooses a state $\mystate{1}$ with
-    probability $\Pr(\mystate{1})$; a sender (S) selects a message
-    $\messg = \Spure(\mystate{1})$ determined by his pure strategy $\Spure$; a receiver (R)
-    selects a state $\mystate{2} = \Rpure(\messg)$ determined by her pure strategy
-    $\Rpure$. Payoff for both sender and receiver is given by
-    $\Utils(\mystate{1}, \mystate{2})$.}
-  \label{fig:sim-max-illustration}
-\end{figure}
-
 Similarity-maximizing (short: sim-max) games are a variation of
 Lewis' games where the receiver's actions are equated with the state
 space (one can think of the actions as choosing states) and different states are allowed to be more or less
@@ -223,8 +197,31 @@ for a play with actual state $\mystate{1}$ and receiver interpretation $\mystate
 identify the receiver's acts with the states of the world, so that the game is one of guessing
 the actual state, so to speak. The utility function should be a monotonically decreasing
 function of similarity.
-In its original formulation, a sender's behavior is represented by a pure strategy $\Spure \in \Messgs^\States$ which associates states to messages (given a state $\state \in \States$ which message $\messg \in \Messgs$ would be sent), and a receiver's behavior by a pure strategy $\Rpure \in \States^\Messgs$ which does the opposite.
-A play in such a game is illustrated in Figure~\ref{fig:sim-max-illustration}.
+A sender's behavior can be represented by a pure strategy $\Spure \in \Messgs^\States$, which deterministically defines which message would be used for each state, a mixed strategy $\Smixed \in \Delta(\Messgs^\States)$, which characterizes a probability distribution over pure strategies, or a behavioral strategy $\Sstrat \in \Delta(\Messgs)^\States$, which defines the \emph{probability} that a given message would be used for each state.
+The analogous happens for the receiver's behavior.
+A play in such a game with behavioral strategies is illustrated in Figure~\ref{fig:sim-max-illustration}.
+
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}[->,auto,semithick,>=stealth',every label/.style={gray},node distance=0.9cm]
+
+  \node (1) {};
+  \node (2) [right=of 1,label=below:$\Pr(\mystate{1})$] {$\mystate{1} \in \States$};
+  \node (3) [right=of 2,label=below:$\Sstrat(\messg \probbar \mystate{1})$] {$\messg \in \Messgs$};
+  \node (4) [right=of 3,label=below:$\Rstrat(\mystate{2} \probbar \messg)$] {$\mystate{2} \in \States$};
+
+  \path
+    (1) edge node {N} (2)
+    (2) edge node {S} (3)
+    (3) edge node {R} (4);
+
+  \end{tikzpicture}
+
+  \caption{A round of play in a sim-max game with behavioral strategies: Nature (N) chooses a state $\mystate{1}$ with probability $\Pr(\mystate{1})$; a sender (S) selects a message $\messg$ with probability $\Sstrat(\messg \probbar \mystate{1})$; a receiver (R) selects a state $\mystate{2}$ with probability $\Rstrat(\mystate{2} \probbar \messg)$. Payoff for both sender and receiver is given by $\Utils(\mystate{1}, \mystate{2})$.}
+   %which is typically proportional to state similarity $\similarity(\mystate{1}, \mystate{2})$.}
+  \label{fig:sim-max-illustration}
+\end{figure}
 
 \citet{JagerMetzger2011:Voronoi-Languag} showed that the evolutionarily stable states of
 sim-max games are remarkably systematic: the evolutionarily stable states are demonstrably
