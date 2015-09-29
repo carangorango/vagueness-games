@@ -100,7 +100,7 @@ clearly not apply, and there may be differences between borderline
 cases in terms of how well they represent the category in
 question. Vagueness does not seem to dramatically affect the success
 of everyday communication, but it is troublesome for some of the most
-prominent theories of language and meaning. This is especially so for the logico-semantic tradition of Frege, Russell and the young
+prominent theories of language and meaning. This is especially so for the logico-positivist tradition of Frege, Russell and the young
 Wittgenstein which is challenged by the paradoxes vagueness gives rise
 to. 
 
@@ -200,7 +200,7 @@ for a play with actual state $\mystate{1}$ and receiver interpretation $\mystate
 identify the receiver's acts with the states of the world, so that the game is one of guessing
 the actual state, so to speak. The utility function should be a monotonically increasing
 function of similarity.
-A sender's behavior can be represented by a pure strategy $\Spure \in \Messgs^\States$, which deterministically defines which message would be used for each state, a mixed strategy $\Smixed \in \Delta(\Messgs^\States)$, which characterizes a probability distribution over pure strategies, or a behavioral strategy $\Sstrat \in \Delta(\Messgs)^\States$, which defines the \emph{probability} that a given message would be used for each state.
+A sender's behavior can be represented by a pure strategy $\Spure \in \Messgs^\States$, which deterministically defines which message would be used for each state, a mixed strategy $\Smixed \in \Delta(\Messgs^\States)$, which characterizes a probability distribution over pure strategies, or a behavioral strategy $\Sstrat \in \Delta(\Messgs)^\States$, which defines the probability that a given message would be used for each state.
 The analogous happens for the receiver's behavior.
 A play in such a game with behavioral strategies is illustrated in Figure~\ref{fig:sim-max-illustration}.
 
@@ -319,9 +319,9 @@ that rely on the notion of conceptual spaces.
 natural categories are convex regions in conceptual space. If the conceptual space has a
 suitable metric, convex categories can be derived from a set of prototypes. The category
 corresponding to prototype $p$ is the set of points that are more similar to $p$ than to any
-other. In this way, \citet{Gardenfors2000:Conceptual-Spac} argues, an efficient categorization
+other. In this way, \citeauthor{Gardenfors2000:Conceptual-Spac} argues, an efficient categorization
 system can be obtained: storing the prototypes lets us recover the categories without having to
-store each category's extension. However, what is left unexplained, is where the prototypes
+store each category's extension. However, what is left unexplained is where the prototypes
 come from, and why we would not see just any distribution of prototypes as an equally efficient
 classification system. This is where sim-max games can contribute a principled approach to
 deriving, in an independent way, not only convex categories but also prototypical exemplars
@@ -355,8 +355,8 @@ prototypical regions. This accounts for the first of the two
 desiderata mentioned above, but still assumes that crisp prototype
 regions must be given.
 
-An alternative approach is taken by \citet{FrankeJager2010:Vagueness-Signa} and
-\citet{OConnor2013:The-Evolution-o} who show how the above desiderata can be met by evolving
+Alternative approaches are taken by, for example, \citet{FrankeJager2010:Vagueness-Signa} and
+\citet{OConnor2013:The-Evolution-o}, who show different ways how the above desiderata can be met by evolving
 strategies in sim-max games. The approach we take here is similar in spirit, but different in
 relevant detail. A more in-depth comparison is deferred until Section~\ref{sec:discussion}. Let
 us first look into our own proposal in more detail.
@@ -375,7 +375,7 @@ adaptations can be described at different levels of abstraction. At the level of
 agents, we can picture a more or less idealized process of how each agent adapts dispositions
 for future actions based on various pieces of information available to the agent. More
 abstractly, at the level of a population of agents, we can describe how average behavioral
-dispositions will evolve. The population-level perspective abstracts over petty stochastic
+dispositions will evolve. The population-level perspective abstracts over small stochastic
 fluctuations and zooms in on the general tendency or direction of evolution that ensues from
 behavior at the agent-level.
 
@@ -418,7 +418,7 @@ sampled sender would have a strategy that responds with $\messg$ to $\state$.
 
 The \emph{expected utility} of choices at each choice point is:\footnote{The notation
   $\propto$, for ``proportional to'', that is used here and hereafter means that the right-hand
-  side must possibly yet be normalized so as to have probabilities sum to one. In general,
+  side might still need to be normalized so as to have probabilities sum to one. In general,
   writing $P(x) \propto f(x)$ for any function $f \mycolon X \rightarrow \mathds{R}$ is
   shorthand for $P(x) = \frac{f(x)}{\sum_{x' \in X} f(x')}$. }
 \begin{align*}
@@ -431,7 +431,7 @@ P(\state \probbar \messg) & \propto \Pr(\state) \cdot \Sstrat(\messg \probbar \s
 \end{align*}
 Expected utilities are sums, over all possible concrete outcomes, of the utilities of these
 outcomes, weighted by how likely they are to occur. For instance, the expected utility for the
-sender of choosing message $\messg$, given tate $\state$ and a receiver
+sender of choosing message $\messg$, given state $\state$ and a receiver
 strategy $\Rstrat$ is the sum, for each act $\act$, of the probability that the
 receiver will choose $\act$ given $\messg$ times the actual utility of triple
 $\state$, $\messg$ and $\act$.
@@ -482,15 +482,15 @@ deriving the replicator dynamic from agent-level processes of behavioral adaptat
 here on one of the simplest: \emph{conditional imitation of success}
 \citep[see][]{Sandholm2010:Population-Game}. The main idea is that agents imitate the behavior
 of other agents at some choice point with a probability that is proportional to the expected
-utility of the latter agents' choice. Since the sim-max games that we will be looking at in
+utility of the latter agents' choice. Since the sim-max games we will be looking at in
 Section~\ref{sec:exploring-rdd} have positive utilities, we can identify the switching
 probability with the expected utility.
 
-Let's consider sender strategies, as the receiver case is parallel. Call (misleadingly!) the
+Let's consider sender strategies, as the receiver case is parallel. Call the
 agent who gets a chance to change behavior ``learner'' and the possibly to-be-imitated agent
-``teacher.'' A random learner is drawn from the population and given a chance to change
+``model.'' A random learner is drawn from the population and given a chance to change
 behavior at choice point $\state$. The probability that our learner plays $\messg$ is
-$\Sstrat(\messg \probbar \state)$. The learner observes what a randomly sampled teacher does at
+$\Sstrat(\messg \probbar \state)$. The learner observes what a randomly sampled model does at
 $\state$. That would be $\messg'$ with probability $\Sstrat(\messg' \probbar \state)$. The
 learner then starts using $\messg'$ instead of $\messg$ with probability
 $\EU(\messg', \state, \Rstrat)$. (Of course, $\messg'$ and $\messg$ could be the same.)
@@ -509,12 +509,12 @@ $\messg$ at $\state$ can be written as:
 \begin{align*}
   P(\messg' \rightarrow m, \state) & = \sum_{\messg'} \underbrace{\Sstrat(\messg' \probbar
     \state)}_{\text{learner plays $\messg'$}} \cdot
-  \underbrace{\Sstrat(\messg \probbar \state)}_{\text{teacher plays $\messg$}} \cdot
-  \underbrace{\EU(\messg, \state, \Rstrat)}_{\text{EU teacher choice}} 
+  \underbrace{\Sstrat(\messg \probbar \state)}_{\text{model plays $\messg$}} \cdot
+  \underbrace{\EU(\messg, \state, \Rstrat)}_{\text{EU model choice}}
   % P(\messg \rightarrow m', \state) & = \sum_{\messg'} \underbrace{\Sstrat(\messg \probbar
   %   \state)}_{\text{learner plays $\messg$}} \cdot
-  % \underbrace{\Sstrat(\messg' \probbar \state)}_{\text{teacher plays $\messg'$}} \cdot
-  % \underbrace{\EU(\messg', \state, \Rstrat)}_{\text{EU teacher choice}}
+  % \underbrace{\Sstrat(\messg' \probbar \state)}_{\text{model plays $\messg'$}} \cdot
+  % \underbrace{\EU(\messg', \state, \Rstrat)}_{\text{EU model choice}}
 \end{align*}
 From this, we can simplify the expression of expected change in Equation~(\ref{eq:MeanChange})
 to:
@@ -627,7 +627,7 @@ previous definitions of expected utilities. This also legitimates the overload o
 
 
 Presence of potential imprecision in the form of non-trivial $P_o$ and $P_r$ will also affect
-the dynamic that ensues from imitation of successes. Since imprecision works slightly
+the dynamic that ensues from imitation of success. Since imprecision works slightly
 differently on senders and receivers (the former confuse choice points, the latter confuse
 choices), we need to look separately at each case.
 
@@ -635,7 +635,7 @@ As before, suppose that senders receive a chance to change their behavior indepe
 given choice point. In the present case, this would be a chance to change how to respond to a
 subjectively perceived state $\mystate{o}$, which need not be the actual one. We must then
 consult the probability $P_o(\messg \probbar \mystate{o})$ that, given that the learner
-observed $\mystate{o}$, he will simultaneously observe a randomly sampled teacher play
+observed $\mystate{o}$, he will simultaneously observe a randomly sampled model play
 $\messg$. This is (with $P_{\overline{o}}$ and $P_{\Sstrat}$ as defined above):
 \begin{align*}
   P_o(\messg \probbar \mystate{o}) = \sum_{\mystate{a}} P_{\overline{o}}(\mystate{a}
@@ -646,8 +646,8 @@ from $\messg'$ to $\messg$ in subjectively perceived state $\mystate{o}$ is ther
 \begin{align*}
   P(\messg' \rightarrow \messg, \mystate{o}) = \sum_{\messg'} \underbrace{\Sstrat(\messg' \probbar
     \mystate{o})}_{\text{learner plays $\messg'$ at $\mystate{o}$}} \cdot
-  \underbrace{P_{o}(\messg \probbar \mystate{o})}_{\text{observe teacher play $\messg$}} \cdot
-  \underbrace{\EU(\messg, \mystate{o}, \Rstrat)}_{\text{EU teacher choice in learner's view}}
+  \underbrace{P_{o}(\messg \probbar \mystate{o})}_{\text{observe model play $\messg$}} \cdot
+  \underbrace{\EU(\messg, \mystate{o}, \Rstrat)}_{\text{EU model choice in learner's view}}
 \end{align*}
 The mean change to the proportion of $\messg$ choices at state $\state$ are then:
 \begin{align}
@@ -662,7 +662,7 @@ The mean change to the proportion of $\messg$ choices at state $\state$ are then
 
 
 The case of the receiver is mostly analogous. Presented with an update opportunity for choice
-point $\messg$, a learner will observe a random teacher choose interpretation $\mystate{o}$
+point $\messg$, a learner will observe a random model choose interpretation $\mystate{o}$
 with probability:\footnote{We assume that the noise $P_o(\mystate{o} \probbar \mystate{a})$
   that applies to the sender's observations also applies to the receiver's observations when
   trying to imitate other agents' strategies. We could easily make the model more complex and
@@ -679,8 +679,8 @@ from using $\state'$ to $\state$ in response to $\messg$ is therefore:
 \begin{align*}
   P(\state' \rightarrow \state, \messg) = \sum_{\state'} \underbrace{\Rstrat(\state' \probbar
     \messg)}_{\text{learner plays $\state'$}} \cdot
-  \underbrace{P_{o}(\state \probbar \messg)}_{\text{observe teacher play $\state$}} \cdot
-  \underbrace{\EU(\state, \messg, \Rstrat)}_{\text{EU teacher choice}}
+  \underbrace{P_{o}(\state \probbar \messg)}_{\text{observe model play $\state$}} \cdot
+  \underbrace{\EU(\state, \messg, \Rstrat)}_{\text{EU model choice}}
 \end{align*}
 Parallel to those for the sender case, this gives rise to:
 \begin{align}
@@ -754,7 +754,7 @@ games. Confusion probabilities between states should be a function of perceptual
 the more similar two states are, the more likely they could be mistaken for each other. 
 
 Let the state space consist of $n \ge 2$ states that are equally spaced across the unit
-interval, including $0$ and $1$. All states occur, for simplicity, with the same probability.
+interval, including $0$ and $1$. All states occur, for simplicity, with the same probability (\emph{i.e.}~$P_a$ is uniform).
 The distance $\card{\mystate{i} - \mystate{j}}$ is the objective, physical similarity between
 two states $\mystate{i}$ and $\mystate{j}$. Distance in physical space feeds into a perceptual
 similarity function, as described by \citet{Nosofsky1986:Attention-Simil}:
@@ -763,7 +763,7 @@ similarity function, as described by \citet{Nosofsky1986:Attention-Simil}:
       \begin{cases}
     1 & \textrm{if } \imprecision = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
     0 & \textrm{if } \imprecision = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
- \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \imprecision^2} \right ) & \textrm{otherwise,} \\
+ \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^2}{ \imprecision^2} \right ) & \textrm{otherwise,} \\
     \end{cases}
 \end{align*}
 where $\imprecision \ge 0$ is an imprecision parameter. When $\imprecision=0$ agents perfectly
@@ -806,7 +806,7 @@ As for utility functions, we take another Nosofsky-style function:
       \begin{cases}
     1 & \textrm{if } \toler = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
     0 & \textrm{if } \toler = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
- \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \toler^2} \right ) & \textrm{otherwise.} \\
+ \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^2}{ \toler^2} \right ) & \textrm{otherwise.} \\
     \end{cases}
 \end{align*}
 The tolerance parameter $\toler \ge 0$ models the amount of tolerable pragmatic slack or
@@ -837,9 +837,9 @@ the total amount of change between strategies before and after an update step wa
 a suitably chosen threshold. It is not guaranteed that strategies at halting time had converged
 to the eventual attracting state, whether they ran for 200 rounds or not. Our notion of
 convergence is therefore only a categorical measure for reaching a certain (well-considered,
-but eventually arbitrary) degree of stability. In other words, out notion of ``convergence'' is
-a measure of relative speed: it is true that the system reached a state in which evolutionary
-adaptations had slowed down almost to a halt before 200 update steps? This is motivated by
+but eventually arbitrary) degree of stability. In other words, it is
+a measure of relative speed capturing whether the system reached a state in which evolutionary
+adaptations had slowed down almost to a halt before 200 update steps. This is motivated by
 pragmatic concerns regarding length of simulation time, but also theoretically justified,
 because we hypothesize that confusability of states leads to regularization of evolving
 strategies, which would show exactly in an increased speed of evolutionary trajectories towards
@@ -874,7 +874,7 @@ well-behaved and regular signaling behavior.
   % \end{subfigure}
 
 
-  \caption{Example strategies under \rdd at stopping time of our simulations.}
+  \caption{Example strategies under \rdd at stopping time. Each line corresponds to a message and plots, for each state, the probability that the message is used.}
   \label{fig:example_strats}
 \end{figure}
 
@@ -1103,7 +1103,7 @@ We thus believe that the model introduced in this paper does not exclude vaguene
 The inclusion of confusability of similar states has noteworthy effects on the evolving meaning of signals.
 It transpired from our results that imprecision can have further accelerating and, surprisingly, unifying effects on meaning evolution.
 The unifying property of perceptual imprecision could be considered an evolutionary beneficial
-side-effect. Higher imprecision can lead to higher \emph{within group expected utility},
+side-effect. A certain degree of imprecision can lead to higher \emph{within group expected utility},
 defined as the average expected utility that each evolved language scored when playing against
 an arbitrary other language obtained for the same parameter
 values. Figure~\ref{fig:GroupMeasuresB} gives a representative example. The observation repeats
@@ -1165,7 +1165,7 @@ We set out to meet a technical challenge posed by Lipman's problem
 formal model that shows how vague language can evolve under selective pressure for efficient
 communication? On the assumption that agents are likely to mistake states for one another,
 especially when they are perceptually similar, derived a generalization of the replicator
-dynamic in terms of imitation of successes. The resulting population-level dynamic produced
+dynamic in terms of imitation of success. The resulting population-level dynamic produced
 signaling behavior that is at the same time regular and by-and-large communicatively efficient,
 while also showing the crucial marks of vagueness. In a sense, the model derives vagueness as a
 by-product of an arguably natural limitation on the discriminatory power of signaling agents.
