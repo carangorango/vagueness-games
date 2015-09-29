@@ -100,7 +100,7 @@ clearly not apply, and there may be differences between borderline
 cases in terms of how well they represent the category in
 question. Vagueness does not seem to dramatically affect the success
 of everyday communication, but it is troublesome for some of the most
-prominent theories of language and meaning. This is especially so for the logico-semantic tradition of Frege, Russell and the young
+prominent theories of language and meaning. This is especially so for the logico-positivist tradition of Frege, Russell and the young
 Wittgenstein which is challenged by the paradoxes vagueness gives rise
 to. 
 
@@ -197,7 +197,7 @@ for a play with actual state $\mystate{1}$ and receiver interpretation $\mystate
 identify the receiver's acts with the states of the world, so that the game is one of guessing
 the actual state, so to speak. The utility function should be a monotonically increasing
 function of similarity.
-A sender's behavior can be represented by a pure strategy $\Spure \in \Messgs^\States$, which deterministically defines which message would be used for each state, a mixed strategy $\Smixed \in \Delta(\Messgs^\States)$, which characterizes a probability distribution over pure strategies, or a behavioral strategy $\Sstrat \in \Delta(\Messgs)^\States$, which defines the \emph{probability} that a given message would be used for each state.
+A sender's behavior can be represented by a pure strategy $\Spure \in \Messgs^\States$, which deterministically defines which message would be used for each state, a mixed strategy $\Smixed \in \Delta(\Messgs^\States)$, which characterizes a probability distribution over pure strategies, or a behavioral strategy $\Sstrat \in \Delta(\Messgs)^\States$, which defines the probability that a given message would be used for each state.
 The analogous happens for the receiver's behavior.
 A play in such a game with behavioral strategies is illustrated in Figure~\ref{fig:sim-max-illustration}.
 
@@ -316,9 +316,9 @@ that rely on the notion of conceptual spaces.
 natural categories are convex regions in conceptual space. If the conceptual space has a
 suitable metric, convex categories can be derived from a set of prototypes. The category
 corresponding to prototype $p$ is the set of points that are more similar to $p$ than to any
-other. In this way, \citet{Gardenfors2000:Conceptual-Spac} argues, an efficient categorization
+other. In this way, \citeauthor{Gardenfors2000:Conceptual-Spac} argues, an efficient categorization
 system can be obtained: storing the prototypes lets us recover the categories without having to
-store each category's extension. However, what is left unexplained, is where the prototypes
+store each category's extension. However, what is left unexplained is where the prototypes
 come from, and why we would not see just any distribution of prototypes as an equally efficient
 classification system. This is where sim-max games can contribute a principled approach to
 deriving, in an independent way, not only convex categories but also prototypical exemplars
@@ -352,8 +352,8 @@ prototypical regions. This accounts for the first of the two
 desiderata mentioned above, but still assumes that crisp prototype
 regions must be given.
 
-An alternative approach is taken by \citet{FrankeJager2010:Vagueness-Signa} and
-\citet{OConnor2013:The-Evolution-o} who show how the above desiderata can be met by evolving
+Alternative approaches are taken by, for example, \citet{FrankeJager2010:Vagueness-Signa} and
+\citet{OConnor2013:The-Evolution-o}, who show different ways how the above desiderata can be met by evolving
 strategies in sim-max games. The approach we take here is similar in spirit, but different in
 relevant detail. A more in-depth comparison is deferred until Section~\ref{sec:discussion}. Let
 us first look into our own proposal in more detail.
@@ -372,7 +372,7 @@ adaptations can be described at different levels of abstraction. At the level of
 agents, we can picture a more or less idealized process of how each agent adapts dispositions
 for future actions based on various pieces of information available to the agent. More
 abstractly, at the level of a population of agents, we can describe how average behavioral
-dispositions will evolve. The population-level perspective abstracts over petty stochastic
+dispositions will evolve. The population-level perspective abstracts over small stochastic
 fluctuations and zooms in on the general tendency or direction of evolution that ensues from
 behavior at the agent-level.
 
@@ -418,7 +418,7 @@ randomly sampled receiver interprets $\messg$ as $\state$.
 
 The \emph{expected utility} of choices at each choice point is:\footnote{The notation
   $\propto$, for ``proportional to'', that is used here and hereafter means that the right-hand
-  side must possibly yet be normalized so as to have probabilities sum to one. In general,
+  side might still need to be normalized so as to have probabilities sum to one. In general,
   writing $P(x) \propto f(x)$ for any function $f \mycolon X \rightarrow \mathds{R}$ is
   shorthand for $P(x) = \frac{f(x)}{\sum_{x' \in X} f(x')}$. }
 \begin{align*}
@@ -605,7 +605,7 @@ games. Confusion probabilities between states should be a function of perceptual
 the more similar two states are, the more likely they could be mistaken for each other. 
 
 Let the state space consist of $n \ge 2$ states that are equally spaced across the unit
-interval, including $0$ and $1$. All states occur, for simplicity, with the same probability.
+interval, including $0$ and $1$. All states occur, for simplicity, with the same probability (\emph{i.e.}~$P_a$ is uniform).
 The distance $\card{\mystate{i} - \mystate{j}}$ is the objective, physical similarity between
 two states $\mystate{i}$ and $\mystate{j}$. Distance in physical space feeds into a perceptual
 similarity function, as described by \citet{Nosofsky1986:Attention-Simil}:
@@ -614,7 +614,7 @@ similarity function, as described by \citet{Nosofsky1986:Attention-Simil}:
       \begin{cases}
     1 & \textrm{if } \imprecision = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
     0 & \textrm{if } \imprecision = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
- \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \imprecision^2} \right ) & \textrm{otherwise,} \\
+ \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^2}{ \imprecision^2} \right ) & \textrm{otherwise,} \\
     \end{cases}
 \end{align*}
 where $\imprecision \ge 0$ is an imprecision parameter. When $\imprecision=0$ agents perfectly
@@ -657,7 +657,7 @@ As for utility functions, we take another Nosofsky-style function:
       \begin{cases}
     1 & \textrm{if } \toler = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
     0 & \textrm{if } \toler = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
- \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^s}{ \toler^2} \right ) & \textrm{otherwise.} \\
+ \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^2}{ \toler^2} \right ) & \textrm{otherwise.} \\
     \end{cases}
 \end{align*}
 The tolerance parameter $\toler \ge 0$ models the amount of tolerable pragmatic slack or
@@ -725,7 +725,7 @@ regular signaling behavior.
   % \end{subfigure}
 
 
-  \caption{Example strategies under \rdd at stopping time of our simulations.}
+  \caption{Example strategies under \rdd at stopping time. Each line corresponds to a message and plots, for each state, the probability that the message is used.}
   \label{fig:example_strats}
 \end{figure}
 
@@ -984,7 +984,7 @@ would be equivalent to our present proposal in all respects.
 The inclusion of confusability of similar states has noteworthy effects on the evolving meaning of signals.
 It transpired from our results that imprecision can have further accelerating and, surprisingly, unifying effects on meaning evolution.
 The unifying property of perceptual imprecision could be considered an evolutionary beneficial
-side-effect. Higher imprecision can lead to higher \emph{within group expected utility},
+side-effect. A certain degree of imprecision can lead to higher \emph{within group expected utility},
 defined as the average expected utility that each evolved language scored when playing against
 an arbitrary other language obtained for the same parameter
 values. Figure~\ref{fig:GroupMeasuresB} gives a representative example. The observation repeats
