@@ -364,7 +364,7 @@ us first look into our own proposal in more detail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Imprecise conditional imitation}
+\section{Imitation with confusability of states}
 \label{sec:repl-diff-dynam}
 
 Signaling agents can adapt their dispositions to act, given some feedback about their past
@@ -398,25 +398,25 @@ function that maps an agent's choice points to a probability distribution over a
 choices.\footnote{Our focus is on behavioral strategies, not \emph{mixed strategies}, i.e.,
   probability distributions over functions from each choice point to an act, such as
   $s \in \Delta(\Messgs^{\States})$.  Dynamics on behavioral strategies assume that agents can
-  adapt their behavior locally, i.e., independently at each choice point. Our
-  focus on behavioral strategies greatly reduces the complexity of the dynamic and simplifies
-  numerical simulations. But it also seems the more plausible choice for imitation-based update
-  protocols: agents only observe how, on some occasion, some other agent behaved in \emph{one}
-  particular situation, not how that agent would behave in \emph{all} relevant choice
-  situations; they imitate the use of a single word, so to speak, not a whole lexicon. (See
-  \citet{Cressman2003:Evolutionary-Dy} for more on the difference between dynamics on mixed or
-  behavioral strategies.)} The sender's behavioral strategies are functions
-$\Sstrat \in \Delta(\Messgs)^\States$, thus mapping each state $\state \in \States$ to a
-probability of each message $\messg \in \Messgs$ being sent in $\state$; the receiver's are
-functions $\Rstrat \in \Delta(\States)^\Messgs$, thus mapping each message $\messg \in \Messgs$
-to a probability of each interpretation $\state \in \States$ being chosen in response to
-$\messg$. Although behavioral strategies are probabilistic, evolutionary modeling usually
-imagines that every individual agent has a non-probabilistic strategy. Behavioral strategies
-then capture average population behavior. In a virtually infinite population, the number
-$\Sstrat(\messg \probbar \state)$, for instance, is then the probability that a randomly
-sampled sender would send message $\messg$ if the actual state was $\state$. Similarly,
-$\Rstrat(\state \probbar \messg)$ is then the probability with which a randomly sampled
-receiver interprets $\messg$ as $\state$.
+  adapt their behavior locally, i.e., independently at each choice point. Our focus on
+  behavioral strategies greatly reduces the complexity of the dynamic and simplifies numerical
+  simulations. But it also seems the more plausible choice for imitation-based update protocols
+  of the kind we consider here: agents only observe how, on some occasion, some other agent
+  behaved in \emph{one} particular situation, not how that agent would behave in \emph{all}
+  relevant choice situations; they imitate the use of a single word, so to speak, not a whole
+  lexicon. (See \citet{Cressman2003:Evolutionary-Dy} for more on the difference between
+  dynamics on mixed or behavioral strategies.)} The sender's behavioral strategies are
+functions $\Sstrat \in \Delta(\Messgs)^\States$, thus mapping each state $\state \in \States$
+to a probability of each message $\messg \in \Messgs$ being sent in $\state$; the receiver's
+are functions $\Rstrat \in \Delta(\States)^\Messgs$, thus mapping each message
+$\messg \in \Messgs$ to a probability of each interpretation $\state \in \States$ being chosen
+in response to $\messg$. Although behavioral strategies are probabilistic, evolutionary
+modeling usually imagines that every individual agent has a non-probabilistic
+strategy. Behavioral strategies then capture average population behavior. Assuming a virtually
+infinite population, the number $\Sstrat(\messg \probbar \state)$, for instance, is then the
+probability that a randomly sampled sender would send message $\messg$ if the actual state was
+$\state$. Similarly, $\Rstrat(\state \probbar \messg)$ is then the probability with which a
+randomly sampled receiver interprets $\messg$ as $\state$.
 
 The \emph{expected utility} of choices at each choice point is:\footnote{The notation
   $\propto$, for ``proportional to'', that is used here and hereafter means that the right-hand
@@ -432,10 +432,11 @@ The \emph{expected utility} of choices at each choice point is:\footnote{The not
 P(\state \probbar \messg) & \propto \Pr(\state) \myts \Sstrat(\messg \probbar \state) \,.
 \end{align*}
 Expected utilities are sums, over all possible concrete outcomes, of the utilities of these
-outcomes, weighted by how likely they are to occur. For instance, the expected utility for the
-sender of choosing message $\messg$, given tate $\state$ and a receiver strategy $\Rstrat$ is
-the sum, for each act $\act$, of the probability that some random receiver will choose
-$\act$ given $\messg$ times the actual utility of triple $\state$, $\messg$ and $\act$.
+outcomes, weighted by how likely they occur. For instance, the expected utility for the sender
+of choosing message $\messg$, given state $\state$ and a receiver strategy $\Rstrat$ is the
+sum, for each interpretation $\state'$, of the probability that some random receiver will
+choose $\state'$ given $\messg$ times the actual utility of triple $\state$, $\messg$ and
+$\state'$.
 
 The discrete-time replicator dynamic tracks changes in frequency of choices in the population
 as proportional to their expected utilities
@@ -445,8 +446,8 @@ as proportional to their expected utilities
   utilities are always positive.}
 \begin{align}
   \label{eq:RDDiscrete}
-  \Sstrat'(\messg \probbar \state) & \propto \Sstrat(\messg \probbar \state) \cdot
-    \EU(\messg, \state,\Rstrat)\,, & \Rstrat'(\act \probbar \messg) & \propto \Rstrat(\act \probbar \messg) \cdot
+  \Sstrat'(\messg \probbar \state) & \propto \Sstrat(\messg \probbar \state) \myts
+    \EU(\messg, \state,\Rstrat)\,, & \Rstrat'(\act \probbar \messg) & \propto \Rstrat(\act \probbar \messg) \myts
     \EU(\act, \messg,\Sstrat)\,.   
 \end{align}
 For a given choice point, say a state $\state$, the probability of seeing $\messg$ played by an
@@ -455,7 +456,7 @@ seeing it \emph{before} the update, which is $\Sstrat(\messg \probbar \state)$, 
 expected utility of $\messg$ at state $\state$. Intuitively put, frequencies of choices change
 by a gradient of current frequency and a measure of how good they are.
 
-\subsection{A noisy replicator dynamic}
+\subsection{Noisy replicator dynamic}
 \label{sec:noisy-repl-dynam}
 
 The replicator dynamic is an abstract population-level dynamic that describes the mean expected
@@ -468,11 +469,10 @@ of the latter agents' choice (see Appendix~XYZ for a derivation of the standard 
 dynamic from this update scheme).
 
 Probabilistic imitation of success presupposes that agents make no mistakes when observing
-states. This may not always be an appropriate assumption. Especially for sim-max games, where,
-intuitively, some states can be fairly similar and therefore likely to be confused for one
+states. This may not always be an appropriate assumption, especially for sim-max games, where,
+some states can be fairly similar and therefore likely to be confused for one
 another. Appendix~XYZ shows how to derive a generalization of the replicator dynamic from the
-assumption that probabilistic imitation of success is affected by two sources of probabilistic
-confusion of states:
+assumption that imitation of success is affected by two sources of probabilistic noise:
 
 \begin{enumerate}
 \item \emph{observation noise:} whenever a state $\mystate{a}$ actually occurs, the
@@ -481,9 +481,15 @@ confusion of states:
   $\mystate{i}$, the probability that $\mystate{r}$ is realized is $P_r(\mystate{r} \probbar \mystate{o})$.
 \end{enumerate}
 
+\noindent Noise-free imitation of success is the special case where $P_o(\mystate{o} \probbar
+\mystate{a}) = 1$ iff $\mystate{a} = \mystate{o}$ and $P_r(\mystate{r} \probbar
+\mystate{i}) = 1$ iff $\mystate{i} = \mystate{r}$. In that case, the population-level impact of
+imitation is described by the replicator equation in (\ref{eq:RDDiscrete}). 
 
-The mean changes in the population frequencies of choices under noise-affected imitation of
-success can be covered by the following discrete-time formulation:
+
+If noise is possibly non-trivial, the mean changes in population frequencies of choices
+under noise-affected imitation of success can be covered by the following discrete-time
+formulation:
 
 \begin{align}
   \label{eq:nRD}
@@ -492,32 +498,35 @@ success can be covered by the following discrete-time formulation:
   \myts \EU(\state, \messg, \Sstrat)\,.
 \end{align}
 
-This looks very much like the discrete-time formulation of the standard replicator dynamic in
-(\ref{eq:RDDiscrete}), but there are differences (the Appendix~XYZ for full definitions and
-formal detail). Firstly, expected utility here takes stochastic confusability of states into
-account in a natural way. Secondly, where the standard replicator dynamic had probabilities
-$\Sstrat(\messg \probbar \state)$ and $\Rstrat(\state \probbar \messg)$, we now have
-$P_o(\messg \probbar \state)$ and $P_o(\state \probbar \messg)$ respectively. This is the major
-difference, so we should dwell on it for a brief moment.
+\noindent This looks very much like the discrete-time formulation of the standard replicator
+dynamic in (\ref{eq:RDDiscrete}), but there are differences (the Appendix~XYZ for full
+definitions and formal detail). Firstly, expected utility here takes stochastic confusability
+of states into account in a natural way. Secondly, where the standard replicator dynamic had
+probabilities $\Sstrat(\messg \probbar \state)$ and $\Rstrat(\state \probbar \messg)$, we now
+have $P_o(\messg \probbar \state)$ and $P_o(\state \probbar \messg)$ respectively. This is the
+major difference, so we should dwell on it for a brief moment.
 
-Look at the sender case first, where $\Sstrat(\messg \probbar \state)$ is the probability with
-which $\messg$ is played in response to actual state $\state$ on average in the population. If
-agents may not perceive the actual state, this should also affect what they observe when trying
-to imitate another agents behavior. $P_o(\messg \probbar \state)$ is therefore the probability,
-given that a potential imitator has observed $\state$, that he would observe a random agent
-play $\messg$, which he may or may not choose to imitate. Similarly for the receiver, we are
-not looking at occurrence probability $\Rstrat(\state \probbar \messg)$ but at the probability
+Look at the sender case first. Is some agent $X$ gets a chance to revise his behavior, he
+observes a state $\state$ and, at the same time, that some agent $Y$ chose $\messg$. But if $X$
+perceives $\state$ that does not necessarily mean that the actual state is $\state$, and
+similarly, that agent $Y$ also perceived state $\state$. Hence, where the replicator dynamic in
+(\ref{eq:RDDiscrete}), derived from noise-free imitation, has the probability
+$\Sstrat(\messg \probbar \state)$ with which $\messg$ is played in response to actual state
+$\state$ on average in the population, we substitute $P_o(\messg \probbar \state)$: the
+probability, given that a potential imitator has observed $\state$, that he would observe a
+random agent play $\messg$. Similar considerations apply to the receiver case: we are not
+looking at occurrence probability $\Rstrat(\state \probbar \messg)$ but at the probability
 $P_o(\state \probbar \messg)$ with which an agent who observes $\messg$ observes another agent
-choose interpretation $\state$. 
+choose interpretation $\state$.
 
 Obviously, $P_o(\messg \probbar \state)$ and $P_o(\state \probbar \messg)$ are to be derived
-from, among others, probabilistic confusion of states $P_o(\mystate{o} \probbar \mystate{a})$
-and $P_r(\mystate{r} \probbar \mystate{o})$. Details are given in Appendix~XYZ. If there is no
-noise, $P_o(\messg \probbar \state)$ reduces to $\Sstrat(\messg \probbar \state)$ and
-$P_o(\state \probbar \messg)$ reduces to $\Rstrat(\state \probbar \messg)$. But if there is,
-imitation probabilities must take confusability of states into account. In this sense, the
-noisy replicator dynamic in (\ref{eq:nRD}) conservatively extends the classic case in
-(\ref{eq:RDDiscrete}).
+from, among others, the assumed probabilistic confusion rates
+$P_o(\mystate{o} \probbar \mystate{a})$ and $P_r(\mystate{r} \probbar \mystate{o})$. Details
+are given in Appendix~XYZ. If there is no noise, $P_o(\messg \probbar \state)$ reduces to
+$\Sstrat(\messg \probbar \state)$ and $P_o(\state \probbar \messg)$ reduces to
+$\Rstrat(\state \probbar \messg)$. But if there is, we must take
+confusability of states into account. In this sense, the noisy replicator dynamic in
+(\ref{eq:nRD}) conservatively extends the classic case in (\ref{eq:RDDiscrete}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
