@@ -136,7 +136,7 @@ appreciated. Section~\ref{sec:repl-diff-dynam} introduces a generalization of th
 dynamic which is derived from the idea that agents imitate other agents' behavior while
 possibly confusing similar states. This imprecise imitation dynamic is explored in
 Section~\ref{sec:exploring-rdd}. Section~\ref{sec:discussion} reflects and compares our
-approach to others. Appendix~\ref{sec:repl-diff-dynam} provides formal detail.
+approach to others. Appendix~\ref{sec:formal-stuff} provides formal detail.
 
 \section{Background}
 \label{sec:background}
@@ -459,7 +459,7 @@ change of behavioral dispositions in a population of signalers. There are severa
 deriving the replicator dynamic from agent-level processes of behavioral adaptation. We focus
 here on one of the simplest: \emph{imitation of success}
 \citep[see][]{Sandholm2010:Population-Game}. The intuitive idea is the following (see
-Appendix~XYZ for a derivation of the standard replicator dynamic from this update scheme).
+Appendix~\ref{sec:formal-stuff} for a derivation of the standard replicator dynamic from this update scheme).
 Every now and then a random agent gets a chance to alter his behavior for one of his choice
 points. Say, this is a sender who gets to ``reconsider'' his choice of message for state
 $\state$. The revising agent then observes what some random agent does at $\state$, say
@@ -528,7 +528,7 @@ $P_r(\mystate{r} \probbar \mystate{i}) = 1$ iff $\mystate{i} = \mystate{r}$.
 
 
 The presence of observation and realization noise also affects imitation of successes. Here, we
-focus on the main ideas. Formal detail is provided by Appendix~XYZ. Take a sender who gets to
+focus on the main ideas. Formal detail is provided by Appendix~\ref{sec:formal-stuff}. Take a sender who gets to
 revise behavior for state $\state$. What agents can plausibly revise by imitation is their pure
 strategy, which maps perceived states onto messages. We should therefore assume that when an
 agent gets to revise his strategy for the perceived state $\state$, this need not necessarily
@@ -540,7 +540,7 @@ interested in the conditional probability $P_o(\messg \probbar \state)$ that som
 agent realizes $\messg$ when the first agent perceived $\state$. This
 $P_o(\messg \probbar \state)$ is derived from the prior probability of states, the current
 sender population behavior $\Sstrat$ and the given observation noise (see
-Appendix~XYZ). Eventually, the imitating agent adopts $\messg$ as his choice for $\state$ with
+Appendix~\ref{sec:formal-stuff}). Eventually, the imitating agent adopts $\messg$ as his choice for $\state$ with
 probability given by the expected utility of sending $\messg$ when perceiving state
 $\state$. Expected utility should, of course, take the probabilistic confusability of states
 into account as well.
@@ -553,7 +553,7 @@ observation and realization noise, as well as on the current receiver population
 $\Rstrat$.
 
 
-Appendix~XYZ shows how imprecise imitation of this sort leads to mean changes in population
+Appendix~\ref{sec:formal-stuff} shows how imprecise imitation of this sort leads to mean changes in population
 frequencies of choices that can be covered by the following discrete-time formulation:
 \begin{align}
   \label{eq:nRD}
