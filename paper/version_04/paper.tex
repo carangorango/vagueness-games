@@ -651,19 +651,14 @@ for any other state with some positive probability. For the uninteresting case o
 $\imprecision \rightarrow \infty$, confusion is maximal and every state can be perceived or
 realized as any other state with probability $\nicefrac{1}{\card{\States}}$.
 
-As for utility functions, we take another Nosofsky-style function:
+As for utility, we define it in terms of similarity and introduce another free parameter, $\toler \ge 0$.
+ The intention is for this parameter to model the amount of tolerable pragmatic slack, which we felt should be allowed to vary separately from perceptual imprecision:
 \begin{align*}
   \util(\mystate{i}, \mystate{j} \myts ; \myts \toler) =
-      \begin{cases}
-    1 & \textrm{if } \toler = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
-    0 & \textrm{if } \toler = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
- \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^2}{ \toler^2} \right ) & \textrm{otherwise.} \\
-    \end{cases}
+      \similarity(\mystate{i}, \mystate{j} \myts ; \myts \toler)
 \end{align*}
-The tolerance parameter $\toler \ge 0$ models the amount of tolerable pragmatic slack or
-communicative imprecision. This choice of utility function is governed partly by convenience in
-parallel to the similarity function, but also because it has, as we believe, the right general
-properties for a communicative payoff function. Unlike utilities that are, say, linearly or
+This choice of utility function is governed partly by convenience, but also because we believe it has the right general properties for a communicative payoff function.
+Unlike utilities that are, say, linearly or
 quadratically decreasing in physical distance
 \citep[c.f.][]{JagerMetzger2011:Voronoi-Languag,FrankeJager2010:Vagueness-Signa}, utilities
 that are exponentially decreasing in negative quadratic distance can model situations where a
