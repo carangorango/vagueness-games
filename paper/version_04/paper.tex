@@ -82,12 +82,12 @@
   Signaling games are popular models for studying the evolution of meaning, but typical
   approaches do not incorporate vagueness as a feature of successful signaling.  Complementing
   recent like-minded models, we describe an aggregate population-level dynamic that describes a
-  process of imitation of successful signaling behavior under imprecise perception and
-  realization of similar stimuli. Applying this new dynamic to a generalization of Lewis'
-  signaling games, we show that stochastic imprecision leads to vague, yet by-and-large
-  efficient signal use, and, moreover, that it unifies evolutionary outcomes and helps avoid
-  suboptimal categorization. The upshot of this is that we see \emph{as-if}-generalization at
-  an aggregate level, without agents actually generalizing.
+  process of imitation of successful behavior under imprecise perception and realization of
+  similar stimuli. Applying this new dynamic to a generalization of Lewis' signaling games, we
+  show that stochastic imprecision leads to vague, yet by-and-large efficient signal use, and,
+  moreover, that it unifies evolutionary outcomes and helps avoid suboptimal
+  categorization. The upshot of this is that we see \emph{as-if}-generalization at an aggregate
+  level, without agents actually generalizing.
 \end{abstract}
 
 \section{Introduction}
@@ -125,11 +125,12 @@ Others have argued that vagueness is a natural byproduct of limitations in infor
 processing \citep[e.g.][]{FrankeJager2010:Vagueness-Signa} or the result of particular
 low-level learning strategies \citep[e.g.][]{OConnor2013:The-Evolution-o}. This paper
 contributes to the latter line of thought. Concretely, we introduce a dynamic that describes
-average behavior resulting from imitation under confusability of similar stimuli. We show that
-stochastic noise can not only lead to vague, yet relatively efficient signal use, but can also
-unify evolutionary outcomes and help avoid suboptimal categorization: regularities in
-confusability of stimuli also regularize signaling behavior and evolving categories. The system
-gives rise to generalization behavior without agents actually generalizing.
+changes in aggregate population behavior as the result of imitation with probabilistic
+confusability of similar stimuli. We show that stochastic noise can not only lead to vague, yet
+relatively efficient signal use, but can also unify evolutionary outcomes and help avoid
+suboptimal categorization: regularities in confusability of stimuli also regularize signaling
+behavior and evolving categories. The system gives rise to generalization behavior without
+agents actually generalizing.
 
 The next section introduces the background against which the work presented here can be
 appreciated. Section~\ref{sec:repl-diff-dynam} introduces a generalization of the replicator
@@ -191,37 +192,16 @@ $\Pr(\state)$ gives the probability that state $\state$ occurs, a similarity met
   % $\similarity(x,z) \le \similarity(x,y) + \similarity(y,z)$
 on states $\similarity \mycolon \States \times \States \rightarrow \mathds{R}$ such that
 $\similarity(\mystate{1}, \mystate{2})$ is the (perceptual) similarity between $\mystate{1}$
-and $\mystate{2}$, and a utility function $\Utils \mycolon \States \times \States \rightarrow
-\mathds{R}$ such that $\Utils(\mystate{1}, \mystate{2})$ is the payoff for sender and receiver
-for a play with actual state $\mystate{1}$ and receiver interpretation $\mystate{2}$. We
-identify the receiver's acts with the states of the world, so that the game is one of guessing
-the actual state, so to speak. The utility function should be a monotonically increasing
-function of similarity.
-A sender's behavior can be represented by a pure strategy $\Spure \in \Messgs^\States$, which deterministically defines which message would be used for each state, a mixed strategy $\Smixed \in \Delta(\Messgs^\States)$, which characterizes a probability distribution over pure strategies, or a behavioral strategy $\Sstrat \in \Delta(\Messgs)^\States$, which defines the probability that a given message would be used for each state.
-The analogous happens for the receiver's behavior.
-A play in such a game with behavioral strategies is illustrated in Figure~\ref{fig:sim-max-illustration}.
+and $\mystate{2}$, and a utility function
+$\Utils \mycolon \States \times \States \rightarrow \mathds{R}$ such that
+$\Utils(\mystate{1}, \mystate{2})$ is the payoff for sender and receiver for a play with actual
+state $\mystate{1}$ and receiver interpretation $\mystate{2}$. We identify the receiver's acts
+with the states of the world, so that the game is one of guessing the actual state, so to
+speak. The utility function should be a monotonically increasing function of similarity.
+Non-probabilistic sender behavior can be represented by a pure strategy
+$\Spure \in \Messgs^\States$, which deterministically defines which message would be used for
+each state. Similarly, a pure receiver strategy is a function $\Rpure \in \States^\Messgs$.
 
-\begin{figure}
-  \centering
-
-  \begin{tikzpicture}[->,auto,semithick,>=stealth',every label/.style={gray},node distance=0.9cm]
-
-  \node (1) {};
-  \node (2) [right=of 1,label=below:$\Pr(\mystate{1})$] {$\mystate{1} \in \States$};
-  \node (3) [right=of 2,label=below:$\Sstrat(\messg \probbar \mystate{1})$] {$\messg \in \Messgs$};
-  \node (4) [right=of 3,label=below:$\Rstrat(\mystate{2} \probbar \messg)$] {$\mystate{2} \in \States$};
-
-  \path
-    (1) edge node {N} (2)
-    (2) edge node {S} (3)
-    (3) edge node {R} (4);
-
-  \end{tikzpicture}
-
-  \caption{A round of play in a sim-max game with behavioral strategies: Nature (N) chooses a state $\mystate{1}$ with probability $\Pr(\mystate{1})$; a sender (S) selects a message $\messg$ with probability $\Sstrat(\messg \probbar \mystate{1})$; a receiver (R) selects a state $\mystate{2}$ with probability $\Rstrat(\mystate{2} \probbar \messg)$. Payoff for both sender and receiver is given by $\Utils(\mystate{1}, \mystate{2})$.}
-   %which is typically proportional to state similarity $\similarity(\mystate{1}, \mystate{2})$.}
-  \label{fig:sim-max-illustration}
-\end{figure}
 
 \citet{JagerMetzger2011:Voronoi-Languag} showed that the evolutionarily stable states of
 sim-max games are remarkably systematic: the evolutionarily stable states are demonstrably
@@ -286,9 +266,9 @@ intervals.  See Figure~\ref{fig:Voronoi-language-example} for an illustration.
  
         \end{tikzpicture}
 
-        \caption{Example of a Voronoi language on $\States = [0,1]$. The (pure) sender strategy
+        \caption{Example of a Voronoi language on $\States = [0,1]$. The pure sender strategy
           $\Spure$ uses one signal for the lower half, and another for the upper half of the
-          unit interval. The (pure) receiver strategy $\Rpure$ selects the central elements in
+          unit interval. The pure receiver strategy $\Rpure$ selects the central elements in
           the respective intervals. See \citet{JagerMetzger2011:Voronoi-Languag} for further
           details.}
   \label{fig:Voronoi-language-example}
@@ -390,20 +370,20 @@ confusability vanishes, the process is just the well-known replicator dynamic
 Fix a sim-max game with finite states $\States$ and messages $\Messgs$. As usual, we assume
 that the receiver chooses states in $\States$ in response to messages. Let
 $\Pr(\cdot) \in \Delta(\States)$ be the prior distribution over states and
-$\Util \mycolon \States \times \States \rightarrow \mathds{R}$ the utility
-function shared by senders and receivers in the population. A \emph{behavioral strategy} is a
-function that maps an agent's choice points to a probability distribution over available
-choices.\footnote{Our focus is on behavioral strategies, not \emph{mixed strategies}, i.e.,
-  probability distributions over functions from each choice point to an act, such as
-  $s \in \Delta(\Messgs^{\States})$.  Dynamics on behavioral strategies assume that agents can
-  adapt their behavior locally, i.e., independently at each choice point. Our focus on
-  behavioral strategies greatly reduces the complexity of the dynamic and simplifies numerical
-  simulations. But it also seems the more plausible choice for imitation-based update protocols
-  of the kind we consider here: agents only observe how, on some occasion, some other agent
-  behaved in \emph{one} particular situation, not how that agent would behave in \emph{all}
-  relevant choice situations; they imitate the use of a single word, so to speak, not a whole
-  lexicon. (See \citet{Cressman2003:Evolutionary-Dy} for more on the difference between
-  dynamics on mixed or behavioral strategies.)} The sender's behavioral strategies are
+$\Util \mycolon \States \times \States \rightarrow \mathds{R}$ the utility function shared by
+senders and receivers in the population. A \emph{behavioral strategy} is a function that maps
+an agent's choice points to a probability distribution over available
+choices.\footnote{\label{fn:mixedStrats}Our focus is on behavioral strategies, not \emph{mixed
+    strategies}, i.e., probability distributions over functions from each choice point to an
+  act, such as $s \in \Delta(\Messgs^{\States})$.  Dynamics on behavioral strategies assume
+  that agents can adapt their behavior locally, i.e., independently at each choice point. Our
+  focus on behavioral strategies greatly reduces the complexity of the dynamic and simplifies
+  numerical simulations. But it also seems the more plausible choice for imitation-based update
+  protocols of the kind we consider here: agents only observe how, on some occasion, some other
+  agent behaved in \emph{one} particular situation, not how that agent would behave in
+  \emph{all} relevant choice situations; they imitate the use of a single word, so to speak,
+  not a whole lexicon. (See \citet{Cressman2003:Evolutionary-Dy} for more on the difference
+  between dynamics on mixed or behavioral strategies.)} The sender's behavioral strategies are
 functions $\Sstrat \in \Delta(\Messgs)^\States$, thus mapping each state $\state \in \States$
 to a probability of each message $\messg \in \Messgs$ being sent in $\state$; the receiver's
 are functions $\Rstrat \in \Delta(\States)^\Messgs$, thus mapping each message
@@ -414,7 +394,34 @@ strategy. Behavioral strategies then capture average population behavior. Assumi
 infinite population, the number $\Sstrat(\messg \probbar \state)$, for instance, is then the
 probability that a randomly sampled sender would send message $\messg$ if the actual state was
 $\state$. Similarly, $\Rstrat(\state \probbar \messg)$ is then the probability with which a
-randomly sampled receiver interprets $\messg$ as $\state$.
+randomly sampled receiver interprets $\messg$ as $\state$. A play of single evolutionary game
+with behavioral strategies is illustrated in Figure~\ref{fig:sim-max-illustration}.
+
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}[->,auto,semithick,>=stealth',every label/.style={gray},node distance=0.9cm]
+
+  \node (1) {};
+  \node (2) [right=of 1,label=below:$\Pr(\mystate{1})$] {$\mystate{1} \in \States$};
+  \node (3) [right=of 2,label=below:$\Sstrat(\messg \probbar \mystate{1})$] {$\messg \in \Messgs$};
+  \node (4) [right=of 3,label=below:$\Rstrat(\mystate{2} \probbar \messg)$] {$\mystate{2} \in \States$};
+
+  \path
+    (1) edge node {N} (2)
+    (2) edge node {S} (3)
+    (3) edge node {R} (4);
+
+  \end{tikzpicture}
+
+  \caption{A round of play in a sim-max game with behavioral strategies: Nature (N) chooses a
+    state $\mystate{1}$ with probability $\Pr(\mystate{1})$; a random sender (S) selects a
+    message $\messg$ with probability $\Sstrat(\messg \probbar \mystate{1})$; a random receiver
+    (R) selects a state $\mystate{2}$ with probability $\Rstrat(\mystate{2} \probbar \messg)$.
+    Payoff for both sender and receiver is given by $\Utils(\mystate{1}, \mystate{2})$.}
+   %which is typically proportional to state similarity $\similarity(\mystate{1}, \mystate{2})$.}
+  \label{fig:sim-max-illustration}
+\end{figure}
 
 The \emph{expected utility} of choices at each choice point is:\footnote{The notation
   $\propto$, for ``proportional to'', that is used here and hereafter means that the right-hand
@@ -445,8 +452,8 @@ as proportional to their expected utilities
 \begin{align}
   \label{eq:RDDiscrete}
   \Sstrat'(\messg \probbar \state) & \propto \Sstrat(\messg \probbar \state) \myts
-    \EU(\messg, \state,\Rstrat)\,, & \Rstrat'(\act \probbar \messg) & \propto \Rstrat(\act \probbar \messg) \myts
-    \EU(\act, \messg,\Sstrat)\,.   
+    \EU(\messg, \state,\Rstrat)\,, & \Rstrat'(\state \probbar \messg) & \propto \Rstrat(\state \probbar \messg) \myts
+    \EU(\state, \messg,\Sstrat)\,.   
 \end{align}
 For a given choice point, say a state $\state$, the probability of seeing $\messg$ played by an
 average agent in the population \emph{after} the update is proportional to the probability of
@@ -459,11 +466,11 @@ change of behavioral dispositions in a population of signalers. There are severa
 deriving the replicator dynamic from agent-level processes of behavioral adaptation. We focus
 here on one of the simplest: \emph{imitation of success}
 \citep[see][]{Sandholm2010:Population-Game}. The intuitive idea is the following (see
-Appendix~\ref{sec:formal-stuff} for a derivation of the standard replicator dynamic from this update scheme).
-Every now and then a random agent gets a chance to alter his behavior for one of his choice
-points. Say, this is a sender who gets to ``reconsider'' his choice of message for state
-$\state$. The revising agent then observes what some random agent does at $\state$, say
-$\messg$, and will henceforth play $\messg$ in $\state$ with a probability given by the
+Appendix~\ref{sec:cond-imit-succ} for a derivation of the standard replicator dynamic from this
+update scheme).  Every now and then a random agent gets a chance to alter his behavior for one
+of his choice points. Say, this is a sender who gets to ``reconsider'' his choice of message
+for state $\state$. The revising agent then observes what some random agent does at $\state$,
+say $\messg$, and will henceforth play $\messg$ in $\state$ with a probability given by the
 expected utility of $\messg$ for state $\state$.
 
 \subsection{Noisy replicator dynamic}
@@ -471,7 +478,7 @@ expected utility of $\messg$ for state $\state$.
 
 Imitation of success, as described above, presupposes that agents make no mistakes when
 observing states, or choosing interpretations. This may not always be an appropriate
-assumption, especially when some states can be fairly similar and therefore likely to be
+assumption, especially when some states can be perceptually similar and therefore likely to be
 confused for one another. Therefore, imitation dynamics could be affected by at least two
 sources of probabilistic noise:
 
@@ -528,24 +535,23 @@ $P_r(\mystate{r} \probbar \mystate{i}) = 1$ iff $\mystate{i} = \mystate{r}$.
 
 
 The presence of observation and realization noise also affects imitation of successes. Here, we
-focus on the main ideas. Formal detail is provided by Appendix~\ref{sec:formal-stuff}. Take a sender who gets to
-revise behavior for state $\state$. What agents can plausibly revise by imitation is their pure
-strategy, which maps perceived states onto messages. We should therefore assume that when an
-agent gets to revise his strategy for the perceived state $\state$, this need not necessarily
-be the actual state. Moreover, when that agent observes $\state$, another possibly
-to-be-imitated agent may yet perceive a completely different state altogether. Given what that
-latter agent perceives, his actual (pure) strategy will determine what he plays. In sum, to
-describe how likely the potential imitator observes a message choice $\messg$, we are
-interested in the conditional probability $P_o(\messg \probbar \state)$ that some other random
-agent realizes $\messg$ when the first agent perceived $\state$. This
-$P_o(\messg \probbar \state)$ is derived from the prior probability of states, the current
-sender population behavior $\Sstrat$ and the given observation noise (see
-Appendix~\ref{sec:formal-stuff}). Eventually, the imitating agent adopts $\messg$ as his choice for $\state$ with
-probability given by the expected utility of sending $\messg$ when perceiving state
-$\state$. Expected utility should, of course, take the probabilistic confusability of states
-into account as well.
+focus on the main ideas. Formal detail is provided by Appendix~\ref{sec:imit-succ-with}. Take a
+sender who gets to revise behavior for state $\state$. What agents can plausibly revise by
+imitation is their pure strategy, which maps perceived states onto messages. When an agent gets
+to revise his strategy for the perceived state $\state$, this need not necessarily be the
+actual state. Moreover, when that agent observes $\state$, another agent may perceive yet a
+different state. Given what that latter agent perceives, his actual (pure) strategy will
+determine what he plays. In sum, to describe how likely the potential imitator observes a
+message choice $\messg$, we are interested in the conditional probability
+$P_o(\messg \probbar \state)$ that some other random agent selects $\messg$ when the first
+agent perceives $\state$. This $P_o(\messg \probbar \state)$ is derived from the prior
+probability of states, the current sender population behavior $\Sstrat$ and the given
+observation noise (see Appendix~\ref{sec:imit-succ-with}). Eventually, the imitating agent adopts
+$\messg$ as his choice for $\state$ with probability given by the expected utility of sending
+$\messg$ when perceiving state $\state$. Expected utility should, of course, take the
+probabilistic confusability of states into account as well.
 
-Similar considerations apply to the receiver side. If an agent who gets a chance to change his
+Similar considerations apply to the receiver side. If an agent gets a chance to change his
 intended interpretation of $\messg$, we need to look at the conditional probability
 $P_o(\state \probbar \messg)$ of observing another agent realize interpretation $\state$ given
 that the first agent (and therefore the second as well) perceived $\messg$. This depends on
@@ -553,7 +559,7 @@ observation and realization noise, as well as on the current receiver population
 $\Rstrat$.
 
 
-Appendix~\ref{sec:formal-stuff} shows how imprecise imitation of this sort leads to mean changes in population
+Appendix~\ref{sec:imit-succ-with} shows how imprecise imitation of this sort leads to mean changes in population
 frequencies of choices that can be covered by the following discrete-time formulation:
 \begin{align}
   \label{eq:nRD}
@@ -593,9 +599,6 @@ words, imprecise imitation may make signaling behavior on average look like agen
 across similar states, even if no agent actually generalizes. To explore whether confusion of
 states can have this effect, we turn to numerical simulation.
 
-
-
-
 \subsection{Setting the stage}
 \label{sec:setting-stage}
 
@@ -605,10 +608,11 @@ games. Confusion probabilities between states should be a function of perceptual
 the more similar two states are, the more likely they could be mistaken for each other. 
 
 Let the state space consist of $n \ge 2$ states that are equally spaced across the unit
-interval, including $0$ and $1$. All states occur, for simplicity, with the same probability (\emph{i.e.}~$P_a$ is uniform).
-The distance $\card{\mystate{i} - \mystate{j}}$ is the objective, physical similarity between
-two states $\mystate{i}$ and $\mystate{j}$. Distance in physical space feeds into a perceptual
-similarity function, as described by \citet{Nosofsky1986:Attention-Simil}:
+interval, including $0$ and $1$. All states occur, for simplicity, with the same probability
+(i.e., $P_a$ is uniform).  The distance $\card{\mystate{i} - \mystate{j}}$ is the objective,
+physical similarity between two states $\mystate{i}$ and $\mystate{j}$. Distance in physical
+space feeds into a perceptual similarity function, as described by
+\citet{Nosofsky1986:Attention-Simil}:
 \begin{align*}
   \similarity(\mystate{i}, \mystate{j} \myts ; \myts \imprecision) =
       \begin{cases}
@@ -642,7 +646,7 @@ observation noise $P_o$ is simply the same as realizational confusability $P_r$ 
 that both are governed by the same imprecision parameter $\alpha$:
 \begin{align*}
   P_o(\mystate{o} \probbar \mystate{a}) & \propto \similarity(\mystate{o}, \mystate{a} \myts ; \myts
-  \imprecision) &   P_r(\mystate{r} \probbar \mystate{i}) & \propto \similarity(\mystate{r}, \mystate{i} \myts ; \myts
+  \imprecision)\,, &   P_r(\mystate{r} \probbar \mystate{i}) & \propto \similarity(\mystate{r}, \mystate{i} \myts ; \myts
   \imprecision) \,.
 \end{align*}
 For $\imprecision = 0$, we obtain trivial confusion probabilities: everything is reduced to
@@ -655,7 +659,7 @@ As for utility, we define it in terms of similarity and introduce another free p
  The intention is for this parameter to model the amount of tolerable pragmatic slack, which we felt should be allowed to vary separately from perceptual imprecision:
 \begin{align*}
   \util(\mystate{i}, \mystate{j} \myts ; \myts \toler) =
-      \similarity(\mystate{i}, \mystate{j} \myts ; \myts \toler)
+      \similarity(\mystate{i}, \mystate{j} \myts ; \myts \toler)\,.
 \end{align*}
 This choice of utility function is governed partly by convenience, but also because we believe it has the right general properties for a communicative payoff function.
 Unlike utilities that are, say, linearly or
@@ -683,8 +687,8 @@ amount of change between strategies before and after an update step was smaller 
 chosen threshold. It is not guaranteed that strategies at halting time had converged to the
 eventual attracting state, whether they ran for 200 rounds or not. Our notion of convergence is
 therefore only a categorical measure for reaching a certain (well-considered, but eventually
-arbitrary) degree of stability. In other words, out notion of ``convergence'' is a measure of
-relative speed: it is true that the system reached a state in which evolutionary adaptations
+arbitrary) degree of stability. In other words, our notion of ``convergence'' is a measure of
+relative speed: is it true that the system reached a state in which evolutionary adaptations
 had slowed down almost to a halt before 200 update steps? This is motivated by pragmatic
 concerns regarding length of simulation time, but also theoretically justified, because we
 hypothesize that confusability of states leads to regularization of evolving strategies, which
@@ -730,7 +734,7 @@ stopping time with 90 states, tolerance $\toler = 0.1$ and imprecision $\impreci
 imprecision means that the trial was effectively an application of the plain \rd. Noteworthily,
 the given sender strategy approximates a pure sender strategy that crisply partitions the state
 space into non-convex sets. The irregular shape of the receiver strategy suggests that the
-pictured strategy pair has not yet reached a dynamically stable state under the \rd. Indeed,
+pictured strategy pair has not yet reached a stable state. Indeed,
 the trial was stopped when reaching the maximum of 200 rounds. In contrast, the outcome of a
 trial with identical parameters, except with imprecision $\imprecision = 0.05$, which is shown
 in Figure~\ref{fig:example_stratsB}, had converged (in our technical sense) after 99
@@ -761,16 +765,15 @@ signal use. \emph{Convexity} captures whether a behavioral strategy would projec
 pure strategy. \emph{Expected utility} measures the communicative efficiency of evolved
 strategy pairs.
 
-\paragraph{Entropy.} This classic information-theoretic notion
-captures the amount of uncertainty in a probability
-distribution. Roughly put, entropy of a signaling strategy captures
-inverse distance from a pure strategy. The usual definition of entropy
-applies directly to mixed strategies, but provably equivalent metrics
-for behavioral strategies are ready to hand:
+\paragraph{Entropy.} This classic information-theoretic notion captures the amount of
+uncertainty in a probability distribution. Roughly put, entropy of a signaling strategy
+captures inverse distance from a pure strategy. The usual definition of entropy applies
+directly to mixed strategies (see Footnote~\ref{fn:mixedStrats}), but provably equivalent
+metrics for behavioral strategies are ready to hand:
 \begin{align*}
   E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs}
   \Sstrat(\messg \probbar \state) \cdot \log(\Sstrat(\messg \probbar
-  \state)) \\
+  \state))\,, \\
   E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\state \in \States}
   \Rstrat(\state \probbar \messg) \cdot \log(\Rstrat(\state \probbar
   \messg)) \,. 
@@ -838,26 +841,22 @@ whole set of results.
 As expected, increasing imprecision leads to higher entropy and lower expected
 utility. Importantly, however, imprecision does not necessarily lead to disastrous decline of
 communicative success. What is more, in line with our hypothesis that mere imprecision in
-imitation behavior can lead to behavior that looks like agents generalize across similar
+imitation behavior can lead to behavior that looks as if agents generalize across similar
 stimuli, higher imprecision led to a higher number of outcomes with convex sender
 strategies. It also led to higher rates of convergence. In fact, sufficient imprecision always
 ensured convergence and convexity. It appears that perceptual imprecision leads to more
 vagueness, slightly less communicative efficiency, but more regular, well-behaved languages in
 shorter time.
 
-Beyond promoting convexity and convergence, diffusion also has another interesting
-regularizing effect on the evolution of signaling. There was very
-little variation in the recorded metrics for evolved strategies, at
-least for higher values of imprecision. On closer inspection, it turns
-out that variability in low-imprecision conditions is not only due to
-non-convergence or non-convexity. Figure~\ref{fig:MoreExample_strats}
-gives two more examples of strategy pairs at stopping time. Both are
-obtained for the same triple of parameters, both converged before the
-maximum number of rounds, and both have
-convex sender strategies. However, they are not equally efficient. In
-fact, the pair in Figure~\ref{fig:example_stratsC} has a normalized
-expected utility of $0.99$ while the one in
-Figure~\ref{fig:example_stratsD} only has $0.89$.
+Beyond promoting convexity and convergence, diffusion also has another interesting regularizing
+effect on the evolution of signaling. There is very little variation in the recorded metrics
+for evolved strategies, at least for higher values of imprecision. On closer inspection, it
+turns out that variability in low-imprecision conditions is not only due to non-convergence or
+non-convexity. Figure~\ref{fig:MoreExample_strats} gives two more examples of strategy pairs at
+stopping time. Both are obtained for the same triple of parameters, both converged before the
+maximum number of rounds, and both have convex sender strategies. However, they are not equally
+efficient. In fact, the pair in Figure~\ref{fig:example_stratsC} has a normalized expected
+utility of $0.99$ while the one in Figure~\ref{fig:example_stratsD} only has $0.89$.
 
 
 \begin{figure}
@@ -933,7 +932,7 @@ the unit interval.
 \label{sec:discussion}
 
 Our imprecise imitation dynamic leads to by-and-large successful signaling behavior, even in
-the presence of noise, that show the hallmarks of vagueness as desired. It also gives rise to
+the presence of noise, that shows the hallmarks of vagueness as desired. It also gives rise to
 population-level behavior that looks as if agents are generalizing across similar
 stimuli. Here, we would like to reflect briefly on some further conceptually relevant points
 and compare our approach to related work.
@@ -948,7 +947,7 @@ should consider its philosophical implications. Based on this picture, vagueness
 would seem to be characterized as a strictly population-level phenomenon since it arises in a
 signaling system from the inability of individual agents to fully align their (non-vague)
 strategies because of imprecision. This is, we believe, a plausible mechanism that can already
-explain the existence of vagueness in a language even if we assume each agent commands a
+explain the existence of vagueness in a language even if we assume that each agent commands a
 non-vague idiolect.
 
 We would not, however, want to commit to the idea that vagueness does not exist at the level of
@@ -962,7 +961,7 @@ inseparable component of an agent's ``signaling faculty.'' In this sense, then, 
 not be entirely incompatible with a picture of agents who have internalized a vague signaling
 strategy. It would need to be seen, however, how revision of non-deterministic individual-level
 behavior must be spelled out rigorously and whether the resulting population-level dynamic
-would be equivalent to our present proposal in all respects.
+would be equivalent to our present proposal in all relevant respects.
 
 % Moreover, we believe that the model may be interpreted in yet alternative ways. The
 % probability $\Sstrat(\messg \probbar \state)$ merely gives us the likelihood that $\messg$ will
@@ -976,17 +975,17 @@ would be equivalent to our present proposal in all respects.
 % level, but to explore all possible interpretations would go beyond our current scope.
 
 \subsection{Evolutionary benefits of imprecision}
-The inclusion of confusability of similar states has noteworthy effects on the evolving meaning of signals.
-It transpired from our results that imprecision can have further accelerating and, surprisingly, unifying effects on meaning evolution.
-The unifying property of perceptual imprecision could be considered an evolutionary beneficial
-side-effect. A certain degree of imprecision can lead to higher \emph{within group expected utility},
-defined as the average expected utility that each evolved language scored when playing against
-an arbitrary other language obtained for the same parameter
-values. Figure~\ref{fig:GroupMeasuresB} gives a representative example. The observation repeats
-for other parameter values: while imprecision might decrease the communicative efficiency of
-individual languages, it increases the conceptual coherence and communicative success between
-independently evolving strategies. It is as if mere confusability of states imposes a
-regularity constraint on evolving categories.
+The inclusion of confusability of similar states has noteworthy effects on the evolving meaning
+of signals.  It transpired from our results that imprecision can have further accelerating and,
+surprisingly, unifying effects on meaning evolution.  The unifying property of perceptual
+imprecision could be considered an evolutionarily beneficial side-effect. A certain degree of
+imprecision can lead to higher \emph{within group expected utility}, defined as the average
+expected utility that each evolved language scored when playing against an arbitrary other
+language obtained for the same parameter values. Figure~\ref{fig:GroupMeasuresB} gives a
+representative example. The observation repeats for other parameter values: while imprecision
+might decrease the communicative efficiency of individual languages, it increases the
+conceptual coherence and communicative success between independently evolving strategies. It is
+as if mere confusability of states imposes a regularity constraint on evolving categories.
 
 The phenomenon could potentially not just be a side effect.  Given the benefit of a certain
 amount of imprecision we observe when comparing within group expected utility, it would be
@@ -999,22 +998,21 @@ potential if we see it in the eyes of multilevel selection theory
 \citep{Wilson1994,OGorman2008}.
 
 \subsection{Related work}
-\citet{OConnor2013:The-Evolution-o} makes a proposal related to ours based on a version of reinforcement
-learning for sim-max games, in which successful play leads to reinforcement of choice options
-also for states similar to the ones that actually occurred. This not only leads to vague
-signaling of the appropriate kind, but also speeds up learning in such a way that, especially
-for sim-max games with higher numbers of states, higher levels of communicative success are
-reached in shorter learning periods. Our results complement and extend
+\citet{OConnor2013:The-Evolution-o} makes a proposal related to ours based on a version of
+reinforcement learning for sim-max games, in which successful play leads to reinforcement of
+choice options also for states similar to the ones that actually occurred. This not only leads
+to vague signaling of the appropriate kind, but also speeds up learning in such a way that,
+especially for sim-max games with higher numbers of states, higher levels of communicative
+success are reached in shorter learning periods. Our results complement and extend
 \citeauthor{OConnor2013:The-Evolution-o}'s. The most important differences are that we obtain
 similar regularizing effects also for cases with low numbers of states and do not assume that
 agents have any kind of generalizing capacity in and of themselves, even if that is only
 implicit, as in \citeauthor{OConnor2013:The-Evolution-o}'s generalized reinforcement learning.
-State confusability has an effect on
-aggregate signaling behavior that can be described as generalization without generalizers: the
-dynamics of imprecise imitation look as if ``conclusions'' about what works for one state are
-``carried over'' to similar states. This, however, is merely an epiphenomenon in the sense no
-single agent genuinely generalizes over stimuli or reasons about what a more systematic
-signaling strategy would be.
+State confusability has an effect on aggregate signaling behavior that can be described as
+generalization without generalizers: the dynamics of imprecise imitation look as if
+``conclusions'' about what works for one state are ``carried over'' to similar states. This,
+however, is merely an epiphenomenon in the sense that no single agent genuinely generalizes
+over stimuli or reasons about what a more systematic signaling strategy would be.
 
 
 \citet{FrankeJager2010:Vagueness-Signa} suggested a number of ways in which
@@ -1068,7 +1066,7 @@ themselves have any generalization power.
 
 The goal of this section is to provide technical details for
 Section~\ref{sec:repl-diff-dynam}. We first show, in Section~\ref{sec:cond-imit-succ}, how to
-derive the standard replicator dynamic from noise-free imitation of success. The, in
+derive the standard replicator dynamic from noise-free imitation of success. Then, in
 Section~\ref{sec:imit-succ-with}, we derive the imprecise imitation dynamic by a parallel
 chain of arguments.
 
@@ -1124,9 +1122,9 @@ to:
       \Sstrat(\messg' \probbar \state) \cdot \EU(\messg',\state,\Rstrat)}_{\text{average
       EU at choice point $\state$}} \Big )\,.
 \end{align*}
-This latter formulation is the continuous-time formulation of the replicator
-dynamic. We obtain the discrete-time formulation from it by assuming that discrete update steps
-are infinitesimally small, so that:
+This latter formulation is the continuous-time version of the replicator dynamic. We obtain a
+discrete-time formulation from it by assuming that discrete update steps are infinitesimally
+small, so that:
  \begin{align*}
     \dot{\sigma}(\messg \probbar \state) & = \sigma'(\messg \probbar \state) - \sigma(\messg
     \probbar \state)\\ 
@@ -1263,9 +1261,10 @@ with probability:\footnote{We assume that the noise $P_o(\mystate{o} \probbar \m
   imitate. We refrain from it here, because we see no immediate theoretical gain.}
 \begin{align*}
   P_o(\mystate{o} \probbar \messg) = \sum_{\mystate{r}} P_o(\mystate{o} \probbar \mystate{r})
-  \myts P_{\Rstrat}(\mystate{r} \probbar \messg) = \sum_{\mystate{r}} P_o(\mystate{o} \probbar \mystate{r})
-  \myts \sum_{\mystate{i}} P_r(\mystate{r} \ \probbar
-  \mystate{i}) \myts \Rstrat(\mystate{i} \probbar \messg) \,.
+  \myts P_{\Rstrat}(\mystate{r} \probbar \messg) % = \sum_{\mystate{r}} P_o(\mystate{o} \probbar \mystate{r})
+  % \myts \sum_{\mystate{i}} P_r(\mystate{r} \ \probbar
+  % \mystate{i}) \myts \Rstrat(\mystate{i} \probbar \messg)
+  \,.
 \end{align*}
 % The probability $P(\state' \rightarrow \state, \messg)$ that a randomly sampled learner switches
 % from using $\state'$ to $\state$ in response to $\messg$ is therefore:
@@ -1295,9 +1294,9 @@ have elegant and practical discrete-time solutions in:
   \myts \EU(\state, \messg, \Sstrat)\,,
 \end{align*}
 which is the discrete-time formulation of the imprecise imitation dynamic given in
-Section~\ref{sec:repl-diff-dynam} in Equation~(\ref{eq:nRD}). To see how the discrete-time
-formulation gives rise to the continuous-time formulations above, let's assume that update
-steps are infinitesimally small, so that, for the sender case:
+Equation~(\ref{eq:nRD}). To see how the discrete-time formulation gives rise to the
+continuous-time formulations above, let's assume that update steps are infinitesimally small,
+so that, for the sender case:
 \begin{align*}
   \dot{\sigma}(\messg \probbar \state) & = \sigma'(\messg \probbar \state) - \sigma(\messg
   \probbar \state)\\
