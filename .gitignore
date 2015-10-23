@@ -18,6 +18,7 @@ vague-voronoi-language.pdf
 *.out
 *.rel
 *.bst
+title_page.pdf
 *.run.xml
 .DS_Store
 auto
