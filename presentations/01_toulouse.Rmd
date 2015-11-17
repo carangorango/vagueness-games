@@ -1,0 +1,21 @@
+---
+title: "Imprecise imitation in signaling games"
+author: "Michael Franke & Jose Pedro Correia"
+runtime: shiny
+output:
+  ioslides_presentation:
+    css: mistyle.css
+    smaller: yes
+    transition: faster
+---
+```{r setup, include=FALSE, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE, dev.args = list(bg = 'transparent'))
+require('ggplot2')
+require('reshape2')
+require('coda')
+require('ggmcmc')
+require('grid')
+require('rjags')
+require('runjags')
+```
+
