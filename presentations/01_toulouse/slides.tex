@@ -310,9 +310,11 @@
           \text{\mymark{pure:}} \hspace*{1cm} & \Spure \in \Messgs^\States
           & & 
           \Rpure \in \States^\Messgs \\
+          \textcolor{white}{dummy} \\
           \text{\mymark{mixed:}} \hspace*{1cm} & \Smixed \in \Delta(\Messgs^\States)
           &  &
           \Rmixed \in \Delta(\States^\Messgs) \\
+          \textcolor{white}{dummy} \\
           \text{\mymark{behavioral:}} \hspace*{1cm} & \Sstrat \in (\Delta(\Messgs))^\States
           &  &
           \Rstrat \in (\Delta(\States))^\Messgs
@@ -457,19 +459,21 @@
     \begin{itemize}
     \item \markdef{indicative meaning} of message $\messg$:
       \begin{align*}
-        F^*_{\Sstrat}(\messg) = \set{\state \in \States \setbar
+        F_{\Sstrat}(\messg) = \set{\state \in \States \setbar
           \Sstrat(\messg \probbar \state) \neq 0}
       \end{align*}
     \item \markdef{imperative meaning} of message $\messg$:
       \begin{align*}
-        F^*_{\Rstrat}(\messg) = \set{\act \in \Acts \setbar
-          \Rstrat(\act \probbar \messg) \neq 0}
+        F_{\Rstrat}(\messg) = \set{\state \in \States \setbar
+          \Rstrat(\state \probbar \messg) \neq 0}
       \end{align*}
     \end{itemize}
 
    \begin{block}{Theorem \hfill   \mygray{\citep{JagerMetzger2011:Voronoi-Languag}}}
-    \ESSs of sim-max games yield Voronoi languages.
+    ESSs of sim-max games yield Voronoi languages.
   \end{block}
+
+  \medskip
 
 Population strategies $\tuple{\Sstrat,\Rstrat}$ yield a
     \mymark{Voronoi Language} if:
@@ -517,10 +521,40 @@ Population strategies $\tuple{\Sstrat,\Rstrat}$ yield a
     \item no vagueness
     \end{itemize}
 
+    
 
-    \bigskip
+\end{frame}
 
-    \begin{center}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Naturalizing vagueness}
+\subsection{dummy}
+
+\begin{frame}
+  \frametitle{Vagueness \& its kin}
+  
+  \begin{itemize}
+  \item[] \markdef{context-dependence:} clearly distinct meanings in different contexts
+    \begin{itemize}
+    \item[] \mygray{e.g., \emph{here}, \emph{now}, \emph{you}, \emph{me}, \emph{bank}} 
+    \end{itemize}
+  \item[] 
+  \item[] \markdef{polysemy:} related meaning aspects in different contexts
+    \begin{itemize}
+    \item[] \mygray{e.g., \emph{fast car}, \emph{fast road}, \emph{fast life}} 
+    \end{itemize}
+  \item[] 
+  \item[] \markdef{vagueness:} clear true cases, but unclear borders \hfill \mygray{(Sorites-paradox)}
+    \begin{itemize}
+    \item[] \mygray{e.g., \emph{tall}, \emph{bald}, \emph{red}, \emph{a fortune}}
+    \end{itemize}
+  \end{itemize}
+
+  \medskip
+
+  \begin{center}
       \begin{tikzpicture}[]
 
         % no borderline
@@ -569,13 +603,6 @@ Population strategies $\tuple{\Sstrat,\Rstrat}$ yield a
 
 
 \end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Naturalizing vagueness}
-\subsection{dummy}
 
 \begin{frame}
   \frametitle{Lipman's problem}
@@ -639,9 +666,11 @@ Population strategies $\tuple{\Sstrat,\Rstrat}$ yield a
 \begin{frame}
   \frametitle{Technical challenge}
   
-  we want an evolutionary dynamics that
+  we want an evolutionary dynamic that
   \begin{itemize}
+  \item[] 
   \item[(i)]  integrates some plausible notion of bounded rationality
+  \item[] 
   \item[(ii)] evolves regular, systematic (though vague) signal meanings 
   \end{itemize}
 
@@ -652,15 +681,38 @@ Population strategies $\tuple{\Sstrat,\Rstrat}$ yield a
 \subsection{dummy}
 
 \begin{frame}
+  \frametitle{Deriving the replicator dynamic}
+  
+  \begin{block}{Biological}
+    \begin{itemize}
+    \item[] asexual reproduction proportional to fitness
+    \item[] life-death process, birth proportional to fitness
+    \item[] \dots
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Cultural}
+    \begin{itemize}
+    \item[] mean field of reinforcement learning between 2 agents
+    \item[] mean field of imitation in infinite populations (many varieties)
+    \item[] \dots 
+    \end{itemize}
+  \end{block}
+
+  \slideFN{\citep{Sandholm2010:Population-Game}}
+
+\end{frame}
+
+\begin{frame}
   \frametitle{Imitation of successes}
   
   \begin{block}{Idea}
   \begin{itemize}
   \item huge, virtually infinite population
   \item each agent holds a pure sender and a pure receiver stratey
-  \item every now and then, agent $i$ get a revision opportunity:
+  \item every now and then, agent $i$ get a revision opportunity, e.g.:
     \begin{itemize}
-    \item $i$ observes what some agent $j$ sends $\messg$ at choice point $\state$
+    \item $i$ observes that $j$ sends $\messg$ at choice point $\state$
     \item $i$ henceforth sends $\messg$ in $\state$ with probability $\EU(\messg, \state, \Rstrat)$
     \end{itemize}
   \end{itemize}
@@ -792,9 +844,11 @@ Population strategies $\tuple{\Sstrat,\Rstrat}$ yield a
   P_{\Rstrat}(\mystate{r} \probbar \messg) & = \sum_{\mystate{i}} P_r(\mystate{r} \ \probbar
   \mystate{i}) \Rstrat(\mystate{i} \probbar \messg)\\
   P_o(\messg \probbar \mystate{o}) & = \sum_{\mystate{a}} P_{\overline{o}}(\mystate{a}
-  \probbar \mystate{o}) \myts P_{\Sstrat}(\messg \probbar \mystate{a}) \\
+  \probbar \mystate{o}) \myts P_{\Sstrat}(\messg \probbar \mystate{a}) & \text{\mygray{$i$
+      observes $j$ play $\messg$ when observing $\mystate{o}$}} \\
   P_o(\mystate{o} \probbar \messg) & = \sum_{\mystate{r}} P_o(\mystate{o} \probbar \mystate{r})
-  \myts P_{\Rstrat}(\mystate{r} \probbar \messg)
+  \myts P_{\Rstrat}(\mystate{r} \probbar \messg) & \text{\mygray{$i$
+      observes $j$ play $\mystate{o}$ when observing $\messg$}}
 \end{align*}
 
 \end{frame}
@@ -888,8 +942,8 @@ Population strategies $\tuple{\Sstrat,\Rstrat}$ yield a
   \item 50 trials for each triplet of parameter values:
     \begin{itemize}
     \item $\ns = \card{\States} \in \set{6, 10, 50, 90}$
-    \item $\imprecision \in \set{0, 0.05, 0.1, 0.2, 0.3}$
-    \item $\toler \in \set{0.05, 0.1, 0.2, 0.3}$
+    \item $\imprecision \in \set{0, 0.05, 0.1, 0.2, 0.3}$ \hfill \mygray{($\imprecision = 0$ gives RD)}
+    \item $\toler \in \set{0.05, 0.1, 0.2, 0.3}$ \hfill \mygray{($\toler = 0$ would be Lewis game)}
     \end{itemize}
   \item start with random population $\Sstrat$, $\Rstrat$
   \item iterated imprecise imitation dynamic until:
