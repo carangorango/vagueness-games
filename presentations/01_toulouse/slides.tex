@@ -20,6 +20,11 @@
 
 \usepackage{mycommands}
 
+\newcommand{\imprecision}{\ensuremath{\alpha}} % imprecision
+\newcommand{\toler}{\ensuremath{\beta}} % tolerance
+\newcommand{\similarity}{\ensuremath{\text{Sim}}} % similarity function
+\newcommand{\ns}{\ensuremath{n_s}} % number of states
+
 %========================================
 % More Layout (Beamer Special)
 %========================================
@@ -262,18 +267,18 @@
      \slideFN{\citep{JagerRooijvan-Rooij2007:Language-Struct}}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Similarity maximizing games}
-  \framesubtitle{Example}
+% \begin{frame}
+%   \frametitle{Similarity maximizing games}
+%   \framesubtitle{Example}
 
-    \begin{center}
-      \vspace{-0.35cm}
+%     \begin{center}
+%       \vspace{-0.35cm}
 
-      \includegraphics[width=\textwidth]{Comic_sim_max.pdf}
+%       \includegraphics[width=\textwidth]{Comic_sim_max.pdf}
 
-     \end{center}
+%      \end{center}
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Sim-max Games}
@@ -289,14 +294,13 @@
       \end{itemize}
     \item $\utils \mycolon \States \times \States \rightarrow \mathds{R}$
       \begin{itemize}
-      \item monotone function of similarity 
+      \item function of similarity 
       \end{itemize}
-
     \end{itemize}
 
 \end{frame}
 
-\section{Solving SM-games}
+\section{Replicator dynamic}
 \subsection{dummy}
 
 \begin{frame}
@@ -306,9 +310,11 @@
           \text{\mymark{pure:}} \hspace*{1cm} & \Spure \in \Messgs^\States
           & & 
           \Rpure \in \States^\Messgs \\
+          \textcolor{white}{dummy} \\
           \text{\mymark{mixed:}} \hspace*{1cm} & \Smixed \in \Delta(\Messgs^\States)
           &  &
           \Rmixed \in \Delta(\States^\Messgs) \\
+          \textcolor{white}{dummy} \\
           \text{\mymark{behavioral:}} \hspace*{1cm} & \Sstrat \in (\Delta(\Messgs))^\States
           &  &
           \Rstrat \in (\Delta(\States))^\Messgs
@@ -316,22 +322,22 @@
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{Combinatorial explosion of pure strategies}
+% \begin{frame}
+%   \frametitle{Combinatorial explosion of pure strategies}
 
-    \begin{itemize}
-    \item fix $\States$ as a 2-dim space with $25 \times 25 = 625$ states
-    \item with 3 messages this gives:
-      \begin{itemize}
-      \item $3^{625} \approx 1.578 \times 10^{298}$ pure sender
-        strategies 
-      \item $625^{3}  = 244\,140\,625$ pure receiver strategies
-      \item $\approx 3.876 \times 10^{303}$ pure strategy in the
-        symmetric game
-      \end{itemize}
-    \end{itemize}
+%     \begin{itemize}
+%     \item fix $\States$ as a 2-dim space with $25 \times 25 = 625$ states
+%     \item with 3 messages this gives:
+%       \begin{itemize}
+%       \item $3^{625} \approx 1.578 \times 10^{298}$ pure sender
+%         strategies 
+%       \item $625^{3}  = 244\,140\,625$ pure receiver strategies
+%       \item $\approx 3.876 \times 10^{303}$ pure strategy in the
+%         symmetric game
+%       \end{itemize}
+%     \end{itemize}
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Example: behavioral strategies}
@@ -423,98 +429,53 @@
 
 
 
+% \begin{frame}
+%   \frametitle{Simulation results: 2d-sim-max game}
+%   \framesubtitle{Discrete-time replicator dynamic in behavioral strategies}
+
+%     \begin{minipage}[t]{0.45\linewidth}
+%       \begin{center}
+%         \includegraphics[width=\textwidth]{sim-max-2d.png}
+%       \end{center}
+%     \end{minipage} $\quad$
+%     \begin{minipage}[t]{0.45\linewidth}
+%       \begin{center}
+%         \includegraphics[width=\textwidth]{sim_max_game.png}
+%       \end{center}
+%     \end{minipage}
+
+
+%  \href{run:myexec_SM2d}{\beamergotobutton{start simulation}}
+
+
+%     \slideFN{\citep{JagerRooijvan-Rooij2007:Language-Struct}}
+
+% \end{frame}
+
 \begin{frame}
-  \frametitle{Simulation results: 2d-sim-max game}
-  \framesubtitle{Discrete-time replicator dynamic in behavioral}
+  \frametitle{Meaning of signals}
 
-    \begin{minipage}[t]{0.45\linewidth}
-      \begin{center}
-        \includegraphics[width=\textwidth]{sim-max-2d.png}
-      \end{center}
-    \end{minipage} $\quad$
-    \begin{minipage}[t]{0.45\linewidth}
-      \begin{center}
-        \includegraphics[width=\textwidth]{sim_max_game.png}
-      \end{center}
-    \end{minipage}
-
-
- \href{run:myexec_SM2d}{\beamergotobutton{start simulation}}
-
-
-    \slideFN{\citep{JagerRooijvan-Rooij2007:Language-Struct}}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Meaning of signals: qualitative}
-
-    Fix population state $\tuple{\Sstrat,\Rstrat}$:
+    Fix population state $\tuple{\Sstrat,\Rstrat}$: \hfill \mygray{\citep{Lewis_1969:Convention}}
     \begin{itemize}
     \item \markdef{indicative meaning} of message $\messg$:
       \begin{align*}
-        F^*_{\Sstrat}(\messg) = \set{\state \in \States \setbar
+        F_{\Sstrat}(\messg) = \set{\state \in \States \setbar
           \Sstrat(\messg \probbar \state) \neq 0}
       \end{align*}
     \item \markdef{imperative meaning} of message $\messg$:
       \begin{align*}
-        F^*_{\Rstrat}(\messg) = \set{\act \in \Acts \setbar
-          \Rstrat(\act \probbar \messg) \neq 0}
+        F_{\Rstrat}(\messg) = \set{\state \in \States \setbar
+          \Rstrat(\state \probbar \messg) \neq 0}
       \end{align*}
     \end{itemize}
 
-    \slideFN{\citep{Lewis_1969:Convention}}
+   \begin{block}{Theorem \hfill   \mygray{\citep{JagerMetzger2011:Voronoi-Languag}}}
+    ESSs of sim-max games yield Voronoi languages.
+  \end{block}
 
-\end{frame}
+  \medskip
 
-
-% \begin{frame}
-%   \frametitle{Meaning of signals: quantitative}
-
-%     Fix population state $\tuple{\Sstrat,\Rstrat}$:
-%     \begin{itemize}
-%     \item \markdef{indicative meaning} of message $\messg$:
-%       \begin{align*}
-%         F_{\Sstrat}(\messg, \state) = \frac{\Sstrat(\messg \probbar
-%           \state)}{\sum_{\state' \in \States} \Sstrat(\messg \probbar
-%           \state')}
-%       \end{align*}
-%     \item \markdef{imperative meaning} of message $\messg$:
-%       \begin{align*}
-%         F_{\Rstrat}(\messg, \act) = \Rstrat(\act \probbar \messg)
-%       \end{align*}
-%     \end{itemize}
-
-%     \slideFN{\citep{FrankeJager2010:Vagueness-Signa}}
-    
-% \end{frame}
-
-
-
-
-\begin{frame}
-  \frametitle{Results of (most) simulation runs}
-    \begin{itemize}
-    \item indicative meaning in attracting state:
-      \begin{itemize}
-      \item convex regions of state space \hfill ($\approx$ natural concepts)
-      \end{itemize}
-    \item imperative meaning in attracting state:
-      \begin{itemize}
-      \item center of gravity of corresponding region \hfill ($\approx$ prototypes)
-      \end{itemize}
-    \end{itemize}
-    \begin{center}
-      \includegraphics[width=0.3\textwidth]{sim_max_game.png}
-    \end{center}
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Analytical result}
-
-
-    Population strategies $\tuple{\Sstrat,\Rstrat}$ yields a
+Population strategies $\tuple{\Sstrat,\Rstrat}$ yield a
     \mymark{Voronoi Language} if:
       \vspace{-0.2cm}
       \begin{columns}[t]
@@ -531,17 +492,8 @@
         \end{column}
       \end{columns}
 
-
-  \bigskip
-
- 
-
-  \begin{block}{Theorem}
-    \ESSs of sim-max games yield Voronoi languages.
-  \end{block}
-
-  \slideFN{\citep{JagerMetzger2011:Voronoi-Languag}}
 \end{frame}
+
 
 
 \begin{frame}
@@ -554,7 +506,7 @@
     \item captures co-evolution of concepts and meanings
     % \item quantifies influence of ``perception space''
     \item explains properties of natural concepts \& prototypes\\
-      \vspace{-0.13cm} \hspace{4.6cm}
+      \vspace{-0.13cm} \hspace{4cm}
       {\footnotesize{\color{gray}{(convexity)}}}
       \hspace{0.4cm} {\footnotesize{\color{gray}{(centrality)}}}
     \end{itemize}
@@ -569,6 +521,7 @@
     \item no vagueness
     \end{itemize}
 
+    
 
 \end{frame}
 
@@ -580,8 +533,28 @@
 \subsection{dummy}
 
 \begin{frame}
-  \frametitle{Desideratum:  higher-order vagueness}
-    \begin{center}
+  \frametitle{Vagueness \& its kin}
+  
+  \begin{itemize}
+  \item[] \markdef{context-dependence:} clearly distinct meanings in different contexts
+    \begin{itemize}
+    \item[] \mygray{e.g., \emph{here}, \emph{now}, \emph{you}, \emph{me}, \emph{bank}} 
+    \end{itemize}
+  \item[] 
+  \item[] \markdef{polysemy:} related meaning aspects in different contexts
+    \begin{itemize}
+    \item[] \mygray{e.g., \emph{fast car}, \emph{fast road}, \emph{fast life}} 
+    \end{itemize}
+  \item[] 
+  \item[] \markdef{vagueness:} clear true cases, but unclear borders \hfill \mygray{(Sorites-paradox)}
+    \begin{itemize}
+    \item[] \mygray{e.g., \emph{tall}, \emph{bald}, \emph{red}, \emph{a fortune}}
+    \end{itemize}
+  \end{itemize}
+
+  \medskip
+
+  \begin{center}
       \begin{tikzpicture}[]
 
         % no borderline
@@ -628,9 +601,22 @@
       \end{tikzpicture}
     \end{center}
 
-  
 
-  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Lipman's problem}
+    
+  \begin{block}{Challenge}
+    \begin{itemize}
+    \item rational players will never prefer a vague language over a
+      precise one
+    \item vague languages can never be evolutionarily stable
+    \item how to explain abundant vagueness in natural language?
+    \end{itemize}
+  \end{block}
+
+
   \begin{block}{Vague strategies}
     \vspace*{-0.25cm}
     \begin{center}
@@ -638,23 +624,10 @@
     \end{center}
   \end{block}
 
-\end{frame}
-
-
-
-\begin{frame}
-
-\frametitle{Problem: vagueness is irrational / unstable in sim-max games}
-
-\begin{itemize}
-\item rational players will never prefer a vague language over a
-  precise one
-\item vague languages can never be evolutionarily stable
-\end{itemize}
-
-  \slideFN{\citep{Lipman2009:Why-is-Language}}
+    \slideFN{\citep{Lipman2009:Why-is-Language}}
 
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Possible solutions}
@@ -690,10 +663,45 @@
 
 \end{frame}
 
+\begin{frame}
+  \frametitle{Technical challenge}
+  
+  we want an evolutionary dynamic that
+  \begin{itemize}
+  \item[] 
+  \item[(i)]  integrates some plausible notion of bounded rationality
+  \item[] 
+  \item[(ii)] evolves regular, systematic (though vague) signal meanings 
+  \end{itemize}
 
+
+\end{frame}
 
 \section{Imitation of success}
 \subsection{dummy}
+
+\begin{frame}
+  \frametitle{Deriving the replicator dynamic}
+  
+  \begin{block}{Biological}
+    \begin{itemize}
+    \item[] asexual reproduction proportional to fitness
+    \item[] life-death process, birth proportional to fitness
+    \item[] \dots
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Cultural}
+    \begin{itemize}
+    \item[] mean field of reinforcement learning between 2 agents
+    \item[] mean field of imitation in infinite populations (many varieties)
+    \item[] \dots 
+    \end{itemize}
+  \end{block}
+
+  \slideFN{\citep{Sandholm2010:Population-Game}}
+
+\end{frame}
 
 \begin{frame}
   \frametitle{Imitation of successes}
@@ -702,9 +710,9 @@
   \begin{itemize}
   \item huge, virtually infinite population
   \item each agent holds a pure sender and a pure receiver stratey
-  \item every now and then, agent $i$ get a revision opportunity:
+  \item every now and then, agent $i$ get a revision opportunity, e.g.:
     \begin{itemize}
-    \item $i$ observes what some agent $j$ sends $\messg$ at choice point $\state$
+    \item $i$ observes that $j$ sends $\messg$ at choice point $\state$
     \item $i$ henceforth sends $\messg$ in $\state$ with probability $\EU(\messg, \state, \Rstrat)$
     \end{itemize}
   \end{itemize}
@@ -836,9 +844,11 @@
   P_{\Rstrat}(\mystate{r} \probbar \messg) & = \sum_{\mystate{i}} P_r(\mystate{r} \ \probbar
   \mystate{i}) \Rstrat(\mystate{i} \probbar \messg)\\
   P_o(\messg \probbar \mystate{o}) & = \sum_{\mystate{a}} P_{\overline{o}}(\mystate{a}
-  \probbar \mystate{o}) \myts P_{\Sstrat}(\messg \probbar \mystate{a}) \\
+  \probbar \mystate{o}) \myts P_{\Sstrat}(\messg \probbar \mystate{a}) & \text{\mygray{$i$
+      observes $j$ play $\messg$ when observing $\mystate{o}$}} \\
   P_o(\mystate{o} \probbar \messg) & = \sum_{\mystate{r}} P_o(\mystate{o} \probbar \mystate{r})
-  \myts P_{\Rstrat}(\mystate{r} \probbar \messg)
+  \myts P_{\Rstrat}(\mystate{r} \probbar \messg) & \text{\mygray{$i$
+      observes $j$ play $\mystate{o}$ when observing $\messg$}}
 \end{align*}
 
 \end{frame}
@@ -879,27 +889,137 @@
   \end{align*}
 \end{block}
 
+\end{frame}
 
+\section{Simulations}
+\subsection{dummy}
 
+\begin{frame}
+  \frametitle{Game set-up}
+  
+  \begin{itemize}
+  \item $\States \subseteq [0;1]$ --- finite, evenly spaced, containing 0 and 1
+  \item two messages 
+  \item uniform/flat prior $P_a$ 
+  \item similarity: \hfill \mygray{\citep{Nosofsky1986:Attention-Simil}}
+    \begin{align*}
+      \text{Sim}(\mystate{i}, \mystate{j} \myts ; \myts \imprecision) =
+      \begin{cases}
+        1 & \textrm{if } \imprecision = 0 \textrm{ and } \mystate{i} = \mystate{j} \\
+        0 & \textrm{if } \imprecision = 0 \textrm{ and } \mystate{i} \neq \mystate{j} \\
+        \expo \left ( -  \frac{\card{\mystate{i} - \mystate{j}}^2}{ \imprecision^2} \right ) & \textrm{otherwise,} \\
+      \end{cases}
+    \end{align*}
+  \item utility:
+    \begin{align*}
+      \util(\mystate{i}, \mystate{j} \myts ; \myts \toler) = \similarity(\mystate{i},
+      \mystate{j} \myts ; \myts \toler)
+    \end{align*}
+  \item observation / realization noise:
+    \begin{align*}
+      P_o(\mystate{o} \probbar \mystate{a}) & \propto \similarity(\mystate{o}, \mystate{a} \myts ; \myts
+      \imprecision)\,, &   P_r(\mystate{r} \probbar \mystate{i}) & \propto
+      \similarity(\mystate{r}, \mystate{i} \myts ; \myts 
+      \imprecision) \,.
+    \end{align*}
+  \end{itemize}
 
 \end{frame}
 
+\begin{frame}
+  \frametitle{Nosofsky similarity}
+  
+  \centering
+
+  \includegraphics[width=\textwidth]{../../paper/version_04/plots/NosofskySim.pdf}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Simulation set-up}
+  
+  \begin{itemize}
+  \item 50 trials for each triplet of parameter values:
+    \begin{itemize}
+    \item $\ns = \card{\States} \in \set{6, 10, 50, 90}$
+    \item $\imprecision \in \set{0, 0.05, 0.1, 0.2, 0.3}$ \hfill \mygray{($\imprecision = 0$ gives RD)}
+    \item $\toler \in \set{0.05, 0.1, 0.2, 0.3}$ \hfill \mygray{($\toler = 0$ would be Lewis game)}
+    \end{itemize}
+  \item start with random population $\Sstrat$, $\Rstrat$
+  \item iterated imprecise imitation dynamic until:
+    \begin{itemize}
+    \item 200 rounds, or
+    \item changes are minimal \hfill (convergence \emph{or} bottleneck)
+    \end{itemize}
 
 
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example results}
+  
+  \centering
+
+  \includegraphics[width=\textwidth]{plots/exampleStrats.png}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Result stats}
+  
+  \centering
+
+  \includegraphics[width=0.7\textwidth]{../../paper/version_04/plots/MeanMetrics3.pdf}
+
+  \slideFN{$\toler = 0.1$}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{More example results}
+  
+  two outcomes of standard RD:
+  \begin{itemize}
+  \item convex and converged
+  \item not equally efficient
+  \end{itemize}
+
+  \bigskip
+
+  \centering
+
+  \includegraphics[width=\textwidth]{plots/exampleStrats2.png}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Within group stats}
+
+  \centering
+
+  \includegraphics[width=\textwidth]{plots/groupStats.png}
+
+  \slideFN{\toler = 0.1, \ns = 10}
+
+\end{frame}
 
 \miniframesoff
 
 \begin{frame}[plain]
-  \frametitle{Summary}
+  \frametitle{Conclusions}
   
   \begin{enumerate}
-  \item meaning evolution without predefined states
-  \item co-evolution of categories and meanings \medskip
-  \item sim-max games
+  \item generalization of replicator dynamic
     \begin{itemize}
-    \item[] replicator dynamics in behavioral strategies\medskip 
+    \item perceptual noise during play and imitation
     \end{itemize}
-  \item vagueness in meaning
+  \item[] 
+  \item evolving signal meaning is vague and highly regular
+    \begin{itemize}
+    \item \emph{as-if} generalization without actual generalization at agent-level
+    \end{itemize}
   \end{enumerate}
 \end{frame}
 
