@@ -203,12 +203,8 @@ $\Spure \in \Messgs^\States$, which deterministically defines which message woul
 each state. Similarly, a pure receiver strategy is a function $\Rpure \in \States^\Messgs$.
 
 
-\citet{JagerMetzger2011:Voronoi-Languag} showed that the evolutionarily stable states of
-sim-max games are remarkably systematic: the evolutionarily stable states are demonstrably
-so-called Voronoi languages.\footnote{Their results were obtained for games with infinitely
-  many states in $n$-dimensional Euclidean space $\States \subseteq \mathds{R}^n$ and a
-  quadratic loss function for utilities
-  $\Utils(\mystate{1}, \mystate{2}) = - (\mystate{1} - \mystate{2})^2$.} Roughly put, a Voronoi
+\citet{JagerMetzger2011:Voronoi-Languag} showed that the evolutionarily stable states of sim-max games with infinitely many states in $n$-dimensional Euclidean space $\States \subseteq \mathds{R}^n$ and a quadratic loss function for utilities $\Utils(\mystate{1}, \mystate{2}) = - (\mystate{1} - \mystate{2})^2$ are remarkably systematic: the evolutionarily stable states are demonstrably so-called Voronoi languages.
+Roughly put, a Voronoi
 language is a pair of sender and receiver strategies, such that the sender strategy partitions
 the state space into convex categories, while the receiver's interpretations are the central
 spots in each category. A subset $X$ of $\mathds{R}^n$ is convex if, informally put, all points
@@ -607,7 +603,7 @@ conditional confusion probabilities $P_o$ and $P_r$ and the utilities of our sim
 games. Confusion probabilities between states should be a function of perceptual similarity:
 the more similar two states are, the more likely they could be mistaken for each other. 
 
-Let the state space consist of $n \ge 2$ states that are equally spaced across the unit
+Let the state space consist of $\ns \ge 2$ states that are equally spaced across the unit
 interval, including $0$ and $1$. All states occur, for simplicity, with the same probability
 (i.e., $P_a$ is uniform).  The distance $\card{\mystate{i} - \mystate{j}}$ is the objective,
 physical similarity between two states $\mystate{i}$ and $\mystate{j}$. Distance in physical
@@ -670,12 +666,13 @@ small amount of imprecision in communication is tolerable, whereas similarly sma
 in intolerably far away interpretations matter very little, with a smooth transition between
 these regimes \citep[c.f.][]{OConnor2013:The-Evolution-o}.
 
+In order to simplify the analysis, we focus on games with two messages, \emph{i.e.}~we fix $\card{M} = 2$.
 In sum, to structure thinking about the behavior of our imprecise imitation dynamic, the system
-is governed by three parameters: the number $\ns = \card{T}s$ of states in the state space,
+is governed by three parameters: the number $\ns = \card{T}$ of states in the state space,
 imprecision $\imprecision$ and tolerance $\toler$.
 
 
-\subsection{Experimental set-up}
+\subsection{Simulation set-up}
 \label{sec:simulations}
 
 We ran 50 trials of the discrete-time dynamic in (\ref{eq:nRD}), starting with randomly sampled

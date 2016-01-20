@@ -5,8 +5,23 @@
 > This paper is very nicely written and the technical results are 1) novel, 2) interesting and 3) of the right level for a publication in philosophy.
 >
 > 1) The author(s) should motivate the assumption of confusability of stimuli a bit more.  One or two sentences and a citation about related empirical work should do it.
->
+
+**What should we cite here?**
+
+**- Individual differences in taste perception related to genetic variation: Bufe et al. The Molecular Basis of Individual Differences in Phenylthiocarbamide and Propylthiouracil Bitterness Perception. Current Biology, 2005, 15, 1-6**
+
+**- Genetic variation related to variation in odour perception: Keller et al. Genetic variation in a human odorant receptor alters odour perception. Nature, 2007, 449, 468-472**
+
+**- Just-noticeable difference? https://en.wikipedia.org/wiki/Just-noticeable_difference**
+
+**- Visual uncertainty influences behavior: Van Bergen, R. S., Ma, W. J., Pratte, M. S., & Jehee, J. F. M. (2015). Sensory uncertainty decoded from visual cortex predicts behavior. Nature Neuroscience, 18(12), 1728–1730. http://doi.org/10.1038/nn.4150**
+
+**- This looks very relevant: Barthelmé S, Mamassian P (2009) Evaluation of Objective Uncertainty in the Visual System. PLoS Comput Biol 5(9): e1000504. doi:10.1371/journal.pcbi.1000504**
+
+
 > 2) Section 4.2 is labeled 'Experimental set-up' and then describes simulation results.  Since there is an active debate in the philosophy of modeling about whether computer simulations should be thought of as experiments or not (with probably more philosophers leaning towards not), I would recommend relabeling this as 'Simulation set-up' or some such.
+
+**Made the change**
 
 
 ## Referee: 2
@@ -36,9 +51,17 @@
 > I don't follow the sentence on page 1, “Since the the existence...”  Why do unclear borderline cases entail inefficiency?
 >
 > I think footnote 2 should be moved into the main text.  I'm skeptical if JMR's results would hold for any monotonic utility function on any metric space.  I think it might be better to start with euclidean space and utility function in the text (or an informal gloss).  Drop the generality that is implied by describing the game as taking place in any-old metric space and having any-old utility function that monotonically decreasing in distance, since this generality is never used in the paper.
->
+
+**Moved footnote into the main text. Not sure how to address the rest.**
+
 > Section 3.2, I would say this is a noisy game, not noisy replicator dynamics, since the dynamics remains deterministic.  I'm worried that “noisy … dynamics” suggests a stochastic dynamics.
->
+
+**The reviewer has a point that the whole game is noisy, not just the dynamic. No changes made yet.**
+
 > Page 7, the number of states on the previous page was $n$, now it's $n_s$.
->
+
+**Good catch. Changed $n$ on page 6 to $\ns$**
+
 > Page 8, I take it from the figures that there are only two messages.  I don't recall being told that, although it's entirely possible I missed it.
+
+**Correct. Added note on this at end of Section 4.1**
