@@ -18,6 +18,8 @@
 
 **- This looks very relevant: Barthelmé S, Mamassian P (2009) Evaluation of Objective Uncertainty in the Visual System. PLoS Comput Biol 5(9): e1000504. doi:10.1371/journal.pcbi.1000504**
 
+**- Nosofsky**
+
 
 > 2) Section 4.2 is labeled 'Experimental set-up' and then describes simulation results.  Since there is an active debate in the philosophy of modeling about whether computer simulations should be thought of as experiments or not (with probably more philosophers leaning towards not), I would recommend relabeling this as 'Simulation set-up' or some such.
 
@@ -33,7 +35,9 @@
 > Motivation One: Lipman's problem – it seems intuitive that evolution would reward precision, but vagueness is ubiquitous.  What gives?
 >
 > Here I'm not really sure that the model provides an answer to this problem.  The agents in the model are getting very close to being as precise as they can be given the constraints imposed by the modeler.  So, all the explanatory work is being done by the modeler's choices.  And, I think the authors would agree their choices are sufficiently arbitrary as to not provide clear explanations.  (I don't mean this is a criticism of the model, just a point about what parts can be used to explain.)
->
+
+**It does not follow immediately 
+
 > To put this a slightly different way, what exactly is the answer that the model is providing to Lipman's problem?  It strikes me that the answer is “evolution can't make them any more precise.”  But this answer was an obvious answer to Lipman's problem without the authors' model, and I don't know what the model adds.
 >
 > One final thought on Lipman's problem, I find it strange that the authors don't discuss partial pooling equilibria as a potential answer to this question.  These actually do provide – at least some – explanation for why evolution might not lead to more precision even when more precision is possible.
