@@ -68,6 +68,9 @@
 \newcommand{\myred}[1]{\textcolor{red}{#1}} 
 \renewcommand{\Pr}{\ensuremath{P}} 
 
+\definecolor{Red}{RGB}{178,34,34}
+\newcommand{\mf}[1]{\textcolor{Red}{[mf: #1]}} 
+
 % \doublespacing
 
 \title{Vagueness and imprecise imitation in signaling games}
@@ -93,51 +96,83 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Many concepts and expressions are vague. A vague category knows clear
-cases that fall under it, clear cases that do not, and also so-called
-borderline cases. Borderline cases do not clearly apply, nor do they
-clearly not apply, and there may be differences between borderline
-cases in terms of how well they represent the category in
-question. Vagueness does not seem to dramatically affect the success
-of everyday communication, but it is troublesome for some of the most
-prominent theories of language and meaning. This is especially so for the logico-positivist tradition of Frege, Russell, and early
-Wittgenstein, which is challenged by the paradoxes vagueness gives rise
-to.
+Many concepts and expressions are vague. A vague category knows clear cases that fall under it,
+clear cases that do not, and also so-called borderline cases. Borderline cases do not clearly
+apply, nor do they clearly not apply, and there may be differences between borderline cases in
+terms of how well they represent the category in question. Vagueness does not seem to
+dramatically affect the success of everyday communication, but it is troublesome for some of
+the most prominent theories of language and meaning. This is especially so for the
+logico-positivist tradition of Frege, Russell, and early Wittgenstein, which is challenged by
+the paradoxes vagueness gives rise to.
 
-But there are other intriguing aspects about vagueness. The puzzle
-that we are concerned with here is how vagueness could arise and be
-maintained in the first place. This is a serious issue for
-functionalist accounts that maintain that concepts and linguistic
-meanings evolved driven towards efficiency. Since the existence of
-unclear borderline cases seems to entail inefficiency of
-categorization or communication, the challenge, succinctly put forward
-by \citet{Lipman2009:Why-is-Language}, is to explain how vagueness can
-persist under evolutionary pressure to be optimally discriminative. We
-address \emph{Lipman's problem} as a technical challenge, namely to
-find a conceptually sound and mathematically coherent formal model of
-the evolution of categorization and language use that yields
-by-and-large efficient categorization \emph{and} vagueness.
-
-A number of authors have recently tried to explain why vagueness evolved as something that is
-itself useful
+But there are other intriguing aspects about vagueness. One perplexing issue is how vagueness
+could arise and be maintained in the first place. This is an apparent puzzle for functionalist
+accounts that maintain that concepts and linguistic meanings evolved driven towards
+efficiency. Since the existence of unclear borderline cases seems to entail inefficiency of
+categorization or communication, the challenge, succinctly put forward by
+\citet{Lipman2009:Why-is-Language}, is to explain two things at the same time: (i) how
+vagueness can persist under evolutionary pressure to be optimally discriminative, (ii) without
+jeopardizing the possibility of evolving, learning and communicating with a meaningful
+language. A number of authors have consequently tried to explain why vagueness evolved as
+something that is itself useful
 \citep[e.g.][]{Jaegherde-Jaegher2003:A-Game-Theoreti,Deemter2009:Utility-and-Lan,BlumeBoard2013:Intentional-Vag}.
 Others have argued that vagueness is a natural byproduct of limitations in information
-processing \citep[e.g.][]{FrankeJager2010:Vagueness-Signa} or the result of particular
-low-level learning strategies \citep[e.g.][]{OConnor2013:The-Evolution-o}. This paper
-contributes to the latter line of thought. Concretely, we introduce a dynamic that describes
-changes in aggregate population behavior as the result of imitation with probabilistic
-confusability of similar stimuli. We show that stochastic noise can not only lead to vague, yet
-relatively efficient signal use, but can also unify evolutionary outcomes and help avoid
-suboptimal categorization: regularities in confusability of stimuli also regularize signaling
-behavior and evolving categories. The system gives rise to generalization behavior without
-agents actually generalizing.
+processing \citep[e.g.][]{FrankeJager2010:Vagueness-Signa} or of generalization in low-level
+learning strategies \citep[e.g.][]{OConnor2013:The-Evolution-o}. This paper contributes to the
+latter line of thought. We believe that vagueness in language and thought may have many
+reasons, not just one. We focus here on one possibility that has not received due attention,
+namely imprecise perception of similar stimuli and imprecise realization of similar
+responses.
+
+Our conceptual starting point is the widely shared conviction that language is shaped by at
+least two forces, which may, on occasion, pull in opposite direction. On the one hand, there is
+functional pressure towards efficient communication. On the other hand, there is systematic
+error, noise or imprecision in the transmission of linguistic behavior, knowledge or traits. As
+an example for the latter, consider a child learning syntactic rules from a parent
+generation. The child must infer these unobservable rules from observable speech. Inductive
+biases of the learner may influence which syntactic rules are likely to be inferred from
+(finite) parental input. Over the course of many generations, the effects of such transmission
+biases can, in a manner of speaking, ``accumulate'' and lead to surprising results, such as the
+evolution of compositional form-meaning mappings or the use of regular recursive syntactic
+structure. This can happen when the effects of tranmission biases are isolated, as in iterated
+learning models
+\citep{KirbyHurford2002:The-Emergence-o,SmithKirby2003:Iterated-Learni,GriffithsKalish2007:Language-Evolut,KirbyGriffith2014:Iterated-Learni},
+or when they interact with functional pressure towards efficient communication, e.g., as
+formalized in the replicator mutator dynamic
+\citep[e.g.][]{NowakPlotkin2000:The-Evolution-o,NowakKomarova2001:Evolution-of-Un}. 
+
+The emphasis of previous models that studied the effects of transmission infidelity on the
+evolution of language has been on inductive biases and the systematicity, compression and
+regularization that they can introduce. Here, we would like to show that transmission noise of
+a different kind can lead to regularization as well and also give rise to vague
+meaning. Towards this end, we formalize the expected change in the behavior of a population of
+agents that try to imitate other agents' signaling behavior. We assume, however, that both
+realization of behavior, as well as observability of others' behavior, is molested by noise, in
+particular the probabilistic confusability of similar stimuli. The resulting population-level
+dynamic generalizes the replicator dynamic \citep{TaylorJonker1978:Evolutionary-St} in its
+interpretation as a cultural evolutionary dynamic based on imitation
+\citep[e.g.][]{Helbing1996:A-Stochastic-Be,Schlag1998:Why-Imitate-and}. The inclusion of
+confusability of stimuli does not undermine the possibility of evolving communicative signaling
+behavior. Instead, it leads to the evolution of vague meanings. It moreover unifies and
+regularizes evolutionary outcomes, making it appear as if agents were applying inductive biases
+or generalizing over partial observations, when in truth this is the sole effect of confusion
+of similar stimuli.
+
+% The replicator mutator dynamic is neat because it keeps the effects of fitness-based selection
+% (replication) and transmission biases (mutation) nicely apart. This is possible because it
+% adheres to a picture of (asexual) biological reproduction: the number of children a (single)
+% parent has is higher, the higher the communicative success of the parent's language; all
+% children of this parent will learn from this parent alone, but may make mistakes during
+% language acquisition.
 
 The next section introduces the background against which the work presented here can be
-appreciated. Section~\ref{sec:repl-diff-dynam} introduces a generalization of the replicator
+appreciated. Section~\ref{sec:repl-diff-dynam} introduces our generalization of the replicator
 dynamic which is derived from the idea that agents imitate other agents' behavior while
 possibly confusing similar states. This imprecise imitation dynamic is explored in
 Section~\ref{sec:exploring-rdd}. Section~\ref{sec:discussion} reflects and compares our
 approach to others. Appendix~\ref{sec:formal-stuff} provides formal detail.
+
+\mf{intro misses a mentioning of signaling games}
 
 \section{Background}
 \label{sec:background}
