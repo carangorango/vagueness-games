@@ -119,10 +119,25 @@ something that is itself useful
 Others have argued that vagueness is a natural byproduct of limitations in information
 processing \citep[e.g.][]{FrankeJager2010:Vagueness-Signa} or of generalization in low-level
 learning strategies \citep[e.g.][]{OConnor2013:The-Evolution-o}. This paper contributes to the
-latter line of thought. We believe that vagueness in language and thought may have many
-reasons, not just one. We focus here on one possibility that has not received due attention,
-namely imprecise perception of similar stimuli and imprecise realization of similar
-responses.
+latter line of thought.
+
+We believe that vagueness in language and thought may have many reasons, not just one. We focus
+here on one \emph{a priori} plausible reason for why vagueness is natural and pervasive. The
+idea is that at least some meanings are vague, in part because of imprecision in the perception
+of similar stimuli and in the realization of similar responses.\footnote{On this view,
+  vagueness in language may be seen as a necessary sub-optimality due to limitations in another
+  domain of cognition, first and foremost perception. The whole system, e.g., perception and
+  language together, may be an almost optimal adaptation in a larger frame of reference, e.g.,
+  if we take into account the metabolic costs for increased accuracy.} While this idea may be
+\emph{prima facie} plausible, it is not immediately clear what the consequences of
+confusability of stimuli are on a process of meaning evolution. In other words, in order to
+address Lipman's challenge seriously, and not just hand-wave it away, it needs to be spelled
+out how exactly confusability of stimuli could come into play in a process of meaning evolution
+and how it could lead to vague but by-and-large informative signal meaning. The formal model
+that this paper introduces does exactly that. And more. % We find that confusability of stimuli
+% can regularize and systematize evolving meaning, and may thereby imply an advantageous
+% side-effect that may counter some of the disadvantages that imprecise and vague communication
+% may have. Here is some elaboration on this point.
 
 Our conceptual starting point is the widely shared conviction that language is shaped by at
 least two forces, which may, on occasion, pull in opposite direction. On the one hand, there is
@@ -130,16 +145,15 @@ functional pressure towards efficient communication. On the other hand, there is
 error, noise or imprecision in the transmission of linguistic behavior, knowledge or traits. As
 an example for the latter, consider a child learning syntactic rules from a parent
 generation. The child must infer these unobservable rules from observable speech. Inductive
-biases of the learner may influence which syntactic rules are likely to be inferred from
-(finite) parental input. Over the course of many generations, the effects of such transmission
-biases can, in a manner of speaking, ``accumulate'' and lead to surprising results, such as the
-evolution of compositional form-meaning mappings or the use of regular recursive syntactic
-structure. This can happen when the effects of tranmission biases are isolated, as in iterated
-learning models
+biases may influence which syntactic rules are likely to be inferred from (finite) parental
+input. Over the course of many generations, the effects of such biases can, in a manner of
+speaking, ``accumulate'' and lead to surprising results, such as the evolution of compositional
+form-meaning mappings or the use of regular recursive syntactic structure. This can happen when
+the effects of tranmission biases are isolated, as in iterated learning models
 \citep{KirbyHurford2002:The-Emergence-o,SmithKirby2003:Iterated-Learni,GriffithsKalish2007:Language-Evolut,KirbyGriffith2014:Iterated-Learni},
 or when they interact with functional pressure towards efficient communication, e.g., as
 formalized in the replicator mutator dynamic
-\citep[e.g.][]{NowakPlotkin2000:The-Evolution-o,NowakKomarova2001:Evolution-of-Un}. 
+\citep[e.g.][]{NowakPlotkin2000:The-Evolution-o,NowakKomarova2001:Evolution-of-Un}.
 
 The emphasis of previous models that studied the effects of transmission infidelity on the
 evolution of language has been on inductive biases and the systematicity, compression and
@@ -153,10 +167,10 @@ dynamic generalizes the replicator dynamic \citep{TaylorJonker1978:Evolutionary-
 interpretation as a cultural evolutionary dynamic based on imitation
 \citep[e.g.][]{Helbing1996:A-Stochastic-Be,Schlag1998:Why-Imitate-and}. The inclusion of
 confusability of stimuli does not undermine the possibility of evolving communicative signaling
-behavior. Instead, it leads to the evolution of vague meanings. It moreover unifies and
-regularizes evolutionary outcomes, making it appear as if agents were applying inductive biases
-or generalizing over partial observations, when in truth this is the sole effect of confusion
-of similar stimuli.
+behavior. Instead, it leads to the evolution of vague meanings. It moreover accelerates the
+emergence of communicative signaling because it unifies and regularizes evolutionary outcomes,
+making it appear as if agents were applying inductive biases or generalizing over partial
+observations, when in truth this is the sole effect of confusion of similar stimuli.
 
 % The replicator mutator dynamic is neat because it keeps the effects of fitness-based selection
 % (replication) and transmission biases (mutation) nicely apart. This is possible because it
@@ -203,17 +217,16 @@ such meaning-generating behavior can evolve is a highly interesting
 topic that we are only beginning to fully understand
 \citep[e.g.][]{Warneryd1993:Cheap-Talk-Coor,BlumeKim1993:Evolutionary-St,Huttegger2007:Evolution-and-t,Pawlowitsch2008:Why-Evolution-d,Barrett2009:The-Evolution-o,HutteggerSkyrms2010:Evolutionary-Dy,Skyrms2010:Signals}.
 
-Similarity-maximizing (short: sim-max) games are a variation of
-Lewis' games where the receiver's actions are equated with the state
-space (one can think of the actions as choosing states) and different states are allowed to be more or less
-similar to one another. While Lewis' games treated communicative
-success as a matter of black and white, sim-max games allow for a
-gradient notion: the more similar the receiver's interpretation is to
-the actual state, the better. Signaling games with utility-relevant
-similarities in the state space are fairly standard in economics
-\citep[e.g.][]{Spence1973:Job-market-sign,CrawfordSobel1982:Strategic-Infor},
-but have received particular attention in a more philosophical context
-for reasons that will become clear presently.
+Similarity-maximizing (short: sim-max) games are a variation of Lewis' games where the
+receiver's actions are equated with the state space (one can think of the actions as choosing
+states) and different states are allowed to be more or less similar to one another. While
+Lewis' games treated communicative success as a matter of black and white, sim-max games allow
+for shades of gray: the more similar the receiver's interpretation is to the actual state, the
+better. Signaling games with utility-relevant similarities in the state space are fairly
+standard in economics
+\citep[e.g.][]{Spence1973:Job-market-sign,CrawfordSobel1982:Strategic-Infor}, but have received
+particular attention in a more philosophical context for reasons that will become clear
+presently.
 
 Formally, a sim-max game consists of a set of states $\States$, a set of messages $\Messgs$ typically with much
 fewer messages than states, a probability distribution $\Pr \in \Delta(\States)$ such that
@@ -306,14 +319,25 @@ intervals.  See Figure~\ref{fig:Voronoi-language-example} for an illustration.
 \end{figure}
 
 
-It is intuitive to think that linguistic and conceptual categories are orderly in such a manner.
-For example, if you consider two people, one with a height of 2m and another with a height of 2.2m, both `tall', it would be difficult to defend considering a person with a height of 2.1m `short'.
-Another example is that of color categorization.
-The World Color Survey project~\citep{CookKay2005:The-World-Color,WCS} collected color naming data for 110 unwritten languages of 45 language families.
-For the great majority of these languages a pattern can be observed: basic color terms are by and large convex~\citep{Regier07,Jager2010}.
-It is premature to argue that these observations can be extended to \emph{all} cases of categorization.
-However, for the cases where it does apply, the result of \citet{JagerMetzger2011:Voronoi-Languag} is interesting because it demonstrates that signaling can impose this kind of orderly categories on a metric space without that being the ulterior purpose of it all.%
-\footnote{For the concrete case of color categorization, see also \citet{JagerRooijvan-Rooij2007:Language-Struct} and \citet{Correia2015}}
+It is intuitive to think that linguistic and conceptual categories are orderly in such a
+manner.  For example, if you consider two people, one with a height of 2m and another with a
+height of 2.2m, both `tall', it would be difficult to defend considering a person with a height
+of 2.1m `short'.  Another example is that of color categorization. The World Color Survey
+project~\citep{CookKay2005:The-World-Color,WCS} collected color naming data for 110 unwritten
+languages of 45 language families.  For the great majority of these languages a pattern can be
+observed: basic color terms are by and large convex~\citep{Regier07,Jager2010}. A prominent
+school of thought in comparative linguistics also assumes that more abstract conceptual domains
+---e.g., spatial-topological relations, temporal reference, or the meanings expressible by
+indefinite pronouns--- are preferably carved up by the languages of the world in such a way
+that meanings are connected regions on a so-called \emph{semantic map}
+\citep[e.g.][]{Croft2003:Typology-and-Un,Haspelmath2003:The-geometry-of,LevinsonMeira2003:Natural-concept}. It
+is premature to argue that these observations can be extended to \emph{all} cases of
+categorization. However, for the cases where it does apply, the result of
+\citet{JagerMetzger2011:Voronoi-Languag} is interesting because it demonstrates that signaling
+can impose this kind of orderly categories on a metric space without that being the ulterior
+purpose of it all.%
+\footnote{For the concrete case of color categorization, see also
+  \citet{JagerRooijvan-Rooij2007:Language-Struct} and \citet{Correia2015}}
 
 There are at least two potential ways of interpreting the signaling setup.
 Sender and receiver can be distinct
