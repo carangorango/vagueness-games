@@ -111,7 +111,7 @@ accounts that maintain that concepts and linguistic meanings evolved driven towa
 efficiency. \citet{Lipman2009:Why-is-Language} argues that, technically, the existence of unclear borderline cases always entails inefficiency of
 categorization or communication. The challenge is then to explain how
 vagueness can persist both: (i) under evolutionary pressure to be optimally discriminative, and (ii) without
-jeopardizing the possibility of evolving, learning and communicating with a meaningful
+undermining the possibility of evolving, learning and communicating with a meaningful
 language. A number of authors have consequently tried to explain why vagueness evolved as
 something that is itself useful
 \citep[e.g.][]{Jaegherde-Jaegher2003:A-Game-Theoreti,Deemter2009:Utility-and-Lan,BlumeBoard2013:Intentional-Vag}.
@@ -122,54 +122,22 @@ latter line of thought.
 
 We believe that vagueness in language and thought may have many reasons, not just one. We focus
 here on one \emph{a priori} plausible reason for why vagueness is natural and pervasive. The
-idea is that at least some meanings are vague, in part because of imprecision in the perception
-of similar stimuli and in the realization of similar responses.\footnote{On this view,
-  vagueness in language may be seen as a necessary sub-optimality due to limitations in another
-  domain of cognition, first and foremost perception. The whole system, e.g., perception and
-  language together, may be an almost optimal adaptation in a larger frame of reference, e.g.,
-  if we take into account the metabolic costs for increased accuracy.} While this idea may be
-\emph{prima facie} plausible, it is not immediately clear what the consequences of
-confusability of stimuli are on a process of meaning evolution. In other words, in order to
-address Lipman's challenge seriously, and not just hand-wave it away, it needs to be spelled
-out how exactly confusability of stimuli could come into play in a process of meaning evolution
-and how it could lead to vague but by-and-large informative signal meaning. The formal model
-that this paper introduces does exactly that. And more. % We find that confusability of stimuli
-% can regularize and systematize evolving meaning, and may thereby imply an advantageous
-% side-effect that may counter some of the disadvantages that imprecise and vague communication
-% may have. Here is some elaboration on this point.
-
-Our conceptual starting point is the widely shared conviction that language is shaped by at
-least two forces, which may, on occasion, pull in opposite direction. On the one hand, there is
-functional pressure towards efficient communication. On the other hand, there is systematic
-error, noise or imprecision in the transmission of linguistic behavior, knowledge or traits. As
-an example for the latter, consider a child learning syntactic rules from a parent
-generation. The child must infer these unobservable rules from observable speech. Inductive
-biases may influence which syntactic rules are likely to be inferred from (finite) parental
-input. Over the course of many generations, the effects of such biases can, in a manner of
-speaking, ``accumulate'' and lead to surprising results, such as the evolution of compositional
-form-meaning mappings or the use of regular recursive syntactic structure. This can happen when
-the effects of tranmission biases are isolated, as in iterated learning models
-\citep{KirbyHurford2002:The-Emergence-o,SmithKirby2003:Iterated-Learni,GriffithsKalish2007:Language-Evolut,KirbyGriffith2014:Iterated-Learni},
-or when they interact with functional pressure towards efficient communication, e.g., as
-formalized in the replicator mutator dynamic
-\citep[e.g.][]{NowakPlotkin2000:The-Evolution-o,NowakKomarova2001:Evolution-of-Un}.
-
-The emphasis of previous models that studied the effects of transmission infidelity on the
-evolution of language has been on inductive biases and the systematicity, compression and
-regularization that they can introduce. Here, we would like to show that transmission noise of
-a different kind can lead to regularization as well and also give rise to vague
-meaning. Towards this end, we formalize the expected change in the behavior of a population of
-agents that try to imitate other agents' signaling behavior. We assume, however, that both
-realization of behavior, as well as observability of others' behavior, is molested by noise, in
-particular the probabilistic confusability of similar stimuli. The resulting population-level
-dynamic generalizes the replicator dynamic \citep{TaylorJonker1978:Evolutionary-St} in its
-interpretation as a cultural evolutionary dynamic based on imitation
-\citep[e.g.][]{Helbing1996:A-Stochastic-Be,Schlag1998:Why-Imitate-and}. The inclusion of
-confusability of stimuli does not undermine the possibility of evolving communicative signaling
-behavior. Instead, it leads to the evolution of vague meanings. It moreover accelerates the
-emergence of communicative signaling because it unifies and regularizes evolutionary outcomes,
-making it appear as if agents were applying inductive biases or generalizing over partial
-observations, when in truth this is the sole effect of confusion of similar stimuli.
+idea is that vagueness is, at least in part, due to imprecision in the perception of similar
+stimuli and imprecision in the realization of similar responses. On this view, vagueness in
+language may be seen as a necessary sub-optimality due to limitations in another domain of
+cognition, first and foremost perception. It could then be speculated that the whole system,
+e.g., perception and language together, may be an almost optimal adaptation in a larger frame
+of reference, e.g., if we take into account the metabolic costs for increased perceptual
+accuracy. We will not engage in such speculation here. Rather we will explore the consequences
+of perceptual limitations on processes of meaning evolution in a suitable formal framework. In
+other words, in order to address Lipman's challenge seriously, and not just hand-wave it away
+by appeal to the naturalness of vagueness, it needs to be spelled out how exactly confusability
+of stimuli could come into play in a process of meaning evolution and how it could lead to
+vague but by-and-large informative signal meaning. The formal model that this paper introduces
+does exactly that. But it also does more. We find that confusability of stimuli can regularize
+and systematize evolving meaning. This suggests a possibly advantageous side-effect that a
+natural cause of vagueness may have and that might counter some of the disadvantages that
+vagueness may have for communicative efficiency \citep[c.f.][]{OConnor2013:The-Evolution-o}.
 
 % The replicator mutator dynamic is neat because it keeps the effects of fitness-based selection
 % (replication) and transmission biases (mutation) nicely apart. This is possible because it
@@ -179,13 +147,11 @@ observations, when in truth this is the sole effect of confusion of similar stim
 % language acquisition.
 
 The next section introduces the background against which the work presented here can be
-appreciated. Section~\ref{sec:repl-diff-dynam} introduces our generalization of the replicator
+appreciated. Section~\ref{sec:repl-diff-dynam} introduces a generalization of the replicator
 dynamic which is derived from the idea that agents imitate other agents' behavior while
 possibly confusing similar states. This imprecise imitation dynamic is explored in
 Section~\ref{sec:exploring-rdd}. Section~\ref{sec:discussion} reflects and compares our
 approach to others. Appendix~\ref{sec:formal-stuff} provides formal detail.
-
-\mf{intro misses a mentioning of signaling games}
 
 \section{Background}
 \label{sec:background}
@@ -380,6 +346,230 @@ show a gradient transition to clear negative examples;
 (ii) prototypes should likewise be gradient regions, peaking at the
 center of the vague category they represent.
 
+To illustrate, let us briefly consider a sim-max game with six equiprobable states and two
+messages, its equilibria and what vagueness intuitively would look like \citep[see][for a more
+thorough discussion]{Jager2007:The-Evolution-o,OConnor2013:The-Evolution-o}. We assume that
+utilities are strictly decreasing with decreasing
+similarity. Figure~\ref{fig:EquilibriaVagueness} shows three pairs of sender and receiver
+strategies. States and acts are arranged according to their similarity: the closer they are to
+each other, the more similar they are. The pair in Figure~\ref{fig:ineffNonEq} is not an
+equilibrium, because the sender's non-convex use of signals is suboptimal given the receiver's
+behavior. In contrast, Figure~\ref{fig:efficientEq}Z shows a maximally efficient
+equilibrium. This is a partial pooling equilibrium in the sense that the speaker uses the same
+message for several states. This would be inefficient if there were more messages, but it is
+maximally efficient for the two-message case. So, while partial pooling may entail
+inefficiency, and while partial pooling can hamper the evolution of maximally efficient signal
+use
+\citep[e.g.][]{Hutteger:2007_Evol_Indicatives_Imperatives,Pawlowitsch2008:Why-Evolution-d,HutteggerSkyrms2010:Evolutionary-Dy},
+this is orthogonal to our concerns about vagueness. A regular and natural yet vague signal use
+would look like in Figure~\ref{fig:vagueUse}. This is not an equilibrium, but it gets close, so
+to speak. It shows smooth transitions across similar states at the boundaries of categories and
+across acts around the most prototypical instances (as indicated by decreasing thickness of
+arrows in Figure~\ref{fig:vagueUse}).
+
+\begin{figure}
+  \centering
+  
+  \begin{subfigure}[]{0.475\textwidth}
+    \centering
+    \begin{tikzpicture}
+
+      \draw[] (0,2) node (t1) {$\mystate{1}$};
+
+      \draw[] (1,2) node (t2) {$\mystate{2}$};
+
+      \draw[] (2,2) node (t3) {$\mystate{3}$};
+
+      \draw[] (3,2) node (t4) {$\mystate{4}$};
+
+      \draw[] (4,2) node (t5) {$\mystate{5}$};
+
+      \draw[] (5,2) node (t6) {$\mystate{6}$};
+
+
+      \draw[] (1,1) node (m1) {$\mymessg{1}$};
+
+      \draw[] (4,1) node (m2) {$\mymessg{2}$};
+
+
+
+      \draw[] (0,0) node (a1) {$\myact{1}$};
+
+      \draw[] (1,0) node (a2) {$\myact{2}$};
+
+      \draw[] (2,0) node (a3) {$\myact{3}$};
+
+      \draw[] (3,0) node (a4) {$\myact{4}$};
+
+      \draw[] (4,0) node (a5) {$\myact{5}$};
+
+      \draw[] (5,0) node (a6) {$\myact{6}$};
+
+      % arrows
+  
+      \draw[->, thick] (t1) -- (m1);
+
+      \draw[->, thick] (t2) -- (m1);
+
+      \draw[->, thick] (t3) -- (m2);
+
+      \draw[->, thick] (t4) -- (m1);
+
+      \draw[->, thick] (t5) -- (m2);
+
+      \draw[->, thick] (t6) -- (m2);
+
+      \draw[->, thick] (m1) -- (a2);
+
+      \draw[->, thick] (m2) -- (a5);
+  
+    \end{tikzpicture}
+
+    \caption{inefficient, non-convex, non-equilibrium}
+    \label{fig:ineffNonEq}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.475\textwidth}
+    \centering
+
+    \begin{tikzpicture}
+
+      \draw[] (0,2) node (t1) {$\mystate{1}$};
+
+      \draw[] (1,2) node (t2) {$\mystate{2}$};
+
+      \draw[] (2,2) node (t3) {$\mystate{3}$};
+
+      \draw[] (3,2) node (t4) {$\mystate{4}$};
+
+      \draw[] (4,2) node (t5) {$\mystate{5}$};
+
+      \draw[] (5,2) node (t6) {$\mystate{6}$};
+
+
+      \draw[] (1,1) node (m1) {$\mymessg{1}$};
+
+      \draw[] (4,1) node (m2) {$\mymessg{2}$};
+
+
+
+      \draw[] (0,0) node (a1) {$\myact{1}$};
+
+      \draw[] (1,0) node (a2) {$\myact{2}$};
+
+      \draw[] (2,0) node (a3) {$\myact{3}$};
+
+      \draw[] (3,0) node (a4) {$\myact{4}$};
+
+      \draw[] (4,0) node (a5) {$\myact{5}$};
+
+      \draw[] (5,0) node (a6) {$\myact{6}$};
+
+      % arrows
+  
+      \draw[->, thick] (t1) -- (m1);
+
+      \draw[->, thick] (t2) -- (m1);
+
+      \draw[->, thick] (t3) -- (m1);
+
+      \draw[->, thick] (t4) -- (m2);
+
+      \draw[->, thick] (t5) -- (m2);
+
+      \draw[->, thick] (t6) -- (m2);
+
+      \draw[->, thick] (m1) -- (a2);
+
+      \draw[->, thick] (m2) -- (a5);
+  
+    \end{tikzpicture}
+
+    \caption{maximally efficient equilibrium, partial pooling}
+    \label{fig:efficientEq}
+  \end{subfigure}
+
+\begin{subfigure}[]{0.475\textwidth}
+    \centering
+
+    \begin{tikzpicture}
+
+      \draw[] (0,2) node (t1) {$\mystate{1}$};
+
+      \draw[] (1,2) node (t2) {$\mystate{2}$};
+
+      \draw[] (2,2) node (t3) {$\mystate{3}$};
+
+      \draw[] (3,2) node (t4) {$\mystate{4}$};
+
+      \draw[] (4,2) node (t5) {$\mystate{5}$};
+
+      \draw[] (5,2) node (t6) {$\mystate{6}$};
+
+
+      \draw[] (1,1) node (m1) {$\mymessg{1}$};
+
+      \draw[] (4,1) node (m2) {$\mymessg{2}$};
+
+
+
+      \draw[] (0,0) node (a1) {$\myact{1}$};
+
+      \draw[] (1,0) node (a2) {$\myact{2}$};
+
+      \draw[] (2,0) node (a3) {$\myact{3}$};
+
+      \draw[] (3,0) node (a4) {$\myact{4}$};
+
+      \draw[] (4,0) node (a5) {$\myact{5}$};
+
+      \draw[] (5,0) node (a6) {$\myact{6}$};
+
+      % arrows
+  
+      \draw[->, thick] (t1) -- (m1);
+
+      \draw[->, thick] (t2) -- (m1);
+
+      \draw[->, thick, dashed] (t3) -- (m1);
+
+      \draw[->, thick, dotted] (t3) -- (m2);
+
+      \draw[->, thick, dotted] (t4) -- (m1);
+
+      \draw[->, thick, dashed] (t4) -- (m2);
+
+      \draw[->, thick] (t5) -- (m2);
+
+      \draw[->, thick] (t6) -- (m2);
+
+      \draw[->, thick, dotted] (m1) -- (a1);
+
+      \draw[->, thick, dashed] (m1) -- (a2);
+
+      \draw[->, thick, dotted] (m1) -- (a3);
+
+      \draw[->, dotted] (m1) -- (a4);
+
+      \draw[->, dotted] (m2) -- (a3);
+
+      \draw[->, thick, dotted] (m2) -- (a4);
+
+      \draw[->, thick, dashed] (m2) -- (a5);
+
+      \draw[->, thick, dotted] (m2) -- (a6);
+  
+    \end{tikzpicture}
+
+    \caption{almost efficient, probabilistic, intuitively vague}
+    \label{fig:vagueUse}
+  \end{subfigure}
+
+
+  \caption{Examples of strategy pairs in sim-max games.}
+  \label{fig:EquilibriaVagueness}
+\end{figure}
+
 \citet{DouvenDecock2011:Vagueness:-A-Co} show that
 \citeauthor{Gardenfors2000:Conceptual-Spac}'s conceptual spaces
 approach can be extended to account for the existence of borderline
@@ -399,6 +589,40 @@ Alternative approaches are taken by, for example, \citet{FrankeJager2010:Vaguene
 strategies in sim-max games. The approach we take here is similar in spirit, but different in
 relevant detail. A more in-depth comparison is deferred until Section~\ref{sec:discussion}. Let
 us first look into our own proposal in more detail.
+
+Our conceptual starting point is the widely shared conviction that language is shaped by at
+least two forces, which may, on occasion, pull in opposite direction. On the one hand, there is
+functional pressure towards efficient communication. On the other hand, there is systematic
+error, noise or imprecision in the transmission of linguistic behavior, knowledge or traits. As
+an example for the latter, consider a child learning syntactic rules from a parent
+generation. The child must infer these unobservable rules from observable speech. Inductive
+biases may influence which syntactic rules are likely to be inferred from (finite) parental
+input. Over the course of many generations, the effects of such biases can, in a manner of
+speaking, ``accumulate'' and lead to surprising results, such as the evolution of compositional
+form-meaning mappings or the use of regular recursive syntactic structure. This can happen when
+the effects of tranmission biases are isolated, as in iterated learning models
+\citep{KirbyHurford2002:The-Emergence-o,SmithKirby2003:Iterated-Learni,GriffithsKalish2007:Language-Evolut,KirbyGriffith2014:Iterated-Learni},
+or when they interact with functional pressure towards efficient communication, e.g., as
+formalized in the replicator mutator dynamic
+\citep[e.g.][]{NowakPlotkin2000:The-Evolution-o,NowakKomarova2001:Evolution-of-Un}.
+
+The emphasis of previous models that studied the effects of transmission infidelity on the
+evolution of language has been on inductive biases and the systematicity, compression and
+regularization that they can introduce. Here, we would like to show that transmission noise of
+a different kind can lead to regularization as well and also give rise to vague
+meaning. Towards this end, we formalize the expected change in the behavior of a population of
+agents that try to imitate other agents' signaling behavior. We assume, however, that both
+realization of behavior, as well as observability of others' behavior, is systematically
+perturbed by noise. The resulting population-level dynamic generalizes the replicator dynamic
+\citep{TaylorJonker1978:Evolutionary-St} in its interpretation as a cultural evolutionary
+dynamic based on imitation
+\citep[e.g.][]{Helbing1996:A-Stochastic-Be,Schlag1998:Why-Imitate-and}. The inclusion of
+confusability of stimuli does not undermine the possibility of evolving communicative signaling
+behavior. Instead, it leads to the evolution of vague meanings. It moreover accelerates the
+emergence of communicative signaling because it unifies and regularizes evolutionary outcomes,
+making it appear as if agents were applying inductive biases or generalizing over partial
+observations, when in truth this is the sole effect of confusion of similar stimuli.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
