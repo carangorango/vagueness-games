@@ -108,10 +108,11 @@ the paradoxes vagueness gives rise to.
 But there are other intriguing aspects about vagueness. One perplexing issue is how vagueness
 could arise and be maintained in the first place. This is an apparent puzzle for functionalist
 accounts that maintain that concepts and linguistic meanings evolved driven towards
-efficiency. \citet{Lipman2009:Why-is-Language} argues that, technically, the existence of unclear borderline cases always entails inefficiency of
-categorization or communication. The challenge is then to explain how
-vagueness can persist both: (i) under evolutionary pressure to be optimally discriminative, and (ii) without
-undermining the possibility of evolving, learning and communicating with a meaningful
+efficiency. \citet{Lipman2009:Why-is-Language} argues that, in common interest signaling
+situations, the existence of unclear borderline cases entails inefficiency of categorization or
+communication, or at least no advantage. The challenge is then to explain how vagueness
+can persist both: (i) under evolutionary pressure to be optimally discriminative, and (ii)
+without undermining the possibility of evolving, learning and communicating with a meaningful
 language. A number of authors have consequently tried to explain why vagueness evolved as
 something that is itself useful
 \citep[e.g.][]{Jaegherde-Jaegher2003:A-Game-Theoreti,Deemter2009:Utility-and-Lan,BlumeBoard2013:Intentional-Vag}.
@@ -193,13 +194,15 @@ standard in economics
 particular attention in a more philosophical context for reasons that will become clear
 presently.
 
-Formally, a sim-max game consists of a set of states $\States$, a set of messages $\Messgs$ typically with much
-fewer messages than states, a probability distribution $\Pr \in \Delta(\States)$ such that
-$\Pr(\state)$ gives the probability that state $\state$ occurs, a similarity metric\footnote{A
-  metric is a function of distance between any two points in a given space. It should satisfy
-  certain axioms that ensure behavior that one would intuitively expect from the words
-  ``similarity'' and ``distance'' alone, but these details do not matter for the purposes of
-  this paper.}
+Formally, a sim-max game consists of a set of states $\States$, a set of messages $\Messgs$
+typically with much fewer messages than states, a probability distribution
+$\Pr \in \Delta(\States)$ such that $\Pr(\state)$ gives the probability that state $\state$
+occurs, a similarity metric\footnote{A metric is a function of distance between any two points
+  in a given space. It should satisfy certain axioms that ensure behavior that one would
+  intuitively expect from the words ``similarity'' and ``distance'' alone, but these details do
+  not matter for the purposes of this paper. The assumption that state similarity forms a
+  metric is conceptually loaded, but we follow the literature here and conceive of it as a
+  first and pragmatic simplification, possibly to be dispensed with later.}
   % : similarity should always be non-negative, zero only for the distance
   % between an element and itself, symmetric, and satisfy the triangle inequality that
   % $\similarity(x,z) \le \similarity(x,y) + \similarity(y,z)$
@@ -210,7 +213,10 @@ $\Utils \mycolon \States \times \States \rightarrow \mathds{R}$ such that
 $\Utils(\mystate{1}, \mystate{2})$ is the payoff for sender and receiver for a play with actual
 state $\mystate{1}$ and receiver interpretation $\mystate{2}$. We identify the receiver's acts
 with the states of the world, so that the game is one of guessing the actual state, so to
-speak. The utility function should be a monotonically increasing function of similarity.
+speak. The utility function should be a monotonically increasing function of
+similarity.\footnote{Section~\ref{sec:setting-stage} motivates a particular choice of utility
+  function that we will explore in more detail. But since the general discussion also applies
+  and makes reference to other choices, we prefer to remain general for the time being.}
 Non-probabilistic sender behavior can be represented by a pure strategy
 $\Spure \in \Messgs^\States$, which deterministically defines which message would be used for
 each state. Similarly, a pure receiver strategy is a function $\Rpure \in \States^\Messgs$.
@@ -273,7 +279,7 @@ intervals.  See Figure~\ref{fig:Voronoi-language-example} for an illustration.
 
           \end{scope}
  
-        \end{tikzpicture}
+         \end{tikzpicture}
 
         \caption{Example of a Voronoi language on $\States = [0,1]$. The pure sender strategy
           $\Spure$ uses one signal for the lower half, and another for the upper half of the
@@ -334,7 +340,7 @@ belonging to them.  These ideas, and more, are developed further by
 \citet{Jager2007:The-Evolution-o,JagerRooijvan-Rooij2007:Language-Struct,JagerMetzger2011:Voronoi-Languag,OConnor2014-OCOEPC},
 among others.
 
-\subsection{Vague signaling in sim-max games}
+\subsection{Vagueness in sim-max games and conceptual spaces}
 
 This outline of an approach to categorization using sim-max games
 leaves many problems unaddressed. One of them is that natural
@@ -346,26 +352,46 @@ show a gradient transition to clear negative examples;
 (ii) prototypes should likewise be gradient regions, peaking at the
 center of the vague category they represent.
 
-To illustrate, let us briefly consider a sim-max game with six equiprobable states and two
-messages, its equilibria and what vagueness intuitively would look like \citep[see][for a more
-thorough discussion]{Jager2007:The-Evolution-o,OConnor2013:The-Evolution-o}. We assume that
-utilities are strictly decreasing with decreasing
-similarity. Figure~\ref{fig:EquilibriaVagueness} shows three pairs of sender and receiver
-strategies. States and acts are arranged according to their similarity: the closer they are to
-each other, the more similar they are. The pair in Figure~\ref{fig:ineffNonEq} is not an
-equilibrium, because the sender's non-convex use of signals is suboptimal given the receiver's
-behavior. In contrast, Figure~\ref{fig:efficientEq} shows a maximally efficient
-equilibrium. This is a partial pooling equilibrium in the sense that the speaker uses the same
-message for several states. This would be inefficient if there were more messages, but it is
-maximally efficient for the two-message case. So, while partial pooling may entail
-inefficiency, and while partial pooling can hamper the evolution of maximally efficient signal
-use
+\citet{DouvenDecock2011:Vagueness:-A-Co} show that
+\citeauthor{Gardenfors2000:Conceptual-Spac}'s conceptual spaces
+approach can be extended to account for the existence of borderline
+cases. From the assumption that prototypes are extended, yet convex
+regions in conceptual space, a construction algorithm is available
+that yields ``collated Voronoi diagrams'' with thick boundaries
+representing borderline
+regions. \citet{DecockDouven2012:What-is-Graded-} show further how it
+is possible to arrive at a gradient transition between categories, by
+weighing in the distance of different borderline cases to various
+prototypical regions. This accounts for the first of the two
+desiderata mentioned above, but still assumes that crisp prototype
+regions must be given.
+
+Alternative approaches are taken by, for example, \citet{FrankeJager2010:Vagueness-Signa} and
+\citet{OConnor2013:The-Evolution-o}, who show different ways how the above desiderata can be
+met by evolving strategies in sim-max games. To illustrate what vague signaling would look
+like, let us briefly consider a sim-max game with six equiprobable states and two messages and
+what its equilibria would be like \citep[see][for a more thorough discussion of equilibria of
+sim-max games]{Jager2007:The-Evolution-o,OConnor2013:The-Evolution-o}. We assume that utilities
+are linearly decreasing with decreasing similarity. Figure~\ref{fig:EquilibriaVagueness} shows
+three pairs of sender and receiver strategies. States are arranged according to their
+similarity: the closer they are to each other, the more similar they are. The pair in
+Figure~\ref{fig:ineffNonEq} is not an equilibrium, because the sender's non-convex use of
+signals is suboptimal given the receiver's behavior. Namely, if \mymessg{1} is interpreted as
+\mystate{2} and \mymessg{2} as \mystate{4}, then the sender would get a higher payoff from
+sending \mymessg{1} in \mystate{3} than from sending \mymessg{2}, because (by assumption)
+\mystate{3} is more similar to \mystate{2} than \mystate{5} is. In contrast,
+Figure~\ref{fig:efficientEq} shows a maximally efficient equilibrium. This is a partial pooling
+equilibrium in the sense that the speaker uses the same message for several states. Partial
+pooling equilibria can be less inefficient than other non-pooling equilibria, but that requires
+enough messages. The strategy pair of Figure~\ref{fig:efficientEq} is maximally efficient for
+the two-message case. So, while partial pooling may entail inefficiency in some sense, and
+while partial pooling can hamper the evolution of maximally efficient signal use
 \citep[e.g.][]{Hutteger:2007_Evol_Indicatives_Imperatives,Pawlowitsch2008:Why-Evolution-d,HutteggerSkyrms2010:Evolutionary-Dy},
 this is orthogonal to our concerns about vagueness. A regular and natural yet vague signal use
-would look like the pair in Figure~\ref{fig:vagueUse}. This is not an equilibrium, but it gets close, so
-to speak. It shows smooth transitions across similar states at the boundaries of categories and
-across acts around the most prototypical instances (as indicated by decreasing thickness of
-arrows in Figure~\ref{fig:vagueUse}).
+would look like the pair in Figure~\ref{fig:vagueUse}. This is not an equilibrium, but it gets
+close, so to speak. It shows smooth transitions across similar states at the boundaries of
+categories and across acts around the most prototypical instances (as indicated by decreasing
+thickness of arrows in Figure~\ref{fig:vagueUse}).
 
 \begin{figure}
   \centering
@@ -393,17 +419,17 @@ arrows in Figure~\ref{fig:vagueUse}).
 
 
 
-      \draw[] (0,0) node (a1) {$\myact{1}$};
+      \draw[] (0,0) node (a1) {$\mystate{1}$};
 
-      \draw[] (1,0) node (a2) {$\myact{2}$};
+      \draw[] (1,0) node (a2) {$\mystate{2}$};
 
-      \draw[] (2,0) node (a3) {$\myact{3}$};
+      \draw[] (2,0) node (a3) {$\mystate{3}$};
 
-      \draw[] (3,0) node (a4) {$\myact{4}$};
+      \draw[] (3,0) node (a4) {$\mystate{4}$};
 
-      \draw[] (4,0) node (a5) {$\myact{5}$};
+      \draw[] (4,0) node (a5) {$\mystate{5}$};
 
-      \draw[] (5,0) node (a6) {$\myact{6}$};
+      \draw[] (5,0) node (a6) {$\mystate{6}$};
 
       % arrows
   
@@ -453,17 +479,17 @@ arrows in Figure~\ref{fig:vagueUse}).
 
 
 
-      \draw[] (0,0) node (a1) {$\myact{1}$};
+      \draw[] (0,0) node (a1) {$\mystate{1}$};
 
-      \draw[] (1,0) node (a2) {$\myact{2}$};
+      \draw[] (1,0) node (a2) {$\mystate{2}$};
 
-      \draw[] (2,0) node (a3) {$\myact{3}$};
+      \draw[] (2,0) node (a3) {$\mystate{3}$};
 
-      \draw[] (3,0) node (a4) {$\myact{4}$};
+      \draw[] (3,0) node (a4) {$\mystate{4}$};
 
-      \draw[] (4,0) node (a5) {$\myact{5}$};
+      \draw[] (4,0) node (a5) {$\mystate{5}$};
 
-      \draw[] (5,0) node (a6) {$\myact{6}$};
+      \draw[] (5,0) node (a6) {$\mystate{6}$};
 
       % arrows
   
@@ -513,17 +539,17 @@ arrows in Figure~\ref{fig:vagueUse}).
 
 
 
-      \draw[] (0,0) node (a1) {$\myact{1}$};
+      \draw[] (0,0) node (a1) {$\mystate{1}$};
 
-      \draw[] (1,0) node (a2) {$\myact{2}$};
+      \draw[] (1,0) node (a2) {$\mystate{2}$};
 
-      \draw[] (2,0) node (a3) {$\myact{3}$};
+      \draw[] (2,0) node (a3) {$\mystate{3}$};
 
-      \draw[] (3,0) node (a4) {$\myact{4}$};
+      \draw[] (3,0) node (a4) {$\mystate{4}$};
 
-      \draw[] (4,0) node (a5) {$\myact{5}$};
+      \draw[] (4,0) node (a5) {$\mystate{5}$};
 
-      \draw[] (5,0) node (a6) {$\myact{6}$};
+      \draw[] (5,0) node (a6) {$\mystate{6}$};
 
       % arrows
   
@@ -566,29 +592,21 @@ arrows in Figure~\ref{fig:vagueUse}).
   \end{subfigure}
 
 
-  \caption{Examples of strategy pairs in sim-max games.}
+  \caption{Examples of strategy pairs in sim-max games. Sender strategies map states onto
+    messages (top two rows); receiver strategies map messages onto states (bottom two rows). In
+    Figure~\ref{fig:EquilibriaVagueness}, the thickness of arrows indicates the probability of
+    a choice in a probabilistic strategy.}
   \label{fig:EquilibriaVagueness}
 \end{figure}
 
-\citet{DouvenDecock2011:Vagueness:-A-Co} show that
-\citeauthor{Gardenfors2000:Conceptual-Spac}'s conceptual spaces
-approach can be extended to account for the existence of borderline
-cases. From the assumption that prototypes are extended, yet convex
-regions in conceptual space, a construction algorithm is available
-that yields ``collated Voronoi diagrams'' with thick boundaries
-representing borderline
-regions. \citet{DecockDouven2012:What-is-Graded-} show further how it
-is possible to arrive at a gradient transition between categories, by
-weighing in the distance of different borderline cases to various
-prototypical regions. This accounts for the first of the two
-desiderata mentioned above, but still assumes that crisp prototype
-regions must be given.
+\subsection{Vagueness, functional pressure \& transmission biases}
+\label{sec:vagu-funct-press}
 
-Alternative approaches are taken by, for example, \citet{FrankeJager2010:Vagueness-Signa} and
-\citet{OConnor2013:The-Evolution-o}, who show different ways how the above desiderata can be met by evolving
-strategies in sim-max games. The approach we take here is similar in spirit, but different in
-relevant detail. A more in-depth comparison is deferred until Section~\ref{sec:discussion}. Let
-us first look into our own proposal in more detail.
+The approach we take here is similar in spirit to that of
+\citet{FrankeJager2010:Vagueness-Signa} and \citet{OConnor2013:The-Evolution-o}, but different
+in relevant detail. A more in-depth comparison is deferred until
+Section~\ref{sec:discussion}. Let us first motivate our approach here, and spell it out in more
+detail in the following section.
 
 Our conceptual starting point is the widely shared conviction that language is shaped by at
 least two forces, which may, on occasion, pull in opposite direction. On the one hand, there is
@@ -609,11 +627,14 @@ formalized in the replicator mutator dynamic
 The emphasis of previous models that studied the effects of transmission infidelity on the
 evolution of language has been on inductive biases and the systematicity, compression and
 regularization that they can introduce. Here, we would like to show that transmission noise of
-a different kind can lead to regularization as well and also give rise to vague
-meaning. Towards this end, we formalize the expected change in the behavior of a population of
-agents that try to imitate other agents' signaling behavior. We assume, however, that both
-realization of behavior, as well as observability of others' behavior, is systematically
-perturbed by noise. The resulting population-level dynamic generalizes the replicator dynamic
+a different kind can lead to regularization as well and also give rise to vague meaning. While
+perhaps \emph{prima facie} unexpected, we find that shared perceptual biases that perturb the
+transmission of successful signaling behavior can regularize, facilitate and accelerate the
+evolution of meaning conventions, albeit at the cost of vagueness. To show this, we formalize
+the expected change in the behavior of a population of agents that try to imitate other agents'
+signaling behavior. We assume, however, that both realization of behavior, as well as
+observability of others' behavior, is systematically perturbed by noise. The resulting
+population-level dynamic generalizes the replicator dynamic
 \citep{TaylorJonker1978:Evolutionary-St} in its interpretation as a cultural evolutionary
 dynamic based on imitation
 \citep[e.g.][]{Helbing1996:A-Stochastic-Be,Schlag1998:Why-Imitate-and}. The inclusion of
@@ -669,7 +690,11 @@ choices.\footnote{\label{fn:mixedStrats}Our focus is on behavioral strategies, n
   agent behaved in \emph{one} particular situation, not how that agent would behave in
   \emph{all} relevant choice situations; they imitate the use of a single word, so to speak,
   not a whole lexicon. (See \citet{Cressman2003:Evolutionary-Dy} for more on the difference
-  between dynamics on mixed or behavioral strategies.)} The sender's behavioral strategies are
+  between dynamics on mixed or behavioral strategies.) It is in this respect that the cultural
+  evolutionary dynamic introduced here differs most visibly from the replicator mutator dynamic
+  \citep[e.g.][]{NowakPlotkin2000:The-Evolution-o,NowakKomarova2001:Evolution-of-Un}, which
+  operates on mixed strategies and is motivated by assumptions of (asexual) biological
+  inheritance with transmission infidelity.} The sender's behavioral strategies are
 functions $\Sstrat \in \Delta(\Messgs)^\States$, thus mapping each state $\state \in \States$
 to a probability of each message $\messg \in \Messgs$ being sent in $\state$; the receiver's
 are functions $\Rstrat \in \Delta(\States)^\Messgs$, thus mapping each message
@@ -680,7 +705,7 @@ strategy. Behavioral strategies then capture average population behavior. Assumi
 infinite population, the number $\Sstrat(\messg \probbar \state)$, for instance, is then the
 probability that a randomly sampled sender would send message $\messg$ if the actual state was
 $\state$. Similarly, $\Rstrat(\state \probbar \messg)$ is then the probability with which a
-randomly sampled receiver interprets $\messg$ as $\state$. A play of single evolutionary game
+randomly sampled receiver interprets $\messg$ as $\state$. A play of a single evolutionary game
 with behavioral strategies is illustrated in Figure~\ref{fig:sim-max-illustration}.
 
 \begin{figure}
@@ -726,7 +751,7 @@ Expected utilities are sums, over all possible concrete outcomes, of the utiliti
 outcomes, weighted by how likely they occur. For instance, the expected utility for the sender
 of choosing message $\messg$, given state $\state$ and a receiver strategy $\Rstrat$ is the
 sum, for each interpretation $\state'$, of the probability that some random receiver will
-choose $\state'$ given $\messg$ times the actual utility of triple $\state$, $\messg$ and
+choose $\state'$ given $\messg$ times the actual utility of pair $\state$ and
 $\state'$.
 
 The discrete-time replicator dynamic tracks changes in frequency of choices in the population
@@ -759,7 +784,7 @@ for state $\state$. The revising agent then observes what some random agent does
 say $\messg$, and will henceforth play $\messg$ in $\state$ with a probability given by the
 expected utility of $\messg$ for state $\state$.
 
-\subsection{Noisy replicator dynamic}
+\subsection{Noise perturbed conditional imitation}
 \label{sec:noisy-repl-dynam}
 
 Imitation of success, as described above, presupposes that agents make no mistakes when
@@ -782,7 +807,7 @@ Imitation dynamics could be affected by at least two sources of probabilistic no
   that an agent observes it as $\mystate{o}$ is $P_o(\mystate{o} \probbar \mystate{a})$;
 \item \emph{realization noise:} whenever an agent intends to realize interpretation
   $\mystate{i}$, the probability that $\mystate{r}$ is realized is
-  $P_r(\mystate{r} \probbar \mystate{o})$.
+  $P_r(\mystate{r} \probbar \mystate{i})$.
 \end{enumerate}
 
 \noindent A round of play of a sim-max game with these two sources of confusability of states
@@ -842,7 +867,7 @@ $P_o(\messg \probbar \state)$ that some other random agent selects $\messg$ when
 agent perceives $\state$. This $P_o(\messg \probbar \state)$ is derived from the prior
 probability of states, the current sender population behavior $\Sstrat$ and the given
 observation noise (see Appendix~\ref{sec:imit-succ-with}). Eventually, the imitating agent adopts
-$\messg$ as his choice for $\state$ with probability given by the expected utility of sending
+$\messg$ as his choice for $\state$ with a probability given by the expected utility of sending
 $\messg$ when perceiving state $\state$. Expected utility should, of course, take the
 probabilistic confusability of states into account as well.
 
@@ -890,7 +915,7 @@ probabilities are moderate and regular, in that they track similarity of states,
 expect a regularizing effect also on evolving signaling strategies. Indeed, we hypothesize that
 confusion of states can give rise to population-level aggregate behavior that looks \emph{as
   if} information about what is good for one state percolates also to similar states. In other
-words, imprecise imitation may make signaling behavior on average look like agents generalize
+words, imprecise imitation may make signaling behavior on average look as if agents generalize
 across similar states, even if no agent actually generalizes. To explore whether confusion of
 states can have this effect, we turn to numerical simulation.
 
@@ -950,8 +975,9 @@ for any other state with some positive probability. For the uninteresting case o
 $\imprecision \rightarrow \infty$, confusion is maximal and every state can be perceived or
 realized as any other state with probability $\nicefrac{1}{\card{\States}}$.
 
-As for utility, we define it in terms of similarity and introduce another free parameter, $\toler \ge 0$.
- The intention is for this parameter to model the amount of tolerable pragmatic slack, which we felt should be allowed to vary separately from perceptual imprecision:
+As for utility, we define it in terms of similarity and introduce another free parameter,
+$\toler \ge 0$.  The intention is for this parameter to model the amount of tolerable pragmatic
+slack, which should be allowed to vary separately from perceptual imprecision:
 \begin{align*}
   \util(\mystate{i}, \mystate{j} \myts ; \myts \toler) =
       \similarity(\mystate{i}, \mystate{j} \myts ; \myts \toler)\,.
@@ -965,7 +991,7 @@ small amount of imprecision in communication is tolerable, whereas similarly sma
 in intolerably far away interpretations matter very little, with a smooth transition between
 these regimes \citep[c.f.][]{OConnor2013:The-Evolution-o}.
 
-In order to simplify the analysis, we focus on games with two messages, \emph{i.e.}~we fix $\card{M} = 2$.
+In order to simplify the analysis, we focus on games with two messages, i.e., we fix $\card{M} = 2$.
 In sum, to structure thinking about the behavior of our imprecise imitation dynamic, the system
 is governed by three parameters: the number $\ns = \card{T}$ of states in the state space,
 imprecision $\imprecision$ and tolerance $\toler$.
@@ -1020,14 +1046,14 @@ regular signaling behavior.
   % \end{subfigure}
 
 
-  \caption{Example strategies under \rdd at stopping time. Each line corresponds to a message and plots, for each state, the probability that the message is used.}
+  \caption{Example strategies at stopping time. Each line corresponds to a message and plots, for each state, the probability that the message is used.}
   \label{fig:example_strats}
 \end{figure}
 
 Representative examples for resulting strategy pairs are given in
 Figure~\ref{fig:example_strats}. Figure~\ref{fig:example_stratsA} shows a strategy pair at
 stopping time with 90 states, tolerance $\toler = 0.1$ and imprecision $\imprecision = 0$. Zero
-imprecision means that the trial was effectively an application of the plain \rd. Noteworthily,
+imprecision means that the trial was effectively an application of the standard replicator dynamic. Noteworthily,
 the given sender strategy approximates a pure sender strategy that crisply partitions the state
 space into non-convex sets. The irregular shape of the receiver strategy suggests that the
 pictured strategy pair has not yet reached a stable state. Indeed,
@@ -1048,11 +1074,11 @@ time, possibly indefinitely. We see this in our limited-time simulations (e.g.,
 Figure~\ref{fig:example_stratsA}), but this also holds, for some types of utility functions,
 for the limiting case. This was first observed by Elliott Wagner, as mentioned by
 \citet{OConnor2014-OCOEPC}.  A full analysis of the dynamics of sim-max games is beyond the
-scope of this paper, but we will shortly see that diffusion from confusability of states
+scope of this paper, but we will see shortly that diffusion from confusability of states
 clearly prevents evolutionary paths that meander for a long time in the vicinity of non-convex
 strategies.
 
-\subsection{Dependent measures}
+\subsection{Measures of interest}
  
 To further explore our simulation results, we calculated metrics that aim to numerically
 capture how vague, generally well-structured, and communicatively efficient the recorded
@@ -1067,23 +1093,21 @@ captures inverse distance from a pure strategy. The usual definition of entropy 
 directly to mixed strategies (see Footnote~\ref{fn:mixedStrats}), but provably equivalent
 metrics for behavioral strategies are ready to hand:
 \begin{align*}
-  E(\Sstrat) = -\sum_{\state \in \States} \sum_{\messg \in \Messgs}
+  E(\Sstrat) & = -\sum_{\state \in \States} \sum_{\messg \in \Messgs}
   \Sstrat(\messg \probbar \state) \cdot \log(\Sstrat(\messg \probbar
-  \state))\,, \\
-  E(\Rstrat) = -\sum_{\messg \in \Messgs} \sum_{\state \in \States}
+  \state))\,, &
+  E(\Rstrat) & = -\sum_{\messg \in \Messgs} \sum_{\state \in \States}
   \Rstrat(\state \probbar \messg) \cdot \log(\Rstrat(\state \probbar
   \messg)) \,. 
 \end{align*}
-Values obtained by these definitions are lower bounded by $0$ and
-upper bounded by, respectively, $\log(|\Messgs^\States|) = |\States|
-\cdot \log(|\Messgs|)$ and $\log(|\States^\Messgs|) = |\Messgs| \cdot
-\log(|\States|)$. We work with normalized values. The sender
-strategies in Figures~\ref{fig:example_stratsA} and
-\ref{fig:example_stratsB} have entropy $1.19e^{-5}$ and $0.08$,
-respectively. The receiver strategies have respective entropies $0.43$
-and $0.81$. In general, we expected that vague languages would have
-higher entropy than crisp ones and that increasing imprecision would
-lead to increased entropy, all else being equal.
+Values obtained by these definitions have lower bound of zero and an upper bound of,
+respectively, $\log(|\Messgs^\States|) = |\States| \cdot \log(|\Messgs|)$ and
+$\log(|\States^\Messgs|) = |\Messgs| \cdot \log(|\States|)$. We work with values rescaled to
+lie in $[0;1]$ for cross-comparability. The sender strategies in
+Figures~\ref{fig:example_stratsA} and \ref{fig:example_stratsB} have entropy $1.19e^{-5}$ and
+$0.08$, respectively. The receiver strategies have respective entropies $0.43$ and $0.81$. In
+general, we expected that vague languages would have higher entropy than crisp ones and that
+increasing imprecision would lead to increased entropy, all else being equal.
 
 \paragraph{Convexity.} At least for sender strategies, which develop faster than receiver
 strategies, it also makes sense to define a categorical measure of convexity that compensates
@@ -1093,7 +1117,7 @@ $\Spure(\state) = \argmax_{\messg' \in \Messgs} \Sstrat(\state,\messg')$. If tha
 convex, we also count $\Sstrat$ as convex. The sender strategy in
 Figure~\ref{fig:example_stratsA} is not convex, while the one in
 Figure~\ref{fig:example_stratsB} is.  If confusion of states can regularize signaling
-strategies, like we hypothesized, we should see more convexity with increasing impairment all
+strategies, like we hypothesized, we should see more convexity with increasing imprecision all
 else equal.
 
 \paragraph{Expected utility.} We also recorded the expected utility of
@@ -1170,7 +1194,7 @@ utility of $0.99$ while the one in Figure~\ref{fig:example_stratsD} only has $0.
     \label{fig:example_stratsD}
   \end{subfigure}
 
-  \caption{More example strategies under \rdd at stopping time of our simulations.}
+  \caption{More example strategies at stopping time of our simulations.}
   \label{fig:MoreExample_strats}
 \end{figure}
 
@@ -1254,7 +1278,7 @@ realization of that pure strategy, according to our model, is bound to be vague 
 agent could signal differently in repeated exposure to the same state). We have used the term
 ``observation noise'' here, but it may well be that this could equally well be perceived as an
 inseparable component of an agent's ``signaling faculty.'' In this sense, then, the model might
-not be entirely incompatible with a picture of agents who have internalized a vague signaling
+be compatible with a picture of agents who have internalized a vague signaling
 strategy. It would need to be seen, however, how revision of non-deterministic individual-level
 behavior must be spelled out rigorously and whether the resulting population-level dynamic
 would be equivalent to our present proposal in all relevant respects.
@@ -1285,8 +1309,8 @@ as if mere confusability of states imposes a regularity constraint on evolving c
 
 The phenomenon could potentially not just be a side effect.  Given the benefit of a certain
 amount of imprecision we observe when comparing within group expected utility, it would be
-interesting to study whether, under certain conditions, this group level advantage could trump
-the individual level disadvantage of a vague language, and thus actually select for a certain
+interesting to study whether, under certain conditions, this group-level advantage could trump
+the individual-level disadvantage of a vague language, and thus actually select for a certain
 amount of imprecision.  This could be achieved by letting the imprecision parameter be an
 evolving part in the dynamics as well. The idea is for now mostly speculative, but we consider
 it an interesting avenue for future research.  There is additional motivation to consider its
@@ -1314,7 +1338,7 @@ over stimuli or reasons about what a more systematic signaling strategy would be
 \citet{FrankeJager2010:Vagueness-Signa} suggested a number of ways in which
 in\-for\-ma\-tion-processing limitations could lead to vague strategies. The model that is most
 clearly related to the present approach uses the notion of a \emph{quantal response}, also
-known as a \emph{soft-max function}
+known as a \emph{soft-max response function}
 \citep[e.g.][]{Luce1959:Individual-Choi,McFadden1976:Quantal-Choice-,GoereeHolt2008:Quantal-Respons}. The
 main difference between this and our present approach is in where stochastic noise is assumed
 to reside. In case of a quantal response dynamic, it is the computation of expected utilities;
@@ -1338,18 +1362,23 @@ not likely be confused for a dwarf.
 We set out to meet a technical challenge posed by Lipman's problem
 \citep{Lipman2009:Why-is-Language}: is there a conceptually sound and mathematically coherent
 formal model that shows how vague language can evolve under selective pressure for efficient
-communication? On the assumption that agents are likely to mistake states for one another,
-especially when they are perceptually similar, we derived a generalization of the replicator
-dynamic from an agent-level process of imprecise imitation. The resulting population-level
-dynamic produced signaling behavior that is at the same time regular and by-and-large
-communicatively efficient, while also showing the crucial marks of vagueness. In a sense, the
-model derives vagueness as a by-product of an arguably natural limitation on the discriminatory
-power of signaling agents.  Although inability to sharply discriminate similar stimuli may lead
-to vagueness and bring about a (slight) decrease in communicative efficiency, there may also be
-an advantage, not of vagueness itself, but of its reason: systematicity in the confusability of
-states (which may be a natural by-product of the perceptual system) supports
-\emph{as-if}-generalization at the population-level without having to assume that agents
-themselves have any generalization power.
+communication if agents tend to confuse similar stimuli? To address this, we derived a
+generalization of the replicator dynamic from an agent-level process of imprecise
+imitation. The resulting population-level dynamic produced signaling behavior that is at the
+same time regular and by-and-large communicatively efficient, while also showing the crucial
+marks of vagueness. In a sense, the model derives vagueness as a by-product of an arguably
+natural limitation on the discriminatory power of signaling agents.  Although inability to
+sharply discriminate similar stimuli may lead to vagueness and bring about a (slight) decrease
+in communicative efficiency, there may also be an advantage, not of vagueness itself, but of
+its reason: systematicity in the confusability of states (which may be a natural by-product of
+the perceptual system) supports \emph{as-if}-generalization at the population-level without
+having to assume that agents themselves have any generalization power. In this way, the
+presented model extends research into the effects of transmission biases on processes of
+meaning evolution. While most previous models have focused on inductive biases of language
+learners and the regularization that these may effect
+\citep[e.g.][]{NowakPlotkin2000:The-Evolution-o,NowakKomarova2001:Evolution-of-Un,KirbyHurford2002:The-Emergence-o,SmithKirby2003:Iterated-Learni,GriffithsKalish2007:Language-Evolut,KirbyGriffith2014:Iterated-Learni},
+we have shown here that shared perceptual biases, of which such an effect was not necessarily
+expected, can also regularize, facilitate and accelerate the evolution of meaning conventions.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
