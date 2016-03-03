@@ -207,16 +207,18 @@ occurs, a similarity metric\footnote{A metric is a function of distance between 
   % between an element and itself, symmetric, and satisfy the triangle inequality that
   % $\similarity(x,z) \le \similarity(x,y) + \similarity(y,z)$
 on states $\similarity \mycolon \States \times \States \rightarrow \mathds{R}$ such that
-$\similarity(\mystate{1}, \mystate{2})$ is the (perceptual) similarity between $\mystate{1}$
-and $\mystate{2}$, and a utility function
+$\similarity(\mystate{1}, \mystate{2})$ is the (physical) similarity between $\mystate{1}$ and
+$\mystate{2}$, and a utility function
 $\Utils \mycolon \States \times \States \rightarrow \mathds{R}$ such that
 $\Utils(\mystate{1}, \mystate{2})$ is the payoff for sender and receiver for a play with actual
 state $\mystate{1}$ and receiver interpretation $\mystate{2}$. We identify the receiver's acts
 with the states of the world, so that the game is one of guessing the actual state, so to
-speak. The utility function should be a monotonically increasing function of
-similarity.\footnote{Section~\ref{sec:setting-stage} motivates a particular choice of utility
-  function that we will explore in more detail. But since the general discussion also applies
-  and makes reference to other choices, we prefer to remain general for the time being.}
+speak. For the modeling purposes of this paper, we make the simplifying assumption that
+$\States$ is a set of points in Euclidean space, whose closeness to each other tracks physical
+similarity. Perceived similarity, where it is necessary, would be a monotonic function of
+physical similarity. Likewise, the utility function should be a monotonically increasing
+function of physical similarity.\footnote{Section~\ref{sec:setting-stage} motivates particular
+  choices of similarity and utility functions that we will explore in more detail.}
 Non-probabilistic sender behavior can be represented by a pure strategy
 $\Spure \in \Messgs^\States$, which deterministically defines which message would be used for
 each state. Similarly, a pure receiver strategy is a function $\Rpure \in \States^\Messgs$.
@@ -382,7 +384,7 @@ sending \mymessg{1} in \mystate{3} than from sending \mymessg{2}, because (by as
 \mystate{3} is more similar to \mystate{2} than \mystate{5} is. In contrast,
 Figure~\ref{fig:efficientEq} shows a maximally efficient equilibrium. This is a partial pooling
 equilibrium in the sense that the speaker uses the same message for several states. Partial
-pooling equilibria can be less inefficient than other non-pooling equilibria, but that requires
+pooling equilibria can be less inefficient than other non-pooling equilibria, if there are
 enough messages. The strategy pair of Figure~\ref{fig:efficientEq} is maximally efficient for
 the two-message case. So, while partial pooling may entail inefficiency in some sense, and
 while partial pooling can hamper the evolution of maximally efficient signal use
@@ -627,16 +629,15 @@ formalized in the replicator mutator dynamic
 The emphasis of previous models that studied the effects of transmission infidelity on the
 evolution of language has been on inductive biases and the systematicity, compression and
 regularization that they can introduce. Here, we would like to show that transmission noise of
-a different kind can lead to regularization as well and also give rise to vague meaning. While
-perhaps \emph{prima facie} unexpected, we find that shared perceptual biases that perturb the
-transmission of successful signaling behavior can regularize, facilitate and accelerate the
-evolution of meaning conventions, albeit at the cost of vagueness. To show this, we formalize
-the expected change in the behavior of a population of agents that try to imitate other agents'
-signaling behavior. We assume, however, that both realization of behavior, as well as
-observability of others' behavior, is systematically perturbed by noise. The resulting
-population-level dynamic generalizes the replicator dynamic
-\citep{TaylorJonker1978:Evolutionary-St} in its interpretation as a cultural evolutionary
-dynamic based on imitation
+a different kind can lead to regularization as well and also give rise to vague meaning. We
+find that shared perceptual biases that perturb the transmission of successful signaling
+behavior can regularize, facilitate and accelerate the evolution of meaning conventions, albeit
+at the cost of vagueness. Concretely, we formalize the expected change in the behavior of a
+population of agents that try to imitate other agents' signaling behavior. We assume, however,
+that both realization of behavior, as well as observability of others' behavior, is
+systematically perturbed by noise. The resulting population-level dynamic generalizes the
+replicator dynamic \citep{TaylorJonker1978:Evolutionary-St} in its interpretation as a cultural
+evolutionary dynamic based on imitation
 \citep[e.g.][]{Helbing1996:A-Stochastic-Be,Schlag1998:Why-Imitate-and}. The inclusion of
 confusability of stimuli does not undermine the possibility of evolving communicative signaling
 behavior. Instead, it leads to the evolution of vague meanings. It moreover accelerates the
