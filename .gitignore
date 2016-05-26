@@ -17,10 +17,8 @@ vague-voronoi-language.pdf
 *-blx.bib
 *.out
 *.rel
-*.bst
 title_page.pdf
 *.run.xml
-.DS_Store
 auto
 .Rhistory
 .RData
