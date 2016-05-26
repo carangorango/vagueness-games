@@ -1,0 +1,196 @@
+%%%% This template is customised for the style of the journal ``The
+%%%% British Journal for the Philosophy of Science'' (BJPS). It should
+%%%% be used in conjunction with the file bjps.bst available from
+%%%% http://www.michaelcuffaro.com/latex.shtml
+
+% one sided:
+\documentclass[12pt,english]{article}
+
+% paper size, margins, etc:
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\usepackage[titletoc,title]{appendix}
+
+% spacing
+\usepackage{setspace}
+\doublespacing
+
+% left justification:
+\raggedright
+
+% indentation
+\setlength\parindent{12pt}
+
+% section headings
+\usepackage{sectsty}
+\allsectionsfont{\normalsize\raggedright\centering}
+
+% table of contents stuff
+\setcounter{tocdepth}{2}
+\usepackage[]{tocloft}
+\addtocontents{toc}{\cftpagenumbersoff{section}}
+\addtocontents{toc}{\cftpagenumbersoff{subsection}}
+\renewcommand{\cftsecfont}{\itshape}
+\renewcommand{\cftsubsecfont}{\itshape}
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{}
+\makeatother
+\renewcommand{\cftdot}{}
+
+% footnotes
+\usepackage[]{footmisc}
+\renewcommand\footnotelayout{\normalsize\doublespacing\raggedright}
+
+% for bibliography
+\usepackage{natbib}
+\usepackage{url}
+\makeatletter
+\def\url@leostyle{%
+  %\@ifundefined{selectfont}{
+    \def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}
+\makeatother
+\urlstyle{leo}
+
+\bibpunct
+{(} %the opening bracket symbol
+{)} %the closing bracket symbol
+{,} %the punctuation between multiple citations
+{a} %the letter `n' for numerical style, or `s' for numerical superscript style, any other letter for author-year
+{} %the punctuation that comes between the author names and the year
+{;} %the punctuation that comes between years or numbers when common author lists are suppressed
+
+% headers
+\pagestyle{plain}
+% no page numbers:
+%\pagestyle{empty}
+
+% for author affiliation
+\usepackage{authblk}
+
+% misc
+\usepackage{graphicx}
+\usepackage{babel}
+
+% math packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+% frames
+\usepackage{framed}
+
+\makeatletter
+\makeatother
+
+% restart equation numbering after every section:
+\numberwithin{equation}{section}
+
+% FONTS:
+%-------
+% for times roman fonts:
+\usepackage{txfonts}
+% recommended if output will have accented characters:
+\usepackage[T1]{fontenc}
+% recommended if inputting accented directly from the keyboard:
+%\usepackage[latin1]{inputenc}
+
+% BJPS specific cite commands:
+\newcommand{\citetbjps}[1]{\citeauthor{#1} ([\citeyear{#1}])}
+\newcommand{\citealtbjps}[1]{\citeauthor{#1} [\citeyear{#1}]}
+\newcommand{\citepbjps}[1]{(\citeauthor{#1} [\citeyear{#1}])}
+\newcommand{\citeyearbjps}[1]{[\citeyear{#1}]}
+\newcommand{\citeyearparbjps}[1]{([\citeyear{#1}])}
+
+\begin{document}
+
+\title{{\normalsize \textbf{Your Title}}}
+\author{{\normalsize \textbf{Your name}}}
+\date{}
+
+\maketitle
+
+%% no headers on the first page:
+\thispagestyle{empty}
+
+\begin{abstract}
+% 300 words maximum for BJPS
+Abstract text goes here.
+\end{abstract}
+
+\mbox{} \\
+
+\tableofcontents
+
+\mbox{} \\
+
+\section{Introduction}
+
+See \citepbjps{deutsch1997}, and for further discussion of this, see
+\citepbjps{wallace2012}. Discussions of the relevance of it to real
+life problems in cosmetics can be found in
+(\citealtbjps{deutsch2000}; \citealtbjps{pitowski2002}; \citealtbjps{hagar2007b};
+\citealtbjps{aaronson2013}; \citealtbjps{timpson2013}). For claims of
+relevance to the philosophy of the culinary arts, see, e.g.,
+\citepbjps{hameroff1998}.
+We will examine a more detailed and explicit statement of this
+position by \citetbjps{jozsa2003} later on. Note that
+\citeauthor[]{datta2005}, for instance, write:
+`Culinary arts and cosmetics are formally identical'
+(\citeyearbjps{datta2005}, p. 1).
+Reflecting on this circumstance in their influential
+\citeyearparbjps{jozsa2003} article (in a section entitled: \emph{Is
+  entanglement a key resource for computational power?}),
+\citeauthor[]{jozsa2003} write: `We disagree'
+(\citealtbjps{jozsa2003}, pp. 2029--30, no emphasis in original
+either).\footnote{Note: the authors cited do not actually say what I
+  say they say here!}
+
+\section{First Section}
+
+Some section text goes here.
+
+\section{Second Section}
+
+Some section text goes here.
+
+\section{Third Section}
+
+Some section text goes here.
+
+\section{Fourth Section}
+
+Some section text goes here.
+
+%\appendix
+\begin{appendices}
+
+\section{Appendix}
+
+Some appendix text goes here.
+
+\end{appendices}
+
+\section*{Funding}
+
+I was funded by a very nice funding institution.
+
+\section*{Acknowledgements}
+
+I am very significantly indebted to a whole bunch of very nice
+people.
+
+\begin{flushright}
+\emph{
+  Name\\
+  Institution\\
+  Department\\
+  Address line 1\\
+  Address line 2\\
+  E-Mail
+}
+\end{flushright}
+
+\bibliographystyle{bjps}
+\bibliography{Bibliography}{}
+
+\end{document}
