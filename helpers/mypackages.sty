@@ -81,7 +81,8 @@
 \RequirePackage{soul}
 \RequirePackage{relsize} % provides command \relsize{+/-x} for relative
                      % font size changes
-\RequirePackage[german,english]{babel}
+%\RequirePackage[german,english]{babel}
+\RequirePackage[english]{babel}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc} 
 % \RequirePackage{subfig}
@@ -116,20 +117,20 @@
   \linespread{1.12}
 \fi
 
-\ifnobib
-  \RequirePackage[style=authoryear-comp, % Citation marks as [Jef65]
-            natbib=true,      % Natbib-style cite macros \citeauthor &c.
-            hyperref=true,    % Cites in pdf are links to bib
-                              % (hyperref conf.)
-            maxnames=3,       % truncate name lists if more than 2
-                              % names appear
-            doi=false,        % no doi's
-            url=false,        % no url's
-            sortcites=false,  % do NOT sort cites in the style of the
-                              % bibliography 
-            %backref=true     % insert backrefs in reference section
-            ]{biblatex}
-\fi
+%\ifnobib
+%  \RequirePackage[style=authoryear-comp, % Citation marks as [Jef65]
+%            natbib=true,      % Natbib-style cite macros \citeauthor &c.
+%            hyperref=true,    % Cites in pdf are links to bib
+%                              % (hyperref conf.)
+%            maxnames=3,       % truncate name lists if more than 2
+%                              % names appear
+%            doi=false,        % no doi's
+%            url=false,        % no url's
+%            sortcites=false,  % do NOT sort cites in the style of the
+%                              % bibliography
+%            %backref=true     % insert backrefs in reference section
+%            ]{biblatex}
+%\fi
 
 
 
