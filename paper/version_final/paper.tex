@@ -204,14 +204,14 @@
 
 Many concepts and expressions are vague. A vague category knows clear cases that fall under it,
 clear cases that do not, and also so-called borderline cases. Borderline cases do not clearly
-apply, nor do they clearly not apply, and there may be differences between borderline cases in
+belong to the category, nor do they clearly not belong, and there may be differences between borderline cases in
 terms of how well they represent the category in question. Vagueness does not seem to
 dramatically affect the success of everyday communication, but it is troublesome for some of
 the most prominent theories of language and meaning. This is especially so for the
 logico-positivist tradition of Frege, Russell, and early Wittgenstein, which is challenged by
 the paradoxes vagueness gives rise to.
 
-But there are other intriguing aspects about vagueness. One perplexing issue is how vagueness
+There are other intriguing aspects about vagueness. One perplexing issue is how vagueness
 could arise and be maintained in the first place. This is an apparent puzzle for functionalist
 accounts that maintain that concepts and linguistic meanings evolved driven towards
 efficiency. \citetbjps{Lipman2009:Why-is-Language} argues that, in common interest signalling
@@ -234,12 +234,12 @@ stimuli and imprecision in the realisation of similar responses. On this view, v
 language may be seen as a necessary sub-optimality due to limitations in another domain of
 cognition, first and foremost perception. It could then be speculated that the whole system,
 perception and language together, may be an almost optimal adaptation in a larger frame
-of reference, e.g., if we take into account the metabolic costs for increased perceptual
+of reference, for example if we take into account the metabolic costs for increased perceptual
 accuracy. We will not engage in such speculation here. Rather we will explore the consequences
 of perceptual limitations on processes of meaning evolution in a suitable formal framework. In
 other words, in order to address Lipman's challenge seriously, and not just hand-wave it away
-by appeal to the naturalness of vagueness, it needs to be spelled out how exactly confusability
-of stimuli could come into play in a process of meaning evolution and how it could lead to
+by appeal to the naturalness of vagueness, one needs to spell out how exactly could confusability
+of stimuli come into play in a process of meaning evolution and how it could lead to
 vague but by-and-large informative signal meaning. The formal model that this paper introduces
 does exactly that. But it also does more. We find that confusability of stimuli can regularise
 and systematise evolving meaning. This suggests a possibly advantageous side-effect that a
@@ -258,7 +258,7 @@ appreciated. Section~\ref{sec:repl-diff-dynam} introduces a generalisation of th
 dynamic which is derived from the idea that agents imitate other agents' behaviour while
 possibly confusing similar states.\footnote{Much previous work has investigated the interplay
   of adaptive dynamics, including imitation-based update protocols, on the one hand, and noise
-  or mutation, on the other hand (e.g., \citealtbjps{FosterYoung1990:Stochastic-Evol};
+  or mutation, on the other hand (e.g.~\citealtbjps{FosterYoung1990:Stochastic-Evol};
   \citealtbjps{FudenbergHarris1992:Evolutionary-Dy};
   \citealtbjps{KandoriMailath1993:Learning-Mutati}; \citealtbjps{Young1993:The-Evolution-o};
   \citealtbjps{FudenbergImhof2006:Imitation-Proce}). While this line of research often looks at
@@ -266,7 +266,7 @@ possibly confusing similar states.\footnote{Much previous work has investigated 
   the focus here is on a quite particular source of stochastic noise and its quite particular
   role in the evolution of meanings through signalling.}  This imprecise imitation dynamic is
 explored in Section~\ref{sec:exploring-rdd}. Section~\ref{sec:discussion} reflects and compares
-our approach to others. Appendix~\ref{sec:formal-stuff} provides formal detail.
+our approach to that of others. Appendix~\ref{sec:formal-stuff} provides formal detail.
 
 \section{Background}
 \label{sec:background}
@@ -293,7 +293,7 @@ the play is a success, otherwise a failure. Certain regular
 combinations of sender signalling and receiver reaction make messages
 meaningful, in the sense that their use is correlated systematically
 to certain states or acts. To investigate the conditions under which
-such meaning-generating behaviour can evolve is a highly interesting
+such meaning-generating behaviour can evolve is a
 topic that we are only beginning to fully understand
 (e.g.~\citealtbjps{Warneryd1993:Cheap-Talk-Coor}; \citealtbjps{BlumeKim1993:Evolutionary-St}; \citealtbjps{Huttegger2007:Evolution-and-t}; \citealtbjps{Pawlowitsch2008:Why-Evolution-d}; \citealtbjps{Barrett2009:The-Evolution-o}; \citealtbjps{HutteggerSkyrms2010:Evolutionary-Dy}; \citealtbjps{Skyrms2010:Signals}).
 
@@ -447,18 +447,17 @@ without having to store each category's extension. However, what is left unexpla
 the prototypes come from, and why we would not see just any distribution of prototypes as an
 equally efficient classification system. This is where sim-max games can contribute a
 principled approach to deriving, in an independent way, not only convex categories but also
-prototypical exemplars belonging to them.  These ideas, and more, are developed further in
-(\citealtbjps{Jager2007:The-Evolution-o};
-\citealtbjps{JagerRooijvan-Rooij2007:Language-Struct};
-\citealtbjps{JagerMetzger2011:Voronoi-Languag}; \citealtbjps{OConnor2014-OCOEPC}), among
+prototypical exemplars belonging to them.  These ideas, and more, are developed further by
+\citetbjps{Jager2007:The-Evolution-o}, \citetbjps{JagerRooijvan-Rooij2007:Language-Struct}, \citetbjps{JagerMetzger2011:Voronoi-Languag}, \citetbjps{OConnor2014-OCOEPC}, among
 others.
 
 \subsection{Vagueness in sim-max games and conceptual spaces}
+\label{sec:vagueness-in-sim-max-games}
 
 This outline of an approach to categorisation using sim-max games
-leaves many problems unaddressed. One of them is that natural
-categories for continuously variable stimuli usually do not have
-unique, point-valued prototypes and clear category boundaries. We
+leaves some problems unaddressed. One of them is that, usually, natural
+categories for continuously variable stimuli neither have
+clear boundaries, nor do they have unique, point-valued prototypes. We
 would like to account for the possibility of such vagueness, in
 particular: (i) clear positive examples of a vague category should
 show a gradient transition to clear negative examples;
@@ -499,7 +498,7 @@ pooling equilibria can be less inefficient than other non-pooling equilibria, if
 enough messages. The strategy pair of Figure~\ref{fig:efficientEq} is maximally efficient for
 the two-message case. So, while partial pooling may entail inefficiency in some sense, and
 while partial pooling can hamper the evolution of maximally efficient signal use
-(e.g.~\citealtbjps{Hutteger:2007-Evol-Indicatives-Imperatives}; \citealtbjps{Pawlowitsch2008:Why-Evolution-d}; \citealtbjps{HutteggerSkyrms2010:Evolutionary-Dy}),
+(\citealtbjps{Hutteger:2007-Evol-Indicatives-Imperatives}; \citealtbjps{Pawlowitsch2008:Why-Evolution-d}; \citealtbjps{HutteggerSkyrms2010:Evolutionary-Dy}),
 this is orthogonal to our concerns about vagueness. A regular and natural yet vague signal use
 would look like the pair in Figure~\ref{fig:vagueUse}. This is not an equilibrium, but it gets
 close, so to speak. It shows smooth transitions across similar states at the boundaries of
@@ -725,7 +724,7 @@ Our conceptual starting point is the widely shared conviction that language is s
 least two forces, which may, on occasion, pull in opposite direction. On the one hand, there is
 functional pressure towards efficient communication. On the other hand, there is systematic
 error, noise or imprecision in the transmission of linguistic behaviour, knowledge or traits. As
-an example for the latter, consider a child learning syntactic rules from a parent
+an example of the latter, consider a child learning syntactic rules from a parent
 generation. The child must infer these unobservable rules from observable speech. Inductive
 biases may influence which syntactic rules are likely to be inferred from (finite) parental
 input. Over the course of many generations, the effects of such biases can, in a manner of
@@ -733,7 +732,7 @@ speaking, `accumulate' and lead to surprising results, such as the evolution of 
 form-meaning mappings or the use of regular recursive syntactic structure. This can happen when
 the effects of transmission biases are isolated, as in iterated learning models
 (\citealtbjps{KirbyHurford2002:The-Emergence-o}; \citealtbjps{SmithKirby2003:Iterated-Learni}; \citealtbjps{GriffithsKalish2007:Language-Evolut}; \citealtbjps{KirbyGriffith2014:Iterated-Learni}),
-or when they interact with functional pressure towards efficient communication, e.g., as
+or when they interact with functional pressure towards efficient communication, for example as
 formalised in the replicator mutator dynamic
 (e.g.~\citealtbjps{NowakPlotkin2000:The-Evolution-o}; \citealtbjps{NowakKomarova2001:Evolution-of-Un}).
 
@@ -745,7 +744,7 @@ find that shared perceptual biases that perturb the transmission of successful s
 behaviour can regularise, facilitate and accelerate the evolution of meaning conventions, albeit
 at the cost of vagueness. Concretely, we formalise the expected change in the behaviour of a
 population of agents that try to imitate other agents' signalling behaviour. We assume, however,
-that both realisation of behaviour, as well as observability of others' behaviour, is
+that both observation of others' behaviour, as well as realisation of behaviour, are both
 systematically perturbed by noise. The resulting population-level dynamic generalises the
 replicator dynamic \citepbjps{TaylorJonker1978:Evolutionary-St} in its interpretation as a cultural
 evolutionary dynamic based on imitation
@@ -754,7 +753,7 @@ confusability of stimuli does not undermine the possibility of evolving communic
 behaviour. Instead, it leads to the evolution of vague meanings. It moreover accelerates the
 emergence of communicative signalling because it unifies and regularises evolutionary outcomes,
 making it appear as if agents were applying inductive biases or generalising over partial
-observations, when in truth this is the sole effect of confusion of similar stimuli.
+observations, when this is actually the sole effect of confusion of similar stimuli.
 
 
 
@@ -852,7 +851,7 @@ The expected utility of choices at each choice point is:\footnote{The notation
   writing $P(x) \propto f(x)$ for any function $f \mycolon X \rightarrow \mathds{R}$ is
   shorthand for $P(x) = \frac{f(x)}{\sum_{x' \in X} f(x')}$. }
 \begin{align*}
-  \EU(\messg, \state, \Rstrat) & = \sum_{\state \in \States}
+  \EU(\messg, \state, \Rstrat) & = \sum_{\state' \in \States}
   \Rstrat(\state' \probbar \messg) \myts U(\state, \state') \\
   \EU(\state', \messg, \Sstrat) & = \sum_{\state \in
     \States} P(\state \probbar \messg)  \myts
@@ -868,7 +867,7 @@ $\state'$.
 
 The discrete-time replicator dynamic tracks changes in frequency of choices in the population
 as proportional to their expected utilities
-\citepbjpspre{e.g.}{HofbauerSigmund1998:Evolutionary-Ga}:\footnote{The formulation given in
+\citepbjps{HofbauerSigmund1998:Evolutionary-Ga}:\footnote{The formulation given in
   Equation~(\ref{eq:RDDiscrete}) is adequate only for cases like the one we will be looking at
   in Section~\ref{sec:exploring-rdd}, where utilities are always non-negative and expected
   utilities are always positive.}
@@ -888,13 +887,13 @@ The replicator dynamic is an abstract population-level dynamic that describes th
 change of behavioural dispositions in a population of signallers. There are several ways of
 deriving the replicator dynamic from agent-level processes of behavioural adaptation. We focus
 here on one of the simplest: imitation of success
-\citepbjpspre{see}{Sandholm2010:Population-Game}. The intuitive idea is the following (see
-Appendix~\ref{sec:cond-imit-succ} for a derivation of the standard replicator dynamic from this
-update scheme).  Every now and then a random agent gets a chance to alter his behaviour for one
-of his choice points. Say, this is a sender who gets to `reconsider' his choice of message
-for state $\state$. The revising agent then observes what some random agent does at $\state$,
+\citepbjpspre{see}{Sandholm2010:Population-Game}. The intuitive idea is the following: every now and then a random agent gets a chance to alter his behaviour for one
+of his choice points (say this is a sender who gets to `reconsider' his choice of message
+for state $\state$); the revising agent then observes what some random agent does at $\state$,
 say $\messg$, and will henceforth play $\messg$ in $\state$ with a probability given by the
-expected utility of $\messg$ for state $\state$.
+expected utility of $\messg$ for state $\state$. See
+Appendix~\ref{sec:cond-imit-succ} for a derivation of the standard replicator dynamic from this
+update scheme.
 
 \subsection{Noise perturbed conditional imitation}
 \label{sec:noisy-repl-dynam}
@@ -906,9 +905,9 @@ confused for one another.
 Human performance in these situations has been studied by a number of authors in experimental psychology. %~\citepbjps{takane_structures_1992}.
 In a stimulus identification experiment~\citepbjps{luce-detection-1963}, subjects are presented in each trial with a stimulus to be identified out of a fixed set.
 The more similar the stimuli are to each other, the larger the number of errors subjects make.
-For example, in Robert Nosofsky's experiments~\citepbjps{Nosofsky1986:Attention-Simil}, stimuli consisted of 16 semicircles with a radial line from the centre to the rim, varying in size (radius of 0.478, 0.500, 0.522, or 0.544 cm) and angle of the line (50º, 53º, 56º, or 59º).
+For example, in Robert Nosofsky's experiments~\citeyearparbjps{Nosofsky1986:Attention-Simil}, stimuli consisted of 16 semicircles with a radial line from the centre to the rim, varying in size (radius of 0.478, 0.500, 0.522, or 0.544 cm) and angle of the line (50º, 53º, 56º, or 59º).
 In over 9000 trials, the two subjects identified the stimulus correctly only approximately 44\% and 35\% of the time.
-Similar experiments have been conducted with other identification tasks, for example, for frequency and intensity of tones, taste, hue of colours, and magnitude of lines and areas~\citepbjps{donkin-why-2015}.
+Similar experiments have been conducted with other identification tasks, for example, for frequency and intensity of tones, taste, hue of colours, and magnitude of lines and areas~\citepbjpspre{see}{donkin-why-2015}.
 The empirical data confirms not only the pervasiveness of variation in the subjects' ability to correctly identify stimuli, but also the relation between similarity and likelihood of stimulus confusion, and further suggests that the phenomenon might extend to all types of perception.
 
 In the context of imitation of success in a game where states have a degree of similarity between them, the possibility of agents mistaking one state for another is thus something that should be taken into account.
@@ -967,7 +966,7 @@ $P_r(\mystate{r} \probbar \mystate{i}) = 1$ iff $\mystate{i} = \mystate{r}$.
 
 
 The presence of observation and realisation noise also affects imitation of successes. Here, we
-focus on the main ideas. Formal detail is provided by Appendix~\ref{sec:imit-succ-with}. Take a
+focus on the main ideas, formal detail is provided in Appendix~\ref{sec:imit-succ-with}. Take a
 sender who gets to revise behaviour for state $\state$. What agents can plausibly revise by
 imitation is their pure strategy, which maps perceived states onto messages. When an agent gets
 to revise his strategy for the perceived state $\state$, this need not necessarily be the
@@ -1059,7 +1058,7 @@ states at all. Figure~\ref{fig:NosofskySim} gives an impression of Nosofsky-simi
 different parameter values. Other formalisations of perceptual similarity are possible,
 including ones that allow for different discriminability in different areas of the state space,
 but we stick with Nosofsky's similarity function for the time being, because it is
-mathematically simple, yet an established notion in mathematical psychology.
+mathematically simple, and an established notion in mathematical psychology.
 
 \begin{figure}
   \centering
@@ -1127,8 +1126,8 @@ eventual attracting state, whether they ran for 200 rounds or not. Our notion of
 therefore only a categorical measure for reaching a certain (well-considered, but eventually
 arbitrary) degree of stability. In other words, our notion of `convergence' is a measure of
 relative speed: is it true that the system reached a state in which evolutionary adaptations
-had slowed down almost to a halt before 200 update steps? This is motivated by pragmatic
-concerns regarding length of simulation time, but also theoretically justified, because we
+had slowed down almost to a halt before 200 update steps? This is motivated by practical
+concerns regarding length of simulation time, but also theoretically justifiable, because we
 hypothesise that confusability of states leads to regularisation of evolving strategies, which
 would show exactly in an increased speed of evolutionary trajectories towards well-behaved and
 regular signalling behaviour.
@@ -1181,13 +1180,12 @@ receiver's interpretations are rather extended curves, peaking at a central poin
 relevant `categories.'
 
 These examples already show two interesting things. Firstly, inclusion of imprecision can lead
-to seemingly well-behaved, yet vague strategies in the sense that we are after. The sender
+to seemingly well-behaved, yet vague strategies in the sense that we are after (see again Section~\ref{sec:vagueness-in-sim-max-games}). The sender
 strategy in Figure~\ref{fig:example_stratsB} identifies clear positive and clear negative cases
 for each signal, with a smooth transition in-between. The receiver's interpretations of signals
 can be seen as smoothed-out prototype regions. Secondly, (sender) strategies can approach
 non-convex pure strategies under the replicator dynamic and linger there for vast amounts of
-time, possibly indefinitely. We see this in our limited-time simulations (e.g.,
-Figure~\ref{fig:example_stratsA}), but this also holds, for some types of utility functions,
+time, possibly indefinitely. We see this in our limited-time simulations (e.g.~Figure~\ref{fig:example_stratsA}), but this also holds, for some types of utility functions,
 for the limiting case. This was first observed by Elliott Wagner, as mentioned by
 \citetbjps{OConnor2014-OCOEPC}.  A full analysis of the dynamics of sim-max games is beyond the
 scope of this paper, but we will see shortly that diffusion from confusability of states
@@ -1339,6 +1337,10 @@ swapping of messages). This means that perceptual imprecision can speed up and u
 evolutionary outcomes. It can amplify the emergence of sender strategies that are not only
 convex, but also regular in that they induce a vague category split exactly in the middle of
 the unit interval.
+This is then reflected in the `within group expected utility', defined as the average
+expected utility that each evolved language scored when playing against an arbitrary other
+language obtained for the same parameter values. Figure~\ref{fig:GroupMeasuresB} gives a
+representative example.
 
 \begin{figure}
   \centering
@@ -1389,9 +1391,9 @@ We would not, however, want to commit to the idea that vagueness does not exist 
 individual agents. True, our derivation of the imprecise imitation dynamic assumed that agents
 carry and revise pure strategies. But that was an assumption of convenience, not of
 conviction. Moreover, even if individual agents command a non-vague pure strategy, the
-realisation of that pure strategy, according to our model, is bound to be vague (e.g., the same
-agent could signal differently in repeated exposure to the same state). We have used the term
-`observation noise' here, but it may well be that this could equally well be perceived as an
+realisation of that pure strategy, according to our model, is bound to be vague: the same
+agent could signal differently in repeated exposure to the same state because of the non-deterministic nature of observation noise. We have used the term
+`observation noise' here, but this could equally well be interpreted as an
 inseparable component of an agent's `signalling faculty.' In this sense, then, the model might
 be compatible with a picture of agents who have internalised a vague signalling
 strategy. It would need to be seen, however, how revision of non-deterministic individual-level
@@ -1422,7 +1424,7 @@ might decrease the communicative efficiency of individual languages, it increase
 conceptual coherence and communicative success between independently evolving strategies. It is
 as if mere confusability of states imposes a regularity constraint on evolving categories.
 
-The phenomenon could potentially not just be a side effect.  Given the benefit of a certain
+The phenomenon could potentially be more than just a side effect.  Given the benefit of a certain
 amount of imprecision we observe when comparing within group expected utility, it would be
 interesting to study whether, under certain conditions, this group-level advantage could trump
 the individual-level disadvantage of a vague language, and thus actually select for a certain
@@ -1439,10 +1441,10 @@ choice options also for states similar to the ones that actually occurred. This 
 to vague signalling of the appropriate kind, but also speeds up learning in such a way that,
 especially for sim-max games with higher numbers of states, higher levels of communicative
 success are reached in shorter learning periods. Our results complement and extend
-\citeauthor{OConnor2013:The-Evolution-o}'s. The most important differences are that we obtain
-similar regularising effects also for cases with low numbers of states and do not assume that
+\citeauthor{OConnor2013:The-Evolution-o}'s. The most important differences are that (i) we obtain
+similar regularising effects also for cases with low numbers of states and (ii) we do not assume that
 agents have any kind of generalising capacity in and of themselves, even if that is only
-implicit, as in \citeauthor{OConnor2013:The-Evolution-o}'s generalised reinforcement learning.
+implicit in \citeauthor{OConnor2013:The-Evolution-o}'s generalised reinforcement learning.
 State confusability has an effect on aggregate signalling behaviour that can be described as
 generalisation without generalisers: the dynamics of imprecise imitation look as if
 `conclusions' about what works for one state are `carried over' to similar states. This,
@@ -1456,8 +1458,8 @@ clearly related to the present approach uses the notion of a quantal response, a
 known as a soft-max response function
 (e.g.~\citealtbjps{Luce1959:Individual-Choi}; \citealtbjps{McFadden1976:Quantal-Choice-}; \citealtbjps{GoereeHolt2008:Quantal-Respons}). The
 main difference between this and our present approach is in where stochastic noise is assumed
-to reside. In case of a quantal response dynamic, it is the computation of expected utilities;
-in case of imprecise imitation, it is perception and realisation of similar states. There are
+to reside. In case of a quantal response dynamic, it resides in the computation of expected utilities;
+in case of imprecise imitation, it resides in perception and realisation of similar states. There are
 cases, then, where evolving signalling behaviour, as predicted by these two approaches, is quite
 different. Intuitively speaking, for a case with two messages, the further we venture away from
 a prototypical interpretation of either message, the less discriminative a signalling strategy
@@ -1475,7 +1477,7 @@ not likely be confused for a dwarf.
 \label{sec:conclusion}
 
 We set out to meet a technical challenge posed by Lipman's problem
-\citepbjps{Lipman2009:Why-is-Language}: is there a conceptually sound and mathematically coherent
+\citeyearparbjps{Lipman2009:Why-is-Language}: is there a conceptually sound and mathematically coherent
 formal model that shows how vague language can evolve under selective pressure for efficient
 communication if agents tend to confuse similar stimuli? To address this, we derived a
 generalisation of the replicator dynamic from an agent-level process of imprecise
@@ -1485,7 +1487,7 @@ marks of vagueness. In a sense, the model derives vagueness as a by-product of a
 natural limitation on the discriminatory power of signalling agents.  Although inability to
 sharply discriminate similar stimuli may lead to vagueness and bring about a (slight) decrease
 in communicative efficiency, there may also be an advantage, not of vagueness itself, but of
-its reason: systematicity in the confusability of states (which may be a natural by-product of
+its cause. Systematicity in the confusability of states (which may be a natural by-product of
 the perceptual system) supports `as-if'-generalisation at the population-level without
 having to assume that agents themselves have any generalisation power. In this way, the
 presented model extends research into the effects of transmission biases on processes of
@@ -1752,13 +1754,11 @@ obtain the above continuous-time formulation.
 
 \section*{Acknowledgements}
 
-We would like to thank Gerhard J\"{a}ger, \textcolor{red}{\dots who else to thank? - Pedro
-  thesis?} and several anonymous reviewers for their insightful comments and suggestions on
+We would like to thank Gerhard J\"{a}ger and several anonymous reviewers for their insightful comments and suggestions on
 earlier versions of this paper. Funding for this research was provided by the Dutch Research
 Council (NWO-VENI grant 275-80-004 to Michael Franke), the Institutional Strategy of the
-University of T\"{u}bingen (German Research Foundation ZUK 63 to Michael Franke), the Priority
-Program XPrag.de (German Research Foundation Schwerpunktprogramm 1727 to Michael Franke), and
-\dots \textcolor{red}{Pedro funding?}.
+University of T\"{u}bingen (German Research Foundation ZUK 63 to Michael Franke), and the Priority
+Program XPrag.de (German Research Foundation Schwerpunktprogramm 1727 to Michael Franke).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
