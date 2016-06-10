@@ -1,0 +1,254 @@
+\documentclass[12pt,english]{article}
+\usepackage{etex}
+
+%========================================
+% Packages
+%========================================
+
+\usepackage[]{../../../helpers/mypackages}
+%\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false]{biblatex}
+\usepackage{../../../helpers/myenvironments}
+\usepackage{../../../helpers/mycommands}
+%\usepackage{todonotes}
+\usepackage{subcaption}
+
+\usepackage{a4wide}
+
+\usepackage[nomarkers, nolists]{endfloat}
+
+%========================================
+% Standard Layout
+%========================================
+
+% Itemize
+\renewcommand{\labelitemi}{\large{$\mathbf{\cdot}$}}    % itemize symbols
+\renewcommand{\labelitemii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiii}{\large{$\mathbf{\cdot}$}}
+\renewcommand{\labelitemiv}{\large{$\mathbf{\cdot}$}}
+% Description
+\renewcommand{\descriptionlabel}[1]{\hspace\labelsep\textsc{#1}}
+
+% Figure Captions
+\usepackage{caption} % use corresponding myfiguresize!
+\setlength{\captionmargin}{20pt}
+\renewcommand{\captionfont}{\small}
+\setlength{\belowcaptionskip}{7pt} % standard is 0pt
+
+%========================================
+% Additional layout & commands
+%========================================
+
+
+\renewcommand{\Smixed}{\ensuremath{\mathrm{\mathbf{s}}}}
+\renewcommand{\Rmixed}{\ensuremath{\mathrm{\mathbf{r}}}}
+
+% Annotations
+\newcommand{\mytodo}[2]{\todo[inline,color=yellow,author=#1]{#2}}
+\newcommand{\question}[2]{\todo[inline,color=blue,author=#1]{#2}}
+\newcommand{\answer}[2]{\todo[inline,color=green,author=#1]{#2}}
+
+\newcommand{\rd}{\acro{rd}} % replicator dynamic
+\newcommand{\rmd}{\acro{rmd}} % replicator mutator dynamic
+\newcommand{\rdd}{\acro{rdd}} % replicator diffusion dynamic
+\newcommand{\RD}{\ensuremath{\mathrm{RD}}} % replicator dynamic
+\newcommand{\RDD}{\ensuremath{\mathrm{RDD}}} % replicator diffusion dynamic
+\newcommand{\RMD}{\ensuremath{\mathrm{RMD}}} % replicator mutator
+\newcommand{\icid}{\acro{icid}} % imprecise conditional imitation dynamic
+\newcommand{\ICID}{\ensuremath{\mathrm{ICID}}} % imprecise conditional imitation dynamic
+                                
+\newcommand{\Diff}{\ensuremath{\mathrm{D}}} % Difusion 
+\newcommand{\Mutate}{\ensuremath{\mathrm{M}}} % Mutation 
+
+\newcommand{\imprecision}{\ensuremath{\alpha}} % imprecision
+\newcommand{\toler}{\ensuremath{\beta}} % tolerance
+\newcommand{\ns}{\ensuremath{n_s}} % number of states
+
+\newcommand{\similarity}{\ensuremath{\mathrm{Sim}}} % similarity function
+
+\newcommand{\myred}[1]{\textcolor{red}{#1}} 
+\renewcommand{\Pr}{\ensuremath{P}} 
+
+\definecolor{Red}{RGB}{178,34,34}
+\newcommand{\mf}[1]{\textcolor{Red}{[mf: #1]}} 
+
+% \doublespacing
+
+% paper size, margins, etc:
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\usepackage[titletoc,title]{appendix}
+
+% spacing
+\usepackage{setspace}
+\doublespacing
+
+% left justification:
+\raggedright
+
+% indentation
+\setlength\parindent{12pt}
+
+% section headings
+\usepackage{sectsty}
+\allsectionsfont{\normalsize\raggedright\centering}
+
+% table of contents stuff
+\setcounter{tocdepth}{2}
+\usepackage[]{tocloft}
+\addtocontents{toc}{\cftpagenumbersoff{section}}
+\addtocontents{toc}{\cftpagenumbersoff{subsection}}
+\renewcommand{\cftsecfont}{\itshape}
+\renewcommand{\cftsubsecfont}{\itshape}
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{}
+\makeatother
+\renewcommand{\cftdot}{}
+
+% footnotes
+\usepackage[]{footmisc}
+\renewcommand\footnotelayout{\normalsize\doublespacing\raggedright}
+
+% for bibliography
+\usepackage{natbib}
+\usepackage{url}
+\makeatletter
+\def\url@leostyle{%
+  %\@ifundefined{selectfont}{
+    \def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}
+\makeatother
+\urlstyle{leo}
+
+\bibpunct
+{(} %the opening bracket symbol
+{)} %the closing bracket symbol
+{,} %the punctuation between multiple citations
+{a} %the letter `n' for numerical style, or `s' for numerical superscript style, any other letter for author-year
+{} %the punctuation that comes between the author names and the year
+{;} %the punctuation that comes between years or numbers when common author lists are suppressed
+
+% headers
+\pagestyle{plain}
+% no page numbers:
+%\pagestyle{empty}
+
+% for author affiliation
+\usepackage{authblk}
+
+% misc
+\usepackage{graphicx}
+\usepackage[english]{babel}
+
+% math packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+% frames
+%\usepackage{framed}
+
+\makeatletter
+\makeatother
+
+% restart equation numbering after every section:
+\numberwithin{equation}{section}
+
+% FONTS:
+%-------
+% for times roman fonts:
+\usepackage{txfonts}
+% recommended if output will have accented characters:
+\usepackage[T1]{fontenc}
+% recommended if inputting accented directly from the keyboard:
+%\usepackage[latin1]{inputenc}
+
+% BJPS specific cite commands:
+\newcommand{\citetbjps}[1]{\citeauthor{#1} ([\citeyear{#1}])}
+\newcommand{\citetbjpspost}[2]{\citeauthor{#2} ([\citeyear{#2}], #1)}
+\newcommand{\citealtbjps}[1]{\citeauthor{#1} [\citeyear{#1}]}
+\newcommand{\citepbjps}[1]{(\citeauthor{#1} [\citeyear{#1}])}
+\newcommand{\citepbjpspre}[2]{(#1~\citeauthor{#2} [\citeyear{#2}])}
+\newcommand{\citeyearbjps}[1]{[\citeyear{#1}]}
+\newcommand{\citeyearparbjps}[1]{([\citeyear{#1}])}
+
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}
+
+\usepackage{pgfplots}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+      \draw[] (0,2) node (t1) {$\mystate{1}$};
+
+      \draw[] (1,2) node (t2) {$\mystate{2}$};
+
+      \draw[] (2,2) node (t3) {$\mystate{3}$};
+
+      \draw[] (3,2) node (t4) {$\mystate{4}$};
+
+      \draw[] (4,2) node (t5) {$\mystate{5}$};
+
+      \draw[] (5,2) node (t6) {$\mystate{6}$};
+
+
+      \draw[] (1,1) node (m1) {$\mymessg{1}$};
+
+      \draw[] (4,1) node (m2) {$\mymessg{2}$};
+
+
+
+      \draw[] (0,0) node (a1) {$\mystate{1}$};
+
+      \draw[] (1,0) node (a2) {$\mystate{2}$};
+
+      \draw[] (2,0) node (a3) {$\mystate{3}$};
+
+      \draw[] (3,0) node (a4) {$\mystate{4}$};
+
+      \draw[] (4,0) node (a5) {$\mystate{5}$};
+
+      \draw[] (5,0) node (a6) {$\mystate{6}$};
+
+      % arrows
+  
+      \draw[->, thick] (t1) -- (m1);
+
+      \draw[->, thick] (t2) -- (m1);
+
+      \draw[->, thick, dashed] (t3) -- (m1);
+
+      \draw[->, thick, dotted] (t3) -- (m2);
+
+      \draw[->, thick, dotted] (t4) -- (m1);
+
+      \draw[->, thick, dashed] (t4) -- (m2);
+
+      \draw[->, thick] (t5) -- (m2);
+
+      \draw[->, thick] (t6) -- (m2);
+
+      \draw[->, thick, dotted] (m1) -- (a1);
+
+      \draw[->, thick, dashed] (m1) -- (a2);
+
+      \draw[->, thick, dotted] (m1) -- (a3);
+
+      \draw[->, dotted] (m1) -- (a4);
+
+      \draw[->, dotted] (m2) -- (a3);
+
+      \draw[->, thick, dotted] (m2) -- (a4);
+
+      \draw[->, thick, dashed] (m2) -- (a5);
+
+      \draw[->, thick, dotted] (m2) -- (a6);
+  
+    \end{tikzpicture}
+
+
+
+\end{document}
+

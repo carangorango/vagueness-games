@@ -1,4 +1,4 @@
-\documentclass[12pt,english]{article}
+\documentclass[11pt,english]{article}
 \usepackage{etex}
 
 %========================================
@@ -14,7 +14,7 @@
 
 \usepackage{a4wide}
 
-\usepackage[nomarkers, nolists]{endfloat}
+% \usepackage[nomarkers, nolists]{endfloat}
 
 %========================================
 % Standard Layout
@@ -80,34 +80,34 @@
 \usepackage[titletoc,title]{appendix}
 
 % spacing
-\usepackage{setspace}
-\doublespacing
+% \usepackage{setspace}
+% \doublespacing
 
 % left justification:
-\raggedright
 
-% indentation
-\setlength\parindent{12pt}
 
-% section headings
-\usepackage{sectsty}
-\allsectionsfont{\normalsize\raggedright\centering}
+% % indentation
+% \setlength\parindent{12pt}
 
-% table of contents stuff
-\setcounter{tocdepth}{2}
-\usepackage[]{tocloft}
-\addtocontents{toc}{\cftpagenumbersoff{section}}
-\addtocontents{toc}{\cftpagenumbersoff{subsection}}
-\renewcommand{\cftsecfont}{\itshape}
-\renewcommand{\cftsubsecfont}{\itshape}
-\makeatletter
-\renewcommand{\@cftmaketoctitle}{}
-\makeatother
-\renewcommand{\cftdot}{}
+% % section headings
+% \usepackage{sectsty}
+% \allsectionsfont{\normalsize\raggedright\centering}
 
-% footnotes
-\usepackage[]{footmisc}
-\renewcommand\footnotelayout{\normalsize\doublespacing\raggedright}
+% % table of contents stuff
+% \setcounter{tocdepth}{2}
+% \usepackage[]{tocloft}
+% \addtocontents{toc}{\cftpagenumbersoff{section}}
+% \addtocontents{toc}{\cftpagenumbersoff{subsection}}
+% \renewcommand{\cftsecfont}{\itshape}
+% \renewcommand{\cftsubsecfont}{\itshape}
+% \makeatletter
+% \renewcommand{\@cftmaketoctitle}{}
+% \makeatother
+% \renewcommand{\cftdot}{}
+
+% % footnotes
+% \usepackage[]{footmisc}
+% \renewcommand\footnotelayout{\normalsize\doublespacing\raggedright}
 
 % for bibliography
 \usepackage{natbib}
@@ -155,25 +155,25 @@
 % FONTS:
 %-------
 % for times roman fonts:
-\usepackage{txfonts}
+% \usepackage{txfonts}
 % recommended if output will have accented characters:
-\usepackage[T1]{fontenc}
+% \usepackage[T1]{fontenc}
 % recommended if inputting accented directly from the keyboard:
 %\usepackage[latin1]{inputenc}
 
 % BJPS specific cite commands:
-\newcommand{\citetbjps}[1]{\citeauthor{#1} ([\citeyear{#1}])}
-\newcommand{\citetbjpspost}[2]{\citeauthor{#2} ([\citeyear{#2}], #1)}
-\newcommand{\citealtbjps}[1]{\citeauthor{#1} [\citeyear{#1}]}
-\newcommand{\citepbjps}[1]{(\citeauthor{#1} [\citeyear{#1}])}
-\newcommand{\citepbjpspre}[2]{(#1~\citeauthor{#2} [\citeyear{#2}])}
-\newcommand{\citeyearbjps}[1]{[\citeyear{#1}]}
-\newcommand{\citeyearparbjps}[1]{([\citeyear{#1}])}
+\newcommand{\citetbjps}[1]{\citeauthor{#1} (\citeyear{#1})}
+\newcommand{\citetbjpspost}[2]{\citeauthor{#2} (\citeyear{#2}, #1)}
+\newcommand{\citealtbjps}[1]{\citeauthor{#1} \citeyear{#1}}
+\newcommand{\citepbjps}[1]{(\citeauthor{#1} \citeyear{#1})}
+\newcommand{\citepbjpspre}[2]{(#1~\citeauthor{#2} \citeyear{#2})}
+\newcommand{\citeyearbjps}[1]{\citeyear{#1}}
+\newcommand{\citeyearparbjps}[1]{(\citeyear{#1})}
 
 \begin{document}
 
 \title{{\normalsize \textbf{Vagueness and imprecise imitation in signalling games}}}
-\author{{\normalsize \textbf{Michael Franke}} \and {\normalsize \textbf{Jos\'e Pedro Correia}}}
+\author{{\normalsize {Michael Franke \& Jos\'e Pedro Correia}}}
 \date{}
 
 \maketitle
@@ -192,12 +192,6 @@
   categorisation. The upshot of this is that we see `as-if'-generalisation at an aggregate
   level, without agents actually generalising.
 \end{abstract}
-
-\mbox{} \\
-
-\tableofcontents
-
-\mbox{} \\
 
 \section{Introduction}
 \label{sec:introduction}
@@ -1763,27 +1757,9 @@ Program XPrag.de (German Research Foundation Schwerpunktprogramm 1727 to Michael
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\begin{flushright}
-Michael Franke \\
-Wilhelmstra\ss e 19 \\
-Department of Linguistics \\
-University of T\"ubingen \\
-72072 T\"u bingen \\
-Germany \\
-\texttt{mchfranke@gmail.com} \\
-\bigskip
-Jos\'e Pedro Correia \\
-Via Panorâmica s/n \\
-Institute of Philosophy \\
-Faculty of Arts \\
-University of Porto \\
-4150-564 Porto \\
-Portugal \\
-\texttt{zepedro.correia@gmail.com} \\
-\end{flushright}
 
-\bibliographystyle{bjps}
+
+\bibliographystyle{apalike}
 \bibliography{bibexport}
 
 \end{document}
