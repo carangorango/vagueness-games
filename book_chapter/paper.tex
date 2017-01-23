@@ -1,8 +1,12 @@
-\documentclass{article}
-\usepackage{todonotes}
-\usepackage{a4wide}
+\documentclass[a4paper]{article}
+
 \usepackage[natbib=true,style=authoryear-comp,backend=biber,doi=false,url=false]{biblatex}
 \bibliography{paper}
+
+\usepackage{todonotes}
+\usepackage{a4wide}
+\usepackage{amssymb}
+\usepackage{syllogism}
 
 \begin{document}
 
@@ -22,8 +26,35 @@ We explore the consequences of these reasons and mechanism for a notion of meani
 
 \tableofcontents
 
-\section{Vaguenes}
+\section{Vagueness}
 \label{sec:vagueness}
+
+The classical philosophical problem of vagueness is most starkly embodied by the Sorites paradox.
+The original formulation is attributed to Eubulides, an ancient Megarian philosopher~\citep{sorensen_sorites_2009}, and uses the example of a heap of sand: if one million grains of sand piled up together clearly form a heap, and removing one grain of sand can never make a heap into a non-heap, then by repeated applications of this reasoning we are lead to acknowledge that one single grain of sand also forms a heap.
+This paradox can be stated in a very general way.
+We start with an $x$ to which a certain predicate $P$ clearly applies.
+We observe that a certain transformation $f$ has no impact on whether something is or is not $P$.
+Thus we are lead to acknowledge that the predicate $P$ also applies to $y = f(x)$.
+Moreover, we can apply the same reasoning subsequently to $f(x)$ and repeat that as many times as the transformation is still applicable.
+The paradox arises when $n$ repeated applications of the transformation $f$ lead us from $x$ to $z = f^n(x)$, where $z$ is something for which $P$ clearly does not apply.
+However, the original premisses seem to force us to accept that $P$ does apply to $x$.
+The paradox with the heap can thus be seen as an instance of this general formulation, if $x$ is the group of grains of sand, the transformation is removing a grain, and $z$ the state of one or zero grains.
+It can also be reversed: it seems reasonable to accept that piling up a grain of sand to something that is not a heap will not turn it into a heap of sand, thus 
+by repeated applications of that transformation one can pile up as many grains of sand as one likes and will never obtain a heap.
+
+Predicates for which one can find a suitable instance of the general formulation of the Sorites paradox are called \emph{vague}.
+Paradigmatic examples besides `heap' include `tall', `red', `bald', `tadpole', and `child'~\citep{Keefe1997}.
+An important intuition regarding these predicates that enables the Sorites paradox to work is that, for a certain level of granularity, there is no clear boundary demarcating the cases where the predicate applies from the cases where it doesn't, but there are nevertheless examples of both cases.
+Intuitively, a person with a height of 2 meters is tall, and one with a height of 1.5 meters is not, but there is no value of height in between where one would draw the line; saying, for example, that a person with a height of 1.80 meters is tall, but a person measuring 1.79 meters is not, just seems preposterous.
+Neither drawing a sharp boundary seems reasonable, nor do the consequences of not doing so, and in there lies the truely paradoxical issue of vagueness.
+How widespread is the problem?
+Mereological nihilists argue that instances of the Sorites can be designed for any material object that can be decomposed into small enough parts.
+If we subscribe to the scientific picture of material objects as composed of molecules and atoms, this applies to tables and chairs, cats and mats, and any other ordinary thing~\citep{Unger1979}.
+Any heap of molecules that we have a name for is potentially at the mercy of being hypotheticall chipped away into nothingness while still keeping its name.
+The problem thus seems to be a serious one.
+In face of such a powerful paradox like the Sorites, something has got to give.
+
+
 
 \section{Paradigm shift}
 \label{sec:Wittgenstein-and-signaling}
