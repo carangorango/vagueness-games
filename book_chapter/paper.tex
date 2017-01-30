@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\usepackage[natbib=true,style=authoryear-comp,backend=biber,doi=false,url=false]{biblatex}
+\usepackage[natbib=true,style=authoryear-comp,backend=biber,doi=false,url=false,isbn=false]{biblatex}
 \bibliography{paper}
 
 \usepackage{todonotes}
@@ -54,57 +54,25 @@ Any heap of molecules that we have a name for is potentially at the mercy of bei
 The problem thus seems to be a serious one.
 In face of such a powerful paradox like the sorites, something has got to give.
 
-Vagueness is typically seen as a challenge to a certain classical conception of language and meaning.
+Vagueness is typically seen as a challenge to a classical conception of language and meaning.
 This is the picture that our words stand in a direct or mediated correspondence to their meanings; sentences are combinations of such words bound by logical rules; knowledge of the meanings of words and of how the rules combine them allows us to know the meaning of sentences and determine whether they are true or false.
 With variations, this picture could be said to underlie theories of meaning of authors life Gottlob Frege, Bertrand Russell, Ludwig Wittgenstein (his early work), Alfred Tarski, Richard Montague, and many others, especially those working in the analytic tradition.
-Vagueness can be seen as a challenge to such a view in different ways.
-Vague predicates seem to lack precise boundaries; if that is the case, how can words like `tall' stand in correspondence to anything at all?
-The classical idea that words like `table' stand in a relation to a set of entities for which it is true to say that they are tables is problematic in light of a sorites paradox that stresses the boundaries of such a hypothetical set of entities to show that there is no way of defining one.
-Is this a problem of sticking to a bivalent notion of truth?
-Can we solve the issue by adopting more truth values besides `true' and `false'?
-What other alternatives are there?
+The problem is that vague predicates seem to lack precise boundaries; if that is the case, how can words like `tall' stand in correspondence to anything at all?
+And if we cannot know exactly whether a certain person is `tall' or not, as with borderline cases, how are we to determine the truth value of sentences that involve statements of tallness regarding this person?
 
-\todo[inline]{Should we include the following detailed arguments?}
-Some argue that we should stick to the classical picture outlined above.
+Some argue that the problems caused by vagueness is not necessarily enough to throw away the picture of meaning outlined above.
 Timothy Williamson, for example, claims that ``[c]lassical logic and semantics are vastly superior to the alternatives in simplicity, power, past success, and integration with theories in other domains.''~\parencite*[162]{williamson_vagueness_1992}
-In the face of vagueness, Williamson defends the so-called \emph{epistemic view}: apparently vague terms do determine precise boundaries, we just don't have the ability to know where they are, \emph{i.e.}~vagueness is a kind of ignorance.
-There is thus a precise height above which people are tall, and below which they are not, we just cannot know what that value is.
-The epistemic approach is curious in that in its attempt to save truth, it renders it sterile as an explanatory notion.
+In the face of vagueness, Williamson defends the so-called \emph{epistemic view}: apparently vague terms do determine precise boundaries, we just don't have the ability to know where they are; vagueness is thus a kind of ignorance.
+There is a precise height above which people are tall, and below which they are not, we just cannot know what that value is.\todo{Talk about Frazee, J., \& Beaver, D. (2010)?}
+The epistemic approach is curious in that in its attempt to save truth, it seems to render it sterile as an explanatory notion.
 If we can never ascertain truth when it comes to vague terms, how can truth be relevant for explaining how we understand or produce language?
 If the concept of truth is crucially tied to meaning, but we have no access to the former, how could we ever have learned the latter?
-Williamson's reason to ignore these problems is a reasonable one: he believes it helps us, as philosophers or linguists, to better understand language.
-But unless we strongly agree with this assessment of the success of the classical picture, we would do better to search for a more intuitive alternative.
+Williamson's reason to ignore these problems is a reasonable one: he believes it helps us, from philosophers of language to theoretical linguists, to better understand language.
+But this is tightly connected with this assessment of the success of the classical picture.
 
-Another suggested theory that attempts to retain as much as possible from classical logic by making minimal modifications to the classical picture of semantics is \emph{supervaluationism}.
-Championed by Kit Fine~\parencite*{Fine1975}, the idea is that vague predicates can be made precise, even arbitrarily.
-Setting a boundary between tall and not tall people at 1.80 meters would be an admissible%
-\footnote{Only precisifications that meet certain constraints should be considered. We refer the reader to Fine's article~\parencite*{Fine1975} for the details.}
-\emph{precisification} of the word `tall'.
-What supervaluationism defends is that, when considering the truth value of a sentence with vague terms, we should take all admissible precisifications of those terms into account: the sentence is true if true under all of them, false if false under all of them, and neither true nor false otherwise.
-The intuition is that a person with a height of 2 meters would be considered tall under all admissible precisifications, thus we could say it is true that that person is tall; for someone measuring 1.79 this would not be the case, hypothetically being true under some precisifications and false under others.
-%In defending this approach, supervaluationism either assumes or postulates the potential existence of a boundary between the sentences for which all admissible precisifications of the vague terms therein make them true, and those for which at least one precisification makes them false.
-Although supervaluationism claims to retain classical logics, it seems to implicitly require a third truth value to account for sentences for which not all precisifications are in agreement.
-Other responses to the problem of vagueness develop alternative logics that explicitly break away from the bivalent assumption that a sentence is either true or false, and introduce additional truth values.
-These range from three-valued logics~\parencite[\emph{e.g.}][]{tye_sorites_1994} to infinite-valued degree theories~\parencite[\emph{e.g.}][]{machina_truth_1976}.
-
-Mark Sainsbury~\parencite*{sainsbury_concepts_1999} argues that all of these solutions fail to address an important characteristic of vague predicates: \emph{higher order vagueness}.
-Supervaluationism, many-valued logics, and degree theories all end up being committed to new artificial demarcating boundaries (\emph{e.g.}~true-under-all-precisifications versus neither true nor false versus false-under-all-precisifications, true versus indefinite versus false, true to degree 1 versus true to degree 0 versus the rest).
-But a vague predicate not only fails to demarcate between the cases where it clearly applies and the ones where it clearly doesn't, it also fails to establish a boundary between the cases where it clearly applies and the borderline cases, as well as between the borderline cases and the cases where it clearly doesn't apply.
-Further introducing borderline borderline cases would lead into an infinite regress.
-The point that these classical approaches to vagueness miss is aptly described as follows:
-\begin{quote}
-But to what in our actual use of language does this division correspond?
-It looks as if, as before, it should correspond to the sentences true beyond the shadow of vagueness, those in some kind of borderline position, and those false beyond the shadow.
-But [\ldots] we do not know, cannot know, and do not need to know these supposed boundaries to use language correctly.
-Hence they cannot be included in a correct description of our language.%
-~\parencite[256]{sainsbury_concepts_1999}
-\end{quote}
-By trying to cling as much as possible to the classical picture of logic and semantics, these approaches are ignoring a simple observation: natural language users are sensitive to the sorites paradox, \emph{i.e.} are able to recognize the logical inconsistency but do not have a good answer to overcome it.
-Even more importantly, we apparently do not need to solve the inconsistency in order to continue using natural language productively.
-Nobody ever stopped using the word `tall` after being confronted with a sorites series to deconstruct it.
-Why should we develop theories of meaning that are impervious to the paradox?
-In attempting to do so, we are imposing a requirement that is contrary to our observations, and by refusing to give that requirement up we are producing unintuitve, unrealistic theories of meaning that, worst of all, do not even seem to resolve the paradox but merely obfuscate the problem.
-Ludwig Wittgenstein put it better:
+Criticism of the adequacy of this picture comes from various quarters.
+One of the strongest can be found in the later work of philosopher Ludwig Wittgenstein\footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (see \cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} or Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}, most importantly in the \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953}.
+Undermining several assumptions behind the classical picture and the implications thereof, Wittgenstein pushes for a paradigm shift:
 \begin{quote}
 The more closely we examine actual language, the greater becomes the conflict between it and our requirement.
 (For the crystalline purity of logic was, of course, not something I had \emph{discovered}: it was a requirement.)
@@ -114,10 +82,78 @@ We want to walk: so we need \emph{friction}.
 Back to the rough ground!%
 ~\parencite[\S 107]{wittgenstein_philosophical_1953}
 \end{quote}
+The ideal of exactness that is tied to the notions of truth and logic dazzles and leads to misunderstandings~\parencite*[\S 100]{wittgenstein_philosophical_1953}; it creates a haze around the workings of language~\parencite*[\S 5]{wittgenstein_philosophical_1953} that keeps us from seeing what is right in front of us.
+We can only escape this by ``turning our whole inquiry around''~\parencite*[\S 108]{wittgenstein_philosophical_1953}.
 
+%%% This discussion is perhaps too detailed for the scope of this paper
+% Another suggested theory that attempts to retain as much as possible from classical logic by making minimal modifications to the classical picture of semantics is \emph{supervaluationism}.
+% Championed by Kit Fine~\parencite*{Fine1975}, the idea is that vague predicates can be made precise, even arbitrarily.
+% Setting a boundary between tall and not tall people at 1.80 meters would be an admissible%
+% \footnote{Only precisifications that meet certain constraints should be considered. We refer the reader to Fine's article~\parencite*{Fine1975} for the details.}
+% \emph{precisification} of the word `tall'.
+% What supervaluationism defends is that, when considering the truth value of a sentence with vague terms, we should take all admissible precisifications of those terms into account: the sentence is true if true under all of them, false if false under all of them, and neither true nor false otherwise.
+% The intuition is that a person with a height of 2 meters would be considered tall under all admissible precisifications, thus we could say it is true that that person is tall; for someone measuring 1.79 this would not be the case, hypothetically being true under some precisifications and false under others.
+% %In defending this approach, supervaluationism either assumes or postulates the potential existence of a boundary between the sentences for which all admissible precisifications of the vague terms therein make them true, and those for which at least one precisification makes them false.
+% Although supervaluationism claims to retain classical logics, it seems to implicitly require a third truth value to account for sentences for which not all precisifications are in agreement.
+% Other responses to the problem of vagueness develop alternative logics that explicitly break away from the bivalent assumption that a sentence is either true or false, and introduce additional truth values.
+% These range from three-valued logics~\parencite[\emph{e.g.}][]{tye_sorites_1994} to infinite-valued degree theories~\parencite[\emph{e.g.}][]{machina_truth_1976}.
 
-\section{Paradigm shift}
-\label{sec:Wittgenstein-and-signaling}
+The way in how the ideal of exactness leads into misunderstandings is somewhat patent in the standard approaches to dealing with vagueness that try to hang on to as much as possible of the classical picture.
+Supervaluationism, many-valued logics, and degree theories all propose changes to it in order to accommodate for vague predicates.
+The proposals are, however, still within the general molds of the classical picture.
+Mark Sainsbury~\parencite*{sainsbury_concepts_1999} argues that, because of that, they all fail to address an important characteristic of vague predicates: \emph{higher order vagueness}.
+All the aforementioned proposals end up being committed to new artificial demarcating boundaries (\emph{e.g.}~true-under-all-precisifications versus neither true nor false versus false-under-all-precisifications, true versus indefinite versus false, true to degree 1 versus true to degree 0 versus the rest).
+But a vague predicate not only fails to demarcate between the cases where it clearly applies and the ones where it clearly doesn't, it also fails to establish a boundary between the cases where it clearly applies and the borderline cases, as well as between the borderline cases and the cases where it clearly doesn't apply.
+Further introducing borderline borderline cases would lead into an infinite regress.
+Because of their attachment to the classical picture, the standard approaches to vagueness fail to see an important lesson:
+\begin{quote}
+But to what in our actual use of language does this division correspond?
+It looks as if, as before, it should correspond to the sentences true beyond the shadow of vagueness, those in some kind of borderline position, and those false beyond the shadow.
+But [\ldots] we do not know, cannot know, and do not need to know these supposed boundaries to use language correctly.
+Hence they cannot be included in a correct description of our language.%
+~\parencite[256]{sainsbury_concepts_1999}
+\end{quote}
+By trying to cling as much as possible to the classical picture of logic and semantics, these approaches are ignoring a simple observation: natural language users are sensitive to the sorites paradox, \emph{i.e.}~are able to recognize the logical inconsistency but do not have a good answer to overcome it.
+Even more importantly, they apparently do not need to solve the inconsistency in order to continue using natural language productively.
+Nobody ever stopped using the word `tall` after being confronted with a sorites series to deconstruct it.
+Why should we develop theories of meaning that are impervious to the paradox?
+
+The reluctance to give up truth and logic as valuable notions to explain meaning is perhaps associated with the fear that, by doing so, we would need to give up important associated notions like rationality\todo{Cite Rorty (PMN)?}.
+Rationality, in this picture, has truth as its guiding light and logic as the means to attain it.
+The fear could thus be that, if we drop the picture of meaning as intimately tied to truth and logic, we lose the ground that rationality stands on.
+But giving up the ideal of truth and logic as relevant explanatory notions to understand natural language does not mean giving up on rationality altogether.
+To say that language does not follow strict logical rules, or that truth is not the ideal the logicians make it out to be, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore completely irrational.
+Vagueness can shed light on features of our language, but only after we step out of the classical picture and start looking at language under a different paradigm.
+
+From Wittgenstein we learn that ``[i]t disperses the fog if we study the phenomena of language in primitive kinds of use in which one can clearly survey the purpose and functioning of the words''~\parencite*[\S 5]{wittgenstein_philosophical_1953}.
+This introduces the notion of language-games as methodological tools: one can set up a hypothetical scenario, or thought experiment, where language is used in a certain type of activity, and reflect on the assumptions that underlie it and their implications and on how the scenario would play according to them.
+Jos\'e Pedro Correia~\parencite*{correia_bivalent_2013} argues that the framework of signaling games, introduced for the study of meaning by David Lewis~\parencite*{lewis_convention_1969} and naturalized by Brian Skyrms~\parencite*{skyrms_evolution_1996,skyrms_signals_2010}, permits us to do exactly that, while reaping benefits from mathematical formalization and computer simulation.
+In the following, we will be looking at signaling models of vagueness in order to provide an overview of proposals of the natural sources of vagueness, what that tells us about rationality, and the implications of these ideas.
+But first, let us look in more detail into how Lewis-Skyrms signaling games work, and how vagueness shows up again as a different kind of problem for these models.
+%With regards to vagueness and exactness, it is also important to note the following:
+%\begin{quote}
+%``Inexact'' is really a reproach, and ``exact'' is praise.
+%And that is to say that what is inexact attains its goal less perfectly than does what is more exact.
+%So it all depends on what we call ``the goal''.
+%\end{quote}
+
+%%% This is perhaps too philosophical and off-topic
+% The reluctance to give up truth and logic as fundamental concepts to understand meaning is perhaps related to a fear of losing a grip on rationality, and more importantly, on the supposed necessity of these concepts to underwrite normative statements and thus condition discourse.
+% Richard Rorty describes this as follows:
+% \begin{quote}
+% The traditional view is that there is a core self which can look at, decide among, use, and express itself by means of, [\ldots] belief and desires.
+% Further, these beliefs and desires are criticizable not simply by reference to their ability to cohere with one another, but by reference to something exterior to the network within which they are strands.
+% Beliefs are, on this account, criticizable because they fail to correspond to reality.
+% Desires are criticizable because they fail to correspond to the essential nature of the human self -- because they are ``irrational'' or ``unnatural''.
+% \end{quote}
+% Since the linguistic turn, language is seen as the medium that puts the self in contact with either reality or the nature of the self.
+% Rationality is, in this picture, dependent on truth as its objective and logic as the means to attain it.
+% The latter are embodied in language.
+% The fear is thus that if we drop the picture of meaning as intimately tied to truth and logic, we lose the ground that rationality stands on, and thus lose the ability to make value judgments on sentences from a supposedly objective standpoint.
+% Full-fledged relativism thus ensues.
+
+\section{Signaling games and another problem of vagueness}
+\label{sec:signaling-and-Lipman}
 
 \section{Signaling models of vagueness}
 \label{sec:vague-signaling}
