@@ -30,48 +30,49 @@ We explore the consequences of these reasons and mechanism for a notion of meani
 \label{sec:vagueness}
 
 The classical philosophical problem of vagueness is most starkly embodied by the sorites paradox.
-The original formulation is attributed to Eubulides, an ancient Megarian philosopher~\parencite{sorensen_sorites_2009}, and uses the example of a heap of sand: if one million grains of sand piled up together clearly form a heap, and removing one grain of sand can never make a heap into a non-heap, then by repeated applications of this reasoning we are lead to acknowledge that one single grain of sand also forms a heap.
-This paradox can be stated in a very general way.
-We start with an $x$ to which a certain predicate $P$ clearly applies.
+The original formulation is attributed to Eubulides, an ancient Megarian philosopher~\parencite{sorensen_sorites_2009}, and uses the example of a heap of sand: if $1 000 000$ grains of sand piled up together clearly form a heap, and removing one grain of sand can never make a heap into a non-heap, then if we remove one grain, the remaining $999 999$ also clearly form a heap; by repeated applications of this reasoning we can remove almost all grains of sand one by one and are lead to acknowledge that $1$ single grain of sand also forms a heap.
+This paradox is interesting because it can be made general and re-applied to many other words besides `heap'.
+In the general formulation, we start with an $x$ to which a certain predicate $P$ clearly applies.
 We observe that a certain transformation $f$ has no impact on whether something is or is not $P$.
 Thus we are lead to acknowledge that the predicate $P$ also applies to $y = f(x)$.
 Moreover, we can apply the same reasoning subsequently to $f(x)$ and repeat that as many times as the transformation is still applicable.
-The paradox arises when $n$ repeated applications of the transformation $f$ lead us from $x$ to $z = f^n(x)$, where $z$ is something for which $P$ clearly does not apply.
-However, the original premisses seem to force us to accept that $P$ does apply to $x$.
-The paradox with the heap can thus be seen as an instance of this general formulation, if $x$ is the group of grains of sand, the transformation is removing a grain, and $z$ the state of one or zero grains.
+The paradox arises when $n$ repeated applications of the transformation $f$ lead us from $x$ to $z = f^n(x)$, where $z$ is something for which originally we would say $P$ clearly does not apply, but since we see it as difficult to reject either the premisses or the reasoning, we seem to be forced to accept that $P$ \emph{does in fact apply} to $x$.
+The paradox with the heap can thus be seen as an instance of this general formulation, if $x$ is the group of $1 000 000$ grains of sand, the transformation is removing a grain, and $z$ the state of one (or even zero) grains.
 It can also be reversed: it seems reasonable to accept that piling up a grain of sand to something that is not a heap will not turn it into a heap of sand, thus 
 by repeated applications of that transformation one can pile up as many grains of sand as one likes and will never obtain a heap.
 
 Predicates for which one can find a suitable instance of the general formulation of the sorites paradox are called \emph{vague}.
 Paradigmatic examples besides `heap' include `tall', `red', `bald', `tadpole', and `child'~\parencite{Keefe1997}.
-An important intuition regarding these predicates that enables the sorites paradox to work is that, for a certain level of granularity, there is no clear boundary demarcating the cases where the predicate applies from the cases where it doesn't, but there are nevertheless examples of both cases.
+An important intuition regarding these predicates that enables the sorites paradox to go through is that there does not seem to be any clear boundary demarcating the cases where the predicate applies from the cases where it doesn't, but there are nevertheless examples of both cases.
 Intuitively, a person with a height of 2 meters is tall, and one with a height of 1.5 meters is not, but there is no value of height in between where one would draw the line; saying, for example, that a person with a height of 1.80 meters is tall, but a person measuring 1.79 meters is not, just seems preposterous.
-Neither drawing a sharp boundary seems reasonable, nor do the consequences of not doing so, and in there lies the truely paradoxical issue of vagueness.
+Neither drawing a sharp boundary seems reasonable, nor do the logical consequences of not doing so, and in there lies the truely paradoxical issue of vagueness.
 How widespread is the problem?
+It is easy to come up with more examples of predicates that are based on more finely grained properties, like `tall' is intuitively based on height, for which constructing a sorites paradox would be easy.
 Mereological nihilists argue that instances of the sorites can be designed for any material object that can be decomposed into small enough parts.
-If we subscribe to the scientific picture of material objects as composed of molecules and atoms, this applies to tables and chairs, cats and mats, and any other ordinary thing~\parencite{Unger1979}.
+If we subscribe to the scientific picture of matter as composed of molecules and atoms, this applies to tables and chairs, cats and mats, and any other ordinary thing~\parencite{Unger1979}.
 Any heap of molecules that we have a name for is potentially at the mercy of being hypotheticall chipped away into nothingness while still keeping its name.
 The problem thus seems to be a serious one.
+Bertrand Russell famously argued~\parencite*{russell_vagueness_1923} that all words, including ``the words of pure logic'', are vague when used by human beings.
 In face of such a powerful paradox like the sorites, something has got to give.
 
 Vagueness is typically seen as a challenge to a classical conception of language and meaning.
-This is the picture that our words stand in a direct or mediated correspondence to their meanings; sentences are combinations of such words bound by logical rules; knowledge of the meanings of words and of how the rules combine them allows us to know the meaning of sentences and determine whether they are true or false.
+We can summarize this classical picture as such: words stand in a direct or mediated correspondence to their meanings; sentences are combinations of such words bound by logical rules; knowledge of the meanings of words and of how the rules combine them allows us to know the meaning of sentences and determine whether they are true or false.
 With variations, this picture could be said to underlie theories of meaning of authors life Gottlob Frege, Bertrand Russell, Ludwig Wittgenstein (his early work), Alfred Tarski, Richard Montague, and many others, especially those working in the analytic tradition.
-The problem is that vague predicates seem to lack precise boundaries; if that is the case, how can words like `tall' stand in correspondence to anything at all?
+The problem is that vague predicates seem to lack precise boundaries; if that is the case, how can words like `tall' stand in correspondence to a well defined set of people?
 And if we cannot know exactly whether a certain person is `tall' or not, as with borderline cases, how are we to determine the truth value of sentences that involve statements of tallness regarding this person?
 
-Some argue that the problems caused by vagueness is not necessarily enough to throw away the picture of meaning outlined above.
-Timothy Williamson, for example, claims that ``[c]lassical logic and semantics are vastly superior to the alternatives in simplicity, power, past success, and integration with theories in other domains.''~\parencite*[162]{williamson_vagueness_1992}
-In the face of vagueness, Williamson defends the so-called \emph{epistemic view}: apparently vague terms do determine precise boundaries, we just don't have the ability to know where they are; vagueness is thus a kind of ignorance.
-There is a precise height above which people are tall, and below which they are not, we just cannot know what that value is.\todo{Talk about Frazee, J., \& Beaver, D. (2010)?}
-The epistemic approach is curious in that in its attempt to save truth, it seems to render it sterile as an explanatory notion.
+Some argue that the problems caused by vagueness are not serious enough for us to throw away the picture of meaning outlined above.
+Timothy Williamson, for example, claims that we should stick with the classical picture because ``[c]lassical logic and semantics are vastly superior to the alternatives in simplicity, power, past success, and integration with theories in other domains.''~\parencite*[162]{williamson_vagueness_1992}
+In the face of vagueness, Williamson defends the so-called \emph{epistemic view}: vague terms do determine precise boundaries, we just don't have the ability to know where they are; there is a precise height above which people are tall, and below which they are not, we are just ignorant of what this value is.
+%%% Could talk about Frazee, J., and Beaver, D. (2010) here
+The epistemic approach is curious in that, in its attempt to save truth, it seems to actually render it sterile as an explanatory notion.
 If we can never ascertain truth when it comes to vague terms, how can truth be relevant for explaining how we understand or produce language?
 If the concept of truth is crucially tied to meaning, but we have no access to the former, how could we ever have learned the latter?
-Williamson's reason to ignore these problems is a reasonable one: he believes it helps us, from philosophers of language to theoretical linguists, to better understand language.
-But this is tightly connected with this assessment of the success of the classical picture.
+Williamson's reason to ignore these problems is a pragmatic one: he believes it helps us, philosophers of language and theoretical linguists, to better understand natural language.
+But this reason holds only insofar as we agree with this assessment of the success of the classical picture.
 
-Criticism of the adequacy of this picture comes from various quarters.
-One of the strongest can be found in the later work of philosopher Ludwig Wittgenstein\footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (see \cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} or Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}, most importantly in the \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953}.
+Criticism of the adequacy of this picture, however, comes from various quarters.
+One of the strongest can be found in the later work of philosopher Ludwig Wittgenstein\footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (see \cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} and Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}, most importantly in the \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953}.
 Undermining several assumptions behind the classical picture and the implications thereof, Wittgenstein pushes for a paradigm shift:
 \begin{quote}
 The more closely we examine actual language, the greater becomes the conflict between it and our requirement.
@@ -82,8 +83,8 @@ We want to walk: so we need \emph{friction}.
 Back to the rough ground!%
 ~\parencite[\S 107]{wittgenstein_philosophical_1953}
 \end{quote}
-The ideal of exactness that is tied to the notions of truth and logic dazzles and leads to misunderstandings~\parencite*[\S 100]{wittgenstein_philosophical_1953}; it creates a haze around the workings of language~\parencite*[\S 5]{wittgenstein_philosophical_1953} that keeps us from seeing what is right in front of us.
-We can only escape this by ``turning our whole inquiry around''~\parencite*[\S 108]{wittgenstein_philosophical_1953}.
+He argues that the ideal of exactness that is tied to the notions of truth and logic dazzles and leads to misunderstandings~\parencite*[\S 100]{wittgenstein_philosophical_1953}; it creates a haze around the workings of language~\parencite*[\S 5]{wittgenstein_philosophical_1953} that keeps us from seeing what is right in front of us.
+We can only escape this predicament, not by bargaining exactness out of logic, but by turning our whole inquiry around~\parencite*[\S 108]{wittgenstein_philosophical_1953}, \emph{i.e.}~by thinking of language in terms of a different paradigm.
 
 %%% This discussion is perhaps too detailed for the scope of this paper
 % Another suggested theory that attempts to retain as much as possible from classical logic by making minimal modifications to the classical picture of semantics is \emph{supervaluationism}.
@@ -105,30 +106,45 @@ Mark Sainsbury~\parencite*{sainsbury_concepts_1999} argues that, because of that
 All the aforementioned proposals end up being committed to new artificial demarcating boundaries (\emph{e.g.}~true-under-all-precisifications versus neither true nor false versus false-under-all-precisifications, true versus indefinite versus false, true to degree 1 versus true to degree 0 versus the rest).
 But a vague predicate not only fails to demarcate between the cases where it clearly applies and the ones where it clearly doesn't, it also fails to establish a boundary between the cases where it clearly applies and the borderline cases, as well as between the borderline cases and the cases where it clearly doesn't apply.
 Further introducing borderline borderline cases would lead into an infinite regress.
-Because of their attachment to the classical picture, the standard approaches to vagueness fail to see an important lesson:
-\begin{quote}
-But to what in our actual use of language does this division correspond?
-It looks as if, as before, it should correspond to the sentences true beyond the shadow of vagueness, those in some kind of borderline position, and those false beyond the shadow.
-But [\ldots] we do not know, cannot know, and do not need to know these supposed boundaries to use language correctly.
-Hence they cannot be included in a correct description of our language.%
-~\parencite[256]{sainsbury_concepts_1999}
-\end{quote}
-By trying to cling as much as possible to the classical picture of logic and semantics, these approaches are ignoring a simple observation: natural language users are sensitive to the sorites paradox, \emph{i.e.}~are able to recognize the logical inconsistency but do not have a good answer to overcome it.
+Because of their attachment to the classical picture, the standard approaches to vagueness fail to see an important lesson, namely that ``we do not know, cannot know, and do not need to know these supposed boundaries to use language correctly''~\parencite*[256]{sainsbury_concepts_1999}.
+% \begin{quote}
+% But to what in our actual use of language does this division correspond?
+% It looks as if, as before, it should correspond to the sentences true beyond the shadow of vagueness, those in some kind of borderline position, and those false beyond the shadow.
+% But [\ldots] we do not know, cannot know, and do not need to know these supposed boundaries to use language correctly.
+% Hence they cannot be included in a correct description of our language.%
+% ~\parencite[256]{sainsbury_concepts_1999}
+% \end{quote}
+By trying to cling as much as possible to the classical picture of logic and semantics, these standard approaches are ignoring a simple observation: natural language users are sensitive to the sorites paradox, \emph{i.e.}~are able to recognize the logical inconsistency but do not have a good answer to overcome it.
 Even more importantly, they apparently do not need to solve the inconsistency in order to continue using natural language productively.
 Nobody ever stopped using the word `tall` after being confronted with a sorites series to deconstruct it.
 Why should we develop theories of meaning that are impervious to the paradox?
 
-The reluctance to give up truth and logic as valuable notions to explain meaning is perhaps associated with the fear that, by doing so, we would need to give up important associated notions like rationality\todo{Cite Rorty (PMN)?}.
+The reluctance to give up truth and logic as valuable notions to explain meaning is perhaps associated with the fear of what would also consequently need to be abandoned down the line.
+Talking about philosophers who defend the desirability of a classical notion of truth, Richard Rorty says:
+\begin{quote}
+In the past, such philosophers have typically conjoined the claim that there is universal human agreement on the supreme desirability of truth with two further premises: that truth is correspondence to reality, and that reality has an intrinsic nature (that there is, in Nelson Goodman's terms, a Way the World Is).
+[\ldots]
+The rise of relatively democratic, relatively tolerant, societies in the last few hundred years is said to be due to the increased rationality of modern times, where `rationality' denotes the employment of an innate truth-oriented faculty.%
+~\parencite*[1]{rorty_response_2000-1}
+\end{quote}
 Rationality, in this picture, has truth as its guiding light and logic as the means to attain it.
-The fear could thus be that, if we drop the picture of meaning as intimately tied to truth and logic, we lose the ground that rationality stands on.
-But giving up the ideal of truth and logic as relevant explanatory notions to understand natural language does not mean giving up on rationality altogether.
-To say that language does not follow strict logical rules, or that truth is not the ideal the logicians make it out to be, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore completely irrational.
-Vagueness can shed light on features of our language, but only after we step out of the classical picture and start looking at language under a different paradigm.
+The fear could be that, if we drop the picture of meaning as intimately tied to truth and logic, we lose the ground on which rationality stands, and the whole edifice would collapse.
+But giving up the ideal of truth and logic as relevant explanatory notions to understand natural language does not mean giving up on rationality, or any of the other notions, altogether.
+To say that language does not follow strict logical rules, or that truth is not a useful notion to guide our inquiries into meaning, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore completely irrational.
+Vagueness can shed light on features of our language and our rationality, but only after we step out of the classical picture and start looking at these concepts in terms of a different paradigm.
 
-From Wittgenstein we learn that ``[i]t disperses the fog if we study the phenomena of language in primitive kinds of use in which one can clearly survey the purpose and functioning of the words''~\parencite*[\S 5]{wittgenstein_philosophical_1953}.
-This introduces the notion of language-games as methodological tools: one can set up a hypothetical scenario, or thought experiment, where language is used in a certain type of activity, and reflect on the assumptions that underlie it and their implications and on how the scenario would play according to them.
-Jos\'e Pedro Correia~\parencite*{correia_bivalent_2013} argues that the framework of signaling games, introduced for the study of meaning by David Lewis~\parencite*{lewis_convention_1969} and naturalized by Brian Skyrms~\parencite*{skyrms_evolution_1996,skyrms_signals_2010}, permits us to do exactly that, while reaping benefits from mathematical formalization and computer simulation.
-In the following, we will be looking at signaling models of vagueness in order to provide an overview of proposals of the natural sources of vagueness, what that tells us about rationality, and the implications of these ideas.
+What can such a paradigm be?
+The Wittgensteinian picture of language is one of multiplicity, heterogeneity, and change.
+Languages are thought of as patchworks of various language-games, with new ones continuously being added and old ones falling out of use.
+These language-games, in turn, are situated uses of words in certain activities.
+The metaphor emphasizes a concept of meaning as strongly linked to the use that words or signs are put to.
+Meaning is thus contingent to the language-games we play, and dynamic.
+The notion of language-game is also used to characterize one of Wittgenstein's methodological tools.
+Following the idea that ``[i]t disperses the fog if we study the phenomena of language in primitive kinds of use in which one can clearly survey the purpose and functioning of the words''~\parencite*[\S 5]{wittgenstein_philosophical_1953}, the method is to set up such a language-game as a hypothetical scenario, or thought experiment, where language is used in a certain type of activity, and then reflect on the assumptions that underlie our interpretation of this set-up, as well as on how the scenario would play through according to those assumptions.
+Jos\'e Pedro Correia~\parencite*{correia_bivalent_2013} argues that the framework of signaling games, introduced for the study of meaning by David Lewis~\parencite*{lewis_convention_1969} and later naturalized by Brian Skyrms~\parencite*{skyrms_evolution_1996,skyrms_signals_2010}, permits us to do exactly that, while reaping the benefits of a mathematical formalism and the further ability to conduct computer simulations.
+From this perspective, creating a signaling game model is like setting up a language-game, only using a formulation that improves perspicuity, and conducting computer simulations is like contemplating how the game would play through according to the implications of the assumptions one built into the model.
+
+In the following, we will be looking at signaling models of vagueness in order to provide an overview of proposals of natural sources of vagueness, what that tells us about rationality, and the implications of these ideas.
 But first, let us look in more detail into how Lewis-Skyrms signaling games work, and how vagueness shows up again as a different kind of problem for these models.
 %With regards to vagueness and exactness, it is also important to note the following:
 %\begin{quote}
