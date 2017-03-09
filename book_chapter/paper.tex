@@ -322,7 +322,8 @@ Not only can we better understand why signaling systems are stable even without 
 In a simple case like the example discussed above, an evolutionary process of the kind described always drives the population into a state where one signaling system takes over completely. %; which one of the possible two will depend on their relative proportions in the original population.
 More complex signaling problems may have different evolutionary outcomes, sometimes unexpected ones.
 Skyrms~\parencite*{skyrms_signals_2010} gives an overview of different topics studied using signaling games, including expansions of the framework itself (for example, considering other dynamics beyond the replicator equation), exploration of other factors that impact the evolution of signaling (for example, how agents are interconnected), or variations on the signaling problem and its basic assumptions (for example, loosening the alignment of interests in order to provide accounts of deceptive signal use).
-Other uses of signaling games include discussions of categorization~\parencite[\emph{e.g.}][]{jager_language_2007}, incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a few\todo{more examples?}.
+Other uses of signaling games include discussions of categorization~\parencite[\emph{e.g.}][]{jager_language_2007}, compositionality~\parencite[\emph{e.g.}][]{barrett_evolution_2009}, incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a few\todo{more examples? less examples?}.
+More recent overviews are given by \textcites{huttegger_how_2014} and \textcite{huttegger_dynamics_2014}.
 
 So what about vagueness?
 In the context of game-theoretic approaches to language, vagueness presents a new challenge.
@@ -409,7 +410,21 @@ Our question is thus what additional modifications to sim-max games are sufficie
 Let's look at some proposals in the literature.
 
 \subsection{Bounded rationality}
-\parencite{franke_vagueness_2010}
+\textcite{franke_vagueness_2011} make two suggestions of how vagueness in a signaling game can arise as a consequence of limitations in the cognitive capacities of rational agents.
+The first proposal is called limited memory fictitious play and models agents playing a sim-max game where their ability to recall past interactions with others is limited to a certain number.
+For a given interaction, each agent uses his limited memory of the other agent's past behavior to estimate the other's strategy.
+Agents are assumed to be rational, thus each plays a best response (given the utility function) to their estimate of the other's strategy.
+In order to observe the evolution of strategies in repeated interaction, this approach involves modeling several individual agents in actual play.
+What the authors observe is the emergence of vague signaling at the level of the population, \emph{i.e.}~population averages of individual strategies exhibit the characteristics of a vague language as characterized before.
+However, each agent still commands a crisp language, which is inadequate if the intention is to capture how vagueness presents itself in human languages.
+
+In order to overcome this limitation, they make another proposal using the notion of a quantal response equilibrium.
+The idea, inspired by experimental psychology, is to model the choice of best response as stochastic rather than deterministic, deviating from the optimal according to an exponentially decaying distribution (where small deviations are very likely, and large ones very rare).
+The approach is not explanatory but descriptive: it is assumed that agents are not always able to make the absolute best choice, but the mechanism behind this limitation is left open to interpretation.
+The degree to which agents deviate from the optimal behavior can be characterized by a parameter.
+The authors find that for low values of this parameter, only babbling equilibria (where sender and receiver simply randomize, respectively, message and response uniformly) where no communication actually occurs.
+Above a certain value of the parameter, other equilibria of the kind described in the beginning of this section arise, where agents communicate successfully, though not perfectly, using fuzzy strategies similar to the ones depicted in Figure~\ref{fig:example_stratsB}.
+
 
 \subsection{Generalized reinforcement}
 \parencite{oconnor_evolution_2014}
@@ -418,7 +433,7 @@ Let's look at some proposals in the literature.
 \parencite{correia_bivalent_2013,franke_vagueness_2017}
 
 \subsection{Preference misalignment}
-\todo[inline]{Test CS~\parencite{crawford_strategic_1982} results in our model by using bias in utility function. READ Förster, M., and Riedel, F. (2011). Distorted Voronoi languages (working Paper).}
+\todo[inline]{Test CS~\parencite{crawford_strategic_1982} results in our model by using bias in utility function. READ Förster, M., and Riedel, F. (2011). Distorted Voronoi languages (working Paper). -> distorted Voronoi languages, i.e. shifted according to bias, but still crisp}
 
 \subsection{Noisy communication}
 \todo[inline]{Test if noise in communication channel as modeled by Blume~\parencite{blume_intentional_2014} induces vague strategies as well}
