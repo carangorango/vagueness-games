@@ -411,14 +411,14 @@ Let's look at some proposals in the literature.
 
 \subsection{Bounded rationality}
 \textcite{franke_vagueness_2011} make two suggestions of how vagueness in a signaling game can arise as a consequence of limitations in the cognitive capacities of rational agents.
-The first proposal is called limited memory fictitious play and models agents playing a sim-max game where their ability to recall past interactions with others is limited to a certain number.
+The first proposal is called limited memory fictitious play (LMF) and models agents playing a sim-max game where their ability to recall past interactions with others is limited to a certain number.
 For a given interaction, each agent uses his limited memory of the other agent's past behavior to estimate the other's strategy.
 Agents are assumed to be rational, thus each plays a best response (given the utility function) to their estimate of the other's strategy.
 In order to observe the evolution of strategies in repeated interaction, this approach involves modeling several individual agents in actual play.
 What the authors observe is the emergence of vague signaling at the level of the population, \emph{i.e.}~population averages of individual strategies exhibit the characteristics of a vague language as characterized before.
 However, each agent still commands a crisp language, which is inadequate if the intention is to capture how vagueness presents itself in human languages.
 
-In order to overcome this limitation, they make another proposal using the notion of a quantal response equilibrium.
+In order to overcome this limitation, they make another proposal using the notion of a quantal response equilibrium (QRE).
 The idea, inspired by experimental psychology, is to model the choice of best response as stochastic rather than deterministic, deviating from the optimal according to an exponentially decaying distribution (where small deviations are very likely, and large ones very rare).
 The approach is not explanatory but descriptive: it is assumed that agents are not always able to make the absolute best choice, but the mechanism behind this limitation is left open to interpretation.
 The degree to which agents deviate from the optimal behavior can be characterized by a parameter.
@@ -426,8 +426,32 @@ The authors find that for low values of this parameter, only babbling equilibria
 Above a certain value of the parameter, other equilibria of the kind described in the beginning of this section arise, where agents communicate successfully, though not perfectly, using fuzzy strategies similar to the ones depicted in Figure~\ref{fig:example_stratsB}.
 
 
-\subsection{Generalized reinforcement}
-\parencite{oconnor_evolution_2014}
+\subsection{Generalized reinforcement learning}
+Cailin O'Connor~\parencite*{oconnor_evolution_2014} proposes a way in which vagueness could be expected to evolve as a side-effect of a particular type of learning process.
+She studies sim-max games driven not by rational choice dynamics, but by generalized reinforcement learning (GRL), a variant of Herrnstein reinforcement learning (HRL)~\parencite{roth_learning_1995}.
+In HRL, agents learn to play a signaling game by strengthening particular choices (of messages for the sender, of responses for the receiver) proportionally to how successful that choice proves to be in an interaction.
+O'Connor's proposal is to model generalization as the propagation of reinforcement to nearby states, where ``nearby'' is defined in terms of distance in state space.
+For example, if a sender was successful in using message $m$ for state $t$, he will not only positively reinforce that choice of message for $t$, but also for states similar to $t$.
+This is done in a degree that is proportional to the degree of similarity between $t$ and other states.
+The dynamics also gives rise to vague signaling of the kind we are looking for.
+
+But why should agents evolve to generalize?
+%First, it is not argued that vagueness in itself is beneficial, but that it is a by-product of a learning mechanism.
+O'Connor suggests that, despite a vague language having lower expected utility than a precise one, the learning mechanism that induces vagueness does have evolutionary advantages, though not obvious ones (see \textcite{oconnor_evolving_2015} for the detailed argument).
+Considerations of optimality of strategies are typically made in terms of hypothetical atemporal comparisons of expected utility.
+However, generalized reinforcement learning has an interesting property in comparison with more strict learning mechanisms: it achieves higher payoffs in a smaller period of time.
+In a naturalized evolutionary setting this temporary advantage should also be taken into account.
+Imagine an initial population of agents with random strategies, some using GRL and others using classical Herrnstein reinforcement learning to adapt to each other.
+Although the latter type of agent can hypothetically develop a precise and more efficient signaling system, agents using GRL would coordinate on vague signaling strategies with high (though not optimal) expected utility sooner than agents using HRL.
+In such a scenario, they could drive the other agents to extinction before the latter had time to achieve coordination and reap the benefits of a more precise signaling system.
+
+But would such a language be stable?
+In terms of evolutionary game theory, one could argue that a small enough group of mutants playing a precise signaling system could later invade a population of vague signalers.
+There is, an additional advantage to the generalized learning that is relevant here, namely the ability to adapt to a changing environment.
+Analysis of a game in terms of evolutionary stable states works well if we assume that the environment where the agents interact remains static.
+However, in a more realistic setting this is not the case.
+In a dynamic game with a variable environment, an ability to converge faster could give an evolutionary advantage over strict learning rules: as soon as the state space or the utiliry function change, GRL would quickly adapt and again potentially drive more strict learning mechanisms to extinction because of their short-term gains.
+
 
 \subsection{Noisy perception}
 \parencite{correia_bivalent_2013,franke_vagueness_2017}
