@@ -78,11 +78,24 @@ The rise of relatively democratic, relatively tolerant, societies in the last fe
 ~\parencite*[1]{rorty_response_2000-1}
 \end{quote}
 Rationality, in this picture, has truth as its guiding light and logic as the means to attain it.
+Being rational is about following universally valid rules of reasoning that, given the correct inputs, necessarily lead us to the correct conclusions (see, for example, Harold Brown~\parencite*[19]{brown_rationality_1990} for a characterization).
+Although humans are not necessarily consciously aware of the rules, they are considered to be nevertheless unconsciously following them when they act rationally.
+This type of rationality is one that supposedly demarcates humans from other animals.
 The fear could be that, if we drop the picture of meaning as intimately tied to truth and logic, we lose the ground on which rationality stands, and the whole edifice would collapse.
 But giving up the ideal of truth and logic as relevant explanatory notions to understand natural language does not mean giving up on rationality, or any of the other notions, altogether.
 To say that language does not follow strict logical rules, or that truth is not a useful notion to guide our inquiries into meaning, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore completely irrational.
-What if we try to step out of the classical picture and start looking at meaning and rationality in terms of a different paradigm?
 
+The aforementioned classical picture of language and meaning is thus focused on an aspect of rationality that we can call \emph{procedural}.
+There are, however, other aspects that are also important.
+We can think of rationality as \emph{instrumental}, \emph{i.e.} as the efficient and effective achieving of goals (see Brown~\parencite*[???]{brown_rationality_1990}).
+An agent is rational if he employs his available means in the best way that helps him achieve a given objective.
+This is close to the notion of rationality that is used in economics and game theory: agents are rational if and only if they make decisions that maximize their expected utility.
+Other animals, however, do this all the time.
+The difference with humans, if we want to establish one, can reveal yet another aspect of rationality.
+Jon Elster~\parencite*{elster_ulysses_1979} suggests that our rationality is characterized by its ability to be more \emph{strategic}, \emph{i.e.}~it can take into account more than the expected immediate results of an action, like anticipation of other players' actions, or consideration of medium/long term gains.
+All of these aspects of rationality (procedural, instrumental, strategic) are probably intertwined in our understanding of rationality.
+
+Do we get different pictures of rationality if we try to step out of the classical picture and start looking at meaning in terms of a different paradigm?
 What can such a paradigm be?
 Perhaps we can draw inspiration from the later work of philosopher Ludwig Wittgenstein%
 \footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (see \cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} and Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}.
@@ -97,26 +110,26 @@ It has been argued~\parencite{correia_bivalent_2013} that the framework of signa
 From this perspective, creating a signaling game model is like setting up a language-game, only using a formulation that improves perspicuity, and conducting computer simulations is like contemplating how the game would play through according to the assumptions one built into the model.
 
 Signaling games were first introduced as models of communication by David Lewis~\parencite*{lewis_convention_1969}.
-His original objective was to address arguments raised against the possibility of language having started as a conventional system: if language is a convention, it had to be originally established by an agreement; in order to establish an agreement, a convention-governed system of communication would have to already have been in place; thus, although some languages could have been established by agreement if another convention was already in place, not all of them could.
-In order to support the idea that conventions can arise without any prior conventional activity, Lewis studies coordination problems formalized in terms of game theory.
-These are ``situations of interdependent decision by two or more agents in which coincidence of interest predominates and in which there are two or more proper coordination equilibria''~\parencite*[24]{lewis_convention_1969}.
-In game theory terms, the agents interested in the coordination are the players, the game involves each player making an independent choice from his set of available actions, a payoff is what is attributed to each player based on the choices of both.
-Adapting one of Lewis' examples, say Alice and Bob want to get together.
-They usually meet at either Caf\'e One or Bistro Two.
-Imagine there is no way for them to make any explicit agreement about it.
-They are thus left to independently decide to either go to Caf\'e One or go to Bistro Two and hope for the other to show up there.
-Neither has any preference for either place, but they do want to meet.
-Each thus prefers to go to one of the places only if the other also decides to go to that particular place.
+% His original objective was to address arguments raised against the possibility of language having started as a conventional system: if language is a convention, it had to be originally established by an agreement; in order to establish an agreement, a convention-governed system of communication would have to already have been in place; thus, although some languages could have been established by agreement if another convention was already in place, not all of them could.
+% In order to support the idea that conventions can arise without any prior conventional activity, Lewis studies coordination problems formalized in terms of game theory.
+% These are ``situations of interdependent decision by two or more agents in which coincidence of interest predominates and in which there are two or more proper coordination equilibria''~\parencite*[24]{lewis_convention_1969}.
+% In game theory terms, the agents interested in the coordination are the players, the game involves each player making an independent choice from his set of available actions, a payoff is what is attributed to each player based on the choices of both.
+% Adapting one of Lewis' examples, say Alice and Bob want to get together.
+% They usually meet at either Caf\'e One or Bistro Two.
+% Imagine there is no way for them to make any explicit agreement about it.
+% They are thus left to independently decide to either go to Caf\'e One or go to Bistro Two and hope for the other to show up there.
+% Neither has any preference for either place, but they do want to meet.
+% Each thus prefers to go to one of the places only if the other also decides to go to that particular place.
 
-In order to extend his notion of convention to \emph{linguistic} exchanges, Lewis considers situations where the actions available involve sending and receiving signals or messages.
+% In order to extend his notion of convention to \emph{linguistic} exchanges
+In order to support the idea that linguistic conventions can arise without any prior conventional activity, Lewis considers situations where the actions available involve sending and receiving signals or messages.
 Thus, we could think of two players with different roles.
 The first player, the sender, has knowledge about which of a number of possible states of affairs obtains and, depending on this information, chooses a signal to send.
 The second player, the receiver, has knowledge about which signal the sender chose and, based on this information, chooses one of several possible responses.
 A preference relation exists between responses and states of affairs, and a payoff is attributed to each player based on the choices of both.
 Note that Lewis assumes that no player has any preference regarding the particular signal that is used, provided that it enables coordination.
 Formally, in order to describe the setup all we need is to specify a set of possible states of affairs $T$, a set of available signals or messages $M$, a set of responses or actions $A$, and the utility function $U : T \times A \rightarrow \mathbb{R}^2$.
-
-Despite the added dimension of the signal exchange, these so-called signaling problems can be seen as particular cases of coordination problems if we consider the players' choices to be of contingency plans or strategies.
+These so-called signaling problems can be seen as particular cases of coordination problems if we consider the players' choices to be of contingency plans or strategies.
 A communicator's contingency plan, or sender strategy as we will call it, is a specification of a choice of message for each possible state of affairs.
 It thus describes the sender's behavior conditional on the state of affairs that obtains.
 An audience's contingency plan, or receiver strategy as we will call it, analogously specifies a choice of action for each possible message.
@@ -146,24 +159,25 @@ The approach adumbrated so far is not, nor does it attempt to be, a full-blown t
 However, we can already see how it attempts to address the study of meaning from a very different angle.
 There is a focus, not on meaning as a kind of correspondence, but rather on the use of signals for specific purposes.
 There is also no appeal to truth as a guide for our inquiry.
-In the examples discussed so far, agents are assumed to possess and exercise rationality.
-It is not, however, the same rationality as we find in the classical picture, \emph{i.e.}~the willingness to abide by truth; it is rather a more pragmatic notion of rationality as utility maximization.
 One advantage of such a paradigm shift is that we are no longer tied to the need to explain how language hooks on to the world; this question is no longer relevant on this account.
 We can merely focus on trying to see how agents can use signals to cope with the world and achieve their purposes.
 On the way, we will better understand meaning, not by trying to say what meaning is, but by trying to better understand how communication works.
+In the examples discussed so far, agents are assumed to possess and exercise rationality.
+It is not, however, the procedural notion of rationality of the classical picture, but rather one that is instrumental and heavily strategic.
 
-Lewis signaling games can be seen as an alternative to the classical picture, even though the author himself might not have agreed with this.
-In order to get there, some aspects of the approach need to be refined.
-Brian Skyrms~\parencite*[80--104]{skyrms_evolution_1996} identifies some problems with the story so far.
+
+% Lewis signaling games can be seen as an alternative to the classical picture, even though the author himself might not have agreed with this.
+% In order to get there, some aspects of the approach need to be refined.
+% Brian Skyrms~\parencite*[80--104]{skyrms_evolution_1996} identifies some problems with the story so far.
 Lewis' account of the stability of conventions rests on what could be considered strong demands for there to be a certain degree of required common knowledge between the players.
-Namely, there needs to be a state of affairs that indicates to everyone involved that a certain regularity will hold, as well as ``mutual ascription of some common inductive standards and background information, rationality, mutual ascription of rationality, and so on''~\parencite*[56--57]{lewis_convention_1969}.
+Namely, there needs to be a state of affairs that indicates to everyone involved that a certain regularity will hold, as well as ``mutual ascription of some common inductive standards and background information, strategic rationality, mutual ascription of strategic rationality, and so on''~\parencite*[56--57]{lewis_convention_1969}.
 These requirements can seem excessive, even more so if we consider how simple signaling systems are when compared to human languages.
 The models were introduced in order to help explain how language could get off the ground as a conventional system without any sort of prior agreement.
-However, if we consider the origins of language from a historical perspective, it seems implausible to assume a high degree of rationality of the agents that started making use of primordial signaling systems which (hypothetically) evolved into languages.
+However, if we consider the origins of language from a historical perspective, it seems implausible to assume a high degree of strategic rationality of the agents that started making use of primordial signaling systems which (hypothetically) evolved into languages.
 Furthermore, communication through simple message exchange is something that almost all animals do: monkeys use calls, birds use singing, bees use dances, ants use pheromone trails, and so on.
-A plausible account of the origin of language should first explain how signaling systems like those could get started, without assuming a great deal of rationality from the part of the agents involved.
+A plausible account of the origin of language should first explain how signaling systems like those could get started, without assuming a great deal of strategic rationality from the part of the agents involved.
 
-In order to address this problem, Skyrms proposes we study signaling problems in evolutionary terms.
+In order to address this problem, Brian Skyrms~\parencite*{skyrms_evolution_1996} proposes we study signaling problems in evolutionary terms.
 Rather than imagining, as Lewis does, rational agents making conscious decisions in possession of knowledge of the game and expectations of the behavior of other agents, we can imagine a simpler scenario inspired by biological evolution: there is a population of agents with biologically hardwired behaviors for engaging in interactions characteristic of a signaling problem; utility does not represent preference, but rather fitness for survival and reproduction; the make-up of the population evolves based on the relative fitness of the strategies represented in the population.
 Such a setup attempts to capture the main features of natural selection: in a diverse population, agents with more successful strategies thrive, while agents with less fit strategies die off.
 Although the inspiration for this scenario is biological evolution, similar things could be said~\parencite[\emph{e.g.}][]{dawkins_selfish_1978,boyd_culture_1985} about how ideas spread in a population of agents who can adopt or abandon them depending on how successful they prove to be.
@@ -177,19 +191,19 @@ Dynamics describe how strategies can evolve when driven by mechanisms of utility
 Focus is put on understanding how various ingredients to the model interact, and which results they produce, not on metaphysical concerns.
 While the general framework manages to abstract quite some detail away from the formalization, it does leave room for them, especially when it comes to the dynamics.
 We already mentioned the replicator equation that can be seen as representing biological or cultural evolution, but one can also use dynamics inspired by learning mechanisms, or even ones assuming a high degree of knowledge of the game and other players\todo{give examples and references?}.
-This range of options goes hand in hand with assumptions of rationality, from nothing more than survival of the fittest in a biologically-inspired setting, to a certain degree of rationality in the case of dynamics that attempt to mimic mechanisms of iterative learning, to higher levels of rationality and even game-theoretical reasoning.
+This range of options goes hand in hand with assumptions of rationality, from nothing more than a basic instrumental rationality that aims for survival in a biologically-inspired setting, to a certain degree of strategic rationality in the case of dynamics that attempt to mimic mechanisms of iterative learning, to higher levels of rationality and even game-theoretical reasoning.
 Each of these can be utilized depending on the problem that one is interested in characterizing.
-Thus, although Skyrms shows that rationality is not necessary for signaling conventions to evolve, the framework does leave room for the study of linguistic interactions where rationality can play a role.
+Thus, although highly strategic rationality is not necessary for signaling conventions to evolve, the framework does leave room for the study of linguistic interactions where it can play a role.
 
-The characterization of signaling problems in terms of evolutionary game theory allow us to explain why certain equilibria come to be and how.
-Not only can we better understand why signaling systems are stable even without any assumptions of rationality, but we can also map out which initial conditions drive the system towards which equilibria and which don't\todo{mention something about phase portraits?}.
-In a simple case like the example discussed above, an evolutionary process of the kind described always drives the population into a state where one signaling system takes over completely. %; which one of the possible two will depend on their relative proportions in the original population.
-More complex signaling problems may have different evolutionary outcomes, sometimes unexpected ones.
-Skyrms~\parencite*{skyrms_signals_2010} gives an overview of different topics studied using signaling games, including expansions of the framework itself (for example, considering other dynamics beyond the replicator equation), exploration of other factors that impact the evolution of signaling (for example, how agents are interconnected), or variations on the signaling problem and its basic assumptions (for example, loosening the alignment of interests in order to provide accounts of deceptive signal use).
-Other uses of signaling games include discussions of categorization~\parencite[\emph{e.g.}][]{jager_language_2007}, compositionality~\parencite[\emph{e.g.}][]{barrett_evolution_2009}, incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a few\todo{more examples? less examples?}.
-More recent overviews are given by \textcites{huttegger_how_2014} and \textcite{huttegger_dynamics_2014}.
+% The characterization of signaling problems in terms of evolutionary game theory allow us to explain why certain equilibria come to be and how.
+% Not only can we better understand why signaling systems are stable even without any assumptions of rationality, but we can also map out which initial conditions drive the system towards which equilibria and which don't\todo{mention something about phase portraits?}.
+% In a simple case like the example discussed above, an evolutionary process of the kind described always drives the population into a state where one signaling system takes over completely. %; which one of the possible two will depend on their relative proportions in the original population.
+% More complex signaling problems may have different evolutionary outcomes, sometimes unexpected ones.
+% Skyrms~\parencite*{skyrms_signals_2010} gives an overview of different topics studied using signaling games, including expansions of the framework itself (for example, considering other dynamics beyond the replicator equation), exploration of other factors that impact the evolution of signaling (for example, how agents are interconnected), or variations on the signaling problem and its basic assumptions (for example, loosening the alignment of interests in order to provide accounts of deceptive signal use).
+% Other uses of signaling games include discussions of categorization~\parencite[\emph{e.g.}][]{jager_language_2007}, compositionality~\parencite[\emph{e.g.}][]{barrett_evolution_2009}, incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a few\todo{more examples? less examples?}.
+% More recent overviews are given by \textcites{huttegger_how_2014} and \textcite{huttegger_dynamics_2014}.
 
-So what about vagueness?
+%So what about vagueness?
 In the context of game-theoretic approaches to language, vagueness presents a new challenge.
 Barton Lipman~\parencite*{lipman_why_2009} gives a detailed account of the problem.
 Very succinctly, it can be put as follows.
