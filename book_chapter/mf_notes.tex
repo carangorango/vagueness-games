@@ -1,0 +1,170 @@
+\documentclass[fleqn,reqno,10pt]{article}
+
+\usepackage{myarticlestyledefault}
+
+\title{Notes on vagueness \& rationality}
+\author{Michael Franke}
+\date{April 19 2017}
+
+\begin{document}
+\maketitle
+
+\section*{Where this is going}
+
+\begin{itemize}
+\item The main question to be addressed is:
+  \begin{quote}
+    How is vagueness in language compatible with rationality and/or evolutionary selection for
+    efficient communication?
+  \end{quote}
+\item The answer I will try to give is something like:
+  \begin{quote}
+    If whatever we want to call ``language'' is not vague, it is likely quite a useless notion.
+  \end{quote}
+  With ``quite useless notion'' I do mean ``philosophically'' or ``theoretically useless'', much in
+  the vein of Wittgenstein's later views on logical analysis of language: yes, we can do most
+  of this, but it shows us little (supply proper references).
+\item The way to give this answer is by a more careful analysis of rational or evolutionary
+  efficient language use. We look at signaling games and models of rational agency /
+  evolutionary selection. It is easy to identify multiple reasons why this idealized picture
+  breaks by giving up a number of assumptions, none of which is necessarily that of idealized
+  rationality or evolutionary optimization.
+\end{itemize}
+
+\section*{Where do we find the meaning of a language?}
+
+\begin{itemize}
+\item There are different places where ``a language's meaning'' might reside:
+  \begin{enumerate}
+  \item at the \textbf{population-level}; or
+  \item at the \textbf{agent-level}, where we might be interested in either:
+  \begin{enumerate}
+    \item an agent's behavior (language use \& interpretation across contexts); or
+    \item her beliefs (about language use, or semantic meaning)
+  \end{enumerate}
+\end{enumerate}
+\item it may seem natural to assume that population-level meaning supervenes on something at
+  the agent-level (either behavior, beliefs or both) of individual agents;
+  \begin{itemize}
+  \item this is putting aside the option that meanings are innate concepts or any such
+    esoteric moves
+  \end{itemize}
+\item We note that there is no generally accepted (formal) criterion for how exactly a
+  language's meaning arises from anything more downstream (agent-level stuff, ways of
+  interaction, etc.). We have to make do in this vacuum.
+  \begin{itemize}
+  \item Some attempts to fill the vacuum:
+    \citet{Harms2004:Information-and,Harms2010:Determining-tru,Franke2013:An-adaptationis}
+  \end{itemize}
+
+\end{itemize}
+
+
+\section*{A closer look at the agent's beliefs and behavior}
+
+\begin{itemize}
+\item game theoretic models of signaling agents define agent behavior as possibly probabilistic
+  functions:
+  \begin{itemize}
+  \item sender behavior $P_S(\messg \mid \state)$ assigns a probability to the choice of message
+    $\messg$ to each state $\state$
+  \item receiver behavior $P_R(\act \mid \messg)$ assigns a probability to the choice of
+    reaction $\act$ after observing message $\messg$
+  \end{itemize}
+\item When we fix a context (think: sim-max signaling game), we can define which choices are
+  rational. We see that, indeed, no vagueness shows.
+  \begin{itemize}
+  \item \textcolor{gray}{MF2JPC: I'll skip this here; you did most of this already and its
+      clear to us anyway}
+  \end{itemize}
+\item This is all rather impoverished. You, I, she and he don't just play one game. Utilities
+  differ in different situations. We also don't always play sim-max games, but may play a
+  reference game. Speakers and listeners may have partial knowledge of the situation and of
+  each other. They may also have beliefs about meaning, and their choices would depend on
+  these. Recent probabilistic models of pragmatic language use explicitly models agents
+  (beliefs) about each other's mental lexica
+  \citep{BergenLevy2012:Thats-what-she-,BergenLevy2014:Pragmatic-Reaso,PottsLassiter2016:Embedded-implic}.
+  \begin{itemize}
+  \item More on dynamic adaptivity to speaker idiolect (Yildirim et al., \dots
+    \citet{Davidson_1986:Derangement})
+  \end{itemize}
+\item The picture of language users which we should adopt minimally adopt is this:
+  \begin{itemize}
+  \item speaker behavior is a probabilistic function $P_S(\messg \mid \state, O^S_c, B^S_l)$
+    specifying a message choice probability for a meaning/state $\state$, a (possibly partial)
+    observation of the context $O_c$ and a belief $B_l$ about the language's meaning
+  \item listener interpretation behavior is similarly a probabilistic function
+    $P_L(\state \mid \messg, O^L_c, B^L_l)$
+    \begin{itemize}
+    \item speaker and listener beliefs about context and meaning need not be the same; in fact,
+      almost always they will be different
+    \item the beliefs about contextual parameters $O_c$ which may influence choice behavior are
+      bountiful:
+      \begin{itemize}
+      \item think: shape and parameters of the utility function in a sim-max game
+      \item imprecise perception of the referent set in a reference game
+      \item different beliefs about anything related to the interlocutor
+      \item \dots
+      \end{itemize}
+    \item the beliefs $B_l$ about the (lexical \& compositional) meanings of expressions could,
+      for simplicity, be captured as a distribution over all possible Boolean lexica, where a
+      Boolean lexicon $l$ assigns a subset set of states to each message: $\den{\messg}_l
+      \subseteq \States$
+    \end{itemize}
+  \end{itemize}
+\item Nothing has been said so far how beliefs are acquired, whether these beliefs are
+  rational, how choice are made based on beliefs. There are many options. We cannot look at
+  them all. We will browse a few and note how they all naturally give rise to something like
+  ``vagueness'' without abandoning rationality.
+
+\end{itemize}
+
+
+\newpage
+
+
+Sources of vagueness:
+
+- uncertainty about threshold:
+   - learning from finite examples
+   - rich language makes decisions about borderline cases obsolete; enhances problem of learning data scarcity
+   - imperfect memory
+- uncertainty about QUD, utility, interlocutor's beliefs
+
+=> why not just have a prior and integrate and have a fixed threshold
+
+1. Priors are non-introspective; sampling based assessment 
+
+2. Choice is probabilistic -> utilities are noisy
+
+Why not adopt a fixed threshold? Why is an agent with uncertainty in the lexicon better off? => revision cost? surprisal cost?
+
+If a single agent's semantic representation is the outcome of rational learning and possibly an internal optimization towards efficient communication. 
+
+Finiteness of life is not irrational. 
+
+Convince by number of examples of natural sources for vagueness. 
+
+Any precise threshold must be a function of priors about properties, QUDs, utilities, and interlocutor beliefs. But these are not stable over time. Vagueness might be optimal to compensate mistakes in a changing environment. Assumption here: revision cost high when too low prob on observable events. (van Deemter example: DECENT behavior)
+
+If speakers' uncertain beliefs come from natural probabilistic evidence, they will not be sharp step-functions. If we measure success of communication by KL-divergence or similar, the update of a literal listener with a vague threshold would give higher utility. But what about pragmatic listeners?
+
+Suppose agents play repeated reference games with different naturals kinds. Each kind has a mean and variance for each of several open and closed scale features. Learners entertain different hypotheses about lexical meaning (McNally?) They would like to assign a fixed degree to an expression because that is economical. They can do that for closed scale natural kinds unless their mean and variance is such that exemplars are frequently away from the end points. Think wine glasses! They cannot do this for open scales. They must consider a more difficult hypothesis, namely to use the prior after all. 
+
+Good point by van Deemter: reliable metrics may be absent; the goal of communication may be expression of sentiment, and the real value may be assessed in a goal-oriented way (BIG when playing soccer not equal to big when painting).
+
+Languages supervene on agents' beliefs about lexica. Lexica are uncertain. They are still useful. Lexical uncertainty might even be rational in the light of belief revision in changing environments. 
+
+Languages are optimized for communication and social interaction. Not necessarily for logical consistency. 
+
+Plurality of language games forces uncertainty. Wittgenstein. 
+
+So then logic breaks, so what? The possibility of visual illusions does not prove the visual system ill adapted or suboptimal. 
+
+
+
+
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
