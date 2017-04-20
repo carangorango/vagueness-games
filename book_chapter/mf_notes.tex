@@ -23,12 +23,40 @@
   \end{quote}
   With ``quite useless notion'' I do mean ``philosophically'' or ``theoretically useless'', much in
   the vein of Wittgenstein's later views on logical analysis of language: yes, we can do most
-  of this, but it shows us little (supply proper references).
+  of this, but it shows us little.
 \item The way to give this answer is by a more careful analysis of rational or evolutionary
   efficient language use. We look at signaling games and models of rational agency /
   evolutionary selection. It is easy to identify multiple reasons why this idealized picture
   breaks by giving up a number of assumptions, none of which is necessarily that of idealized
   rationality or evolutionary optimization.
+\item The main reason for vagueness in language argued for here is this:
+  \begin{itemize}
+  \item what counts as optimal crisp language use crucially depends on certain
+    statistical properties of the world
+    \begin{itemize}
+    \item language must be optimal in different language games (see below)
+      \begin{enumerate}
+      \item sim-max games
+      \item reference games without displacement
+      \item reference games with displacement
+      \end{enumerate}
+    \item optimal behavior for all of these language games depends on specifics of the game
+      situation, most importantly the utilities and the priors about what happens in the real
+      world
+    \end{itemize}
+  \item neither rationality, nor evolutionary pressure can eradicate uncertainty about a
+    complex and dynamically changing world
+    \begin{itemize}
+    \item the main implicit premisse here is that it is not irrational not to be omniscient;
+      it's not irrational to have remaining uncertainty after any finite number of
+      observations; finiteness of life is not to blame on irrationality either
+    \end{itemize}
+  \item neither rationality nor evolutionary selection could possibly guarantee an optimal
+    crisp language
+  \end{itemize}
+\item Despite this uncertainty and the vagueness it gives rise to, there seems to be no need to
+  postulate an idealized language as an explanatory ingredient of either agents beliefs (about
+  language), nor about their actual linguistic practices.
 \end{itemize}
 
 \section*{Where do we find the meaning of a language?}
@@ -56,11 +84,14 @@
   \item Some attempts to fill the vacuum:
     \citet{Harms2004:Information-and,Harms2010:Determining-tru,Franke2013:An-adaptationis}
   \end{itemize}
-
+\item Although speculative and provocative, we here suggest that everything of observational
+  relevance (agents linguistic behavior, possibly their beliefs) can be explained well (i)
+  without postulating an idealized non-vague language, and (ii) without abandoning the ideas of
+  idealized individual-level rationality or idealized long-run evolutionary selection.
 \end{itemize}
 
 
-\section*{A closer look at the agent's beliefs and behavior}
+\section*{A closer look at an agent's beliefs and behavior}
 
 \begin{itemize}
 \item game theoretic models of signaling agents define agent behavior as possibly probabilistic
@@ -81,90 +112,174 @@
   differ in different situations. We also don't always play sim-max games, but may play a
   reference game. Speakers and listeners may have partial knowledge of the situation and of
   each other. They may also have beliefs about meaning, and their choices would depend on
-  these. Recent probabilistic models of pragmatic language use explicitly models agents
-  (beliefs) about each other's mental lexica
+  these. Recent probabilistic models of pragmatic use explicitly model agents' (beliefs) about
+  each other's mental lexica
   \citep{BergenLevy2012:Thats-what-she-,BergenLevy2014:Pragmatic-Reaso,PottsLassiter2016:Embedded-implic}.
   \begin{itemize}
   \item More on dynamic adaptivity to speaker idiolect (Yildirim et al., \dots
     \citet{Davidson_1986:Derangement})
   \end{itemize}
-\item The picture of language users which we should adopt minimally adopt is this:
+\item The picture of language users which we should minimally adopt is this:
   \begin{itemize}
-  \item speaker behavior is a probabilistic function $P_S(\messg \mid \state, O^S_c, B^S_l)$
-    specifying a message choice probability for a meaning/state $\state$, a (possibly partial)
-    observation of the context $O_c$ and a belief $B_l$ about the language's meaning
+  \item speaker behavior is a probabilistic function $P_S(\messg \mid \state, B^S_c, B^S_l)$
+    specifying a message choice probability for a meaning/state $\state$, a belief after a
+    (possibly partial) observation of the context $B_c$ and a belief $B_l$ about the language's
+    meaning
   \item listener interpretation behavior is similarly a probabilistic function
-    $P_L(\state \mid \messg, O^L_c, B^L_l)$
+    $P_L(\state \mid \messg, B^L_c, B^L_l)$
     \begin{itemize}
     \item speaker and listener beliefs about context and meaning need not be the same; in fact,
       almost always they will be different
-    \item the beliefs about contextual parameters $O_c$ which may influence choice behavior are
+    \item the beliefs about contextual parameters $B_c$ which may influence choice behavior are
       bountiful:
       \begin{itemize}
-      \item think: shape and parameters of the utility function in a sim-max game
+      \item think: shape and parameters of the utility function in a sim-max game; most
+        importantly: prior distribution of states (more on this below)
       \item imprecise perception of the referent set in a reference game
-      \item different beliefs about anything related to the interlocutor
       \item \dots
       \end{itemize}
     \item the beliefs $B_l$ about the (lexical \& compositional) meanings of expressions could,
       for simplicity, be captured as a distribution over all possible Boolean lexica, where a
       Boolean lexicon $l$ assigns a subset set of states to each message: $\den{\messg}_l
       \subseteq \States$
+      \begin{itemize}
+      \item even if we do not want to have agents with ``fancy'' beliefs about meanings, a
+        definition of rational choice would require a belief about opponent behavior; in a
+        large population, this behavioral belief is good enough for our purposes: it will
+        likewise be subject to heavy uncertainty, being obtained from finite (partial)
+        observations about a dynamically changing world
+      \end{itemize}
+
     \end{itemize}
   \end{itemize}
+\end{itemize}
+
+\section*{Different language games and natural uncertainty}
+
+\begin{itemize}
 \item Nothing has been said so far how beliefs are acquired, whether these beliefs are
   rational, how choice are made based on beliefs. There are many options. We cannot look at
   them all. We will browse a few and note how they all naturally give rise to something like
   ``vagueness'' without abandoning rationality.
-
+\item We do this by noting that language games are plenty. We do not just ever engage in a
+  single sim-max games (with everlastingly fixed priors, utilities and co-players). 
+\item Let us distinguish at least three relevant kinds of games in which gradable properties
+  could be used for immediate communication:
+  \begin{enumerate}
+  \item sim-max games
+    \begin{itemize}
+    \item clear how they look like
+    \item a point which has so far not been stressed (at all? or enough?): the optimal strategy
+      is a function of the prior; what counts as ``tall'' depends on (beliefs about) the
+      distribution of states/degrees
+    \item if priors track, say the actual frequency with which someone is, say, 180cm tall that
+      real world frequency is impossible to know precisely
+    \item as a result even perfectly rational agents would not be certain about the optimal
+      strategy and will (given different life histories) have different strategies
+    \item being rational, they would also know that they don't know for certain what the prior
+      is and that there is no commonly known and temporally stable prior to begin with
+    \end{itemize}
+  \item reference games without displacement
+    \begin{itemize}
+    \item in each trial nature selects a variable number of referents (objects) as the
+      \emph{context}; she also selects a designated object for the speaker to refer to; speaker
+      and listener both observe the context, but only the speaker observes the designated
+      object; speaker and listener obtain a positive payoff if they coordinate on the
+      designated referent \citep{Franke2012:Scales-Salience,Franke2012:On-Scales-Salie}
+    \item crucially, these could be considered as an infinite collection of games, all
+      conditioned on the current context
+    \item optimal behavior for these games could be defined as a function of the actual
+      context; the problem for even a rational agent is to predict the co-player's behavior,
+      for in almost any new trial there will not be a preceding trial in which the exact same
+      context has been observed (adding perceptual noise and knowledge of perceptual
+      limitations would make this even more pressing)
+    \item as a result, even rational agents will be highly uncertain (and aware of their
+      uncertainty) as to how language is used in these situations
+    \item a rational response will take care of this uncertainty by preferring, if possible,
+      expressions whose use conditions are clearer over those that are less clear: borderline
+      case uses will be avoided (especially when the language is rich) and underdetermination
+      by use creates further uncertainty creates further underdetermination etc.
+    \end{itemize}
+  \item reference games with displacement
+    \begin{itemize}
+    \item similar to the above; these games have been considered (informally) by
+      \citet{Lipman2009:Why-is-Language} and \citet{Deemter2009:Utility-and-Lan}
+    \item the sender observes a referent and describes it for the listener; but unlike before,
+      the listener will have to pick out the designated referent in a future context (not known
+      by the sender): e.g., picking up a person from the airport, identifying a robber or (from
+      the main paper draft) picking up a book from the next room based on the color
+    \item as the sender does not know the future context in which the designated referent will
+      occur (the other objects co-present in the environment), the sender's optimal choice
+      depends crucially on a conjecture about the likelihood of seeing particular contexts
+    \item again the sender must needs know the statistical properties of a changing world for
+      genuinely optimal crisp language use
+    \end{itemize}
+  \end{enumerate}
 \end{itemize}
 
+\printbibliography[heading=bibintoc]
 
 \newpage
 
+\section*{Snippets}
 
-Sources of vagueness:
+\begin{itemize}
+\item - uncertainty about threshold: - learning from finite examples - rich language makes
+  decisions about borderline cases obsolete; enhances problem of learning data scarcity -
+  imperfect memory - uncertainty about QUD, utility, interlocutor's beliefs
 
-- uncertainty about threshold:
-   - learning from finite examples
-   - rich language makes decisions about borderline cases obsolete; enhances problem of learning data scarcity
-   - imperfect memory
-- uncertainty about QUD, utility, interlocutor's beliefs
+\item   => why not just have a prior and integrate and have a fixed threshold
 
-=> why not just have a prior and integrate and have a fixed threshold
+\item   1. Priors are non-introspective; sampling based assessment
 
-1. Priors are non-introspective; sampling based assessment 
+\item   2. Choice is probabilistic -> utilities are noisy
 
-2. Choice is probabilistic -> utilities are noisy
+\item   Why not adopt a fixed threshold? Why is an agent with uncertainty in the lexicon better off?
+  => revision cost? surprisal cost?
 
-Why not adopt a fixed threshold? Why is an agent with uncertainty in the lexicon better off? => revision cost? surprisal cost?
+\item   If a single agent's semantic representation is the outcome of rational learning and possibly
+  an internal optimization towards efficient communication.
 
-If a single agent's semantic representation is the outcome of rational learning and possibly an internal optimization towards efficient communication. 
+\item   Finiteness of life is not irrational.
 
-Finiteness of life is not irrational. 
+\item   Convince by number of examples of natural sources for vagueness.
 
-Convince by number of examples of natural sources for vagueness. 
+\item   Any precise threshold must be a function of priors about properties, QUDs, utilities, and
+  interlocutor beliefs. But these are not stable over time. Vagueness might be optimal to
+  compensate mistakes in a changing environment. Assumption here: revision cost high when too
+  low prob on observable events. (van Deemter example: DECENT behavior)
 
-Any precise threshold must be a function of priors about properties, QUDs, utilities, and interlocutor beliefs. But these are not stable over time. Vagueness might be optimal to compensate mistakes in a changing environment. Assumption here: revision cost high when too low prob on observable events. (van Deemter example: DECENT behavior)
+\item   If speakers' uncertain beliefs come from natural probabilistic evidence, they will not be
+  sharp step-functions. If we measure success of communication by KL-divergence or similar, the
+  update of a literal listener with a vague threshold would give higher utility. But what about
+  pragmatic listeners?
 
-If speakers' uncertain beliefs come from natural probabilistic evidence, they will not be sharp step-functions. If we measure success of communication by KL-divergence or similar, the update of a literal listener with a vague threshold would give higher utility. But what about pragmatic listeners?
+\item   Suppose agents play repeated reference games with different naturals kinds. Each kind has a
+  mean and variance for each of several open and closed scale features. Learners entertain
+  different hypotheses about lexical meaning (McNally?) They would like to assign a fixed
+  degree to an expression because that is economical. They can do that for closed scale natural
+  kinds unless their mean and variance is such that exemplars are frequently away from the end
+  points. Think wine glasses! They cannot do this for open scales. They must consider a more
+  difficult hypothesis, namely to use the prior after all.
 
-Suppose agents play repeated reference games with different naturals kinds. Each kind has a mean and variance for each of several open and closed scale features. Learners entertain different hypotheses about lexical meaning (McNally?) They would like to assign a fixed degree to an expression because that is economical. They can do that for closed scale natural kinds unless their mean and variance is such that exemplars are frequently away from the end points. Think wine glasses! They cannot do this for open scales. They must consider a more difficult hypothesis, namely to use the prior after all. 
+\item   Good point by van Deemter: reliable metrics may be absent; the goal of communication may be
+  expression of sentiment, and the real value may be assessed in a goal-oriented way (BIG when
+  playing soccer not equal to big when painting).
 
-Good point by van Deemter: reliable metrics may be absent; the goal of communication may be expression of sentiment, and the real value may be assessed in a goal-oriented way (BIG when playing soccer not equal to big when painting).
+\item   Languages supervene on agents' beliefs about lexica. Lexica are uncertain. They are still
+  useful. Lexical uncertainty might even be rational in the light of belief revision in
+  changing environments.
 
-Languages supervene on agents' beliefs about lexica. Lexica are uncertain. They are still useful. Lexical uncertainty might even be rational in the light of belief revision in changing environments. 
+\item   Languages are optimized for communication and social interaction. Not necessarily for logical
+  consistency.
 
-Languages are optimized for communication and social interaction. Not necessarily for logical consistency. 
+\item   Plurality of language games forces uncertainty. Wittgenstein.
 
-Plurality of language games forces uncertainty. Wittgenstein. 
-
-So then logic breaks, so what? The possibility of visual illusions does not prove the visual system ill adapted or suboptimal. 
-
-
-
+\item   So then logic breaks, so what? The possibility of visual illusions does not prove the visual
+  system ill adapted or suboptimal.
+\end{itemize}
 
 
-\printbibliography[heading=bibintoc]
+
 
 \end{document}
