@@ -11,10 +11,14 @@
 \usepackage{subcaption}
 
 
+\usepackage{xcolor}
+\definecolor{Red}{RGB}{178,34,34}
+\newcommand{\mf}[1]{\textcolor{Red}{[mf: #1]}} 
+
 \begin{document}
 
 \title{Natural sources of vagueness and their implications}
-\author{Michael Franke \and Jos\'e Pedro Correia}
+\author{Jos\'e Pedro Correia \and Michael Franke}
 \date{}
 
 \maketitle
@@ -32,7 +36,7 @@ We explore the consequences of these reasons and mechanism for a notion of meani
 \section{Vagueness}
 \label{sec:vagueness}
 
-The classical philosophical problem of vagueness is most starkly embodied by the sorites paradox.
+The classic philosophical problem of vagueness is most starkly embodied by the sorites paradox.
 The original formulation is attributed to Eubulides, an ancient Megarian philosopher~\parencite{sorensen_sorites_2009}, and uses the example of a heap of sand: if no removal of one grain of sand can make a heap into a non-heap, we can repeatedly remove all but one grain of sand of something that is clearly a heap and be forced to acknowledge that the remaining single grain of sand is still a heap; otherwise, it seems, we would have to accept that there is a determinate number of grains that forms a heap, and anything under it is not a heap.
 Neither choice is, however, intuitively satisfying.
 The paradox is interesting because it can be made general and re-applied to many other words besides `heap'.
@@ -86,7 +90,7 @@ What if we try to step out of the classical picture and start looking at meaning
 What can such a paradigm be?
 Perhaps we can draw inspiration from the later work of philosopher Ludwig Wittgenstein%
 \footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (see \cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} and Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}.
-Most starkly in the \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953} we can find a picture of language is terms of multiplicity, heterogeneity, and change.
+Most starkly in the \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953} we can find a picture of language in terms of multiplicity, heterogeneity, and change.
 Languages are seen as patchworks of various language-games, with new ones continuously being added and old ones falling out of use.
 These language-games, in turn, can be thought of language intermingled with a practice.
 The metaphor emphasizes a concept of meaning as strongly linked to the use that words or signs are put to.
@@ -133,7 +137,8 @@ They usually meet at either Caf\'e One or Bistro Two.
 Imagine there is no way for them to make any explicit agreement about it.
 They are thus left to independently decide to either go to Caf\'e One or go to Bistro Two and hope for the other to show up there.
 Neither has any preference for either place, but they do want to meet.
-Each thus prefers to go to one of the places only if the other also decides to go to that particular place.
+Each thus prefers to go to one of the places only if the other also decides to go to that
+particular place. \mf{shorten this paragraph? and the next?}
 
 In order to extend his notion of convention to \emph{linguistic} exchanges, Lewis considers situations where the actions available involve sending and receiving signals or messages.
 Thus, we could think of two players with different roles.
@@ -141,7 +146,10 @@ The first player, the sender, has knowledge about which of a number of possible 
 The second player, the receiver, has knowledge about which signal the sender chose and, based on this information, chooses one of several possible responses.
 A preference relation exists between responses and states of affairs, and a payoff is attributed to each player based on the choices of both.
 Note that Lewis assumes that no player has any preference regarding the particular signal that is used, provided that it enables coordination.
-Formally, in order to describe the setup all we need is to specify a set of possible states of affairs $T$, a set of available signals or messages $M$, a set of responses or actions $A$, and the utility function $U : T \times A \rightarrow \mathbb{R}^2$.
+Formally, in order to describe the setup all we need is to specify a set of possible states of
+affairs $T$, a set of available signals or messages $M$, a set of responses or actions $A$, and
+the utility function $U : T \times A \rightarrow \mathbb{R}^2$. \mf{explain sender and receiver
+payoffs}
 
 Despite the added dimension of the signal exchange, these so-called signaling problems can be seen as particular cases of coordination problems if we consider the players' choices to be of contingency plans or strategies.
 A communicator's contingency plan, or sender strategy as we will call it, is a specification of a choice of message for each possible state of affairs.
@@ -190,31 +198,62 @@ However, if we consider the origins of language from a historical perspective, i
 Furthermore, communication through simple message exchange is something that almost all animals do: monkeys use calls, birds use singing, bees use dances, ants use pheromone trails, and so on.
 A plausible account of the origin of language should first explain how signaling systems like those could get started, without assuming a great deal of rationality from the part of the agents involved.
 
-In order to address this problem, Skyrms proposes we study signaling problems in evolutionary terms.
-Rather than imagining, as Lewis does, rational agents making conscious decisions in possession of knowledge of the game and expectations of the behavior of other agents, we can imagine a simpler scenario inspired by biological evolution: there is a population of agents with biologically hardwired behaviors for engaging in interactions characteristic of a signaling problem; utility does not represent preference, but rather fitness for survival and reproduction; the make-up of the population evolves based on the relative fitness of the strategies represented in the population.
-Such a setup attempts to capture the main features of natural selection: in a diverse population, agents with more successful strategies thrive, while agents with less fit strategies die off.
-Although the inspiration for this scenario is biological evolution, similar things could be said~\parencite[\emph{e.g.}][]{dawkins_selfish_1978,boyd_culture_1985} about how ideas spread in a population of agents who can adopt or abandon them depending on how successful they prove to be.
-The principles can be captured in a formal model that abstracts away from the interpretations: the replicator dynamics.
-The only thing relevant to this equation are the relative proportions of strategies in a given population and the utility function.
-Using it, one can compute which strategies evolve under which conditions.
+In order to address this problem, Skyrms proposes we study signaling problems in evolutionary
+terms.  Rather than imagining, as Lewis does, rational agents making conscious decisions in
+possession of knowledge of the game and expectations of the behavior of other agents, we can
+imagine a simpler scenario inspired by biological evolution: there is a population of agents
+with biologically hardwired behaviors for engaging in interactions characteristic of a
+signaling problem; utility does not represent preference, but rather fitness for survival and
+reproduction; the make-up of the population evolves based on the relative fitness of the
+strategies represented in the population.  Such a setup attempts to capture the main features
+of natural selection: in a diverse population, agents with more successful strategies thrive,
+while agents with less fit strategies die off.  Although the inspiration for this scenario is
+biological evolution, similar things could be
+said~\parencite[\emph{e.g.}][]{dawkins_selfish_1978,boyd_culture_1985} about how ideas spread
+in a population of agents who can adopt or abandon them depending on how successful they prove
+to be~\parencite[\emph{e.g.}][]{BenzJager2006:Game-Theory-and,Pagel2009:Human-Language-}.  The
+principles can be captured in a formal model that abstracts away from the interpretations: the
+replicator dynamics.  The only thing relevant to this equation are the relative proportions of
+strategies in a given population and the utility function.  Using it, one can compute which
+strategies evolve under which conditions.
 
-Skyrms' evolutionary game theory approach to signaling games not only gives more plausible grounds to support Lewis' discussion of convention, but it also accomplishes an important conceptual change: it moves most of the theory and mathematical formalisms to the descriptive side of the investigation.
-Utility represents how the modeler views the signaling problem and understands the relative advantages or disadvantages of different possible strategy combinations.
-Dynamics describe how strategies can evolve when driven by mechanisms of utility maximization.
-Focus is put on understanding how various ingredients to the model interact, and which results they produce, not on metaphysical concerns.
-While the general framework manages to abstract quite some detail away from the formalization, it does leave room for them, especially when it comes to the dynamics.
-We already mentioned the replicator equation that can be seen as representing biological or cultural evolution, but one can also use dynamics inspired by learning mechanisms, or even ones assuming a high degree of knowledge of the game and other players\todo{give examples and references?}.
-This range of options goes hand in hand with assumptions of rationality, from nothing more than survival of the fittest in a biologically-inspired setting, to a certain degree of rationality in the case of dynamics that attempt to mimic mechanisms of iterative learning, to higher levels of rationality and even game-theoretical reasoning.
-Each of these can be utilized depending on the problem that one is interested in characterizing.
-Thus, although Skyrms shows that rationality is not necessary for signaling conventions to evolve, the framework does leave room for the study of linguistic interactions where rationality can play a role.
+Skyrms' evolutionary game theory approach to signaling games not only gives more plausible
+grounds to support Lewis' discussion of convention, but it also accomplishes an important
+conceptual change: it moves most of the theory and mathematical formalisms to the descriptive
+side of the investigation.  Utility represents how the modeler views the signaling problem and
+understands the relative advantages or disadvantages of different possible strategy
+combinations.  Dynamics describe how strategies can evolve when driven by mechanisms of utility
+maximization.  Focus is put on understanding how various ingredients to the model interact, and
+which results they produce, not on metaphysical concerns.  While the general framework manages
+to abstract quite some detail away from the formalization, it does leave room for them,
+especially when it comes to the dynamics.  We already mentioned the replicator equation that
+can be seen as representing biological or cultural evolution, but one can also use dynamics
+inspired by learning mechanisms, or even ones assuming a high degree of knowledge of the game
+and other players~\parencite[\emph{e.g.}][]{Muhlenbernd2011:Learning-with-N}.  This range of
+options goes hand in hand with assumptions of rationality, from nothing more than survival of
+the fittest in a biologically-inspired setting, to a certain degree of rationality in the case
+of dynamics that attempt to mimic mechanisms of iterative learning, to higher levels of
+rationality and even game-theoretical reasoning.  Each of these can be utilized depending on
+the problem that one is interested in characterizing.  Thus, although Skyrms shows that
+rationality is not necessary for signaling conventions to evolve, the framework does leave room
+for the study of linguistic interactions where rationality can play a role.
 
-The characterization of signaling problems in terms of evolutionary game theory allow us to explain why certain equilibria come to be and how.
-Not only can we better understand why signaling systems are stable even without any assumptions of rationality, but we can also map out which initial conditions drive the system towards which equilibria and which don't\todo{mention something about phase portraits?}.
+The characterization of signaling problems in terms of evolutionary game theory allow us to
+explain why certain equilibria come to be and how. \mf{explain/introduce equilibrium and/or ESS?}
+Not only can we better understand why signaling systems are stable even without any assumptions
+of rationality, but we can also map out which initial conditions drive the system towards which
+equilibria and which don't\todo{mention something about phase portraits? \mf{too much detail,
+    rather not!}}.
 In a simple case like the example discussed above, an evolutionary process of the kind described always drives the population into a state where one signaling system takes over completely. %; which one of the possible two will depend on their relative proportions in the original population.
 More complex signaling problems may have different evolutionary outcomes, sometimes unexpected ones.
 Skyrms~\parencite*{skyrms_signals_2010} gives an overview of different topics studied using signaling games, including expansions of the framework itself (for example, considering other dynamics beyond the replicator equation), exploration of other factors that impact the evolution of signaling (for example, how agents are interconnected), or variations on the signaling problem and its basic assumptions (for example, loosening the alignment of interests in order to provide accounts of deceptive signal use).
-Other uses of signaling games include discussions of categorization~\parencite[\emph{e.g.}][]{jager_language_2007}, compositionality~\parencite[\emph{e.g.}][]{barrett_evolution_2009}, incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a few\todo{more examples? less examples?}.
-More recent overviews are given by \textcites{huttegger_how_2014} and \textcite{huttegger_dynamics_2014}.
+Other uses of signaling games include discussions of
+categorization~\parencite[\emph{e.g.}][]{jager_language_2007},
+compositionality~\parencite[\emph{e.g.}][]{barrett_evolution_2009},
+incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a
+few\todo{more examples? less examples? \mf{good as it is}}.
+More recent overviews are given by \textcites{huttegger_how_2014},
+\textcite{huttegger_dynamics_2014} or \citet{FrankeWagner2014:Game-Theory-and}.
 
 So what about vagueness?
 In the context of game-theoretic approaches to language, vagueness presents a new challenge.
@@ -223,7 +262,7 @@ Very succinctly, it can be put as follows.
 In standard game-theoretic models of communication, vague usage of messages is less efficient than precise use.
 Therefore, given that the dynamics (be it natural selection, cultural evolution, or rational choice) maximize utility, vagueness should be weeded out by these forces, giving rise to only precise languages.
 However, vagueness is pervasive in our natural languages, and there is no reason to believe it is going away.
-Lipman concludes then that ``we cannot explain the prevalence of vague terms in natural language without a model of bounded rationality which is significantly different from anything in the existing literature''~\parencite*[1]{lipman_why_2009}
+Lipman concludes then that ``we cannot explain the prevalence of vague terms in natural language without a model of bounded rationality which is significantly different from anything in the existing literature''~\parencite*[1]{lipman_why_2009}.
 In the following section we provide an overview of models that try to account for vagueness in a signaling games framework, and what the implications of each account are for how we view rationality.
 
 
@@ -236,7 +275,8 @@ In the following section we provide an overview of models that try to account fo
 \section{Signaling models of vagueness}
 \label{sec:vague-signaling}
 
-Before we discuss the particular suggestions of how to account for vagueness in a signaling games framework, we need to discuss what useful changes could we make to the classic setup.
+Before we discuss the particular suggestions of how to account for vagueness in a signaling
+games framework, we need to discuss what useful changes we could make to the classic setup.
 First, in order to work, the sorites paradox requires us to assume a relation between the vague term and a more precise underlying dimension (height for tallness, number of hairs for baldness, number of grains of sand for ``heapness'', and so on).
 Not only does this property need to be much more fine-grained than the vague term, but it also needs to have some structure, in the sense that there is at least an order between the elements in it (thinking of height in centimeters, $180 > 179 > \ldots > 120$), but usually even a degree of how far apart these elements are from each other.
 In terms of signaling games, we can take the height to be the state space and the terms the message space.
@@ -254,7 +294,11 @@ Wanting to read that book, I ask you to fetch the red book for me.
 If you bring me a different red book, whose hue is very similar to my prototypical notion of red, I would still be disappointed.
 If, however, you bring me my other edition of that book, despite it being far from red, I would be satisfied.
 This example is just to illustrate that there is more to the use of vague terms in natural language than what the setup we just described can cover.
-But, we believe, the setup captures one possible scenario where vagueness is relevant that would be difficult to capture in the classic formulations of signaling discussed before.
+But, we believe, the setup captures one possible scenario where vagueness is relevant that
+would be difficult to capture in the classic formulations of signaling discussed before. \mf{I
+  suggest to enlarge on the ``other games are possible'' idea later; much in the general spirit
+  of Wittgenstein: consider multiple language games and what all of these suggest about
+  language in conjunction (perspicuous presentation)}
 
 These games, called similarity-maximization or sim-max games for short, were first introduced by Gerhard J{\"a}ger and Robert van~Rooij~\parencite{jager_language_2007,Jager2007} and further studied by~\textcite{jager_voronoi_2011}.
 What these authors find about this setup is that the evolutionary stable states are what they call Voronoi languages.
