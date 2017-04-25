@@ -17,7 +17,7 @@
 
 \begin{document}
 
-\title{Natural sources of vagueness and their implications}
+\title{Natural sources of uncertainty and their implications}
 \author{Jos\'e Pedro Correia \and Michael Franke}
 \date{}
 
@@ -124,7 +124,6 @@ Signaling games were first introduced as models of communication by David Lewis~
 % They are thus left to independently decide to either go to Caf\'e One or go to Bistro Two and hope for the other to show up there.
 % Neither has any preference for either place, but they do want to meet.
 % Each thus prefers to go to one of the places only if the other also decides to go to that particular place.
-
 % In order to extend his notion of convention to \emph{linguistic} exchanges
 In order to support the idea that linguistic conventions can arise without any prior conventional activity, Lewis considers situations where the actions available involve sending and receiving signals or messages.
 Thus, we could think of two players with different roles.
@@ -201,12 +200,11 @@ Each of these can be utilized depending on the problem that one is interested in
 Thus, although Skyrms shows that rationality is not necessary for signaling conventions to evolve, the framework does leave room for the study of linguistic interactions where rationality can play a role.
 
 The characterization of signaling problems in terms of evolutionary game theory allow us to explain why certain equilibria come to be and how. \mf{explain/introduce equilibrium and/or ESS?}
-Not only can we better understand why signaling systems are stable even without any assumptions of rationality, but we can also map out which initial conditions drive the system towards which equilibria and which don't\todo{mention something about phase portraits? \mf{too much detail,
-    rather not!}}.
+Not only can we better understand why signaling systems are stable even without any assumptions of rationality, but we can also map out which initial conditions drive the system towards which equilibria and which don't.
 In a simple case like the example discussed above, an evolutionary process of the kind described always drives the population into a state where one signaling system takes over completely. %; which one of the possible two will depend on their relative proportions in the original population.
 More complex signaling problems may have different evolutionary outcomes, sometimes unexpected ones.
 Skyrms~\parencite*{skyrms_signals_2010} gives an overview of different topics studied using signaling games, including expansions of the framework itself (for example, considering other dynamics beyond the replicator equation), exploration of other factors that impact the evolution of signaling (for example, how agents are interconnected), or variations on the signaling problem and its basic assumptions (for example, loosening the alignment of interests in order to provide accounts of deceptive signal use).
-Other uses of signaling games include discussions of categorization~\parencite[\emph{e.g.}][]{jager_language_2007}, compositionality~\parencite[\emph{e.g.}][]{barrett_evolution_2009}, incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a few\todo{more examples? less examples? \mf{good as it is}}.
+Other uses of signaling games include discussions of categorization~\parencite[\emph{e.g.}][]{jager_language_2007}, compositionality~\parencite[\emph{e.g.}][]{barrett_evolution_2009}, incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a few.
 More recent overviews are given by \textcites{huttegger_how_2014}, \textcite{huttegger_dynamics_2014}, and \citet{FrankeWagner2014:Game-Theory-and}.
 
 %So what about vagueness?
@@ -226,8 +224,8 @@ In the following section we provide an overview of models that try to account fo
 %
 
 
-\section{Signaling models of vagueness}
-\label{sec:vague-signaling}
+\section{Vagueness in sim-max games}
+\label{sec:sim-max-vagueness}
 
 Before we discuss the particular suggestions of how to account for vagueness in a signaling
 games framework, we need to discuss what useful changes we could make to the classic setup.
@@ -294,11 +292,10 @@ A third option is to see probabilities as capturing relative numbers in a popula
 For example, if the sender strategy assigns a probability of $0.4$ of message $m$ being sent for state $t$, this would mean that $40\%$ of the population uses that message for that state, while $60\%$ uses the other.
 This latter option leaves open the possible interpretation that each agent commands a crisp language and vagueness is only a population-level effect.
 However, given the level of abstraction of the description so far, none of this is necessarily implied by the model.
-
 Our question is thus what additional modifications to sim-max games are sufficient for the optimal languages to be more like Figure~\ref{fig:example_stratsB}, rather than like Figure~\ref{fig:example_stratsA}.
-Let's look at some proposals in the literature.
+%Let's look at some proposals in the literature.
 
-\subsection{Bounded rationality}
+% \subsection{Bounded rationality}
 \textcite{franke_vagueness_2011} make two suggestions of how vagueness in a signaling game can arise as a consequence of limitations in the cognitive capacities of rational agents.
 The first proposal is called limited memory fictitious play (LMF) and models agents playing a sim-max game where their ability to recall past interactions with others is limited to a certain number.
 For a given interaction, each agent uses his limited memory of the other agent's past behavior to estimate the other's strategy.
@@ -315,7 +312,7 @@ The authors find that for low values of this parameter, only babbling equilibria
 Above a certain value of the parameter, other equilibria of the kind described in the beginning of this section arise, where agents communicate successfully, though not perfectly, using fuzzy strategies similar to the ones depicted in Figure~\ref{fig:example_stratsB}.
 
 
-\subsection{Generalized reinforcement learning}
+% \subsection{Generalized reinforcement learning}
 Cailin O'Connor~\parencite*{oconnor_evolution_2014} proposes a way in which vagueness could be expected to evolve as a side-effect of a particular type of learning process.
 She studies sim-max games driven not by rational choice dynamics, but by generalized reinforcement learning (GRL), a variant of Herrnstein reinforcement learning (HRL)~\parencite{roth_learning_1995}.
 In HRL, agents learn to play a signaling game by strengthening particular choices (of messages for the sender, of responses for the receiver) proportionally to how successful that choice proves to be in an interaction.
@@ -342,15 +339,94 @@ However, in a more realistic setting this is not the case.
 In a dynamic game with a variable environment, an ability to converge faster could give an evolutionary advantage over strict learning rules: as soon as the state space or the utiliry function change, GRL would quickly adapt and again potentially drive more strict learning mechanisms to extinction because of their short-term gains.
 
 
-\subsection{Noisy perception}
-\parencite{correia_bivalent_2013,franke_vagueness_2017}
+% \subsection{Noisy perception}
+\todo[inline]{talk about \textcite{correia_bivalent_2013,franke_vagueness_2017}}
 
-\subsection{Preference misalignment}
-\todo[inline]{Test CS~\parencite{crawford_strategic_1982} results in our model by using bias in utility function. READ Förster, M., and Riedel, F. (2011). Distorted Voronoi languages (working Paper). -> distorted Voronoi languages, i.e. shifted according to bias, but still crisp}
+% \subsection{Aggregation from multiple senders}
+\textcite{lawry_vagueness_2017} explore the potential benefits of vagueness in variations of a sim-max game with multiple senders and one receiver.
+Although the models considered are not explicitly identified as sim-max games, they are equivalent in the relevant aspects: they are signaling games where senders have private knowledge of a given state $x$, each sends a message to the receiver, which then selects an estimate $y$ of the original state; although the authors do not define a utility function, their analysis evaluates the models in terms of the expected error between the estimate and the original state, defined as $(x-y)^2$; better models have lower expected error, thus one could say that the objective is to minimize this function, which would be equivalent to maximizing its inverse; the game could then be seen as a sim-max game with multiple senders and negative squared difference as similarity function.
+Unlike the models discussed so far that introduce minimal constraints to a dynamic and study the strategies that emerge out of an evolutionary process, these authors' approach is mostly static and analytical.
+They consider several possible sender strategies with uncertainty and without and calculate if and when sender and receiver achieve better transmission accuracy, \emph{i.e.}~smaller expected error between original state and receiver estimate.
+Senders without uncertainty have a strategy that boils down to what is represented in Figure~\ref{fig:example_stratsA}: they split the state space according to a fixed thresholds, switching from using one message to another abruptly.
+The model for the other type of sender is similar, but assumes that there is uncertainty regarding the value of the thresholds, representing them as uniformly distributed random variables.
+What results from this in terms of sender strategy is also a smooth transition between the use of two messages, but unlike what we see in Figure~\ref{fig:example_stratsB}, it is a linear transition\footnote{This is certainly connected with the choice of modeling the uncertain threshold as uniformly distributed. We speculate that another choice of distribution, like for example a normal distribution, would yield something similar. What is important to characterize a vague use of messages, however, is that the transition is smooth and monotonous, not its particular shape.}.
+The receiver strategy is not inherently vague for either type of sender, it merely aggregates the messages received to provide an estimate of the original state using a simple arithmetic mean.
 
-\subsection{Noisy communication}
-\todo[inline]{Test if noise in communication channel as modeled by Blume~\parencite{blume_intentional_2014} induces vague strategies as well}
+The authors analyze a number of variations of this model.
+For a model with one sender, results are consistent with Lipman's~\parencite{lipman_why_2009} in that strategies without uncertainty lead to more accurate communication.
+For models with two messages and more than one sender, the expected error is a strictly decreasing function of the number of senders, and above a certain number of senders, strategies with uncertainty actually achieve lower expected error than sharp ones.
+This minimal number of senders from which vagueness surpasses sharpness is a decreasing function of the number of messages, \emph{i.e.}~whereas at least 8 senders are needed if the number of messages available is 2, this number lowers to 5 for 3 messages, 4 for and 5 messages, and 3 for more than 6 messages.
+If random errors are introduced between the choice of the sender and the message that reaches the receiver, increasing the number of senders can compensate for the noise, to a certain extent.
+Results are mixed when dropping the assumption of uniform priors for the state space.
 
+These results are interesting since they reveal scenarios where vague strategies have an advantage over strict ones, even in a setting of higher rationality.
+The approaches discussed so far argue that vagueness is the inevitable byproduct of either cognitive limitations or a particular learning mechanism in the context of other learning mechanisms, which still leaves the idealist\footnote{In an ordinary, non-philosophical, sense.} some room for speculation.
+In the models of \citeauthor{franke_vagueness_2011}, the idealist could argue that higher rationality (or better memory) would lead to more precision.
+\citeauthor{oconnor_evolving_2015}'s learning strategy could theoretically be dominated by a process with higher strategic rationality, like best response dynamics~\parencite{ellison_learning_1993}\todo{is this the canonical reference?}.
+A combination of both would hypothetically lead to a better outcome in the scenario of \citeauthor{franke_vagueness_2017}.
+However, \citeauthor{lawry_vagueness_2017} give us something that holds even if the idealist is unwilling to acknowledge the constraints that permeate our finite existence.
+Whether the scenario of multiple senders is representative of the language games where vagueness comes about, and whether the strategies proposed by the authors would be the ones to evolve\footnote{Their analysis is a static one. Despite the advantage of the proposed vague strategies against strict ones in certain settings, one cannot know whether other strategies of higher accuracy would not be possible in those same settings without studying some dynamics in an evolutionary context.}, is something that is, however, open for debate.
+
+
+\section{Vagueness in referential games}
+\label{sec:referential-vagueness}
+
+% \section{Vagueness in related models}
+% \label{sec:other-vagueness}
+%
+% \subsection{Preference misalignment}
+% \todo[inline]{Test CS~\parencite{crawford_strategic_1982} results in our model by using bias in utility function. READ Förster, M., and Riedel, F. (2011). Distorted Voronoi languages (working Paper). -> distorted Voronoi languages, i.e. shifted according to bias, but still crisp}
+%
+% \subsection{Noisy communication}
+% \todo[inline]{Test if noise in communication channel as modeled by Blume~\parencite{blume_intentional_2014} induces vague strategies as well}
+
+
+\section{How could language not be vague?}
+\label{sec:finite-experience}
+The research surveyed here suggests various mechanisms that can lead to vague use of messages in certain signaling games, such as cognitive limitations like a finite memory or the inability to always calculate the absolute optimum choice to make, learning mechanisms that compensate for the finiteness of experience through generalization based on similarity, imperfect senses that allow for the possibility of stimulae to be confused, etc\todo{fit Lawry and James plus referential games stuff}.
+In order to account for vagueness in natural language, they all need to peel away from an idealized model of agents, language, and the world, and bring some assumptions down to earth.
+They point to some ways, but by all means not all, in which we, as language learners and language users, are finite beings finding ways to cope with a highly complex and dynamic world.
+Consider the following:
+\begin{enumerate}
+\item Our existence is temporally finite; language does not have an infinite amount of time to evolve or take a long time to be learned. The faster a language can start to be useful, the better;
+\item Language learning through experience has to rely on a limited number of observations. Not only is the state space typically much larger than what one can survey in sufficient time, but it is also potentially infinite and constantly changing;
+\item A corollary of the former is that there will always be heterogeneity in a population of language learners, at least of prior experience since each agent will have relied on a different set of observations. Furthermore, this information is not directly or fully accessible to others;
+\item Given that an agent is almost always learning and using language in such a population of other agents, there are also various potential sources of linguistic input the agent is constantly integrating in his practice;
+\item We do not play only one language game in our existence; there is a plurality of them and which one an agent is engaged in at a particular moment is never clearly identified, neither are the exact benefits one might take out of it by choosing a certain behavior over another;
+\item These are furthermore not fixed in time; old language games fall out of fashion or stop being useful, and new ones emerge all the time.
+\end{enumerate}
+It is almost inevitable that uncertainty gets introduced at many levels of language learning and language use.
+In the context of a signaling game, we can expect uncertainty about priors, observations, utilities, behavior of other players, and more.
+This is true both from the perspective of the modeler, as from the perspective of the agents involved.
+Arguments, of the kind presented by Lipman~\parencite*{lipman_why_2009}, that a vague language is suboptimal compared to a crisp one depend on ignoring all of these aspects of the world, language, and experience.
+
+We learned from \citeauthor{oconnor_evolution_2014} and \citeauthor{franke_vagueness_2017} that vague languages are quicker to converge and more adaptable, which is valuable given the finite and dynamic character of our experience (point 1).
+\citeauthor{oconnor_evolving_2015} also showed how generalization, an invaluable feature of any procedure for learning from a limited number of observations (point 2), leads to vagueness.
+We also learned from \citeauthor{franke_vagueness_2017} that state confusability, a mechanism thats leads to vague signal use, can have a homogenizing effect on vocabularies, potentially compensating for the heterogeneity of agents' experiences (point 3).
+\citeauthor{lawry_vagueness_2017} demonstrated the benefits of strategies that incorporate uncertainty, leading to vagueness, in language games where agents need to aggregate information from various sources (point 4).\todo{add something for 5 and 6, maybe referential games}
+Trying to answer the question of ``Why is language vague?'', is important to force us to recognize those aspects of language and the world that are easily forgotten when idealizing the subject matter.
+The finiteness of human experience, the dynamic nature of the world, and the communitarian context of language use and development, these are things we need to keep in mind lest we end up with inadequate models of language and meaning.
+% Wittgenstein put it better:
+% \begin{quote}
+% The more closely we examine actual language, the greater becomes the conflict between it and our requirement. (For the crystalline purity of logic was, of course, not something I had discovered: it was a requirement.) The conflict becomes intolerable; the requirement is now in danger of becoming vacuous. – We have got on to slippery ice where there is no friction, and so, in a certain sense, the conditions are ideal; but also, just because of that, we are unable to walk. We want to walk: so we need friction. Back to the rough ground!%
+% ~\parencite*[\S 107]{wittgenstein_philosophical_1953}
+% \end{quote}
+
+What do these observations tell us about rationality?
+An agent with minimal instrumental rationality, merely adapting its behavior based on reinforcement, will be directly conditioned by the limitations imposed by its environment.
+Therefore, given all the natural sources of uncertainty discussed so far, even the most effective of such agents (or population thereof) would develop a signaling behavior that inevitably makes vague use of messages.
+The agent would still be driving for the highest possible payoff it can achieve, by definition, and the presence of vagueness could not be attributed to any lack of rationality.
+For a more complex agent, the story is perhaps more nuanced.
+Consider an agent that has awareness that something like a game is being played, some estimate of the potential payoff involved, ability to gauge other players' expected behaviors, and the capacity to think strategically.
+Is it rational for a sender to use a message in a crisp way, splitting the state space as if a strict threshold existed between the use of one term and the other?
+If he is \emph{not} aware of the natural sources of uncertainty discussed so far, one cannot charge him with irrationality since by adopting a crisp strategy he is choosing the optimal strategy for his assumptions.
+However, if he \emph{is} aware, then it would be less rational to use a crisp strategy than to use a strategy that incorporates at least some source of uncertainty.
+A crisp strategy for a particular game would, in most realistic scenarios, take more time to achieve convergence, be less adaptable to changes, less easy to reuse in other similar games, and less able to foster cooperation with a bigger group of agents.
+
+
+
+
+\todo[inline]{precision is possible though, but not absolute precision, and vagueness comes in degrees, figuring out how much vagueness to use is the real challenge, and this needs to be studied}
 
 \printbibliography
 
