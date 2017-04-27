@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\usepackage[natbib=true,style=authoryear-comp,backend=biber,doi=false,url=false,isbn=false]{biblatex}
+\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false,isbn=false]{biblatex}
 \bibliography{paper}
 
 \usepackage{todonotes}
@@ -43,7 +43,7 @@ The paradox is interesting because it can be made general and re-applied to many
 Predicates for which one can find a suitable instance of the general formulation of the sorites paradox are called \emph{vague}.
 Paradigmatic examples besides `heap' include `tall', `red', `bald', `tadpole', and `child'~\parencite{Keefe1997}.
 How widespread is the problem?
-It is easy to come up with more examples of predicates based on more finely grained properties---as `tall' is intuitively based on height---for which constructing a sorites paradox would be easy.
+It is easy to find more examples of predicates based on more finely grained properties---as `tall' is intuitively based on height---for which constructing a sorites paradox would be easy.
 Mereological nihilists argue that instances of the sorites can be designed for any material object that can be decomposed into small enough parts.
 If we subscribe to the scientific picture of matter as composed of molecules and atoms, this applies to tables and chairs, cats and mats, and any other ordinary thing~\parencite{Unger1979}.
 Bertrand Russell famously argued~\parencite*{russell_vagueness_1923} that all words, including ``the words of pure logic'', are vague when used by human beings.
@@ -69,11 +69,11 @@ Because of their attachment to the classical picture, the standard approaches to
 % \end{quote}
 By trying to cling as much as possible to the classical picture of logic and semantics, these standard approaches are ignoring a simple observation: natural language users are sensitive to the sorites paradox, \emph{i.e.}~are able to recognize the logical inconsistency but do not have a good answer to overcome it.
 Even more importantly, they apparently do not need to solve the inconsistency in order to continue using natural language productively.
-Nobody ever stopped using the word `tall` after being confronted with a sorites series to deconstruct it.
+Nobody ever stopped using the word `tall` after being confronted with a sorites series.
 Why should we develop theories of meaning that are impervious to the paradox?
 
 The reluctance to give up truth and logic as valuable notions to explain meaning is perhaps associated with the fear of what would also consequently need to be abandoned down the line.
-One notion that seems to quickly be in peril in that of rationality.
+One notion that seems to quickly be in peril is that of rationality.
 In reference to philosophers who defend the desirability of a classical notion of truth, Richard Rorty says:
 \begin{quote}
 In the past, such philosophers have typically conjoined the claim that there is universal human agreement on the supreme desirability of truth with two further premises: that truth is correspondence to reality, and that reality has an intrinsic nature (that there is, in Nelson Goodman's terms, a Way the World Is).
@@ -184,7 +184,7 @@ A plausible account of the origin of language should first explain how signaling
 In order to address this problem, Brian Skyrms~\parencite*{skyrms_evolution_1996} proposes we study signaling problems in evolutionary terms.
 Rather than imagining, as Lewis does, rational agents making conscious decisions in possession of knowledge of the game and expectations of the behavior of other agents, we can imagine a simpler scenario inspired by biological evolution: there is a population of agents with biologically hardwired behaviors for engaging in interactions characteristic of a signaling problem; utility does not represent preference, but rather fitness for survival and reproduction; the make-up of the population evolves based on the relative fitness of the strategies represented in the population.
 Such a setup attempts to capture the main features of natural selection: in a diverse population, agents with more successful strategies thrive, while agents with less fit strategies die off.
-Although the inspiration for this scenario is biological evolution, similar things could be said~\parencite[\emph{e.g.}][]{dawkins_selfish_1978,boyd_culture_1985} about how ideas spread in a population of agents who can adopt or abandon them depending on how successful they prove to be~\parencite[\emph{e.g.}][]{BenzJager2006:Game-Theory-and,Pagel2009:Human-Language-}.
+Although the inspiration for this scenario is biological evolution, similar things could be said~\parencite[\emph{e.g.}][]{dawkins_selfish_1978,boyd_culture_1985} about how ideas spread in a population of agents who can adopt or abandon them depending on how successful they prove to be~\parencite[\emph{e.g.}][]{BenzJager2006:Game-Theory-and,Pagel2009:Human-Language-,ThompsonKirby2016:Culture-Shapes-}.
 The principles can be captured in a formal model that abstracts away from the interpretations: the replicator dynamics.
 The only thing relevant to this equation are the relative proportions of strategies in a given population and the utility function.
 Using it, one can compute which strategies evolve under which conditions.
@@ -194,7 +194,7 @@ Utility represents how the modeler views the signaling problem and understands t
 Dynamics describe how strategies can evolve when driven by mechanisms of utility maximization.
 Focus is put on understanding how various ingredients to the model interact, and which results they produce, not on metaphysical concerns.
 While the general framework manages to abstract quite some detail away from the formalization, it does leave room for them, especially when it comes to the dynamics.
-We already mentioned the replicator equation that can be seen as representing biological or cultural evolution, but one can also use dynamics inspired by learning mechanisms, or even ones assuming a high degree of knowledge of the game and other players~\parencite[\emph{e.g.}][]{Muhlenbernd2011:Learning-with-N}..
+We already mentioned the replicator equation that can be seen as representing biological or cultural evolution, but one can also use dynamics inspired by learning mechanisms, or even ones assuming a high degree of knowledge of the game and other players~\parencite[\emph{e.g.}][]{Muhlenbernd2011:Learning-with-N,SpikeStadler2016:Minimal-Require}.
 This range of options goes hand in hand with assumptions of rationality, from nothing more than survival of the fittest in a biologically-inspired setting, to a certain degree of rationality in the case of dynamics that attempt to mimic mechanisms of iterative learning, to higher levels of rationality and even game-theoretical reasoning.
 Each of these can be utilized depending on the problem that one is interested in characterizing.
 Thus, although Skyrms shows that rationality is not necessary for signaling conventions to evolve, the framework does leave room for the study of linguistic interactions where rationality can play a role.
@@ -238,24 +238,12 @@ Second, another important ingredient of the paradox is the acknowledgment of a c
 This tolerance decreases with distance: assuming a 180cm person is tall, one would easily tolerate the use of the term for a person measuring 179cm, less so for someone who is 170cm, and much less so for 160cm.
 This can be modeled by using a utility function that is continuous rather than discrete and that is monotonously decreasing with distance in a metric space, \emph{i.e.}~success is not a matter of black and white, right or wrong, but a matter of degree, of how close the agent got to the optimal.
 
-The simplest type of game to study in this scenario is one where the state space and the action space are the same.
-We can imagine this as a game of guessing the state of affairs: the sender has knowledge of it, sends a message to the receiver, who in turn has to guess it; their payoff, as discussed above, is proportional to how close he got.
-Other games are possible, depending on what situation of use we want to model.
-For example, imagine I have two editions of a book, one of them is red the other one is green.
-Wanting to read that book, I ask you to fetch the red book for me.
-If you bring me a different red book, whose hue is very similar to my prototypical notion of red, I would still be disappointed.
-If, however, you bring me my other edition of that book, despite it being far from red, I would be satisfied.
-This example is just to illustrate that there is more to the use of vague terms in natural language than what the setup we just described can cover.
-But, we believe, the setup captures one possible scenario where vagueness is relevant that
-would be difficult to capture in the classic formulations of signaling discussed before. \mf{I
-  suggest to enlarge on the ``other games are possible'' idea later; much in the general spirit
-  of Wittgenstein: consider multiple language games and what all of these suggest about
-  language in conjunction (perspicuous presentation)}
-
+Although we will look at more complex cases below, the simplest type of game to study in this scenario is one where the state space and the action space are the same. 
+We can imagine this as a game of guessing the state of affairs: the sender has knowledge of it, sends a message to the receiver, who in turn has to guess it; their payoff, as discussed above, is proportional to how close he got. 
 These games, called similarity-maximization or sim-max games for short, were first introduced by Gerhard J{\"a}ger and Robert van~Rooij~\parencite{jager_language_2007,Jager2007} and further studied by~\textcite{jager_voronoi_2011}.
 What these authors find about this setup is that the evolutionary stable states are what they call Voronoi languages.
 Roughly, these are situations where the sender uses messages in a way that can be seen as partitioning the state space into convex regions and the receiver responds with the central element of those regions.
-For example, imagine a state space consisting of values of height in centimeters ranging from 40 to 280\footnote{Giving some slack to the values of the shortest and tallest people ever as recorded by Guinness World Records, respectively at 54.6 and 272.}.
+For example, imagine a state space consisting of values of height in centimeters ranging from 40 to 280.\footnote{Giving some slack to the values of the shortest and tallest people ever as recorded by Guinness World Records, respectively at 54.6 and 272.}
 Given two possible messages, the optimal sender strategy is to use one for all values from 40 up to 160, and the other for all values from 160 up to 280.
 The optimal receiver strategy is to guess with 100 if given the first message and with 220 given the second message.
 Confirming Lipman's argument, there is no vagueness in such an optimal language: when given a height of 159 the sender will always use one message and given a height of 161 will always use the other; correspondingly, the receiver's response is also crisp, associating only one guess with each message.
@@ -305,12 +293,14 @@ What the authors observe is the emergence of vague signaling at the level of the
 However, each agent still commands a crisp language, which is inadequate if the intention is to capture how vagueness presents itself in human languages.
 
 In order to overcome this limitation, they make another proposal using the notion of a quantal response equilibrium (QRE).
-The idea, inspired by experimental psychology, is to model the choice of best response as stochastic rather than deterministic, deviating from the optimal according to an exponentially decaying distribution (where small deviations are very likely, and large ones very rare).
-The approach is not explanatory but descriptive: it is assumed that agents are not always able to make the absolute best choice, but the mechanism behind this limitation is left open to interpretation.
-The degree to which agents deviate from the optimal behavior can be characterized by a parameter.
-The authors find that for low values of this parameter, only babbling equilibria (where sender and receiver simply randomize, respectively, message and response uniformly) where no communication actually occurs.
-Above a certain value of the parameter, other equilibria of the kind described in the beginning of this section arise, where agents communicate successfully, though not perfectly, using fuzzy strategies similar to the ones depicted in Figure~\ref{fig:example_stratsB}.
-
+The idea, inspired by experimental psychology, is to model the choice of best response as stochastic rather than deterministic.\footnote{Probabilistic choice rules are also the source of vagueness in recent accounts by \textcite{LassiterGoodman2015:Adjectival-vagu} and \textcite{QingFranke2014:Gradable-Adject}.} 
+A prominent explanation for such soft-max or quantal choice behavior is that agents make small mistakes in the calculation of their expected utilities \parencite{Train2009:Discrete-Choice}. 
+They still choose rationally the option with the highest expected utility, but each assessment of the expected utilities is noise perturbed.
+This, in turn, may actually be optimal behavior if the calculation of expected utilities relies on assessing stochastic uncertainty. 
+Choice based on a few samples from a distribution can be optimal if taking more samples or other means of better approximating degrees of uncertainty is resource costly \parencite[\emph{e.g.}][]{VulGoodman2014:One-and-Done-Op,SanbornChater2016:Bayesian-Brains}.
+The degree to which agents tremble in the calculation of expected utilities and therefore deviate from the optimal behavior can be characterized by a parameter.
+\textcite{franke_vagueness_2011} find that for low values of this parameter, only babbling equilibria (where sender and receiver simply randomize, respectively, message and response uniformly) where no communication actually occurs.
+Above a certain value of the parameter, other equilibria of the kind described in the beginning of this section arise, where agents communicate successfully, though not perfectly, using fuzzy strategies similar to the ones depicted in Figure~\ref{fig:example_stratsB}. However, it is not clear that soft-max choices model the right stochastic trembles in decision making as they would arise under natural sources of uncertainty about the context \parencite[see][]{franke_vagueness_2017}.
 
 % \subsection{Generalized reinforcement learning}
 Cailin O'Connor~\parencite*{oconnor_evolution_2014} proposes a way in which vagueness could be expected to evolve as a side-effect of a particular type of learning process.
