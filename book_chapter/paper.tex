@@ -330,7 +330,21 @@ In a dynamic game with a variable environment, an ability to converge faster cou
 
 
 % \subsection{Noisy perception}
-\todo[inline]{talk about \textcite{correia_bivalent_2013,franke_vagueness_2017}}
+\textcite{franke_vagueness_2017} study a variant of the replicator dynamics that is motivated by perceptual limitations.
+Assuming that agents do not have perfect perception, there will always be a possibility that senders confuse states and receivers mix up responses.
+Furthermore, it seems reasonable to assume that this state confusability is proportional to state similarity, \emph{i.e.}~that the more similar two states are, the more likely it is they will be mistaken for each other.
+Incorporating thiese considerations into a derivation of the replicator dynamics based on imitation processes, they develop a variant of that dynamic that also induces vague signal use of the kind we expect here.
+The consequence is very similar to that of the GRL model discussed above, in that the way the behavior for a given state is updated takes into account the behavior of similar states, proportionally to their similarity.
+Given the known relation between reinforcement learning and the replicator dynamics~\parencite{Beggs2005}, it is actually quite plausible that the two are tightly related, but this would need to be formally demonstrated.
+The account is, however, interpretable at a lower level of rationality since the replicator equation is suitable to represent biological processes of natural selection.
+
+The motivation underlying this model of vague signaling is still one of inevitability.
+A vague strategy is still not claimed to have higher expected utility than a crisp one.
+However, the authors observe an effect similar to that pointed out by~\citeauthor{oconnor_evolution_2014}: signaling converges faster in scenarios where there is some degree of state confusability.
+Furthermore, they observe one additional potentially beneficial property.
+By running several rounds of simulation for each parameter set, they can measure how close resulting strategies are to each other within each group, and how they would fair playing against each other by calculating a within group expected utility.
+The results show that the within group distances between strategies is smaller with growing confusability, and the within group expected utility is actually higher for strategies evolving under a certain degree of state confusion.
+Thus, some amount of uncertainty seems to promote more homogeneous populations of signalers that are better at achieving cooperation within a group of such signalers
 
 % \subsection{Aggregation from multiple senders}
 \textcite{lawry_vagueness_2017} explore the potential benefits of vagueness in variations of a sim-max game with multiple senders and one receiver.
