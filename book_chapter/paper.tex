@@ -397,8 +397,93 @@ However, \citeauthor{lawry_vagueness_2017} give us something that holds even if 
 Whether the scenario of multiple senders is representative of the language games where vagueness comes about, and whether the strategies proposed by the authors would be the ones to evolve\footnote{The authors' analysis is a static one. Despite the advantage of the proposed vague strategies against strict ones in certain settings, one cannot know whether other strategies of higher accuracy would not be possible in those same settings without studying some dynamics in an evolutionary context.}, is something that is, however, open for debate.
 
 
+\section{How could language not be vague?}
+\label{sec:finite-experience}
+
+Arguments of the kind presented by Lipman~\parencite*{lipman_why_2009}, that a vague language is suboptimal compared to a crisp one, work under a number of various assumptions.
+Together, these assumptions form a picture of the context where agents learn and use language that is highly idealized and probably derives, via game theory, from the conception of rationality of traditional theoretical economics.
+%This picture has been criticized for several decades, at least in the field of theoretical economics.
+Herbert A.~Simon describes this picture as follows:
+\begin{quote}
+Traditional economic theory postulates an ``economic man,'' who, in the course of being ``economic'' is also ``rational.''
+This man is assumed to have knowledge of the relevant aspects of his environment which, if not absolutely complete, is at least impressively clear and voluminous.
+He is assumed also to have a well-organized and stable system of preferences, and a skill in computation that enables him to calculate, for the alternative courses of action that are available to him, which of these will permit him to reach the highest attainable point on his preference scale.%
+~\parencite[99]{simon_behavioral_1955}
+\end{quote}
+This ``economic man'', a game-omniscient and highly strategic rational agent, seems to have survived almost unscathed to now populate most game theoretic models of language and signaling.
+Both Simon and Lipman call for this picture to be revisited.
+
+In order to account for vagueness in natural language in the context of these models, the proposals surveyed here all need to peel away from this idealized picture and bring some of these assumptions down to earth.
+In the process, they point to ways in which we, as language learners and language users, are finite beings finding ways to cope with a highly complex and dynamic world:
+\begin{enumerate}
+\item Our existence is temporally finite; language does not have an infinite amount of time to evolve, nor can it take an infinite time to be learned. The faster a language can start being useful, the better;
+\item Language learning through experience has to rely on a limited number of observations. Not only is the state space typically much larger than what one can survey in sufficient time, it is even potentially infinite and constantly changing;
+\item A corollary of the former is that there will always be heterogeneity in a population of language learners, at the very least in their prior experience, since each agent will have relied on a different set of observations. Furthermore, this information is not directly or fully accessible to others;
+\item Given that an agent is almost always learning and using language in a population of other agents, there are also various potential sources of linguistic input the agent is constantly integrating in his practice;
+\end{enumerate}
+All of these observations support the weakening of our modeling assumptions.
+% If we take these points seriously, we have to concede that it is almost inevitable that uncertainty gets introduced at almost all levels of language learning and language use.
+% In the context of a signaling game, we can expect uncertainty about priors, observations, utilities, behavior of other players, and more.
+% This is true both from the perspective of the modeler, as from the perspective of the agents involved, supporting the motivation to take it into account in our modeling efforts.
+The research surveyed here shows us some examples of assumptions which, when weakened, make vague signal use a natural outcome of certain evolutionary dynamics.
+% That includes considering various mechanisms that can lead to vague use of messages in certain signaling games: cognitive limitations like a finite memory or the inability to always calculate the absolute optimum choice to make; learning mechanisms that compensate for the finiteness of experience through generalization based on similarity; and imperfect senses that allow for the possibility of stimuli to be confused, etc\todo{fit Lawry and James plus referential games stuff}.
+But it gives us even more.
+It suggests ways in which the mechanisms that lead to vagueness can have positive effects that are extremely important in the context of the points just enumerated.
+We learned from \citeauthor{oconnor_evolution_2014} and \citeauthor{franke_vagueness_2017} that vague languages are quicker to converge and adapt, which is valuable given the finite and dynamic character of our experience (point 1).
+\citeauthor{oconnor_evolving_2015} also showed how generalization, an invaluable feature of any procedure for learning from a limited number of observations (point 2), leads to vagueness.
+We also learned from \citeauthor{franke_vagueness_2017} that state confusability, a mechanism thats leads to vague signal use, can have a homogenizing effect on vocabularies, potentially compensating for the heterogeneity of agents' experiences (point 3).
+\citeauthor{lawry_vagueness_2017} demonstrated the benefits of strategies that incorporate uncertainty, leading to vagueness, in language games where agents need to aggregate information from various sources (point 4).
+%Trying to answer the question of ``Why is language vague?'', is important to force us to recognize those aspects of language and the world that are easily forgotten when idealizing the subject matter.
+%The finiteness of human experience, the dynamic nature of the world, and the communitarian context of language use and development, these are things we need to keep in mind lest we end up with inadequate models of language and meaning.
+% Wittgenstein put it better:
+
+What do these observations tell us about rationality?
+% The replicator equation lends itself to an interpretation where agents could be said to be devoid of rationality, procedural or instrumental.
+% This is the case where we see the equation as purely descriptive of a population of agents with hardwired behaviors, where the most successful strive and the least successful die off.
+% In such an interpretation there is no room for questions regarding the rationality of vagueness.
+% Another possible interpretation is that of a population of agents learning by imitation.
+The LMF dynamics of~\textcite{franke_vagueness_2011}, generalized reinforcement learning~\parencite{oconnor_evolution_2014}, and the work of~\textcite{franke_vagueness_2017}, all paint a picture of agents with a basic level of instrumental rationality, very limited awareness of the game, and a lack of strategic capabilities, adapting their behavior with only short-term gains in sight.
+Under the standard assumptions, even agents with such limited rationality would evolve crisp signaling in sim-max games.
+All approaches introduce constraints into the dynamics that prevent the evolution of crisp signal use.
+But a crisp language would still have a higher expected utility than the evolved strategies.
+Agents in those models seem to be rational only to the extent of their capabilities.
+Despite the plausibility of the mechanisms proposed (limited memory, generalization, state confusability), this feels like a bittersweet conclusion because of this hypothetical possibility of an ideal strategy that seems to be only artificially barred from the agents.
+But this is so only if rationality is equated with maximization of expected utility.
+The mechanisms that lead to vague signal use, as~\textcite{oconnor_evolution_2014} and~\textcite{franke_vagueness_2017} stress, have the aforementioned important advantages of faster speed of convergence, higher flexibility, and homogenization.
+These advantages matter, especially in the complex, dynamic context of real language use.
+One would thus like to say that using a strategy that promotes those characteristics without a significant loss of expected utility is certainly a rational choice.
+But in order to be able to say that in the context of the model, we need either a notion of rationality that goes beyond maximization of expected utility, or a notion of expected utility that incorporates other dimensions.
+
+For more complex agents, the story is potentially more nuanced.
+Consider an agent that has awareness that something like a game is being played, some estimate of the potential payoff involved, ability to gauge other players' expected behaviors, and the capacity to think strategically.
+Is it rational for a sender to use a message in a crisp way, splitting the state space as if a strict threshold existed between the use of one term and the other?
+In a scenario where the agent's ability to make the optimal choice is bounded, such as the QRE model of~\textcite{franke_vagueness_2011}, the agent is again doing the best he can given the constraints imposed on him.
+\textcite{lawry_vagueness_2017} draw attention to another option we need to consider: such agents could opt to ignore their limitations and external sources of uncertainty and use a crisp strategy regardless.
+The authors' analysis shows that such an approach would be irrational in a number of different scenarios, even in the narrow interpretation of rationality as utility maximization.
+But even in other scenarios, we could again argue that, if we broaden our notion of rationality, it would be less rational to use a crisp strategy rather than one that incorporates at least some source of uncertainty.
+A crisp strategy for a particular game would, in most realistic scenarios, take more time to achieve convergence, be less adaptable to changes, less easy to reuse in other similar games, and less able to foster cooperation with a bigger group of agents.
+
+We believe these considerations are, again, very much in line with Wittgenstein's later philosophy:
+\begin{quote}
+The more closely we examine actual language, the greater becomes the conflict between it and our requirement.
+(For the crystalline purity of logic was, of course, not something I had discovered: it was a requirement.)
+The conflict becomes intolerable; the requirement is now in danger of becoming vacuous.
+– We have got on to slippery ice where there is no friction, and so, in a certain sense, the conditions are ideal; but also, just because of that, we are unable to walk.
+We want to walk: so we need friction.
+Back to the rough ground!%
+~\parencite*[\S 107]{wittgenstein_philosophical_1953}
+\end{quote}
+This seems like a very clear call for what we are arguing here.
+But are we exposing ourselves to ``philosophical disease'' by following a ``one-sided diet''~\parencite*[\S 593]{wittgenstein_philosophical_1953} when looking only at sim-max games?
+In the spirit of Wittgenstein's pluralistic picture of language, we would like to reflect on vagueness in one more type of signaling game and speculate on the impact of plurality for vagueness.
+
+
 \section{Vagueness in multiple reference games}
 \label{sec:referential-vagueness}
+
+% \item We do not play only one language game in our existence; there is a plurality of them and which one an agent is engaged in at a particular moment is never clearly identified, neither are the exact benefits one might take out of it by choosing a certain behavior over another;
+% \item These are furthermore not fixed in time; old language games fall out of fashion or stop being useful, and new ones emerge all the time.
+
 
 Linguistic interaction, as captured by a sim-max game, has a rather narrow scope. There is a fixed prior, a fixed utility function and a fixed similarity measure between states. 
 If the sender observes a state $t$ and the receiver guesses state $t'$ the utility of that interaction is proportional to the similarity between $t$ and $t$. 
@@ -467,98 +552,17 @@ Adopting this perspective does not \emph{solve} the problem of how vagueness is 
 But it suggest that it might be an inflated issue that we need not or should not worry about, because it will not matter for a more general and pressing issue in a more realistic and encompassing picture of language, its use and evolution. The following section will expand on this.
 
 
+\section{Conclusion}
+\label{sec:conclusion}
 
-
-% \section{Vagueness in related models}
-% \label{sec:other-vagueness}
-%
-% \subsection{Preference misalignment}
-% \todo[inline]{Test CS~\parencite{crawford_strategic_1982} results in our model by using bias in utility function. READ Förster, M., and Riedel, F. (2011). Distorted Voronoi languages (working Paper). -> distorted Voronoi languages, i.e. shifted according to bias, but still crisp}
-%
-% \subsection{Noisy communication}
-% \todo[inline]{Test if noise in communication channel as modeled by Blume~\parencite{blume_intentional_2014} induces vague strategies as well}
-
-
-\section{How could language not be vague?}
-\label{sec:finite-experience}
-Arguments of the kind presented by Lipman~\parencite*{lipman_why_2009}, that a vague language is suboptimal compared to a crisp one, work under a number of various assumptions.
-Together, they form a picture of the context where agents learn and use language that is highly idealized.
-This picture has been criticized for several decades, at least in the field of theoretical economics.
-Herbert A.~Simon describes it as such:
-\begin{quote}
-Traditional economic theory postulates an ``economic man,'' who, in the course of being ``economic'' is also ``rational.''
-This man is assumed to have knowledge of the relevant aspects of his environment which, if not absolutely complete, is at least impressively clear and voluminous.
-He is assumed also to have a well-organized and stable system of preferences, and a skill in computation that enables him to calculate, for the alternative courses of action that are available to him, which of these will permit him to reach the highest attainable point on his preference scale.%
-~\parencite[99]{simon_behavioral_1955}
-\end{quote}
-Perhaps this could be seen as the setup of a straw man argument, but we believe it captures some of the crucial assumptions that still underlie some game theoretic models of language.
-
-In fact, in order to account for vagueness in natural language in the context of these models, the proposals surveyed here all need to peel away from this idealized model of agents, language, and the world, and bring some of these assumptions down to earth.
-They suggest various mechanisms that can lead to vague use of messages in certain signaling games, such as cognitive limitations like a finite memory or the inability to always calculate the absolute optimum choice to make, learning mechanisms that compensate for the finiteness of experience through generalization based on similarity, imperfect senses that allow for the possibility of stimulae to be confused, etc\todo{fit Lawry and James plus referential games stuff}.
-In the process, we realize ways in which we, as language learners and language users, are finite beings finding ways to cope with a highly complex and dynamic world:
-\begin{enumerate}
-\item Our existence is temporally finite; language does not have an infinite amount of time to evolve or take a long time to be learned. The faster a language can start to be useful, the better;
-\item Language learning through experience has to rely on a limited number of observations. Not only is the state space typically much larger than what one can survey in sufficient time, but it is also potentially infinite and constantly changing;
-\item A corollary of the former is that there will always be heterogeneity in a population of language learners, at least of prior experience since each agent will have relied on a different set of observations. Furthermore, this information is not directly or fully accessible to others;
-\item Given that an agent is almost always learning and using language in such a population of other agents, there are also various potential sources of linguistic input the agent is constantly integrating in his practice;
-\item We do not play only one language game in our existence; there is a plurality of them and which one an agent is engaged in at a particular moment is never clearly identified, neither are the exact benefits one might take out of it by choosing a certain behavior over another;
-\item These are furthermore not fixed in time; old language games fall out of fashion or stop being useful, and new ones emerge all the time.
-\end{enumerate}
-All of these observations support the weakening of our modeling assumptions.
-% If we take these points seriously, we have to concede that it is almost inevitable that uncertainty gets introduced at almost all levels of language learning and language use.
-% In the context of a signaling game, we can expect uncertainty about priors, observations, utilities, behavior of other players, and more.
-% This is true both from the perspective of the modeler, as from the perspective of the agents involved, supporting the motivation to take it into account in our modeling efforts.
-
-The research surveyed here shows us some examples of assumptions which, when weakened, make vague signal use a natural outcome of certain evolutionary dynamics.
-But it gives us even more.
-We learned from \citeauthor{oconnor_evolution_2014} and \citeauthor{franke_vagueness_2017} that vague languages are quicker to converge and more adaptable, which is valuable given the finite and dynamic character of our experience (point 1).
-\citeauthor{oconnor_evolving_2015} also showed how generalization, an invaluable feature of any procedure for learning from a limited number of observations (point 2), leads to vagueness.
-We also learned from \citeauthor{franke_vagueness_2017} that state confusability, a mechanism thats leads to vague signal use, can have a homogenizing effect on vocabularies, potentially compensating for the heterogeneity of agents' experiences (point 3).
-\citeauthor{lawry_vagueness_2017} demonstrated the benefits of strategies that incorporate uncertainty, leading to vagueness, in language games where agents need to aggregate information from various sources (point 4).
-\todo[inline]{add something for 5 and 6, maybe referential games}
-%Trying to answer the question of ``Why is language vague?'', is important to force us to recognize those aspects of language and the world that are easily forgotten when idealizing the subject matter.
-%The finiteness of human experience, the dynamic nature of the world, and the communitarian context of language use and development, these are things we need to keep in mind lest we end up with inadequate models of language and meaning.
-% Wittgenstein put it better:
-% \begin{quote}
-% The more closely we examine actual language, the greater becomes the conflict between it and our requirement. (For the crystalline purity of logic was, of course, not something I had discovered: it was a requirement.) The conflict becomes intolerable; the requirement is now in danger of becoming vacuous. – We have got on to slippery ice where there is no friction, and so, in a certain sense, the conditions are ideal; but also, just because of that, we are unable to walk. We want to walk: so we need friction. Back to the rough ground!%
-% ~\parencite*[\S 107]{wittgenstein_philosophical_1953}
-% \end{quote}
-
-What do these observations tell us about rationality?
-% The replicator equation lends itself to an interpretation where agents could be said to be devoid of rationality, procedural or instrumental.
-% This is the case where we see the equation as purely descriptive of a population of agents with hardwired behaviors, where the most successful strive and the least successful die off.
-% In such an interpretation there is no room for questions regarding the rationality of vagueness.
-% Another possible interpretation is that of a population of agents learning by imitation.
-The LMF dynamics of~\textcite{franke_vagueness_2011}, generalized reinforcement learning~\parencite{oconnor_evolution_2014}, and the work of~\textcite{franke_vagueness_2017}, all paint a picture of agents with a basic level of instrumental rationality, very limited awareness of the game, and a lack of strategic capabilities, adapting their behavior with only short-term gains in sight.
-Under the standard assumptions, even agents with such limited rationality would evolve crisp signaling in sim-max games.
-All approaches introduce constraints into the dynamics that prevent the evolution of crisp signal use.
-But a crisp language would still have a higher expected utility than the evolved strategies.
-Agents in those models seem to be rational only to the extent of their capabilities.
-Despite the plausibility of the mechanisms proposed (limited memory, generalization, state confusability), this feels like a bittersweet conclusion because of this hypothetical possibility of a better, hence more rational, strategy, that seems to be only artificially barred from the agents.
-But this is so only if rationality is equated with maximization of expected utility.
-The mechanisms that lead to vague signal use, as~\textcite{oconnor_evolution_2014} and~\textcite{franke_vagueness_2017} stress, have the aforementioned important advantages of faster speed of convergence, higher flexibility, and homogenization.
-These advantages matter, especially in the complex, dynamic context of real language use.
-One would thus like to say that using a strategy that promotes those characteristics without a significant loss of expected utility is certainly a rational choice.
-But in order to be able to say that in the context of the model, we need either a notion of rationality that goes beyond maximization of expected utility.
-
-For more complex agents, the story is potentially more nuanced.
-Consider an agent that has awareness that something like a game is being played, some estimate of the potential payoff involved, ability to gauge other players' expected behaviors, and the capacity to think strategically.
-Is it rational for a sender to use a message in a crisp way, splitting the state space as if a strict threshold existed between the use of one term and the other?
-In a scenario where the agent ability to make the optimal choice is bounded, such as the QRE model of~\textcite{franke_vagueness_2011}, the agent is again doing the best he can given the constraints imposed on him.
-\textcite{lawry_vagueness_2017} draw attention to another option we need to consider: such agents could opt to ignore their limitations and external sources of uncertainty and use a crisp strategy regardless.
-The authors' analysis shows that such an approach would be irrational in a number of different scenarios, even in the narrow interpretation of rationality as utility maximization.
-But even in other scenarios, we could again argue that, if we broaden our notion of rationality, it would be less rational to use a crisp strategy rather than one that incorporates at least some source of uncertainty.
-A crisp strategy for a particular game would, in most realistic scenarios, take more time to achieve convergence, be less adaptable to changes, less easy to reuse in other similar games, and less able to foster cooperation with a bigger group of agents.
-
-Thus, if we pragmatically acknowledge the complex and dynamic environment that surrounds language learning and use, we find many plausible sources of uncertainty that can lead to vague signal use.
+We tried to show that, if we pragmatically acknowledge the complex and dynamic environment that surrounds language learning and use, we find many plausible sources of uncertainty that can lead to vague signal use.
 Furthermore, if we broaden our notion of rationality beyond mere maximization of expected utility, we also find reasons to welcome the positive aspects of these processes and to see their acceptance as a perfectly rational choice.
+Irrational would be to ignore the finite 
 The investigation doesn't end here, though.
 The research discussed here suggests that although vagueness can be beneficial, that is the case only in moderation: too much can lead to babbling equilibria where no information is transmitted.
 Thus, for agents capable of adjusting the level of vagueness in their strategies, questions remain regarding how this can be modeled and what factors influence the amount of vagueness that is optimal for a given situation.
 Other challenges include how to incorporate the intuitions about the relevance of the aspects enumerated above into our models.
 
-\section{Conclusion}
-\label{sec:conclusion}
 
 \printbibliography
 
