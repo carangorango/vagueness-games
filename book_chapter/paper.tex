@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\usepackage[natbib=true,style=authoryear-comp,backend=bibtex,doi=false,url=false,isbn=false]{biblatex}
+\usepackage[natbib=true,style=authoryear-comp,backend=biber,doi=false,url=false,isbn=false]{biblatex}
 \bibliography{paper}
 
 \usepackage{todonotes}
@@ -27,8 +27,8 @@
 A vexing puzzle about vagueness, rationality and evolution runs, in crude abbreviation, as follows: vague language use is demonstrably suboptimal if the goal is efficient precise and cooperative information transmission; hence rational deliberation or evolutionary selection should, under this assumed goal, eradicate vagueness from language use.
 Since vagueness is persistent in all human languages, something has to give.
 In this paper, we investigate a number of reasons why and mechanisms how vagueness may come into the picture in formal models of rational or evolutionary optimal signaling.
-We show how uncertainty about not only the linguistic practices of others, but also about the world itself can lead to vagueness, and how, given vagueness, natural linguistic practices are likely to create more reason for vagueness.
-We explore the consequences of these reasons and mechanisms for a notion of meaning and a notion of language.
+We show how uncertainty about not only the linguistic practices of others, but also about the world itself can lead to vagueness.
+We explore the consequences of these reasons and mechanisms for a notion of meaning and a notion of rationality.
 \end{abstract}
 
 \tableofcontents
@@ -87,14 +87,20 @@ Rationality, in this picture, has truth as its guiding light and logic as the me
 Being rational is about following universally valid rules of reasoning that, given the correct inputs, necessarily lead us to the correct conclusions (see, for example, Harold Brown~\parencite*[19]{brown_rationality_1990} for a characterization).
 Although humans are not necessarily consciously aware of the rules, they are considered to be nevertheless unconsciously following them when they act rationally.
 This type of rationality is one that supposedly demarcates humans from other animals.
+
 We want to argue here that giving up the ideal of truth and logic as relevant explanatory notions for understanding meaning in natural language does not imply giving up on rationality altogether.
+It also does not necessarily eradicate all hope for a (formal) explication of meaning.
 To say that language does not follow strict logical rules, or that truth is not a useful notion to guide our inquiries into meaning, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore irrational.
-What we need is to revisit the notion of rationality tied to the classical picture.
+To support this view, we need to investigate different aspects of rationality (which is what the next section will do) and see how these relate to different ways of thinking about language, use and meaning (which is what the rest of the paper will do).
+
+\section{Facets of rationality and a different picture}
+\label{sec:facets-rationality}
 
 Rationality is an elusive notion which is frequently debated in areas like philosophy, psychology, and economics.
 Discussions around it usually rely on common connotations and implicit assumptions.
 The aforementioned classical picture of language and meaning is focused on an aspect of rationality that we can call \emph{procedural}.
 It attempts to characterize a particular choice of an agent as rational based on the procedures used to select it.
+It is intimately related to logically valid deductive inference.  
 We can also focus instead on the consequences, rather than the procedures.
 \emph{Instrumental} rationality, as it is typically called, characterizes an agent's choice as rational if, in making that choice, the available means were employed in the best way possible to achieve a certain goal.
 The notion is linked to David Hume~\parencite*{hume_treatise_1738} and his assertion that ``Reason is, and ought to only be the slave of the passions.''
@@ -102,33 +108,48 @@ This is close to a notion of rational choice that is used in economics and game 
 Concretely, for a (finite) set of acts $A$, a (finite) set of world states $T$ with prior probability $P \in \Delta(T)$ and a utility function $u \colon A \times T \rightarrow \mathbb{R}$, choice of action $a$ is rational only if the expected utility $EU(a) = \sum_{t\in T} P(t) \, u(a,t)$ of $a$ is at least as high as that of any other $a' \in A$.
 
 Choice rationality is not all there is to rationality though.
-An agent's mental representation of the decision situation is also subject to considerations of rationality. 
+An agent's mental representation of the decision situation can also be subject to considerations of rationality. 
 Depending on how accurate and complete the agent's knowledge of its environment, the objectives to be achieved, the choices available, the relation between those choices and the objectives, etc, the verdict over the rationality of his choices can vary.
 This is difficult to characterize in general, but, in the context of a given model, we can describe agents with respect to how much knowledge they have of the ingredients of the model.
 An \emph{omniscient} agent is one that is in possession of the same information as the modeler, whereas an agent with less than that is said to only have \emph{limited} awareness of the relevant aspects of the model.
-In many cases, agents may impossibly have all decision relevant information.
+In many cases, it is simply impossible for an agent to own all decision relevant information.
 This can happen when an agent has made only a rather small number of observations, e.g., about how a particular word is used.
-But even with \emph{partial information}, an agent can be required to have rational beliefs, i.e., to use all of the information available in the best possible way.
+Having only partial information is not irrational.
+But even with partial information, an agent can be required to have rational beliefs, i.e., to use all of the information available in the best possible way.
 This leads back to procedural rationality, logical inference and inductive learning.
 It is very hard to say what exactly rational learning is.
 It is easier to gesture at what it is not: ignoring observational evidence; failing to draw simple and obvious conclusions; failing to make simple and obvious generalizations etc.
 A further aspect of rational belief formation is very important for our present concerns, namely the ability of an agent to make accurate predictions about how other agents behave.
-We can say that an agent is more or less \emph{strategically rational} depending on the extent to which he is able to anticipate and consider either the actions and beliefs of other agents, or considerations of medium/long term gains.
-Strategic rationality is important for language use, because it is natural to assume that an agent's believes about how an expression is used normally or how it ought to be used properly will depend, at least in part, on beliefs about how others use a said expression.
+We can say that an agent is more or less \emph{strategically rational} depending on the extent to which he is able to anticipate the actions and beliefs of other agents, and to predict medium/long term gains from repeated play.
+Strategic rationality is important for language use, because it is natural to assume that an agent's beliefs about how an expression is used normally or how it ought to be used properly will depend, at least in part, on beliefs about how others use said expression.
 
 We draw attention to two additional aspects of rationality which will be helpful in the following.
-Where the above definition of instrumental rationality is usually understood as requiring a single choice of act $a$ to maximize the expected utility in a single concrete decision situation, we might also be interested more generally not in specific single local choices, so to speak, but in general global choice mechanisms.
-A choice mechanism in thes sense would be a general way of behaving, \emph{e.g.} a function from choice situations or contexts to single choices in each context.
-A notion of \emph{ecological rationality} requires a \emph{choice mechanism} to be optimal in the sense of expected utility maximization, across a whole class of different decision situations or contexts, weighed by their probability of frequency of occurrence.
-To make this a bit more transparent, consider the following rough formalization.
-If a context $c$ from some set $C$ gives us a decision problem with action set $A_c$, states $T_c$, probabilities of states $P_c \in \Delta(T)$ and utility function $u_c$, then a choice mechanism would be a function $CM \colon C \rightarrow \bigcup_{c \in C} A_c$. A choice mechanism $CM$ would be ecologically rational if it maximizes the 
+Where the above definition of instrumental rationality is usually understood as requiring a single choice of act to maximize the expected utility in a single concrete decision situation, we might also be interested in more general \emph{choice mechanisms} \parencite[\emph{e.g.}]{ZollmanSmead2010:Plasticity-and-,HagenChater2012:Decision-Making,FawcettHamblin2013:Exposing-the-be,GaleazziFranke2016:Smart-Transform}.
+A choice mechanism is a general way of behaving.
+Think of it as a function from contexts (choice situations, decision problems, different language games) to action choices in each context.
+A notion of \emph{ecological rationality} requires a choice mechanism to be optimal, in the sense of expected utility maximization, across the whole class $C$ of potential contexts, weighed by their probability or frequency of occurrence $P \in \Delta(C)$.
+To make this more transparent, consider the following rough formalization.
+A context $c \in C$ gives us a decision problem with action set $A_c$, states $T_c$, probabilities of states $P_c \in \Delta(T_c)$ and utility function $u_c$.
+A choice mechanism is a function $CM \colon c \mapsto CM(c) \in A_c$. 
+Choice mechanism $CM$ is ecologically rational if it maximizes the expected utility $EU(CM) = \int \sum_{t \in T_c} P_c(t) \, u_c(CM(c) , t) \ \text{d} P(c)$.
+A $CM$ is ecologically rational in this sense only if it delivers instrumentally rational choices in each local context.
+But ecological rationality trades off with requirements on rationality of beliefs (captured here roughly by $P \in \Delta(C)$ and $P_c \in \Delta(T_c)$).
+Especially when agents do not face a static, unchanging environment, such as when decision relevant beliefs hinge on the behavior of other agents, it may simply be impossible to achieve perfect ecological rationality.
+Moreover, not every choice mechanism is as natural as another. 
+Some may be easier to learn and apply; some may rely on imprecise but useful generalizations across contexts, others may not.
+This leads to a related notion of rationality, which we will call \emph{bounded rationality} here.
+This notion takes into account that the application of a choice mechanism may be more or less costly, \emph{e.g.}~how much time and effort does the agent invest into approximating or precisely calculating decision relevant beliefs and preferences?
+In this way, it is conceivable that a given choice mechanism returns many good but still sub-optimal action choices in many contexts from the point of view of locally instrumental rationality.
+At the same time, this choice mechanism, though locally sub-optimal, may outperform a strictly ecologically rational mechanism if the former is easier to compute, especially with an eye to generalization to novel contexts where precise computation of all decision relevant factors might be difficult.
+In a nutshel, bounded rationality integrates performance factors into what should count as optimal or rational behavior. 
+It is an alternative to instrumental and ecological rationality.
+It becomes particularly relevant when we consider an open class of decision situations, like we do for ecological rationality, and also consider rationality of beliefs and strategic multi-player considerations in a non-static environment.
 
-The classical picture is, in these terms, tied to a procedural account of rationality, where agents are pretty much omniscient.
-Questions of how strategic they are do not really come to the fore, since the analysis is typically both atemporal and individualistic.
-
-\mf{I suggest to rewrite this paragraph, keeping as much as possible, but to include a formal definition of ``instrumental rationality'' as maximization of expected utilities, and to also include notions ``ecological rationality'' and ``bounded rationality'' with special-purpose and clearly spelled out definitions, namely roughly like this: where ``instrumental rationality'' requires a single choice to maximize EU in a single local context / a single stage-game, \emph{ecological rationality} requires a general way of choosing (call it, e.g., a \emph{choice mechanism}) to be optimal (max EU) across a whole class of different contexts / games / decision-making situations; a choice mechanism is \emph{bounded rationality} if it is ecologically rational if we also take into account the processing costs necessary to reach a decision (so a choice mechanism that is fast-and-cheap can be better (under bounded rationality) than a highly precise one on average because it saves processing costs, while it would be strictly outperformed in any game/context/decision situation by a more precise mechanism)}
-
-What implications for a notion of rationality of language users do we get if we try to step out of the classical picture and start looking at meaning in terms of a different paradigm?
+Within this landscape of aspects of rationality, it seems that the classical picture of meaning is intimately related to a procedural account of rationality, where agents are pretty much omniscient.
+Logically valid inference is important.
+The sorites paradox is a real threat.
+Questions of how language is used or in which sense it is used rationally do not really come to the fore, since the analysis is typically both atemporal and abstracts away from individual language users.
+But, what other aspects of rationality of language users are important when we step out of the classical picture and start looking at meaning in terms of a different paradigm?
 What could such a paradigm even be?
 Perhaps we can draw inspiration from the later work of philosopher Ludwig Wittgenstein%
 \footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (but see~\cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} and Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}.
@@ -147,7 +168,6 @@ The following section introduces the framework of signaling games.
 Section~\ref{sec:sim-max-vagueness} looks at explanations for vagueness in a special kind of signaling game, a so-called sim-max game.
 Section~\ref{sec:finite-experience} reflects on the consequences of these explanations for notions of rationality.
 Section~\ref{sec:referential-vagueness} generalizes our discussion to the natural case where agents play more than one game. 
-\mf{Please check if this overview paragraph is appropriate or if you would like to go into a little more detail.}
 
 
 \section{Signaling games}
@@ -201,7 +221,7 @@ Partial coordination is achieved, for example, by $\sigma = \lbrace t_1 \mapsto 
 
 The approach adumbrated so far is not, nor does it attempt to be, a full-blown theory of meaning like one would have in the classical picture.
 However, we can already see how it attempts to address the study of meaning from a very different angle.
-There is a focus, not on meaning as a kind of correspondence, but rather on the use of signals for specific purposes (but see \cite{Hutteger:2007_Evol_Indicatives_Imperatives,Harms2010:Determining-tru,skyrms_signals_2010,Franke2013:An-adaptationis} for characterizations of signal meaning in terms of some correspondence with states or acts).
+There is a focus, not on meaning as a kind of correspondence, but rather on the use of signals for specific purposes \parencite[but see][]{Hutteger:2007_Evol_Indicatives_Imperatives,Harms2010:Determining-tru,skyrms_signals_2010,Franke2013:An-adaptationis}.
 There is also no appeal to truth as a guide for our inquiry.
 One advantage of such a paradigm shift is that we are no longer tied to the need of explaining how language hooks on to the world; this question is no longer of primary relevance.
 We can merely focus on trying to see how agents can use signals to cope with the world and achieve their purposes.
@@ -326,7 +346,7 @@ Our question is thus what additional modifications to sim-max games are sufficie
 %Let's look at some proposals in the literature.
 
 % \subsection{Bounded rationality}
-\textcite{franke_vagueness_2011} make two suggestions of how vagueness in a signaling game can arise as a consequence of limitations in the cognitive capacities of instrumentally rational agents.
+\textcite{franke_vagueness_2011} make two suggestions of how vagueness in a signaling game can be boundedly rational, \emph{i.e.}~how vagueness could arise as a consequence of cost-saving limitations in the cognitive capacities of instrumentally rational agents.
 The first proposal is called limited memory fictitious play (LMF) and models agents playing a sim-max game where their ability to recall past interactions with others is limited to a certain number.
 For a given interaction, each agent uses his limited memory of the other agent's past behavior to estimate the other's strategy.
 Each agent plays an instrumentally rational best response (given the utility function) to their estimate of the other's strategy.
@@ -337,13 +357,12 @@ However, each agent still commands a crisp language, which is inadequate if the 
 In order to overcome this limitation, \citeauthor{franke_vagueness_2011} make another proposal using the notion of a quantal response equilibrium (QRE).
 The idea, inspired by experimental psychology, is to model the choice of best response as stochastic rather than deterministic.\footnote{Probabilistic choice rules are also the source of vagueness in recent accounts by \textcite{LassiterGoodman2015:Adjectival-vagu} and \textcite{QingFranke2014:Gradable-Adject}.} 
 A prominent explanation for such soft-max or quantal choice behavior is that agents make small mistakes in the calculation of their expected utilities \parencite{Train2009:Discrete-Choice}. 
-They still choose by instrumental rationality the option with the highest expected utility, but each assessment of the expected utilities is noise perturbed.
-This, in turn, may actually be optimal behavior if the calculation of expected utilities relies on assessing stochastic uncertainty. 
+They still choose the option with the highest expected utility, but each assessment of the expected utilities is noise perturbed.
+This, in turn, may actually be boundedly rational since the calculation of expected utilities relies on assessing stochastic uncertainty, which in turn may be costly to calculate precisely. 
 Choice based on a few samples from a distribution can be optimal if taking more samples or other means of better approximating degrees of uncertainty is resource costly \parencite[\emph{e.g.}][]{VulGoodman2014:One-and-Done-Op,SanbornChater2016:Bayesian-Brains}.
-The degree to which agents tremble in the calculation of expected utilities and therefore deviate from the optimal behavior can be characterized by a parameter.
+The degree to which agents tremble in the calculation of expected utilities and therefore deviate from the instrumentally rational behavior can be characterized by a parameter.
 \citeauthor{franke_vagueness_2011} find that for low values of this parameter, only babbling equilibria are possible, where sender and receiver simply randomize, respectively, message and interpretation choice uniformly.
 Above a certain value of the parameter, other equilibria of the kind described in the beginning of this section arise, where agents communicate successfully, though not perfectly, using fuzzy strategies similar to the ones depicted in Figure~\ref{fig:example_stratsB}. However, it is not clear whether soft-max choices capture the right stochastic trembles in decision making as they would arise under natural sources of uncertainty about the context \parencite[see][]{franke_vagueness_2017}.
-\mf{use concept ``bounded rationality'' in this paragraph}
 
 % \subsection{Generalized reinforcement learning}
 Cailin O'Connor~\parencite*{oconnor_evolution_2014} proposes a way in which vagueness could be expected to evolve as a side-effect of a particular type of learning process.
@@ -359,11 +378,11 @@ But why should agents evolve to generalize?
 O'Connor suggests that, despite a vague language having lower expected utility than a precise one, the learning mechanism that induces vagueness does have evolutionary advantages, though less obvious ones (see \textcite{oconnor_evolving_2015} for the detailed argument).
 Considerations of optimality of strategies, for example by considering the evolutionary stable states, are typically made in terms of hypothetical atemporal comparisons of expected utility.
 However, GRL has an interesting property in comparison with more strict learning mechanisms: it achieves higher payoffs in a smaller period of time.
-In a naturalized evolutionary setting this temporary advantage should also be taken into account.
+In a naturalized evolutionary setting, where we care about bounded rationality in a multi-context environment, learning speed is an advantage which should also be taken into account.
 Imagine an initial population of agents with random strategies, some using GRL and others using classical HRL to adapt to each other.
 Although the latter type of agent can hypothetically develop a precise and more efficient signaling system, agents using GRL would coordinate on vague signaling strategies with high (though not optimal) expected utility sooner than agents using HRL.
 In such a scenario, they could drive the other agents to extinction before the latter had time to achieve coordination and reap the benefits of a more precise signaling system.
-\mf{use concept ``ecological rationality'' in this paragraph}
+
 
 But would such a language be stable?
 In terms of evolutionary game theory, one could argue that a small enough group of mutants playing a precise signaling system could later invade a population of vague signalers.
@@ -389,6 +408,7 @@ Furthermore, they observe one additional potentially beneficial property.
 By running several rounds of simulation for each parameter set, they can measure how close resulting strategies are within each group of results, and how they would fare playing against each other.
 The results show that the within group distance between strategies becomes smaller with growing confusability, and the within group expected utility is actually higher for strategies evolving under a certain degree of state confusion.
 Thus, some amount of uncertainty seems to promote more homogeneous populations of signalers that are better at achieving cooperation within a group.
+In this picture, vagueness is the natural and unavoidable consequence of perceptual limitations, but may still contribute to the overall boundedly rational character of language if we take multiple contexts of learning into account.
 
 % \subsection{Aggregation from multiple senders}
 \textcite{lawry_vagueness_2017} explore the potential benefits of vagueness in variations of a sim-max game with multiple senders and one receiver.
@@ -435,7 +455,7 @@ This man is assumed to have knowledge of the relevant aspects of his environment
 He is assumed also to have a well-organized and stable system of preferences, and a skill in computation that enables him to calculate, for the alternative courses of action that are available to him, which of these will permit him to reach the highest attainable point on his preference scale.%
 ~\parencite[99]{simon_behavioral_1955}
 \end{quote}
-This ``economic man'', a game-omniscient and highly strategic rational agent, seems to have survived almost unscathed to now populate most game theoretic models of language and signaling.
+This ``economic man'', a game-omniscient and highly strategic, instrumentally rational agent, seems to have survived almost unscathed to now populate most game theoretic models of language and signaling.
 Both Simon and Lipman call for this picture to be revisited.
 
 In order to account for vagueness in natural language in the context of these models, the proposals surveyed here all need to peel away from this idealized picture and bring some of these assumptions down to earth.
@@ -467,18 +487,20 @@ What do these observations tell us about rationality?
 % This is the case where we see the equation as purely descriptive of a population of agents with hardwired behaviors, where the most successful strive and the least successful die off.
 % In such an interpretation there is no room for questions regarding the rationality of vagueness.
 % Another possible interpretation is that of a population of agents learning by imitation.
-The LMF dynamics of~\textcite{franke_vagueness_2011}, generalized reinforcement learning~\parencite{oconnor_evolution_2014}, and the work of~\textcite{franke_vagueness_2017}, all paint a picture of agents with a basic level of instrumental rationality, very limited awareness of the game, and a lack of strategic capabilities, adapting their behavior with only short-term gains in sight.
+The models of~\textcite{franke_vagueness_2011}, generalized reinforcement learning~\parencite{oconnor_evolution_2014}, and the work of~\textcite{franke_vagueness_2017}, all paint a picture of agents with a basic level of instrumental rationality, possibly limited awareness of the game and a lack of strategic capabilities, adapting their behavior with only short-term gains in sight.
 Under the standard assumptions, even agents with such limited rationality would evolve crisp signaling in sim-max games.
-All approaches introduce constraints into the dynamics that prevent the evolution of crisp signal use.
+All approaches introduce constraints on agent behavior or information processing that prevent the evolution of crisp signal use.
 But a crisp language would still have a higher expected utility than the evolved strategies.
 Agents in those models seem to be rational only to the extent of their capabilities.
-Despite the plausibility of the mechanisms proposed (limited memory, generalization, state confusability), this feels like a bittersweet conclusion because of this hypothetical possibility of an ideal strategy that seems to be only artificially barred from the agents.
+Despite the plausibility of the mechanisms proposed (limited memory, imprecise calculation of expected utilities, generalization, state confusability), this feels like a bittersweet conclusion because of this hypothetical possibility of an ideal strategy that seems to be only artificially barred from the agents.
 But this is so only if rationality is equated with maximization of expected utility.
 The mechanisms that lead to vague signal use, as~\textcite{oconnor_evolution_2014} and~\textcite{franke_vagueness_2017} stress, have the aforementioned important advantages of faster speed of convergence, higher flexibility, and homogenization.
 These advantages matter, especially in the complex, dynamic context of real language use.
+Limits on memory and precision in the calculation of complex probabilistic beliefs may have a reduced metabolic processing cost.
 One would thus like to say that using a strategy that promotes those characteristics without a significant loss of expected utility is certainly a rational choice.
 But in order to be able to say that in the context of the model, we need either a notion of rationality that goes beyond maximization of expected utility, or a notion of expected utility that incorporates other dimensions.
-\mf{reformulate last bit of paragraph using notion ``ecological rationality''?}
+It is in this sense that these explanations tie in with a notion of bounded ecological rationality.
+
 
 For more complex agents, the story is potentially more nuanced.
 Consider an agent that has awareness that something like a game is being played, some estimate of the potential payoff involved, ability to gauge other players' expected behaviors, and the capacity to think strategically.
