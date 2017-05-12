@@ -33,6 +33,7 @@ We explore the consequences of these reasons and mechanisms for a notion of mean
 
 \tableofcontents
 
+
 \section{Vagueness and the classical picture}
 \label{sec:vagueness}
 
@@ -112,63 +113,85 @@ In Section~\ref{sec:signaling-games} we introduce the framework of signaling gam
 Section~\ref{sec:finite-experience} reflects on the implications of these explanations for notions of rationality.
 Section~\ref{sec:referential-vagueness} generalizes our discussion to the natural case where agents play more than one game. 
 
+
 \section{Facets of rationality}
 \label{sec:facets-rationality}
 
 Rationality is an elusive notion which is frequently debated in areas like philosophy, psychology, and economics.
-Discussions around it usually rely on common connotations and implicit assumptions.
-The aforementioned classical picture of language and meaning is focused on an aspect of rationality that we can call \emph{procedural}.
-It attempts to characterize a particular choice of an agent as rational based on the procedures used to select it.
-It is intimately related to logically valid deductive inference.  
-We can also focus instead on the consequences, rather than the procedures.
-\emph{Instrumental} rationality, as it is typically called, characterizes an agent's choice as rational if, in making that choice, the available means were employed in the best way possible to achieve a certain goal.
-The notion is linked to David Hume~\parencite*{hume_treatise_1738} and his assertion that ``Reason is, and ought to only be the slave of the passions.''
-This is close to a notion of rational choice that is used in economics and game theory: agents are rational if and only if they make decisions that maximize their expected utility. 
-Concretely, for a (finite) set of acts $A$, a (finite) set of world states $T$ with prior probability $P \in \Delta(T)$ and a utility function $u \colon A \times T \rightarrow \mathbb{R}$, choice of action $a$ is rational only if the expected utility $EU(a) = \sum_{t\in T} P(t) \, u(a,t)$ of $a$ is at least as high as that of any other $a' \in A$.
+Discussions around it, although touching on different aspects of the concept, often rely on a number of implicit assumptions.
+We can start by considering what is deemed to be most important when characterizing the rationality of a given choice.
+The aforementioned classical picture of language and meaning is focused on procedures.
+Thus, a choice is deemed rational if it was arrived at by means of following proper rules of reasoning, like for example a logically valid deductive inference.
+A \emph{procedural} account of rationality focuses on the means, rather than the ends.
+One can also do the opposite and focus on the consequences of the choice instead.
+\emph{Instrumental} rationality, as it is typically called\todo{references}, characterizes an agent's choice as rational if it maximizes the possibility of achieving a desired goal, regardless of the means.
+The notion is linked to David Hume~\parencite*{hume_treatise_1738} and epitomized in his assertion that ``Reason is, and ought to only be the slave of the passions.''
+This is close to a notion of rational choice that is used in economics and game theory: agents are rational if and only if they make decisions that maximize their expected utility%
+\footnote{\todo[inline]{discuss other options like minimax and such}}%
+.
+A more in-depth discussion of the opposition in the context of theoretical economics can be found, for example, in the work of Herbert A.~Simon~\parencite*[\emph{e.g.}][]{simon_rationality_1986}%
+\footnote{Simon uses the term substantive instead of instrumental rationality, but the characterization is basically the same~\parencite[210-212]{simon_rationality_1986}.}%
+.
+%Concretely, for a (finite) set of acts $A$, a (finite) set of world states $T$ with prior probability $P \in \Delta(T)$ and a utility function $u \colon A \times T \rightarrow \mathbb{R}$, choice of action $a$ is rational only if the expected utility $EU(a) = \sum_{t\in T} P(t) \, u(a,t)$ of $a$ is at least as high as that of any other $a' \in A$.\todo{Brings in a particular model too soon}
 
-Choice rationality is not all there is to rationality though.
-An agent's mental representation of the decision situation can also be subject to considerations of rationality. 
-Depending on how accurate and complete the agent's knowledge of its environment, the objectives to be achieved, the choices available, the relation between those choices and the objectives, etc, the verdict over the rationality of his choices can vary.
-This is difficult to characterize in general, but, in the context of a given model, we can describe agents with respect to how much knowledge they have of the ingredients of the model.
+When developing models where rationality is relevant, be it constructing a logical system or setting up a formal game, the assumed epistemic relation between whatever agents are involved and the elements of the model can come to bear on considerations of rationality.
+Depending on how accurate and complete the agent's knowledge of its environment, the goals to be achieved, the choices or rules available, the relation between those choices and the objectives, etc, the verdict over the rationality of certain choices can vary.
 An \emph{omniscient} agent is one that is in possession of the same information as the modeler, whereas an agent with less than that is said to only have \emph{limited} awareness of the relevant aspects of the model.
-In many cases, it is simply impossible for an agent to own all decision relevant information.
-This can happen when an agent has made only a rather small number of observations, e.g., about how a particular word is used.
-Having only partial information is not irrational.
-But even with partial information, an agent can be required to have rational beliefs, i.e., to use all of the information available in the best possible way.
-This leads back to procedural rationality, logical inference and inductive learning.
-It is very hard to say what exactly rational learning is.
-It is easier to gesture at what it is not: ignoring observational evidence; failing to draw simple and obvious conclusions; failing to make simple and obvious generalizations etc.
-A further aspect of rational belief formation is very important for our present concerns, namely the ability of an agent to make accurate predictions about how other agents behave.
-We can say that an agent is more or less \emph{strategically rational} depending on the extent to which he is able to anticipate the actions and beliefs of other agents, and to predict medium/long term gains from repeated play.
-Strategic rationality is important for language use, because it is natural to assume that an agent's beliefs about how an expression is used normally or how it ought to be used properly will depend, at least in part, on beliefs about how others use said expression.
+Models working within the classical picture typically do not make a distinction between modeler and agent, thus there is no room to express any epistemic gaps.
+It follows that agents can only be assumed to be omniscient of the details involved.
+By abstracting away from language users, these models cannot represent potential interactions between them, let alone repeated interaction and language change.
+In other types of models, however, a further aspect of rational belief formation needs to be considered, namely the ability of agents to make accurate predictions about how other agents behave.
+We can say that an agent is more or less \emph{strategic} depending on the extent to which he is able to anticipate the actions and beliefs of other agents, and to predict medium/long term gains from repeated play.
+%Strategic rationality is important for language use, because it is natural to assume that an agent's beliefs about how an expression is used normally or how it ought to be used properly will depend, at least in part, on beliefs about how others use said expression.\todo{too soon}
 
-We draw attention to two additional aspects of rationality which will be helpful in the following.
-Where the above definition of instrumental rationality is usually understood as requiring a single choice of act to maximize the expected utility in a single concrete decision situation, we might also be interested in more general \emph{choice mechanisms} \parencite[\emph{e.g.}]{ZollmanSmead2010:Plasticity-and-,HagenChater2012:Decision-Making,FawcettHamblin2013:Exposing-the-be,GaleazziFranke2016:Smart-Transform}.
-A choice mechanism is a general way of behaving.
-Think of it as a function from contexts (choice situations, decision problems, different language games) to action choices in each context.
-A notion of \emph{ecological rationality} requires a choice mechanism to be optimal, in the sense of expected utility maximization, across the whole class $C$ of potential contexts, weighed by their probability or frequency of occurrence $P \in \Delta(C)$.
-To make this more transparent, consider the following rough formalization.
-A context $c \in C$ gives us a decision problem with action set $A_c$, states $T_c$, probabilities of states $P_c \in \Delta(T_c)$ and utility function $u_c$.
-A choice mechanism is a function $CM \colon c \mapsto CM(c) \in A_c$. 
-Choice mechanism $CM$ is ecologically rational if it maximizes the expected utility $EU(CM) = \int \sum_{t \in T_c} P_c(t) \, u_c(CM(c) , t) \ \text{d} P(c)$.
-A $CM$ is ecologically rational in this sense only if it delivers instrumentally rational choices in each local context.
-But ecological rationality trades off with requirements on rationality of beliefs (captured here roughly by $P \in \Delta(C)$ and $P_c \in \Delta(T_c)$).
-Especially when agents do not face a static, unchanging environment, such as when decision relevant beliefs hinge on the behavior of other agents, it may simply be impossible to achieve perfect ecological rationality.
-Moreover, not every choice mechanism is as natural as another. 
-Some may be easier to learn and apply; some may rely on imprecise but useful generalizations across contexts, others may not.
-This leads to a related notion of rationality, which we will call \emph{bounded rationality} here.
-This notion takes into account that the application of a choice mechanism may be more or less costly, \emph{e.g.}~how much time and effort does the agent invest into approximating or precisely calculating decision relevant beliefs and preferences?
-In this way, it is conceivable that a given choice mechanism returns many good but still sub-optimal action choices in many contexts from the point of view of locally instrumental rationality.
-At the same time, this choice mechanism, though locally sub-optimal, may outperform a strictly ecologically rational mechanism if the former is easier to compute, especially with an eye to generalization to novel contexts where precise computation of all decision relevant factors might be difficult.
-In a nutshel, bounded rationality integrates performance factors into what should count as optimal or rational behavior. 
-It is an alternative to instrumental and ecological rationality.
-It becomes particularly relevant when we consider an open class of decision situations, like we do for ecological rationality, and also consider rationality of beliefs and strategic multi-player considerations in a non-static environment.
 
-Within this landscape of aspects of rationality, it seems that the classical picture of meaning is intimately related to a procedural account of rationality, where agents are pretty much omniscient.
-Logically valid inference is important.
-The sorites paradox is a real threat.
-Questions of how language is used or in which sense it is used rationally do not really come to the fore, since the analysis is typically both atemporal and abstracts away from individual language users.
-Let us know look into signaling games as another framework for the study of language use and meaning and see what account of rationality is characteristic of that approach.
+% \todo[inline]{Following discussion is already drawing conclusions, and is too closely tied to notions that haven't been introduced yet}
+% In many cases, it is simply impossible for an agent to own all decision relevant information.
+% This can happen when an agent has made only a rather small number of observations, e.g., about how a particular word is used.
+% Having only partial information is not irrational.
+% But even with partial information, an agent can be required to have rational beliefs, i.e., to use all of the information available in the best possible way.
+% This leads back to procedural rationality, logical inference and inductive learning.
+% It is very hard to say what exactly rational learning is.
+% It is easier to gesture at what it is not: ignoring observational evidence; failing to draw simple and obvious conclusions; failing to make simple and obvious generalizations etc.
+
+%We draw attention to two additional aspects of rationality which will be helpful in the following.
+Where the above definition of instrumental rationality is usually understood as requiring a single choice of act to maximize the expected utility in a single concrete decision situation, we might also be interested in more general choice mechanisms~\parencite[\emph{e.g.}]{ZollmanSmead2010:Plasticity-and-,HagenChater2012:Decision-Making,FawcettHamblin2013:Exposing-the-be,GaleazziFranke2016:Smart-Transform}.
+A choice mechanism is a general way of behaving for an agent involved in a variety of decision situations.
+When considering only a single situation, rationality can only be \emph{local}.
+If we take into account the possibility of the agent's choice or choice mechanism hinging on multiple situations, we can also talk about \emph{global} or \emph{ecological} rationality.
+This is important because, hypothetically, there could be choice mechanisms that are sub-optimal at a local level (for each situation) but are actually perfectly rational at a global level.
+
+% \todo[inline]{Formalization narrows down the concepts too much}
+% Think of it as a function from contexts (choice situations, decision problems, different language games) to action choices in each context.
+% A notion of \emph{ecological rationality} requires a choice mechanism to be optimal, in the sense of expected utility maximization, across the whole class $C$ of potential contexts, weighed by their probability or frequency of occurrence $P \in \Delta(C)$.
+% To make this more transparent, consider the following rough formalization.
+% A context $c \in C$ gives us a decision problem with action set $A_c$, states $T_c$, probabilities of states $P_c \in \Delta(T_c)$ and utility function $u_c$.
+% A choice mechanism is a function $CM \colon c \mapsto CM(c) \in A_c$. 
+% Choice mechanism $CM$ is ecologically rational if it maximizes the expected utility $EU(CM) = \int \sum_{t \in T_c} P_c(t) \, u_c(CM(c) , t) \ \text{d} P(c)$.
+% A $CM$ is ecologically rational in this sense only if it delivers instrumentally rational choices in each local context.
+% But ecological rationality trades off with requirements on rationality of beliefs (captured here roughly by $P \in \Delta(C)$ and $P_c \in \Delta(T_c)$).
+% Especially when agents do not face a static, unchanging environment, such as when decision relevant beliefs hinge on the behavior of other agents, it may simply be impossible to achieve perfect ecological rationality.
+% Moreover, not every choice mechanism is as natural as another. 
+% Some may be easier to learn and apply; some may rely on imprecise but useful generalizations across contexts, others may not.
+
+Note that we consider that, in theory, most combinations of these aspects are possible.
+Although we have been pinning logic to the classical picture, this is only with the most traditional logical systems in mind.
+Dynamic, epistemic, fuzzy, paraconsistent, and other types of logic\todo{cite Modal Logic for Open Minds?}, can potentially capture procedural rationality with limited non-strategic agents.
+Game-theoretical models of language can, on the other hand, also assume local instrumental rationality with omnisciente highly strategic agents.
+Our objective here is not to survey all the possibilities.
+We want to focus on signaling games as a framework for the study of language use and meaning.
+The vocabulary introduced in this section will, we hope, help inform the discussion that follows.
+
+
+% This leads to a related notion of rationality, which we will call \emph{bounded rationality} here.
+% This notion takes into account that the application of a choice mechanism may be more or less costly, \emph{e.g.}~how much time and effort does the agent invest into approximating or precisely calculating decision relevant beliefs and preferences?
+% In this way, it is conceivable that a given choice mechanism returns many good but still sub-optimal action choices in many contexts from the point of view of locally instrumental rationality.
+% At the same time, this choice mechanism, though locally sub-optimal, may outperform a strictly ecologically rational mechanism if the former is easier to compute, especially with an eye to generalization to novel contexts where precise computation of all decision relevant factors might be difficult.
+% In a nutshel, bounded rationality integrates performance factors into what should count as optimal or rational behavior. 
+% It is an alternative to instrumental and ecological rationality.
+% It becomes particularly relevant when we consider an open class of decision situations, like we do for ecological rationality, and also consider rationality of beliefs and strategic multi-player considerations in a non-static environment.
+%
+
 
 \section{Signaling games}
 \label{sec:signaling-games}
