@@ -88,12 +88,31 @@ Being rational is about following universally valid rules of reasoning that, giv
 Although humans are not necessarily consciously aware of the rules, they are considered to be nevertheless unconsciously following them when they act rationally.
 This type of rationality is one that supposedly demarcates humans from other animals.
 
-We want to argue here that giving up the ideal of truth and logic as relevant explanatory notions for understanding meaning in natural language does not imply giving up on rationality altogether.
+We want to argue here that to say that language does not follow strict logical rules, or that truth is not a useful notion to guide our inquiries into meaning, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore irrational.
+Giving up the ideal of truth and logic as relevant explanatory notions for understanding meaning in natural language does not imply giving up on rationality altogether.
 It also does not necessarily eradicate all hope for a (formal) explication of meaning.
-To say that language does not follow strict logical rules, or that truth is not a useful notion to guide our inquiries into meaning, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore irrational.
-To support this view, we need to investigate different aspects of rationality (which is what the next section will do) and see how these relate to different ways of thinking about language, use and meaning (which is what the rest of the paper will do).
+In order to make this argument, we need a different paradigm of language and meaning.
+But what could such a paradigm even be?
 
-\section{Facets of rationality and a different picture}
+We suggest that inspiration can be drawn from the later work of philosopher Ludwig Wittgenstein%
+\footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (but see~\cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} and Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}.
+His \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953} adumbrate a characterization of language that departs from the classical picture by highlighting its diversity, heterogeneity, and dynamism.
+Language is seen as a patchwork of various language-games, with new ones continuously being added and old ones falling out of use.
+These language-games, in turn, can be thought of as the use of signs in the context of and intermingled with a practice.
+%The metaphor emphasizes a concept of meaning as strongly linked to the use that words or signs are put to.
+There is no meaning in an abstract atemporal world, it is rather created dynamically and in a way that is contingent to the practices we engage in, to the language-games we play.
+The notion of language-game is also used to characterize one of Wittgenstein's methodological tools.
+Following the idea that ``[i]t disperses the fog if we study the phenomena of language in primitive kinds of use in which one can clearly survey the purpose and functioning of the words''~\parencite*[\S 5]{wittgenstein_philosophical_1953}, the method is to set up a language-game as a hypothetical scenario, or thought experiment, where language is used in a certain type of activity, and then reflect on the assumptions that underlie our interpretation of this set-up, as well as on how the scenario would play out according to those assumptions.
+It has been argued~\parencite{correia_bivalent_2013} that the framework of \emph{signaling games}, introduced to the study of meaning by David Lewis~\parencite*{lewis_convention_1969} and later naturalized by Brian Skyrms~\parencite*{skyrms_evolution_1996,skyrms_signals_2010}, permits us to do exactly that while reaping the benefits of a formalism that enables the in-depth exploration of the implications of complex hypothetical language-games via mathematical analysis or computer simulation.
+From this perspective, creating a signaling game model is like setting up a language-game, only using a formulation that improves perspicuity, and conducting mathematical analysis or computer simulations is like contemplating how the game would play out according to the assumptions built into the model.
+
+Following this idea, we here survey proposals for addressing vagueness in the context of signaling games and reflect on their implications for how one thinks of rationality in the context of language use.
+We start, in Section~\ref{sec:facets-rationality}, by clarifying some concepts that can help characterize different notions of rationality.
+In Section~\ref{sec:signaling-games} we introduce the framework of signaling games and in Section~\ref{sec:sim-max-vagueness} we look into explanations of vagueness in a special kind of signaling game, a so-called sim-max game.
+Section~\ref{sec:finite-experience} reflects on the implications of these explanations for notions of rationality.
+Section~\ref{sec:referential-vagueness} generalizes our discussion to the natural case where agents play more than one game. 
+
+\section{Facets of rationality}
 \label{sec:facets-rationality}
 
 Rationality is an elusive notion which is frequently debated in areas like philosophy, psychology, and economics.
@@ -149,26 +168,7 @@ Within this landscape of aspects of rationality, it seems that the classical pic
 Logically valid inference is important.
 The sorites paradox is a real threat.
 Questions of how language is used or in which sense it is used rationally do not really come to the fore, since the analysis is typically both atemporal and abstracts away from individual language users.
-But, what other aspects of rationality of language users are important when we step out of the classical picture and start looking at meaning in terms of a different paradigm?
-What could such a paradigm even be?
-Perhaps we can draw inspiration from the later work of philosopher Ludwig Wittgenstein%
-\footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (but see~\cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} and Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}.
-Most starkly in the \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953}, we can find a characterization of language that departs from the classical picture by highlighting its diversity, heterogeneity, and dynamism.
-Language is seen as a patchwork of various language-games, with new ones continuously being added and old ones falling out of use.
-These language-games, in turn, can be thought of as the use of signs in the context of and intermingled with a practice.
-%The metaphor emphasizes a concept of meaning as strongly linked to the use that words or signs are put to.
-There is no meaning in an abstract atemporal world, it is rather created dynamically and in a way that is contingent to the practices we engage in, to the language-games we play.
-The notion of language-game is also used to characterize one of Wittgenstein's methodological tools.
-Following the idea that ``[i]t disperses the fog if we study the phenomena of language in primitive kinds of use in which one can clearly survey the purpose and functioning of the words''~\parencite*[\S 5]{wittgenstein_philosophical_1953}, the method is to set up a language-game as a hypothetical scenario, or thought experiment, where language is used in a certain type of activity, and then reflect on the assumptions that underlie our interpretation of this set-up, as well as on how the scenario would play out according to those assumptions.
-It has been argued~\parencite{correia_bivalent_2013} that the framework of \emph{signaling games}, introduced to the study of meaning by David Lewis~\parencite*{lewis_convention_1969} and later naturalized by Brian Skyrms~\parencite*{skyrms_evolution_1996,skyrms_signals_2010}, permits us to do exactly that while reaping the benefits of a formalism that enables the in-depth exploration of the implications of complex hypothetical language-games via mathematical analysis or computer simulation.
-From this perspective, creating a signaling game model is like setting up a language-game, only using a formulation that improves perspicuity, and conducting mathematical analysis or computer simulations is like contemplating how the game would play out according to the assumptions built into the model.
-
-Following this idea, we here survey proposals for addressing vagueness in the context of signaling games.
-The following section introduces the framework of signaling games.
-Section~\ref{sec:sim-max-vagueness} looks at explanations for vagueness in a special kind of signaling game, a so-called sim-max game.
-Section~\ref{sec:finite-experience} reflects on the consequences of these explanations for notions of rationality.
-Section~\ref{sec:referential-vagueness} generalizes our discussion to the natural case where agents play more than one game. 
-
+Let us know look into signaling games as another framework for the study of language use and meaning and see what account of rationality is characteristic of that approach.
 
 \section{Signaling games}
 \label{sec:signaling-games}
