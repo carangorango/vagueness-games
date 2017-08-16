@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{bm}
+
+\title{Meta-dynamics: a sketch}
+\author{José Pedro Correia}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+Say that we want to test different dynamics against each other in one population of agents.
+Each dynamic is used by a certain percentage of the population.
+Each sub-population is characterized by a sender (receiver) strategy which is evolved according to its dynamic, but they interact with each other, so each strategy's expected utility is calculated against the whole population.
+I will here assume that senders and receivers are separate sub-populations.
+
+We can denote the percentage of sender population using dynamic $i \in I$ by $S_i$ and the percentage of receiver population using the same dynamic by $R_i$.
+Strategies are also indexed by the dynamic, so we have $\sigma_i$ and $\rho_i$ for each $i \in I$.
+Dynamics are functions $D_i$ that calculate a new generation of strategies based on the existing ones (this could benefit from a more formal characterization).
+
+The calculation of a new generation now applies to both the strategies themselves, as to the dynamics.
+Sender strategy $\sigma_i$ gets updated according to its dynamic $D_i$:
+$$
+\sigma_i^\prime(m \mid t) = D_i(\sigma_i, EU(m \mid t))
+$$
+
+For example, if $D_3$ is the replicator dynamic, we would have the following:
+$$
+\sigma_3^\prime(m \mid t) = \sigma_3(m \mid t) \cdot \frac{EU(m \mid t)}{\sum_{m^\prime \in M} EU(m^\prime \mid t)}
+$$
+
+One important point is that expected utility for the sender strategy of one dynamic is calculated against the receiver strategies of all other dynamics:
+$$
+EU(m \mid t) = \sum_{i \in I} R_i \cdot \sum_{t^\prime \in T} \rho_i(t^\prime \mid m) \cdot U(t, t^\prime)
+$$
+
+Then we also update the percentage of senders using a certain dynamic.
+In this case, using the replicator equation as meta-dynamic, we get the following:
+$$
+S_i^\prime = S_i \cdot \frac{EU(\sigma_i)}{\sum_{i^\prime \in I} EU(\sigma_{i^\prime})}
+$$
+where the expected utility of a whole sender strategy of one dynamic is also calculated against the receiver strategies of all other dynamics:
+$$
+EU(\sigma) = \sum_{i \in I} R_i \cdot \sum_{t, t^\prime \in T} \sum_{m \in M} P(t) \cdot \sigma(m \mid t) \cdot \rho_i(t^\prime \mid m) \cdot U(t, t^\prime)
+$$
+
+We can make similar formulations, \emph{mutatis mutandis}, for the receiver populations.
+	
+\end{document}
