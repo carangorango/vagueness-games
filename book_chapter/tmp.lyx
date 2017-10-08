@@ -1,0 +1,201 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{a4wide}
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.66\textwidth}
+\setlength{\epigraphrule}{0pt}
+
+\usepackage[doi=false,isbn=false,url=false,style=authoryear,natbib=true,backend=biber,bibencoding=utf8,style=philosophy-classic,square=true]{biblatex}
+\addbibresource{/home/zepedro/Documents/PhD/zotero_bibliography.bib}
+\end_preamble
+\use_default_options true
+\begin_modules
+todonotesalternate
+biblatex
+\end_modules
+\maintain_unincluded_children false
+\begin_local_layout
+Provides natbib 1
+\end_local_layout
+\language english
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman "lmodern" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command biber
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\propto P_{a}(t_{a})P_{o}^{\alpha}(t_{o}|t_{a})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{\sigma}^{\alpha}(m|t_{a})=\sum_{t_{o}}P_{o}^{\alpha}(t_{o}|t_{a})\sigma^{\alpha}(m|t_{o})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{\rho}^{\alpha}(t_{r}|m)=\sum_{t_{i}}P_{r}^{\alpha}(t_{r}|t_{i})\rho^{\alpha}(t_{i}|m)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{\bar{\sigma}}^{\alpha}(t_{a}|m)\propto P_{a}(t_{a})P_{\sigma}^{\alpha}(m|t_{a})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\star})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\sum_{\alpha^{\prime}\in A}P(\rho^{\alpha^{\prime}})\sum_{t_{r}}P_{\rho}^{\alpha^{\prime}}(t_{r}|m)U(t_{a},t_{r})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\star})=\sum_{\alpha^{\prime}\in A}P(\sigma^{\alpha^{\prime}})\sum_{t_{a}}P_{\bar{\sigma}}^{\alpha^{\prime}}(t_{a}|m)\sum_{t_{r}}P_{r}^{\alpha}(t_{r}|t_{i})U(t_{a},t_{r})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{o}^{\alpha}(m|t_{o})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\sum_{\alpha^{\prime}\in A}P(\sigma^{\alpha^{\prime}})P_{\sigma}^{\alpha^{\prime}}(m|t_{a})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+P_{o}^{\alpha}(t_{o}|m)=\sum_{t_{r}}P_{o}^{\alpha}(t_{o}|t_{r})\sum_{\alpha^{\prime}\in A}P(\rho^{\alpha^{\prime}})P_{\rho}^{\alpha^{\prime}}(t_{r}|m)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sigma_{i+1}^{\alpha}(m|t)=P_{o}^{\alpha}(m|t)EU_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\star})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\rho_{i+1}^{\alpha}(t|m)=P_{o}^{\alpha}(t|m)EU_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\star})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
