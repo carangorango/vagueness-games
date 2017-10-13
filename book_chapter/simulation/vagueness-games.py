@@ -198,32 +198,31 @@ PriorDistributionType = 'uniform'
 NMessages = 2
 Dynamics = 'replicator dynamics'
 Impairments = [0.0, 0.05]
-NPopulations = len(Impairments)
 NewPopulationRate = 0.05
 Tolerance = 0.1
 convThreshold = 0.001
 rounds = 100
-OutputFile = sys.stdout
 MetaDynamicsStep = 1
 
 # # Batch mode
 
 BatchMode = len(sys.argv) > 1
 
-# if BatchMode:
-#     if len(sys.argv) < 5:
-#         print "Usage: python", sys.argv[
-#             0], "<number of states> <number of messages> <impairment> <tolerance> <output file>"
-#         sys.exit(1)
-#     else:
-#         NStates = int(sys.argv[1])
-#         NMessages = int(sys.argv[2])
-#         Impairment = float(sys.argv[3])
-#         ImpairmentR = Impairment
-#         Tolerance = float(sys.argv[4])
-#         OutputFile = open(sys.argv[5], 'ab')
+if BatchMode:
+    if len(sys.argv) < 5:
+        print "Usage: python", sys.argv[
+            0], "--batch <number of states> <meta dynamics step> <birth rate> <impairments...>"
+        sys.exit(1)
+    else:
+        NStates = int(sys.argv[2])
+        MetaDynamicsStep = int(sys.argv[3])
+        NewPopulationRate = float(sys.argv[4])
+        Impairments = []
+        for i in xrange(5, len(sys.argv)):
+            Impairments.append(float(sys.argv[i]))
 
 # # Initialization
+NPopulations = len(Impairments)
 
 SendersPercentages = makePDF(np.ones(NPopulations))
 ReceiversPercentages = makePDF(np.ones(NPopulations))
@@ -254,6 +253,25 @@ ExpectedUtilitiesSenders = [ExpectedUtilitySpeaker(Speakers[j], Hearers, Receive
                             for j in xrange(NPopulations)]
 ExpectedUtilitiesHearers = [ExpectedUtilityHearer(Speakers, SendersPercentages, Hearers[j], Utility)
                             for j in xrange(NPopulations)]
+
+SubPopulationMeasurements = []
+for j in xrange(NPopulations):
+    SubPopulationMeasurements.append({
+        'number.of.states': NStates,
+        'birth.rate': NewPopulationRate,
+        'meta.step': MetaDynamicsStep,
+        'iteration': 0,
+        'impairment': Impairments[j],
+        'sender.converged': False,
+        'receiver.converged': False,
+        'sender.proportion': SendersPercentages[j],
+        'receiver.proportion': ReceiversPercentages[j],
+        'sender.eu': ExpectedUtilitySpeaker(Speakers[j], Hearers, ReceiversPercentages, Utility),
+        'receiver.eu': ExpectedUtilityHearer(Speakers, SendersPercentages, Hearers[j], Utility),
+        'sender.entropy': NormalizedEntropy(Speakers[j]),
+        'receiver.entropy': NormalizedEntropy(Hearers[j]),
+        'sender.convexity': Convexity(Speakers[j]),
+    })
 
 SendersPercentagesHistory = np.array([SendersPercentages])
 ReceiversPercentagesHistory = np.array([ReceiversPercentages])
@@ -309,13 +327,6 @@ for i in xrange(1, rounds):
     ExpectedUtilityHistoryReceivers = np.append(ExpectedUtilityHistoryReceivers,
                                                 [copy.deepcopy(ExpectedUtilitiesHearers)], axis=0)
 
-    SpeakersConverged = [np.sum(abs(Speakers[j] - SpeakersBefore[j])) < convThreshold for j in xrange(NPopulations)]
-    HearersConverged = [np.sum(abs(Hearers[j] - HearersBefore[j])) < convThreshold for j in xrange(NPopulations)]
-    if all(SpeakersConverged) and all(HearersConverged):
-        converged = True
-        print 'Languages converged!'
-        break
-
     if i % MetaDynamicsStep == 0:
         for j in xrange(NPopulations):
             SendersPercentages[j] = SendersPercentages[j] * ExpectedUtilitiesSenders[j] \
@@ -335,28 +346,45 @@ for i in xrange(1, rounds):
     SendersPercentagesHistory = np.append(SendersPercentagesHistory, [copy.deepcopy(SendersPercentages)], axis=0)
     ReceiversPercentagesHistory = np.append(ReceiversPercentagesHistory, [copy.deepcopy(ReceiversPercentages)], axis=0)
 
+    SpeakersConverged = [np.sum(abs(Speakers[j] - SpeakersBefore[j])) < convThreshold for j in xrange(NPopulations)]
+    HearersConverged = [np.sum(abs(Hearers[j] - HearersBefore[j])) < convThreshold for j in xrange(NPopulations)]
+
+    for j in xrange(NPopulations):
+        SubPopulationMeasurements.append({
+            'number.of.states': NStates,
+            'birth.rate': NewPopulationRate,
+            'meta.step': MetaDynamicsStep,
+            'iteration': i,
+            'impairment': Impairments[j],
+            'sender.converged': SpeakersConverged[j],
+            'receiver.converged': HearersConverged[j],
+            'sender.proportion': SendersPercentages[j],
+            'receiver.proportion': ReceiversPercentages[j],
+            'sender.eu': ExpectedUtilitiesSenders[j],
+            'receiver.eu': ExpectedUtilitiesHearers[j],
+            'sender.entropy': NormalizedEntropy(Speakers[j]),
+            'receiver.entropy': NormalizedEntropy(Hearers[j]),
+            'sender.convexity': Convexity(Speakers[j]),
+        })
+
     if not BatchMode:
         plotStrategies()
+
+    if all(SpeakersConverged) and all(HearersConverged):
+        converged = True
+        print 'Languages converged!'
+        break
 
 # if not BatchMode: plotStrategies(block=True)
 
 ResultsDirectory = 'results'
 SimulationID = datetime.today().strftime('%Y%m%d-%H%M%S-%f')
 
-ParametersOutputFilename = ResultsDirectory + '/' + SimulationID + '-parameters.csv'
-with open(ParametersOutputFilename, 'w') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=['meta-dynamic-step', 'birth-rate', 'impairments'])
+MeasurementsOutputFilename = ResultsDirectory + '/' + SimulationID + '-measurements.csv'
+with open(MeasurementsOutputFilename, 'w') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=SubPopulationMeasurements[0].keys())
     writer.writeheader()
-    writer.writerow({'meta-dynamic-step': MetaDynamicsStep,
-                     'birth-rate': NewPopulationRate,
-                     'impairments': Impairments})
-
-SpeakerPopulationOutputFilename = ResultsDirectory + '/' + SimulationID + '-speaker-populations.csv'
-np.savetxt(SpeakerPopulationOutputFilename,
-           SendersPercentagesHistory, delimiter=',', header=','.join(map(str, Impairments)))
-HearerPopulationOutputFilename = ResultsDirectory + '/' + SimulationID + '-hearer-populations.csv'
-np.savetxt(HearerPopulationOutputFilename,
-           ReceiversPercentagesHistory, delimiter=',', header=','.join(map(str, Impairments)))
+    writer.writerows(SubPopulationMeasurements)
 
 for i in xrange(NPopulations):
     SpeakerOutputFilename = ResultsDirectory + '/strategies/' + \
