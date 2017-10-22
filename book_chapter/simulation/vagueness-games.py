@@ -201,8 +201,9 @@ Impairments = [0.0, 0.05]
 NewPopulationRate = 0.05
 Tolerance = 0.1
 convThreshold = 0.001
-rounds = 100
+rounds = 200
 MetaDynamicsStep = 1
+SubPopulationInteraction = 'weakest'
 
 # # Batch mode
 
@@ -211,14 +212,15 @@ BatchMode = len(sys.argv) > 1
 if BatchMode:
     if len(sys.argv) < 5:
         print "Usage: python", sys.argv[
-            0], "--batch <number of states> <meta dynamics step> <birth rate> <impairments...>"
+            0], "--batch <number of states> <meta dynamics step> <birth rate> <sub-population interaction type> <impairments...>"
         sys.exit(1)
     else:
         NStates = int(sys.argv[2])
         MetaDynamicsStep = int(sys.argv[3])
         NewPopulationRate = float(sys.argv[4])
+        SubPopulationInteraction = sys.argv[5]
         Impairments = []
-        for i in xrange(5, len(sys.argv)):
+        for i in xrange(6, len(sys.argv)):
             Impairments.append(float(sys.argv[i]))
 
 # # Initialization
@@ -260,6 +262,7 @@ for j in xrange(NPopulations):
         'number.of.states': NStates,
         'birth.rate': NewPopulationRate,
         'meta.step': MetaDynamicsStep,
+        'interaction': SubPopulationInteraction,
         'iteration': 0,
         'impairment': Impairments[j],
         'sender.converged': False,
@@ -271,6 +274,7 @@ for j in xrange(NPopulations):
         'sender.entropy': NormalizedEntropy(Speakers[j]),
         'receiver.entropy': NormalizedEntropy(Hearers[j]),
         'sender.convexity': Convexity(Speakers[j]),
+        'sender.convex': ConvexityCat(Speakers[j]),
     })
 
 SendersPercentagesHistory = np.array([SendersPercentages])
@@ -283,7 +287,7 @@ if not BatchMode:
 
 converged = False
 for i in xrange(1, rounds):
-    print i
+    # print i
 
     SpeakersBefore, HearersBefore = copy.deepcopy(Speakers), copy.deepcopy(Hearers)
 
@@ -296,27 +300,73 @@ for i in xrange(1, rounds):
     PRho = [np.dot(HearersBefore[k], ReceiverConfusions[k])
             for k in xrange(NPopulations)]  # prob receiver plays act (row) given message (column)
     for j in xrange(NPopulations):
-        PoSender = np.dot(PoT[j], np.sum(SendersPercentages[k] * PSigma[k]
-                                         for k in xrange(NPopulations)))  # P_o(m|t_o)
-        ExpUS = np.array([
-            [np.sum([PoT[j][to, ta] * np.sum(ReceiversPercentages[k] * PRho[k][m, tr] * Utility[ta, tr]
-                                             for k in xrange(NPopulations)
-                                             for tr in xrange(NStates))
-                     for ta in xrange(NStates)])
-             for m in xrange(NMessages)]
-            for to in xrange(NStates)])
-        Speakers[j] = makePDFPerRow(PoSender * ExpUS)
+        if SubPopulationInteraction == 'strong':
+            PoSender = np.dot(PoT[j], np.sum(SendersPercentages[k] * PSigma[k]
+                                             for k in xrange(NPopulations)))  # P_o(m|t_o)
+            ExpUS = np.array([
+                [np.sum([PoT[j][to, ta] * np.sum(ReceiversPercentages[k] * PRho[k][m, tr] * Utility[ta, tr]
+                                                 for k in xrange(NPopulations)
+                                                 for tr in xrange(NStates))
+                         for ta in xrange(NStates)])
+                 for m in xrange(NMessages)]
+                for to in xrange(NStates)])
+            Speakers[j] = makePDFPerRow(PoSender * ExpUS)
 
-        PoReceiver = np.dot(np.sum(ReceiversPercentages[k] * PRho[k]
-                                   for k in xrange(NPopulations)), SenderConfusions[j])  # P_o(t_o|m)
-        ExpUR = np.array([
-            [np.sum([SendersPercentages[k] * PSigmaInverse[k][m, ta] * ReceiverConfusions[j][ti, tr] * Utility[ta, tr]
+            PoReceiver = np.dot(np.sum(ReceiversPercentages[k] * PRho[k]
+                                       for k in xrange(NPopulations)), SenderConfusions[j])  # P_o(t_o|m)
+            ExpUR = np.array([
+                [np.sum(
+                    [SendersPercentages[k] * PSigmaInverse[k][m, ta] * ReceiverConfusions[j][ti, tr] * Utility[ta, tr]
                      for ta in xrange(NStates)
                      for tr in xrange(NStates)
                      for k in xrange(NPopulations)])
-             for ti in xrange(NStates)]
-            for m in xrange(NMessages)])
-        Hearers[j] = makePDFPerRow(PoReceiver * ExpUR)
+                    for ti in xrange(NStates)]
+                for m in xrange(NMessages)])
+            Hearers[j] = makePDFPerRow(PoReceiver * ExpUR)
+        elif SubPopulationInteraction == 'weak':
+            PoSender = np.dot(PoT[j], PSigma[j])  # P_o(m|t_o)
+            ExpUS = np.array([
+                [np.sum([PoT[j][to, ta] * np.sum(ReceiversPercentages[k] * PRho[k][m, tr] * Utility[ta, tr]
+                                                 for k in xrange(NPopulations)
+                                                 for tr in xrange(NStates))
+                         for ta in xrange(NStates)])
+                 for m in xrange(NMessages)]
+                for to in xrange(NStates)])
+            Speakers[j] = makePDFPerRow(PoSender * ExpUS)
+
+            PoReceiver = np.dot(PRho[j], SenderConfusions[j])  # P_o(t_o|m)
+            ExpUR = np.array([
+                [np.sum(
+                    [SendersPercentages[k] * PSigmaInverse[k][m, ta] * ReceiverConfusions[j][ti, tr] * Utility[ta, tr]
+                     for ta in xrange(NStates)
+                     for tr in xrange(NStates)
+                     for k in xrange(NPopulations)])
+                    for ti in xrange(NStates)]
+                for m in xrange(NMessages)])
+            Hearers[j] = makePDFPerRow(PoReceiver * ExpUR)
+        elif SubPopulationInteraction == 'weakest':
+            PoSender = np.dot(PoT[j], PSigma[j])  # P_o(m|t_o)
+            ExpUS = np.array([
+                [np.sum([PoT[j][to, ta] * np.sum(PRho[j][m, tr] * Utility[ta, tr]
+                                                 for tr in xrange(NStates))
+                         for ta in xrange(NStates)])
+                 for m in xrange(NMessages)]
+                for to in xrange(NStates)])
+            Speakers[j] = makePDFPerRow(PoSender * ExpUS)
+
+            PoReceiver = np.dot(PRho[j], SenderConfusions[j])  # P_o(t_o|m)
+            ExpUR = np.array([
+                [np.sum(
+                    [PSigmaInverse[j][m, ta] * ReceiverConfusions[j][ti, tr] * Utility[ta, tr]
+                     for ta in xrange(NStates)
+                     for tr in xrange(NStates)])
+                    for ti in xrange(NStates)]
+                for m in xrange(NMessages)])
+            Hearers[j] = makePDFPerRow(PoReceiver * ExpUR)
+        else:
+            raise ValueError(
+                'Valid sub-population interaction types are \'strong\', \'weak\', and \'weakest\'. Unknown value \'%s\''
+                % SubPopulationInteraction)
 
     for j in xrange(NPopulations):
         ExpectedUtilitiesSenders[j] = ExpectedUtilitySpeaker(Speakers[j], Hearers, ReceiversPercentages, Utility)
@@ -354,6 +404,7 @@ for i in xrange(1, rounds):
             'number.of.states': NStates,
             'birth.rate': NewPopulationRate,
             'meta.step': MetaDynamicsStep,
+            'interaction': SubPopulationInteraction,
             'iteration': i,
             'impairment': Impairments[j],
             'sender.converged': SpeakersConverged[j],
@@ -365,15 +416,16 @@ for i in xrange(1, rounds):
             'sender.entropy': NormalizedEntropy(Speakers[j]),
             'receiver.entropy': NormalizedEntropy(Hearers[j]),
             'sender.convexity': Convexity(Speakers[j]),
+            'sender.convex': ConvexityCat(Speakers[j]),
         })
 
     if not BatchMode:
         plotStrategies()
 
-    if all(SpeakersConverged) and all(HearersConverged):
-        converged = True
-        print 'Languages converged!'
-        break
+    # if all(SpeakersConverged) and all(HearersConverged):
+    #     converged = True
+    #     print 'Languages converged!'
+    #     break
 
 # if not BatchMode: plotStrategies(block=True)
 
