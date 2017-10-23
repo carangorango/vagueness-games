@@ -35,21 +35,17 @@ def plotStrategies(block=False):
         plt.legend(loc='best')
         # plt.title('Hearer strategy')
 
-    plt.subplot(4, 4, 13)
+    plt.subplot(4, 3, 10)
     for i in xrange(NPopulations):
         plt.plot(ExpectedUtilityHistorySenders[:, i], label=Impairments[i])
     plt.legend(loc='upper left', prop={'size': 8})
-    plt.subplot(4, 4, 14)
-    for i in xrange(NPopulations):
-        plt.plot(SendersPercentagesHistory[:, i], label=Impairments[i])
-    plt.legend(loc='upper left', prop={'size': 8})
-    plt.subplot(4, 4, 15)
+    plt.subplot(4, 3, 11)
     for i in xrange(NPopulations):
         plt.plot(ExpectedUtilityHistoryReceivers[:, i], label=Impairments[i])
     plt.legend(loc='upper left', prop={'size': 8})
-    plt.subplot(4, 4, 16)
+    plt.subplot(4, 3, 12)
     for i in xrange(NPopulations):
-        plt.plot(ReceiversPercentagesHistory[:, i], label=Impairments[i])
+        plt.plot(PopulationProportionsHistory[:, i], label=Impairments[i])
     plt.legend(loc='upper left', prop={'size': 8})
 
     #     plt.subplot(3, 1, 3)
@@ -197,13 +193,13 @@ NStates = 30
 PriorDistributionType = 'uniform'
 NMessages = 2
 Dynamics = 'replicator dynamics'
-Impairments = [0.0, 0.05]
-NewPopulationRate = 0.05
+Impairments = [0.0, 0.05, 0.1]
+NewPopulationRate = 0.0
 Tolerance = 0.1
 convThreshold = 0.001
 rounds = 200
 MetaDynamicsStep = 1
-SubPopulationInteraction = 'weakest'
+SubPopulationInteraction = 'weak'
 
 # # Batch mode
 
@@ -226,8 +222,7 @@ if BatchMode:
 # # Initialization
 NPopulations = len(Impairments)
 
-SendersPercentages = makePDF(np.ones(NPopulations))
-ReceiversPercentages = makePDF(np.ones(NPopulations))
+PopulationProportions = makePDF(np.ones(NPopulations))
 
 PerceptualSpace = np.linspace(0, 1, NStates, endpoint=True)
 if PriorDistributionType == 'uniform':
@@ -251,9 +246,9 @@ ReceiverConfusions = [
 Speakers = [random.dirichlet([1] * NMessages, NStates) for _ in xrange(NPopulations)]
 Hearers = [random.dirichlet([1] * NStates, NMessages) for _ in xrange(NPopulations)]
 
-ExpectedUtilitiesSenders = [ExpectedUtilitySpeaker(Speakers[j], Hearers, ReceiversPercentages, Utility)
+ExpectedUtilitiesSenders = [ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility)
                             for j in xrange(NPopulations)]
-ExpectedUtilitiesHearers = [ExpectedUtilityHearer(Speakers, SendersPercentages, Hearers[j], Utility)
+ExpectedUtilitiesHearers = [ExpectedUtilityHearer(Speakers, PopulationProportions, Hearers[j], Utility)
                             for j in xrange(NPopulations)]
 
 SubPopulationMeasurements = []
@@ -267,18 +262,16 @@ for j in xrange(NPopulations):
         'impairment': Impairments[j],
         'sender.converged': False,
         'receiver.converged': False,
-        'sender.proportion': SendersPercentages[j],
-        'receiver.proportion': ReceiversPercentages[j],
-        'sender.eu': ExpectedUtilitySpeaker(Speakers[j], Hearers, ReceiversPercentages, Utility),
-        'receiver.eu': ExpectedUtilityHearer(Speakers, SendersPercentages, Hearers[j], Utility),
+        'proportion': PopulationProportions[j],
+        'sender.eu': ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility),
+        'receiver.eu': ExpectedUtilityHearer(Speakers, PopulationProportions, Hearers[j], Utility),
         'sender.entropy': NormalizedEntropy(Speakers[j]),
         'receiver.entropy': NormalizedEntropy(Hearers[j]),
         'sender.convexity': Convexity(Speakers[j]),
         'sender.convex': ConvexityCat(Speakers[j]),
     })
 
-SendersPercentagesHistory = np.array([SendersPercentages])
-ReceiversPercentagesHistory = np.array([ReceiversPercentages])
+PopulationProportionsHistory = np.array([PopulationProportions])
 ExpectedUtilityHistorySenders = np.array([ExpectedUtilitiesSenders])
 ExpectedUtilityHistoryReceivers = np.array([ExpectedUtilitiesHearers])
 
@@ -301,10 +294,10 @@ for i in xrange(1, rounds):
             for k in xrange(NPopulations)]  # prob receiver plays act (row) given message (column)
     for j in xrange(NPopulations):
         if SubPopulationInteraction == 'strong':
-            PoSender = np.dot(PoT[j], np.sum(SendersPercentages[k] * PSigma[k]
+            PoSender = np.dot(PoT[j], np.sum(PopulationProportions[k] * PSigma[k]
                                              for k in xrange(NPopulations)))  # P_o(m|t_o)
             ExpUS = np.array([
-                [np.sum([PoT[j][to, ta] * np.sum(ReceiversPercentages[k] * PRho[k][m, tr] * Utility[ta, tr]
+                [np.sum([PoT[j][to, ta] * np.sum(PopulationProportions[k] * PRho[k][m, tr] * Utility[ta, tr]
                                                  for k in xrange(NPopulations)
                                                  for tr in xrange(NStates))
                          for ta in xrange(NStates)])
@@ -312,11 +305,11 @@ for i in xrange(1, rounds):
                 for to in xrange(NStates)])
             Speakers[j] = makePDFPerRow(PoSender * ExpUS)
 
-            PoReceiver = np.dot(np.sum(ReceiversPercentages[k] * PRho[k]
+            PoReceiver = np.dot(np.sum(PopulationProportions[k] * PRho[k]
                                        for k in xrange(NPopulations)), SenderConfusions[j])  # P_o(t_o|m)
             ExpUR = np.array([
                 [np.sum(
-                    [SendersPercentages[k] * PSigmaInverse[k][m, ta] * ReceiverConfusions[j][ti, tr] * Utility[ta, tr]
+                    [PopulationProportions[k] * PSigmaInverse[k][m, ta] * ReceiverConfusions[j][ti, tr] * Utility[ta, tr]
                      for ta in xrange(NStates)
                      for tr in xrange(NStates)
                      for k in xrange(NPopulations)])
@@ -326,7 +319,7 @@ for i in xrange(1, rounds):
         elif SubPopulationInteraction == 'weak':
             PoSender = np.dot(PoT[j], PSigma[j])  # P_o(m|t_o)
             ExpUS = np.array([
-                [np.sum([PoT[j][to, ta] * np.sum(ReceiversPercentages[k] * PRho[k][m, tr] * Utility[ta, tr]
+                [np.sum([PoT[j][to, ta] * np.sum(PopulationProportions[k] * PRho[k][m, tr] * Utility[ta, tr]
                                                  for k in xrange(NPopulations)
                                                  for tr in xrange(NStates))
                          for ta in xrange(NStates)])
@@ -337,7 +330,7 @@ for i in xrange(1, rounds):
             PoReceiver = np.dot(PRho[j], SenderConfusions[j])  # P_o(t_o|m)
             ExpUR = np.array([
                 [np.sum(
-                    [SendersPercentages[k] * PSigmaInverse[k][m, ta] * ReceiverConfusions[j][ti, tr] * Utility[ta, tr]
+                    [PopulationProportions[k] * PSigmaInverse[k][m, ta] * ReceiverConfusions[j][ti, tr] * Utility[ta, tr]
                      for ta in xrange(NStates)
                      for tr in xrange(NStates)
                      for k in xrange(NPopulations)])
@@ -369,8 +362,8 @@ for i in xrange(1, rounds):
                 % SubPopulationInteraction)
 
     for j in xrange(NPopulations):
-        ExpectedUtilitiesSenders[j] = ExpectedUtilitySpeaker(Speakers[j], Hearers, ReceiversPercentages, Utility)
-        ExpectedUtilitiesHearers[j] = ExpectedUtilityHearer(Speakers, SendersPercentages, Hearers[j], Utility)
+        ExpectedUtilitiesSenders[j] = ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility)
+        ExpectedUtilitiesHearers[j] = ExpectedUtilityHearer(Speakers, PopulationProportions, Hearers[j], Utility)
 
     ExpectedUtilityHistorySenders = np.append(ExpectedUtilityHistorySenders,
                                               [copy.deepcopy(ExpectedUtilitiesSenders)], axis=0)
@@ -379,12 +372,10 @@ for i in xrange(1, rounds):
 
     if i % MetaDynamicsStep == 0:
         for j in xrange(NPopulations):
-            SendersPercentages[j] = SendersPercentages[j] * ExpectedUtilitiesSenders[j] \
-                                    / sum(ExpectedUtilitiesSenders)
-            ReceiversPercentages[j] = ReceiversPercentages[j] * ExpectedUtilitiesHearers[j] \
-                                      / sum(ExpectedUtilitiesHearers)
-        SendersPercentages = makePDF(SendersPercentages)
-        ReceiversPercentages = makePDF(ReceiversPercentages)
+            PopulationProportions[j] = PopulationProportions[j] \
+                                       *(ExpectedUtilitiesSenders[j] + ExpectedUtilitiesHearers[j]) \
+                                       / (sum(ExpectedUtilitiesSenders) + sum(ExpectedUtilitiesHearers))
+        PopulationProportions = makePDF(PopulationProportions)
         NewSpeakers = [random.dirichlet([1] * NMessages, NStates) for _ in xrange(NPopulations)]
         NewHearers = [random.dirichlet([1] * NStates, NMessages) for _ in xrange(NPopulations)]
         for j in xrange(NPopulations):
@@ -393,8 +384,7 @@ for i in xrange(1, rounds):
             Hearers[j] = makePDFPerRow((1 - NewPopulationRate) * Hearers[j] +
                                        NewPopulationRate * NewHearers[j])
 
-    SendersPercentagesHistory = np.append(SendersPercentagesHistory, [copy.deepcopy(SendersPercentages)], axis=0)
-    ReceiversPercentagesHistory = np.append(ReceiversPercentagesHistory, [copy.deepcopy(ReceiversPercentages)], axis=0)
+    PopulationProportionsHistory = np.append(PopulationProportionsHistory, [copy.deepcopy(PopulationProportions)], axis=0)
 
     SpeakersConverged = [np.sum(abs(Speakers[j] - SpeakersBefore[j])) < convThreshold for j in xrange(NPopulations)]
     HearersConverged = [np.sum(abs(Hearers[j] - HearersBefore[j])) < convThreshold for j in xrange(NPopulations)]
@@ -409,8 +399,7 @@ for i in xrange(1, rounds):
             'impairment': Impairments[j],
             'sender.converged': SpeakersConverged[j],
             'receiver.converged': HearersConverged[j],
-            'sender.proportion': SendersPercentages[j],
-            'receiver.proportion': ReceiversPercentages[j],
+            'proportion': PopulationProportions[j],
             'sender.eu': ExpectedUtilitiesSenders[j],
             'receiver.eu': ExpectedUtilitiesHearers[j],
             'sender.entropy': NormalizedEntropy(Speakers[j]),
@@ -440,10 +429,10 @@ with open(MeasurementsOutputFilename, 'w') as csvfile:
 
 for i in xrange(NPopulations):
     SpeakerOutputFilename = ResultsDirectory + '/strategies/' + \
-                            SimulationID + '-speaker-' + str(Impairments[i]) + '.csv'
+                            SimulationID + '-speaker.csv'
     np.savetxt(SpeakerOutputFilename, Speakers[i], delimiter=',')
     HearerOutputFilename = ResultsDirectory + '/strategies/' + \
-                           SimulationID + '-hearer-' + str(Impairments[i]) + '.csv'
+                           SimulationID + '-hearer.csv'
     np.savetxt(HearerOutputFilename, Hearers[i], delimiter=',')
 
 # (SpeakerVoronoiness, HearerVoronoiness) = Voronoiness(Hearer, Speaker, Similarity)

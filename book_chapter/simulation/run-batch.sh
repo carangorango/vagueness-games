@@ -14,5 +14,6 @@ do
                 exit
             fi
         done
+        echo
     done
 done
