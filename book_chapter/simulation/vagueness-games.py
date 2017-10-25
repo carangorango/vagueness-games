@@ -429,10 +429,10 @@ with open(MeasurementsOutputFilename, 'w') as csvfile:
 
 for i in xrange(NPopulations):
     SpeakerOutputFilename = ResultsDirectory + '/strategies/' + \
-                            SimulationID + '-speaker.csv'
+                            SimulationID + '-speaker-' + str(Impairments[i]) + '.csv'
     np.savetxt(SpeakerOutputFilename, Speakers[i], delimiter=',')
     HearerOutputFilename = ResultsDirectory + '/strategies/' + \
-                           SimulationID + '-hearer.csv'
+                           SimulationID + '-hearer-' + str(Impairments[i]) + '.csv'
     np.savetxt(HearerOutputFilename, Hearers[i], delimiter=',')
 
 # (SpeakerVoronoiness, HearerVoronoiness) = Voronoiness(Hearer, Speaker, Similarity)
