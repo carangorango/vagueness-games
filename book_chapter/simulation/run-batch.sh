@@ -1,6 +1,16 @@
 #!/bin/bash
 
-for a in "0.0" "0.0 0.05" "0.0 0.05 0.1"
+for n in {1..25}
+do
+    echo -n "  $n "
+    python vagueness-games.py --batch 30 1 0.05 weakest 0.0
+    if [ $? -ne 0 ]; then
+        exit
+    fi
+done
+echo
+
+for a in "0.0 0.05" "0.0 0.05 0.1"
 do
     echo $a
     for b in "strong" "weak" "weakest"
