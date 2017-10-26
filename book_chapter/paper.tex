@@ -1,6 +1,6 @@
 \documentclass[a4paper]{article}
 
-\usepackage[natbib=true,style=authoryear-comp,backend=bibtex`,doi=false,url=false,isbn=false]{biblatex}
+\usepackage[natbib=true,style=authoryear-comp,doi=false,url=false,isbn=false]{biblatex}
 \bibliography{paper}
 
 \usepackage{todonotes}
@@ -531,7 +531,6 @@ One would thus like to say that using a strategy that promotes those characteris
 But in order to be able to say that in the context of the model, we need either a notion of rationality that goes beyond maximization of expected utility, or a notion of expected utility that incorporates other dimensions.
 It is in this sense that these explanations tie in with a notion of bounded ecological rationality.
 
-
 For more complex agents, the story is potentially more nuanced.
 Consider an agent that has awareness that something like a game is being played, some estimate of the potential payoff involved, ability to gauge other players' expected behaviors, and the capacity to think strategically.
 Is it rational for a sender to use a message in a crisp way, splitting the state space as if a strict threshold existed between the use of one term and the other?
@@ -542,92 +541,249 @@ But even in other scenarios, we could again argue that, if we broaden our notion
 A crisp strategy for a particular game would, in most realistic scenarios, take more time to achieve convergence, be less adaptable to changes, less easy to reuse in other similar games, and less able to foster cooperation with a bigger group of agents.
 Though potentially a locally rational choice, it might thus not be globally optimal.
 
-We believe these considerations are, again, very much in line with Wittgenstein's later philosophy:
-\begin{quote}
-The more closely we examine actual language, the greater becomes the conflict between it and our requirement.
-(For the crystalline purity of logic was, of course, not something I had discovered: it was a requirement.)
-The conflict becomes intolerable; the requirement is now in danger of becoming vacuous.
-– We have got on to slippery ice where there is no friction, and so, in a certain sense, the conditions are ideal; but also, just because of that, we are unable to walk.
-We want to walk: so we need friction.
-Back to the rough ground!%
-~\parencite*[\S 107]{wittgenstein_philosophical_1953}
-\end{quote}
-This seems like a very clear call for what we are arguing here.
-But are we exposing ourselves to ``philosophical disease'' by following a ``one-sided diet''~\parencite*[\S 593]{wittgenstein_philosophical_1953} when looking only at sim-max games?
-In the spirit of Wittgenstein's pluralistic picture of language, we would like to reflect on vagueness in one more type of signaling game and speculate on the impact of plurality for vagueness.
+In order to explore these considerations further, in the remainder of the paper we propose three variations of a multi-population model of imprecise imitation dynamics.
+The idea is to investigate how populations with different levels of imprecision interact, and to what extent does the hypothesized temporary advantage of faster convergence helps vagueness to thrive in such an environment.
+
+%We believe these considerations are, again, very much in line with Wittgenstein's later philosophy:
+%\begin{quote}
+%The more closely we examine actual language, the greater becomes the conflict between it and our requirement.
+%(For the crystalline purity of logic was, of course, not something I had discovered: it was a requirement.)
+%The conflict becomes intolerable; the requirement is now in danger of becoming vacuous.
+%– We have got on to slippery ice where there is no friction, and so, in a certain sense, the conditions are ideal; but also, just because of that, we are unable to walk.
+%We want to walk: so we need friction.
+%Back to the rough ground!%
+%~\parencite*[\S 107]{wittgenstein_philosophical_1953}
+%\end{quote}
+%This seems like a very clear call for what we are arguing here.
+%But are we exposing ourselves to ``philosophical disease'' by following a ``one-sided diet''~\parencite*[\S 593]{wittgenstein_philosophical_1953} when looking only at sim-max games?
+%In the spirit of Wittgenstein's pluralistic picture of language, we would like to reflect on vagueness in one more type of signaling game and speculate on the impact of plurality for vagueness.
 
 
-\section{Vagueness in multiple reference games}
-\label{sec:referential-vagueness}
+%\section{Vagueness in multiple reference games}
+%\label{sec:referential-vagueness}
+%
+%The type of linguistic interaction captured by a sim-max game has its own particular scope.
+%There is a fixed prior, a fixed utility function and a fixed similarity measure between states.
+%If the sender observes a state $t$ and the receiver guesses state $t'$ the utility of that interaction is proportional to the similarity between $t$ and $t'$.
+%Here is a natural example of a situation captured by a sim-max model: Kiki wants Bubu to draw her dissertation cover in a particular shade of blue; the closer Bubu's color choice matches Kiki's idea, the better. Here Kiki wants to \emph{describe} the color for Bubu to pick out or realize from the whole set of possibilities.
+%It's a natural thing to want to do with language.
+%But other types of communication with vague and contiguously variable properties are possible.
+%A \emph{reference game} is a model of a situation in which the speaker has a particular object in mind and uses a description in order for the receiver to pick this object and no other object.
+%One crucial difference with sim-max games is that close will not be close enough: if Kiki needs a long nail, a nail a little longer or shorter may be good enough; but if Bubu needs the long, slightly bend nail with the flat top (which she previously disassembled from her art installation), no other nail will do.
+%
+%Interestingly, referential communication can take place under a plethora of different epistemic conditions.
+%A lot of modeling work considers \emph{reference games without displacement} where sender and receiver communicate about a context, i.e. a set of objects, which is immediately accessible in their direct perceptual environment \parencite[\emph{e.g.}][]{BaronchelliGong2010:Modeling-the-Em,Franke2012:Scales-Salience,Franke2012:On-Scales-Salie}.
+%Agents may make mistakes about observing exactly how blue or long etc.~a particular object is, but there is no further fundamental uncertainty about the context.
+%This, of course, need not be so. \textcite{lipman_why_2009} and \textcite{Deemter2009:Utility-and-Lan}, for example, consider \emph{reference games with displacement}.
+%Kiki asks Bubu to fetch the red book from the library.
+%No other book than the one Kiki needs will serve.
+%When Kiki describes the book, the perceptual context in which Bubu must make her choice is not co-present to Kiki at the time of speaking.
+%Yet other situations are imaginable.
+%In \emph{reference games with partial uncertainty}, for instance, interlocutors may know that they have shared and immediate access only to a subset of the objects in the context, but be uncertain about whether the co-player sees any other objects.
+%This is the set-up for the widely-used director task in psycholinguistics \parencite[\emph{e.g.}][]{KraussGlucksberg1977:Social-and-nons,Keysar2000,KeyzarLin2003:Limits-on-Theor}.
+%
+%What would a rational agent do in repeated reference games?
+%Take a universe in which agents play repeated reference games without displacement.
+%A single game has sender and receiver both flawlessly perceive a context of $k$ objects (with $k$ possibly randomly drawn for each encounter); each object has its individual features, e.g., drawn from a rich multidimensional feature space of continuously variable properties \parencite[\emph{e.g.}][]{Franke2012:Scales-Salience,Franke2012:On-Scales-Salie}.
+%The sender chooses a message $m$ for the target object $t$, but she can condition her choice on the current context $c$.
+%Likewise, the receiver chooses a referent $t'$ from the available objects in $c$, again conditional on $c$.
+%But if agents play many such reference games with different contexts $c$ and $c'$, strategic and instrumental rationality of local choices in $c$ and $c'$ is not enough to guarantee that agents' beliefs and behavior in $c$ have any relation to their beliefs and behavior in $c'$.
+%An agent could use a certain signal to denote, say, the tallest object in every context with between five and twelve objects or when the number of objects is a prime number, but use the same signal for the darkest object in all other contexts.
+%In other words, neither rationality of choice in a fixed context nor evolutionary adaptation to each single context entails a natural, globally consistent behavior across multiple contexts.
+%The situation only gets worse if we want to have agents use the same expressions in a consistent way also across different types of reference games, with possibly different epistemic conditions.
+%
+%The picture just sketched neglects learning from observation, as well as generalization across contexts.
+%For strategic and instrumentally rational agents, we need to consider also the ability to learn from previous experience and to generalize from the past to the future.
+%For evolutionary adaptation, the story so far misses the key fact that languages and practices have to be learnable in appropriate time from the actual observables, lest what is learned and further transmitted will simply be a different language or practice \parencite[\emph{e.g.}][]{KirbyGriffith2014:Iterated-Learni}.
+%But even if every language learner in history had been perfectly rational, it is extremely unlikely, as was discussed in the previous section, that anyone ever succeeded in reducing all uncertainty about language use and say with confidence: this is the threshold that truly separates heaps from non-heaps no matter what.
+%For one, there may simply not be enough time in the lifespan of a rational learner to observe enough instances of language use for certainty about crisp denotations.
+%For another, what needs to be learned likely changes over time.
+%The optimal use for gradable properties hinges crucially on the prior over states \parencite[\emph{e.g.}][]{Franke2012:Scales-Salience,Franke2012:On-Scales-Salie,QingFranke2014:Gradable-Adject,LassiterGoodman2015:Adjectival-vagu}.
+%If the prior captures real world attributes, such as the probability of an individual's body height, these attributes will not only be hard to know for certain, but they will also vary over time.
+%They may also depend on location: do we use our language exclusively in this village (where all heaps are extraordinarily small and people are extraordinarily tall) or do we travel beyond?
+%If so, the priors that determine the goodness of a convention for one agent need not be the same as those for another.
+%Going beyond the priors for property degrees, the probability of seeing a particular context $c$ in some kind of reference game, is also crucial for determining globally efficient linguistic behavior.
+%But here it is even more inconceivable how a rational learner could acquire a fairly confident estimate over how often the upcoming reference games will have a particular context or another.
+%The list of sources of natural and seemingly insurmountable uncertainty about the parameters necessary to determine locally or globally optimal strategies is much longer than hinted at here.
+%Still, it should be clear enough that a finite existence, a sparse learning input and the inherent fuzziness of the linguistic context itself (its temporal, local and social variability) is not a fault of rationality on the part of the agent, or the mechanism of selection of successful linguistic practices.
+%
+%What about meaning and vagueness in a universe of multiple language games and heavy uncertainty?
+%We do not play only one language game in our existence; there is a plurality of them and which one an agent is engaged in at a particular moment is never clearly identified, neither are the exact benefits one might take out of it by choosing a certain behavior over another.
+%These are furthermore not fixed in time; old language games fall out of fashion or stop being useful, and new ones emerge all the time~\parencite[\S 23]{wittgenstein_philosophical_1953}.
+%We could look for meaning at several levels in this pluralistic picture.
+%Firstly, as before, there is the actual behavior of a single agent in each actualized language game.
+%As mentioned above in connection the soft-max choice function used by \textcite{franke_vagueness_2011}, behavior that strictly maximizes expected utility under uncertainty may be resource heavy, so it might be compatible with local strategic rationality that agents' production choices are stochastic.
+%% \mf{mention ``bounded rationality'' here}
+%Secondly, if we look at behavior across many game types and contexts, there is also the level of an agent's internal theory of how words and phrases are likely to be used (or even normatively: how messages should be used), conditional on a given context.
+%Notice that a single agent's rational beliefs about linguistic practices or linguistic meaning may well have to reflect the actual stochasticity: under natural assumptions about information loss, the best belief for prediction matches the actual distribution in the real world \parencite[\emph{e.g.}][]{VehtariOjanen2012:A-survey-of-Bay}.
+%In sum, both at the level of behavior and at the level of beliefs about use or meaning, we should expect to find vagueness.
+%Still, despite the natural vagueness, there does not seem to be anything fundamentally missing or conceptually incoherent in a naturalistic, rationality- or optimality-driven explanation of what each agent is doing or what each agent beliefs about language, use and meaning.
+%
+%% Finally, we might be interested in a notion of meaning of language as an abstraction over their users and its use.
+%% We might not care about individual agents' behavior and beliefs as much as we care about the meaning of words, expressions and sentences.
+%% The questions to address then are probably: what explanatory purpose is a notion of meaning of an abstracted language to play?; if both agents' rational behavior and rational beliefs are plausibly fuzzy, why should a concept of supervening meaning be crisp?; what can be explained only by a notion of meaning that is not vague?
+%% \mf{I leave this paragraph in for you to read and ponder, but would recommend to leave it out entirely}
+%
+%Taken together, when we look at the picture of multiple language games side by side, the question of what rational or optimal behavior is in any one of them, or the question of why human language users do not more closely approximate instrumentally rational or optimal local behavior more closely seem entirely misplaced.
+%What seems more pressing is to answer how the interaction of individual learning, individual local optimization and general pressure for successful communication at a cross-situational level lead to the shaping of linguistic practices in an open-ended landscape of language games.
+%How to attain locally sub-optimal play in a single language game is not a theoretical puzzle we should take serious, if what really matters is a global multi-game perspective.
+%Adopting this perspective does not \emph{solve} the problem of how vagueness is compatible with rationality.
+%But it suggest that it might be an inflated issue that we need not or should not worry about, because it will likely not matter in a more realistic and encompassing picture of language, its use and evolution as driven by an appropriate notion of rational choice and evolutionary selection.
 
-The type of linguistic interaction captured by a sim-max game has its own particular scope.
-There is a fixed prior, a fixed utility function and a fixed similarity measure between states. 
-If the sender observes a state $t$ and the receiver guesses state $t'$ the utility of that interaction is proportional to the similarity between $t$ and $t'$.
-Here is a natural example of a situation captured by a sim-max model: Kiki wants Bubu to draw her dissertation cover in a particular shade of blue; the closer Bubu's color choice matches Kiki's idea, the better. Here Kiki wants to \emph{describe} the color for Bubu to pick out or realize from the whole set of possibilities. 
-It's a natural thing to want to do with language. 
-But other types of communication with vague and contiguously variable properties are possible. 
-A \emph{reference game} is a model of a situation in which the speaker has a particular object in mind and uses a description in order for the receiver to pick this object and no other object. 
-One crucial difference with sim-max games is that close will not be close enough: if Kiki needs a long nail, a nail a little longer or shorter may be good enough; but if Bubu needs the long, slightly bend nail with the flat top (which she previously disassembled from her art installation), no other nail will do. 
 
-Interestingly, referential communication can take place under a plethora of different epistemic conditions. 
-A lot of modeling work considers \emph{reference games without displacement} where sender and receiver communicate about a context, i.e. a set of objects, which is immediately accessible in their direct perceptual environment \parencite[\emph{e.g.}][]{BaronchelliGong2010:Modeling-the-Em,Franke2012:Scales-Salience,Franke2012:On-Scales-Salie}.
-Agents may make mistakes about observing exactly how blue or long etc.~a particular object is, but there is no further fundamental uncertainty about the context. 
-This, of course, need not be so. \textcite{lipman_why_2009} and \textcite{Deemter2009:Utility-and-Lan}, for example, consider \emph{reference games with displacement}. 
-Kiki asks Bubu to fetch the red book from the library. 
-No other book than the one Kiki needs will serve. 
-When Kiki describes the book, the perceptual context in which Bubu must make her choice is not co-present to Kiki at the time of speaking. 
-Yet other situations are imaginable. 
-In \emph{reference games with partial uncertainty}, for instance, interlocutors may know that they have shared and immediate access only to a subset of the objects in the context, but be uncertain about whether the co-player sees any other objects. 
-This is the set-up for the widely-used director task in psycholinguistics \parencite[\emph{e.g.}][]{KraussGlucksberg1977:Social-and-nons,Keysar2000,KeyzarLin2003:Limits-on-Theor}.
+\section{Two multi-population models of imprecise imitation}
+\label{sec:multi-population-model}
 
-What would a rational agent do in repeated reference games? 
-Take a universe in which agents play repeated reference games without displacement. 
-A single game has sender and receiver both flawlessly perceive a context of $k$ objects (with $k$ possibly randomly drawn for each encounter); each object has its individual features, e.g., drawn from a rich multidimensional feature space of continuously variable properties \parencite[\emph{e.g.}][]{Franke2012:Scales-Salience,Franke2012:On-Scales-Salie}. 
-The sender chooses a message $m$ for the target object $t$, but she can condition her choice on the current context $c$. 
-Likewise, the receiver chooses a referent $t'$ from the available objects in $c$, again conditional on $c$. 
-But if agents play many such reference games with different contexts $c$ and $c'$, strategic and instrumental rationality of local choices in $c$ and $c'$ is not enough to guarantee that agents' beliefs and behavior in $c$ have any relation to their beliefs and behavior in $c'$. 
-An agent could use a certain signal to denote, say, the tallest object in every context with between five and twelve objects or when the number of objects is a prime number, but use the same signal for the darkest object in all other contexts.
-In other words, neither rationality of choice in a fixed context nor evolutionary adaptation to each single context entails a natural, globally consistent behavior across multiple contexts. 
-The situation only gets worse if we want to have agents use the same expressions in a consistent way also across different types of reference games, with possibly different epistemic conditions. 
+We build upon the model of~\textcite{franke_vagueness_2017} by adding the possibility for more than one population, where each population has its own imprecision parameter.
+The dynamic needs to be adapted to allow different types of interactions between these populations, namely regarding which agents will be imitated, and which agents will be expected to play against.
+Finally, in order to see the impact of the success of different imprecision levels, we add another process of selection.
+Imagine the following: agents are born with varying perceptual abilities (modeled as populations with different imprecision values), they learn a signaling strategy by imitation of other agents (either within or across populations), depending on the success of the strategies they develop, they will be more or less likely to survive and reproduce, thus the proportion of each population will change depending on their fitness compared to other populations.
 
-The picture just sketched neglects learning from observation, as well as generalization across contexts. 
-For strategic and instrumentally rational agents, we need to consider also the ability to learn from previous experience and to generalize from the past to the future. 
-For evolutionary adaptation, the story so far misses the key fact that languages and practices have to be learnable in appropriate time from the actual observables, lest what is learned and further transmitted will simply be a different language or practice \parencite[\emph{e.g.}][]{KirbyGriffith2014:Iterated-Learni}.
-But even if every language learner in history had been perfectly rational, it is extremely unlikely, as was discussed in the previous section, that anyone ever succeeded in reducing all uncertainty about language use and say with confidence: this is the threshold that truly separates heaps from non-heaps no matter what. 
-For one, there may simply not be enough time in the lifespan of a rational learner to observe enough instances of language use for certainty about crisp denotations. 
-For another, what needs to be learned likely changes over time. 
-The optimal use for gradable properties hinges crucially on the prior over states \parencite[\emph{e.g.}][]{Franke2012:Scales-Salience,Franke2012:On-Scales-Salie,QingFranke2014:Gradable-Adject,LassiterGoodman2015:Adjectival-vagu}. 
-If the prior captures real world attributes, such as the probability of an individual's body height, these attributes will not only be hard to know for certain, but they will also vary over time. 
-They may also depend on location: do we use our language exclusively in this village (where all heaps are extraordinarily small and people are extraordinarily tall) or do we travel beyond? 
-If so, the priors that determine the goodness of a convention for one agent need not be the same as those for another. 
-Going beyond the priors for property degrees, the probability of seeing a particular context $c$ in some kind of reference game, is also crucial for determining globally efficient linguistic behavior. 
-But here it is even more inconceivable how a rational learner could acquire a fairly confident estimate over how often the upcoming reference games will have a particular context or another. 
-The list of sources of natural and seemingly insurmountable uncertainty about the parameters necessary to determine locally or globally optimal strategies is much longer than hinted at here. 
-Still, it should be clear enough that a finite existence, a sparse learning input and the inherent fuzziness of the linguistic context itself (its temporal, local and social variability) is not a fault of rationality on the part of the agent, or the mechanism of selection of successful linguistic practices. 
+Let $A$ be the set of imprecision values considered.
+For each value $\alpha \in A$, the proportion of its population is given by $P(\alpha)$ such that $\sum_{\alpha \in A} P(\alpha) = 1$.
+The probability that a given agent with imprecision $\alpha$ (or of type $\alpha$) observes $t_o$ when the actual state is $t_a$ is given by $P_{o}^{\alpha}(t_{o}|t_{a})$.
+If the same agent intends to realize $t_i$, the probability that he actually realizes $t_r$ instead is given by $P_{r}^{\alpha}(t_{r}|t_{i})$.
+Following~\textcite[26]{franke_vagueness_2017}, we can define the following values.
+Probability that $t_a$ is actual if $t_o$ is observed by an agent of type $\alpha$:
+$$
+P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\propto P_{a}(t_{a})P_{o}^{\alpha}(t_{o}|t_{a})
+$$
+Probability that a random sender of type $\alpha$ produces $m$ when the actual state is $t_a$:
+$$
+P_{\sigma}^{\alpha}(m|t_{a})=\sum_{t_{o}}P_{o}^{\alpha}(t_{o}|t_{a})\sigma^{\alpha}(m|t_{o})
+$$
+Probability that the actual state is $t_a$ if a random sender of type $\alpha$ produced $m$:
+$$
+P_{\rho}^{\alpha}(t_{r}|m)=\sum_{t_{i}}P_{r}^{\alpha}(t_{r}|t_{i})\rho^{\alpha}(t_{i}|m)
+$$
+Probability that $t_r$ is realized by a random receiver of type $\alpha$ in response to message $m$:
+$$
+P_{\bar{\sigma}}^{\alpha}(t_{a}|m)\propto P_{a}(t_{a})P_{\sigma}^{\alpha}(m|t_{a})
+$$
 
-What about meaning and vagueness in a universe of multiple language games and heavy uncertainty?
-We do not play only one language game in our existence; there is a plurality of them and which one an agent is engaged in at a particular moment is never clearly identified, neither are the exact benefits one might take out of it by choosing a certain behavior over another.
-These are furthermore not fixed in time; old language games fall out of fashion or stop being useful, and new ones emerge all the time~\parencite[\S 23]{wittgenstein_philosophical_1953}.
-We could look for meaning at several levels in this pluralistic picture. 
-Firstly, as before, there is the actual behavior of a single agent in each actualized language game. 
-As mentioned above in connection the soft-max choice function used by \textcite{franke_vagueness_2011}, behavior that strictly maximizes expected utility under uncertainty may be resource heavy, so it might be compatible with local strategic rationality that agents' production choices are stochastic. 
-% \mf{mention ``bounded rationality'' here}
-Secondly, if we look at behavior across many game types and contexts, there is also the level of an agent's internal theory of how words and phrases are likely to be used (or even normatively: how messages should be used), conditional on a given context. 
-Notice that a single agent's rational beliefs about linguistic practices or linguistic meaning may well have to reflect the actual stochasticity: under natural assumptions about information loss, the best belief for prediction matches the actual distribution in the real world \parencite[\emph{e.g.}][]{VehtariOjanen2012:A-survey-of-Bay}.
-In sum, both at the level of behavior and at the level of beliefs about use or meaning, we should expect to find vagueness.
-Still, despite the natural vagueness, there does not seem to be anything fundamentally missing or conceptually incoherent in a naturalistic, rationality- or optimality-driven explanation of what each agent is doing or what each agent beliefs about language, use and meaning. 
+Given these probabilities, we can compute expected utilities and update probabilities for each type.
+We have a number of possible types of interaction between populations.
 
-% Finally, we might be interested in a notion of meaning of language as an abstraction over their users and its use.
-% We might not care about individual agents' behavior and beliefs as much as we care about the meaning of words, expressions and sentences.
-% The questions to address then are probably: what explanatory purpose is a notion of meaning of an abstracted language to play?; if both agents' rational behavior and rational beliefs are plausibly fuzzy, why should a concept of supervening meaning be crisp?; what can be explained only by a notion of meaning that is not vague?
-% \mf{I leave this paragraph in for you to read and ponder, but would recommend to leave it out entirely}
+\subsection{Tight population interaction}
+\label{sec:tight-interaction-model}
+The first we will consider is a tight one, where each agent plays with, observes, and potentially imitates any other agent, regardless of their type.
+Expected utilities for this case are given, for a sender of type $\alpha$, by:
+$$
+\text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\star})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})\sum_{t_{r}}P_{\rho}^{\alpha^{\prime}}(t_{r}|m)U(t_{a},t_{r})
+$$
+and, for a receiver of type $\alpha$, by:
+$$
+\text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\star})=\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})\sum_{t_{a}}P_{\bar{\sigma}}^{\alpha^{\prime}}(t_{a}|m)\sum_{t_{r}}P_{r}^{\alpha}(t_{r}|t_{i})U(t_{a},t_{r})
+$$
 
-Taken together, when we look at the picture of multiple language games side by side, the question of what rational or optimal behavior is in any one of them, or the question of why human language users do not more closely approximate instrumentally rational or optimal local behavior more closely seem entirely misplaced.
-What seems more pressing is to answer how the interaction of individual learning, individual local optimization and general pressure for successful communication at a cross-situational level lead to the shaping of linguistic practices in an open-ended landscape of language games.
-How to attain locally sub-optimal play in a single language game is not a theoretical puzzle we should take serious, if what really matters is a global multi-game perspective.
-Adopting this perspective does not \emph{solve} the problem of how vagueness is compatible with rationality. 
-But it suggest that it might be an inflated issue that we need not or should not worry about, because it will likely not matter in a more realistic and encompassing picture of language, its use and evolution as driven by an appropriate notion of rational choice and evolutionary selection.
+Furthermore, we can define the probability that a sender of type $\alpha$ observes a randomly sampled agent play message $m$ for observed state $t_o$ as:
+$$
+P_{o}^{\alpha}(m|t_{o})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})P_{\sigma}^{\alpha^{\prime}}(m|t_{a})
+$$
+and the probability that a receiver of type $\alpha$ observes a randomly sampled agent choose interpretation $t_o$ given message $m$ as:
+$$
+P_{o}^{\alpha}(t_{o}|m)=\sum_{t_{r}}P_{o}^{\alpha}(t_{o}|t_{r})\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})P_{\rho}^{\alpha^{\prime}}(t_{r}|m)
+$$
 
+Finally, the update probabilities for a sender strategy of type $\alpha$ at time instant $i+1$ is given by:
+$$
+\sigma_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)EU_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\star})
+$$
+and similarly for a receiver strategy of type $\alpha$ by:
+$$
+\rho_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)EU_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\star})
+$$
+
+The formulations so far cover the evolution of the particular strategies of agents.
+We can think of this as the level of cultural evolution: agents are born with a certain level of imprecision and learn strategies based on the behavior of others.
+Alongside this process, we can imagine another level of selection, where agents die and new agents are born.
+More successful agents will have a higher likelihood of surviving and reproducing, giving rise to more agents with their level of imprecision.
+Levels of imprecision are thus subject to an evolutionary dynamic that is indirectly influenced by the cultural dynamic.
+\todo{genotype vs phenotype?}
+Importantly, only the level of imprecision is passed on to new generations under this dynamic, not the actual strategies developed by the agents at the cultural level.
+
+We model this process by changing the proportion of each type $P(\alpha)$ according to the replicator dynamic.
+A population of type $\alpha$ consists of agents employing both a sender and a receiver strategy, thus the overall fitness of the population must involve the expected utilities of each.
+We could imagine this process happening at a different speed than the cultural process, in which case we could have different time scales.
+For the sake of simplicity, we choose to have them both happen at each time step, but calculate the changes occurring at this level of selection after the other level.
+We define the proportion of type $\alpha$ at time step $i+1$ as:
+$$
+P_{i+1}(\alpha) \propto P_i(\alpha)(EU_{\sigma_{i+1}}^{\alpha}(m,t,\rho_{i}^{\star}) + EU_{\rho_{i+1}}^{\alpha}(t,m,\sigma_{i}^{\star}))
+$$
+In order to additionally account for the fact that strategies are not passed on to new generations, we mix the evolved strategies of a certain type $\sigma^\alpha$ and $\rho^\alpha$ with new random strategies $\tilde{\sigma}$ and $\tilde{\rho}$ according to a parameter $\gamma$ defining the birth rate within the population.
+This can be described, for a certain time step $i+1$, in the following formulas:
+$$
+\sigma_{i+1}^{\alpha}(m|t)=(1 - \gamma)\sigma_{i+1}^{\alpha}(m|t) + \gamma \tilde{\sigma}
+$$
+$$
+\rho_{i+1}^{\alpha}(t|m)=(1 - \gamma)\rho_{i+1}^{\alpha}(t|m) + \gamma \tilde{\rho}
+$$
+
+We performed 25 simulation runs of this model for each of three population scenarios: only one population with $\alpha = 0$ (for reference), two populations with $\alpha \in \{0, 0.05\}$, and three populations with $\alpha \in \{0, 0.05\}$.
+For each scenario, starting proportions $P(\alpha)$ were equal for each value of $\alpha$.
+Given the observations by~\textcite{franke_vagueness_2017} that state space size and tolerance parameter $\beta$ do not result in important qualitative difference, we fixed these values at $n_S = 30$ and $\beta = 0.1$.
+We also used a fixed uniform distribution for the priors and a message space with 2 messages.
+Regarding the duration of the simulations, due to the mixing in of random strategies at each step in order to simulate new individuals being introduced into the population (birth rate was fixed at $\gamma = 0.05$), the convergence criteria is not applicable.
+Therefore, all simulation runs were stopped after 200 iterations.
+
+The first thing to observe from the simulation results is that the population with no imprecision ($\alpha = 0$) always dominated the other populations in every run.
+\begin{figure}
+  \centering
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-example-0-005-strong.png}
+%    \caption{Crisp}
+%    \label{fig:example_stratsA}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-example-0-005-01-strong.png}
+%    \caption{Vague}
+%    \label{fig:example_stratsB}
+  \end{subfigure}
+  \caption{\todo[inline]{description}}
+  \label{fig:examples-proportion-tight-interaction}
+\end{figure}
+In Figure~\ref{fig:examples-proportion-tight-interaction} we plot the evolution of the proportion of each population in the two-population and three-populations scenario for one example trial.
+There were no qualitative differences across trials.
+As the plot shows, the population with no imprecision steadily increases its proportion against the others.
+In the three population scenario, the proportion of the population with $\alpha = 0.05$ sees a slight increase in the beginning of the simulation, but inexorably starts a downward trend.
+
+These observations go against the expectation of~\textcite{franke_vagueness_2017} that faster convergence to a convex strategy by populations with a certain level of imprecision could give them a temporary advantage to take over and eliminate other types.
+What happens in this setup is nevertheless easy to explain.
+Because the populations interact very tightly, they develop strategies in close tandem with each other.
+One of the consequences of this is that the population with no imprecision reaps some benefits from evolving together with a population with a certain level of imprecision.
+Namely, they reach convexity faster and develop more homogeneous strategies
+\begin{figure}
+  \centering
+  \begin{subfigure}[]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/convex-percentage-all-strong.png}
+%    \caption{Crisp}
+    \label{fig:convexity-tight-interaction}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/entropy-sender-all-strong.png}
+%    \caption{Vague}
+    \label{fig:entropy-sender-tight-interaction}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/entropy-receiver-all-strong.png}
+%    \caption{Vague}
+    \label{fig:entropy-receiver-tight-interaction}
+  \end{subfigure}
+  \caption{\todo[inline]{description}}
+  \label{fig:metrics-tight-interaction}
+\end{figure}
+We can see the effect on convexity by looking to Figure~\ref{fig:convexity-tight-interaction} where we plot, for each scenario, the percentage of strategies that are convex at a given iteration, including the scenario with a population with no imprecision evolving on its own.
+These effects preclude the hypothesized temporary advantage to even manifest itself.
+
+The flipside of this tight connection between populations is that strategies evolved by populations with no imprecision are also more vague (in the sense defined in Section~\ref{sec:sim-max-vagueness}).
+This is visible by looking at entropy values, namely sender strategy entropy, plotted in Figure~\ref{fig:entropy-sender-tight-interaction}, and receiver strategy entropy, plotted in Figure~\ref{fig:entropy-receiver-tight-interaction}.
+The values for the population with no imprecision are clearly higher in the scenarios where it evolves together with populations with imprecision than in the scenario where it evolves on its own.
+Given the trends in population proportions, one expects this to eventually be eliminated when the population with no imprecision finally takes over the others, but it is interesting to observe that while populations with vague strategies persist, the population with no imprecision takes much longer to evolve a crisp strategy.
+
+Given the tight interaction between populations precluding the manifestation of temporary advantages of vagueness, we decided to test a variation of the model where populations interact more loosely.
 
 \section{Conclusion}
 \label{sec:conclusion}
