@@ -1,0 +1,110 @@
+library(tidyverse)
+
+read.data <- function() {
+    measurement_data <<- tibble()
+    for (fname in dir('.', pattern = '*.csv')) {
+        x <- read_csv(fname)
+        x$sender.converged <- parse_logical(toupper(x$sender.converged))
+        x$receiver.converged <- parse_logical(toupper(x$receiver.converged))
+        x$file <- fname
+        x$populations <- as.character(summarise(x, paste(unique(impairment), collapse='/')))
+        x$number.of.populations <- as.integer(summarise(x, length(unique(impairment))))
+        measurement_data <<- rbind(measurement_data, x)
+    }
+    measurement_data$sim.id <<- as.integer(factor(measurement_data$file))
+}
+
+plot.proportion <- function(population.scenario, interaction.type, simulation.id=NULL) {
+    dt <- filter(measurement_data, populations == population.scenario, interaction == interaction.type)
+    if (!is.null(simulation.id)) {
+        dt <- filter(dt, sim.id == simulation.id)
+    }
+    p <- ggplot(dt, aes(x=iteration, y=proportion)) +
+        geom_line(aes(linetype=factor(impairment))) +
+        labs(x=expression(i), y=expression(P(alpha)), linetype=expression(alpha))
+    if (is.null(simulation.id)) {
+        p <- p + facet_grid(. ~ sim.id) +
+            scale_x_continuous(breaks=c(100,200)) + theme(axis.text.x = element_text(angle=45))
+    }
+    return(p)
+}
+
+plot.convex.percentage <- function(interaction.type) {
+    dt <- filter(measurement_data, interaction == interaction.type | populations == '0', impairment == 0)
+    p <- ggplot(dt, aes(x=iteration)) +
+        stat_summary(fun.y='mean', geom='line', aes(y=sender.convex, linetype=factor(populations))) +
+        labs(x=expression(i), y='Convex percentage', linetype='Scenario') + theme_bw()
+    return(p)
+}
+
+plot.sender.entropy <- function(interaction.type) {
+    dt <- filter(measurement_data, interaction == interaction.type | populations == '0', impairment == 0)
+    p <- ggplot(dt, aes(x=iteration)) +
+        # geom_point(alpha=0.1) +
+        stat_summary(fun.y='mean', geom='line', aes(y=sender.entropy, linetype=factor(populations))) +
+        labs(x=expression(i), y=expression(E(sigma^alpha)), linetype='Scenario') + theme_bw()
+    return(p)
+}
+
+plot.receiver.entropy <- function(interaction.type) {
+    dt <- filter(measurement_data, interaction == interaction.type | populations == '0', impairment == 0)
+    p <- ggplot(dt, aes(x=iteration)) +
+        # geom_point(alpha=0.1) +
+        stat_summary(fun.y='mean', geom='line', aes(y=receiver.entropy, linetype=factor(populations))) +
+        labs(x=expression(i), y=expression(E(rho^alpha)), linetype='Scenario') + theme_bw()
+    return(p)
+}
+
+plot.total.entropy <- function(interaction.type) {
+    dt <- filter(measurement_data, interaction == interaction.type | populations == '0')
+    p <- ggplot(dt, aes(x=iteration)) +
+        # geom_point(alpha=0.1) +
+        stat_summary(fun.y='mean', geom='line', aes(y=sender.entropy + receiver.entropy, linetype=factor(impairment), color=factor(populations))) +
+        labs(x=expression(i), y=expression(E(sigma^alpha)+E(rho^alpha)), linetype=expression(alpha), color='Scenario')
+    return(p)
+}
+
+plot.language <- function(simulation.id, impairment) {
+    message.names <- c('m1','m2')
+    sigma <- read_csv(paste0('strategies/', simulation.id, '-speaker-', impairment, '.csv'), col_names = message.names)
+    nstates <- nrow(sigma)
+    state.names <- paste0('t', as.character(0:29/29))
+    sigma <- add_column(sigma, State = state.names)
+    sigma <- gather(sigma, 'Message', 'Sender', 1:2)
+
+    rho <- read_csv(paste0('strategies/', simulation.id, '-hearer-', impairment, '.csv'), col_names = state.names)
+    rho <- add_column(rho, Message = message.names)
+    rho <- gather(rho, 'State', 'Receiver', 1:nstates)
+
+    lang <- full_join(sigma, rho, by=c('State', 'Message'))
+    lang <- gather(lang, 'Role', 'Probability', 3:4)
+    lang$State <- as.double(substring(lang$State, 2))
+    lang$Role <- factor(lang$Role, levels=c('Sender','Receiver'))
+    ggplot(lang, aes(x=State, y=Probability, linetype=Message)) + 
+        geom_line() +
+        facet_grid(Role ~ ., scales = 'free_y') +
+        theme_bw() + theme(legend.position="none") + labs(y=NULL)
+}
+
+plot.eu.cases <- function(interaction.type, population.scenario) {
+    dt <- filter(measurement_data, interaction == interaction.type, populations == population.scenario)
+    p <- ggplot(dt, aes(x=iteration)) +
+        geom_line(aes(y=sender.eu+receiver.eu, linetype=factor(impairment))) +
+        facet_grid(file ~ .) +
+        labs(x=expression(i), y=expression(EU(sigma^alpha)+EU(rho^alpha)), linetype=expression(alpha), color='Scenario')
+    return(p)
+}
+
+plot.eu.mean <- function(interaction.type, population.scenario=NULL) {
+    if (is.null(population.scenario)) {
+        dt <- filter(measurement_data, interaction == interaction.type | populations == '0')
+        p <- stat_summary(fun.y='mean', geom='line', aes(y=sender.eu+receiver.eu, linetype=factor(impairment), color=factor(populations)))
+    } else {
+        dt <- filter(measurement_data, interaction == interaction.type, populations == population.scenario)
+        p <- stat_summary(fun.y='mean', geom='line', aes(y=sender.eu+receiver.eu, linetype=factor(impairment)))
+    }
+    p <- ggplot(dt, aes(x=iteration)) + p +
+        labs(x=expression(i), y=expression(EU(sigma^alpha)+EU(rho^alpha)), linetype=expression(alpha), color='Scenario')
+    return(p)
+}
+

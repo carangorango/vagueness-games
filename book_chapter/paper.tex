@@ -130,7 +130,7 @@ Instrumental rationality is close to a notion of rational choice that is used in
 A more in-depth discussion of the opposition in the context of theoretical economics can be found, for example, in the work of Herbert A.~Simon~\parencite*[\emph{e.g.}][]{simon_rationality_1986}%
 \footnote{Simon uses the term substantive instead of instrumental rationality, but the characterization is basically the same~\parencite[210-212]{simon_rationality_1986}.}%
 .
-%Concretely, for a (finite) set of acts $A$, a (finite) set of world states $T$ with prior probability $P \in \Delta(T)$ and a utility function $u \colon A \times T \rightarrow \mathbb{R}$, choice of action $a$ is rational only if the expected utility $EU(a) = \sum_{t\in T} P(t) \, u(a,t)$ of $a$ is at least as high as that of any other $a' \in A$.\todo{Brings in a particular model too soon}
+%Concretely, for a (finite) set of acts $A$, a (finite) set of world states $T$ with prior probability $P \in \Delta(T)$ and a utility function $u \colon A \times T \rightarrow \mathbb{R}$, choice of action $a$ is rational only if the expected utility $\text{EU}(a) = \sum_{t\in T} P(t) \, u(a,t)$ of $a$ is at least as high as that of any other $a' \in A$.\todo{Brings in a particular model too soon}
 % The dichotomy between procedural and instrumental views of rationality is not an exclusive one, since usually both means and ends are taking into account, but it helps us describe where the emphasis is placed on.
 
 When developing models where rationality is relevant, be it constructing a logical system or setting up a formal game, the assumed epistemic relation between agents and their environment can come to bear on considerations of rationality.
@@ -225,10 +225,10 @@ A sender strategy is a specification of a choice of message for each possible st
 It thus describes the sender's behavior conditional on the state of affairs that obtains.
 A receiver strategy analogously specifies a choice of action for each possible message.
 Thus, formally, what the sender chooses is a function $\sigma : T \rightarrow M$ and the receiver a function $\rho : M \rightarrow A$.
-The expected utility $EU$ of a strategy can be calculated using the utility function and aggregating payoffs for all pairings of states of affairs and actions, weighted by the probability of each state. Concretely, the expected utility of $\sigma$ given $\rho$ is $EU_S(\sigma \mid \rho) = \sum_{t \in T} P(t) \ U_S(t, \rho(\sigma(t)))$ and the expected utility of $\rho$ given $\sigma$ is $EU_S(\rho \mid \sigma) = \sum_{t \in T} P(t) \ U_R(t, \rho(\sigma(t)))$.
+The expected utility $\text{EU}$ of a strategy can be calculated using the utility function and aggregating payoffs for all pairings of states of affairs and actions, weighted by the probability of each state. Concretely, the expected utility of $\sigma$ given $\rho$ is $\text{EU}_S(\sigma \mid \rho) = \sum_{t \in T} P(t) \ U_S(t, \rho(\sigma(t)))$ and the expected utility of $\rho$ given $\sigma$ is $\text{EU}_S(\rho \mid \sigma) = \sum_{t \in T} P(t) \ U_R(t, \rho(\sigma(t)))$.
 The expected u %, \emph{i.e.}:
 % $$
-% EU(\sigma, \rho) = \sum_{t \in T} U(t, \rho(\sigma(t)))
+% \text{EU}(\sigma, \rho) = \sum_{t \in T} U(t, \rho(\sigma(t)))
 % $$
 As an example, consider a game with $T = \lbrace t_1, t_2 \rbrace$, $M = \lbrace m_1, m_2 \rbrace$, $A = \lbrace a_1, a_2 \rbrace$, and the following utility matrix:
 \begin{center}
@@ -472,7 +472,7 @@ However, \citeauthor{lawry_vagueness_2017} give us something that holds even if 
 Whether the scenario of multiple senders is representative of the language games where vagueness comes about, and whether the strategies proposed by the authors would be the ones to evolve\footnote{The authors' analysis is a static one. Despite the advantage of the proposed vague strategies against strict ones in certain settings, one cannot know whether other strategies of higher accuracy would not be possible in those same settings without studying some dynamics in an evolutionary context.}, is something that is, however, open for debate.
 
 
-\section{How could language not be vague?}
+\section{The ecology of vagueness}
 \label{sec:finite-experience}
 
 Arguments of the kind presented by Lipman~\parencite*{lipman_why_2009}, that a vague language is suboptimal compared to a crisp one, work under a number of various assumptions.
@@ -541,7 +541,7 @@ But even in other scenarios, we could again argue that, if we broaden our notion
 A crisp strategy for a particular game would, in most realistic scenarios, take more time to achieve convergence, be less adaptable to changes, less easy to reuse in other similar games, and less able to foster cooperation with a bigger group of agents.
 Though potentially a locally rational choice, it might thus not be globally optimal.
 
-In order to explore these considerations further, in the remainder of the paper we propose three variations of a multi-population model of imprecise imitation dynamics.
+In order to explore these considerations further, in the remainder of the paper we propose two variations of a multi-population model of imprecise imitation dynamics.
 The idea is to investigate how populations with different levels of imprecision interact, and to what extent does the hypothesized temporary advantage of faster convergence helps vagueness to thrive in such an environment.
 
 %We believe these considerations are, again, very much in line with Wittgenstein's later philosophy:
@@ -687,11 +687,11 @@ $$
 
 Finally, the update probabilities for a sender strategy of type $\alpha$ at time instant $i+1$ is given by:
 $$
-\sigma_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)EU_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\star})
+\sigma_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)\text{EU}_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\star})
 $$
 and similarly for a receiver strategy of type $\alpha$ by:
 $$
-\rho_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)EU_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\star})
+\rho_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)\text{EU}_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\star})
 $$
 
 The formulations so far cover the evolution of the particular strategies of agents.
@@ -699,7 +699,7 @@ We can think of this as the level of cultural evolution: agents are born with a 
 Alongside this process, we can imagine another level of selection, where agents die and new agents are born.
 More successful agents will have a higher likelihood of surviving and reproducing, giving rise to more agents with their level of imprecision.
 Levels of imprecision are thus subject to an evolutionary dynamic that is indirectly influenced by the cultural dynamic.
-\todo{genotype vs phenotype?}
+%\todo{genotype vs phenotype?}
 Importantly, only the level of imprecision is passed on to new generations under this dynamic, not the actual strategies developed by the agents at the cultural level.
 
 We model this process by changing the proportion of each type $P(\alpha)$ according to the replicator dynamic.
@@ -708,7 +708,7 @@ We could imagine this process happening at a different speed than the cultural p
 For the sake of simplicity, we choose to have them both happen at each time step, but calculate the changes occurring at this level of selection after the other level.
 We define the proportion of type $\alpha$ at time step $i+1$ as:
 $$
-P_{i+1}(\alpha) \propto P_i(\alpha)(EU_{\sigma_{i+1}}^{\alpha}(m,t,\rho_{i}^{\star}) + EU_{\rho_{i+1}}^{\alpha}(t,m,\sigma_{i}^{\star}))
+P_{i+1}(\alpha) \propto P_i(\alpha)(\text{EU}_{\sigma_{i+1}}^{\alpha}(m,t,\rho_{i}^{\star}) + \text{EU}_{\rho_{i+1}}^{\alpha}(t,m,\sigma_{i}^{\star}))
 $$
 In order to additionally account for the fact that strategies are not passed on to new generations, we mix the evolved strategies of a certain type $\sigma^\alpha$ and $\rho^\alpha$ with new random strategies $\tilde{\sigma}$ and $\tilde{\rho}$ according to a parameter $\gamma$ defining the birth rate within the population.
 This can be described, for a certain time step $i+1$, in the following formulas:
@@ -729,54 +729,54 @@ Therefore, all simulation runs were stopped after 200 iterations.
 The first thing to observe from the simulation results is that the population with no imprecision ($\alpha = 0$) always dominated the other populations in every run.
 \begin{figure}
   \centering
-  \begin{subfigure}[]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-example-0-005-strong.png}
-%    \caption{Crisp}
-%    \label{fig:example_stratsA}
+  \begin{subfigure}[]{\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-strong.png}
+    \caption{Two populations scenario.}
+    \label{fig:proportion-cases-two-tight-interaction}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-example-0-005-01-strong.png}
-%    \caption{Vague}
-%    \label{fig:example_stratsB}
+  \begin{subfigure}[]{\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-01-strong.png}
+    \caption{Three populations scenario.}
+    \label{fig:proportion-cases-three-tight-interaction}
   \end{subfigure}
-  \caption{\todo[inline]{description}}
-  \label{fig:examples-proportion-tight-interaction}
+  \caption{Evolution of population proportions through time for each simulation trial of the tight interaction model.}
+  \label{fig:proportion-cases-tight-interaction}
 \end{figure}
-In Figure~\ref{fig:examples-proportion-tight-interaction} we plot the evolution of the proportion of each population in the two-population and three-populations scenario for one example trial.
-There were no qualitative differences across trials.
-As the plot shows, the population with no imprecision steadily increases its proportion against the others.
+In Figure~\ref{fig:proportion-cases-tight-interaction} we plot the evolution of the proportion of each population in the two-population and three-populations scenario for all trials.
+As the plot shows, for every trial, the population with no imprecision steadily increases its proportion against the others.
 In the three population scenario, the proportion of the population with $\alpha = 0.05$ sees a slight increase in the beginning of the simulation, but inexorably starts a downward trend.
 
 These observations go against the expectation of~\textcite{franke_vagueness_2017} that faster convergence to a convex strategy by populations with a certain level of imprecision could give them a temporary advantage to take over and eliminate other types.
-What happens in this setup is nevertheless easy to explain.
-Because the populations interact very tightly, they develop strategies in close tandem with each other.
-One of the consequences of this is that the population with no imprecision reaps some benefits from evolving together with a population with a certain level of imprecision.
-Namely, they reach convexity faster and develop more homogeneous strategies
+The reason for this is interesting in itself.
+What happens is that, because of the tight interaction between populations, the strategies of each type evolve in close tandem with each other.
+One of the consequences of this is that the population with no imprecision reaches convexity faster and develops more homogeneous strategies because of the interaction with the populations with imprecision.
+We can see the effect on convexity by looking into the percentage of trials with convex sender strategies at a given iteration, for each scenario, and comparing the three scenarios: population with no imprecision evolving alone, two populations ($\alpha \in \{0, 0.05\}$), and three populations ($\alpha \in \{0, 0.05, 0.1\}$).
 \begin{figure}
   \centering
-  \begin{subfigure}[]{0.3\textwidth}
+  \begin{subfigure}[]{0.32\textwidth}
     \includegraphics[width=\textwidth]{simulation/results/round-3/plots/convex-percentage-all-strong.png}
-%    \caption{Crisp}
+    \caption{Percentage of convex sender strategies.}
     \label{fig:convexity-tight-interaction}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[]{0.3\textwidth}
+  \begin{subfigure}[]{0.32\textwidth}
     \includegraphics[width=\textwidth]{simulation/results/round-3/plots/entropy-sender-all-strong.png}
-%    \caption{Vague}
+    \caption{Mean entropy of sender strategies.}
     \label{fig:entropy-sender-tight-interaction}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[]{0.3\textwidth}
+  \begin{subfigure}[]{0.32\textwidth}
     \includegraphics[width=\textwidth]{simulation/results/round-3/plots/entropy-receiver-all-strong.png}
-%    \caption{Vague}
+    \caption{Mean entropy of receiver strategies.}
     \label{fig:entropy-receiver-tight-interaction}
   \end{subfigure}
-  \caption{\todo[inline]{description}}
+  \caption{Development of some metrics through time for the $\alpha = 0$ population in each of three scenarios: evolving alone (`0'), with an $\alpha = 0.05$ population (`0/0.05'), and with an additional $\alpha = 0.1$ population (`0/0.05/0.1').}
   \label{fig:metrics-tight-interaction}
 \end{figure}
-We can see the effect on convexity by looking to Figure~\ref{fig:convexity-tight-interaction} where we plot, for each scenario, the percentage of strategies that are convex at a given iteration, including the scenario with a population with no imprecision evolving on its own.
-These effects preclude the hypothesized temporary advantage to even manifest itself.
+This is plotted in Figure~\ref{fig:convexity-tight-interaction}.
+What we see is more trials reaching convexity earlier for the multi-population scenarios when compared with the single-poulation scenario.
+This effect precludes the hypothesized temporary advantage of imprecision to even manifest itself, but it can be seen as a positive influence on the population with no imprecision.
 
 The flipside of this tight connection between populations is that strategies evolved by populations with no imprecision are also more vague (in the sense defined in Section~\ref{sec:sim-max-vagueness}).
 This is visible by looking at entropy values, namely sender strategy entropy, plotted in Figure~\ref{fig:entropy-sender-tight-interaction}, and receiver strategy entropy, plotted in Figure~\ref{fig:entropy-receiver-tight-interaction}.
@@ -785,9 +785,81 @@ Given the trends in population proportions, one expects this to eventually be el
 
 Given the tight interaction between populations precluding the manifestation of temporary advantages of vagueness, we decided to test a variation of the model where populations interact more loosely.
 
+\subsection{Loose population interaction}
+\label{sec:loose-interaction-model}
+In order to model a different type of interaction between populations in our multi-population model, we need to make changes to some formulations.
+Any formula that is not redefined in this section should be assumed to be the same as used for the model in Section~\ref{sec:tight-interaction-model}.
+The dynamic we want to model here is one where agents of a certain type $\alpha$ imitate and learn only from other agents of the same type.
+First, if agents learn only within their population, the imitation dynamic needs to consider only the expected utility against agents of that population.
+We thus define the following expected utilities for a sender of type $\alpha$:
+$$
+\text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\alpha})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\sum_{t_{r}}P_{\rho}^{\alpha}(t_{r}|m)U(t_{a},t_{r})
+$$
+and for a receiver of type $\alpha$:
+$$
+\text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\alpha})=\sum_{t_{a}}P_{\bar{\sigma}}^{\alpha}(t_{a}|m)\sum_{t_{r}}P_{r}^{\alpha}(t_{r}|t_{i})U(t_{a},t_{r})
+$$
+The main difference is that these expected utilities are not calculated against all populations ($\sigma^\star$ and $\rho^\star$) but only against the agent's own type.
+
+We can redefine the probability that a sender of type $\alpha$ observes a randomly sampled agent play message $m$ for observed state $t_o$ as:
+$$
+P_{o}^{\alpha}(m|t_{o})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})P_{\sigma}^{\alpha}(m|t_{a})
+$$
+and the probability that a receiver of type $\alpha$ observes a randomly sampled agent choose interpretation $t_o$ given message $m$ as:
+$$
+P_{o}^{\alpha}(t_{o}|m)=\sum_{t_{r}}P_{o}^{\alpha}(t_{o}|t_{r})P_{\rho}^{\alpha}(t_{r}|m)
+$$
+Again, the main difference is that agents make observations within their own population, so to model a randomly sampled agent one needs only to take into account the same type.
+
+Update probabilities for a sender strategy of type $\alpha$ at time instant $i+1$ is then given by:
+$$
+\sigma_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)\text{EU}_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\alpha})
+$$
+and similarly for a receiver strategy of type $\alpha$ by:
+$$
+\rho_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)\text{EU}_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\alpha})
+$$
+
+The selection process between different populations still follows the same motivation: agents of a certain type that evolve successful strategies (with respect to other types) will be more likely to survive and reproduce, benifitting the proportion of their population.
+The formulation of the dynamic of the proportion of each type $P(\alpha)$ thus stays the same.
+In order to avoid confusion, we want to stress that this means that these calculations thus still rely on the calculation of expected utilities across populations (\emph{i.e.}~$\text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\star})$ and $\text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\star})$) and not the newly introduced $\text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\alpha})$ and $\text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\alpha})$.
+
+We ran the same number of simulation trials under the same conditions as for the model with tight population interaction.
+\begin{figure}
+  \centering
+  \begin{subfigure}[]{\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-weakest.png}
+    \caption{Two populations scenario.}
+    \label{fig:proportion-cases-two-loose-interaction}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[]{\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-01-weakest.png}
+    \caption{Three populations scenario.}
+    \label{fig:proportion-cases-three-loose-interaction}
+  \end{subfigure}
+  \caption{Evolution of population proportions through time for each simulation trial of the loose interaction model.}
+  \label{fig:proportion-cases-loose-interaction}
+\end{figure}
+In Figure~\ref{fig:proportion-cases-loose-interaction} we plot the evolution of population proportions for all trials of the multi-population scenarios.
+The first thing to observe is that proportions evolve faster than in the model with tight interaction.
+Whereas in the latter no given population ever reached much more than 70\% proportion, in this model we see that many trials resulted in the one population fully dominating the others.
+In the two-population scenario, some population reached 99\% proportion in 24 out of 25 trials.
+In the three-population scenario, this happened in 18 out of 25 trials.
+Given that strategies no longer develop in close tandem with each other, differences in expected utility can be more salient resulting in some population reaching a more clear advantage than the other.
+
+More interestingly for our investigation, some trials actually resulted in a population with some degree of imprecision dominating the others.
+For the two-population scenario, $\alpha = 0.05$ fully reached 100\% proportion in 8 trials, a point from which it is technically impossible for the other population to recover.
+In most cases the dominating population gains its ground from the start, but in 5 cases we see a temporary advantage of $\alpha = 0.05$ that is then lost to the other population.
+In one interesting trial (85), $\alpha = 0.05$ reached 99.87\% only to then start losing ground to $\alpha = 0$.
+For the three population scenario, $\alpha = 0.05$ fully reached 100\% proportion in only 1 trial and $\alpha = 0.1$ never reached more than 59\%.
+In 5 other trials we see a positive trend for $\alpha = 0.05$, but given the reversals that sometimes occur (\emph{e.g.}~trial 171), one cannot be sure whether full dominance would be achieved if the simulation was left to run for longer time.
+
+
+
 \section{Conclusion}
 \label{sec:conclusion}
-
+\todo[inline]{Extend/Rewrite}
 We tried to show that, if we pragmatically acknowledge the complex and dynamic environment that surrounds language learning and use, we find many plausible sources of uncertainty that can lead to vague signal use.
 We supported this claim by giving an overview of recent research that tries to accommodate for vagueness in the context of sim-max games, and by discussing, in more general terms, how these considerations are relevant for reference games, and in the broader context of language as a multiplicity of language-games.
 Furthermore, we argued that if we broaden our notion of rationality beyond mere maximization of expected utility, we also find reasons to welcome the positive aspects of these processes and to see their acceptance as a perfectly rational choice.
