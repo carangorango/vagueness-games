@@ -490,11 +490,11 @@ He is assumed also to have a well-organized and stable system of preferences, an
 %This ``economic man'', a game-omniscient and highly strategic, instrumentally rational agent, seems to have survived almost unscathed to now populate most game theoretic models of language and signaling.
 Both Simon and Lipman call for this picture to be revised, and this is what the proposals surveyed here all do.
 In order to account for vagueness in natural language in the context of these models, they peel away from this idealized picture and bring some of these assumptions down to earth.
-In the process, they point to ways in which we, as language learners and language users, are finite beings finding ways to cope with a highly complex and dynamic world:
+In the process, they point to ways in which we, as language learners and language users, are finite beings finding ways to cope with a highly complex and dynamic environment:
 \begin{enumerate}
-\item Our existence is temporally finite; language does not have an infinite amount of time to evolve, nor can it take an infinite time to be learned. The faster a language can start being useful, the better.
-\item Language learning through experience has to rely on a limited number of observations. Not only is the state space typically much larger than what one can survey in sufficient time, it is even potentially infinite and constantly changing.
-\item A corollary of the former is that there will always be heterogeneity in a population of language learners, at the very least in their prior experience, since each agent will have relied on a different set of observations. Furthermore, this information is not directly or fully accessible to others.
+\item Our existence is temporally finite; language does not have an infinite amount of time to evolve, nor can it take an infinite time to be learned. The faster a language can start being useful, the better;
+\item Language learning through experience has to rely on a limited number of observations. Not only is the state space typically much larger than what one can survey in sufficient time, it is even potentially infinite and constantly changing;
+\item A corollary of the former is that there will always be heterogeneity in a population of language learners, at the very least in their prior experience, since each agent will have relied on a different set of observations. Furthermore, this information is not directly or fully accessible to others;
 \item Given that an agent is almost always learning and using language in a population of other agents, there are also various potential sources of linguistic input the agent is constantly integrating in his practice.
 \end{enumerate}
 All of these observations support the weakening of the modeling assumptions.
@@ -660,17 +660,18 @@ Using this model, we can better see under which conditions the hypothesized adva
 
 \section{Two multi-population models of imprecise imitation}
 \label{sec:multi-population-model}
+We build upon the model of~\textcite{franke_vagueness_2017}, adding to the imprecise imitation dynamics the support for multiple populations, with different imprecision parameters, evolving together.
+In order to do this, first we consider that each population evolves according to the imprecise imitation dynamics.
+However, we want to model populations that are able to interact with each other.
+Therefore, the dynamic needs to be adapted in order to reflect the fact that agents can hypothetically imitate and play against agents with different imprecision levels.
+Second, in order to see the impact of the success of different imprecision levels, we need to add another process of selection.
+The motivation is as follows: agents are born with varying perceptual abilities (modeled as populations with different imprecision values), they learn a signaling strategy by imitation of other agents (either within or across populations), depending on the success of the strategies they develop, they will be more or less likely to survive and reproduce, thus the proportion of each population changes depending on its fitness compared to other populations.
 
-We build upon the model of~\textcite{franke_vagueness_2017} by adding the possibility for more than one population, where each population has its own imprecision parameter.
-The dynamic needs to be adapted to allow different types of interactions between these populations, namely regarding which agents will be imitated, and which agents will be expected to play against.
-Finally, in order to see the impact of the success of different imprecision levels, we add another process of selection.
-Imagine the following: agents are born with varying perceptual abilities (modeled as populations with different imprecision values), they learn a signaling strategy by imitation of other agents (either within or across populations), depending on the success of the strategies they develop, they will be more or less likely to survive and reproduce, thus the proportion of each population will change depending on their fitness compared to other populations.
-
-Let $A$ be the set of imprecision values considered.
-For each value $\alpha \in A$, the proportion of its population is given by $P(\alpha)$ such that $\sum_{\alpha \in A} P(\alpha) = 1$.
+Formally, let $A$ be the set of imprecision values considered.
+For each value $\alpha \in A$, the proportion of its population is given by $P(\alpha)$, such that $\sum_{\alpha \in A} P(\alpha) = 1$.
 The probability that a given agent with imprecision $\alpha$ (or of type $\alpha$) observes $t_o$ when the actual state is $t_a$ is given by $P_{o}^{\alpha}(t_{o}|t_{a})$.
 If the same agent intends to realize $t_i$, the probability that he actually realizes $t_r$ instead is given by $P_{r}^{\alpha}(t_{r}|t_{i})$.
-Following~\textcite[26]{franke_vagueness_2017}, we can define the following values.
+Following~\textcite[26]{franke_vagueness_2017}, we can then define the following values.
 Probability that $t_a$ is actual if $t_o$ is observed by an agent of type $\alpha$:
 $$
 P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\propto P_{a}(t_{a})P_{o}^{\alpha}(t_{o}|t_{a})
@@ -681,29 +682,35 @@ P_{\sigma}^{\alpha}(m|t_{a})=\sum_{t_{o}}P_{o}^{\alpha}(t_{o}|t_{a})\sigma^{\alp
 $$
 Probability that the actual state is $t_a$ if a random sender of type $\alpha$ produced $m$:
 $$
-P_{\rho}^{\alpha}(t_{r}|m)=\sum_{t_{i}}P_{r}^{\alpha}(t_{r}|t_{i})\rho^{\alpha}(t_{i}|m)
+P_{\bar{\sigma}}^{\alpha}(t_{a}|m)\propto P_{a}(t_{a})P_{\sigma}^{\alpha}(m|t_{a})
 $$
 Probability that $t_r$ is realized by a random receiver of type $\alpha$ in response to message $m$:
 $$
-P_{\bar{\sigma}}^{\alpha}(t_{a}|m)\propto P_{a}(t_{a})P_{\sigma}^{\alpha}(m|t_{a})
+P_{\rho}^{\alpha}(t_{r}|m)=\sum_{t_{i}}P_{r}^{\alpha}(t_{r}|t_{i})\rho^{\alpha}(t_{i}|m)
 $$
-
-Given these probabilities, we can compute expected utilities and update probabilities for each type.
-We have a number of possible types of interaction between populations.
+These formulations are merely parameterized versions of the single-population model.
+They encapsulate calculations that we can then use to compute expected utilities and update probabilities for each type.
+The latter depend on the types of interaction that we imagine occurring between populations.
+In the following sections, we consider two different types.
 
 \subsection{Tight population interaction}
 \label{sec:tight-interaction-model}
-The first we will consider is a tight one, where each agent plays with, observes, and potentially imitates any other agent, regardless of their type.
-Expected utilities for this case are given, for a sender of type $\alpha$, by:
+In a multi-population model with tight interaction between populations, each agent plays with, observes, and potentially imitates any other agent, regardless of their type.
+This has an impact on the expected utilities of sender and receiver strategies of each type, and on the update probabilities for those strategies.
+Let's start with the expected utilities.
+For a sender of type $\alpha$, the expected utility of its strategy $\sigma^\alpha$ against all other receiver strategies $\rho^\star$, is given by:
 $$
 \text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\star})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})\sum_{t_{r}}P_{\rho}^{\alpha^{\prime}}(t_{r}|m)U(t_{a},t_{r})
 $$
-and, for a receiver of type $\alpha$, by:
+and, for a receiver of type $\alpha$, the expected utility of its strategy $\rho^\alpha$ against all other senderstrategies $\sigma^\star$, is given by:
 $$
 \text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\star})=\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})\sum_{t_{a}}P_{\bar{\sigma}}^{\alpha^{\prime}}(t_{a}|m)\sum_{t_{r}}P_{r}^{\alpha}(t_{r}|t_{i})U(t_{a},t_{r})
 $$
+Expected utilities thus take into account the existence of strategies of other types, and weigh the relevance of each type $\alpha^\prime$ according to its relative proportion $P(\alpha^\prime)$.
 
-Furthermore, we can define the probability that a sender of type $\alpha$ observes a randomly sampled agent play message $m$ for observed state $t_o$ as:
+Another important value to calculate has to do with the types which agents observe and imitate.
+In a model with tight interaction, we imagine that this occurring across populations.
+Therefore, we can define the probability that a sender of type $\alpha$ observes a randomly sampled agent play message $m$ for observed state $t_o$ as:
 $$
 P_{o}^{\alpha}(m|t_{o})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})P_{\sigma}^{\alpha^{\prime}}(m|t_{a})
 $$
@@ -711,8 +718,9 @@ and the probability that a receiver of type $\alpha$ observes a randomly sampled
 $$
 P_{o}^{\alpha}(t_{o}|m)=\sum_{t_{r}}P_{o}^{\alpha}(t_{o}|t_{r})\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})P_{\rho}^{\alpha^{\prime}}(t_{r}|m)
 $$
+Thus, these calculation also incorporate the probabilities that the imitating agent might observe the behavior of an agent of another type $\alpha^\prime$, weighed by its relative proportion.
 
-Finally, the update probabilities for a sender strategy of type $\alpha$ at time instant $i+1$ is given by:
+Finally, the update probabilities for a sender strategy of type $\alpha$ at time instant $i+1$ are given by:
 $$
 \sigma_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)\text{EU}_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\star})
 $$
@@ -721,18 +729,17 @@ $$
 \rho_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)\text{EU}_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\star})
 $$
 
-The formulations so far cover the evolution of the particular strategies of agents.
+These formulations cover the evolution of the particular strategies of each type.
 We can think of this as the level of cultural evolution: agents are born with a certain level of imprecision and learn strategies based on the behavior of others.
 Alongside this process, we can imagine another level of selection, where agents die and new agents are born.
-More successful agents will have a higher likelihood of surviving and reproducing, giving rise to more agents with their level of imprecision.
+More successful agents have a higher likelihood of surviving and reproducing, giving rise to more agents with their level of imprecision.
 Levels of imprecision are thus subject to an evolutionary dynamic that is indirectly influenced by the cultural dynamic.
-%\todo{genotype vs phenotype?}
 Importantly, only the level of imprecision is passed on to new generations under this dynamic, not the actual strategies developed by the agents at the cultural level.
 
 We model this process by changing the proportion of each type $P(\alpha)$ according to the replicator dynamic.
-A population of type $\alpha$ consists of agents employing both a sender and a receiver strategy, thus the overall fitness of the population must involve the expected utilities of each.
+A population of type $\alpha$ consists of agents employing both a sender and a receiver strategy, thus the overall fitness of the population must include the expected utilities of both.
 We could imagine this process happening at a different speed than the cultural process, in which case we could have different time scales.
-For the sake of simplicity, we choose to have them both happen at each time step, but calculate the changes occurring at this level of selection after the other level.
+For the sake of simplicity, we choose to have them both happen at each time step, but calculate the changes occurring at this level of selection after the calculation for the other level.
 We define the proportion of type $\alpha$ at time step $i+1$ as:
 $$
 P_{i+1}(\alpha) \propto P_i(\alpha)(\text{EU}_{\sigma_{i+1}}^{\alpha}(m,t,\rho_{i}^{\star}) + \text{EU}_{\rho_{i+1}}^{\alpha}(t,m,\sigma_{i}^{\star}))
