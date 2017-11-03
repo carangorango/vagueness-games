@@ -18,7 +18,7 @@
 
 \begin{document}
 
-\title{Natural sources of vagueness and their implications}
+\title{Towards an ecology of vagueness}
 \author{Jos\'e Pedro Correia \and Michael Franke}
 \date{}
 
@@ -27,9 +27,11 @@
 \begin{abstract}
 A vexing puzzle about vagueness, rationality and evolution runs, in crude abbreviation, as follows: vague language use is demonstrably suboptimal if the goal is efficient precise and cooperative information transmission; hence rational deliberation or evolutionary selection should, under this assumed goal, eradicate vagueness from language use.
 Since vagueness is persistent in all human languages, something has to give.
-In this paper, we investigate a number of reasons why and mechanisms how vagueness may come into the picture in formal models of rational or evolutionary optimal signaling.
-We show how uncertainty about not only the linguistic practices of others, but also about the world itself can lead to vagueness.
-We explore the consequences of these reasons and mechanisms for a notion of meaning and a notion of rationality.
+In this paper, we focus on this problem in the context of signaling games.
+We provide an overview of a number of proposed reasons why and mechanisms how vagueness may come into the picture in formal models of rational or evolutionary signaling.
+Most of them argue that vague signal use is simply the best we can get, given certain factors.
+Despite the plausibility of the proposals, we argue that a deeper understanding of the benefits of vagueness needs a more ecological perspective, namely one that goes beyond local optimization of signaling strategies of a homogeneous population.
+As an example of one possible way to expand upon our current models, we propose two variants of a novel multi-population dynamic of imprecise imitation where, under certain conditions, populations with a certain level of imprecision dominate over precise ones.
 \end{abstract}
 
 \tableofcontents
@@ -49,20 +51,35 @@ It is easy to find more examples of predicates based on more finely grained prop
 Mereological nihilists argue that instances of the sorites can be designed for any material object that can be decomposed into small enough parts.
 If we subscribe to the scientific picture of matter as composed of molecules and atoms, this applies to tables and chairs, cats and mats, and any other ordinary thing~\parencite{Unger1979}.
 Bertrand Russell famously argued~\parencite*{russell_vagueness_1923} that all words, including ``the words of pure logic'', are vague when used by human beings.
-The problem thus seems to be a wide-ranging one, but it does not obviously undermine our everyday linguistic practices.
+If we think of language as governed by logical rules, and of rationality as the ability to follow those rules, the sorites paradox seems \emph{prima facie} to show that vagueness in our language can undermine our rationality.
+
+But we can think of language in different terms.
+A possibility is to think of signs as tools agents use to coordinate actions.
+An example of a way to formally study language along those lines is by using the framework of signaling games~\parencite{lewis_convention_1969}.
+In such a context, rationality becomes the ability to choose the use of signs that is optimal to achieve the desired coordination.
+%So what about vagueness?
+However, in the context of these game-theoretic approaches to language, vagueness presents a new challenge.
+Barton Lipman~\parencite*{lipman_why_2009} gives a detailed account of the problem.
+Very succinctly, it can be put as follows.
+In standard game-theoretic models of communication, vague signal use yields a lower expected utility than crisp use.
+Therefore, given that the dynamics (be it natural selection, cultural evolution, or rational choice) maximize utility, vagueness should be weeded out by these forces, giving rise to only precise languages.
+Thus it would be irrational to stick to vague language use when we could (theoretically) switch to a better system.
+But as we said before, vagueness is pervasive in our natural languages, and there is no reason to believe it is going away.
+The problem seems to be a theoretically serious one, but it does not obviously undermine our everyday linguistic practices.
 Most of the time we seem to communicate just fine.
 Therefore, the issue must lie with the conceptions we have of the forces or mechanisms that underlie those practices.
+Lipman concludes that ``we cannot explain the prevalence of vague terms in natural language without a model of bounded rationality which is significantly different from anything in the existing literature''~\parencite*[1]{lipman_why_2009}.
 
-Vagueness is typically seen as a challenge to a classical conception of language that relies on reference and truth as two core notions for understanding meaning.
-One problem is that vague predicates seem to lack precise boundaries; if that is the case, how can words like `tall' stand in correspondence to something like a well defined set of tall people?
-And if we cannot know exactly whether a certain person is `tall' or not, as with borderline cases, how are we to determine the truth value of sentences that involve statements of tallness regarding these borderline cases?
-Supervaluationism, many-valued logics, and degree theories all propose changes to the classical picture in order to accommodate for vague predicates.
-They are, however, still strongly committed to its two core notions.
-As argued by Mark Sainsbury~\parencite*{sainsbury_concepts_1999}, because of that they fail to address an important characteristic of vague predicates: \emph{higher order vagueness}.
-All the aforementioned proposals end up being committed to new artificial demarcating boundaries (\emph{e.g.}~true-under-all-precisifications versus neither true nor false versus false-under-all-precisifications, true versus indefinite versus false, true to degree 1 versus true to degree 0 versus the rest).
-But a vague predicate not only fails to demarcate between the cases where it clearly applies and the ones where it clearly doesn't, it also fails to establish a boundary between the cases where it clearly applies and the borderline cases, as well as between the borderline cases and the cases where it clearly doesn't apply.
-Further introducing borderline borderline cases would lead to an infinite regress.
-Because of their attachment to the classical picture, the standard approaches to vagueness also fail to draw an important lesson from the sorites paradox, namely that ``we do not know, cannot know, and do not need to know these supposed boundaries to use language correctly''~\parencite*[256]{sainsbury_concepts_1999}.
+%Vagueness is typically seen as a challenge to a classical conception of language that relies on reference and truth as two core notions for understanding meaning.
+%One problem is that vague predicates seem to lack precise boundaries; if that is the case, how can words like `tall' stand in correspondence to something like a well defined set of tall people?
+%And if we cannot know exactly whether a certain person is `tall' or not, as with borderline cases, how are we to determine the truth value of sentences that involve statements of tallness regarding these borderline cases?
+%Supervaluationism, many-valued logics, and degree theories all propose changes to the classical picture in order to accommodate for vague predicates.
+%They are, however, still strongly committed to its two core notions.
+%As argued by Mark Sainsbury~\parencite*{sainsbury_concepts_1999}, because of that they fail to address an important characteristic of vague predicates: \emph{higher order vagueness}.
+%All the aforementioned proposals end up being committed to new artificial demarcating boundaries (\emph{e.g.}~true-under-all-precisifications versus neither true nor false versus false-under-all-precisifications, true versus indefinite versus false, true to degree 1 versus true to degree 0 versus the rest).
+%But a vague predicate not only fails to demarcate between the cases where it clearly applies and the ones where it clearly doesn't, it also fails to establish a boundary between the cases where it clearly applies and the borderline cases, as well as between the borderline cases and the cases where it clearly doesn't apply.
+%Further introducing borderline borderline cases would lead to an infinite regress.
+%Because of their attachment to the classical picture, the standard approaches to vagueness also fail to draw an important lesson from the sorites paradox, namely that ``we do not know, cannot know, and do not need to know these supposed boundaries to use language correctly''~\parencite*[256]{sainsbury_concepts_1999}.
 % \begin{quote}
 % But to what in our actual use of language does this division correspond?
 % It looks as if, as before, it should correspond to the sentences true beyond the shadow of vagueness, those in some kind of borderline position, and those false beyond the shadow.
@@ -70,61 +87,56 @@ Because of their attachment to the classical picture, the standard approaches to
 % Hence they cannot be included in a correct description of our language.%
 % ~\parencite[256]{sainsbury_concepts_1999}
 % \end{quote}
-By trying to cling as much as possible to the classical picture of logic and semantics, these standard approaches are ignoring a simple observation: natural language users are sensitive to the sorites paradox, \emph{i.e.}~they are able to recognize the logical inconsistency but do not have a good answer as to how to overcome it.
-Even more importantly, they apparently do not need to solve the inconsistency in order to continue using natural language to achieve their daily goals.
-Nobody ever stopped using the word `tall` after being confronted with a sorites series.
-Why should we develop theories of meaning that are impervious to the paradox?
+%By trying to cling as much as possible to the classical picture of logic and semantics, these standard approaches are ignoring a simple observation: natural language users are sensitive to the sorites paradox, \emph{i.e.}~they are able to recognize the logical inconsistency but do not have a good answer as to how to overcome it.
+%Even more importantly, they apparently do not need to solve the inconsistency in order to continue using natural language to achieve their daily goals.
+%Nobody ever stopped using the word `tall` after being confronted with a sorites series.
+%Why should we develop theories of meaning that are impervious to the paradox?
+%
+%The reluctance to give up truth and logic as valuable notions to explain meaning is perhaps associated with the fear of what would also need to be abandoned as a consequence.
+%One notion that seems to quickly be in peril is that of rationality.
+%In reference to philosophers who defend the desirability of a classical notion of truth, Richard Rorty says:
+%\begin{quote}
+%In the past, such philosophers have typically conjoined the claim that there is universal human agreement on the supreme desirability of truth with two further premises: that truth is correspondence to reality, and that reality has an intrinsic nature (that there is, in Nelson Goodman's terms, a Way the World Is).
+%[\ldots]
+%The rise of relatively democratic, relatively tolerant, societies in the last few hundred years is said to be due to the increased rationality of modern times, where `rationality' denotes the employment of an innate truth-oriented faculty.%
+%~\parencite*[1]{rorty_response_2000-1}
+%\end{quote}
+%By tying all of these notions tightly together, the fear could be that by dropping the picture of meaning as intimately tied to truth and logic we necessarily lose the ground on which rationality stands, and the whole edifice could collapse.
+%Rationality, in this picture, has truth as its guiding light and logic as the means to attain it.
+%Being rational is about following universally valid rules of reasoning that, given the correct inputs, necessarily lead us to the correct conclusions. % (see, for example, Harold Brown~\parencite*[19]{brown_rationality_1990} for a characterization).
+%Although humans are not necessarily consciously aware of the rules, they are considered to be nevertheless unconsciously following them when they act rationally.
+%This type of rationality is one that supposedly demarcates humans from other animals.
 
-The reluctance to give up truth and logic as valuable notions to explain meaning is perhaps associated with the fear of what would also need to be abandoned as a consequence.
-One notion that seems to quickly be in peril is that of rationality.
-In reference to philosophers who defend the desirability of a classical notion of truth, Richard Rorty says:
-\begin{quote}
-In the past, such philosophers have typically conjoined the claim that there is universal human agreement on the supreme desirability of truth with two further premises: that truth is correspondence to reality, and that reality has an intrinsic nature (that there is, in Nelson Goodman's terms, a Way the World Is).
-[\ldots]
-The rise of relatively democratic, relatively tolerant, societies in the last few hundred years is said to be due to the increased rationality of modern times, where `rationality' denotes the employment of an innate truth-oriented faculty.%
-~\parencite*[1]{rorty_response_2000-1}
-\end{quote}
-By tying all of these notions tightly together, the fear could be that by dropping the picture of meaning as intimately tied to truth and logic we necessarily lose the ground on which rationality stands, and the whole edifice could collapse.
-Rationality, in this picture, has truth as its guiding light and logic as the means to attain it.
-Being rational is about following universally valid rules of reasoning that, given the correct inputs, necessarily lead us to the correct conclusions. % (see, for example, Harold Brown~\parencite*[19]{brown_rationality_1990} for a characterization).
-Although humans are not necessarily consciously aware of the rules, they are considered to be nevertheless unconsciously following them when they act rationally.
-This type of rationality is one that supposedly demarcates humans from other animals.
-
-We want to argue here that to say that language does not follow strict logical rules, or that truth is not a useful notion to guide our inquiries into meaning, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore irrational.
-Giving up the ideal of truth and logic as relevant explanatory notions for understanding meaning in natural language does not imply giving up on rationality altogether.
-It also does not necessarily eradicate all hope for a (formal) explication of meaning.
-In order to make this argument, we need a different paradigm of language and meaning.
-But what could such a paradigm even be?
-
-We suggest that inspiration can be drawn from the later work of philosopher Ludwig Wittgenstein%
-\footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (but see~\cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} and Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}.
-His \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953} adumbrate a characterization of language that departs from the classical picture by highlighting its diversity, heterogeneity, and dynamism.
-Language is seen as a patchwork of various language-games, with new ones continuously being added and old ones falling out of use.
-These language-games, in turn, can be thought of as the use of signs in the context of and intermingled with a practice.
-%The metaphor emphasizes a concept of meaning as strongly linked to the use that words or signs are put to.
-There is no meaning in an abstract atemporal world, it is rather created dynamically and in a way that is contingent to the practices we engage in, to the language-games we play.
-The notion of language-game is also used to characterize one of Wittgenstein's methodological tools.
-Following the idea that ``[i]t disperses the fog if we study the phenomena of language in primitive kinds of use in which one can clearly survey the purpose and functioning of the words''~\parencite*[\S 5]{wittgenstein_philosophical_1953}, the method is to set up a language-game as a hypothetical scenario, or thought experiment, where language is used in a certain type of activity, and then reflect on the assumptions that underlie our interpretation of this set-up, as well as on how the scenario would play out according to those assumptions.
-It has been argued~\parencite{correia_bivalent_2013} that the framework of \emph{signaling games}, introduced to the study of meaning by David Lewis~\parencite*{lewis_convention_1969} and later naturalized by Brian Skyrms~\parencite*{skyrms_evolution_1996}, permits us to do exactly that while reaping the benefits of a formalism that enables the in-depth exploration of the implications of complex hypothetical language-games via mathematical analysis or computer simulation.
-From this perspective, creating a signaling game model is like setting up a language-game, only using a formulation that improves perspicuity, and conducting mathematical analysis or computer simulations is like contemplating how the game would play out according to the assumptions built into the model.
+%We want to argue here that to say that language does not follow strict logical rules, or that truth is not a useful notion to guide our inquiries into meaning, is not to say that language is unstructured, meaningless, or unusable; neither is it to say that we, language users, are therefore irrational.
+%Giving up the ideal of truth and logic as relevant explanatory notions for understanding meaning in natural language does not imply giving up on rationality altogether.
+%It also does not necessarily eradicate all hope for a (formal) explication of meaning.
+%In order to make this argument, we need a different paradigm of language and meaning.
+%But what could such a paradigm even be?
+%
+%We suggest that inspiration can be drawn from the later work of philosopher Ludwig Wittgenstein%
+%\footnote{To the extent that substantial views can be said to be defended by the author. Skipping over the debate (but see~\cite{kahane_wittgenstein_2007} for more details), we are here assuming an interpretation of Wittgenstein as a kind of pragmatist, along the lines of the readings of Hilary Putnam~\parencite*{putnam_pragmatism_1994} and Richard Rorty~\parencite*{rorty_wittgenstein_2007}.}.
+%His \emph{Philosophical Investigations}~\parencite*{wittgenstein_philosophical_1953} adumbrate a characterization of language that departs from the classical picture by highlighting its diversity, heterogeneity, and dynamism.
+%Language is seen as a patchwork of various language-games, with new ones continuously being added and old ones falling out of use.
+%These language-games, in turn, can be thought of as the use of signs in the context of and intermingled with a practice.
+%%The metaphor emphasizes a concept of meaning as strongly linked to the use that words or signs are put to.
+%There is no meaning in an abstract atemporal world, it is rather created dynamically and in a way that is contingent to the practices we engage in, to the language-games we play.
+%The notion of language-game is also used to characterize one of Wittgenstein's methodological tools.
+%Following the idea that ``[i]t disperses the fog if we study the phenomena of language in primitive kinds of use in which one can clearly survey the purpose and functioning of the words''~\parencite*[\S 5]{wittgenstein_philosophical_1953}, the method is to set up a language-game as a hypothetical scenario, or thought experiment, where language is used in a certain type of activity, and then reflect on the assumptions that underlie our interpretation of this set-up, as well as on how the scenario would play out according to those assumptions.
+%It has been argued~\parencite{correia_bivalent_2013} that the framework of \emph{signaling games}, introduced to the study of meaning by David Lewis~\parencite*{lewis_convention_1969} and later naturalized by Brian Skyrms~\parencite*{skyrms_evolution_1996}, permits us to do exactly that while reaping the benefits of a formalism that enables the in-depth exploration of the implications of complex hypothetical language-games via mathematical analysis or computer simulation.
+%From this perspective, creating a signaling game model is like setting up a language-game, only using a formulation that improves perspicuity, and conducting mathematical analysis or computer simulations is like contemplating how the game would play out according to the assumptions built into the model.
 
 Following this idea, we here survey proposals for addressing vagueness in the context of signaling games and reflect on their implications for how one thinks of rationality in the context of language use.
-Before we start, we want to establish some vocabulary that will be useful later on.
-%
-%
-%\section{Facets of rationality}
-%\label{sec:facets-rationality}
-%
+But before we start, we need to establish some vocabulary to better frame our discussion.
 Rationality is an elusive notion which is frequently debated in areas like philosophy, psychology, and economics.
 Discussions around it, although touching on different aspects of the concept, often fail to clearly demarcate them.
 We can start by considering what is deemed to be most important when characterizing the rationality of a given choice.
-The aforementioned classical picture of language and meaning is focused on dichotomies like true and false, meaningful and meaningless, correct and incorrect.
+The aforementioned logical picture of language and meaning is focused on dichotomies like true and false, meaningful and meaningless, correct and incorrect.
 A sentence can be true or false only if it is meaningful, and it is meaningful if it is constructed according to correct rules.
 Rationality is intimately connected with the ability to follow good procedures, not only of sentence production, but ultimately of sentence combination and reasoning (think of what is required for making a logically valid deductive inference).
-A \emph{procedural} account of rationality thus focuses on the means, rather than the ends.
+This is what we could call a \emph{procedural} account of rationality, one which focuses more on the means rather than the ends.
 One can also do the opposite and focus on the consequences instead.
 \emph{Instrumental} rationality, as it is typically called, characterizes an agent's choice as rational if it maximizes the possibility of achieving a desired goal, regardless of the means.
-The notion is linked to David Hume~\parencite*{hume_treatise_1738}, epitomized in his assertion that ``Reason is, and ought to only be the slave of the passions.''
+The notion is linked to David Hume~\parencite*{hume_treatise_1738}, epitomized in the following assertion: ``Reason is, and ought to only be the slave of the passions.''
 Instrumental rationality is close to a notion of rational choice that is used in economics and game theory%
 \footnote{In fact, it has been argued~\parencite{vanderschraaf_informal_1998} that Hume's whole account of convention is very closely in line with modern game theory.}%
 : agents are rational if and only if they make decisions that maximize their expected utility.
@@ -137,7 +149,7 @@ A more in-depth discussion of the opposition in the context of theoretical econo
 When developing models where rationality is relevant, be it constructing a logical system or setting up a formal game, the assumed epistemic relation between agents and their environment can come to bear on considerations of rationality.
 Depending on how accurate and complete an agent's knowledge of its environment, the goals to be achieved, the choices or rules available, the relation between those choices and the objectives, etc, the verdict over the rationality of certain choices can vary.
 An \emph{omniscient} agent is one that is in possession of the same information as the modeler, whereas an agent with less than that is said to only have \emph{limited} awareness of the relevant aspects of the model.
-Models working within the classical picture typically do not make a distinction between modeler and agent, thus there is no room to express any epistemic gaps.
+Models working within the logical picture typically do not make a distinction between modeler and agent, thus lacking room to express any epistemic gaps.
 It follows that agents can only be assumed to be omniscient of the details involved.
 By abstracting away from language users, these models cannot represent potential interactions between them, let alone repeated interaction and language change.
 In other types of models, however, a further aspect of rational belief formation needs to be considered, namely the ability of agents to make accurate predictions about how other agents behave.
@@ -146,8 +158,7 @@ We can say that an agent is more or less \emph{strategic} depending on the exten
 Lack of perfect knowledge of the situation or lack of strategicness can be caused by many possible factors.
 These include, but are not limited to, limitations in handling information (receiving, storing, retrieving, transmitting) and limited computational resources to solve complex problems.
 We can talk about \emph{bounded} rationality to characterize the choices of such agents.
-
-
+%
 % \todo[inline]{Following discussion is already drawing conclusions, and is too closely tied to notions that haven't been introduced yet}
 % In many cases, it is simply impossible for an agent to own all decision relevant information.
 % This can happen when an agent has made only a rather small number of observations, e.g., about how a particular word is used.
@@ -156,12 +167,12 @@ We can talk about \emph{bounded} rationality to characterize the choices of such
 % This leads back to procedural rationality, logical inference and inductive learning.
 % It is very hard to say what exactly rational learning is.
 % It is easier to gesture at what it is not: ignoring observational evidence; failing to draw simple and obvious conclusions; failing to make simple and obvious generalizations etc.
-
+%
 %We draw attention to two additional aspects of rationality which will be helpful in the following.
-Where the above definition of instrumental rationality is usually understood as requiring a single choice of act to maximize the expected utility in a single concrete decision situation, we might also be interested in more general choice mechanisms~\parencite[\emph{e.g.}][]{ZollmanSmead2010:Plasticity-and-,HagenChater2012:Decision-Making,FawcettHamblin2013:Exposing-the-be,GaleazziFranke2016:Smart-Transform}.
+Where the above definition of instrumental rationality is usually understood as requiring a single choice to maximize the expected utility in a single concrete decision situation, we might also be interested in more general choice mechanisms~\parencite[\emph{e.g.}][]{ZollmanSmead2010:Plasticity-and-,HagenChater2012:Decision-Making,FawcettHamblin2013:Exposing-the-be,GaleazziFranke2016:Smart-Transform}.
 A choice mechanism is a general way of behaving for an agent involved in a variety of decision situations.
 When considering only a single situation, rationality can only be \emph{local}.
-If we take into account the possibility of the agent's choice or choice mechanism hinging on multiple situations, we can also talk about \emph{global} or \emph{ecological} rationality.
+If we take into account the possibility of the agent's choice or choice mechanism hinging on multiple situations, we can also talk about \emph{global} rationality.
 This can be important because, hypothetically, there could be choice mechanisms that are sub-optimal at a local level (for each situation) but are actually perfectly rational at a global level.
 
 % \todo[inline]{Formalization narrows down the concepts too much}
@@ -178,16 +189,16 @@ This can be important because, hypothetically, there could be choice mechanisms 
 % Some may be easier to learn and apply; some may rely on imprecise but useful generalizations across contexts, others may not.
 
 Note that we consider that, in theory, most combinations of these aspects are possible.
-Although we have been pinning logic to the classical picture, this is only with the most traditional logical systems in mind.
+Although we have been pinning procedural rationality to the logical picture of language, this is only with the most traditional logical systems in mind.
 We are not denying that advances in dynamic, epistemic, fuzzy, paraconsistent, and other types of logic could potentially enable one to capture procedural rationality with different characteristics.
-Game-theoretical models of language can, on the other hand, also assume local instrumental rationality with omniscient highly strategic agents.
+Game-theoretical models of language can, on the other hand, also combine local instrumental rationality with omniscient highly strategic agents.
 Our objective here is not to survey all the possibilities.
 We want to focus on signaling games as a framework for the study of language use and meaning.
 The vocabulary just introduced will, we hope, help inform the discussion that follows.
-\todo[inline]{Review}
 We proceed by introducing the framework of signaling games in Section~\ref{sec:signaling-games}.
 In Section~\ref{sec:sim-max-vagueness} we look into explanations of vagueness in a particular kind of signaling game.
-Section~\ref{sec:finite-experience} reflects on the implications of these explanations for considerations of rationality.
+Section~\ref{sec:ecology-of-vagueness} tries to generalize the considerations of these proposals to argue for a more ecological approach to vagueness.
+We propose and analyse the results of a novel multi-population model of imprecise imitation in Section~\ref{sec:multi-population-model}, and summarize our conclusions in Section~\ref{sec:conclusions}.
 %Section~\ref{sec:referential-vagueness} generalizes our discussion to the natural case where agents play more than one game.
 
 
@@ -300,16 +311,6 @@ More complex signaling problems may have different evolutionary outcomes, someti
 Skyrms~\parencite*{skyrms_signals_2010} gives an overview of different topics studied using signaling games, including expansions of the framework itself (for example, considering other dynamics beyond the replicator equation), exploration of other factors that impact the evolution of signaling (for example, how agents are interconnected), or variations on the signaling problem and its basic assumptions (for example, loosening the alignment of interests in order to provide accounts of deceptive signal use).
 Other uses of signaling games include discussions of categorization~\parencite[\emph{e.g.}][]{jager_language_2007}, compositionality~\parencite[\emph{e.g.}][]{barrett_evolution_2009}, incommensurability~\parencite[\emph{e.g.}][]{barrett_faithful_2010}, just to name a few.
 More recent overviews are given by \textcites{huttegger_how_2014}, \textcite{huttegger_dynamics_2014}, and \citet{FrankeWagner2014:Game-Theory-and}.
-
-%So what about vagueness?
-In the context of game-theoretic approaches to language, vagueness presents a new challenge.
-Barton Lipman~\parencite*{lipman_why_2009} gives a detailed account of the problem.
-Very succinctly, it can be put as follows.
-In standard game-theoretic models of communication, vague signal use yields a lower expected utility than crisp use.
-Therefore, given that the dynamics (be it natural selection, cultural evolution, or rational choice) maximize utility, vagueness should be weeded out by these forces, giving rise to only precise languages.
-However, vagueness is pervasive in our natural languages, and there is no reason to believe it is going away.
-Lipman concludes that ``we cannot explain the prevalence of vague terms in natural language without a model of bounded rationality which is significantly different from anything in the existing literature''~\parencite*[1]{lipman_why_2009}.
-What proposals have been put forward to address this issue?
 
 % One interesting aspect of these signaling systems is that, if we were to observe the repeated interactions of sender and receiver according to those strategies from a bird's eye view, we would be inclined to say that the signals are meaningful.
 % For example, if we consider the latter example, a sender would always send $m_1$ when state of affairs $t_1$ obtains to which the receiver would always respond with action $a_1$ which maximizes both players' payoff.
@@ -475,7 +476,7 @@ Whether the scenario of multiple senders is representative of the language games
 
 
 \section{The ecology of vagueness}
-\label{sec:finite-experience}
+\label{sec:ecology-of-vagueness}
 
 Arguments of the kind presented by Lipman~\parencite*{lipman_why_2009}, that vague signal use is suboptimal when compared to a crisp one, work under a number of various assumptions.
 Part of the picture formed by these assumptions is a highly idealized conception of the agents involved and of the context in which they develop and use signals.
@@ -744,13 +745,15 @@ We define the proportion of type $\alpha$ at time step $i+1$ as:
 $$
 P_{i+1}(\alpha) \propto P_i(\alpha)(\text{EU}_{\sigma_{i+1}}^{\alpha}(m,t,\rho_{i}^{\star}) + \text{EU}_{\rho_{i+1}}^{\alpha}(t,m,\sigma_{i}^{\star}))
 $$
-In order to additionally account for the fact that strategies are not passed on to new generations, we mix the evolved strategies of a certain type $\sigma^\alpha$ and $\rho^\alpha$ with new random strategies $\tilde{\sigma}$ and $\tilde{\rho}$ according to a parameter $\gamma$ defining the birth rate within the population.
-This can be described, for a certain time step $i+1$, in the following formulas:
+In order to additionally account for the fact that strategies are not passed on to new generations, we mix the evolved strategies of a certain type $\sigma^\alpha$ and $\rho^\alpha$ with new random strategies $\tilde{\sigma^\alpha}$ and $\tilde{\rho^\alpha}$ (generated at each time step).
+The idea is that, at each time step, a certain percentage of each population will consist of ``newborn'' agents, \emph{i.e.}~agents that haven't yet had time to evolve their strategies.
+We define a parameter $\gamma$ that quantifies this percentage, or as we can also call it the birth rate, which we consider to be the same for every population.
+This mixing can be described, for a certain time step $i+1$, in the following formulas:
 $$
-\sigma_{i+1}^{\alpha}(m|t)=(1 - \gamma)\sigma_{i+1}^{\alpha}(m|t) + \gamma \tilde{\sigma}
+\sigma_{i+1}^{\alpha}(m|t)=(1 - \gamma)\sigma_{i+1}^{\alpha}(m|t) + \gamma \tilde{\sigma_{i+1}^{\alpha}}
 $$
 $$
-\rho_{i+1}^{\alpha}(t|m)=(1 - \gamma)\rho_{i+1}^{\alpha}(t|m) + \gamma \tilde{\rho}
+\rho_{i+1}^{\alpha}(t|m)=(1 - \gamma)\rho_{i+1}^{\alpha}(t|m) + \gamma \tilde{\rho_{i+1}^{\alpha}}
 $$
 
 We performed 25 simulation runs of this model for each of three population scenarios: only one population with $\alpha = 0$ (for reference), two populations with $\alpha \in \{0, 0.05\}$, and three populations with $\alpha \in \{0, 0.05\}$.
@@ -891,8 +894,8 @@ In 5 other trials we see a positive trend for $\alpha = 0.05$, but given the rev
 
 
 
-\section{Conclusion}
-\label{sec:conclusion}
+\section{Conclusions}
+\label{sec:conclusions}
 \todo[inline]{Extend/Rewrite}
 We tried to show that, if we pragmatically acknowledge the complex and dynamic environment that surrounds language learning and use, we find many plausible sources of uncertainty that can lead to vague signal use.
 We supported this claim by giving an overview of recent research that tries to accommodate for vagueness in the context of sim-max games, and by discussing, in more general terms, how these considerations are relevant for reference games, and in the broader context of language as a multiplicity of language-games.
