@@ -8,6 +8,7 @@ read.data <- function() {
         x$receiver.converged <- parse_logical(toupper(x$receiver.converged))
         x$file <- fname
         x$populations <- as.character(summarise(x, paste(unique(impairment), collapse='/')))
+        x$initial.proportions <- as.character(summarise(filter(x, iteration == 0), paste(proportion, collapse='/')))
         x$number.of.populations <- as.integer(summarise(x, length(unique(impairment))))
         measurement_data <<- rbind(measurement_data, x)
     }
@@ -64,7 +65,11 @@ plot.total.entropy <- function(interaction.type) {
     return(p)
 }
 
-plot.language <- function(simulation.id, impairment) {
+plot.language <- function(sim, impairment) {
+    fname <- unique(filter(measurement_data, sim.id == sim)$file)
+    fname.parts <- strsplit(fname, '-')
+    simulation.id <- paste(fname.parts[[1]][1:3], collapse='-')
+
     message.names <- c('m1','m2')
     sigma <- read_csv(paste0('strategies/', simulation.id, '-speaker-', impairment, '.csv'), col_names = message.names)
     nstates <- nrow(sigma)
@@ -108,3 +113,11 @@ plot.eu.mean <- function(interaction.type, population.scenario=NULL) {
     return(p)
 }
 
+do.stuff <- function() {
+    for (fname in unique(filter(measurement_data, interaction == 'weakest', populations == '0/0.05')$file)) {
+        parts <- strsplit(fname, '-')
+        sim.id <- paste(parts[[1]][1:3], collapse='-')
+        print(plot.language(sim.id, '0.0'))
+        print(plot.language(sim.id, '0.05'))
+    }
+}

@@ -193,13 +193,14 @@ NStates = 30
 PriorDistributionType = 'uniform'
 NMessages = 2
 Dynamics = 'replicator dynamics'
-Impairments = [0.0, 0.05, 0.1]
-NewPopulationRate = 0.0
+Impairments = [0.0, 0.05]
+PopulationProportions = makePDF(np.ones(len(Impairments)))
+NewPopulationRate = 0.05
 Tolerance = 0.1
 convThreshold = 0.001
 rounds = 200
 MetaDynamicsStep = 1
-SubPopulationInteraction = 'weak'
+SubPopulationInteraction = 'weakest'
 
 # # Batch mode
 
@@ -208,7 +209,7 @@ BatchMode = len(sys.argv) > 1
 if BatchMode:
     if len(sys.argv) < 5:
         print "Usage: python", sys.argv[
-            0], "--batch <number of states> <meta dynamics step> <birth rate> <sub-population interaction type> <impairments...>"
+            0], "--batch <number of states> <meta dynamics step> <birth rate> <sub-population interaction type> <<impairment proportion>...>"
         sys.exit(1)
     else:
         NStates = int(sys.argv[2])
@@ -216,13 +217,15 @@ if BatchMode:
         NewPopulationRate = float(sys.argv[4])
         SubPopulationInteraction = sys.argv[5]
         Impairments = []
-        for i in xrange(6, len(sys.argv)):
+        PopulationProportions = []
+        for i in xrange(6, len(sys.argv), 2):
             Impairments.append(float(sys.argv[i]))
+            PopulationProportions.append(float(sys.argv[i+1]))
 
 # # Initialization
 NPopulations = len(Impairments)
 
-PopulationProportions = makePDF(np.ones(NPopulations))
+PopulationProportions = makePDF(PopulationProportions)
 
 PerceptualSpace = np.linspace(0, 1, NStates, endpoint=True)
 if PriorDistributionType == 'uniform':
