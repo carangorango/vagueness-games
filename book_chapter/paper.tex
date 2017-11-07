@@ -534,9 +534,10 @@ Perhaps a deeper understanding of vagueness and the reasons for its pervasivenes
 All the models discussed so far explore evolutionary dynamics for one homogeneous population playing one game.
 Different types of agents and different game setups are considered, but each of these different possible scenarios is always tested separately.
 We see at least two ways in which one could have a more ecological perspective.
-The first is to think about meaning and vagueness in a universe of multiple language games.
-We do not play only one language game in our existence; there is a plurality of them and which one an agent is engaged in at a particular moment is never clearly identified, neither are the exact benefits one might take out of it by choosing a certain behavior over another.
-These are furthermore not fixed in time; old language games fall out of fashion or stop being useful, and new ones emerge all the time~\parencite[\S 23]{wittgenstein_philosophical_1953}.
+The first is to think about meaning and vagueness with a more Wittgensteinian perspective.
+We can see each signaling game as embodying a particular language game.
+In Wittgenstein's picture of language, however, we do not play only one language game in our existence; there is a plurality of them and which one an agent is engaged in at a particular moment is never clearly identified, neither are the exact benefits one might take out of it by choosing a certain behavior over another.
+These are furthermore not fixed in time; old language games fall out of fashion or stop being useful, and new ones emerge all the time~\parencite[see][and in particular \S 23]{wittgenstein_philosophical_1953}.
 We could look for rationality at several levels in this pluralistic picture.
 Firstly, as before, there is the actual behavior of a single agent in each actualized language game.
 As mentioned above in connection the soft-max choice function used by \textcite{franke_vagueness_2011}, behavior that strictly maximizes expected utility under uncertainty may be resource heavy, so it might be compatible with local strategic rationality that agents' production choices are stochastic.
@@ -667,10 +668,21 @@ In order to do this, first we consider that each population evolves according to
 However, we want to model populations that are able to interact with each other.
 Therefore, the dynamic needs to be adapted in order to reflect the fact that agents can hypothetically imitate and play against agents with different imprecision levels.
 Second, in order to see the impact of the success of different imprecision levels, we need to add another process of selection.
-The motivation is as follows: imagine agents who are born with varying perceptual abilities, subsequently learn a signaling strategy by imitation of other agents (either within or across populations), and depending on the success of the strategies they develop are more or less likely to survive and reproduce.
+A possible story to motivate these ideas goes as follows: imagine agents who are born with varying perceptual abilities, subsequently learn a signaling strategy by imitation of other agents (either within or across populations), and depending on the success of the strategies they develop are more or less likely to survive and reproduce.
 In such setup, we change not only each populations particular strategies, but also the proportion of each population depending on its fitness compared to other populations.
 
-Formally, let's define $A$ to be the set of imprecision values considered.
+The motivations behind this model are closely related to the ideas behind the theories of kin selection~\parencite{hamilton_genetical_1964} and multi-level (or group) selection~\parencite{wilson_theory_1975}.
+These theories build upon the hypothesis that selection acts not only to directly favor genes that result in behaviors that benefit individuals, but also to indirectly favor genes that lead to behaviors that benefit either genotypically (kin) or socially (group) related individuals~\parencite[see][for more details]{okasha_evolution_2006}.
+%There are thus two aspects to be considered: for kin selection that would be the direct and indirect effects, and for multi-level selection the within-group and between-group components~\parencite[28--29]{birch_kin_2014}
+In our model there is also a similar structure: there is a process of selection of behavior within each population, levels of imprecision are selected across populations based on the strategies they give rise to.
+We believe there is an important distinction in that the two selection processes in our model act on different entities, the inner shaping signaling behavior, and the outer selecting levels of imprecision.
+In any case, we intend our model to be descriptive rather than causal or explanatory.
+That means that we do not want to commit to seeing populations either as kins or as social groups, and use them as merely descriptive abstractions that allow us to capture the hypothetical impact of indirect selection processes%
+\footnote{We make this note because of the heated debate between the two theories. See~\textcite{kohn_darwin_2008} and~\textcite{kramer_kin_2016} for more details on that.}%
+.
+
+In the following, we lay down the formal details of our model.
+Let's start by defining $A$ to be the set of imprecision values considered.
 For each value $\alpha \in A$, the proportion of its population is given by $P(\alpha)$, such that $\sum_{\alpha \in A} P(\alpha) = 1$.
 The probability that a given agent with imprecision $\alpha$ (or of type $\alpha$) observes $t_o$ when the actual state is $t_a$ is given by $P_{o}^{\alpha}(t_{o}|t_{a})$.
 If the same agent intends to realize $t_i$, the probability that he actually realizes $t_r$ instead is given by $P_{r}^{\alpha}(t_{r}|t_{i})$.
