@@ -1,3 +1,4 @@
+library(likert)
 library(tidyverse)
 
 read.data <- function() {
@@ -15,8 +16,10 @@ read.data <- function() {
     measurement_data$sim.id <<- as.integer(factor(measurement_data$file))
 }
 
-plot.proportion <- function(population.scenario, interaction.type, simulation.id=NULL) {
-    dt <- filter(measurement_data, populations == population.scenario, interaction == interaction.type)
+plot.proportion <- function(interaction.type, population.scenario, simulation.id=NULL) {
+    dt <- filter(measurement_data, 
+                 populations == population.scenario, 
+                 interaction == interaction.type)
     if (!is.null(simulation.id)) {
         dt <- filter(dt, sim.id == simulation.id)
     }
@@ -35,6 +38,16 @@ plot.convex.percentage <- function(interaction.type) {
     p <- ggplot(dt, aes(x=iteration)) +
         stat_summary(fun.y='mean', geom='line', aes(y=sender.convex, linetype=factor(populations))) +
         labs(x=expression(i), y='Convex percentage', linetype='Scenario') + theme_bw()
+    return(p)
+}
+
+plot.convex.cases <- function(interaction.type, population.scenario) {
+    dt <- filter(measurement_data, interaction == interaction.type, populations == population.scenario) %>% 
+        group_by(impairment, sim.id) %>% filter(sender.convex == 1) %>% 
+        summarise(convex.it = first(iteration))
+    p <- ggplot(dt) + geom_point(aes(x=convex.it, y=reverse.levels(factor(sim.id)), shape=factor(impairment))) +
+        scale_shape(solid = FALSE) +
+        labs(x=expression(i), y='Simulation', shape=expression(alpha))
     return(p)
 }
 
@@ -91,11 +104,25 @@ plot.language <- function(sim, impairment) {
         theme_bw() + theme(legend.position="none") + labs(y=NULL)
 }
 
+plot.eu <- function(interaction.type, population.scenario, sim.identificator) {
+    dt <- filter(measurement_data, 
+                 interaction == interaction.type, 
+                 populations == population.scenario,
+                 sim.id == sim.identificator)
+    dt2 <- filter(dt, sender.convex == 1) %>% group_by(impairment) %>% summarise(convex.it = first(iteration))
+    p <- ggplot(dt, aes(x=iteration)) +
+        geom_line(aes(y=sender.eu, linetype=factor(impairment)), color='red') +
+        geom_line(aes(y=receiver.eu, linetype=factor(impairment)), color='green') +
+        geom_vline(data = dt2, mapping = aes(xintercept = convex.it, linetype = factor(impairment))) +
+        labs(x=expression(i), y=expression(EU), linetype=expression(alpha))
+    return(p)
+}
+
 plot.eu.cases <- function(interaction.type, population.scenario) {
     dt <- filter(measurement_data, interaction == interaction.type, populations == population.scenario)
     p <- ggplot(dt, aes(x=iteration)) +
         geom_line(aes(y=sender.eu+receiver.eu, linetype=factor(impairment))) +
-        facet_grid(file ~ .) +
+        facet_grid(. ~ sim.id) +
         labs(x=expression(i), y=expression(EU(sigma^alpha)+EU(rho^alpha)), linetype=expression(alpha), color='Scenario')
     return(p)
 }
@@ -113,11 +140,26 @@ plot.eu.mean <- function(interaction.type, population.scenario=NULL) {
     return(p)
 }
 
-do.stuff <- function() {
-    for (fname in unique(filter(measurement_data, interaction == 'weakest', populations == '0/0.05')$file)) {
-        parts <- strsplit(fname, '-')
-        sim.id <- paste(parts[[1]][1:3], collapse='-')
-        print(plot.language(sim.id, '0.0'))
-        print(plot.language(sim.id, '0.05'))
+show.languages <- function(interaction.type, population.scenario) {
+    dt <- filter(measurement_data, interaction == interaction.type, populations == population.scenario)
+    for (sim.id in unique(dt$sim.id)) {
+        for (impair in unique(dt$impairment)) {
+            imp <- if (impair == 0) '0.0' else as.character(impair)
+            print(plot.language(sim.id, imp) + ggtitle(paste(sim.id, imp)))
+            readline()
+        }
     }
 }
+
+final.proportions <- function(interaction.type, population.scenario) {
+    dt <- filter(measurement_data, interaction == interaction.type, populations == population.scenario) %>%
+        group_by(sim.id, impairment) %>% summarise(final.proportion = last(proportion))
+    return(dt)
+}
+
+initial.eu <- function(interaction.type, population.scenario) {
+    dt <- filter(measurement_data, interaction == interaction.type, populations == population.scenario) %>%
+        group_by(sim.id, impairment) %>% summarise(initial.eu = nth(sender.eu, 2)+nth(sender.eu, 2))
+    return(dt)
+}
+

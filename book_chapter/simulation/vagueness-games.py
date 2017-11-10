@@ -246,8 +246,8 @@ ReceiverConfusions = [
     for x in Impairments
 ]
 
-Speakers = [random.dirichlet([1] * NMessages, NStates) for _ in xrange(NPopulations)]
-Hearers = [random.dirichlet([1] * NStates, NMessages) for _ in xrange(NPopulations)]
+Speakers = [random.dirichlet([1] * NMessages, NStates)] * NPopulations
+Hearers = [random.dirichlet([1] * NStates, NMessages)] * NPopulations
 
 ExpectedUtilitiesSenders = [ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility)
                             for j in xrange(NPopulations)]
@@ -379,8 +379,8 @@ for i in xrange(1, rounds):
                                        *(ExpectedUtilitiesSenders[j] + ExpectedUtilitiesHearers[j]) \
                                        / (sum(ExpectedUtilitiesSenders) + sum(ExpectedUtilitiesHearers))
         PopulationProportions = makePDF(PopulationProportions)
-        NewSpeakers = [random.dirichlet([1] * NMessages, NStates) for _ in xrange(NPopulations)]
-        NewHearers = [random.dirichlet([1] * NStates, NMessages) for _ in xrange(NPopulations)]
+        NewSpeakers = [random.dirichlet([1] * NMessages, NStates)] * NPopulations
+        NewHearers = [random.dirichlet([1] * NStates, NMessages)] * NPopulations
         for j in xrange(NPopulations):
             Speakers[j] = makePDFPerRow((1 - NewPopulationRate) * Speakers[j] +
                                         NewPopulationRate * NewSpeakers[j])
