@@ -684,6 +684,7 @@ That means that we do not want to commit to seeing populations either as kins or
 In the following, we lay down the formal details of our model.
 Let's start by defining $A$ to be the set of imprecision values considered.
 For each value $\alpha \in A$, the proportion of its population is given by $P(\alpha)$, such that $\sum_{\alpha \in A} P(\alpha) = 1$.
+Each population has its own sender and receiver strategies, represented as $\sigma^\alpha$ and $\rho^\alpha$.
 The probability that a given agent with imprecision $\alpha$ (or of type $\alpha$) observes $t_o$ when the actual state is $t_a$ is given by $P_{o}^{\alpha}(t_{o}|t_{a})$.
 If the same agent intends to realize $t_i$, the probability that he actually realizes $t_r$ instead is given by $P_{r}^{\alpha}(t_{r}|t_{i})$.
 Following~\textcite[26]{franke_vagueness_2017}, we can then define the following values.
@@ -704,14 +705,14 @@ $$
 P_{\rho}^{\alpha}(t_{r}|m)=\sum_{t_{i}}P_{r}^{\alpha}(t_{r}|t_{i})\rho^{\alpha}(t_{i}|m)
 $$
 These formulations are merely parameterized versions of the single-population model.
-They encapsulate calculations that we can use to compute expected utilities and update probabilities for each type.
+They encapsulate calculations that we can use to compute expected utilities and strategy update steps for each type.
 The latter, however, depend on the types of interaction that we imagine occurring between populations.
 In the following sections, we consider two different possibilities.
 
 \subsection{Tight population interaction}
 \label{sec:tight-interaction-model}
 In a multi-population model with tight interaction between populations, each agent plays with, observes, and potentially imitates any other agent, regardless of their type.
-This has an impact on the expected utilities of sender and receiver strategies of each type, and on the update probabilities for those strategies.
+This has an impact on the expected utilities of sender and receiver strategies of each type, and on the update steps for those strategies.
 Let's start with the expected utilities.
 For a sender of type $\alpha$, the expected utility of its strategy $\sigma^\alpha$ against all other receiver strategies $\rho^\star$, is given by:
 $$
@@ -735,14 +736,15 @@ P_{o}^{\alpha}(t_{o}|m)=\sum_{t_{r}}P_{o}^{\alpha}(t_{o}|t_{r})\sum_{\alpha^{\pr
 $$
 Again, these calculation incorporate the probabilities that the imitating agent might observe the behavior of an agent of another type $\alpha^\prime$, weighed by its relative proportion.
 %
-Finally, the update probabilities for a sender strategy of type $\alpha$ at time instant $i+1$ can be given by:
+Finally, the update step for a sender strategy of type $\alpha$ at time instant $i+1$ is given by:
 $$
-\sigma_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)\text{EU}_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\star})
+\check{\sigma}_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)\text{EU}_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\star})
 $$
 and similarly for a receiver strategy of type $\alpha$ by:
 $$
-\rho_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)\text{EU}_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\star})
+\check{\rho}_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)\text{EU}_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\star})
 $$
+We here use $\check{\sigma}$ and $\check{\rho}$ since there is still an additional adjustment to these values to be calculated before we get the final strategies $\sigma$ and $\rho$.
 
 These formulations cover the evolution of the particular strategies of each type.
 We can think of this as the level of cultural evolution: agents are born with a certain level of imprecision and learn strategies based on the behavior of others.
@@ -762,12 +764,12 @@ $$
 In order to additionally account for the fact that strategies are not passed on to new generations, we mix the evolved strategies of a certain type $\sigma^\alpha$ and $\rho^\alpha$ with new random strategies $\tilde{\sigma}^\alpha$ and $\tilde{\rho}^\alpha$ (generated at each time step).
 The idea is that, at each time step, a certain percentage of each population will consist of ``newborn'' agents, \emph{i.e.}~agents that haven't yet had time to evolve their strategies.
 We define a parameter $\gamma$ that quantifies this percentage, or as we can also call it the birth rate, which we consider to be the same for every population.
-This mixing can be described, for a certain time step $i+1$, in the following formulas:
+This mixing finally defines the strategies for time step $i+1$ and can be described in the following formulas:
 $$
-\sigma_{i+1}^{\alpha}(m|t)=(1 - \gamma)\sigma_{i+1}^{\alpha}(m|t) + \gamma \tilde{\sigma}_{i+1}^{\alpha}
+\sigma_{i+1}^{\alpha}(m|t)=(1 - \gamma)\check{\sigma}_{i+1}^{\alpha}(m|t) + \gamma \tilde{\sigma}_{i+1}^{\alpha}(m|t)
 $$
 $$
-\rho_{i+1}^{\alpha}(t|m)=(1 - \gamma)\rho_{i+1}^{\alpha}(t|m) + \gamma \tilde{\rho}_{i+1}^{\alpha}
+\rho_{i+1}^{\alpha}(t|m)=(1 - \gamma)\check{\rho}_{i+1}^{\alpha}(t|m) + \gamma \tilde{\rho}_{i+1}^{\alpha}(t|m)
 $$
 
 We performed 25 simulation runs of this model for each of three population scenarios: only one population with $\alpha = 0$ (for reference), two populations with $\alpha \in \{0, 0.05\}$, and three populations with $\alpha \in \{0, 0.05, 0.1\}$.
@@ -782,18 +784,18 @@ The first thing to observe from the simulation results is that the population wi
 %\begin{sidewaysfigure}
 \begin{figure}
   \centering
-  \begin{subfigure}[]{\textwidth}
-    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-strong.png}
+  \begin{subfigure}[]{.9\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-strong-square.png}
     \caption{Two populations scenario.}
     \label{fig:proportion-cases-two-tight-interaction}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[]{\textwidth}
-    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-01-strong.png}
+  \begin{subfigure}[]{.9\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-01-strong-square.png}
     \caption{Three populations scenario.}
     \label{fig:proportion-cases-three-tight-interaction}
   \end{subfigure}
-  \caption{Evolution of population proportions through time for each simulation trial of the tight interaction model.}
+  \caption{Evolution of population proportions through time for each simulation trial of the tight interaction model. Numbers on top of each plot identify each trial.}
   \label{fig:proportion-cases-tight-interaction}
 \end{figure}
 %\end{sidewaysfigure}
@@ -865,13 +867,13 @@ P_{o}^{\alpha}(t_{o}|m)=\sum_{t_{r}}P_{o}^{\alpha}(t_{o}|t_{r})P_{\rho}^{\alpha}
 $$
 Again, the main difference is that agents make observations within their own population, so to model a randomly sampled agent one needs only to take into account agents of the same type.
 Population proportions again do not play a role in these calculations.
-Based on these formulas, we can define the update probabilities for a sender strategy of type $\alpha$ at time instant $i+1$ as:
+Based on these formulas, we can define the update step for a sender strategy of type $\alpha$ at time instant $i+1$ as:
 $$
-\sigma_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)\text{EU}_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\alpha})
+\check{\sigma}_{i+1}^{\alpha}(m|t) \propto P_{o}^{\alpha}(m|t)\text{EU}_{\sigma_{i}}^{\alpha}(m,t,\rho_{i}^{\alpha})
 $$
 and similarly for a receiver strategy of type $\alpha$ as:
 $$
-\rho_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)\text{EU}_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\alpha})
+\check{\rho}_{i+1}^{\alpha}(t|m) \propto P_{o}^{\alpha}(t|m)\text{EU}_{\rho_{i}}^{\alpha}(t,m,\sigma_{i}^{\alpha})
 $$
 Note that, because imitation and learning occur only within populations, these formulations are essentially the same as for the single-population model of~\textcite{franke_vagueness_2017}, only parameterized by type $\alpha$.
 
@@ -883,18 +885,18 @@ We ran the same number of simulation trials under the same conditions as for the
 %\begin{sidewaysfigure}
 \begin{figure}
   \centering
-  \begin{subfigure}[]{\textwidth}
-    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-weakest.png}
+  \begin{subfigure}[]{.9\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-weakest-square.png}
     \caption{Two populations scenario.}
     \label{fig:proportion-cases-two-loose-interaction}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[]{\textwidth}
-    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-01-weakest.png}
+  \begin{subfigure}[]{.9\textwidth}
+    \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-01-weakest-square.png}
     \caption{Three populations scenario.}
     \label{fig:proportion-cases-three-loose-interaction}
   \end{subfigure}
-  \caption{Evolution of population proportions through time for each simulation trial of the loose interaction model.}
+  \caption{Evolution of population proportions through time for each simulation trial of the loose interaction model. Numbers on top of each plot identify each trial.}
   \label{fig:proportion-cases-loose-interaction}
 \end{figure}
 %\end{sidewaysfigure}

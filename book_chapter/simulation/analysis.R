@@ -27,7 +27,7 @@ plot.proportion <- function(interaction.type, population.scenario, simulation.id
         geom_line(aes(linetype=factor(impairment))) +
         labs(x=expression(i), y=expression(P(alpha)), linetype=expression(alpha))
     if (is.null(simulation.id)) {
-        p <- p + facet_grid(. ~ sim.id) +
+        p <- p + facet_wrap(~ sim.id, nrow=5) +
             scale_x_continuous(breaks=c(100,200)) + theme(axis.text.x = element_text(angle=45))
     }
     return(p)
