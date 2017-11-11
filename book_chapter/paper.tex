@@ -786,13 +786,13 @@ The first thing to observe from the simulation results is that the population wi
   \centering
   \begin{subfigure}[]{.9\textwidth}
     \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-strong-square.png}
-    \caption{Two populations scenario.}
+    \caption{Two-population scenario.}
     \label{fig:proportion-cases-two-tight-interaction}
   \end{subfigure}
   \hfill
   \begin{subfigure}[]{.9\textwidth}
     \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-01-strong-square.png}
-    \caption{Three populations scenario.}
+    \caption{Three-population scenario.}
     \label{fig:proportion-cases-three-tight-interaction}
   \end{subfigure}
   \caption{Evolution of population proportions through time for each simulation trial of the tight interaction model. Numbers on top of each plot identify each trial.}
@@ -887,13 +887,13 @@ We ran the same number of simulation trials under the same conditions as for the
   \centering
   \begin{subfigure}[]{.9\textwidth}
     \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-weakest-square.png}
-    \caption{Two populations scenario.}
+    \caption{Two-population scenario.}
     \label{fig:proportion-cases-two-loose-interaction}
   \end{subfigure}
   \hfill
   \begin{subfigure}[]{.9\textwidth}
     \includegraphics[width=\textwidth]{simulation/results/round-3/plots/proportion-cases-0-005-01-weakest-square.png}
-    \caption{Three populations scenario.}
+    \caption{Three-population scenario.}
     \label{fig:proportion-cases-three-loose-interaction}
   \end{subfigure}
   \caption{Evolution of population proportions through time for each simulation trial of the loose interaction model. Numbers on top of each plot identify each trial.}
@@ -906,7 +906,7 @@ Whereas in the latter no given population ever reached much more than 70\% propo
 In the two-population scenario, some population reached 99\% proportion in 24 out of 25 trials.
 In the three-population scenario, this happened in 18 out of 25 trials.
 %Given that strategies no longer develop in close tandem with each other, differences in expected utility can become more salient resulting in some type reaching a more clear advantage than the other.
-More interestingly for our investigation, some trials actually resulted in a population with some degree of imprecision dominating the others.
+More interestingly for our investigation, some trials actually resulted in the population with $\alpha = 0$ being dominated.
 For the two-population scenario, $\alpha = 0.05$ fully reached 100\% proportion in 8 trials (79, 86, 88, 89, 91, 93, 96, 98), a point from which it is technically impossible for the other population to recover.
 In most cases the dominating population gains its ground from the start, but in 5 cases we see a temporary advantage of $\alpha = 0.05$ that is then lost to the other population.
 In one interesting trial (85), $\alpha = 0.05$ reached 99.87\% only to then steadly lose ground to $\alpha = 0$.
@@ -915,7 +915,7 @@ In all of those cases, $\alpha = 0.05$ clearly has the upper hand over $\alpha =
 %In 5 other trials we see a positive trend for $\alpha = 0.05$, but given the reversals that sometimes occur (\emph{e.g.}~trial 171), one cannot be sure whether full dominance would be achieved if the simulation was left to run for longer time.
 
 Because of the loose interaction between populations, different types can now evolve separately.
-One consequence of this is that populations would a certain level of imprecision again reach convexity faster than those without imprecision.
+One consequence of this is that populations with a certain level of imprecision again reach convexity faster than those without imprecision.
 \begin{figure}
   \centering
   \begin{subfigure}[]{0.45\textwidth}
@@ -933,26 +933,26 @@ One consequence of this is that populations would a certain level of imprecision
   \label{fig:convex-cases-loose-interaction}
 \end{figure}
 In Figure~\ref{fig:convex-cases-loose-interaction} we plot, for each trial, the first iteration when each type reached convexity.
-What we see is that, even though that is true on average, it is not always the case.
+What we see is that, even though $\alpha = 0$ usually reaches convexity later, this is not always the case.
 This has certainly to do with the initial conditions of each trial, since the randomly generated strategies can simply by chance be more favourable to reaching convexity.
 More importantly, we also see that reaching convexity sooner is not a suficient condition for achieving population dominance .
-There were many trials where another type reached convexity much sooner than $\alpha = 0$ but was completely dominated nevertheless (\emph{e.g.}~76, 84, 92, and 99 in the two-population scenario; 156, 165, 168, and 172 in the three-population scenario).
+There were many trials where another type reached convexity much sooner than $\alpha = 0$ but its population was completely dominated nevertheless (\emph{e.g.}~76, 84, 92, and 99 in the two-population scenario; 156, 165, 168, and 172 in the three-population scenario).
 It also does not seem to be fully necessary, given a few examples where $\alpha = 0$ reached convexity early on and another type ended up dominating (89 in the two-population scenario and 152 in the three-population scenario).
 
 Another consequence of the two populations evolving separately is that they do not necessarily evolve towards the same equilibrium.
-In a sim-max game such as the one set up there are only two stable equilibria.
+In a sim-max game such as the one set up here, there are only two stable equilibria.
 These are two Voronoi systems of the kind shown in Figure~\ref{fig:example_strats}, one where the first message is used for the first half of the state space, and the other where the second message is used for this region.
 In the multi-population model with loose interaction, each population evolves independently towards one of these two equilibria.
 This is importantly conditioned by the initial strategy the process of selection initiates from.
 The populations are, however, not fully independent, since the process of selection of the level of precision relies on the expected utility of one population playing against itself and the others.
 And this is important because strategies in one equilibrium get the lowest payoff possible against strategies in the other equilibrium.
 Now, if two populations evolve towards different equilibria, whatever advantage one population has playing against itself could trigger a runaway effect by causing an increase in its proportion, which in turn will increase the population's relative expected utility, potentially increasing their proportion further in the next round, and so forth.
-In this case, one would expect that faster convergence towards convexity would be especially important for success.
+In this case, one would expect that faster convergence towards convexity would be especially important for a population's success.
 
 In the two-population scenario, of the 8 trials where $\alpha = 0$ was reduced to 0\%, all but two (88, 98) ended with the two populations each close to a different equilibria.
-In the two-population scenario, the population with $\alpha = 0$ evolved towards the same equilibrium as the other two in 1 of the trials where it was eliminated.
+In the three-population scenario, the population with $\alpha = 0$ evolved towards the same equilibrium as the other two in 1 of the trials where it was eliminated.
 In the other 3 trials, in 2 it evolved to a different equilibrium than the other two, and in 1 it evolved towards the same equilibrium as $\alpha = 0.05$ (but different to the one $\alpha = 0.1$ evolved towards).
-Again, we do not find a clear case for this being a decisive factor in the success of populations with impairment.
+Again, we do not find a clear case for this being a decisive factor in the success of populations with some imprecision.
 That same goes for the impact of an initial advantage in expected utility creating the runaway effect we just mentioned.
 Despite none of these three factors (including reaching convexity sooner) sentencing the demise of $\alpha = 0$ with certainty, they do seem to conspire together to bring it about.
 In most trials where the type was eliminated, in both the two- and three-population scenarios, $\alpha = 0$ ended up evolving towards a different equilibrium than the other types, and either had an initial disadvantage in expected utility, or reached convexity much later.
@@ -976,29 +976,29 @@ This is not surprising since we are facing a complex dynamical system with vario
   \label{fig:eu-trial-88-loose-interaction}
 \end{figure}
 Just as an example of this, in Figure~\ref{fig:eu-trial-88-loose-interaction} we plot the expected utilities of sender and receiver strategies for both populations of trial 88.
-The curves up to where $\alpha = 0.05$ achieved convexity seem to suggest that the sender strategy of that type was evolving in tandem with the receiver strategy of the other.
-This is possible in our model, although we expect it to be highly unlikely.
+The curves up to where $\alpha = 0.05$ achieved convexity seem to suggest that the sender strategy of that type was evolving towards the same equilibrium as the receiver strategy of the other.
 The moment where the population reaches convexity marks the point where the sender strategy of $\alpha = 0.05$ aligns with its type's receiver strategy and this coincides with the moment where the population seems to gain real traction over the other type (see again the plot for trial 88 in Figure~\ref{fig:convex-cases-loose-interaction}).
+In this particular case, reaching convexity seems to have made an important difference.
 
 
 \section{Conclusions}
 \label{sec:conclusions}
-Vagueness presents a challenge to both procedural and instrumental pictures of language and rationality alike.
-In the context of game-theoretical models of language, this takes the form of a question about evolution: how can vagueness persist if leads to demonstrably less efficient communication?
+Vagueness presents a challenge to both procedural and instrumental pictures of rationality alike.
+In the context of game-theoretical models of language, this takes the form of a question about evolution: how can vagueness persist if it characterizes demonstrably less efficient communication?
 Most existing proposals in the literature attempt to explain this by considering agents with some degree of bounded rationality.
-Despite the many ways in which our rationality is inevitably limited, the argument for the pervasiveness of vagueness in natural language would be much strengthened if there were also associated advantages.
+Despite the many ways in which our rationality is inevitably limited, the argument for the pervasiveness of vagueness in natural language would be much stronger if one could also find associated advantages.
 In this paper, we argued that finding those might require us to go beyond a local notion of rationality, as two of the proposals reviewed here~\parencite{oconnor_evolution_2014, franke_vagueness_2017} suggest.
 We advocate moving towards an ecological approach, studying vagueness in more heterogenenous ecosystems.
-Language is part of a very complex system~\parencite{beckner_language_2009} involving many components that interact in often unpredictable ways.
-An ecology of vagueness would involve considering models where different populations can evolve and interact with each other, or where different language games can be played between the individuals, or where the environment is uncertain and changing, all of the above, or anything else that more closely approximates the real context of language evolution.
+Language is part of a very complex system~\parencite{beckner_language_2009} that involves many components that interact in often unpredictable ways.
+An ecology of vagueness would involve studying models where different populations can evolve and interact with each other, where different language games can be played between the individuals, where the environment is uncertain and changing, or anything else that more closely approximates the real context of language evolution.
 
-In light of this picture, we proposed two variants of a concrete multi-population signaling model to test the hypothesis~\parencite{franke_vagueness_2017} that certain features of imprecise imitation, like promoting faster convergence and regularity, could prove beneficial against full precision.
+In light of this picture, we proposed two variants of a concrete multi-population signaling model to test the hypothesis~\parencite{franke_vagueness_2017} that certain features of imprecise imitation, like promoting faster convergence and regularity, could prove beneficial in contrast with full precision.
 Analysing these models did not provide us with a clear-cut answer, and revealed that the story is much more nuanced than initially expected.
 In a variant where populations with and without imprecision interact tightly, although precision always has the upper hand, vagueness seems to take a long time to be weeded out.
 When we let populations interact more loosely, we see a more complex pattern of outcomes.
 These include scenarios where imprecise imitation dominates over full precision, showing that strategies with vagueness can actually, under certain circumstances, be more successful.
-Bringing several populations together in a more complex ecosystem thus allowed us to not only spell out and test the original intuition, but also learn about new unforeseen effects.
-These models thus serve as an example of how moving to a more global perspective on rationality can allow us to achieve a more detailed awareness of the complex interactions that might be involved in sustaining vagueness in our language.
+Bringing several populations together in a more complex ecosystem thus allowed us to not only spell out and test the original intuition, but also learn about unforeseen effects.
+These models thus serve as an example of how moving to a more global perspective on rationality can allow us to achieve a more detailed awareness of the complex interactions that might be involved in sustaining vagueness in natural language.
 They can be seen, we believe, as a first step towards an ecology of vagueness.
 
 
