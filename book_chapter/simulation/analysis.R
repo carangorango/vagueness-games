@@ -111,8 +111,8 @@ plot.eu <- function(interaction.type, population.scenario, sim.identificator) {
                  sim.id == sim.identificator)
     dt2 <- filter(dt, sender.convex == 1) %>% group_by(impairment) %>% summarise(convex.it = first(iteration))
     p <- ggplot(dt, aes(x=iteration)) +
-        geom_line(aes(y=sender.eu, linetype=factor(impairment)), color='red') +
-        geom_line(aes(y=receiver.eu, linetype=factor(impairment)), color='green') +
+        geom_line(aes(y=sender.eu, linetype=factor(impairment)), color = 'red') +
+        geom_line(aes(y=receiver.eu, linetype=factor(impairment)), color = 'green') +
         geom_vline(data = dt2, mapping = aes(xintercept = convex.it, linetype = factor(impairment))) +
         labs(x=expression(i), y=expression(EU), linetype=expression(alpha))
     return(p)
@@ -159,7 +159,7 @@ final.proportions <- function(interaction.type, population.scenario) {
 
 initial.eu <- function(interaction.type, population.scenario) {
     dt <- filter(measurement_data, interaction == interaction.type, populations == population.scenario) %>%
-        group_by(sim.id, impairment) %>% summarise(initial.eu = nth(sender.eu, 2)+nth(sender.eu, 2))
+        group_by(sim.id, impairment) %>% summarise(initial.eu = nth(sender.eu, 2) + nth(receiver.eu, 2))
     return(dt)
 }
 
