@@ -32,7 +32,9 @@ In this paper, we focus on this problem in the context of signaling games.
 We provide an overview of a number of proposed reasons why and mechanisms how vagueness may come into the picture in formal models of rational or evolutionary signaling.
 Most of them argue that vague signal use is simply the best we can get, given certain factors.
 Despite the plausibility of the proposals, we argue that a deeper understanding of the benefits of vagueness needs a more ecological perspective, namely one that goes beyond local optimization of signaling strategies of a homogeneous population.
-As an example of one possible way to expand upon our current models, we propose two variants of a novel multi-population dynamic of imprecise imitation where, under certain conditions, populations with a certain level of imprecision dominate over precise ones.
+As an example of one possible way to expand upon our current models, we propose two variants of
+a novel multi-population dynamic of imprecise imitation where, under certain conditions,
+populations with vague language use dominate over populations with precise language use.
 \end{abstract}
 
 \tableofcontents
@@ -199,6 +201,7 @@ The vocabulary just introduced will, we hope, help inform the discussion that fo
 We proceed by introducing the framework of signaling games in Section~\ref{sec:signaling-games}.
 In Section~\ref{sec:sim-max-vagueness} we look into explanations of vagueness in a particular kind of signaling game.
 Section~\ref{sec:ecology-of-vagueness} tries to generalize the considerations of these proposals to argue for a more ecological approach to vagueness.
+\mf{We should make clear what ``ecological'' means.}
 We propose and analyse the results of a novel multi-population model of imprecise imitation in Section~\ref{sec:multi-population-model}, and summarize our conclusions in Section~\ref{sec:conclusions}.
 %Section~\ref{sec:referential-vagueness} generalizes our discussion to the natural case where agents play more than one game.
 
@@ -322,7 +325,7 @@ In the following section, we give an overview of what vagueness looks like in a 
 \section{Vagueness in sim-max games}
 \label{sec:sim-max-vagueness}
 
-In order to work, the sorites paradox requires us to assume a relation between the vague terms and a more precise underlying dimension (height for tallness, number of hairs for baldness, number of grains of sand for ``heapness'', and so on).
+The sorites paradox requires us to assume a relation between the vague terms and a more precise underlying dimension (height for tallness, number of hairs for baldness, number of grains of sand for ``heapness'', and so on).
 Not only does this property need to be much more fine-grained than the vague term, but it also needs to have some structure, in the sense that there is at least an order between the elements in it (thinking of height in centimeters, $180 > 179 > \ldots > 120$), but usually even a degree of how far apart these elements are from each other.
 In terms of signaling games, we can model this by using a state space constituted of values of the underlying dimension, and a message space as constituted by the terms in question.
 Because of the difference in granularity, we will typically be interested in cases where the state space is much larger than the message space.
@@ -363,29 +366,30 @@ Still, confirming Lipman's argument, there is no vagueness in any such optimal l
   \label{fig:example_strats}
 \end{figure}
 
-In an abstract setup, using 50 states uniformly distributed over the unit interval and two possible messages, such an optimal language looks like what we see in Figure~\ref{fig:example_stratsA}: the probability that the sender uses one message decays sharply from 1 to 0, and increases sharply from 0 to 1 for the other message; the response of the receiver for each message is a degenerate distribution over the state space.
+In an abstract setup, using 50 states uniformly distributed over the unit interval and two possible messages, such an optimal language looks like what we see in Figure~\ref{fig:example_stratsA}: the probability that the sender uses one message decays sharply from 1 to 0, and increases sharply from 0 to 1 for the other message; the response of the receiver for each message is a degenerate distribution over the state space which assigns all probability mass to a single state.
 The sender/receiver strategy pairs that we are looking for look more like Figure~\ref{fig:example_stratsB}, where the sender's choice of message to use is characterized by a smooth transition, and the receiver strategy assigns a positive probability to more than one state for each message.
-The particular shapes of these strategies are not important to characterize a vague signal use.
-What is important is that the transition is smooth and monotonous for both players.
+The particular shapes of these strategies are less important for diagnosing vagueness.
+What is more important is a smooth and monotonous transition between areas where a message clearly applies and where it clearly does not.
 This means that, for some states in the middle of the state space, there is uncertainty as to which message will be used, whereas for states in the extremes this is as good as certain.
 
 The interpretation of this uncertainty will be different depending on the interpretation of the model.
 If we see it as an explanatory model of how two agents play the game, we can see it as randomization.
 If we interpret the model as descriptive, it simply represents expected behavior in a manner agnostic to the underlying mechanisms.
 A third option is to see probabilities as capturing relative numbers in a population of agents.
-For example, if the sender strategy assigns a probability of $0.4$ of message $m$ being sent for state $t$, this would mean that $40\%$ of the population uses that message for that state, while $60\%$ uses the other.
+For example, if the sender strategy assigns a probability of $0.4$ to the event of message $m$ being sent for state $t$, this would mean that $40\%$ of the population uses that message for that state.
 This latter option leaves open the possible interpretation that each agent commands a crisp language and vagueness is only a population-level effect.
 However, given the level of abstraction of the description so far, none of this is necessarily implied by the model.
 Our question is thus what additional modifications to sim-max games are sufficient for the optimal languages to be more like Figure~\ref{fig:example_stratsB}, rather than like Figure~\ref{fig:example_stratsA}.
 %Let's look at some proposals in the literature.
 
 % \subsection{Bounded rationality}
-\textcite{franke_vagueness_2011} make two suggestions of how vagueness in a signaling game can be boundedly rational, \emph{i.e.}~how vagueness could arise as a consequence of cost-saving limitations in the cognitive capacities of instrumentally rational agents.
+\textcite{franke_vagueness_2011} make two suggestions as to how vagueness in a signaling game can be boundedly rational, \emph{i.e.}~how vagueness could arise as a consequence of cost-saving limitations in the cognitive capacities of instrumentally rational agents.
 The first proposal is called limited memory fictitious play (LMF) and models agents playing a sim-max game where their ability to recall past interactions with others is limited to a certain number.
 For a given interaction, each agent uses his limited memory of the other agent's past behavior to estimate the other's strategy.
 Each agent plays an instrumentally rational best response (given the utility function) to their estimate of the other's strategy.
 In order to study the evolution of strategies in repeated interaction, the authors model several individual agents in actual play.
 What they observe is the emergence of vague signaling at the level of the population, \emph{i.e.}~population averages of individual strategies exhibit the characteristics of a vague language as characterized before.
+This is because each agent is exposed to a different history of previous play and so holds slightly different beliefs about language use.
 However, each agent still commands a crisp language, which is inadequate if the intention is to capture how vagueness presents itself in human languages.
 
 In order to overcome this limitation, \citeauthor{franke_vagueness_2011} make another proposal using the notion of a quantal response equilibrium (QRE).
@@ -393,7 +397,7 @@ The idea, inspired by experimental psychology, is to model the choice of best re
 A prominent explanation for such soft-max or quantal choice behavior is that agents make small mistakes in the calculation of their expected utilities \parencite{Train2009:Discrete-Choice}. 
 They still choose the option with the highest expected utility, but each assessment of the expected utilities is noise perturbed.
 This, in turn, may actually be boundedly rational since the calculation of expected utilities relies on assessing stochastic uncertainty, which in turn may be costly to calculate precisely. 
-Choice based on a few samples from a distribution can be optimal if taking more samples or other means of better approximating degrees of uncertainty is resource costly \parencite[\emph{e.g.}][]{VulGoodman2014:One-and-Done-Op,SanbornChater2016:Bayesian-Brains}.
+Choice based on a few samples from a distribution can be optimal if taking more samples or other means of better approximating probabilistic beliefs is resource costly \parencite[\emph{e.g.}][]{VulGoodman2014:One-and-Done-Op,SanbornChater2016:Bayesian-Brains}.
 The degree to which agents tremble in the calculation of expected utilities and therefore deviate from the instrumentally rational behavior can be characterized by a parameter.
 \citeauthor{franke_vagueness_2011} find that for low values of this parameter, only babbling equilibria are possible, where sender and receiver simply randomize, respectively, message and interpretation choice uniformly.
 Above a certain value of the parameter, other equilibria of the kind described in the beginning of this section arise, where agents communicate successfully, though not perfectly, using fuzzy strategies similar to the ones depicted in Figure~\ref{fig:example_stratsB}. However, it is not clear whether soft-max choices capture the right stochastic trembles in decision making as they would arise under natural sources of uncertainty about the context \parencite[see][]{franke_vagueness_2017}.
@@ -405,29 +409,19 @@ In HRL, agents learn to play a signaling game by strengthening particular choice
 O'Connor's proposal is to model generalization as the propagation of reinforcement to nearby states, where ``nearby'' is defined in terms of distance in state space.
 For example, if a sender was successful in using message $m$ for state $t$, he will not only positively reinforce that choice of message for $t$, but also for states similar to $t$.
 This is done to a degree that is proportional to the similarity between $t$ and other states.
-The dynamics also gives rise to vague signaling of the kind we are looking for.
+The dynamics gives rise to vague signaling of the kind we are looking for.
 
-But why should agents evolve to generalize?
-%First, it is not argued that vagueness in itself is beneficial, but that it is a by-product of a learning mechanism.
-O'Connor suggests that, despite a vague language having lower expected utility than a precise one, the learning mechanism that induces vagueness does have evolutionary advantages, though less obvious ones (see \textcite{oconnor_evolving_2015} for the detailed argument).
-Considerations of optimality of strategies, for example by analysing evolutionary stable states, are typically made in terms of hypothetical atemporal comparisons of expected utility.
-However, GRL has an interesting property in comparison with more strict learning mechanisms: it achieves higher payoffs in a shorter period of time.
-In a naturalized evolutionary setting, where we care about bounded rationality in a multi-context environment, learning speed is an advantage which should also be taken into account.
+% \subsection{Noisy perception}
+Although there is a close relationship between reinforcement learning and population-level dynamics \citep{Borgers1997,Beggs2005}, O'Connor's GRL is, on the face of it, an account of learning between single players.
+Also, we need to ask for further justification to link generalization in reinforcement closely to the underlying payoff function of the sim-max game.
+Why should agents evolve to generalize in exactly the right way?
+O'Connor suggests that, despite a vague language having lower expected utility than a precise one, the learning mechanism that induces vagueness does have evolutionary advantages: it achieves higher payoffs in a shorter period of time.
+From a more encompassing, ecological point of view, learning speed can be an advantage.
 Imagine an initial population of agents with random strategies, some using GRL and others using classical HRL to adapt to each other.
 Although the latter type of agent can hypothetically develop a precise and more efficient signaling system, agents using GRL would coordinate on vague signaling strategies with high (though not optimal) expected utility sooner than agents using HRL.
 In such a scenario, they could drive the other agents to extinction before the latter had time to achieve coordination and reap the benefits of a more precise signaling system.
 
-
-But would such a language be stable?
-In terms of evolutionary game theory, one could argue that a small enough group of mutants playing a precise signaling system could later invade a population of vague signalers.
-There is, however, an additional advantage to the generalized learning that is relevant here, namely the ability to adapt to a changing environment.
-Analysis of a game in terms of evolutionary stable states works well if we assume that the environment where the agents interact remains static.
-However, in a more realistic setting this is not the case.
-In a dynamic game with a variable environment, an ability to converge faster could give an evolutionary advantage over strict learning rules: as soon as the state space or the utility function change, GRL would quickly adapt and again potentially drive more strict learning mechanisms to extinction because of its short-term gains.
-
-
-% \subsection{Noisy perception}
-\textcite{franke_vagueness_2017} study a variant of the replicator dynamics that is motivated by perceptual limitations.
+An alternative is offered by \textcite{franke_vagueness_2017} who study a variant of the replicator dynamics, \emph{i.e.}~a population-level dynamics, in which individual agents do not have the ability to generalize but simply make perceptual mistakes. 
 Assuming that agents do not have perfect perception, there will always be a possibility that senders confuse states and receivers mix up responses.
 Furthermore, it seems reasonable to assume that this state confusability is proportional to state similarity, \emph{i.e.}~that the more similar two states are, the more likely it is that they will be mistaken for each other.
 Incorporating these considerations into a derivation of the replicator dynamics based on imitation processes, they develop a variant of the dynamic that also induces vague signal use of the kind we expect here.
@@ -443,37 +437,44 @@ By running several rounds of simulation for each parameter set, they can measure
 The results show that the within group distance between strategies becomes smaller with growing confusability, and the within group expected utility is actually higher for strategies evolving under a certain degree of state confusion.
 Thus, some amount of uncertainty seems to promote more homogeneous populations of signalers that are better at achieving cooperation within a group.
 %In this picture, vagueness is the natural and unavoidable consequence of perceptual limitations, but may still contribute to the overall boundedly rational character of language if we take multiple contexts of learning into account.
+What is left to show, like for O'Connor's GRL approach, is whether the potential payoff advantages which were observed in simulations actually suffice to promote vague language use in an encompassing model of multi-level selection. The following section motivates an ecological approach to the evolution of vagueness in more detail, before Section~\ref{sec:multi-population-model} gives a concrete model.
 
-% \subsection{Aggregation from multiple senders}
-Finally, \textcite{lawry_vagueness_2017} explore the potential benefits of vagueness in variations of a sim-max game with multiple senders and one receiver.
-Although the models considered are not explicitly identified as sim-max games, they are equivalent in the relevant aspects.
-They are signaling games where senders have private knowledge of a given state $x$, each sends a message to the receiver, which then selects an estimate $y$ of the original state.
-Although the authors do not define a utility function, their analysis evaluates the models in terms of the expected error between the estimate and the original state, defined as $(x-y)^2$.
-Better models have lower expected error, thus one could say that the objective is to minimize this function, which would be equivalent to maximizing its inverse.
-The game could then be seen as a sim-max game with multiple senders and negative squared difference as utility function.
+% In terms of evolutionary game theory, one could argue that a small enough group of mutants playing a precise signaling system could later invade a population of vague signalers.
+% There is, however, an additional advantage to the generalized learning that is relevant here, namely the ability to adapt to a changing environment.
+% Analysis of a game in terms of evolutionary stable states works well if we assume that the environment where the agents interact remains static.
+% However, in a more realistic setting this is not the case.
+% In a dynamic game with a variable environment, an ability to converge faster could give an evolutionary advantage over strict learning rules: as soon as the state space or the utility function change, GRL would quickly adapt and again potentially drive more strict learning mechanisms to extinction because of its short-term gains.
 
-Unlike the models discussed so far that introduce minimal constraints to a dynamic and study the strategies that emerge out of an evolutionary process, \citeauthor{lawry_vagueness_2017}' approach is mostly static and analytical.
-They consider several possible sender strategies, with and without uncertainty, and calculate if and when sender and receiver achieve better transmission accuracy, \emph{i.e.}~smaller expected error between original state and receiver estimate.
-Senders without uncertainty have a strategy that boils down to what is represented in Figure~\ref{fig:example_stratsA}: they split the state space according to a fixed threshold, switching from using one message to another abruptly.
-The model for the other type of sender is similar, but assumes that there is uncertainty regarding the value of the threshold, representing it as a uniformly distributed random variable.
-What results from this in terms of sender strategy is also a smooth transition between the use of two messages.%
-\footnote{Unlike what we see in Figure~\ref{fig:example_stratsB}, it is a linear transition. This is certainly connected with the choice of modeling the uncertain threshold as uniformly distributed. We speculate that another choice of distribution, such as for example a normal distribution, could yield something similar to Figure~\ref{fig:example_stratsB}.}%
-The receiver strategy is not inherently vague for either type of sender, it merely aggregates the messages received to provide an estimate of the original state using a simple arithmetic mean.
+% These results are interesting since they reveal scenarios where vague strategies have an advantage over strict ones.
+% The approaches discussed so far argue that vagueness is the inevitable byproduct of either cognitive limitations or a particular learning mechanism in the context of other learning mechanisms, which still leaves the idealist\footnote{In an ordinary, non-philosophical, sense.} some room for speculation.
+% In the models of \citeauthor{franke_vagueness_2011}, the idealist could argue that higher rationality (better memory, or more reliable computation of expected utilities) would lead to more precision.
+% \citeauthor{oconnor_evolving_2015}'s learning strategy could theoretically be dominated by a process with higher strategic rationality, like best response dynamics~\parencite{gilboa_social_1991}.
+% A combination of both would hypothetically lead to a better outcome in the scenario of \citeauthor{franke_vagueness_2017}.
 
-The authors analyze a number of variations of this model.
-For a model with one sender, results are consistent with Lipman's~\parencite*{lipman_why_2009} in that strategies without uncertainty lead to more accurate communication.
-For models with two messages and more than one sender, the expected error is a strictly decreasing function of the number of senders, and above a certain number of senders, strategies with uncertainty actually achieve lower expected error than crisp ones.
-This minimal number of senders from which vagueness surpasses sharpness is a decreasing function of the number of messages, \emph{i.e.}~whereas at least 8 senders are needed if the number of messages available is 2, this number lowers to 5 for 3 messages, 4 for and 5 messages, and 3 for more than 6 messages.
-If random errors are introduced between the choice of the sender and the message that reaches the receiver, increasing the number of senders can compensate for the noise, to a certain extent.
-Results are mixed when dropping the assumption of uniform priors for the state space.
 
-These results are interesting since they reveal scenarios where vague strategies have an advantage over strict ones, even in a setting of game-omniscient strategic agents.
-The approaches discussed so far argue that vagueness is the inevitable byproduct of either cognitive limitations or a particular learning mechanism in the context of other learning mechanisms, which still leaves the idealist\footnote{In an ordinary, non-philosophical, sense.} some room for speculation.
-In the models of \citeauthor{franke_vagueness_2011}, the idealist could argue that higher rationality (better memory, or more reliable computation of expected utilities) would lead to more precision.
-\citeauthor{oconnor_evolving_2015}'s learning strategy could theoretically be dominated by a process with higher strategic rationality, like best response dynamics~\parencite{gilboa_social_1991}.
-A combination of both would hypothetically lead to a better outcome in the scenario of \citeauthor{franke_vagueness_2017}.
-\citeauthor{lawry_vagueness_2017} give us something that holds even if the idealist is unwilling to acknowledge the constraints that pervade our finite existence.
-Whether the strategies proposed by the authors would be the ones to evolve\footnote{The authors' analysis is a static one. Despite the advantage of the proposed vague strategies against strict ones in certain settings, one cannot know whether other strategies of higher accuracy would not be possible in those same settings without studying some dynamics in an evolutionary context.}, is something that is, however, open for debate.
+% % \subsection{Aggregation from multiple senders}
+% Finally, \textcite{lawry_vagueness_2017} explore the potential benefits of vagueness in variations of a sim-max game with multiple senders and one receiver.
+% Although the models considered are not explicitly identified as sim-max games, they are equivalent in the relevant aspects.
+% They are signaling games where senders have private knowledge of a given state $x$, each sends a message to the receiver, which then selects an estimate $y$ of the original state.
+% Although the authors do not define a utility function, their analysis evaluates the models in terms of the expected error between the estimate and the original state, defined as $(x-y)^2$.
+% Better models have lower expected error, thus one could say that the objective is to minimize this function, which would be equivalent to maximizing its inverse.
+% The game could then be seen as a sim-max game with multiple senders and negative squared difference as utility function.
+
+% Unlike the models discussed so far that introduce minimal constraints to a dynamic and study the strategies that emerge out of an evolutionary process, \citeauthor{lawry_vagueness_2017}' approach is mostly static and analytical.
+% They consider several possible sender strategies, with and without uncertainty, and calculate if and when sender and receiver achieve better transmission accuracy, \emph{i.e.}~smaller expected error between original state and receiver estimate.
+% Senders without uncertainty have a strategy that boils down to what is represented in Figure~\ref{fig:example_stratsA}: they split the state space according to a fixed threshold, switching from using one message to another abruptly.
+% The model for the other type of sender is similar, but assumes that there is uncertainty regarding the value of the threshold, representing it as a uniformly distributed random variable.
+% What results from this in terms of sender strategy is also a smooth transition between the use of two messages.%
+% \footnote{Unlike what we see in Figure~\ref{fig:example_stratsB}, it is a linear transition. This is certainly connected with the choice of modeling the uncertain threshold as uniformly distributed. We speculate that another choice of distribution, such as for example a normal distribution, could yield something similar to Figure~\ref{fig:example_stratsB}.}%
+% The receiver strategy is not inherently vague for either type of sender, it merely aggregates the messages received to provide an estimate of the original state using a simple arithmetic mean.
+
+% The authors analyze a number of variations of this model.
+% For a model with one sender, results are consistent with Lipman's~\parencite*{lipman_why_2009} in that strategies without uncertainty lead to more accurate communication.
+% For models with two messages and more than one sender, the expected error is a strictly decreasing function of the number of senders, and above a certain number of senders, strategies with uncertainty actually achieve lower expected error than crisp ones.
+% This minimal number of senders from which vagueness surpasses sharpness is a decreasing function of the number of messages, \emph{i.e.}~whereas at least 8 senders are needed if the number of messages available is 2, this number lowers to 5 for 3 messages, 4 for and 5 messages, and 3 for more than 6 messages.
+% If random errors are introduced between the choice of the sender and the message that reaches the receiver, increasing the number of senders can compensate for the noise, to a certain extent.
+% Results are mixed when dropping the assumption of uniform priors for the state space.
+
 
 
 \section{The ecology of vagueness}
@@ -545,7 +546,7 @@ As mentioned above in connection the soft-max choice function used by \textcite{
 Secondly, if we look at behavior across many game types and contexts, there is also the level of an agent's internal theory of how words and phrases are likely to be used (or even normatively: how messages should be used), conditional on a given context.
 Notice that a single agent's rational beliefs about linguistic practices or linguistic meaning may well have to reflect the actual stochasticity: under natural assumptions about information loss, the best belief for prediction matches the actual distribution in the real world \parencite[\emph{e.g.}][]{VehtariOjanen2012:A-survey-of-Bay}.
 In sum, both at the level of behavior and at the level of beliefs about use or meaning, we should expect to find vagueness.
-Still, despite the natural vagueness, there does not seem to be anything fundamentally missing or conceptually incoherent in a naturalistic, rationality- or optimality-driven explanation of what each agent is doing or what each agent beliefs about language, use and meaning.
+Still, despite the natural vagueness, there does not seem to be anything fundamentally missing or conceptually incoherent in a naturalistic, rationality- or optimality-driven explanation of what each agent is doing or what each agent believes about language, use and meaning.
 
 Another way to go beyond locality is to work with more heterogeneous population models.
 The mechanisms that lead to vague signal use, as~\textcite{oconnor_evolution_2014} and~\textcite{franke_vagueness_2017} stress, have the aforementioned important advantages of faster speed of convergence, higher flexibility, and homogenization.
@@ -664,22 +665,20 @@ Using this model, we can better see under which conditions the hypothesized adva
 \section{Two multi-population models of imprecise imitation}
 \label{sec:multi-population-model}
 We build upon the model of~\textcite{franke_vagueness_2017}, adding to the imprecise imitation dynamics the support for multiple populations with different imprecision values evolving together.
-In order to do this, first we consider that each population evolves according to the imprecise imitation dynamics.
-However, we want to model populations that are able to interact with each other.
-Therefore, the dynamic needs to be adapted in order to reflect the fact that agents can hypothetically imitate and play against agents with different imprecision levels.
-Second, in order to see the impact of the success of different imprecision levels, we need to add another process of selection.
-A possible story to motivate these ideas goes as follows: imagine agents who are born with varying perceptual abilities, subsequently learn a signaling strategy by imitation of other agents (either within or across populations), and depending on the success of the strategies they develop are more or less likely to survive and reproduce.
-In such setup, we change not only each populations particular strategies, but also the proportion of each population depending on its fitness compared to other populations.
+The resulting evolutionary dynamic has two layers: for one, signaling strategies change by imprecise imitation following the model of~\textcite{franke_vagueness_2017}; for another, there is higher-order evolutionary selection of the level of precision used by agents in their imitation of others' strategies.
+More concretely, imagine agents who are born with varying perceptual abilities, subsequently learn a signaling strategy by imitation of other agents (either within or across populations), and depending on the success of the strategies they develop are more or less likely to survive and reproduce.
+In such setup, evolutionary processes will not only change the distribution of strategies within a population, where a population is identified by a shared level of imprecision in imitation.
+It will also promote those levels of imprecision which result in communicatively successful signal use.
 
-The motivations behind this model are closely related to the ideas behind the theories of kin selection~\parencite{hamilton_genetical_1964} and multi-level (or group) selection~\parencite{wilson_theory_1975}.
+This is closely related to the ideas behind theories of kin selection~\parencite{hamilton_genetical_1964} and multi-level (or group) selection~\parencite{wilson_theory_1975}.
 These theories build upon the hypothesis that selection acts not only to directly favor genes that result in behaviors that benefit individuals, but also to indirectly favor genes that lead to behaviors that benefit either genotypically (kin) or socially (group) related individuals~\parencite[see][for more details]{okasha_evolution_2006}.
 %There are thus two aspects to be considered: for kin selection that would be the direct and indirect effects, and for multi-level selection the within-group and between-group components~\parencite[28--29]{birch_kin_2014}
 In our model there is also a similar structure: there is a process of selection of behavior within each population, levels of imprecision are selected across populations based on the strategies they give rise to.
 We believe there is an important distinction in that the two selection processes in our model act on different entities, the inner shaping signaling behavior, and the outer selecting levels of imprecision.
 In any case, we intend our model to be descriptive rather than causal or explanatory.
-That means that we do not want to commit to seeing populations either as kins or as social groups, and use them as merely descriptive abstractions that allow us to capture the hypothetical impact of indirect selection processes%
+That means that we do not want to commit to seeing populations either as kins or as social groups, and use them as merely descriptive abstractions that allow us to capture the hypothetical impact of indirect selection processes.%
 \footnote{We make this note because of the heated debate between the two theories. See~\textcite{kohn_darwin_2008} and~\textcite{kramer_kin_2016} for more details on that.}%
-.
+
 
 In the following, we lay down the formal details of our model.
 Let's start by defining $A$ to be the set of imprecision values considered.
@@ -718,7 +717,7 @@ For a sender of type $\alpha$, the expected utility of its strategy $\sigma^\alp
 $$
 \text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\star})=\sum_{t_{a}}P_{\bar{o}}^{\alpha}(t_{a}|t_{o})\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})\sum_{t_{r}}P_{\rho}^{\alpha^{\prime}}(t_{r}|m)U(t_{a},t_{r})
 $$
-and, for a receiver of type $\alpha$, the expected utility of its strategy $\rho^\alpha$ against all other senderstrategies $\sigma^\star$, is given by:
+and, for a receiver of type $\alpha$, the expected utility of its strategy $\rho^\alpha$ against all other sender strategies $\sigma^\star$, is given by:
 $$
 \text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\star})=\sum_{\alpha^{\prime}\in A}P(\alpha^{\prime})\sum_{t_{a}}P_{\bar{\sigma}}^{\alpha^{\prime}}(t_{a}|m)\sum_{t_{r}}P_{r}^{\alpha}(t_{r}|t_{i})U(t_{a},t_{r})
 $$
@@ -747,7 +746,7 @@ $$
 We here use $\check{\sigma}$ and $\check{\rho}$ since there is still an additional adjustment to these values to be calculated before we get the final strategies $\sigma$ and $\rho$.
 
 These formulations cover the evolution of the particular strategies of each type.
-We can think of this as the level of cultural evolution: agents are born with a certain level of imprecision and learn strategies based on the behavior of others.
+We can think of this as the level of cultural evolution: agents are born with a certain level of imprecision and adopt strategies based on the behavior of others.
 Alongside this process, we can imagine another level of selection, where agents die and new agents are born.
 More successful agents have a higher likelihood of surviving and reproducing, giving rise to more agents with their level of imprecision.
 Levels of imprecision are thus subject to an evolutionary dynamic that is indirectly influenced by the cultural dynamic.
@@ -806,7 +805,7 @@ These observations go against the expectation of~\textcite{franke_vagueness_2017
 The reason for this is interesting in itself.
 What happens is that, because of the tight interaction between populations, the strategies of each type evolve in close tandem with each other.
 One of the consequences of this is that the population with no imprecision reaches convexity faster than it would on its own because of the interaction with the populations with imprecision.
-We can see this effect by looking into the percentage of trials with convex sender strategies at a given iteration, for each scenario, and comparing the three scenarios: population with no imprecision evolving alone, two populations ($\alpha \in \{0, 0.05\}$), and three populations ($\alpha \in \{0, 0.05, 0.1\}$).
+We can see this effect by looking into the percentage of trials with convex sender strategies at a given iteration, for each scenario, and comparing the three scenarios: populations with no imprecision evolving alone, two populations ($\alpha \in \{0, 0.05\}$), and three populations ($\alpha \in \{0, 0.05, 0.1\}$).
 \begin{figure}
   \centering
   \begin{subfigure}[]{0.32\textwidth}
@@ -841,10 +840,9 @@ Given the trends in population proportions, one expects this to eventually be el
 
 \subsection{Loose population interaction}
 \label{sec:loose-interaction-model}
-Given the tight interaction between populations precluding the manifestation of temporary advantages of vagueness, we decided to test a variation of the model where populations interact more loosely.
-In order to do this, we need to make changes to some calculations.
-However, any formula that is not redefined in this section should be assumed to remain the same.
-The dynamic we want to model here is one where agents of a certain type $\alpha$ imitate and learn only from other agents of that same type.
+If we turn to a scenario where populations interact more loosely, we need to make changes to some calculations.
+Any formula that is not redefined in this section should be assumed to remain the same.
+The dynamic we want to model here is one where agents of a certain type $\alpha$ imitate and learn only from other agents of that same precision type.
 First, if agents learn only within their population, the imitation dynamic needs to consider only the expected utility against agents of that population.
 We thus define the following expected utilities for a sender of type $\alpha$:
 $$
@@ -877,7 +875,7 @@ $$
 $$
 Note that, because imitation and learning occur only within populations, these formulations are essentially the same as for the single-population model of~\textcite{franke_vagueness_2017}, only parameterized by type $\alpha$.
 
-The selection process between different populations still follows the same motivation as before: agents of a certain type that evolve successful strategies (with respect to other types) will be more likely to survive and reproduce, benifiting the proportion of their population.
+The selection process between different populations still follows the same motivation as before: agents of a certain type that evolve successful strategies (with respect to other types) will be more likely to survive and reproduce, benefiting the proportion of their population.
 The formulation of the dynamic of the proportion of each type $P(\alpha)$ thus stays the same.
 In order to avoid confusion, we want to stress that this means that these calculations rely on the definitions of expected utility across populations (\emph{i.e.}~$\text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\star})$ and $\text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\star})$) and not the newly introduced $\text{EU}_{\sigma}^{\alpha}(m,t_{o},\rho^{\alpha})$ and $\text{EU}_{\rho}^{\alpha}(t_{i},m,\sigma^{\alpha})$.
 
@@ -909,7 +907,7 @@ In the three-population scenario, this happened in 18 out of 25 trials.
 More interestingly for our investigation, some trials actually resulted in the population with $\alpha = 0$ being dominated.
 For the two-population scenario, $\alpha = 0.05$ fully reached 100\% proportion in 8 trials (79, 86, 88, 89, 91, 93, 96, 98), a point from which it is technically impossible for the other population to recover.
 In most cases the dominating population gains its ground from the start, but in 5 cases we see a temporary advantage of $\alpha = 0.05$ that is then lost to the other population.
-In one interesting trial (85), $\alpha = 0.05$ reached 99.87\% only to then steadly lose ground to $\alpha = 0$.
+In one interesting trial (85), $\alpha = 0.05$ reached 99.87\% only to then steadily lose ground to $\alpha = 0$.
 For the three population scenario, $\alpha = 0$ was reduced to 0\% proportion in 4 trials (152, 157, 159, and 175).
 In all of those cases, $\alpha = 0.05$ clearly has the upper hand over $\alpha = 0.1$, despite a temporary advantage of the latter in some trials.
 %In 5 other trials we see a positive trend for $\alpha = 0.05$, but given the reversals that sometimes occur (\emph{e.g.}~trial 171), one cannot be sure whether full dominance would be achieved if the simulation was left to run for longer time.
@@ -943,13 +941,13 @@ Another consequence of the two populations evolving separately is that they do n
 In a sim-max game such as the one set up here, there are only two stable equilibria.
 These are two Voronoi systems of the kind shown in Figure~\ref{fig:example_strats}, one where the first message is used for the first half of the state space, and the other where the second message is used for this region.
 In the multi-population model with loose interaction, each population evolves independently towards one of these two equilibria.
-This is importantly conditioned by the initial strategy the process of selection initiates from.
+An important factor determining which strategy to converge to is the initial random population configuration.
 The populations are, however, not fully independent, since the process of selection of the level of precision relies on the expected utility of one population playing against itself and the others.
 And this is important because strategies in one equilibrium get the lowest payoff possible against strategies in the other equilibrium.
 Now, if two populations evolve towards different equilibria, whatever advantage one population has playing against itself could trigger a runaway effect by causing an increase in its proportion, which in turn will increase the population's relative expected utility, potentially increasing their proportion further in the next round, and so forth.
 In this case, one would expect that faster convergence towards convexity would be especially important for a population's success.
 
-In the two-population scenario, of the 8 trials where $\alpha = 0$ was reduced to 0\%, all but two (88, 98) ended with the two populations each close to a different equilibria.
+In the two-population scenario, of the 8 trials where $\alpha = 0$ was reduced to 0\%, all but two (88, 98) ended with the two populations each close to different equilibria.
 In the three-population scenario, the population with $\alpha = 0$ evolved towards the same equilibrium as the other two in 1 of the trials where it was eliminated.
 In the other 3 trials, in 2 it evolved to a different equilibrium than the other two, and in 1 it evolved towards the same equilibrium as $\alpha = 0.05$ (but different to the one $\alpha = 0.1$ evolved towards).
 Again, we do not find a clear case for this being a decisive factor in the success of populations with some imprecision.
