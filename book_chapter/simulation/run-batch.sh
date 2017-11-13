@@ -3,7 +3,7 @@
 for a in "0.0 1 0.05 1" "0.0 1 0.05 1 0.1 1"
 do
     echo $a
-    for b in "weakest"
+    for b in "detached"
     do
         echo " $b"
         for n in {1..25}

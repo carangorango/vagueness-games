@@ -249,10 +249,16 @@ ReceiverConfusions = [
 Speakers = [random.dirichlet([1] * NMessages, NStates) for _ in xrange(NPopulations)]
 Hearers = [random.dirichlet([1] * NStates, NMessages) for _ in xrange(NPopulations)]
 
-ExpectedUtilitiesSenders = [ExpectedUtility(Speakers[j], Hearers[j], Utility)
-                            for j in xrange(NPopulations)]
-ExpectedUtilitiesHearers = [ExpectedUtility(Speakers[j], Hearers[j], Utility)
-                            for j in xrange(NPopulations)]
+if SubPopulationInteraction == 'detached':
+    ExpectedUtilitiesSenders = [ExpectedUtility(Speakers[j], Hearers[j], Utility)
+                                for j in xrange(NPopulations)]
+    ExpectedUtilitiesHearers = [ExpectedUtility(Speakers[j], Hearers[j], Utility)
+                                for j in xrange(NPopulations)]
+else:
+    ExpectedUtilitiesSenders = [ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility)
+                                for j in xrange(NPopulations)]
+    ExpectedUtilitiesHearers = [ExpectedUtilityHearer(Speakers, PopulationProportions, Hearers[j], Utility)
+                                for j in xrange(NPopulations)]
 
 SubPopulationMeasurements = []
 for j in xrange(NPopulations):
@@ -340,7 +346,7 @@ for i in xrange(1, rounds):
                     for ti in xrange(NStates)]
                 for m in xrange(NMessages)])
             Hearers[j] = makePDFPerRow(PoReceiver * ExpUR)
-        elif SubPopulationInteraction == 'weakest':
+        elif SubPopulationInteraction == 'weakest' or SubPopulationInteraction == 'detached':
             PoSender = np.dot(PoT[j], PSigma[j])  # P_o(m|t_o)
             ExpUS = np.array([
                 [np.sum([PoT[j][to, ta] * np.sum(PRho[j][m, tr] * Utility[ta, tr]
@@ -361,12 +367,16 @@ for i in xrange(1, rounds):
             Hearers[j] = makePDFPerRow(PoReceiver * ExpUR)
         else:
             raise ValueError(
-                'Valid sub-population interaction types are \'strong\', \'weak\', and \'weakest\'. Unknown value \'%s\''
-                % SubPopulationInteraction)
+                'Valid sub-population interaction types are \'strong\', \'weak\', \'weakest\', and \'detached\'. '
+                'Unknown value \'%s\'' % SubPopulationInteraction)
 
     for j in xrange(NPopulations):
-        ExpectedUtilitiesSenders[j] = ExpectedUtility(Speakers[j], Hearers[j], Utility)
-        ExpectedUtilitiesHearers[j] = ExpectedUtility(Speakers[j], Hearers[j], Utility)
+        if SubPopulationInteraction == 'detached':
+            ExpectedUtilitiesSenders[j] = ExpectedUtility(Speakers[j], Hearers[j], Utility)
+            ExpectedUtilitiesHearers[j] = ExpectedUtility(Speakers[j], Hearers[j], Utility)
+        else:
+            ExpectedUtilitiesSenders[j] = ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility)
+            ExpectedUtilitiesHearers[j] = ExpectedUtilityHearer(Speakers, PopulationProportions, Hearers[j], Utility)
 
     ExpectedUtilityHistorySenders = np.append(ExpectedUtilityHistorySenders,
                                               [copy.deepcopy(ExpectedUtilitiesSenders)], axis=0)
