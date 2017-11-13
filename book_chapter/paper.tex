@@ -40,7 +40,7 @@ populations with vague language use dominate over populations with precise langu
 \tableofcontents
 
 
-\section{Vagueness and the classical picture}
+\section{Vagueness and rationality}
 \label{sec:vagueness}
 
 The classical philosophical problem of vagueness is most starkly embodied by the sorites paradox.
@@ -200,8 +200,7 @@ We want to focus on signaling games as a framework for the study of language use
 The vocabulary just introduced will, we hope, help inform the discussion that follows.
 We proceed by introducing the framework of signaling games in Section~\ref{sec:signaling-games}.
 In Section~\ref{sec:sim-max-vagueness} we look into explanations of vagueness in a particular kind of signaling game.
-Section~\ref{sec:ecology-of-vagueness} tries to generalize the considerations of these proposals to argue for a more ecological approach to vagueness.
-\mf{We should make clear what ``ecological'' means.}
+Section~\ref{sec:ecology-of-vagueness} tries to generalize the considerations of these proposals to argue for an approach to vagueness anchored in a more global notion of rationality.
 We propose and analyse the results of a novel multi-population model of imprecise imitation in Section~\ref{sec:multi-population-model}, and summarize our conclusions in Section~\ref{sec:conclusions}.
 %Section~\ref{sec:referential-vagueness} generalizes our discussion to the natural case where agents play more than one game.
 
@@ -369,7 +368,7 @@ Still, confirming Lipman's argument, there is no vagueness in any such optimal l
 In an abstract setup, using 50 states uniformly distributed over the unit interval and two possible messages, such an optimal language looks like what we see in Figure~\ref{fig:example_stratsA}: the probability that the sender uses one message decays sharply from 1 to 0, and increases sharply from 0 to 1 for the other message; the response of the receiver for each message is a degenerate distribution over the state space which assigns all probability mass to a single state.
 The sender/receiver strategy pairs that we are looking for look more like Figure~\ref{fig:example_stratsB}, where the sender's choice of message to use is characterized by a smooth transition, and the receiver strategy assigns a positive probability to more than one state for each message.
 The particular shapes of these strategies are less important for diagnosing vagueness.
-What is more important is a smooth and monotonous transition between areas where a message clearly applies and where it clearly does not.
+What is more important is a smooth and monotonous transition between areas where a message is clearly used and where it is clearly not.
 This means that, for some states in the middle of the state space, there is uncertainty as to which message will be used, whereas for states in the extremes this is as good as certain.
 
 The interpretation of this uncertainty will be different depending on the interpretation of the model.
@@ -416,7 +415,7 @@ Although there is a close relationship between reinforcement learning and popula
 Also, we need to ask for further justification to link generalization in reinforcement closely to the underlying payoff function of the sim-max game.
 Why should agents evolve to generalize in exactly the right way?
 O'Connor suggests that, despite a vague language having lower expected utility than a precise one, the learning mechanism that induces vagueness does have evolutionary advantages: it achieves higher payoffs in a shorter period of time.
-From a more encompassing, ecological point of view, learning speed can be an advantage.
+From a more global point of view, learning speed can be an advantage.
 Imagine an initial population of agents with random strategies, some using GRL and others using classical HRL to adapt to each other.
 Although the latter type of agent can hypothetically develop a precise and more efficient signaling system, agents using GRL would coordinate on vague signaling strategies with high (though not optimal) expected utility sooner than agents using HRL.
 In such a scenario, they could drive the other agents to extinction before the latter had time to achieve coordination and reap the benefits of a more precise signaling system.

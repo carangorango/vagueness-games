@@ -246,12 +246,12 @@ ReceiverConfusions = [
     for x in Impairments
 ]
 
-Speakers = [random.dirichlet([1] * NMessages, NStates)] * NPopulations
-Hearers = [random.dirichlet([1] * NStates, NMessages)] * NPopulations
+Speakers = [random.dirichlet([1] * NMessages, NStates) for _ in xrange(NPopulations)]
+Hearers = [random.dirichlet([1] * NStates, NMessages) for _ in xrange(NPopulations)]
 
-ExpectedUtilitiesSenders = [ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility)
+ExpectedUtilitiesSenders = [ExpectedUtility(Speakers[j], Hearers[j], Utility)
                             for j in xrange(NPopulations)]
-ExpectedUtilitiesHearers = [ExpectedUtilityHearer(Speakers, PopulationProportions, Hearers[j], Utility)
+ExpectedUtilitiesHearers = [ExpectedUtility(Speakers[j], Hearers[j], Utility)
                             for j in xrange(NPopulations)]
 
 SubPopulationMeasurements = []
@@ -266,8 +266,8 @@ for j in xrange(NPopulations):
         'sender.converged': False,
         'receiver.converged': False,
         'proportion': PopulationProportions[j],
-        'sender.eu': ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility),
-        'receiver.eu': ExpectedUtilityHearer(Speakers, PopulationProportions, Hearers[j], Utility),
+        'sender.eu': ExpectedUtilitiesSenders[j],
+        'receiver.eu': ExpectedUtilitiesHearers[j],
         'sender.entropy': NormalizedEntropy(Speakers[j]),
         'receiver.entropy': NormalizedEntropy(Hearers[j]),
         'sender.convexity': Convexity(Speakers[j]),
@@ -365,8 +365,8 @@ for i in xrange(1, rounds):
                 % SubPopulationInteraction)
 
     for j in xrange(NPopulations):
-        ExpectedUtilitiesSenders[j] = ExpectedUtilitySpeaker(Speakers[j], Hearers, PopulationProportions, Utility)
-        ExpectedUtilitiesHearers[j] = ExpectedUtilityHearer(Speakers, PopulationProportions, Hearers[j], Utility)
+        ExpectedUtilitiesSenders[j] = ExpectedUtility(Speakers[j], Hearers[j], Utility)
+        ExpectedUtilitiesHearers[j] = ExpectedUtility(Speakers[j], Hearers[j], Utility)
 
     ExpectedUtilityHistorySenders = np.append(ExpectedUtilityHistorySenders,
                                               [copy.deepcopy(ExpectedUtilitiesSenders)], axis=0)
@@ -379,8 +379,8 @@ for i in xrange(1, rounds):
                                        *(ExpectedUtilitiesSenders[j] + ExpectedUtilitiesHearers[j]) \
                                        / (sum(ExpectedUtilitiesSenders) + sum(ExpectedUtilitiesHearers))
         PopulationProportions = makePDF(PopulationProportions)
-        NewSpeakers = [random.dirichlet([1] * NMessages, NStates)] * NPopulations
-        NewHearers = [random.dirichlet([1] * NStates, NMessages)] * NPopulations
+        NewSpeakers = [random.dirichlet([1] * NMessages, NStates) for _ in xrange(NPopulations)]
+        NewHearers = [random.dirichlet([1] * NStates, NMessages) for _ in xrange(NPopulations)]
         for j in xrange(NPopulations):
             Speakers[j] = makePDFPerRow((1 - NewPopulationRate) * Speakers[j] +
                                         NewPopulationRate * NewSpeakers[j])
